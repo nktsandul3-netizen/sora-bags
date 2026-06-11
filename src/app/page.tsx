@@ -27,7 +27,7 @@ export default function Home() {
       {/* Hero */}
       <section className="relative w-full overflow-hidden bg-stone-100">
         <Image
-          src="/hero-amalfi-street-hq.jpg"
+          src="/hero-amalfi-terrace-hq.jpg"
           alt={brand.name}
           width={2400}
           height={1600}
