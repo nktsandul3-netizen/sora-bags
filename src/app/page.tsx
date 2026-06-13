@@ -38,17 +38,14 @@ export default function Home() {
         />
       </section>
 
-      {/* Тонкий разделитель между баннером и блоками */}
-      <div className="mx-auto mt-[calc(1.5rem-1cm)] h-px w-full max-w-7xl bg-stone-200 sm:mt-[calc(2rem-1cm)]" />
-
       {/* Плитки разделов: Новинки / Сумки / Аксессуары */}
-      <section className="mt-[1.5rem] w-full sm:mt-[2rem]">
+      <section className="mt-0 w-full">
         <div className="grid gap-0 md:grid-cols-3">
           {heroTiles.map((t) => (
             <Link
               key={t.href}
               href={t.href}
-              className="group relative flex h-[78vh] min-h-[520px] items-center justify-center overflow-hidden md:h-[92vh] md:min-h-[680px]"
+              className="group relative flex h-[58vh] min-h-[420px] items-center justify-center overflow-hidden md:h-[92vh] md:min-h-[680px]"
             >
               {t.video ? (
                 <video

@@ -1,36 +1,126 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# LUMA — магазин сумок и аксессуаров (Next.js)
 
-## Getting Started
+Интернет-магазин сумок и аксессуаров из натуральной кожи. Сделан на Next.js (App Router) + TypeScript + Tailwind CSS. Структура каталога вдохновлена типовым магазином кожаных изделий, но весь контент (бренды, описания, изображения) — оригинальный и принадлежит вашему бренду.
 
-First, run the development server:
+## Запуск
 
 ```bash
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Откройте http://localhost:3000
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+> Примечание: не понижайте лимит открытых файлов перед запуском (`ulimit -n` с маленьким значением) — это ломает file‑watcher Turbopack и приводит к ошибкам `EMFILE: too many open files` и пустому дереву маршрутов (404 на всех страницах). Запускайте `npm run dev` с системными настройками по умолчанию.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Личный кабинет (авторизация и заказы)
 
-## Learn More
+Кабинет (`/account`) использует **MongoDB** для хранения пользователей, заказов и адресов и **Auth.js (NextAuth)** для входа по e‑mail и паролю.
 
-To learn more about Next.js, take a look at the following resources:
+1. Создайте кластер в [MongoDB Atlas](https://www.mongodb.com/atlas) (или используйте свой MongoDB).
+2. Скопируйте `.env.example` → `.env.local` и заполните:
+   - `MONGODB_URI` — строка подключения (`mongodb+srv://…`).
+   - `MONGODB_DB` — имя базы (по умолчанию `sora`).
+   - `AUTH_SECRET` — секрет сессий, сгенерируйте: `openssl rand -base64 32`.
+   - На продакшене задайте `AUTH_URL` с рабочим доменом.
+3. Перезапустите `npm run dev`.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Возможности кабинета:
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+- **Регистрация и вход** (e‑mail + пароль, пароли хранятся в виде bcrypt‑хеша).
+- **История заказов** — оформленный в корзине заказ сохраняется в БД и привязывается к аккаунту (если пользователь вошёл).
+- **Сохранённые адреса** — добавление/удаление, выбор основного; основной адрес подставляется в оформление заказа.
+- **Избранное** — при входе локальное избранное (`localStorage`) переносится в аккаунт и далее хранится в БД.
 
-## Deploy on Vercel
+Коллекции создаются автоматически при первом обращении: `users`, `orders`, `addresses`, `wishlists` (с нужными индексами).
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Админ-панель (`/admin`)
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Защищённая панель управления магазином: дашборд, заказы, товары, клиенты, настройки.
+
+### Доступ
+
+Вход — `/admin/login` (e‑mail + пароль). Пускаются только пользователи с ролью **admin**.
+
+Создать администратора (или повысить существующий аккаунт):
+
+```bash
+npm run create-admin -- admin@example.com ВашПароль "Имя Админа"
+```
+
+Скрипт читает `MONGODB_URI`/`MONGODB_DB` из `.env.local`, ставит роль `admin`, обновляет пароль и засеивает коллекцию `categories` из каталога.
+
+### Возможности
+
+- **Обзор** — заказы, выручка (без отменённых), число клиентов и товаров, график продаж за 14 дней, разбивка по статусам, последние заказы.
+- **Заказы** — список с поиском (номер/имя/телефон/e‑mail) и фильтром по статусу, страница заказа, смена статуса (Новый → В обработке → Отправлен → Доставлен / Отменён), внутренние заметки.
+- **Товары** — CRUD, несколько изображений (по пути/URL), бренд, раздел и категория, остаток, статус (В наличии / Нет в наличии / Предзаказ), SEO‑поля. Валидация — Zod.
+- **Клиенты** — список с поиском, профиль с историей заказов и суммой покупок.
+- **Настройки** — статус каналов уведомлений (Telegram/e‑mail), смена пароля администратора.
+
+### Уведомления о новых заказах
+
+При каждом заказе (через `/api/preorder`) отправляются уведомления (best‑effort, не блокируют покупателя):
+
+- **Telegram** — задайте `TELEGRAM_BOT_TOKEN` (от @BotFather) и `TELEGRAM_CHAT_ID`.
+- **E‑mail** — через Resend (`RESEND_API_KEY`, `PREORDER_TO`).
+
+### Безопасность
+
+- `src/proxy.ts` (в Next 16 middleware переименован в **proxy**) — оптимистичный редирект гостей на `/admin/login`.
+- Авторитетная проверка роли — в layout панели и в каждом server action (`requireAdmin`/`assertAdmin`).
+- Вход и server actions валидируются через **Zod**, пароли — **bcrypt**, на вход стоит **rate limiting** (5 попыток/мин на IP, in‑memory; для нескольких инстансов замените на Redis).
+
+Дополнительные коллекции: `products`, `categories`, `newsletters`.
+
+> Загрузка изображений товара реализована по пути/URL (например, `/products/.../image.png`). Для загрузки бинарных файлов с диска подключите блоб‑хранилище (Vercel Blob, S3) — серверлес не пишет в `public/` в рантайме.
+
+## Команды
+
+- `npm run dev` — режим разработки
+- `npm run build` — продакшен-сборка
+- `npm run start` — запуск собранного приложения
+- `npm run lint` — проверка кода
+- `npm run create-admin -- <email> <пароль> [имя]` — создать/повысить администратора
+
+## Как поменять под свой бренд
+
+1. **Название, контакты, соцсети** — `src/lib/config.ts` (один файл).
+2. **Категории / типы товаров** — `src/lib/data.ts` (`bagCategories`, `accessoryCategories`).
+3. **Бренды** — `src/lib/data.ts` (`brands`).
+4. **Товары** — `src/lib/data.ts` (`products`).
+5. **Инфо-страницы** (о нас, доставка, оплата и т.д.) — `src/lib/info.ts`.
+6. **Цвет акцента и шрифты** — `src/app/globals.css` (`--c-accent`) и `src/app/layout.tsx`.
+
+## Структура
+
+```
+src/
+  app/                # маршруты (App Router)
+    page.tsx          # главная
+    bags/             # сумки + /bags/[type]
+    accessories/      # аксессуары + /accessories/[type]
+    new/  sale/       # новинки и скидки
+    brands/ brand/    # список брендов и страница бренда
+    product/[slug]/   # карточка товара
+    cart/             # корзина (демо-оформление)
+    info/[slug]/      # информационные страницы
+    contacts/         # контакты
+  components/         # Header, Footer, ProductCard, и т.д.
+    account/          # личный кабинет (вход/регистрация + дашборд)
+    api/              # preorder, register, wishlist, account/*, auth/[...nextauth]
+  components/         # Header, Footer, ProductCard, account/*, и т.д.
+  context/cart.tsx    # корзина (React Context + localStorage)
+  context/wishlist.tsx# избранное (localStorage + синхронизация с БД при входе)
+  auth.ts             # конфигурация Auth.js (Credentials + JWT)
+  lib/                # config, data, types, format, info, mongodb, account
+```
+
+## Что подключить для продакшена
+
+- **Изображения товаров.** Сейчас используются стильные градиентные заглушки
+  (`src/components/ProductImage.tsx`). Замените на реальные фото через `next/image`.
+- **Оплата.** Корзина оформляет заказ (письмо через Resend + запись в БД). Подключите
+  платёжного провайдера (например, ЮKassa / Stripe) поверх `src/app/api/preorder/route.ts`.
+- **Форма обратной связи / заявки** на странице контактов — добавьте отправку.
+- **Каталог из БД/CMS** вместо статического `src/lib/data.ts` при необходимости.
