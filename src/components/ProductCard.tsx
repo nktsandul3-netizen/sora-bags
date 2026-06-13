@@ -103,7 +103,7 @@ export default function ProductCard({ product }: { product: Product }) {
           />
         )}
 
-        <div className="pointer-events-none absolute left-3 top-3 z-10 flex flex-col gap-1.5">
+        <div className="pointer-events-none absolute left-3 top-3 z-10 hidden flex-col gap-1.5 lg:flex">
           <span className="rounded-sm bg-stone-900/90 px-2.5 py-1 text-[10px] font-medium uppercase tracking-[0.18em] text-white shadow-sm backdrop-blur-sm">
             {delivery.badge}
           </span>

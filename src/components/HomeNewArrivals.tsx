@@ -129,7 +129,7 @@ function ShowcaseCard({ product }: { product: Product }) {
           />
         )}
 
-        <div className="absolute left-3 top-3 flex items-center gap-2 text-[10px] font-semibold uppercase tracking-[0.14em] text-stone-950">
+        <div className="absolute left-3 top-3 hidden items-center gap-2 text-[10px] font-semibold uppercase tracking-[0.14em] text-stone-950 lg:flex">
           {onSale && <span>Скидка</span>}
           {product.isNew && <span>Новинка</span>}
           {product.hasVideo && <span>Видео</span>}
