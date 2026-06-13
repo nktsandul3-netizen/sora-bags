@@ -199,7 +199,7 @@ export default function CatalogView({
       </header>
 
       {/* Панель управления: фильтр / сортировка / показывать по N */}
-      <div className="relative mb-7 flex items-center justify-between gap-4 border-y border-stone-200 py-3 text-[11px] font-medium uppercase tracking-[0.14em] text-stone-700 sm:justify-start sm:gap-8">
+      <div className="relative mb-5 flex items-center justify-between gap-4 border-y border-stone-200 py-3 text-[11px] font-medium uppercase tracking-[0.14em] text-stone-700 sm:mb-7 sm:justify-start sm:gap-8">
         <button
           type="button"
           onClick={openDrawer}

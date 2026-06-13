@@ -7,6 +7,7 @@ import type { Product } from "@/lib/types";
 import { getBrandName } from "@/lib/data";
 import { formatPrice } from "@/lib/format";
 import { getDeliveryInfo } from "@/lib/delivery";
+import { useIsDesktop } from "@/lib/useIsDesktop";
 import ProductImage from "./ProductImage";
 import ProductColorSwatches, { getColorImages } from "./ProductColorSwatches";
 import WishlistButton from "./WishlistButton";
@@ -16,6 +17,8 @@ export default function ProductCard({ product }: { product: Product }) {
   const [previewIdx, setPreviewIdx] = useState<number | null>(null);
   const [imageHovered, setImageHovered] = useState(false);
   const [quickViewOpen, setQuickViewOpen] = useState(false);
+  const [quickViewMounted, setQuickViewMounted] = useState(false);
+  const isDesktop = useIsDesktop();
   const onSale = Boolean(product.oldPrice && product.oldPrice > product.price);
   const colors = product.colors;
   const displayIdx = previewIdx ?? 0;
@@ -23,10 +26,17 @@ export default function ProductCard({ product }: { product: Product }) {
   const colorImages = activeColor ? getColorImages(activeColor) : [];
   const primary = colorImages[0];
   const secondary = colorImages[1];
-  const hasSwap = Boolean(secondary && secondary.src !== primary?.src);
+  // Вторую картинку (свап по наведению) грузим только на десктопе — на телефоне
+  // ховера нет, поэтому это лишняя загрузка, которая тормозит каталог.
+  const hasSwap = Boolean(isDesktop && secondary && secondary.src !== primary?.src);
   const showSecondary = imageHovered && previewIdx === null && hasSwap;
   const showSwatches = colors.length > 1;
   const delivery = getDeliveryInfo(product);
+
+  function openQuickView() {
+    setQuickViewMounted(true);
+    setQuickViewOpen(true);
+  }
 
   return (
     <div className="group flex flex-col">
@@ -136,7 +146,7 @@ export default function ProductCard({ product }: { product: Product }) {
         </h3>
       </Link>
 
-      <div className="relative mt-2.5 h-11 px-0.5">
+      <div className="relative mt-2 h-10 px-0.5 lg:mt-2.5 lg:h-11">
         <div className="flex h-full items-center gap-2 transition-all duration-300 group-hover:pointer-events-none group-hover:-translate-y-1 group-hover:opacity-0 max-lg:hidden">
           <span
             className={
@@ -154,19 +164,21 @@ export default function ProductCard({ product }: { product: Product }) {
         </div>
         <button
           type="button"
-          onClick={() => setQuickViewOpen(true)}
-          className="absolute inset-x-0 top-0 flex h-11 translate-y-2 items-center justify-center rounded-md bg-stone-950 px-4 text-[13px] font-semibold text-white opacity-0 shadow-sm transition-all duration-300 ease-out hover:bg-stone-800 group-hover:translate-y-0 group-hover:opacity-100 max-lg:translate-y-0 max-lg:opacity-100"
+          onClick={openQuickView}
+          className="absolute inset-x-0 top-0 flex h-10 translate-y-2 items-center justify-center rounded-md bg-stone-950 px-4 text-[12px] font-semibold text-white opacity-0 shadow-sm transition-all duration-300 ease-out hover:bg-stone-800 group-hover:translate-y-0 group-hover:opacity-100 max-lg:translate-y-0 max-lg:opacity-100 lg:h-11 lg:text-[13px]"
         >
           Купить {formatPrice(product.price)}
         </button>
       </div>
 
-      <QuickViewModal
-        product={product}
-        open={quickViewOpen}
-        onClose={() => setQuickViewOpen(false)}
-        initialColorIdx={displayIdx}
-      />
+      {quickViewMounted && (
+        <QuickViewModal
+          product={product}
+          open={quickViewOpen}
+          onClose={() => setQuickViewOpen(false)}
+          initialColorIdx={displayIdx}
+        />
+      )}
     </div>
   );
 }
