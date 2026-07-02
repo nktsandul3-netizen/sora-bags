@@ -9,9 +9,21 @@ import { useCart } from "@/context/cart";
 import { getBrandName } from "@/lib/data";
 import { formatPrice } from "@/lib/format";
 import { getDeliveryInfo } from "@/lib/delivery";
+import { withLocalePath } from "@/lib/i18n";
+import { useLocale, useT } from "@/lib/useI18n";
+import {
+  localizeColorName,
+  localizeProductDescription,
+  localizeProductHighlights,
+  localizeProductSpec,
+  localizeProductTitle,
+  localizeStaticText,
+  getVisibleProductSpecs,
+} from "@/lib/product-i18n";
 import { getColorImages } from "./ProductColorSwatches";
 import ProductImage from "./ProductImage";
 import WishlistButton from "./WishlistButton";
+import PreorderStatusBadge from "./PreorderStatusBadge";
 
 function ArrowIcon({ direction }: { direction: "left" | "right" }) {
   return (
@@ -73,6 +85,11 @@ const sectionIcons = {
       <circle cx="17" cy="17.5" r="1.5" />
     </svg>
   ),
+  highlights: (
+    <svg viewBox="0 0 24 24" className="h-[18px] w-[18px]" fill="none" stroke="currentColor" strokeWidth="1.4" aria-hidden>
+      <path d="M12 4.5l2.1 4.3 4.7.7-3.4 3.3.8 4.7-4.2-2.2-4.2 2.2.8-4.7-3.4-3.3 4.7-.7z" strokeLinejoin="round" />
+    </svg>
+  ),
 };
 
 export default function QuickViewModal({
@@ -87,20 +104,57 @@ export default function QuickViewModal({
   initialColorIdx?: number;
 }) {
   const { add, openCart } = useCart();
-  const [mounted, setMounted] = useState(false);
-  const [colorIdx, setColorIdx] = useState(initialColorIdx);
-  const [imageIdx, setImageIdx] = useState(0);
+  const [selection, setSelection] = useState(() => ({
+    open,
+    productSlug: product.slug,
+    initialColorIdx,
+    colorIdx: initialColorIdx,
+    imageIdx: 0,
+  }));
   const [added, setAdded] = useState(false);
 
-  useEffect(() => setMounted(true), []);
+  const selectionIsStale =
+    selection.open !== open ||
+    selection.productSlug !== product.slug ||
+    selection.initialColorIdx !== initialColorIdx;
+  const colorIdx = selectionIsStale ? initialColorIdx : selection.colorIdx;
+  const imageIdx = selectionIsStale ? 0 : selection.imageIdx;
+  const locale = useLocale();
+  const t = useT();
 
-  useEffect(() => {
-    if (open) {
-      setColorIdx(initialColorIdx);
-      setImageIdx(0);
-      setAdded(false);
-    }
-  }, [open, initialColorIdx]);
+  function setSelectedColorIdx(nextColorIdx: number) {
+    setSelection({
+      open,
+      productSlug: product.slug,
+      initialColorIdx,
+      colorIdx: nextColorIdx,
+      imageIdx: 0,
+    });
+  }
+
+  function setSelectedImageIdx(nextImageIdx: number | ((current: number) => number)) {
+    setSelection((current) => {
+      const base = current.open === open &&
+        current.productSlug === product.slug &&
+        current.initialColorIdx === initialColorIdx
+        ? current
+        : {
+            open,
+            productSlug: product.slug,
+            initialColorIdx,
+            colorIdx: initialColorIdx,
+            imageIdx: 0,
+          };
+
+      return {
+        ...base,
+        imageIdx:
+          typeof nextImageIdx === "function" ? nextImageIdx(base.imageIdx) : nextImageIdx,
+      };
+    });
+  }
+
+  const showAdded = selectionIsStale ? false : added;
 
   useEffect(() => {
     if (!open) return;
@@ -116,7 +170,7 @@ export default function QuickViewModal({
     };
   }, [open, onClose]);
 
-  if (!mounted) return null;
+  if (typeof document === "undefined") return null;
 
   const brandName = getBrandName(product.brandSlug);
   const color = product.colors[colorIdx] ?? product.colors[0];
@@ -128,8 +182,11 @@ export default function QuickViewModal({
   const activeImage = galleryImages[safeImageIdx];
   const hasGallery = galleryImages.length > 1;
   const onSale = Boolean(product.oldPrice && product.oldPrice > product.price);
-  const delivery = getDeliveryInfo(product);
+  const delivery = getDeliveryInfo(product, locale);
   const canBuy = product.status !== "out_of_stock";
+  const localizedColor = localizeColorName(color, locale);
+  const localizedDescription = localizeProductDescription(product, locale);
+  const localizedTitle = localizeProductTitle(product, locale);
 
   function handleAdd() {
     if (!canBuy || !color) return;
@@ -148,7 +205,7 @@ export default function QuickViewModal({
 
   function showImage(direction: "prev" | "next") {
     if (!hasGallery) return;
-    setImageIdx((current) =>
+    setSelectedImageIdx((current) =>
       direction === "next"
         ? (current + 1) % galleryImages.length
         : (current - 1 + galleryImages.length) % galleryImages.length,
@@ -177,7 +234,7 @@ export default function QuickViewModal({
             <button
               type="button"
               onClick={onClose}
-              aria-label="Закрыть"
+              aria-label={t("common.close")}
               className="absolute right-4 top-4 z-20 flex h-10 w-10 items-center justify-center rounded-full bg-white text-stone-700 shadow-md transition hover:scale-105 hover:text-stone-950"
             >
               <svg viewBox="0 0 24 24" className="h-5 w-5" fill="none" stroke="currentColor" strokeWidth="1.7" aria-hidden>
@@ -185,7 +242,7 @@ export default function QuickViewModal({
               </svg>
             </button>
 
-            <div className="overflow-y-auto lg:flex lg:w-full lg:overflow-visible">
+            <div className="min-h-0 overflow-y-auto lg:flex lg:w-full lg:overflow-visible">
               {/* Фото */}
               <div className="relative shrink-0 bg-stone-50 lg:w-[46%]">
                 <div className="group relative aspect-[4/5] max-h-[44vh] w-full sm:max-h-[50vh] lg:h-full lg:max-h-none lg:min-h-[560px]">
@@ -194,7 +251,7 @@ export default function QuickViewModal({
                     hex={color?.hex ?? "#d6d3d1"}
                     section={product.section}
                     src={activeImage?.src}
-                    alt={activeImage?.alt ?? product.title}
+                    alt={activeImage?.alt ?? localizedTitle}
                     sizes="(min-width: 1024px) 40vw, 100vw"
                     imageClassName="object-contain object-center"
                     className="absolute inset-0 h-full w-full"
@@ -204,7 +261,7 @@ export default function QuickViewModal({
                     <>
                       <button
                         type="button"
-                        aria-label="Предыдущее фото"
+                        aria-label={t("common.previousPhoto")}
                         onClick={() => showImage("prev")}
                         className="absolute left-3 top-1/2 flex h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full border border-white/70 bg-white/80 text-stone-900 shadow-sm backdrop-blur transition hover:bg-white"
                       >
@@ -212,7 +269,7 @@ export default function QuickViewModal({
                       </button>
                       <button
                         type="button"
-                        aria-label="Следующее фото"
+                        aria-label={t("common.nextPhoto")}
                         onClick={() => showImage("next")}
                         className="absolute right-3 top-1/2 flex h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full border border-white/70 bg-white/80 text-stone-900 shadow-sm backdrop-blur transition hover:bg-white"
                       >
@@ -223,8 +280,8 @@ export default function QuickViewModal({
                           <button
                             key={`${image.src}-dot-${i}`}
                             type="button"
-                            aria-label={`Фото ${i + 1}`}
-                            onClick={() => setImageIdx(i)}
+                            aria-label={`${t("common.photo")} ${i + 1}`}
+                            onClick={() => setSelectedImageIdx(i)}
                             className={
                               "h-1.5 rounded-full transition-all " +
                               (i === safeImageIdx ? "w-5 bg-stone-950" : "w-1.5 bg-stone-400")
@@ -242,26 +299,29 @@ export default function QuickViewModal({
                 <p className="text-xs font-medium uppercase tracking-[0.16em] text-stone-400">
                   {brandName}
                 </p>
-                <div className="mt-1.5 flex flex-wrap items-baseline justify-between gap-x-6 gap-y-1 pr-10">
+                <div className="mt-1.5 flex flex-wrap items-start justify-between gap-x-6 gap-y-2 pr-10">
                   <h2 className="font-serif text-2xl leading-snug text-stone-950">
-                    {product.title}
+                    {localizedTitle}
                   </h2>
-                  <span className="flex items-baseline gap-2">
-                    <span className={"text-xl font-semibold " + (onSale ? "text-[--c-accent]" : "text-stone-950")}>
-                      {formatPrice(product.price)}
-                    </span>
-                    {onSale && (
-                      <span className="text-sm text-stone-400 line-through">
-                        {formatPrice(product.oldPrice!)}
+                  <div className="flex flex-col items-end">
+                    <span className="flex items-baseline gap-2">
+                      {onSale && (
+                        <span className="price-strike text-sm font-normal text-stone-400">
+                          {formatPrice(product.oldPrice!, locale)}
+                        </span>
+                      )}
+                      <span className={"font-bold " + (onSale ? "text-2xl text-sale" : "text-xl text-stone-950")}>
+                        {formatPrice(product.price, locale)}
                       </span>
-                    )}
-                  </span>
+                    </span>
+                    <PreorderStatusBadge status={product.status} compact className="mt-1.5" />
+                  </div>
                 </div>
 
                 {/* Цвета (фото-миниатюры) */}
                 <div className="mt-5">
                   <p className="text-sm text-stone-700">
-                    Цвет: <span className="text-stone-500">{color?.name}</span>
+                    {t("catalog.color")}: <span className="text-stone-500">{localizedColor}</span>
                   </p>
                   {product.colors.length > 1 && (
                     <div className="mt-2.5 flex flex-wrap gap-2.5">
@@ -272,11 +332,11 @@ export default function QuickViewModal({
                           <button
                             key={`${c.name}-${i}`}
                             type="button"
-                            onClick={() => setColorIdx(i)}
-                            aria-label={c.name}
-                            title={c.name}
+                            onClick={() => setSelectedColorIdx(i)}
+                            aria-label={localizeColorName(c, locale)}
+                            title={localizeColorName(c, locale)}
                             className={
-                              "relative h-16 w-16 overflow-hidden rounded-xl border bg-stone-50 transition " +
+                              "relative h-16 w-16 overflow-hidden rounded-xl border bg-white transition " +
                               (selected
                                 ? "border-stone-950 ring-1 ring-stone-950"
                                 : "border-stone-200 hover:border-stone-400")
@@ -313,7 +373,7 @@ export default function QuickViewModal({
                     disabled={!canBuy}
                     className="flex-1 rounded-full bg-stone-950 px-6 py-3.5 text-sm font-semibold tracking-wide text-white transition hover:bg-stone-800 disabled:cursor-not-allowed disabled:opacity-50"
                   >
-                    {canBuy ? (added ? "Добавлено в корзину ✓" : "Добавить в корзину") : "Нет в наличии"}
+                    {canBuy ? (showAdded ? `${t("common.addedToCart")} ✓` : t("common.addToCart")) : t("common.outOfStock")}
                   </button>
                   <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full border border-stone-200">
                     <WishlistButton slug={product.slug} />
@@ -327,37 +387,45 @@ export default function QuickViewModal({
 
                 {/* Аккордеоны */}
                 <div className="mt-6 border-b border-stone-200">
-                  <AccordionSection icon={sectionIcons.description} title="Описание">
-                    <p className="whitespace-pre-line">{product.description}</p>
+                  <AccordionSection icon={sectionIcons.description} title={t("catalog.description")}>
+                    <p className="whitespace-pre-line">{localizedDescription}</p>
                   </AccordionSection>
-                  <AccordionSection icon={sectionIcons.specs} title="Характеристики">
+                  {product.highlights && product.highlights.length > 0 && (
+                    <AccordionSection icon={sectionIcons.highlights} title={t("catalog.highlights")}>
+                      <ul className="space-y-2">
+                        {localizeProductHighlights(product, locale).map((item) => (
+                          <li key={item} className="flex gap-2">
+                            <span className="text-stone-400">•</span>
+                            <span>{item}</span>
+                          </li>
+                        ))}
+                      </ul>
+                    </AccordionSection>
+                  )}
+                  <AccordionSection icon={sectionIcons.specs} title={t("catalog.specs")}>
                     <dl className="space-y-2">
-                      <div className="flex justify-between gap-6">
-                        <dt className="text-stone-500">Материал</dt>
-                        <dd className="text-right text-stone-800">{product.material}</dd>
-                      </div>
-                      {product.specs?.map((s) => (
-                        <div key={s.label} className="flex justify-between gap-6">
-                          <dt className="text-stone-500">{s.label}</dt>
-                          <dd className="text-right text-stone-800">{s.value}</dd>
-                        </div>
-                      ))}
+                      {getVisibleProductSpecs(product.specs).map((s) => {
+                        const localized = localizeProductSpec(s, locale);
+                        return (
+                          <div key={s.label} className="flex justify-between gap-6">
+                            <dt className="text-stone-500">{localized.label}</dt>
+                            <dd className="text-right text-stone-800">{localized.value}</dd>
+                          </div>
+                        );
+                      })}
                     </dl>
                   </AccordionSection>
-                  <AccordionSection icon={sectionIcons.delivery} title="Доставка и возврат">
+                  <AccordionSection icon={sectionIcons.delivery} title={t("catalog.deliveryReturns")}>
                     <p>{delivery.description}</p>
-                    <p className="mt-2">• Доставка по Кишинёву и всей Молдове.</p>
-                    <p>• Возврат и обмен в течение 14 дней.</p>
-                    <p>• Гарантия 30 дней на производственные дефекты.</p>
                   </AccordionSection>
                 </div>
 
                 <Link
-                  href={`/product/${product.slug}`}
+                  href={withLocalePath(`/product/${product.slug}`, locale)}
                   onClick={onClose}
                   className="mt-5 flex items-center justify-between text-[12px] font-semibold uppercase tracking-[0.18em] text-stone-900 transition hover:text-stone-600"
                 >
-                  Все детали товара
+                  {t("catalog.details")}
                   <ArrowIcon direction="right" />
                 </Link>
               </div>

@@ -6,9 +6,14 @@ import {
   usersCollection,
   wishlistsCollection,
   ObjectId,
+  type CustomerPaymentMethod,
+  type DeliveryMethod,
   type OrderItem,
 } from "@/lib/mongodb";
 import type { OrderPaymentStatus, OrderStatus } from "@/lib/mongodb";
+import { trackAnalyticsEvent } from "@/lib/analytics";
+
+const PRIVACY_POLICY_URL = "/info/politika-konfidentsialnosti";
 
 export interface AddressView {
   id: string;
@@ -133,6 +138,10 @@ export interface CreateOrderInput {
     address?: string;
     comment?: string;
   };
+  deliveryMethod: DeliveryMethod;
+  paymentMethod: CustomerPaymentMethod;
+  privacyConsent: boolean;
+  analyticsSessionId?: string;
   items: OrderItem[];
   total: number;
 }
@@ -177,6 +186,11 @@ async function insertOrderWithUniqueNumber(
     address: input.customer.address,
     city: input.customer.city,
     shippingAddress,
+    deliveryMethod: input.deliveryMethod,
+    customerPaymentMethod: input.paymentMethod,
+    privacyConsent: input.privacyConsent,
+    privacyConsentAt: now,
+    privacyPolicyUrl: PRIVACY_POLICY_URL,
     items: input.items,
     products: input.items,
     total: input.total,
@@ -224,7 +238,7 @@ export async function createOrder(input: CreateOrderInput): Promise<CreatedOrder
     customerName: input.customer.name,
     amount: input.total,
     status: "pending",
-    method: "other",
+    method: input.paymentMethod === "cash_on_delivery" ? "cash" : "bank_transfer",
     createdAt: now,
     updatedAt: now,
   });
@@ -235,6 +249,16 @@ export async function createOrder(input: CreateOrderInput): Promise<CreatedOrder
       .updateOne({ slug: item.slug }, { $inc: { salesCount: item.qty } })
       .catch(() => {});
   }
+
+  await trackAnalyticsEvent({
+    type: "order_created",
+    sessionId: input.analyticsSessionId,
+    userId: input.userId,
+    orderId: created.id,
+    orderNumber: created.number,
+    amount: input.total,
+    city: input.customer.city,
+  });
 
   return created;
 }

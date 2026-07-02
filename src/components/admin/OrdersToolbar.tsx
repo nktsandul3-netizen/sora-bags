@@ -2,7 +2,6 @@
 
 import { useRouter, useSearchParams } from "next/navigation";
 import { useState } from "react";
-import { ORDER_STATUSES, ORDER_STATUS_LABELS } from "@/lib/admin/constants";
 
 export default function OrdersToolbar() {
   const router = useRouter();
@@ -25,35 +24,52 @@ export default function OrdersToolbar() {
   }
 
   return (
-    <div className="flex flex-col gap-3 sm:flex-row sm:items-center">
+    <div className="space-y-3">
       <form
         onSubmit={(e) => {
           e.preventDefault();
           apply({ search });
         }}
-        className="flex-1"
+        className="flex flex-col gap-2 sm:flex-row"
       >
         <input
           value={search}
           onChange={(e) => setSearch(e.target.value)}
-          placeholder="Поиск по номеру, имени, телефону, e-mail…"
-          className="w-full border border-stone-300 px-3 py-2.5 text-sm outline-none focus:border-[#A01D26]"
+          placeholder="Поиск: номер, имя, телефон, e-mail…"
+          className="min-w-0 flex-1 border border-stone-300 px-3 py-2.5 text-sm outline-none focus:border-[#A01D26]"
         />
+        <button
+          type="submit"
+          className="bg-stone-900 px-4 py-2.5 text-sm font-medium text-white hover:bg-stone-800"
+        >
+          Найти
+        </button>
       </form>
-      <select
-        value={status}
-        onChange={(e) => apply({ status: e.target.value })}
-        className="border border-stone-300 bg-white px-3 py-2.5 text-sm outline-none focus:border-[#A01D26]"
-      >
-        <option value="all">Все статусы</option>
-        <option value="new">{ORDER_STATUS_LABELS.new}</option>
-        <option value="paid">Оплачен</option>
-        {ORDER_STATUSES.filter((s) => s !== "new").map((s) => (
-          <option key={s} value={s}>
-            {ORDER_STATUS_LABELS[s]}
-          </option>
+      <div className="flex flex-wrap gap-2">
+        {[
+          { value: "all", label: "Все" },
+          { value: "new", label: "Новые" },
+          { value: "processing", label: "В обработке" },
+          { value: "shipped", label: "Доставка" },
+          { value: "delivered", label: "Завершённые" },
+          { value: "paid", label: "Оплаченные" },
+          { value: "cancelled", label: "Отменённые" },
+        ].map((item) => (
+          <button
+            key={item.value}
+            type="button"
+            onClick={() => apply({ status: item.value })}
+            className={
+              "px-3 py-1.5 text-xs font-medium transition " +
+              (status === item.value
+                ? "bg-[#A01D26] text-white"
+                : "bg-white text-stone-600 ring-1 ring-stone-200 hover:text-[#A01D26]")
+            }
+          >
+            {item.label}
+          </button>
         ))}
-      </select>
+      </div>
     </div>
   );
 }

@@ -1,6 +1,17 @@
 import { auth } from "@/auth";
 import { createOrder } from "@/lib/account";
+import { readAnalyticsSessionId } from "@/lib/analytics";
 import { notifyNewOrder } from "@/lib/notify";
+import {
+  getDeliveryOptions,
+  getDeliveryLabel,
+  getPaymentLabel,
+  getPaymentOptions,
+  type CustomerPaymentMethod,
+  type DeliveryMethod,
+} from "@/lib/order-options";
+import { localeFromRequest } from "@/lib/i18n";
+import { translate, type TranslationKey } from "@/lib/messages";
 
 interface PreorderItem {
   slug: string;
@@ -17,6 +28,8 @@ interface PreorderPayload {
   email?: string;
   city?: string;
   address?: string;
+  deliveryMethod?: DeliveryMethod;
+  paymentMethod?: CustomerPaymentMethod;
   comment?: string;
   consent?: boolean;
   items?: PreorderItem[];
@@ -24,30 +37,38 @@ interface PreorderPayload {
 }
 
 export async function POST(request: Request) {
+  const locale = localeFromRequest(request);
+  const error = (key: TranslationKey, status = 400) =>
+    Response.json({ error: translate(locale, key) }, { status });
   let data: PreorderPayload;
   try {
     data = await request.json();
   } catch {
-    return Response.json({ error: "Некорректный запрос" }, { status: 400 });
+    return error("checkout.errSubmit");
   }
 
   const name = data.name?.trim();
   const phone = data.phone?.trim();
+  const deliveryMethod = data.deliveryMethod ?? "courier_chisinau";
+  const paymentMethod = data.paymentMethod ?? "cash_on_delivery";
 
   if (!name || name.length < 2) {
-    return Response.json({ error: "Укажите имя" }, { status: 400 });
+    return error("checkout.errName");
   }
   if (!phone || phone.replace(/\D/g, "").length < 6) {
-    return Response.json({ error: "Укажите корректный телефон" }, { status: 400 });
+    return error("checkout.errPhone");
   }
   if (!data.consent) {
-    return Response.json(
-      { error: "Необходимо согласие на обработку данных" },
-      { status: 400 },
-    );
+    return error("checkout.errConsent");
+  }
+  if (!getDeliveryOptions(locale).some((option) => option.value === deliveryMethod)) {
+    return error("checkout.deliveryMethod");
+  }
+  if (!getPaymentOptions(locale).some((option) => option.value === paymentMethod)) {
+    return error("checkout.paymentMethod");
   }
   if (!data.items || data.items.length === 0) {
-    return Response.json({ error: "Корзина пуста" }, { status: 400 });
+    return error("checkout.emptyCart");
   }
   const items = data.items.map((item) => ({
     slug: String(item.slug),
@@ -73,13 +94,17 @@ export async function POST(request: Request) {
         address: data.address,
         comment: data.comment,
       },
+      deliveryMethod,
+      paymentMethod,
+      privacyConsent: true,
+      analyticsSessionId: readAnalyticsSessionId(request),
       items,
       total,
     });
   } catch (err) {
     console.error("[preorder] Заказ не сохранён в БД:", err);
     return Response.json(
-      { error: "Не удалось сохранить заказ. Попробуйте ещё раз." },
+      { error: translate(locale, "checkout.errSubmit") },
       { status: 500 },
     );
   }
@@ -91,6 +116,8 @@ export async function POST(request: Request) {
     phone,
     email: data.email,
     city: data.city,
+    deliveryMethod: getDeliveryLabel(deliveryMethod, locale),
+    paymentMethod: getPaymentLabel(paymentMethod, locale),
     comment: [data.address, data.comment].filter(Boolean).join("\n"),
     items: items.map((it) => ({
       title: it.title,

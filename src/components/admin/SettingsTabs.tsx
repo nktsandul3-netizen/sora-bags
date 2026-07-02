@@ -113,11 +113,11 @@ export default function SettingsTabs({
           <SettingsForm section="shipping">
             <div className="grid gap-4 sm:grid-cols-2">
               <div>
-                <label className={labelClass}>Бесплатная доставка от (лей)</label>
+                <label className={labelClass}>Бесплатная доставка от (MDL)</label>
                 <input name="freeFrom" type="number" min="0" defaultValue={settings.shipping.freeFrom ?? ""} className={inputClass} />
               </div>
               <div>
-                <label className={labelClass}>Стоимость по умолчанию (лей)</label>
+                <label className={labelClass}>Стоимость по умолчанию (MDL)</label>
                 <input name="defaultCost" type="number" min="0" defaultValue={settings.shipping.defaultCost ?? ""} className={inputClass} />
               </div>
             </div>

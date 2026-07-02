@@ -4,9 +4,14 @@ import Link from "next/link";
 import { useEffect, useMemo, useRef, useState } from "react";
 import { products, getBrandName } from "@/lib/data";
 import { formatPrice } from "@/lib/format";
+import { withLocalePath } from "@/lib/i18n";
+import { useLocale, useT } from "@/lib/useI18n";
+import { localizeProductTitle } from "@/lib/product-i18n";
 import ProductImage from "./ProductImage";
 
 export default function SearchOverlay({ onClose }: { onClose: () => void }) {
+  const locale = useLocale();
+  const t = useT();
   const [query, setQuery] = useState("");
   const inputRef = useRef<HTMLInputElement>(null);
 
@@ -24,10 +29,11 @@ export default function SearchOverlay({ onClose }: { onClose: () => void }) {
       .filter(
         (p) =>
           p.title.toLowerCase().includes(q) ||
+          localizeProductTitle(p, locale).toLowerCase().includes(q) ||
           getBrandName(p.brandSlug).toLowerCase().includes(q),
       )
       .slice(0, 8);
-  }, [query]);
+  }, [query, locale]);
 
   return (
     <div className="fixed inset-0 z-[60]">
@@ -43,12 +49,12 @@ export default function SearchOverlay({ onClose }: { onClose: () => void }) {
               ref={inputRef}
               value={query}
               onChange={(e) => setQuery(e.target.value)}
-              placeholder="Поиск по каталогу…"
+              placeholder={t("search.placeholder")}
               className="w-full bg-transparent text-lg outline-none placeholder:text-stone-400"
             />
             <button
               onClick={onClose}
-              aria-label="Закрыть"
+              aria-label={t("common.close")}
               className="inline-flex h-9 w-9 items-center justify-center rounded-full text-stone-500 hover:bg-stone-100"
             >
               <svg viewBox="0 0 24 24" className="h-5 w-5" fill="none" stroke="currentColor" strokeWidth="1.7">
@@ -60,14 +66,14 @@ export default function SearchOverlay({ onClose }: { onClose: () => void }) {
           <div className="max-h-[60vh] overflow-y-auto py-3">
             {query.trim() && results.length === 0 && (
               <p className="py-6 text-center text-sm text-stone-500">
-                Ничего не найдено по запросу «{query}».
+                {t("search.noResults")} <span>&quot;{query}&quot;</span>.
               </p>
             )}
             <ul className="divide-y divide-stone-100">
               {results.map((p) => (
                 <li key={p.slug}>
                   <Link
-                    href={`/product/${p.slug}`}
+                    href={withLocalePath(`/product/${p.slug}`, locale)}
                     onClick={onClose}
                     className="flex items-center gap-4 py-3 transition hover:bg-stone-50"
                   >
@@ -80,10 +86,10 @@ export default function SearchOverlay({ onClose }: { onClose: () => void }) {
                       <p className="text-[11px] uppercase tracking-wide text-stone-400">
                         {getBrandName(p.brandSlug)}
                       </p>
-                      <p className="truncate text-sm text-stone-800">{p.title}</p>
+                      <p className="truncate text-sm text-stone-800">{localizeProductTitle(p, locale)}</p>
                     </div>
                     <span className="shrink-0 text-sm font-semibold text-stone-900">
-                      {formatPrice(p.price)}
+                      {formatPrice(p.price, locale)}
                     </span>
                   </Link>
                 </li>
@@ -91,7 +97,7 @@ export default function SearchOverlay({ onClose }: { onClose: () => void }) {
             </ul>
             {!query.trim() && (
               <p className="py-6 text-center text-sm text-stone-400">
-                Начните вводить название модели или бренда.
+                {t("search.hint")}
               </p>
             )}
           </div>

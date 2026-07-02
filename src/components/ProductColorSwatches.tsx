@@ -2,6 +2,9 @@
 
 import Link from "next/link";
 import type { ProductColor } from "@/lib/types";
+import { withLocalePath } from "@/lib/i18n";
+import { useLocale, useT } from "@/lib/useI18n";
+import { localizeColorName } from "@/lib/product-i18n";
 
 export const MAX_SWATCHES = 5;
 const VISIBLE_BEFORE_OVERFLOW = MAX_SWATCHES - 1;
@@ -35,17 +38,19 @@ function ColorSwatch({
   highlighted,
   href,
   onPreview,
+  label,
 }: {
   color: ProductColor;
   highlighted: boolean;
   href: string;
   onPreview: () => void;
+  label: string;
 }) {
   return (
     <Link
       href={href}
-      aria-label={color.name}
-      title={color.name}
+      aria-label={label}
+      title={label}
       onMouseEnter={onPreview}
       onFocus={onPreview}
       className={
@@ -54,7 +59,7 @@ function ColorSwatch({
       }
     >
       <span
-        className="block h-4 w-4 rounded-full sm:h-[18px] sm:w-[18px]"
+        className="block h-4 w-4 rounded-full border border-stone-300/70 sm:h-[18px] sm:w-[18px]"
         style={{ backgroundColor: color.hex }}
       />
     </Link>
@@ -74,7 +79,9 @@ export default function ProductColorSwatches({
   onPreview?: (index: number | null) => void;
   className?: string;
 }) {
-  if (colors.length <= 1) return null;
+  const locale = useLocale();
+  const t = useT();
+  if (colors.length === 0) return null;
 
   const swatchItems = getSwatchItems(colors);
   const highlightIndex = previewIndex ?? 0;
@@ -90,15 +97,16 @@ export default function ProductColorSwatches({
             key={`${item.color.name}-${item.index}`}
             color={item.color}
             highlighted={item.index === highlightIndex}
-            href={getProductColorHref(productSlug, item.color.name)}
+            href={withLocalePath(getProductColorHref(productSlug, item.color.name), locale)}
             onPreview={() => onPreview?.(item.index)}
+            label={localizeColorName(item.color, locale)}
           />
         ) : (
           <Link
             key="overflow"
-            href={`/product/${productSlug}`}
+            href={withLocalePath(`/product/${productSlug}`, locale)}
             className="inline-flex h-4 w-4 shrink-0 items-center justify-center rounded-full bg-stone-100 text-[9px] font-medium leading-none text-stone-700 transition hover:bg-stone-200 sm:h-[18px] sm:w-[18px] sm:text-[10px]"
-            aria-label={`Ещё ${item.count} ${item.count === 1 ? "цвет" : item.count < 5 ? "цвета" : "цветов"}`}
+            aria-label={`${t("common.moreColors")} ${item.count}`}
           >
             +{item.count}
           </Link>

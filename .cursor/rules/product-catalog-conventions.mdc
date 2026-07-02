@@ -1,0 +1,46 @@
+---
+description: Conventions for adding/editing products in src/lib/data.ts — naming, copywriting, materials, specs
+globs: src/lib/data.ts
+alwaysApply: false
+---
+
+# Product Catalog Conventions
+
+Apply these rules automatically to every new product added to `products` in `src/lib/data.ts` — don't wait to be asked again.
+
+## Title (naming)
+
+Format: `"[Имя] — [тип/форма сумки]"` (no color in the title — color is shown separately via the `colors` swatch UI).
+
+- One unique, premium-sounding first name per product (Italian/French feminine names, Italian/French place names, soft nature words). No repeats across the catalog.
+- Never use real luxury brand names (Gucci, Prada, Celine, Dior, Chanel, Hermès, Jacquemus, Furla, Guess, etc.).
+- Never reuse the catalog's own sub-brand names as a product name: `luma-atelier`/SÓRA Atelier, `aurelia`, `marrone`, `castello`, `vionetta`, `pelle-nova`.
+- Avoid cheap-sounding titles ("Сумка женская 2025", "Модная сумочка", "Люкс сумка").
+- **Already-used names — do not repeat**: Mirelle, Adriana, Fiorella, Ondine, Marbella, Positano, Capri, Ortigia, Perla, Talia, Vittoria, Romina, Odette, Amara, Liora, Serena, Camelia, Selene, Faustine, Marisol, Ibiza, Provence, Taormina, Cuore, Ravello, Sirmione, Elodie, Corinne, Luna, Valentina, Coralie, Beatrice, Milena, Adele, Genevieve, Nerina, Solenne, Ottavia, Anouk, Sabina, Iris, Cosima, Delphine, Estelle, Renata, Flora, Verona, Alba, Tosca, Bianca, Camille, Marcella, Isadora, Chiara, Alessia, Martina, Simona, Elise, Noemi, Ilaria, Silvana, Antonella, Graziella, Marguerite, Emmeline, Josephine, Seraphine, Cortina, Volterra, Ischia, Procida, Sperlonga, Margaux, Avignon, Honfleur, Deauville, Annecy, Giverny, Biarritz, Trieste, Sienna, Colette, Lucerne, Amelie, Claire, Paloma, Nadine, Suzette, Brielle, Camea, Noelle, Amalia, Zelie, Aimee, Rosalie, Leonie, Giuliana, Giada, Filippa, Luciana, Ines, Paola, Greta, Helena, Celeste, Vivienne, Francesca, Giulietta, Nerissa, Fabrizia, Lucrezia, Ginevra, Allegra, Bettina, Perrine, Anaelle, Ninette, Thea, Colline, Maelle, Livia, Cassia, Aurea, Halle, Romilly, Vespera, Marielle, Fiorenza, Loretta, Cressida, Palmira, Amabel, Ottilie, Perlette, Rosalind, Solaine, Adalina, Elowen, Fantine, Garance, Herminie, Isolde, Jacinta, Kalina, Lisette, Manon, Noriane, Oriane, Pernelle, Aveline, Cendrine, Dorine, Gwenaelle.
+- When you assign a new name, add it to the list above so it stays authoritative.
+
+## Description & highlights
+
+- `description`: 2–3 short, natural paragraphs (`\n\n` between). Premium but calm tone — no "шикарная", "люкс", "богатая", "топовая", "идеальная". No canned corporate phrasing. Vary wording across products, don't reuse the same sentences.
+- `highlights`: array of 3–4 short factual bullet points (material, key construction detail, strap/closure, hardware). Only real facts — never invent a detail that isn't in the photos/spec.
+- Don't fabricate facts (e.g. a detachable strap) if it isn't visible/confirmed.
+
+## Leather terminology
+
+The shop only carries genuine leather — no eco-leather, no vague hedging.
+
+- Always say **"кожа"** (RU) — never plain "натуральная кожа", never "экокожа"/"искусственная кожа".
+- Suede: "замша".
+- English `material` facet field: use "Leather" (e.g. `"Woven Texture Base + Leather Trim"`, `"Premium Leather"`).
+
+## Specs table
+
+- `"Страна производства"`: use the real country if known (usually `"Италия"`); if unknown, use `"Уточняется по бирке/поставщику"` — never leave it out or just say `"Уточняется"`.
+- **Important UI quirk**: `getVisibleProductSpecs` in `src/lib/product-i18n.ts` hides any spec row labeled exactly `"Материал"` from the UI. If a product needs a *visible* material line in the specs table, label it `"Кожа"` (or another non-hidden label), not `"Материал"`.
+- Keep existing label conventions (Размер, Ручки, Ремень, Пряжка, Отделение, Карманы, Застёжка, Фурнитура, Подкладка, Доставка).
+
+## Image/product mechanics (recap)
+
+- Image naming: `{color}-front.png`, `-back.png`, `-side.png`, `-inside.png`, `-open.png`, `-set.png`, `-front-alt.png`.
+- `galleryFit: "contain"` for wide/structured photos so they don't get cropped on cards.
+- Standard defaults: `brandSlug: "luma-atelier"`, `price: 1600`, `status: "in_stock"`, `isNew: true`.

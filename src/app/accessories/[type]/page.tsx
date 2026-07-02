@@ -6,6 +6,8 @@ import {
   getCategory,
   productsByCategory,
 } from "@/lib/data";
+import { getServerLocale } from "@/lib/server-i18n";
+import { categoryName } from "@/lib/catalog-i18n";
 
 export function generateStaticParams() {
   return accessoryCategories
@@ -29,19 +31,21 @@ export default async function AccessoryTypePage({
   params: Promise<{ type: string }>;
 }) {
   const { type } = await params;
+  const locale = await getServerLocale();
   const cat = getCategory(type);
   if (!cat || cat.section !== "accessories") notFound();
+  const label = categoryName(cat.slug, cat.name, locale);
 
   return (
     <CatalogView
-      title={cat.name}
+      title={label}
       products={productsByCategory(cat.slug)}
       categories={accessoryCategories}
       basePath="/accessories"
       activeSlug={cat.slug}
       crumbs={[
-        { label: "Аксессуары", href: "/accessories" },
-        { label: cat.name },
+        { label: categoryName("vse-aksessuary", "Все аксессуары", locale), href: "/accessories" },
+        { label },
       ]}
     />
   );

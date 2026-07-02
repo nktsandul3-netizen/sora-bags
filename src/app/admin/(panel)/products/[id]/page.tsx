@@ -5,6 +5,8 @@ import { getBrandOptions, getCategoryOptions } from "@/lib/admin/categories";
 import ProductForm from "@/components/admin/ProductForm";
 import DeleteProductButton from "@/components/admin/DeleteProductButton";
 import DuplicateProductButton from "@/components/admin/DuplicateProductButton";
+import ProductAnalyticsPanel from "@/components/admin/ProductAnalyticsPanel";
+import { getProductAnalyticsSummary } from "@/lib/admin/sales-intelligence";
 
 export const dynamic = "force-dynamic";
 
@@ -19,6 +21,7 @@ export default async function EditProductPage({
     getCategoryOptions(),
   ]);
   if (!product) notFound();
+  const analytics = await getProductAnalyticsSummary(product.slug);
   const brands = getBrandOptions();
 
   return (
@@ -35,6 +38,7 @@ export default async function EditProductPage({
           <DeleteProductButton productId={product.id} />
         </div>
       </div>
+      <ProductAnalyticsPanel rows={analytics} />
       <ProductForm product={product} brands={brands} categories={categories} />
     </div>
   );

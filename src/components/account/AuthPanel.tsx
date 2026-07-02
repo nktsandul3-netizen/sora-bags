@@ -4,6 +4,8 @@ import Link from "next/link";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { signIn } from "next-auth/react";
+import { withLocalePath } from "@/lib/i18n";
+import { useLocale, useT } from "@/lib/useI18n";
 
 const fieldClass =
   "w-full rounded-xl border border-stone-200 px-4 py-3 text-sm outline-none transition focus:border-stone-900";
@@ -12,6 +14,8 @@ type AuthMode = "login" | "register" | "forgot";
 
 export default function AuthPanel() {
   const router = useRouter();
+  const locale = useLocale();
+  const t = useT();
   const [mode, setMode] = useState<AuthMode>("login");
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
@@ -41,13 +45,10 @@ export default function AuthPanel() {
         });
         const data = await res.json().catch(() => null);
         if (!res.ok) {
-          setError(data?.error ?? "Не удалось отправить письмо");
+          setError(data?.error ?? t("auth.errForgotSend"));
           return;
         }
-        setSuccess(
-          data?.message ??
-            "Если аккаунт с таким e-mail существует, мы отправили ссылку для восстановления пароля.",
-        );
+        setSuccess(t("auth.forgotSuccess"));
         return;
       }
 
@@ -59,7 +60,7 @@ export default function AuthPanel() {
         });
         const data = await res.json().catch(() => null);
         if (!res.ok) {
-          setError(data?.error ?? "Не удалось зарегистрироваться");
+          setError(data?.error ?? t("auth.errRegister"));
           return;
         }
       }
@@ -73,32 +74,40 @@ export default function AuthPanel() {
       if (result?.error) {
         setError(
           mode === "login"
-            ? "Неверный e-mail или пароль"
-            : "Аккаунт создан, но войти не удалось. Попробуйте войти вручную.",
+            ? t("auth.errInvalidCredentials")
+            : t("auth.errLoginAfterRegister"),
         );
         return;
       }
 
       router.refresh();
     } catch {
-      setError("Проблема с соединением. Попробуйте ещё раз.");
+      setError(t("auth.errConnection"));
     } finally {
       setLoading(false);
     }
   }
 
   const title =
-    mode === "login" ? "Вход" : mode === "register" ? "Регистрация" : "Восстановление пароля";
+    mode === "login"
+      ? t("auth.loginTitle")
+      : mode === "register"
+        ? t("auth.registerTitle")
+        : t("auth.forgotTitle");
 
   const submitLabel =
-    mode === "login" ? "Войти" : mode === "register" ? "Зарегистрироваться" : "Отправить ссылку";
+    mode === "login"
+      ? t("auth.loginSubmit")
+      : mode === "register"
+        ? t("auth.registerSubmit")
+        : t("auth.forgotSubmit");
 
   const footerText =
     mode === "login"
-      ? "Войдите, чтобы видеть историю заказов, адреса и избранное."
+      ? t("auth.loginFooter")
       : mode === "register"
-        ? "Регистрация сохранит ваши заказы, адреса и избранное в личном кабинете."
-        : "Мы отправим письмо со ссылкой для создания нового пароля.";
+        ? t("auth.registerFooter")
+        : t("auth.forgotFooter");
 
   return (
     <div className="mx-auto max-w-md px-4 py-12 sm:px-6">
@@ -114,7 +123,7 @@ export default function AuthPanel() {
               (mode === "login" ? "bg-stone-900 text-white" : "text-stone-600")
             }
           >
-            Войти
+            {t("auth.loginTab")}
           </button>
           <button
             type="button"
@@ -124,7 +133,7 @@ export default function AuthPanel() {
               (mode === "register" ? "bg-stone-900 text-white" : "text-stone-600")
             }
           >
-            Регистрация
+            {t("auth.registerTab")}
           </button>
         </div>
       ) : (
@@ -133,7 +142,7 @@ export default function AuthPanel() {
           onClick={() => switchMode("login")}
           className="mb-6 text-sm text-stone-500 underline-offset-2 transition hover:text-stone-800 hover:underline"
         >
-          ← Вернуться ко входу
+          {t("auth.backToLoginArrow")}
         </button>
       )}
 
@@ -141,7 +150,7 @@ export default function AuthPanel() {
         {mode === "register" && (
           <input
             type="text"
-            placeholder="Имя"
+            placeholder={t("auth.namePlaceholder")}
             value={name}
             onChange={(e) => setName(e.target.value)}
             autoComplete="name"
@@ -150,7 +159,7 @@ export default function AuthPanel() {
         )}
         <input
           type="email"
-          placeholder="E-mail"
+          placeholder={t("auth.emailPlaceholder")}
           value={email}
           onChange={(e) => setEmail(e.target.value)}
           autoComplete="email"
@@ -160,7 +169,7 @@ export default function AuthPanel() {
         {mode !== "forgot" && (
           <input
             type="password"
-            placeholder="Пароль"
+            placeholder={t("auth.passwordPlaceholder")}
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             autoComplete={mode === "login" ? "current-password" : "new-password"}
@@ -175,7 +184,7 @@ export default function AuthPanel() {
               onClick={() => switchMode("forgot")}
               className="text-xs text-stone-500 underline-offset-2 transition hover:text-stone-800 hover:underline"
             >
-              Забыли пароль?
+              {t("auth.forgotPassword")}
             </button>
           </div>
         )}
@@ -193,15 +202,15 @@ export default function AuthPanel() {
           disabled={loading || (mode === "forgot" && !!success)}
           className="w-full rounded-full bg-stone-900 px-6 py-3.5 text-sm font-semibold text-white transition hover:bg-stone-800 disabled:cursor-not-allowed disabled:opacity-60"
         >
-          {loading ? "Подождите…" : submitLabel}
+          {loading ? t("auth.waiting") : submitLabel}
         </button>
       </form>
 
       <p className="mt-4 text-center text-xs text-stone-400">
         {footerText}{" "}
         {mode === "forgot" && (
-          <Link href="/account" className="underline-offset-2 hover:underline">
-            Вернуться ко входу
+          <Link href={withLocalePath("/account", locale)} className="underline-offset-2 hover:underline">
+            {t("auth.backToLogin")}
           </Link>
         )}
       </p>

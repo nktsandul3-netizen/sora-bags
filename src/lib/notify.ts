@@ -7,6 +7,8 @@ export interface NewOrderNotification {
   phone: string;
   email?: string;
   city?: string;
+  deliveryMethod?: string;
+  paymentMethod?: string;
   comment?: string;
   items: { title: string; color: string; qty: number; price: number }[];
   total: number;
@@ -41,6 +43,8 @@ function buildEmailHtml(data: NewOrderNotification): string {
       <tr><td style="padding:4px 12px 4px 0;color:#78716c;">Телефон</td><td style="padding:4px 0;font-weight:600;">${escapeHtml(data.phone)}</td></tr>
       ${data.email ? `<tr><td style="padding:4px 12px 4px 0;color:#78716c;">Email</td><td style="padding:4px 0;">${escapeHtml(data.email)}</td></tr>` : ""}
       ${data.city ? `<tr><td style="padding:4px 12px 4px 0;color:#78716c;">Город</td><td style="padding:4px 0;">${escapeHtml(data.city)}</td></tr>` : ""}
+      ${data.deliveryMethod ? `<tr><td style="padding:4px 12px 4px 0;color:#78716c;">Доставка</td><td style="padding:4px 0;">${escapeHtml(data.deliveryMethod)}</td></tr>` : ""}
+      ${data.paymentMethod ? `<tr><td style="padding:4px 12px 4px 0;color:#78716c;">Оплата</td><td style="padding:4px 0;">${escapeHtml(data.paymentMethod)}</td></tr>` : ""}
       ${data.comment ? `<tr><td style="padding:4px 12px 4px 0;color:#78716c;vertical-align:top;">Комментарий</td><td style="padding:4px 0;">${escapeHtml(data.comment)}</td></tr>` : ""}
     </table>
     <table style="border-collapse:collapse;width:100%;font-size:14px;">
@@ -68,6 +72,8 @@ function buildTelegramText(data: NewOrderNotification): string {
     `📞 ${data.phone}`,
     data.email ? `✉️ ${data.email}` : "",
     data.city ? `🏙 ${data.city}` : "",
+    data.deliveryMethod ? `🚚 ${data.deliveryMethod}` : "",
+    data.paymentMethod ? `💳 ${data.paymentMethod}` : "",
     data.comment ? `💬 ${data.comment}` : "",
     "",
     ...data.items.map(

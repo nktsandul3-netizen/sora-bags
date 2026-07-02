@@ -10,24 +10,24 @@ interface Point {
 /** Универсальный столбчатый график для аналитики. */
 export default function BarChart({
   data,
-  valueKey = "value",
   color = "#A01D26",
   formatValue,
 }: {
   data: Point[];
-  valueKey?: string;
   color?: string;
   formatValue?: (n: number) => string;
 }) {
   const [hover, setHover] = useState<number | null>(null);
   const values = data.map((d) => d.value);
   const max = Math.max(1, ...values);
+  const labelEvery = Math.max(1, Math.ceil(data.length / 6));
 
   return (
-    <div className="flex h-44 items-end gap-1.5">
+    <div className="flex h-44 items-end gap-1.5 overflow-hidden">
       {data.map((d, i) => {
         const val = d.value;
         const h = Math.round((val / max) * 100);
+        const showLabel = i === 0 || i === data.length - 1 || i % labelEvery === 0;
         return (
           <div
             key={d.label + i}
@@ -48,7 +48,9 @@ export default function BarChart({
                 backgroundColor: hover === i ? color : `${color}55`,
               }}
             />
-            <span className="truncate text-[10px] text-stone-400">{d.label}</span>
+            <span className="h-3 max-w-full truncate text-[10px] text-stone-400">
+              {showLabel ? d.label : ""}
+            </span>
           </div>
         );
       })}

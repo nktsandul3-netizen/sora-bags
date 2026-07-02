@@ -32,6 +32,8 @@ export interface Product {
   brandSlug: string;
   section: Section;
   categorySlug: string;
+  /** Extra category slugs this product should also appear under (e.g. a hobo bag is also a shoulder bag). */
+  additionalCategorySlugs?: string[];
   price: number;
   oldPrice?: number;
   status?: ProductStatus;
@@ -39,7 +41,12 @@ export interface Product {
   images?: ProductImageAsset[];
   material: string;
   description: string;
+  /** Short, factual bullet points shown between the description and the specs table. */
+  highlights?: string[];
   isNew?: boolean;
+  isVintage?: boolean;
   hasVideo?: boolean;
+  /** "contain" shows the full photo without cropping wide/tall product shots */
+  galleryFit?: "cover" | "contain";
   specs?: { label: string; value: string }[];
 }

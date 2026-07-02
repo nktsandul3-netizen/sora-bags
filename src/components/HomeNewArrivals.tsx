@@ -6,20 +6,31 @@ import Image from "next/image";
 import type { Product } from "@/lib/types";
 import { formatPrice } from "@/lib/format";
 import { getBrandName } from "@/lib/data";
+import { withLocalePath } from "@/lib/i18n";
 import { useIsDesktop } from "@/lib/useIsDesktop";
+import { useLocale, useT } from "@/lib/useI18n";
+import { localizeProductTitle } from "@/lib/product-i18n";
 import ProductImage from "./ProductImage";
 import ProductColorSwatches, { getColorImages } from "./ProductColorSwatches";
 import WishlistButton from "./WishlistButton";
 import QuickViewModal from "./QuickViewModal";
+import PreorderStatusBadge from "./PreorderStatusBadge";
 
 function isLifestyleImage(src?: string) {
   return Boolean(src?.includes("lifestyle"));
 }
 
-function cardImageClassName(src: string | undefined, hovered: boolean) {
-  const fit = isLifestyleImage(src)
-    ? "object-cover object-[50%_35%]"
-    : "object-contain object-center";
+function cardImageClassName(
+  src: string | undefined,
+  hovered: boolean,
+  galleryFit: "cover" | "contain" = "cover",
+) {
+  const fit =
+    galleryFit === "contain"
+      ? "object-contain object-center p-1 sm:p-2"
+      : isLifestyleImage(src)
+        ? "object-cover object-[50%_35%]"
+        : "object-cover object-center";
 
   return (
     fit +
@@ -49,7 +60,10 @@ function ShowcaseCard({ product }: { product: Product }) {
   const [quickViewOpen, setQuickViewOpen] = useState(false);
   const [quickViewMounted, setQuickViewMounted] = useState(false);
   const isDesktop = useIsDesktop();
+  const locale = useLocale();
+  const t = useT();
   const onSale = product.oldPrice && product.oldPrice > product.price;
+  const localizedTitle = localizeProductTitle(product, locale);
   const colors = product.colors;
   const displayIdx = previewIdx ?? 0;
   const activeColor = colors[displayIdx] ?? colors[0];
@@ -58,7 +72,8 @@ function ShowcaseCard({ product }: { product: Product }) {
   const secondary = colorImages[1];
   const hasSwap = Boolean(isDesktop && secondary && secondary.src !== primary?.src);
   const showSecondary = imageHovered && previewIdx === null && hasSwap;
-  const showSwatches = colors.length > 1;
+  const showSwatches = colors.length > 0;
+  const galleryFit = product.galleryFit ?? "cover";
 
   function openQuickView() {
     setQuickViewMounted(true);
@@ -68,9 +83,9 @@ function ShowcaseCard({ product }: { product: Product }) {
   return (
     <div className="group block min-w-0">
       <div className="relative">
-        <Link href={`/product/${product.slug}`} className="block">
+        <Link href={withLocalePath(`/product/${product.slug}`, locale)} className="block">
         <div
-          className="relative aspect-[4/5] w-full overflow-hidden bg-stone-50"
+          className="relative aspect-[4/5] w-full overflow-hidden border border-stone-950/20 bg-white"
           onMouseEnter={() => setImageHovered(true)}
           onMouseLeave={() => setImageHovered(false)}
         >
@@ -85,13 +100,14 @@ function ShowcaseCard({ product }: { product: Product }) {
               <Image
                 key={`${displayIdx}-primary-${primary.src}`}
                 src={primary.src}
-                alt={primary.alt || product.title}
+                alt={primary.alt || localizedTitle}
                 fill
                 sizes="(min-width: 1024px) 25vw, 82vw"
                 quality={90}
                 className={cardImageClassName(
                   primary.src,
                   imageHovered && previewIdx === null,
+                  galleryFit,
                 )}
               />
             </div>
@@ -105,11 +121,11 @@ function ShowcaseCard({ product }: { product: Product }) {
                 <Image
                   key={`${displayIdx}-secondary-${secondary!.src}`}
                   src={secondary!.src}
-                  alt={secondary!.alt || product.title}
+                  alt={secondary!.alt || localizedTitle}
                   fill
                   sizes="(min-width: 1024px) 25vw, 82vw"
                   quality={90}
-                  className={cardImageClassName(secondary!.src, showSecondary)}
+                  className={cardImageClassName(secondary!.src, showSecondary, galleryFit)}
                 />
               </div>
             )}
@@ -119,23 +135,24 @@ function ShowcaseCard({ product }: { product: Product }) {
             key={`${displayIdx}-placeholder-${activeColor?.hex}`}
             hex={activeColor?.hex ?? "#d6d3d1"}
             section={product.section}
-            alt={product.title}
+            alt={localizedTitle}
             sizes="(min-width: 1024px) 25vw, 82vw"
             imageClassName={cardImageClassName(
               undefined,
               imageHovered && previewIdx === null,
+              galleryFit,
             )}
             className="h-full w-full"
           />
         )}
 
         <div className="absolute left-3 top-3 hidden items-center gap-2 text-[10px] font-semibold uppercase tracking-[0.14em] text-stone-950 lg:flex">
-          {onSale && <span>Скидка</span>}
-          {product.isNew && <span>Новинка</span>}
-          {product.hasVideo && <span>Видео</span>}
+          {onSale && <span>{t("catalog.badgeSale")}</span>}
+          {product.isNew && <span>{t("catalog.badgeNew")}</span>}
+          {product.hasVideo && <span>{t("catalog.badgeVideo")}</span>}
         </div>
 
-        <div className="absolute right-3 top-3">
+        <div className="absolute right-3 top-3 hidden lg:block">
           <WishlistButton slug={product.slug} />
         </div>
 
@@ -153,27 +170,40 @@ function ShowcaseCard({ product }: { product: Product }) {
         />
       ) : null}
 
+      <div className="mt-2.5 px-1 lg:hidden">
+        <WishlistButton slug={product.slug} variant="compact" />
+      </div>
+
       <Link
-        href={`/product/${product.slug}`}
+        href={withLocalePath(`/product/${product.slug}`, locale)}
         className={
           "grid grid-cols-[1fr_auto] gap-x-5 gap-y-2 px-1 text-[11px] uppercase tracking-[0.08em] " +
           (showSwatches ? "mt-2.5" : "mt-4")
         }
       >
         <p className="font-semibold text-stone-950">{getBrandName(product.brandSlug)}</p>
-        <h3 className="col-span-2 line-clamp-2 leading-snug text-stone-700">{product.title}</h3>
+        <h3 className="col-span-2 line-clamp-2 leading-snug text-stone-700">{localizedTitle}</h3>
       </Link>
 
-      <div className="relative mt-2 h-10 px-1 lg:mt-2.5 lg:h-11">
-        <p className="flex h-full items-center text-[11px] font-semibold uppercase tracking-[0.08em] text-stone-950 transition-all duration-300 group-hover:pointer-events-none group-hover:-translate-y-1 group-hover:opacity-0 max-lg:hidden">
-          {formatPrice(product.price)}
-        </p>
+      <div className="relative mt-2 px-1 lg:mt-2.5">
+        <div className="transition-all duration-300 group-hover:pointer-events-none group-hover:-translate-y-1 group-hover:opacity-0 max-lg:hidden">
+          <p className="text-[11px] font-semibold uppercase tracking-[0.08em] text-stone-950">
+            {formatPrice(product.price, locale)}
+          </p>
+          <PreorderStatusBadge status={product.status} compact className="mt-1.5" />
+        </div>
+        <div className="mb-1.5 lg:hidden">
+          <p className="text-[11px] font-semibold uppercase tracking-[0.08em] text-stone-950">
+            {formatPrice(product.price, locale)}
+          </p>
+          <PreorderStatusBadge status={product.status} compact className="mt-1.5" />
+        </div>
         <button
           type="button"
           onClick={openQuickView}
-          className="absolute inset-x-1 top-0 flex h-10 translate-y-2 items-center justify-center rounded-md bg-stone-950 px-4 text-[12px] font-semibold text-white opacity-0 shadow-sm transition-all duration-300 ease-out hover:bg-stone-800 group-hover:translate-y-0 group-hover:opacity-100 max-lg:translate-y-0 max-lg:opacity-100 lg:h-11 lg:text-[13px]"
+          className="absolute inset-x-1 top-0 flex h-10 translate-y-2 items-center justify-center rounded-md bg-stone-950 px-4 text-[12px] font-semibold text-white opacity-0 shadow-sm transition-all duration-300 ease-out hover:bg-stone-800 group-hover:translate-y-0 group-hover:opacity-100 max-lg:translate-y-0 max-lg:opacity-100 lg:h-14 lg:text-[13px]"
         >
-          Купить {formatPrice(product.price)}
+          {t("common.buy")} {formatPrice(product.price, locale)}
         </button>
       </div>
 
@@ -191,6 +221,8 @@ function ShowcaseCard({ product }: { product: Product }) {
 
 export default function HomeNewArrivals({ products }: { products: Product[] }) {
   const railRef = useRef<HTMLDivElement>(null);
+  const locale = useLocale();
+  const t = useT();
 
   function scroll(direction: "left" | "right") {
     const rail = railRef.current;
@@ -205,7 +237,7 @@ export default function HomeNewArrivals({ products }: { products: Product[] }) {
     <section className="py-12">
       <div className="mb-8 text-center">
         <h2 className="text-base font-semibold uppercase tracking-[0.12em] text-stone-950">
-          Новинки
+          {t("home.newArrivals")}
         </h2>
       </div>
 
@@ -242,10 +274,10 @@ export default function HomeNewArrivals({ products }: { products: Product[] }) {
 
       <div className="mt-8 flex justify-center">
         <Link
-          href="/new"
+          href={withLocalePath("/new", locale)}
           className="border border-stone-200 px-16 py-3 text-[11px] font-semibold uppercase tracking-[0.16em] text-stone-950 transition hover:border-stone-950"
         >
-          В каталог
+          {t("home.toCatalog")}
         </Link>
       </div>
     </section>

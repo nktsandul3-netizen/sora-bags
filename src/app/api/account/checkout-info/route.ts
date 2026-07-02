@@ -20,5 +20,8 @@ export async function GET() {
     email: profile?.email || "",
     phone: def?.phone || "",
     city: def?.city || "",
+    address: def?.street || "",
+    defaultAddressId: def?.id || null,
+    addresses,
   });
 }

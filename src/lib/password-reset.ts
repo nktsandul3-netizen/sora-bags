@@ -118,14 +118,14 @@ export async function requestPasswordReset(
 export async function resetPasswordWithToken(
   token: string,
   password: string,
-): Promise<{ ok: true; email: string } | { error: string }> {
+): Promise<{ ok: true; email: string } | { errorKey: string }> {
   const tokenHash = hashToken(token);
   const tokens = await passwordResetTokensCollection();
   const record = await tokens.findOne({ tokenHash });
 
   if (!record || record.expiresAt.getTime() <= Date.now()) {
     if (record) await tokens.deleteOne({ _id: record._id });
-    return { error: "Ссылка недействительна или срок её действия истёк. Запросите новую." };
+    return { errorKey: "api.errResetLinkInvalid" };
   }
 
   const passwordHash = await bcrypt.hash(password, 10);
@@ -137,7 +137,7 @@ export async function resetPasswordWithToken(
 
   if (updated.matchedCount === 0) {
     await tokens.deleteOne({ _id: record._id });
-    return { error: "Аккаунт не найден. Запросите новую ссылку." };
+    return { errorKey: "api.errAccountNotFound" };
   }
 
   await tokens.deleteMany({ userId: record.userId as ObjectId });

@@ -5,6 +5,8 @@ import { usePathname } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import { signOut, useSession } from "next-auth/react";
 import { accountTabHref } from "@/lib/account-tabs";
+import { withLocalePath } from "@/lib/i18n";
+import { useLocale, useT } from "@/lib/useI18n";
 
 function MenuIcon({ name }: { name: string }) {
   const cls = "h-5 w-5 shrink-0 text-stone-700";
@@ -58,11 +60,11 @@ function MenuIcon({ name }: { name: string }) {
 }
 
 const menuItems = [
-  { id: "console", label: "Консоль", href: accountTabHref("console") },
-  { id: "orders", label: "Мои покупки", href: accountTabHref("orders") },
-  { id: "wishlist", label: "Wishlist", href: accountTabHref("wishlist") },
-  { id: "addresses", label: "Мои адреса", href: accountTabHref("addresses") },
-  { id: "profile", label: "Анкета", href: accountTabHref("profile") },
+  { id: "console", labelKey: "account.console", href: accountTabHref("console") },
+  { id: "orders", labelKey: "account.orders", href: accountTabHref("orders") },
+  { id: "wishlist", labelKey: "common.wishlist", href: accountTabHref("wishlist") },
+  { id: "addresses", labelKey: "account.addresses", href: accountTabHref("addresses") },
+  { id: "profile", labelKey: "account.profile", href: accountTabHref("profile") },
 ] as const;
 
 export default function ProfileMenu({
@@ -74,6 +76,8 @@ export default function ProfileMenu({
 }) {
   const { status } = useSession();
   const pathname = usePathname();
+  const locale = useLocale();
+  const t = useT();
   const [open, setOpen] = useState(false);
   const rootRef = useRef<HTMLDivElement>(null);
   const onAccount = pathname.startsWith("/account");
@@ -92,11 +96,11 @@ export default function ProfileMenu({
   if (status !== "authenticated") {
     return (
       <Link
-        href="/account"
-        aria-label="Профиль"
-        className={`inline-flex h-14 w-14 items-center justify-center rounded-full transition ${overlay ? "hover:bg-white/10" : "hover:bg-stone-100"}`}
+        href={withLocalePath("/account", locale)}
+        aria-label={t("common.profile")}
+        className={`inline-flex h-9 w-9 items-center justify-center transition ${overlay ? "hover:opacity-75" : "hover:opacity-60"}`}
       >
-        <svg viewBox="0 0 24 24" className="h-8 w-8 origin-center scale-x-[1.12]" fill="none" stroke="currentColor" strokeWidth="1.25" aria-hidden>
+        <svg viewBox="0 0 24 24" className="h-7 w-7 origin-center scale-x-[1.08]" fill="none" stroke="currentColor" strokeWidth="1.35" aria-hidden>
           <circle cx="12" cy="8.25" r="3.25" />
           <path d="M5.5 20.25c0-3.75 2.9-6 6.5-6s6.5 2.25 6.5 6" strokeLinecap="round" />
         </svg>
@@ -105,7 +109,7 @@ export default function ProfileMenu({
   }
 
   const triggerClass = iconOnly
-    ? `inline-flex h-14 w-14 items-center justify-center rounded-full transition ${overlay ? "hover:bg-white/10" : "hover:bg-stone-100"}`
+    ? `inline-flex h-9 w-9 items-center justify-center transition ${overlay ? "hover:opacity-75" : "hover:opacity-60"}`
     : `border-b-2 pb-0.5 ${overlay ? "text-sm font-medium text-white drop-shadow-[0_1px_6px_rgba(0,0,0,0.65)] transition hover:text-white/90" : "text-sm font-medium text-stone-800 transition hover:text-stone-950"}`;
 
   return (
@@ -113,18 +117,18 @@ export default function ProfileMenu({
       <button
         type="button"
         onClick={() => setOpen((v) => !v)}
-        aria-label="Мой профиль"
+        aria-label={t("common.profile")}
         className={`${triggerClass} ${!iconOnly && (open || onAccount) ? (overlay ? "border-white" : "border-stone-900") : !iconOnly ? "border-transparent" : ""}`}
         aria-expanded={open}
         aria-haspopup="menu"
       >
         {iconOnly ? (
-          <svg viewBox="0 0 24 24" className="h-8 w-8 origin-center scale-x-[1.12]" fill="none" stroke="currentColor" strokeWidth="1.25" aria-hidden>
+          <svg viewBox="0 0 24 24" className="h-7 w-7 origin-center scale-x-[1.08]" fill="none" stroke="currentColor" strokeWidth="1.35" aria-hidden>
             <circle cx="12" cy="8.25" r="3.25" />
             <path d="M5.5 20.25c0-3.75 2.9-6 6.5-6s6.5 2.25 6.5 6" strokeLinecap="round" />
           </svg>
         ) : (
-          "Мой профиль"
+          t("account.profile")
         )}
       </button>
 
@@ -136,13 +140,13 @@ export default function ProfileMenu({
           {menuItems.map((item) => (
             <Link
               key={item.id}
-              href={item.href}
+              href={withLocalePath(item.href, locale)}
               role="menuitem"
               onClick={() => setOpen(false)}
               className="flex items-center gap-3 px-4 py-2.5 text-sm text-stone-800 transition hover:bg-stone-50"
             >
               <MenuIcon name={item.id} />
-              {item.label}
+              {t(item.labelKey)}
             </Link>
           ))}
           <button
@@ -150,12 +154,12 @@ export default function ProfileMenu({
             role="menuitem"
             onClick={() => {
               setOpen(false);
-              signOut({ callbackUrl: "/" });
+              signOut({ callbackUrl: withLocalePath("/", locale) });
             }}
             className="flex w-full items-center gap-3 px-4 py-2.5 text-left text-sm text-stone-800 transition hover:bg-stone-50"
           >
             <MenuIcon name="logout" />
-            Выйти
+              {t("account.logout")}
           </button>
         </div>
       )}

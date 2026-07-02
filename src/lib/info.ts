@@ -81,13 +81,56 @@ export const infoPages: InfoPage[] = [
     title: "Реквизиты",
     body: [],
   },
+  {
+    slug: "politika-konfidentsialnosti",
+    title: "Политика конфиденциальности",
+    body: [],
+  },
 ];
 
-const hiddenInfoNavSlugs = new Set(["vozvrat", "rekvizity", "optom"]);
+const hiddenInfoNavSlugs = new Set([
+  "vozvrat",
+  "rekvizity",
+  "optom",
+  "politika-konfidentsialnosti",
+]);
 
 /** Info pages shown in header, footer, and info sidebar navigation. */
 export const navInfoPages = infoPages.filter((p) => !hiddenInfoNavSlugs.has(p.slug));
 
 export function getInfoPage(slug: string): InfoPage | undefined {
   return infoPages.find((p) => p.slug === slug);
+}
+
+const localizedInfoTitles: Record<string, { ro: string; en: string }> = {
+  "o-nas": { ro: "Despre noi", en: "About us" },
+  "oplata-i-dostavka": { ro: "Plată și livrare", en: "Payment and delivery" },
+  vozvrat: { ro: "Retur", en: "Returns" },
+  garantiya: { ro: "Garanția calității", en: "Quality warranty" },
+  optom: { ro: "Comenzi en-gros", en: "Wholesale orders" },
+  "nashi-magaziny": { ro: "Magazinele noastre", en: "Our stores" },
+  "podarochnye-sertifikaty": { ro: "Certificate cadou", en: "Gift certificates" },
+  rekvizity: { ro: "Date companie", en: "Company details" },
+  "politika-konfidentsialnosti": { ro: "Politica de confidențialitate", en: "Privacy policy" },
+};
+
+const localizedInfoBody: Record<string, { ro: string[]; en: string[] }> = {
+  "nashi-magaziny": {
+    ro: [
+      "Informațiile despre magazinele SÓRA Bags vor apărea în curând pe această pagină.",
+      "Dacă doriți să confirmați adresa, programul sau disponibilitatea unui model, contactați-ne prin metoda convenabilă pentru dvs.",
+    ],
+    en: [
+      "Information about SÓRA Bags stores will appear on this page soon.",
+      "If you would like to confirm the address, working hours or availability of a specific model, contact us in the way most convenient for you.",
+    ],
+  },
+};
+
+export function getInfoTitle(page: Pick<InfoPage, "slug" | "title">, locale: "ru" | "ro" | "en") {
+  return locale === "ru" ? page.title : localizedInfoTitles[page.slug]?.[locale] ?? page.title;
+}
+
+export function getInfoBody(page: Pick<InfoPage, "slug" | "body">, locale: "ru" | "ro" | "en") {
+  return locale === "ru" ? page.body : localizedInfoBody[page.slug]?.[locale] ?? page.body;
 }

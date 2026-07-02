@@ -4,35 +4,41 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
 import { adminLogout } from "@/app/admin/actions";
+import { withLocalePath } from "@/lib/i18n";
+import { useLocale, useT } from "@/lib/useI18n";
+import type { TranslationKey } from "@/lib/messages";
 
 interface NavItem {
   href: string;
-  label: string;
+  labelKey: TranslationKey;
   icon: keyof typeof ICONS;
   exact?: boolean;
 }
 
 const NAV: NavItem[] = [
-  { href: "/admin", label: "Обзор", icon: "dashboard", exact: true },
-  { href: "/admin/analytics", label: "Аналитика", icon: "analytics" },
-  { href: "/admin/orders", label: "Заказы", icon: "orders" },
-  { href: "/admin/payments", label: "Платежи", icon: "payments" },
-  { href: "/admin/products", label: "Товары", icon: "products" },
-  { href: "/admin/media", label: "Медиа", icon: "media" },
-  { href: "/admin/customers", label: "Клиенты", icon: "customers" },
-  { href: "/admin/newsletter", label: "Подписчики", icon: "newsletter" },
-  { href: "/admin/reviews", label: "Отзывы", icon: "reviews" },
-  { href: "/admin/coupons", label: "Купоны", icon: "coupons" },
-  { href: "/admin/settings", label: "Настройки", icon: "settings" },
+  { href: "/admin", labelKey: "admin.overview", icon: "dashboard", exact: true },
+  { href: "/admin/analytics", labelKey: "admin.analytics", icon: "analytics" },
+  { href: "/admin/orders", labelKey: "admin.orders", icon: "orders" },
+  { href: "/admin/payments", labelKey: "admin.payments", icon: "payments" },
+  { href: "/admin/products", labelKey: "admin.products", icon: "products" },
+  { href: "/admin/media", labelKey: "admin.media", icon: "media" },
+  { href: "/admin/customers", labelKey: "admin.customers", icon: "customers" },
+  { href: "/admin/newsletter", labelKey: "admin.newsletter", icon: "newsletter" },
+  { href: "/admin/reviews", labelKey: "admin.reviews", icon: "reviews" },
+  { href: "/admin/coupons", labelKey: "admin.coupons", icon: "coupons" },
+  { href: "/admin/settings", labelKey: "admin.settings", icon: "settings" },
 ];
 
 export default function AdminNav({ userName }: { userName: string }) {
   const pathname = usePathname();
+  const locale = useLocale();
+  const t = useT();
   const [open, setOpen] = useState(false);
 
   function isActive(item: NavItem): boolean {
-    if (item.exact) return pathname === item.href;
-    return pathname === item.href || pathname.startsWith(item.href + "/");
+    const current = pathname.replace(/^\/(ru|ro|en)(?=\/|$)/, "") || "/";
+    if (item.exact) return current === item.href;
+    return current === item.href || current.startsWith(item.href + "/");
   }
 
   const links = (
@@ -42,7 +48,7 @@ export default function AdminNav({ userName }: { userName: string }) {
         return (
           <Link
             key={item.href}
-            href={item.href}
+            href={withLocalePath(item.href, locale)}
             onClick={() => setOpen(false)}
             className={`flex items-center gap-3 px-4 py-2 text-sm tracking-wide transition-colors ${
               active
@@ -51,7 +57,7 @@ export default function AdminNav({ userName }: { userName: string }) {
             }`}
           >
             <span className="h-4 w-4 shrink-0">{ICONS[item.icon]}</span>
-            {item.label}
+            {t(item.labelKey)}
           </Link>
         );
       })}
@@ -61,12 +67,12 @@ export default function AdminNav({ userName }: { userName: string }) {
   return (
     <>
       <div className="flex items-center justify-between border-b border-stone-200 px-4 py-3 lg:hidden">
-        <Link href="/admin" className="font-serif text-xl tracking-[0.2em] text-stone-900">
+        <Link href={withLocalePath("/admin", locale)} className="font-serif text-xl tracking-[0.2em] text-stone-900">
           SÓRA
         </Link>
         <button
           type="button"
-          aria-label="Меню"
+          aria-label={t("common.menu")}
           onClick={() => setOpen((v) => !v)}
           className="rounded-md border border-stone-300 p-2 text-stone-700"
         >
@@ -86,7 +92,7 @@ export default function AdminNav({ userName }: { userName: string }) {
         } border-b border-stone-200 bg-white lg:sticky lg:top-0 lg:block lg:h-screen lg:w-56 lg:shrink-0 lg:border-b-0 lg:border-r lg:overflow-y-auto`}
       >
         <div className="hidden items-center gap-2 px-5 py-5 lg:flex">
-          <Link href="/admin" className="font-serif text-xl tracking-[0.25em] text-stone-900">
+          <Link href={withLocalePath("/admin", locale)} className="font-serif text-xl tracking-[0.25em] text-stone-900">
             SÓRA
           </Link>
         </div>
@@ -100,7 +106,7 @@ export default function AdminNav({ userName }: { userName: string }) {
               className="flex w-full items-center gap-3 px-2 py-2 text-sm text-stone-600 transition-colors hover:text-[#A01D26]"
             >
               <span className="h-4 w-4 shrink-0">{ICONS.logout}</span>
-              Выйти
+              {t("account.logout")}
             </button>
           </form>
         </div>

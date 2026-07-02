@@ -1,6 +1,7 @@
 import Image from "next/image";
 import ConsultationBlock from "@/components/ConsultationBlock";
 import RevealOnScroll from "@/components/about/RevealOnScroll";
+import type { Locale } from "@/lib/i18n";
 
 const cream = "#F5F1EB";
 const ink = "#1A1A1A";
@@ -62,54 +63,94 @@ function BodyCopy({
   );
 }
 
-function EditorialImage({
-  src,
-  alt,
-  className = "",
-  priority = false,
-  sizes = "(min-width: 1024px) 50vw, 100vw",
-  objectFit = "cover",
-  objectPosition = "object-center",
-}: {
-  src: string;
-  alt: string;
-  className?: string;
-  priority?: boolean;
-  sizes?: string;
-  objectFit?: "cover" | "contain";
-  objectPosition?: string;
-}) {
-  return (
-    <div className={`relative overflow-hidden ${className}`}>
-      <Image
-        src={src}
-        alt={alt}
-        fill
-        priority={priority}
-        quality={88}
-        sizes={sizes}
-        className={`${objectFit === "contain" ? "object-contain" : "object-cover"} ${objectPosition}`}
-      />
-    </div>
-  );
-}
+const copy = {
+  ru: {
+    intro: [
+      "Мы создали SÓRA Bags с простой идеей — помочь женщинам находить сумки, которые выглядят дорого, служат долго и остаются актуальными независимо от модных трендов. Мы уверены, что качественная сумка — это не просто аксессуар. Это часть образа, отражение вкуса и деталь, которая сопровождает свою владелицу каждый день.",
+      "В основе нашего ассортимента лежат итальянские сумки и аксессуары, выбранные с особым вниманием к качеству материалов, удобству и дизайну. Мы сотрудничаем с проверенными поставщиками и уделяем большое внимание каждой модели, прежде чем она появится в нашей коллекции. Для нас важно, чтобы каждая сумка сочетала в себе элегантность, практичность и долговечность.",
+    ],
+    modern: "Современная классика",
+    modernText: [
+      "SÓRA Bags появился благодаря любви к современной классике. Мы заметили, что многие покупательницы сталкиваются с выбором между доступностью и качеством. Наша задача — предложить изделия, которые выглядят премиально, изготовлены из качественных материалов и доступны по справедливой цене.",
+      "Мы стремимся создавать не просто магазин, а место, где каждая женщина сможет найти аксессуар, соответствующий ее стилю жизни. Будь то деловая встреча, путешествие, прогулка по городу или особенное событие — правильная сумка помогает чувствовать себя уверенно в любой ситуации.",
+    ],
+    details: "Элегантность в деталях",
+    detailsText: [
+      "Особое внимание мы уделяем обслуживанию клиентов. Мы всегда готовы помочь с выбором модели, рассказать о материалах, подобрать подходящий цвет и ответить на любые вопросы. Для нас важна не только покупка, но и впечатление, которое остаётся после неё.",
+      "Мы верим, что настоящая элегантность заключается в деталях. Именно поэтому каждая сумка в SÓRA Bags подбирается с учётом актуальных тенденций, качества исполнения и практичности в повседневной жизни.",
+    ],
+    craft: "Мастерство и качество",
+    craftText: [
+      "Каждая сумка SÓRA начинается с тщательно отобранных материалов — мягкой итальянской кожи, продуманной фурнитуры и фактур, выбранных за красоту и долговечность. Мы работаем с мастерами, которые знают: настоящая роскошь — в деталях: точная строчка, сбалансированные пропорции, удобные внутренние отделения для повседневной жизни.",
+      "Наш подход сознательно сдержанный. Мы выбираем чистые силуэты, нейтральные оттенки и формы, которые не привязаны к сезону — вещи, к которым возвращаетесь из года в год, от утренних встреч до вечера у моря.",
+      "Качество — это не обещание на бирке. Это вес в руке, то, как ремень ложится на плечо, и удовольствие от вещи, созданной надолго.",
+    ],
+    world: "The World of SÓRA",
+  },
+  ro: {
+    intro: [
+      "Am creat SÓRA Bags cu o idee simplă: să ajutăm femeile să găsească genți care arată elegant, rezistă în timp și rămân actuale dincolo de tendințe. O geantă de calitate nu este doar un accesoriu, ci o parte a imaginii personale.",
+      "La baza sortimentului nostru sunt genți și accesorii italiene, selectate cu atenție pentru materiale, confort și design. Pentru noi contează ca fiecare model să combine eleganța, utilitatea și durabilitatea.",
+    ],
+    modern: "Clasic modern",
+    modernText: [
+      "SÓRA Bags a apărut din dragoste pentru clasicul modern. Multe cliente aleg între accesibilitate și calitate, iar misiunea noastră este să oferim produse cu aspect premium, materiale bune și preț corect.",
+      "Ne dorim să fim mai mult decât un magazin: un loc unde fiecare femeie găsește accesoriul potrivit stilului ei de viață, de la întâlniri de business până la plimbări sau evenimente speciale.",
+    ],
+    details: "Eleganță în detalii",
+    detailsText: [
+      "Acordăm o atenție deosebită serviciului pentru clienți. Vă ajutăm să alegeți modelul, materialul și culoarea potrivită și răspundem la întrebări cu grijă.",
+      "Credem că eleganța adevărată stă în detalii. De aceea, fiecare geantă SÓRA este selectată pentru tendințe actuale, calitate de execuție și utilitate zilnică.",
+    ],
+    craft: "Măiestrie și calitate",
+    craftText: [
+      "Fiecare geantă SÓRA începe cu materiale atent alese: piele italiană, texturi frumoase și feronerie gândită pentru durabilitate. Lucrăm cu furnizori care înțeleg valoarea proporțiilor, cusăturilor și compartimentelor comode.",
+      "Alegem siluete curate, nuanțe versatile și forme care nu depind de un singur sezon, piese la care revii de la întâlnirile de dimineață până la serile în oraș.",
+      "Calitatea înseamnă felul în care se simte produsul în mână, cum cade cureaua pe umăr și bucuria unei piese create să dureze.",
+    ],
+    world: "Universul SÓRA",
+  },
+  en: {
+    intro: [
+      "We created SÓRA Bags with a simple idea: to help women find bags that look refined, last long and stay relevant beyond trends. A quality bag is more than an accessory; it is part of a look and a detail that accompanies its owner every day.",
+      "Our assortment is built around Italian bags and accessories selected with care for materials, comfort and design. Every model should combine elegance, practicality and durability.",
+    ],
+    modern: "Modern classic",
+    modernText: [
+      "SÓRA Bags grew from a love of modern classics. Many customers have to choose between accessibility and quality; our task is to offer pieces that look premium, use quality materials and come at a fair price.",
+      "We aim to be more than a store: a place where every woman can find an accessory that fits her lifestyle, from business meetings to travel, city walks and special occasions.",
+    ],
+    details: "Elegance in details",
+    detailsText: [
+      "We pay special attention to customer service. We are ready to help with model choice, materials, color and any questions that come up.",
+      "We believe true elegance lives in the details. That is why every SÓRA bag is selected for current style, quality execution and everyday practicality.",
+    ],
+    craft: "Craftsmanship and quality",
+    craftText: [
+      "Every SÓRA bag begins with carefully chosen materials: soft Italian leather, thoughtful hardware and textures selected for beauty and durability. We work with partners who know that real luxury lives in precise stitching, balanced proportions and convenient compartments.",
+      "Our approach is intentionally restrained. We choose clean silhouettes, neutral shades and shapes that are not tied to one season, pieces you return to year after year.",
+      "Quality is not a promise on a tag. It is the weight in the hand, the way a strap rests on the shoulder and the pleasure of an item made to last.",
+    ],
+    world: "The World of SÓRA",
+  },
+};
 
-export default function AboutUsContent() {
+export default function AboutUsContent({ locale = "ru" }: { locale?: Locale }) {
+  const c = copy[locale];
   return (
     <div className="overflow-x-clip" style={{ color: ink }}>
       {/* Hero */}
-      <section className="relative w-full">
-        <div className="relative aspect-[3/2] w-full min-h-[min(52vh,640px)] sm:min-h-[min(62vh,760px)] lg:min-h-[min(72vh,820px)]">
+      <section className="relative w-full bg-white">
+        <div className="relative h-[42vw] min-h-[260px] max-h-[560px] w-full overflow-hidden bg-[#F5F1EB]">
           <Image
-            src="/about/brand-flatlay.png"
-            alt="SÓRA Bags — Mediterranean luxury"
+            src="/about/about-hero-sora-florence.png"
+            alt="SÓRA Bags — Florence editorial"
             fill
             priority
             quality={92}
             sizes="100vw"
             className="object-cover object-center"
           />
-          <div className="absolute inset-0 bg-gradient-to-b from-black/45 via-transparent to-transparent" />
         </div>
       </section>
 
@@ -121,19 +162,7 @@ export default function AboutUsContent() {
               className="mx-auto max-w-[650px] space-y-6 text-[15px] leading-[1.9] sm:text-base sm:leading-[1.95]"
               style={{ color: `${ink}CC` }}
             >
-              <p>
-                Мы создали SÓRA Bags с простой идеей — помочь женщинам находить сумки, которые выглядят
-                дорого, служат долго и остаются актуальными независимо от модных трендов. Мы уверены, что
-                качественная сумка — это не просто аксессуар. Это часть образа, отражение вкуса и деталь,
-                которая сопровождает свою владелицу каждый день.
-              </p>
-              <p>
-                В основе нашего ассортимента лежат итальянские сумки и аксессуары, выбранные с особым
-                вниманием к качеству материалов, удобству и дизайну. Мы сотрудничаем с проверенными
-                поставщиками и уделяем большое внимание каждой модели, прежде чем она появится в нашей
-                коллекции. Для нас важно, чтобы каждая сумка сочетала в себе элегантность, практичность и
-                долговечность.
-              </p>
+              {c.intro.map((paragraph) => <p key={paragraph}>{paragraph}</p>)}
             </div>
           </RevealOnScroll>
         </div>
@@ -159,21 +188,10 @@ export default function AboutUsContent() {
             className="flex items-center px-4 py-12 sm:px-6 sm:py-14 lg:col-start-2 lg:row-start-1 lg:py-16 xl:py-20 lg:pl-4 lg:pr-8 xl:pl-8 xl:pr-[max(1rem,calc((100vw-80rem)/2))]"
           >
             <div>
-              <SectionHeading>Современная классика</SectionHeading>
+              <SectionHeading>{c.modern}</SectionHeading>
               <AccentRule />
               <BodyCopy className="mt-8 space-y-5">
-                <p>
-                  SÓRA Bags появился благодаря любви к современной классике. Мы заметили, что многие
-                  покупательницы сталкиваются с выбором между доступностью и качеством. Наша задача —
-                  предложить изделия, которые выглядят премиально, изготовлены из качественных материалов и
-                  доступны по справедливой цене.
-                </p>
-                <p>
-                  Мы стремимся создавать не просто магазин, а место, где каждая женщина сможет найти
-                  аксессуар, соответствующий ее стилю жизни. Будь то деловая встреча, путешествие, прогулка
-                  по городу или особенное событие — правильная сумка помогает чувствовать себя уверенно в
-                  любой ситуации.
-                </p>
+                {c.modernText.map((paragraph) => <p key={paragraph}>{paragraph}</p>)}
               </BodyCopy>
             </div>
           </RevealOnScroll>
@@ -183,19 +201,10 @@ export default function AboutUsContent() {
             className="flex items-center px-4 py-12 sm:px-6 sm:py-14 lg:col-start-1 lg:row-start-2 lg:py-16 xl:py-20 lg:pr-4 lg:pl-8 xl:pr-8 xl:pl-[max(1rem,calc((100vw-80rem)/2))]"
           >
             <div>
-              <SectionHeading>Элегантность в деталях</SectionHeading>
+              <SectionHeading>{c.details}</SectionHeading>
               <AccentRule />
               <BodyCopy className="mt-8 space-y-5">
-                <p>
-                  Особое внимание мы уделяем обслуживанию клиентов. Мы всегда готовы помочь с выбором
-                  модели, рассказать о материалах, подобрать подходящий цвет и ответить на любые вопросы.
-                  Для нас важна не только покупка, но и впечатление, которое остаётся после неё.
-                </p>
-                <p>
-                  Мы верим, что настоящая элегантность заключается в деталях. Именно поэтому каждая сумка
-                  в SÓRA Bags подбирается с учётом актуальных тенденций, качества исполнения и
-                  практичности в повседневной жизни.
-                </p>
+                {c.detailsText.map((paragraph) => <p key={paragraph}>{paragraph}</p>)}
               </BodyCopy>
             </div>
           </RevealOnScroll>
@@ -236,24 +245,10 @@ export default function AboutUsContent() {
             delay={0.12}
             className="px-4 sm:px-6 lg:pl-4 lg:pr-8 xl:pl-8 xl:pr-[max(1rem,calc((100vw-80rem)/2))]"
           >
-            <SectionHeading>Мастерство и качество</SectionHeading>
+            <SectionHeading>{c.craft}</SectionHeading>
             <AccentRule />
             <BodyCopy className="mt-8 space-y-5">
-              <p>
-                Каждая сумка SÓRA начинается с тщательно отобранных материалов — мягкой итальянской кожи,
-                продуманной фурнитуры и фактур, выбранных за красоту и долговечность. Мы работаем с
-                мастерами, которые знают: настоящая роскошь — в деталях: точная строчка, сбалансированные
-                пропорции, удобные внутренние отделения для повседневной жизни.
-              </p>
-              <p>
-                Наш подход сознательно сдержанный. Мы выбираем чистые силуэты, нейтральные оттенки и формы,
-                которые не привязаны к сезону — вещи, к которым возвращаетесь из года в год, от утренних
-                встреч до вечера у моря.
-              </p>
-              <p>
-                Качество — это не обещание на бирке. Это вес в руке, то, как ремень ложится на плечо, и
-                удовольствие от вещи, созданной надолго.
-              </p>
+              {c.craftText.map((paragraph) => <p key={paragraph}>{paragraph}</p>)}
             </BodyCopy>
           </RevealOnScroll>
         </div>
@@ -263,7 +258,7 @@ export default function AboutUsContent() {
       <section className={sectionPad} style={{ backgroundColor: cream }}>
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <RevealOnScroll className="mb-12 md:mb-16">
-            <SectionHeading align="center">The World of SÓRA</SectionHeading>
+            <SectionHeading align="center">{c.world}</SectionHeading>
             <AccentRule className="mx-auto" />
           </RevealOnScroll>
 
@@ -322,23 +317,13 @@ export default function AboutUsContent() {
               </RevealOnScroll>
             </div>
 
-            {/* Full-width cinematic closer */}
-            <RevealOnScroll className="sm:col-span-2" delay={0.16}>
-              <EditorialImage
-                src="/about/editorial-lounge-hero.png"
-                alt="SÓRA Bags — чёрная сумка в интерьере"
-                className="aspect-[16/9] w-full min-h-[220px] sm:min-h-[280px]"
-                sizes="100vw"
-                objectPosition="object-[center_45%]"
-              />
-            </RevealOnScroll>
           </div>
         </div>
       </section>
 
       {/* Existing consultation block — unchanged */}
       <div className="mx-auto max-w-7xl px-4 pb-16 sm:px-6 lg:px-8">
-        <ConsultationBlock />
+        <ConsultationBlock locale={locale} />
       </div>
     </div>
   );

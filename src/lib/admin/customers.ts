@@ -114,6 +114,7 @@ export async function getCustomerById(
     customerEmail: d.customer?.email ?? d.email ?? user.email,
     total: d.total ?? d.total_amount ?? 0,
     itemsCount: (d.items ?? d.products ?? []).reduce((s, it) => s + it.qty, 0),
+    processingChecklist: d.processingChecklist ?? {},
     createdAt: (d.createdAt ?? d.created_at ?? new Date()).toISOString(),
   }));
 

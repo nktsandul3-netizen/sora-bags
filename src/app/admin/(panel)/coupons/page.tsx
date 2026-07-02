@@ -1,6 +1,5 @@
 import Link from "next/link";
 import { listCoupons } from "@/lib/admin/coupons";
-import { COUPON_TYPE_LABELS } from "@/lib/admin/constants";
 import { formatPrice } from "@/lib/format";
 
 export const dynamic = "force-dynamic";

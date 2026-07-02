@@ -1,4 +1,5 @@
 import { brand } from "@/lib/config";
+import type { Locale } from "@/lib/i18n";
 
 function Row({ label, value }: { label: string; value: string }) {
   return (
@@ -11,35 +12,48 @@ function Row({ label, value }: { label: string; value: string }) {
   );
 }
 
-export default function RekvizityContent() {
+export default function RekvizityContent({ locale = "ru" }: { locale?: Locale }) {
+  const c = {
+    title: locale === "ru" ? "Реквизиты" : locale === "ro" ? "Date companie" : "Company details",
+    company: locale === "ru" ? "Компания" : locale === "ro" ? "Companie" : "Company",
+    beneficiary: locale === "ru" ? "Бенефициар" : locale === "ro" ? "Beneficiar" : "Beneficiary",
+    reg: locale === "ru" ? "Рег. номер / IDNO" : locale === "ro" ? "Nr. înregistrare / IDNO" : "Registration no. / IDNO",
+    director: locale === "ru" ? "Директор" : locale === "ro" ? "Director" : "Director",
+    bankDetails: locale === "ru" ? "Банковские реквизиты для MDL" : locale === "ro" ? "Date bancare pentru MDL" : "Bank details for MDL",
+    bank: locale === "ru" ? "Банк" : locale === "ro" ? "Bancă" : "Bank",
+    note: locale === "ru"
+      ? "При оплате в MDL указывайте назначение платежа и номер заказа. После перевода пришлите подтверждение на"
+      : locale === "ro"
+        ? "La plata în MDL, indicați scopul plății și numărul comenzii. După transfer, trimiteți confirmarea la"
+        : "When paying in MDL, include payment purpose and order number. After transfer, send confirmation to",
+  };
   return (
     <div className="text-sm leading-[1.75] text-stone-600 sm:text-[15px]">
-      <h1 className="font-serif text-3xl text-stone-950 sm:text-4xl">Реквизиты</h1>
+      <h1 className="font-serif text-3xl text-stone-950 sm:text-4xl">{c.title}</h1>
 
       <h2 className="mt-10 text-xs font-semibold uppercase tracking-[0.2em] text-stone-950">
-        Компания
+        {c.company}
       </h2>
       <dl className="mt-4">
-        <Row label="Бенефициар" value="(R) RONS Concept Store SRL" />
+        <Row label={c.beneficiary} value="(R) RONS Concept Store SRL" />
         <Row
-          label="Рег. номер / IDNO"
+          label={c.reg}
           value="1026023036917"
         />
-        <Row label="Директор" value="Radion Olga" />
+        <Row label={c.director} value="Radion Olga" />
       </dl>
 
       <h2 className="mt-10 text-xs font-semibold uppercase tracking-[0.2em] text-stone-950">
-        Банковские реквизиты для MDL
+        {c.bankDetails}
       </h2>
       <dl className="mt-4">
         <Row label="IBAN" value="MD55AG000000022517554857" />
-        <Row label="Банк" value="BC «MAIB» S.A. suc. «MAIB PARK»" />
+        <Row label={c.bank} value="BC «MAIB» S.A. suc. «MAIB PARK»" />
         <Row label="SWIFT" value="AGRNMD2X522" />
       </dl>
 
       <p className="mt-8 text-[13px] leading-relaxed text-stone-500">
-        При оплате в леях (MDL) указывайте назначение платежа и номер заказа. После
-        перевода пришлите подтверждение на{" "}
+        {c.note}{" "}
         <a
           href={`mailto:${brand.email}`}
           className="text-stone-700 underline-offset-2 hover:text-stone-950 hover:underline"

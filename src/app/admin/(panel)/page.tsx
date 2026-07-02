@@ -7,21 +7,24 @@ import {
   getRevenueComparison,
   getNewCustomersWidget,
 } from "@/lib/admin/stats";
+import { getOwnerCenter } from "@/lib/admin/operations";
 import { getLowStockProducts } from "@/lib/admin/products";
 import { LOW_STOCK_THRESHOLD } from "@/lib/admin/constants";
 import SalesChart from "@/components/admin/SalesChart";
 import { OrderStatusBadge } from "@/components/admin/Badges";
+import OwnerTaskCenter from "@/components/admin/OwnerTaskCenter";
 
 export const dynamic = "force-dynamic";
 
 export default async function AdminDashboardPage() {
-  const [stats, sales, recent, revenueCmp, newCustomers, lowStock] = await Promise.all([
+  const [stats, sales, recent, revenueCmp, newCustomers, lowStock, ownerCenter] = await Promise.all([
     getDashboardStats(),
     getSalesSeries(14),
     getRecentOrders(6),
     getRevenueComparison(),
     getNewCustomersWidget(5),
     getLowStockProducts(LOW_STOCK_THRESHOLD, 6),
+    getOwnerCenter(),
   ]);
 
   const cards = [
@@ -40,6 +43,8 @@ export default async function AdminDashboardPage() {
         <h1 className="font-serif text-3xl text-stone-900">Обзор</h1>
         <p className="mt-1 text-sm text-stone-500">Сводка по магазину SÓRA</p>
       </header>
+
+      <OwnerTaskCenter data={ownerCenter} />
 
       <div className="grid grid-cols-2 gap-4 lg:grid-cols-4">
         {cards.map((c) => (

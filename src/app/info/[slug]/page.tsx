@@ -10,7 +10,10 @@ import WarrantyPageContent from "@/components/warranty/WarrantyPageContent";
 import GiftCertificatePageContent from "@/components/gift/GiftCertificatePageContent";
 import WholesalePageContent from "@/components/wholesale/WholesalePageContent";
 import RekvizityContent from "@/components/RekvizityContent";
-import { getInfoPage, infoPages, navInfoPages } from "@/lib/info";
+import PrivacyPolicyContent from "@/components/PrivacyPolicyContent";
+import { getInfoBody, getInfoPage, getInfoTitle, infoPages, navInfoPages } from "@/lib/info";
+import { getServerLocale } from "@/lib/server-i18n";
+import { withLocalePath, type Locale } from "@/lib/i18n";
 
 export function generateStaticParams() {
   return infoPages.map((p) => ({ slug: p.slug }));
@@ -22,18 +25,19 @@ export async function generateMetadata({
   params: Promise<{ slug: string }>;
 }): Promise<Metadata> {
   const { slug } = await params;
+  const locale = await getServerLocale();
   const page = getInfoPage(slug);
-  return { title: page?.title ?? "Информация" };
+  return { title: page ? getInfoTitle(page, locale) : locale === "ro" ? "Informații" : locale === "en" ? "Information" : "Информация" };
 }
 
-function InfoSidebar({ activeSlug }: { activeSlug: string }) {
+function InfoSidebar({ activeSlug, locale }: { activeSlug: string; locale: Locale }) {
   return (
     <aside className="hidden lg:block">
       <nav className="space-y-1">
         {navInfoPages.map((p) => (
           <Link
             key={p.slug}
-            href={`/info/${p.slug}`}
+            href={withLocalePath(`/info/${p.slug}`, locale)}
             className={
               "block rounded-lg px-3 py-2 text-sm transition " +
               (p.slug === activeSlug
@@ -41,7 +45,7 @@ function InfoSidebar({ activeSlug }: { activeSlug: string }) {
                 : "text-stone-600 hover:bg-stone-100 hover:text-stone-950")
             }
           >
-            {p.title}
+            {getInfoTitle(p, locale)}
           </Link>
         ))}
       </nav>
@@ -55,31 +59,32 @@ export default async function InfoPageRoute({
   params: Promise<{ slug: string }>;
 }) {
   const { slug } = await params;
+  const locale = await getServerLocale();
   const page = getInfoPage(slug);
   if (!page) notFound();
 
   if (page.slug === "o-nas") {
-    return <AboutUsContent />;
+    return <AboutUsContent locale={locale} />;
   }
 
   if (page.slug === "oplata-i-dostavka") {
-    return <PaymentDeliveryPageContent />;
+    return <PaymentDeliveryPageContent locale={locale} />;
   }
 
   if (page.slug === "garantiya") {
-    return <WarrantyPageContent />;
+    return <WarrantyPageContent locale={locale} />;
   }
 
   if (page.slug === "podarochnye-sertifikaty") {
-    return <GiftCertificatePageContent />;
+    return <GiftCertificatePageContent locale={locale} />;
   }
 
   if (page.slug === "optom") {
-    return <WholesalePageContent />;
+    return <WholesalePageContent locale={locale} />;
   }
 
   if (page.slug === "vozvrat") {
-    return <ReturnPageContent />;
+    return <ReturnPageContent locale={locale} />;
   }
 
   if (page.bannerImage) {
@@ -93,7 +98,7 @@ export default async function InfoPageRoute({
 
     return (
       <div className="mx-auto max-w-7xl overflow-x-clip px-4 py-10 sm:px-6 lg:py-14">
-        <Breadcrumbs items={[{ label: page.title }]} />
+        <Breadcrumbs items={[{ label: getInfoTitle(page, locale) }]} />
         <div className="mt-8 grid items-start gap-8 lg:grid-cols-2 lg:gap-12 xl:gap-16">
           <div
             className={
@@ -111,7 +116,7 @@ export default async function InfoPageRoute({
               >
                 <Image
                   src={page.bannerImage}
-                  alt={page.title}
+                  alt={getInfoTitle(page, locale)}
                   priority
                   quality={85}
                   sizes={
@@ -151,10 +156,10 @@ export default async function InfoPageRoute({
           >
             <>
               <h1 className="text-sm font-semibold uppercase tracking-[0.22em] text-stone-950">
-                {page.title}
+                {getInfoTitle(page, locale)}
               </h1>
               <div className="mt-8 space-y-5 text-sm leading-[1.75] text-stone-600 sm:text-[15px]">
-                {page.body.map((para, i) => (
+                {getInfoBody(page, locale).map((para, i) => (
                   <p key={i}>{para}</p>
                 ))}
               </div>
@@ -168,20 +173,22 @@ export default async function InfoPageRoute({
 
   return (
     <div className="mx-auto max-w-5xl px-4 py-8 sm:px-6">
-      <Breadcrumbs items={[{ label: page.title }]} />
+      <Breadcrumbs items={[{ label: getInfoTitle(page, locale) }]} />
       <div className="mt-6 grid gap-10 lg:grid-cols-[220px_1fr]">
-        <InfoSidebar activeSlug={page.slug} />
+        <InfoSidebar activeSlug={page.slug} locale={locale} />
 
         <article>
-          {page.slug === "rekvizity" ? (
-            <RekvizityContent />
+          {page.slug === "politika-konfidentsialnosti" ? (
+            <PrivacyPolicyContent locale={locale} />
+          ) : page.slug === "rekvizity" ? (
+            <RekvizityContent locale={locale} />
           ) : (
             <>
               <h1 className="font-serif text-3xl text-stone-950 sm:text-4xl">
-                {page.title}
+                {getInfoTitle(page, locale)}
               </h1>
               <div className="mt-6 space-y-5 leading-relaxed text-stone-600">
-                {page.body.map((para, i) => (
+                {getInfoBody(page, locale).map((para, i) => (
                   <p key={i}>{para}</p>
                 ))}
               </div>

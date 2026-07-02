@@ -138,7 +138,7 @@ export default function ProductForm({
         </h2>
         <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
           <div>
-            <label className={labelClass}>Цена (лей)</label>
+            <label className={labelClass}>Цена (MDL)</label>
             <input
               name="price"
               type="number"

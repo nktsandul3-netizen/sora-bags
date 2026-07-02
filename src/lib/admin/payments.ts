@@ -5,6 +5,7 @@ import {
   ObjectId,
 } from "@/lib/mongodb";
 import type { PaymentDoc, PaymentMethod, PaymentStatus } from "@/lib/mongodb";
+import { trackAnalyticsEvent } from "@/lib/analytics";
 
 export interface AdminPaymentView {
   id: string;
@@ -117,6 +118,13 @@ export async function updatePaymentStatus(
         },
       },
     );
+    await trackAnalyticsEvent({
+      type: "payment_paid",
+      sessionId: "admin",
+      orderId: payment.orderId.toString(),
+      orderNumber: payment.orderNumber,
+      amount: payment.amount,
+    });
   } else if (status === "refunded") {
     const orders = await ordersCollection();
     await orders.updateOne(

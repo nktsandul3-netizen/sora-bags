@@ -7,6 +7,9 @@ import OrderNoteForm from "@/components/admin/OrderNoteForm";
 import OrderTimeline from "@/components/admin/OrderTimeline";
 import TrackingForm from "@/components/admin/TrackingForm";
 import { OrderPaymentStatusBadge } from "@/components/admin/Badges";
+import OrderQuickActions from "@/components/admin/OrderQuickActions";
+import OrderProcessingChecklist from "@/components/admin/OrderProcessingChecklist";
+import ReminderForm from "@/components/admin/ReminderForm";
 
 export const dynamic = "force-dynamic";
 
@@ -18,6 +21,7 @@ export default async function AdminOrderDetailPage({
   const { id } = await params;
   const order = await getOrderById(id);
   if (!order) notFound();
+  const fullAddress = [order.customer.city, order.customer.address].filter(Boolean).join(", ");
 
   return (
     <div className="space-y-6">
@@ -44,6 +48,13 @@ export default async function AdminOrderDetailPage({
 
       <div className="grid gap-6 lg:grid-cols-3">
         <div className="space-y-6 lg:col-span-2">
+          <div className="bg-white p-6 ring-1 ring-stone-200">
+            <OrderProcessingChecklist
+              orderId={order.id}
+              checklist={order.processingChecklist}
+            />
+          </div>
+
           <div className="bg-white ring-1 ring-stone-200">
             <h2 className="border-b border-stone-200 px-6 py-4 text-sm font-medium uppercase tracking-wide text-stone-500">
               Состав заказа
@@ -117,15 +128,39 @@ export default async function AdminOrderDetailPage({
           </div>
 
           <div className="bg-white p-6 ring-1 ring-stone-200">
+            <h2 className="mb-4 text-sm font-medium uppercase tracking-wide text-stone-500">
+              Напоминание по заказу
+            </h2>
+            <ReminderForm
+              targetType="order"
+              targetId={order.id}
+              targetLabel={order.number}
+              returnTo={`/admin/orders/${order.id}`}
+            />
+          </div>
+
+          <div className="bg-white p-6 ring-1 ring-stone-200">
             <h2 className="mb-3 text-sm font-medium uppercase tracking-wide text-stone-500">
               Оплата
             </h2>
             <OrderPaymentStatusBadge status={order.paymentStatus} />
+            {order.paymentMethod && (
+              <p className="mt-3 text-sm text-stone-700">{order.paymentMethod}</p>
+            )}
             <p className="mt-3 text-xs leading-relaxed text-stone-500">
               Подготовлено для будущего подключения PayNet, MAIB eCommerce или Stripe:
               после успешного callback/webhook статус будет обновляться автоматически.
             </p>
           </div>
+
+          {order.deliveryMethod && (
+            <div className="bg-white p-6 ring-1 ring-stone-200">
+              <h2 className="mb-3 text-sm font-medium uppercase tracking-wide text-stone-500">
+                Доставка
+              </h2>
+              <p className="text-sm text-stone-700">{order.deliveryMethod}</p>
+            </div>
+          )}
 
           <div className="bg-white p-6 ring-1 ring-stone-200">
             <TrackingForm orderId={order.id} current={order.trackingNumber} />
@@ -135,7 +170,14 @@ export default async function AdminOrderDetailPage({
             <h2 className="mb-4 text-sm font-medium uppercase tracking-wide text-stone-500">
               Клиент
             </h2>
-            <dl className="space-y-2 text-sm">
+            <OrderQuickActions
+              orderNumber={order.number}
+              customerName={order.customer.name}
+              phone={order.customer.phone}
+              email={order.customer.email}
+              address={fullAddress}
+            />
+            <dl className="mt-4 space-y-2 text-sm">
               <Row label="Имя" value={order.customer.name} />
               <Row label="Телефон" value={order.customer.phone} />
               {order.customer.email && <Row label="E-mail" value={order.customer.email} />}

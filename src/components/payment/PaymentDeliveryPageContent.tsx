@@ -1,4 +1,5 @@
 import Image from "next/image";
+import type { Locale } from "@/lib/i18n";
 
 const phone = "+373 68 935 619";
 const phoneHref = "tel:+37368935619";
@@ -144,13 +145,158 @@ function DeliveryTile({
   );
 }
 
-export default function PaymentDeliveryPageContent() {
+const copy = {
+  ru: {
+    alt: "Способы оплаты и доставки — SÓRA Bags",
+    srTitle: "Способы оплаты и доставки",
+    orderTitle: "Оформление заказа",
+    orderIntro: "Вы можете оформить заказ одним из следующих способов:",
+    byPhone: "По телефону",
+    phoneText: "Свяжитесь с нами по номеру",
+    phoneTail: "и наш менеджер поможет оформить заказ.",
+    viaSite: "Через сайт",
+    steps: ["Добавьте понравившиеся товары в корзину.", "Перейдите в раздел «Корзина».", "Нажмите кнопку «Оформить заказ».", "Заполните необходимые данные для доставки.", "Подтвердите заказ."],
+    orderNote: "После оформления заказа наш менеджер свяжется с вами для подтверждения заказа и уточнения деталей доставки.",
+    stockTitle: "Наличие товара",
+    stockIntro: "В интернет-магазине SÓRA представлены товары двух категорий:",
+    inStockTitle: "Товары в наличии",
+    inStockText: "Товары со статусом «В наличии» доступны для немедленной отправки и доставляются в стандартные сроки.",
+    preorderTitle: "Товары под заказ",
+    preorderText: "Некоторые модели доступны только под заказ. Срок доставки таких товаров составляет от 7 до 14 календарных дней.",
+    statusText: "Статус товара указывается на странице каждого изделия:",
+    available: "В наличии",
+    preorderBadge: "Под заказ (7–14 дней)",
+    stockNote: "После оформления заказа менеджер SÓRA свяжется с вами для подтверждения наличия товара и уточнения сроков доставки.",
+    deliveryTitle: "Доставка",
+    deliveryIntro: "Мы осуществляем доставку по городу Кишинёв и по всей территории Республики Молдова.",
+    schedule: "График обработки заказов",
+    weekdays: "Понедельник – Пятница",
+    scheduleNote: "Заказы, оформленные после 14:00, обрабатываются на следующий рабочий день.",
+    needed: "Для доставки необходимо указать",
+    neededItems: ["Имя получателя", "Контактный номер телефона", "Адрес доставки"],
+    chisinau: "Кишинёв",
+    chisinauNote: "Экспресс-доставка осуществляется по согласованию с курьерской службой.",
+    moldova: "Молдова",
+    moldovaNote: "После оформления заказа с вами свяжется курьер для подтверждения деталей доставки.",
+    preorder: "Под заказ",
+    preorderNote: "Точный срок доставки сообщается менеджером после подтверждения заказа.",
+    t12: "12–24 часа",
+    express: "1–3 часа (экспресс)",
+    days13: "1–3 рабочих дня",
+    deliveryTime: "Срок доставки",
+    days714: "7–14 дней",
+    paymentTitle: "Способы оплаты",
+    cash: "Наличными при получении",
+    cashText: "Оплата производится курьеру после проверки товара.",
+    card: "Банковской картой",
+    cardText: "Безопасная онлайн-оплата на сайте. После успешной оплаты на вашу электронную почту будет отправлено подтверждение заказа.",
+    questions: "Остались вопросы?",
+    questionsText: "Мы будем рады помочь вам с выбором и оформлением заказа",
+  },
+  ro: {
+    alt: "Metode de plată și livrare — SÓRA Bags",
+    srTitle: "Metode de plată și livrare",
+    orderTitle: "Plasarea comenzii",
+    orderIntro: "Puteți plasa comanda prin una dintre metodele următoare:",
+    byPhone: "Prin telefon",
+    phoneText: "Contactați-ne la numărul",
+    phoneTail: "iar managerul nostru vă ajută să plasați comanda.",
+    viaSite: "Prin site",
+    steps: ["Adăugați produsele preferate în coș.", "Accesați secțiunea Coș.", "Apăsați Plasează comanda.", "Completați datele necesare pentru livrare.", "Confirmați comanda."],
+    orderNote: "După plasarea comenzii, managerul vă contactează pentru confirmare și detalii de livrare.",
+    stockTitle: "Disponibilitatea produselor",
+    stockIntro: "În magazinul online SÓRA există două tipuri de produse:",
+    inStockTitle: "Produse în stoc",
+    inStockText: "Produsele cu statusul În stoc sunt disponibile pentru expediere imediată și se livrează în termene standard.",
+    preorderTitle: "Produse la comandă",
+    preorderText: "Unele modele sunt disponibile doar la comandă. Termenul de livrare este de 7-14 zile calendaristice.",
+    statusText: "Statusul este indicat pe pagina fiecărui produs:",
+    available: "În stoc",
+    preorderBadge: "La comandă (7-14 zile)",
+    stockNote: "După plasarea comenzii, managerul SÓRA confirmă disponibilitatea și termenul de livrare.",
+    deliveryTitle: "Livrare",
+    deliveryIntro: "Livrăm în Chișinău și pe întreg teritoriul Republicii Moldova.",
+    schedule: "Program de procesare",
+    weekdays: "Luni - Vineri",
+    scheduleNote: "Comenzile plasate după ora 14:00 sunt procesate în următoarea zi lucrătoare.",
+    needed: "Pentru livrare trebuie indicate",
+    neededItems: ["Numele destinatarului", "Numărul de telefon", "Adresa de livrare"],
+    chisinau: "Chișinău",
+    chisinauNote: "Livrarea expres se face prin acord cu serviciul de curierat.",
+    moldova: "Moldova",
+    moldovaNote: "După plasarea comenzii, curierul vă contactează pentru confirmarea detaliilor.",
+    preorder: "La comandă",
+    preorderNote: "Termenul exact este comunicat de manager după confirmarea comenzii.",
+    t12: "12-24 ore",
+    express: "1-3 ore (expres)",
+    days13: "1-3 zile lucrătoare",
+    deliveryTime: "Termen de livrare",
+    days714: "7-14 zile",
+    paymentTitle: "Metode de plată",
+    cash: "Numerar la primire",
+    cashText: "Plata se face curierului după verificarea produsului.",
+    card: "Card bancar",
+    cardText: "Plată online sigură pe site. După achitare primiți confirmarea comenzii pe email.",
+    questions: "Aveți întrebări?",
+    questionsText: "Vă ajutăm cu drag să alegeți și să plasați comanda",
+  },
+  en: {
+    alt: "Payment and delivery methods — SÓRA Bags",
+    srTitle: "Payment and delivery methods",
+    orderTitle: "Placing an order",
+    orderIntro: "You can place an order in one of the following ways:",
+    byPhone: "By phone",
+    phoneText: "Contact us at",
+    phoneTail: "and our manager will help place the order.",
+    viaSite: "Through the website",
+    steps: ["Add the items you like to cart.", "Go to the Cart section.", "Click Place order.", "Fill in the delivery details.", "Confirm the order."],
+    orderNote: "After the order is placed, our manager will contact you to confirm it and clarify delivery details.",
+    stockTitle: "Product availability",
+    stockIntro: "The SÓRA online store has two product categories:",
+    inStockTitle: "In-stock items",
+    inStockText: "Items marked In stock are available for immediate shipment and delivered within standard timing.",
+    preorderTitle: "Pre-order items",
+    preorderText: "Some models are available only by pre-order. Delivery time is 7-14 calendar days.",
+    statusText: "Product status is shown on each product page:",
+    available: "In stock",
+    preorderBadge: "Pre-order (7-14 days)",
+    stockNote: "After ordering, a SÓRA manager will confirm availability and delivery timing.",
+    deliveryTitle: "Delivery",
+    deliveryIntro: "We deliver in Chisinau and across the Republic of Moldova.",
+    schedule: "Order processing schedule",
+    weekdays: "Monday - Friday",
+    scheduleNote: "Orders placed after 14:00 are processed on the next business day.",
+    needed: "For delivery, please provide",
+    neededItems: ["Recipient name", "Contact phone number", "Delivery address"],
+    chisinau: "Chisinau",
+    chisinauNote: "Express delivery is arranged with the courier service.",
+    moldova: "Moldova",
+    moldovaNote: "After ordering, the courier will contact you to confirm delivery details.",
+    preorder: "Pre-order",
+    preorderNote: "Exact delivery time is provided by the manager after order confirmation.",
+    t12: "12-24 hours",
+    express: "1-3 hours (express)",
+    days13: "1-3 business days",
+    deliveryTime: "Delivery time",
+    days714: "7-14 days",
+    paymentTitle: "Payment methods",
+    cash: "Cash on delivery",
+    cashText: "Payment is made to the courier after checking the item.",
+    card: "Bank card",
+    cardText: "Secure online payment on the website. After successful payment, order confirmation is sent to your email.",
+    questions: "Still have questions?",
+    questionsText: "We will be happy to help you choose and place an order",
+  },
+};
+
+export default function PaymentDeliveryPageContent({ locale = "ru" }: { locale?: Locale }) {
+  const c = copy[locale];
   return (
     <>
       <section className="relative h-[clamp(250px,44vw,580px)] w-full overflow-hidden bg-stone-100">
         <Image
           src={heroImage}
-          alt="Способы оплаты и доставки — SÓRA Bags"
+          alt={c.alt}
           fill
           priority
           quality={90}
@@ -164,86 +310,72 @@ export default function PaymentDeliveryPageContent() {
       </section>
 
       <div className="mx-auto max-w-7xl overflow-x-clip px-4 sm:px-6">
-        <h1 className="sr-only">Способы оплаты и доставки</h1>
-        <section className="py-14 sm:py-16 lg:py-20">
+        <h1 className="sr-only">{c.srTitle}</h1>
+        <section className="pb-14 pt-8 sm:pb-16 sm:pt-10 lg:pb-20 lg:pt-12">
           <div className="grid gap-6 sm:grid-cols-2 sm:gap-7 lg:gap-8">
-            <InfoCard title="Оформление заказа">
-              <p>Вы можете оформить заказ одним из следующих способов:</p>
+            <InfoCard title={c.orderTitle}>
+              <p>{c.orderIntro}</p>
 
-              <CardSubheading>По телефону</CardSubheading>
+              <CardSubheading>{c.byPhone}</CardSubheading>
               <p>
-                Свяжитесь с нами по номеру{" "}
+                {c.phoneText}{" "}
                 <a
                   href={phoneHref}
                   className="whitespace-nowrap font-medium text-stone-950 underline-offset-2 hover:underline"
                 >
                   {phone}
                 </a>
-                , и наш менеджер поможет оформить заказ.
+                , {c.phoneTail}
               </p>
 
-              <CardSubheading>Через сайт</CardSubheading>
-              <NumberedList
-                items={[
-                  "Добавьте понравившиеся товары в корзину.",
-                  "Перейдите в раздел «Корзина».",
-                  "Нажмите кнопку «Оформить заказ».",
-                  "Заполните необходимые данные для доставки.",
-                  "Подтвердите заказ.",
-                ]}
-              />
+              <CardSubheading>{c.viaSite}</CardSubheading>
+              <NumberedList items={c.steps} />
               <p className="text-[13px] leading-[1.6] text-stone-500">
-                После оформления заказа наш менеджер свяжется с вами для подтверждения
-                заказа и уточнения деталей доставки.
+                {c.orderNote}
               </p>
             </InfoCard>
 
-            <InfoCard title="Наличие товара">
-              <p>В интернет-магазине SÓRA представлены товары двух категорий:</p>
+            <InfoCard title={c.stockTitle}>
+              <p>{c.stockIntro}</p>
 
-              <CardSubheading>Товары в наличии</CardSubheading>
+              <CardSubheading>{c.inStockTitle}</CardSubheading>
               <p>
-                Товары со статусом «В наличии» доступны для немедленной отправки и
-                доставляются в стандартные сроки.
+                {c.inStockText}
               </p>
 
-              <CardSubheading>Товары под заказ</CardSubheading>
+              <CardSubheading>{c.preorderTitle}</CardSubheading>
               <p>
-                Некоторые модели доступны только под заказ. Срок доставки таких товаров
-                составляет от 7 до 14 календарных дней.
+                {c.preorderText}
               </p>
 
-              <p>Статус товара указывается на странице каждого изделия:</p>
+              <p>{c.statusText}</p>
               <div className="flex flex-wrap gap-2.5">
-                <StatusBadge tone="available">В наличии</StatusBadge>
-                <StatusBadge tone="preorder">Под заказ (7–14 дней)</StatusBadge>
+                <StatusBadge tone="available">{c.available}</StatusBadge>
+                <StatusBadge tone="preorder">{c.preorderBadge}</StatusBadge>
               </div>
 
               <p className="text-[13px] leading-[1.6] text-stone-500">
-                После оформления заказа менеджер SÓRA свяжется с вами для подтверждения
-                наличия товара и уточнения сроков доставки.
+                {c.stockNote}
               </p>
             </InfoCard>
 
-            <InfoCard title="Доставка" className="sm:col-span-2">
+            <InfoCard title={c.deliveryTitle} className="sm:col-span-2">
               <p>
-                Мы осуществляем доставку по городу Кишинёв и по всей территории
-                Республики Молдова.
+                {c.deliveryIntro}
               </p>
 
               <div className="grid gap-x-10 gap-y-4 pt-1 md:grid-cols-2">
                 <div>
-                  <CardSubheading>График обработки заказов</CardSubheading>
-                  <p className="mt-2 font-medium text-stone-950">Понедельник – Пятница</p>
+                  <CardSubheading>{c.schedule}</CardSubheading>
+                  <p className="mt-2 font-medium text-stone-950">{c.weekdays}</p>
                   <p className="mt-1 text-[14px] text-stone-600">
-                    Заказы, оформленные после 14:00, обрабатываются на следующий рабочий
-                    день.
+                    {c.scheduleNote}
                   </p>
                 </div>
                 <div>
-                  <CardSubheading>Для доставки необходимо указать</CardSubheading>
+                  <CardSubheading>{c.needed}</CardSubheading>
                   <ul className="mt-2 space-y-1.5">
-                    {["Имя получателя", "Контактный номер телефона", "Адрес доставки"].map(
+                    {c.neededItems.map(
                       (item) => (
                         <li key={item} className="flex gap-2">
                           <span
@@ -260,42 +392,49 @@ export default function PaymentDeliveryPageContent() {
 
               <div className="grid gap-4 pt-2 md:grid-cols-3 md:gap-5">
                 <DeliveryTile
-                  title="Кишинёв"
-                  note="Экспресс-доставка осуществляется по согласованию с курьерской службой."
+                  title={c.chisinau}
+                  note={c.chisinauNote}
                 >
-                  <PriceRow term="12–24 часа" price="60 леев" />
-                  <PriceRow term="1–3 часа (экспресс)" price="84 лея" />
+                  <PriceRow
+                    term={c.t12}
+                    price={
+                      locale === "ru" ? "Бесплатно" : locale === "ro" ? "Gratuit" : "Free"
+                    }
+                  />
+                  <PriceRow
+                    term={c.express}
+                    price={"100 MDL"}
+                  />
                 </DeliveryTile>
 
                 <DeliveryTile
-                  title="Молдова"
-                  note="После оформления заказа с вами свяжется курьер для подтверждения деталей доставки."
+                  title={c.moldova}
+                  note={c.moldovaNote}
                 >
-                  <PriceRow term="1–3 рабочих дня" price="100 леев" />
+                  <PriceRow term={c.days13} price={"100 MDL"} />
                 </DeliveryTile>
 
                 <DeliveryTile
-                  title="Под заказ"
-                  note="Точный срок доставки сообщается менеджером после подтверждения заказа."
+                  title={c.preorder}
+                  note={c.preorderNote}
                 >
-                  <PriceRow term="Срок доставки" price="7–14 дней" />
+                  <PriceRow term={c.deliveryTime} price={c.days714} />
                 </DeliveryTile>
               </div>
             </InfoCard>
 
-            <InfoCard title="Способы оплаты" className="sm:col-span-2">
+            <InfoCard title={c.paymentTitle} className="sm:col-span-2">
               <div className="grid gap-x-10 gap-y-5 md:grid-cols-2">
                 <div>
-                  <CardSubheading>Наличными при получении</CardSubheading>
+                  <CardSubheading>{c.cash}</CardSubheading>
                   <p className="mt-2">
-                    Оплата производится курьеру после проверки товара.
+                    {c.cashText}
                   </p>
                 </div>
                 <div>
-                  <CardSubheading>Банковской картой</CardSubheading>
+                  <CardSubheading>{c.card}</CardSubheading>
                   <p className="mt-2">
-                    Безопасная онлайн-оплата на сайте. После успешной оплаты на вашу
-                    электронную почту будет отправлено подтверждение заказа.
+                    {c.cardText}
                   </p>
                   <PaymentIcons className="mt-4" />
                 </div>
@@ -305,9 +444,9 @@ export default function PaymentDeliveryPageContent() {
         </section>
 
         <section className="mb-14 rounded-[20px] bg-stone-950 px-8 py-10 text-center sm:mb-16 sm:px-12 sm:py-12 lg:mb-20">
-          <h2 className="font-serif text-2xl text-white sm:text-3xl">Остались вопросы?</h2>
+          <h2 className="font-serif text-2xl text-white sm:text-3xl">{c.questions}</h2>
           <p className="mt-3 text-sm text-stone-400 sm:text-[15px]">
-            Мы будем рады помочь вам с выбором и оформлением заказа
+            {c.questionsText}
           </p>
           <a
             href={phoneHref}

@@ -2,7 +2,10 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { formatPrice } from "@/lib/format";
 import { getCustomerById } from "@/lib/admin/customers";
+import { listCustomerCrmNotes } from "@/lib/admin/operations";
 import { OrderStatusBadge } from "@/components/admin/Badges";
+import CustomerCrmPanel from "@/components/admin/CustomerCrmPanel";
+import ReminderForm from "@/components/admin/ReminderForm";
 
 export const dynamic = "force-dynamic";
 
@@ -12,7 +15,10 @@ export default async function AdminCustomerDetailPage({
   params: Promise<{ id: string }>;
 }) {
   const { id } = await params;
-  const customer = await getCustomerById(id);
+  const [customer, crmNotes] = await Promise.all([
+    getCustomerById(id),
+    listCustomerCrmNotes(id),
+  ]);
   if (!customer) notFound();
 
   return (
@@ -49,6 +55,21 @@ export default async function AdminCustomerDetailPage({
             </div>
           )}
         </dl>
+      </div>
+
+      <div className="grid gap-6 lg:grid-cols-[1.2fr_0.8fr]">
+        <CustomerCrmPanel customerId={customer.id} notes={crmNotes} />
+        <section className="bg-white p-6 ring-1 ring-stone-200">
+          <h2 className="mb-4 text-sm font-medium uppercase tracking-wide text-stone-500">
+            Напоминание по клиенту
+          </h2>
+          <ReminderForm
+            targetType="customer"
+            targetId={customer.id}
+            targetLabel={customer.name}
+            returnTo={`/admin/customers/${customer.id}`}
+          />
+        </section>
       </div>
 
       <div className="bg-white ring-1 ring-stone-200">

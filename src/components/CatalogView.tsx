@@ -2,62 +2,44 @@
 
 import { useMemo, useState } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import type { CategoryDef, Product } from "@/lib/types";
-import { bagMenuCategories, getBrandName } from "@/lib/data";
+import {
+  bagMenuCategories,
+  compareByCategoryThenNewest,
+  compareByNewest,
+  getBrandName,
+} from "@/lib/data";
+import { withLocalePath } from "@/lib/i18n";
+import { useLocale, useT } from "@/lib/useI18n";
+import { categoryName } from "@/lib/catalog-i18n";
 import ProductGrid from "./ProductGrid";
-import Breadcrumbs from "./Breadcrumbs";
 
 type SortKey = "new" | "price-asc" | "price-desc";
-
-const SORT_LABELS: Record<SortKey, string> = {
-  new: "новизне",
-  "price-asc": "возрастанию цены",
-  "price-desc": "убыванию цены",
-};
-
-const PER_PAGE_OPTIONS = [30, 60, 90];
 
 interface Filters {
   priceMin: string;
   priceMax: string;
-  genders: string[];
   brands: string[];
   colors: string[];
   materials: string[];
-  countries: string[];
 }
 
 const EMPTY_FILTERS: Filters = {
   priceMin: "",
   priceMax: "",
-  genders: [],
   brands: [],
   colors: [],
   materials: [],
-  countries: [],
 };
-
-function specValue(product: Product, label: string): string | undefined {
-  return product.specs?.find((s) => s.label === label)?.value;
-}
-
-function getGender(product: Product): string | undefined {
-  return specValue(product, "Пол");
-}
-
-function getCountry(product: Product): string | undefined {
-  return specValue(product, "Страна производства");
-}
 
 function countActive(filters: Filters): number {
   return (
     (filters.priceMin ? 1 : 0) +
     (filters.priceMax ? 1 : 0) +
-    filters.genders.length +
     filters.brands.length +
     filters.colors.length +
-    filters.materials.length +
-    filters.countries.length
+    filters.materials.length
   );
 }
 
@@ -83,7 +65,7 @@ export default function CatalogView({
   categories,
   basePath,
   activeSlug,
-  crumbs,
+  heroBanner,
 }: {
   title: string;
   description?: string;
@@ -92,47 +74,59 @@ export default function CatalogView({
   basePath?: string;
   activeSlug?: string;
   crumbs: { label: string; href?: string }[];
+  heroBanner?: {
+    src: string;
+    alt: string;
+    width?: number;
+    height?: number;
+    objectPosition?: string;
+    copy?: { title: string; description: string };
+    copyTone?: "light" | "dark";
+    bgClassName?: string;
+    fit?: "cover" | "contain" | "full-width";
+    aspectClass?: string;
+    copyOverlayClass?: string;
+    mediaFilterClass?: string;
+  };
 }) {
+  const locale = useLocale();
+  const t = useT();
+  const sortLabels: Record<SortKey, string> = {
+    new: t("catalog.sortNew"),
+    "price-asc": t("catalog.sortPriceAsc"),
+    "price-desc": t("catalog.sortPriceDesc"),
+  };
   const [showFilter, setShowFilter] = useState(false);
   const [sortKey, setSortKey] = useState<SortKey>("new");
-  const [perPage, setPerPage] = useState(60);
+  const perPage = 60;
   const [visible, setVisible] = useState(60);
   const [applied, setApplied] = useState<Filters>(EMPTY_FILTERS);
   const [draft, setDraft] = useState<Filters>(EMPTY_FILTERS);
-  const [openMenu, setOpenMenu] = useState<"sort" | "per" | null>(null);
+  const [openMenu, setOpenMenu] = useState<"sort" | null>(null);
+  const groupByCategory = activeSlug === "vse-sumki" || activeSlug === "vse-aksessuary";
 
   const facets = useMemo(() => {
-    const genders = new Set<string>();
     const brandSlugs = new Set<string>();
     const colors = new Set<string>();
     const materials = new Set<string>();
-    const countries = new Set<string>();
     for (const p of products) {
-      const g = getGender(p);
-      if (g) genders.add(g);
       brandSlugs.add(p.brandSlug);
       p.colors.forEach((c) => colors.add(c.name));
       if (p.material) materials.add(p.material);
-      const country = getCountry(p);
-      if (country) countries.add(country);
     }
     return {
-      genders: [...genders].sort(),
       brands: [...brandSlugs].sort((a, b) =>
-        getBrandName(a).localeCompare(getBrandName(b), "ru"),
+        getBrandName(a).localeCompare(getBrandName(b), locale),
       ),
-      colors: [...colors].sort((a, b) => a.localeCompare(b, "ru")),
-      materials: [...materials].sort((a, b) => a.localeCompare(b, "ru")),
-      countries: [...countries].sort((a, b) => a.localeCompare(b, "ru")),
+      colors: [...colors].sort((a, b) => a.localeCompare(b, locale)),
+      materials: [...materials].sort((a, b) => a.localeCompare(b, locale)),
     };
-  }, [products]);
+  }, [locale, products]);
 
   const filtered = useMemo(() => {
     const list = products.filter((p) => {
       if (applied.priceMin && p.price < Number(applied.priceMin)) return false;
       if (applied.priceMax && p.price > Number(applied.priceMax)) return false;
-      const g = getGender(p);
-      if (applied.genders.length && (!g || !applied.genders.includes(g))) return false;
       if (applied.brands.length && !applied.brands.includes(p.brandSlug)) return false;
       if (
         applied.colors.length &&
@@ -141,21 +135,23 @@ export default function CatalogView({
         return false;
       if (applied.materials.length && !applied.materials.includes(p.material))
         return false;
-      const country = getCountry(p);
-      if (applied.countries.length && (!country || !applied.countries.includes(country)))
-        return false;
       return true;
     });
     if (sortKey === "price-asc") list.sort((a, b) => a.price - b.price);
     else if (sortKey === "price-desc") list.sort((a, b) => b.price - a.price);
+    else list.sort(groupByCategory ? compareByCategoryThenNewest : compareByNewest);
     return list;
-  }, [products, applied, sortKey]);
+  }, [products, applied, sortKey, groupByCategory]);
 
   const shown = filtered.slice(0, visible);
   const activeCount = countActive(applied);
   const isBags = categories?.[0]?.section === "bags";
-  const sectionLabel = isBags ? "Виды сумок" : "Виды аксессуаров";
-  const navCategories = isBags ? bagMenuCategories : categories;
+  const sectionLabel = isBags ? t("nav.bags") : t("nav.accessories");
+  const navCategories = isBags
+    ? bagMenuCategories
+    : categories?.filter((c) => c.slug !== "vse-aksessuary");
+  const productCountLabel =
+    locale === "ru" ? "товаров" : locale === "ro" ? "produse" : "products";
 
   function openDrawer() {
     setDraft(applied);
@@ -185,100 +181,205 @@ export default function CatalogView({
     });
   }
 
+  const copyTone = heroBanner?.copyTone ?? "dark";
+  const isLightCopy = copyTone === "light";
+
+  const heroCopyBlock = heroBanner?.copy ? (
+    <div
+      className={
+        "max-w-2xl text-center " +
+        (isLightCopy
+          ? "text-white drop-shadow-[0_1px_10px_rgba(0,0,0,0.45)]"
+          : "text-stone-600")
+      }
+    >
+      <h2
+        className={
+          "font-sans text-2xl font-bold uppercase tracking-[0.32em] sm:text-3xl lg:text-4xl lg:tracking-[0.38em] " +
+          (isLightCopy
+            ? "text-white drop-shadow-[0_1px_10px_rgba(0,0,0,0.45)]"
+            : "text-stone-600")
+        }
+      >
+        {heroBanner.copy.title}
+      </h2>
+      <p
+        className={
+          "mx-auto mt-4 max-w-xl font-sans text-sm font-normal leading-relaxed tracking-[0.04em] sm:mt-5 sm:text-base sm:leading-7 " +
+          (isLightCopy
+            ? "text-white drop-shadow-[0_1px_8px_rgba(0,0,0,0.4)]"
+            : "text-stone-500")
+        }
+      >
+        {heroBanner.copy.description}
+      </p>
+    </div>
+  ) : null;
+
+  const copyOverlayClass =
+    heroBanner?.copyOverlayClass ?? "items-center justify-center";
+
+  const heroMediaFilterClass =
+    heroBanner?.mediaFilterClass ?? "catalog-hero-media";
+
   return (
     <>
-      <div className="mx-auto max-w-7xl px-4 py-8 sm:px-6">
-      <Breadcrumbs items={crumbs} />
-      <header className="mt-5 mb-5">
-        <h1 className="font-serif text-3xl text-stone-950 sm:text-4xl">{title}</h1>
-        {description ? (
-          <p className="mt-2 max-w-2xl text-sm leading-relaxed text-stone-500">
-            {description}
-          </p>
-        ) : null}
-      </header>
-
-      {/* Панель управления: фильтр / сортировка / показывать по N */}
-      <div className="relative mb-5 flex items-center justify-between gap-4 border-y border-stone-200 py-3 text-[11px] font-medium uppercase tracking-[0.14em] text-stone-700 sm:mb-7 sm:justify-start sm:gap-8">
-        <button
-          type="button"
-          onClick={openDrawer}
-          className="flex items-center gap-2 transition hover:text-stone-950"
+      {heroBanner ? (
+        <section
+          className={
+            "catalog-hero-section relative overflow-hidden " +
+            (heroBanner.bgClassName ?? "bg-[#7b4426]")
+          }
         >
-          <FilterIcon />
-          <span className="hidden xs:inline">Показать фильтр</span>
-          <span className="xs:hidden">Фильтр</span>
-          {activeCount > 0 && (
-            <span className="rounded-full bg-stone-900 px-1.5 py-0.5 text-[10px] leading-none text-white">
-              {activeCount}
-            </span>
-          )}
-        </button>
-
-        <div className="relative">
-          <button
-            type="button"
-            onClick={() => setOpenMenu((m) => (m === "sort" ? null : "sort"))}
-            className="flex items-center gap-1.5 transition hover:text-stone-950"
-          >
-            <span className="hidden xs:inline">Сортировать по</span>
-            <span className="xs:hidden">Сортировка:</span>
-            <span className="text-stone-400">{SORT_LABELS[sortKey]}</span>
-            <Chevron open={openMenu === "sort"} />
-          </button>
-          {openMenu === "sort" && (
-            <Menu onClose={() => setOpenMenu(null)} align="right">
-              {(Object.keys(SORT_LABELS) as SortKey[]).map((key) => (
-                <button
-                  key={key}
-                  type="button"
-                  onClick={() => {
-                    setSortKey(key);
-                    setOpenMenu(null);
-                  }}
+          {heroBanner.fit === "full-width" ? (
+            <>
+              <Image
+                src={heroBanner.src}
+                alt={heroBanner.alt}
+                width={heroBanner.width ?? 2560}
+                height={heroBanner.height ?? 1440}
+                priority
+                quality={90}
+                sizes="100vw"
+                className={
+                  heroMediaFilterClass +
+                  " catalog-hero-image block h-auto w-full max-w-none"
+                }
+              />
+              {heroBanner.copy ? (
+                <div
                   className={
-                    "block w-full px-5 py-2.5 text-left text-[13px] normal-case tracking-normal transition hover:bg-stone-50 " +
-                    (key === sortKey ? "text-stone-400" : "text-stone-800")
+                    "absolute inset-0 flex px-6 sm:px-10 " + copyOverlayClass
                   }
                 >
-                  {SORT_LABELS[key]}
-                </button>
-              ))}
-            </Menu>
-          )}
-        </div>
-
-        <div className="relative hidden sm:block">
-          <button
-            type="button"
-            onClick={() => setOpenMenu((m) => (m === "per" ? null : "per"))}
-            className="flex items-center gap-1.5 transition hover:text-stone-950"
-          >
-            Показывать по <span className="text-stone-400">{perPage}</span>
-            <Chevron open={openMenu === "per"} />
-          </button>
-          {openMenu === "per" && (
-            <Menu onClose={() => setOpenMenu(null)}>
-              {PER_PAGE_OPTIONS.map((n) => (
-                <button
-                  key={n}
-                  type="button"
-                  onClick={() => {
-                    setPerPage(n);
-                    setVisible(n);
-                    setOpenMenu(null);
-                  }}
+                  {heroCopyBlock}
+                </div>
+              ) : null}
+            </>
+          ) : (
+            <div
+              className={
+                "relative w-full " +
+                (heroBanner.fit === "contain"
+                  ? ""
+                  : heroBanner.aspectClass ?? "aspect-[2/1] sm:aspect-[5/2]")
+              }
+            >
+              <Image
+                src={heroBanner.src}
+                alt={heroBanner.alt}
+                fill={heroBanner.fit !== "contain"}
+                width={heroBanner.fit === "contain" ? heroBanner.width : undefined}
+                height={heroBanner.fit === "contain" ? heroBanner.height : undefined}
+                priority
+                quality={90}
+                sizes="100vw"
+                className={
+                  heroBanner.fit === "contain"
+                    ? heroMediaFilterClass + " block h-auto w-full max-w-none"
+                    : heroMediaFilterClass + " size-full object-cover"
+                }
+                style={
+                  heroBanner.fit === "contain"
+                    ? undefined
+                    : { objectPosition: heroBanner.objectPosition ?? "50% 62%" }
+                }
+              />
+              {heroBanner.copy ? (
+                <div
                   className={
-                    "block w-full px-5 py-2.5 text-left text-[13px] normal-case tracking-normal transition hover:bg-stone-50 " +
-                    (n === perPage ? "text-stone-400" : "text-stone-800")
+                    "absolute inset-0 flex px-6 sm:px-10 " + copyOverlayClass
                   }
                 >
-                  {n}
-                </button>
-              ))}
-            </Menu>
+                  {heroCopyBlock}
+                </div>
+              ) : null}
+            </div>
           )}
+        </section>
+      ) : null}
+      <div className="mx-auto max-w-7xl px-4 py-6 sm:px-6 sm:py-7">
+      <h1 className="sr-only">{title}</h1>
+      {description ? <p className="sr-only">{description}</p> : null}
+
+      {navCategories && basePath ? (
+        <nav className="mb-7 overflow-x-auto [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+          <div className="flex min-w-max items-center justify-center gap-6 text-[11px] font-medium leading-none text-stone-500 sm:gap-7">
+            {navCategories.map((c) => {
+              const href =
+                c.slug === "vse-sumki" || c.slug === "vse-aksessuary"
+                  ? basePath
+                  : `${basePath}/${c.slug}`;
+              return (
+                <Link
+                  key={c.slug}
+                  href={withLocalePath(href, locale)}
+                  className={
+                    "whitespace-nowrap transition hover:text-stone-950 " +
+                    (c.slug === activeSlug
+                      ? "font-semibold text-stone-950"
+                      : "text-stone-500")
+                  }
+                >
+                  {categoryName(c.slug, c.name, locale)}
+                </Link>
+              );
+            })}
+          </div>
+        </nav>
+      ) : null}
+
+      {/* Панель управления: фильтр / сортировка / количество товаров */}
+      <div className="relative mb-7 flex items-center justify-between gap-4 border-b border-stone-200 pb-3 text-[11px] font-medium text-stone-950">
+        <div className="flex items-center gap-4">
+          <button
+            type="button"
+            onClick={openDrawer}
+            className="inline-flex h-9 min-w-[76px] items-center justify-center gap-2 rounded-sm border border-stone-100 bg-white px-5 text-[10px] shadow-[0_2px_10px_rgba(0,0,0,0.03)] transition hover:border-stone-300"
+          >
+            <span>{t("catalog.filter")}</span>
+            {activeCount > 0 && (
+              <span className="rounded-full bg-stone-900 px-1.5 py-0.5 text-[10px] leading-none text-white">
+                {activeCount}
+              </span>
+            )}
+          </button>
+
+          <div className="relative">
+            <button
+              type="button"
+              onClick={() => setOpenMenu((m) => (m === "sort" ? null : "sort"))}
+              className="inline-flex h-9 min-w-[132px] items-center justify-between gap-4 rounded-sm border border-stone-100 bg-white px-5 text-[10px] shadow-[0_2px_10px_rgba(0,0,0,0.03)] transition hover:border-stone-300"
+            >
+              <span>{t("catalog.sortBy")}</span>
+              <Chevron open={openMenu === "sort"} />
+            </button>
+            {openMenu === "sort" && (
+              <Menu onClose={() => setOpenMenu(null)} align="right">
+                {(Object.keys(sortLabels) as SortKey[]).map((key) => (
+                  <button
+                    key={key}
+                    type="button"
+                    onClick={() => {
+                      setSortKey(key);
+                      setOpenMenu(null);
+                    }}
+                    className={
+                      "block w-full px-5 py-2.5 text-left text-[13px] normal-case tracking-normal transition hover:bg-stone-50 " +
+                      (key === sortKey ? "text-stone-400" : "text-stone-800")
+                    }
+                  >
+                    {sortLabels[key]}
+                  </button>
+                ))}
+              </Menu>
+            )}
+          </div>
         </div>
+
+        <span className="whitespace-nowrap text-[11px] text-stone-800">
+          {filtered.length} {productCountLabel}
+        </span>
       </div>
 
       <ProductGrid products={shown} />
@@ -290,7 +391,7 @@ export default function CatalogView({
             onClick={() => setVisible((v) => v + perPage)}
             className="border border-stone-200 px-16 py-3 text-[11px] font-medium uppercase tracking-[0.16em] text-stone-950 transition hover:border-stone-950"
           >
-            Показать ещё
+            {t("catalog.more")}
           </button>
         </div>
       )}
@@ -315,24 +416,24 @@ export default function CatalogView({
             (showFilter ? "translate-x-0" : "-translate-x-full")
           }
           role="dialog"
-          aria-label="Фильтр"
+          aria-label={t("catalog.filter")}
         >
           <button
             type="button"
             onClick={closeDrawer}
             className="flex items-center justify-between px-6 py-5 text-[12px] font-medium uppercase tracking-[0.16em] text-stone-900"
           >
-            Скрыть фильтр
+            {t("catalog.hideFilter")}
             <CloseIcon />
           </button>
 
           <div className="flex-1 overflow-y-auto px-6">
-            <FilterSection title="Цена">
+            <FilterSection title={t("catalog.price")}>
               <div className="flex items-center gap-3">
                 <input
                   type="number"
                   inputMode="numeric"
-                  placeholder="от"
+                  placeholder={t("catalog.from")}
                   value={draft.priceMin}
                   onChange={(e) => setDraft((d) => ({ ...d, priceMin: e.target.value }))}
                   className="w-full rounded-md border border-stone-200 px-3 py-2 text-sm outline-none focus:border-stone-900"
@@ -341,7 +442,7 @@ export default function CatalogView({
                 <input
                   type="number"
                   inputMode="numeric"
-                  placeholder="до"
+                  placeholder={t("catalog.to")}
                   value={draft.priceMax}
                   onChange={(e) => setDraft((d) => ({ ...d, priceMax: e.target.value }))}
                   className="w-full rounded-md border border-stone-200 px-3 py-2 text-sm outline-none focus:border-stone-900"
@@ -349,17 +450,7 @@ export default function CatalogView({
               </div>
             </FilterSection>
 
-            {facets.genders.length > 0 && (
-              <FilterSection title="Пол">
-                <CheckboxList
-                  items={facets.genders.map((g) => ({ value: g, label: g }))}
-                  selected={draft.genders}
-                  onToggle={(v) => toggle("genders", v)}
-                />
-              </FilterSection>
-            )}
-
-            <FilterSection title="Бренд">
+            <FilterSection title={t("catalog.brand")}>
               <CheckboxList
                 items={facets.brands.map((b) => ({ value: b, label: getBrandName(b) }))}
                 selected={draft.brands}
@@ -373,7 +464,7 @@ export default function CatalogView({
                   {navCategories.map((c) => (
                     <Link
                       key={c.slug}
-                      href={`${basePath}/${c.slug}`}
+                      href={withLocalePath(`${basePath}/${c.slug}`, locale)}
                       className={
                         "py-1 text-[13px] transition " +
                         (c.slug === activeSlug
@@ -381,14 +472,14 @@ export default function CatalogView({
                           : "text-stone-600 hover:text-stone-950")
                       }
                     >
-                      {c.name}
+                      {categoryName(c.slug, c.name, locale)}
                     </Link>
                   ))}
                 </div>
               </FilterSection>
             )}
 
-            <FilterSection title="Цвет">
+            <FilterSection title={t("catalog.color")}>
               <CheckboxList
                 items={facets.colors.map((c) => ({ value: c, label: c }))}
                 selected={draft.colors}
@@ -396,7 +487,7 @@ export default function CatalogView({
               />
             </FilterSection>
 
-            <FilterSection title="Материал">
+            <FilterSection title={t("catalog.material")}>
               <CheckboxList
                 items={facets.materials.map((m) => ({ value: m, label: m }))}
                 selected={draft.materials}
@@ -404,15 +495,6 @@ export default function CatalogView({
               />
             </FilterSection>
 
-            {facets.countries.length > 0 && (
-              <FilterSection title="Производство">
-                <CheckboxList
-                  items={facets.countries.map((c) => ({ value: c, label: c }))}
-                  selected={draft.countries}
-                  onToggle={(v) => toggle("countries", v)}
-                />
-              </FilterSection>
-            )}
           </div>
 
           <div className="flex items-center gap-4 border-t border-stone-200 px-6 py-4">
@@ -421,14 +503,14 @@ export default function CatalogView({
               onClick={applyDraft}
               className="flex-1 border border-stone-900 bg-stone-900 px-6 py-3 text-[11px] font-medium uppercase tracking-[0.16em] text-white transition hover:bg-stone-800"
             >
-              Применить
+              {t("catalog.apply")}
             </button>
             <button
               type="button"
               onClick={resetDraft}
               className="text-[11px] font-medium uppercase tracking-[0.16em] text-stone-500 transition hover:text-stone-900"
             >
-              Сбросить
+              {t("catalog.reset")}
             </button>
           </div>
         </aside>
@@ -535,14 +617,6 @@ function Menu({
         {children}
       </div>
     </>
-  );
-}
-
-function FilterIcon() {
-  return (
-    <svg viewBox="0 0 24 24" className="h-4 w-4" fill="none" stroke="currentColor" strokeWidth="1.6" aria-hidden>
-      <path d="M3 5h18M6 12h12M10 19h4" strokeLinecap="round" />
-    </svg>
   );
 }
 

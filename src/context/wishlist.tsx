@@ -10,6 +10,7 @@ import {
   type ReactNode,
 } from "react";
 import { useSession } from "next-auth/react";
+import { sendAnalyticsEvent } from "@/components/AnalyticsTracker";
 
 const STORAGE_KEY = "luma-wishlist-v1";
 
@@ -101,10 +102,14 @@ export function WishlistProvider({ children }: { children: ReactNode }) {
       has: (slug) => items.includes(slug),
       toggle: (slug) =>
         setItems((prev) => {
+          const isAdding = !prev.includes(slug);
           const next = prev.includes(slug)
             ? prev.filter((s) => s !== slug)
             : [...prev, slug];
           persistRemote(next);
+          if (isAdding) {
+            sendAnalyticsEvent({ type: "wishlist_add", productSlug: slug });
+          }
           return next;
         }),
       remove: (slug) =>

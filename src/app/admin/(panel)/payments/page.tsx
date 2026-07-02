@@ -62,6 +62,7 @@ export default async function PaymentsPage({
             <thead>
               <tr className="text-left text-xs uppercase tracking-wide text-stone-400">
                 <th className="px-5 py-3">Заказ</th>
+                <th className="px-5 py-3">Дата</th>
                 <th className="px-5 py-3">Клиент</th>
                 <th className="px-5 py-3">Метод</th>
                 <th className="px-5 py-3">Статус</th>
@@ -76,6 +77,15 @@ export default async function PaymentsPage({
                     <Link href={`/admin/orders/${p.orderId}`} className="font-medium hover:text-[#A01D26]">
                       {p.orderNumber}
                     </Link>
+                  </td>
+                  <td className="whitespace-nowrap px-5 py-3 text-stone-500">
+                    {new Date(p.createdAt).toLocaleString("ru-RU", {
+                      day: "2-digit",
+                      month: "2-digit",
+                      year: "numeric",
+                      hour: "2-digit",
+                      minute: "2-digit",
+                    })}
                   </td>
                   <td className="px-5 py-3 text-stone-600">{p.customerName}</td>
                   <td className="px-5 py-3 text-stone-500">{PAYMENT_METHOD_LABELS[p.method]}</td>

@@ -1,6 +1,10 @@
 import type { Filter } from "mongodb";
-import { ordersCollection, ObjectId } from "@/lib/mongodb";
+import { ordersCollection, paymentsCollection, productsCollection, ObjectId } from "@/lib/mongodb";
 import type {
+  CustomerPaymentMethod,
+  DeliveryMethod,
+  OrderChecklistKey,
+  OrderProcessingChecklist,
   OrderDoc,
   OrderItem,
   OrderPaymentStatus,
@@ -9,6 +13,8 @@ import type {
   ShippingAddress,
 } from "@/lib/mongodb";
 import { normalizeOrderStatus, ORDER_STATUS_LABELS } from "@/lib/admin/constants";
+import { getDeliveryLabel, getPaymentLabel } from "@/lib/order-options";
+import { trackAnalyticsEvent } from "@/lib/analytics";
 
 export interface AdminOrderTimelineItem {
   type: OrderTimelineEvent["type"];
@@ -33,6 +39,7 @@ export interface AdminOrderListItem {
   customerEmail: string;
   total: number;
   itemsCount: number;
+  processingChecklist: OrderProcessingChecklist;
   createdAt: string;
 }
 
@@ -46,12 +53,30 @@ export interface AdminOrderDetail extends AdminOrderListItem {
     address?: string;
     comment?: string;
   };
+  deliveryMethod?: string;
+  paymentMethod?: string;
   shippingAddress?: ShippingAddress;
   trackingNumber?: string;
   items: OrderItem[];
   notes: AdminOrderNote[];
   timeline: AdminOrderTimelineItem[];
+  processingChecklist: Record<OrderChecklistKey, boolean>;
   updatedAt: string | null;
+}
+
+export interface CreateManualOrderInput {
+  customer: {
+    name: string;
+    phone: string;
+    email?: string;
+    city?: string;
+    address?: string;
+    comment?: string;
+  };
+  deliveryMethod: DeliveryMethod;
+  paymentMethod: CustomerPaymentMethod;
+  items: OrderItem[];
+  total: number;
 }
 
 export interface ListOrdersParams {
@@ -128,6 +153,8 @@ export async function getOrderById(id: string): Promise<AdminOrderDetail | null>
       city: doc.city,
       address: doc.address,
     },
+    deliveryMethod: getDeliveryLabel(doc.deliveryMethod),
+    paymentMethod: getPaymentLabel(doc.customerPaymentMethod),
     shippingAddress: doc.shippingAddress,
     trackingNumber: doc.trackingNumber ?? doc.tracking_number,
     items: doc.items ?? doc.products ?? [],
@@ -142,6 +169,13 @@ export async function getOrderById(id: string): Promise<AdminOrderDetail | null>
       author: t.author,
       createdAt: t.createdAt.toISOString(),
     })),
+    processingChecklist: {
+      contacted: Boolean(doc.processingChecklist?.contacted),
+      availabilityConfirmed: Boolean(doc.processingChecklist?.availabilityConfirmed),
+      addressConfirmed: Boolean(doc.processingChecklist?.addressConfirmed),
+      paymentAgreed: Boolean(doc.processingChecklist?.paymentAgreed),
+      handedToDelivery: Boolean(doc.processingChecklist?.handedToDelivery),
+    },
     updatedAt: doc.updatedAt ? doc.updatedAt.toISOString() : null,
   };
 }
@@ -221,6 +255,135 @@ export async function addOrderNote(
   return res.matchedCount > 0;
 }
 
+const CHECKLIST_MESSAGES: Record<OrderChecklistKey, string> = {
+  contacted: "Связались с клиентом",
+  availabilityConfirmed: "Наличие подтверждено",
+  addressConfirmed: "Адрес подтверждён",
+  paymentAgreed: "Оплата согласована",
+  handedToDelivery: "Заказ передан в доставку",
+};
+
+export async function updateOrderChecklistItem(
+  id: string,
+  key: OrderChecklistKey,
+  checked: boolean,
+  author: string,
+): Promise<boolean> {
+  if (!ObjectId.isValid(id)) return false;
+  const orders = await ordersCollection();
+  const now = new Date();
+  const res = await orders.updateOne(
+    { _id: new ObjectId(id) },
+    {
+      $set: {
+        [`processingChecklist.${key}`]: checked,
+        updatedAt: now,
+        updated_at: now,
+      },
+      $push: {
+        timeline: {
+          type: "note",
+          message: `${CHECKLIST_MESSAGES[key]}${checked ? "" : " — снято"}`,
+          author,
+          createdAt: now,
+        },
+      },
+    },
+  );
+  return res.matchedCount > 0;
+}
+
+function generateOrderNumber(): string {
+  const ts = Date.now().toString(36).toUpperCase();
+  const rand = Math.random().toString(36).slice(2, 6).toUpperCase();
+  return `SORA-${ts}-${rand}`;
+}
+
+export async function createManualOrder(input: CreateManualOrderInput): Promise<string> {
+  const orders = await ordersCollection();
+  const payments = await paymentsCollection();
+  const products = await productsCollection();
+  const now = new Date();
+  const number = generateOrderNumber();
+  const paymentMethod = input.paymentMethod === "cash_on_delivery" ? "cash" : "bank_transfer";
+
+  const shippingAddress =
+    input.customer.city || input.customer.address
+      ? {
+          recipient: input.customer.name,
+          phone: input.customer.phone,
+          city: input.customer.city ?? "",
+          street: input.customer.address ?? input.customer.city ?? "",
+          comment: input.customer.comment,
+        }
+      : undefined;
+
+  const result = await orders.insertOne({
+    userId: null,
+    number,
+    order_number: number,
+    status: "new",
+    order_status: "new",
+    paymentStatus: "pending",
+    payment_status: "pending",
+    customer: input.customer,
+    customer_name: input.customer.name,
+    email: input.customer.email,
+    phone: input.customer.phone,
+    address: input.customer.address,
+    city: input.customer.city,
+    shippingAddress,
+    deliveryMethod: input.deliveryMethod,
+    customerPaymentMethod: input.paymentMethod,
+    items: input.items,
+    products: input.items,
+    total: input.total,
+    total_amount: input.total,
+    notes: [],
+    processingChecklist: {},
+    timeline: [
+      {
+        type: "created",
+        message: "Заказ создан вручную",
+        author: "admin",
+        createdAt: now,
+      },
+    ],
+    createdAt: now,
+    created_at: now,
+    updatedAt: now,
+    updated_at: now,
+  });
+
+  await payments.insertOne({
+    orderId: result.insertedId,
+    orderNumber: number,
+    customerName: input.customer.name,
+    amount: input.total,
+    status: "pending",
+    method: paymentMethod,
+    createdAt: now,
+    updatedAt: now,
+  });
+
+  for (const item of input.items) {
+    await products
+      .updateOne({ slug: item.slug }, { $inc: { salesCount: item.qty } })
+      .catch(() => {});
+  }
+
+  await trackAnalyticsEvent({
+    type: "order_created",
+    sessionId: "admin",
+    orderId: result.insertedId.toString(),
+    orderNumber: number,
+    amount: input.total,
+    city: input.customer.city,
+  });
+
+  return result.insertedId.toString();
+}
+
 function toListItem(doc: OrderDoc): AdminOrderListItem {
   return {
     id: doc._id!.toString(),
@@ -232,6 +395,7 @@ function toListItem(doc: OrderDoc): AdminOrderListItem {
     customerEmail: doc.customer?.email ?? doc.email ?? "",
     total: doc.total ?? doc.total_amount ?? 0,
     itemsCount: (doc.items ?? doc.products ?? []).reduce((s, it) => s + it.qty, 0),
+    processingChecklist: doc.processingChecklist ?? {},
     createdAt: (doc.createdAt ?? doc.created_at ?? new Date()).toISOString(),
   };
 }

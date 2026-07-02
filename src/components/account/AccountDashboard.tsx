@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState, useTransition } from "react";
+import { useMemo, useState, useTransition } from "react";
 import type { ReactNode } from "react";
 import Link from "next/link";
 import Image from "next/image";
@@ -9,7 +9,11 @@ import { motion } from "framer-motion";
 import { signOut } from "next-auth/react";
 import { products } from "@/lib/data";
 import { formatPrice } from "@/lib/format";
+import { withLocalePath } from "@/lib/i18n";
+import { useLocale, useT } from "@/lib/useI18n";
 import { useWishlist } from "@/context/wishlist";
+import { localizeProductTitle } from "@/lib/product-i18n";
+import { getAccountRecommendations } from "@/lib/recommendations";
 import ProductGrid from "@/components/ProductGrid";
 import type { Product } from "@/lib/types";
 import {
@@ -26,6 +30,7 @@ import {
   type ActionResult,
 } from "@/app/account/actions";
 import type { AddressView, OrderView, ProfileView } from "@/lib/account";
+import { getAddressLabelDisplay, getAddressLabelOptions } from "@/lib/address-label";
 
 const accent = "#8A6248";
 
@@ -33,16 +38,6 @@ const fadeUp = {
   hidden: { opacity: 0, y: 18 },
   show: { opacity: 1, y: 0 },
 };
-
-const recommendedProducts = [
-  "suede-fringe-shoulder-bag-taupe",
-  "premium-suede-shoulder-bag-black",
-  "elegant-leather-shoulder-bag-cognac",
-  "classic-leather-tote-bag-black",
-]
-  .map((slug) => products.find((product) => product.slug === slug))
-  .filter(Boolean)
-  .slice(0, 4) as Product[];
 
 export default function AccountDashboard({
   profile,
@@ -57,20 +52,17 @@ export default function AccountDashboard({
 }) {
   const router = useRouter();
   const searchParams = useSearchParams();
+  const locale = useLocale();
+  const t = useT();
   const { count: wishlistCount } = useWishlist();
-  const [tab, setTab] = useState<AccountTab>(() => parseAccountTab(initialTab));
-
-  useEffect(() => {
-    setTab(parseAccountTab(searchParams.get("tab") ?? initialTab));
-  }, [searchParams, initialTab]);
+  const activeTab = parseAccountTab(searchParams.get("tab") ?? initialTab);
 
   function selectTab(next: AccountTab) {
-    setTab(next);
-    router.push(accountTabHref(next));
+    router.push(withLocalePath(accountTabHref(next), locale));
   }
 
   const firstName = profile.name.trim().split(/\s+/)[0] || profile.name;
-  const activeTabLabel = ACCOUNT_TABS.find((item) => item.id === tab)?.label ?? "Консоль";
+  const activeTabLabel = accountTabLabel(activeTab, t);
 
   return (
     <motion.div
@@ -98,21 +90,20 @@ export default function AccountDashboard({
         <div className="relative flex flex-col gap-8 lg:flex-row lg:items-center lg:justify-between">
           <div className="max-w-2xl">
             <p className="text-[11px] font-semibold uppercase tracking-[0.28em] text-stone-500">
-              SÓRA private account
+              {t("account.privateAccount")}
             </p>
             <h1 className="mt-5 font-serif text-[2.35rem] leading-[0.98] text-stone-950 sm:text-5xl lg:text-6xl">
-              Здравствуйте, {firstName}
+              {t("account.hello")}, {firstName}
             </h1>
             <p className="mt-5 max-w-xl text-[15px] leading-7 text-stone-600 sm:text-base">
-              Добро пожаловать в личный кабинет SÓRA. Здесь вы можете управлять
-              заказами, избранными товарами и адресами доставки.
+              {t("account.welcome")}
             </p>
           </div>
           <Link
-            href="/bags"
+            href={withLocalePath("/bags", locale)}
             className="group inline-flex w-fit items-center justify-center rounded-full bg-stone-950 px-7 py-3.5 text-[12px] font-semibold uppercase tracking-[0.18em] text-white shadow-[0_14px_30px_rgba(28,25,23,0.16)] transition duration-300 hover:-translate-y-0.5 hover:bg-[#2b221b] focus:outline-none focus:ring-2 focus:ring-stone-950 focus:ring-offset-2"
           >
-            Продолжить покупки
+            {t("account.continueShopping")}
             <span className="ml-3 transition-transform duration-300 group-hover:translate-x-1">→</span>
           </Link>
         </div>
@@ -125,7 +116,7 @@ export default function AccountDashboard({
             <span className="text-stone-400 transition-transform group-open:rotate-180">⌄</span>
           </summary>
           <AccountNavigation
-            activeTab={tab}
+            activeTab={activeTab}
             onNavigate={selectTab}
             className="border-t border-stone-100 p-2"
           />
@@ -138,32 +129,33 @@ export default function AccountDashboard({
           className="sticky top-28 hidden rounded-[24px] border border-[#e8e8e8] bg-white p-3 shadow-[0_20px_60px_rgba(41,31,23,0.055)] lg:block"
         >
           <div className="border-b border-stone-100 px-4 py-4">
-            <p className="text-[11px] uppercase tracking-[0.24em] text-stone-400">Аккаунт</p>
+            <p className="text-[11px] uppercase tracking-[0.24em] text-stone-400">{t("common.profile")}</p>
             <p className="mt-2 truncate text-sm text-stone-700">{profile.email}</p>
           </div>
-          <AccountNavigation activeTab={tab} onNavigate={selectTab} className="mt-3" />
+          <AccountNavigation activeTab={activeTab} onNavigate={selectTab} className="mt-3" />
         </motion.aside>
 
         <motion.main
-          key={tab}
+          key={activeTab}
           variants={fadeUp}
           initial="hidden"
           animate="show"
           transition={{ duration: 0.35, ease: "easeOut" }}
           className="min-w-0"
         >
-          {tab === "console" && (
+          {activeTab === "console" && (
             <ConsoleSection
+              orders={orders}
               ordersCount={orders.length}
               addressesCount={addresses.length}
               wishlistCount={wishlistCount}
               onNavigate={selectTab}
             />
           )}
-          {tab === "orders" && <SectionShell eyebrow="История покупок" title="Заказы"><OrdersSection orders={orders} /></SectionShell>}
-          {tab === "addresses" && <SectionShell eyebrow="Доставка" title="Адреса"><AddressesSection addresses={addresses} /></SectionShell>}
-          {tab === "wishlist" && <SectionShell eyebrow="Сохранённые модели" title="Избранное"><WishlistSection /></SectionShell>}
-          {tab === "profile" && <SectionShell eyebrow="Персональная информация" title="Личные данные"><ProfileSection profile={profile} /></SectionShell>}
+          {activeTab === "orders" && <SectionShell eyebrow={t("account.purchaseHistory")} title={t("account.orders")}><OrdersSection orders={orders} /></SectionShell>}
+          {activeTab === "addresses" && <SectionShell eyebrow={t("account.delivery")} title={t("account.addresses")}><AddressesSection addresses={addresses} /></SectionShell>}
+          {activeTab === "wishlist" && <SectionShell eyebrow={t("account.savedModels")} title={t("common.wishlist")}><WishlistSection /></SectionShell>}
+          {activeTab === "profile" && <SectionShell eyebrow={t("account.personalInfo")} title={t("account.personalData")}><ProfileSection profile={profile} /></SectionShell>}
         </motion.main>
       </div>
     </motion.div>
@@ -179,8 +171,10 @@ function AccountNavigation({
   onNavigate: (tab: AccountTab) => void;
   className?: string;
 }) {
+  const t = useT();
+  const locale = useLocale();
   return (
-    <nav className={"space-y-1 " + className} aria-label="Навигация личного кабинета">
+    <nav className={"space-y-1 " + className} aria-label={t("common.profile")}>
       {ACCOUNT_TABS.map((item) => {
         const active = activeTab === item.id;
         return (
@@ -196,21 +190,29 @@ function AccountNavigation({
             }
           >
             <AccountIcon id={item.id} active={active} />
-            <span className="flex-1">{item.menuLabel}</span>
+            <span className="flex-1">{accountTabLabel(item.id, t)}</span>
             {active && <span className="h-px w-7" style={{ backgroundColor: accent }} />}
           </button>
         );
       })}
       <button
         type="button"
-        onClick={() => signOut({ callbackUrl: "/account" })}
+        onClick={() => signOut({ callbackUrl: withLocalePath("/account", locale) })}
         className="group flex w-full items-center gap-3 rounded-2xl px-4 py-3 text-left text-sm text-stone-400 transition duration-300 hover:bg-stone-50 hover:text-stone-950 focus:outline-none focus:ring-2 focus:ring-[#8A6248]/25"
       >
         <AccountIcon id="logout" />
-        <span className="flex-1">Выход</span>
+        <span className="flex-1">{t("account.logout")}</span>
       </button>
     </nav>
   );
+}
+
+function accountTabLabel(tab: AccountTab, t: ReturnType<typeof useT>) {
+  if (tab === "console") return t("account.console");
+  if (tab === "orders") return t("account.orders");
+  if (tab === "wishlist") return t("common.wishlist");
+  if (tab === "addresses") return t("account.addresses");
+  return t("account.profile");
 }
 
 function AccountIcon({
@@ -270,20 +272,23 @@ function AccountIcon({
 }
 
 function ConsoleSection({
+  orders,
   ordersCount,
   addressesCount,
   wishlistCount,
   onNavigate,
 }: {
+  orders: OrderView[];
   ordersCount: number;
   addressesCount: number;
   wishlistCount: number;
   onNavigate: (tab: AccountTab) => void;
 }) {
+  const t = useT();
   const cards = [
-    { tab: "orders" as const, label: "Заказы", value: String(ordersCount) },
-    { tab: "wishlist" as const, label: "Избранное", value: String(wishlistCount) },
-    { tab: "addresses" as const, label: "Адреса", value: String(addressesCount) },
+    { tab: "orders" as const, label: t("account.orders"), value: String(ordersCount) },
+    { tab: "wishlist" as const, label: t("common.wishlist"), value: String(wishlistCount) },
+    { tab: "addresses" as const, label: t("account.addresses"), value: String(addressesCount) },
   ];
 
   return (
@@ -302,24 +307,30 @@ function ConsoleSection({
           </motion.button>
         ))}
       </section>
-      <RecommendationsSection />
+      <RecommendationsSection orders={orders} />
       <BrandBenefitsSection />
     </div>
   );
 }
 
-function RecommendationsSection() {
+function RecommendationsSection({ orders }: { orders: OrderView[] }) {
+  const locale = useLocale();
+  const t = useT();
+  const recommendedProducts = useMemo(
+    () => getAccountRecommendations(orders.flatMap((order) => order.items.map((item) => item.slug)), 4),
+    [orders],
+  );
   return (
     <section className="rounded-[24px] border border-[#e8e8e8] bg-[#fbfaf8] p-5 sm:p-7 lg:p-8">
       <div className="mb-6 flex items-end justify-between gap-4">
         <div>
-          <p className="text-[11px] font-semibold uppercase tracking-[0.24em] text-stone-400">Рекомендации</p>
+          <p className="text-[11px] font-semibold uppercase tracking-[0.24em] text-stone-400">{t("account.recommendations")}</p>
           <h2 className="mt-2 font-serif text-3xl text-stone-950 sm:text-4xl">
-            Подобрано специально для вас
+            {t("account.recommendedForYou")}
           </h2>
         </div>
-        <Link href="/bags" className="hidden text-sm font-medium text-stone-500 transition hover:text-stone-950 sm:inline">
-          Все модели →
+        <Link href={withLocalePath("/bags", locale)} className="hidden text-sm font-medium text-stone-500 transition hover:text-stone-950 sm:inline">
+          {t("account.allModels")} →
         </Link>
       </div>
       <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
@@ -333,18 +344,21 @@ function RecommendationsSection() {
 
 function RecommendationCard({ product }: { product: Product }) {
   const image = getProductImage(product);
+  const locale = useLocale();
+  const t = useT();
+  const localizedTitle = localizeProductTitle(product, locale);
   return (
     <motion.article
       whileHover={{ y: -5 }}
       transition={{ duration: 0.28, ease: "easeOut" }}
       className="group overflow-hidden rounded-[20px] border border-[#e8e8e8] bg-white shadow-[0_16px_38px_rgba(41,31,23,0.04)]"
     >
-      <Link href={`/product/${product.slug}`} className="block">
+      <Link href={withLocalePath(`/product/${product.slug}`, locale)} className="block">
         <div className="relative aspect-[4/5] overflow-hidden bg-[#f4f0eb]">
           {image ? (
             <Image
               src={image.src}
-              alt={image.alt || product.title}
+              alt={image.alt || localizedTitle}
               fill
               sizes="(min-width: 1280px) 220px, (min-width: 640px) 45vw, 90vw"
               className="object-contain object-center p-5 transition-transform duration-700 ease-out group-hover:scale-[1.055]"
@@ -353,15 +367,15 @@ function RecommendationCard({ product }: { product: Product }) {
             <div className="absolute inset-0 bg-gradient-to-br from-stone-100 to-stone-200" />
           )}
           <span className="absolute bottom-4 left-1/2 -translate-x-1/2 translate-y-2 rounded-full bg-white/95 px-5 py-2 text-[10px] font-semibold uppercase tracking-[0.18em] text-stone-900 opacity-0 shadow-sm backdrop-blur-sm transition-all duration-300 group-hover:translate-y-0 group-hover:opacity-100">
-            Смотреть
+            {t("common.view")}
           </span>
         </div>
         <div className="p-4">
           <h3 className="line-clamp-2 text-sm leading-snug text-stone-800 transition-colors group-hover:text-stone-950">
-            {product.title}
+            {localizedTitle}
           </h3>
           <p className="mt-2 text-sm font-medium tracking-wide text-stone-950">
-            {formatPrice(product.price)}
+            {formatPrice(product.price, locale)}
           </p>
         </div>
       </Link>
@@ -374,10 +388,11 @@ function getProductImage(product: Product) {
 }
 
 function BrandBenefitsSection() {
-  const benefits = ["Made in Italy", "Натуральная кожа", "Гарантия качества", "Быстрая доставка"];
+  const t = useT();
+  const benefits = ["Made in Italy", t("account.naturalLeather"), t("account.qualityWarranty"), t("account.fastDelivery")];
   return (
     <section className="rounded-[24px] border border-[#e8e8e8] bg-white p-6 shadow-[0_18px_45px_rgba(41,31,23,0.04)] sm:p-8">
-      <h2 className="font-serif text-3xl text-stone-950">Преимущества SÓRA</h2>
+      <h2 className="font-serif text-3xl text-stone-950">{t("account.benefits")}</h2>
       <div className="mt-6 grid gap-3 sm:grid-cols-2 xl:grid-cols-4">
         {benefits.map((benefit) => (
           <motion.div
@@ -414,13 +429,32 @@ function SectionShell({
   );
 }
 
+function customerOrderStatusLabel(status: string, t: ReturnType<typeof useT>) {
+  const labels: Record<string, string> = {
+    new: t("account.orderAccepted"),
+    processing: t("account.confirmingDetails"),
+    shipped: t("account.shippedToDelivery"),
+    delivered: t("status.delivered"),
+    cancelled: t("status.cancelled"),
+    Новый: t("account.orderAccepted"),
+    "В обработке": t("account.confirmingDetails"),
+    Отправлен: t("account.shippedToDelivery"),
+    Доставлен: t("status.delivered"),
+    Отменён: t("status.cancelled"),
+  };
+
+  return labels[status] ?? status;
+}
+
 function OrdersSection({ orders }: { orders: OrderView[] }) {
+  const locale = useLocale();
+  const t = useT();
   if (orders.length === 0) {
     return (
       <EmptyState
-        text="У вас пока нет заказов."
-        ctaHref="/bags"
-        ctaLabel="В каталог"
+        text={t("account.noOrders")}
+        ctaHref={withLocalePath("/bags", locale)}
+        ctaLabel={t("home.toCatalog")}
       />
     );
   }
@@ -437,7 +471,7 @@ function OrdersSection({ orders }: { orders: OrderView[] }) {
             <div>
               <p className="text-sm font-semibold text-stone-950">№ {order.number}</p>
               <p className="text-xs text-stone-400">
-                {new Date(order.createdAt).toLocaleDateString("ru-RU", {
+                {new Date(order.createdAt).toLocaleDateString(locale === "ru" ? "ru-RU" : locale === "ro" ? "ro-RO" : "en-US", {
                   day: "numeric",
                   month: "long",
                   year: "numeric",
@@ -445,7 +479,7 @@ function OrdersSection({ orders }: { orders: OrderView[] }) {
               </p>
             </div>
             <span className="rounded-full bg-stone-100 px-3 py-1 text-xs font-medium text-stone-600">
-              {order.status}
+              {customerOrderStatusLabel(order.status, t)}
             </span>
           </div>
 
@@ -457,18 +491,18 @@ function OrdersSection({ orders }: { orders: OrderView[] }) {
               >
                 <span className="text-stone-700">
                   {it.title}
-                  <span className="text-stone-400"> · {it.color} · {it.qty} шт.</span>
+                  <span className="text-stone-400"> · {it.color} · {it.qty} {t("account.units")}</span>
                 </span>
                 <span className="shrink-0 text-stone-900">
-                  {formatPrice(it.price * it.qty)}
+                  {formatPrice(it.price * it.qty, locale)}
                 </span>
               </li>
             ))}
           </ul>
 
           <div className="mt-3 flex justify-between border-t border-stone-100 pt-3 text-sm font-semibold">
-            <span className="text-stone-700">Итого</span>
-            <span className="text-stone-950">{formatPrice(order.total)}</span>
+            <span className="text-stone-700">{t("account.total")}</span>
+            <span className="text-stone-950">{formatPrice(order.total, locale)}</span>
           </div>
         </motion.div>
       ))}
@@ -478,6 +512,9 @@ function OrdersSection({ orders }: { orders: OrderView[] }) {
 
 function AddressesSection({ addresses }: { addresses: AddressView[] }) {
   const router = useRouter();
+  const t = useT();
+  const locale = useLocale();
+  const labelOptions = getAddressLabelOptions(locale);
   const [pending, startTransition] = useTransition();
   const [showForm, setShowForm] = useState(addresses.length === 0);
   const [error, setError] = useState<string | null>(null);
@@ -520,10 +557,10 @@ function AddressesSection({ addresses }: { addresses: AddressView[] }) {
             >
               {a.isDefault && (
                 <span className="absolute right-4 top-4 rounded-full bg-stone-900 px-2.5 py-1 text-[11px] font-medium text-white">
-                  Основной
+                  {t("account.defaultAddress")}
                 </span>
               )}
-              <p className="text-sm font-semibold text-stone-950">{a.label}</p>
+              <p className="text-sm font-semibold text-stone-950">{getAddressLabelDisplay(a.label, locale)}</p>
               <p className="mt-2 text-sm text-stone-600">{a.recipient}</p>
               <p className="text-sm text-stone-600">{a.phone}</p>
               <p className="text-sm text-stone-600">
@@ -539,7 +576,7 @@ function AddressesSection({ addresses }: { addresses: AddressView[] }) {
                     onClick={() => runAction(() => setDefaultAddress(a.id))}
                     className="font-medium text-stone-700 underline-offset-2 hover:underline disabled:opacity-50"
                   >
-                    Сделать основным
+                    {t("account.makeDefault")}
                   </button>
                 )}
                 <button
@@ -547,7 +584,7 @@ function AddressesSection({ addresses }: { addresses: AddressView[] }) {
                   onClick={() => runAction(() => deleteAddress(a.id))}
                   className="text-stone-400 underline-offset-2 hover:text-red-600 hover:underline disabled:opacity-50"
                 >
-                  Удалить
+                  {t("common.delete")}
                 </button>
               </div>
             </motion.div>
@@ -561,44 +598,108 @@ function AddressesSection({ addresses }: { addresses: AddressView[] }) {
 
       {showForm ? (
         <div className="rounded-[20px] border border-[#e8e8e8] bg-[#fdfcfb] p-5">
-          <h3 className="mb-4 font-serif text-2xl text-stone-950">Новый адрес</h3>
+          <h3 className="mb-4 font-serif text-2xl text-stone-950">{t("account.newAddress")}</h3>
           <div className="grid gap-3 sm:grid-cols-2">
-            <input
-              placeholder="Название (Дом, Работа…)"
-              value={form.label}
-              onChange={(e) => setForm({ ...form, label: e.target.value })}
-              className={fieldClass}
-            />
-            <input
-              placeholder="Получатель"
-              value={form.recipient}
-              onChange={(e) => setForm({ ...form, recipient: e.target.value })}
-              className={fieldClass}
-            />
-            <input
-              placeholder="Телефон"
-              value={form.phone}
-              onChange={(e) => setForm({ ...form, phone: e.target.value })}
-              className={fieldClass}
-            />
-            <input
-              placeholder="Город"
-              value={form.city}
-              onChange={(e) => setForm({ ...form, city: e.target.value })}
-              className={fieldClass}
-            />
-            <input
-              placeholder="Улица, дом, квартира"
-              value={form.street}
-              onChange={(e) => setForm({ ...form, street: e.target.value })}
-              className={fieldClass + " sm:col-span-2"}
-            />
-            <input
-              placeholder="Комментарий (необязательно)"
-              value={form.comment}
-              onChange={(e) => setForm({ ...form, comment: e.target.value })}
-              className={fieldClass + " sm:col-span-2"}
-            />
+            <label className="space-y-1.5">
+              <span className="block text-xs font-medium uppercase tracking-[0.12em] text-stone-400">
+                {t("account.addressType")}
+              </span>
+              <div className="flex flex-wrap gap-2">
+                {labelOptions.map((option) => {
+                  const active = form.label === option.value;
+                  return (
+                    <button
+                      key={option.value}
+                      type="button"
+                      onClick={() => setForm({ ...form, label: option.value })}
+                      className={
+                        "rounded-full border px-3.5 py-1.5 text-xs font-medium transition " +
+                        (active
+                          ? "border-stone-900 bg-stone-900 text-white"
+                          : "border-[#e8e8e8] bg-white text-stone-600 hover:border-stone-400")
+                      }
+                    >
+                      {option.label}
+                    </button>
+                  );
+                })}
+              </div>
+              <input
+                placeholder={t("account.addressTypePlaceholder")}
+                value={form.label}
+                onChange={(e) => setForm({ ...form, label: e.target.value })}
+                autoComplete="address-line3"
+                className={fieldClass}
+              />
+              <span className="block text-xs text-stone-400">
+                {t("account.addressTypeHint")}
+              </span>
+            </label>
+            <label className="space-y-1.5">
+              <span className="block text-xs font-medium uppercase tracking-[0.12em] text-stone-400">
+                {t("account.recipient")}
+              </span>
+              <input
+                placeholder={t("account.recipientPlaceholder")}
+                value={form.recipient}
+                onChange={(e) => setForm({ ...form, recipient: e.target.value })}
+                autoComplete="name"
+                className={fieldClass}
+              />
+              <span className="block text-xs text-stone-400">
+                {t("account.recipientHint")}
+              </span>
+            </label>
+            <label className="space-y-1.5">
+              <span className="block text-xs font-medium uppercase tracking-[0.12em] text-stone-400">
+                {t("account.mobilePhone")}
+              </span>
+              <input
+                placeholder="+373 ..."
+                value={form.phone}
+                onChange={(e) => setForm({ ...form, phone: e.target.value })}
+                autoComplete="tel"
+                className={fieldClass}
+              />
+            </label>
+            <label className="space-y-1.5">
+              <span className="block text-xs font-medium uppercase tracking-[0.12em] text-stone-400">
+                {t("checkout.city")}
+              </span>
+              <input
+                placeholder={t("account.cityPlaceholder")}
+                value={form.city}
+                onChange={(e) => setForm({ ...form, city: e.target.value })}
+                autoComplete="address-level2"
+                className={fieldClass}
+              />
+            </label>
+            <label className="space-y-1.5 sm:col-span-2">
+              <span className="block text-xs font-medium uppercase tracking-[0.12em] text-stone-400">
+                {t("checkout.address")}
+              </span>
+              <input
+                placeholder={t("account.addressPlaceholder")}
+                value={form.street}
+                onChange={(e) => setForm({ ...form, street: e.target.value })}
+                autoComplete="street-address"
+                className={fieldClass}
+              />
+              <span className="block text-xs text-stone-400">
+                {t("account.addressHint")}
+              </span>
+            </label>
+            <label className="space-y-1.5 sm:col-span-2">
+              <span className="block text-xs font-medium uppercase tracking-[0.12em] text-stone-400">
+                {t("account.deliveryComment")}
+              </span>
+              <input
+                placeholder={t("account.commentPlaceholder")}
+                value={form.comment}
+                onChange={(e) => setForm({ ...form, comment: e.target.value })}
+                className={fieldClass}
+              />
+            </label>
           </div>
           <label className="mt-4 flex items-center gap-2 text-sm text-stone-600">
             <input
@@ -607,7 +708,7 @@ function AddressesSection({ addresses }: { addresses: AddressView[] }) {
               onChange={(e) => setForm({ ...form, isDefault: e.target.checked })}
               className="h-4 w-4 accent-stone-900"
             />
-            Сделать основным адресом
+            {t("account.makeDefaultAddress")}
           </label>
           <div className="mt-4 flex gap-3">
             <button
@@ -631,14 +732,14 @@ function AddressesSection({ addresses }: { addresses: AddressView[] }) {
               }
               className="rounded-full bg-stone-950 px-6 py-3 text-sm font-semibold text-white transition hover:bg-[#2b221b] disabled:opacity-60"
             >
-              {pending ? "Сохраняем…" : "Сохранить адрес"}
+              {pending ? t("account.saving") : t("account.saveAddress")}
             </button>
             {addresses.length > 0 && (
               <button
                 onClick={() => setShowForm(false)}
                 className="rounded-full px-5 py-2.5 text-sm text-stone-500 hover:text-stone-800"
               >
-                Отмена
+                {t("common.cancel")}
               </button>
             )}
           </div>
@@ -648,7 +749,7 @@ function AddressesSection({ addresses }: { addresses: AddressView[] }) {
           onClick={() => setShowForm(true)}
           className="rounded-full border border-[#d8d0c8] px-5 py-3 text-sm font-medium text-stone-700 transition hover:border-stone-900 hover:bg-stone-50"
         >
-          + Добавить адрес
+          {t("account.addAddress")}
         </button>
       )}
     </div>
@@ -657,14 +758,16 @@ function AddressesSection({ addresses }: { addresses: AddressView[] }) {
 
 function WishlistSection() {
   const { items } = useWishlist();
+  const locale = useLocale();
+  const t = useT();
   const favorites = products.filter((p) => items.includes(p.slug));
 
   if (favorites.length === 0) {
     return (
       <EmptyState
-        text="В избранном пока пусто. Нажимайте на сердечко у понравившихся моделей."
-        ctaHref="/bags"
-        ctaLabel="В каталог"
+        text={t("account.wishlistHint")}
+        ctaHref={withLocalePath("/bags", locale)}
+        ctaLabel={t("home.toCatalog")}
       />
     );
   }
@@ -672,12 +775,12 @@ function WishlistSection() {
   return (
     <div>
       <div className="mb-5 flex items-center justify-between">
-        <p className="text-sm text-stone-500">Сохранено: {favorites.length}</p>
+        <p className="text-sm text-stone-500">{t("account.savedCount")}: {favorites.length}</p>
         <Link
-          href="/wishlist"
+          href={withLocalePath("/wishlist", locale)}
           className="text-sm font-medium text-stone-700 underline-offset-2 hover:underline"
         >
-          Открыть избранное
+          {t("account.openWishlist")}
         </Link>
       </div>
       <ProductGrid products={favorites} />
@@ -687,6 +790,7 @@ function WishlistSection() {
 
 function ProfileSection({ profile }: { profile: ProfileView }) {
   const router = useRouter();
+  const t = useT();
   const [pending, startTransition] = useTransition();
   const [name, setName] = useState(profile.name);
   const [error, setError] = useState<string | null>(null);
@@ -712,7 +816,7 @@ function ProfileSection({ profile }: { profile: ProfileView }) {
   return (
     <div className="max-w-lg space-y-5">
       <div>
-        <label className="mb-2 block text-xs font-medium uppercase tracking-[0.18em] text-stone-400">Имя</label>
+        <label className="mb-2 block text-xs font-medium uppercase tracking-[0.18em] text-stone-400">{t("account.name")}</label>
         <input
           value={name}
           onChange={(e) => {
@@ -734,7 +838,7 @@ function ProfileSection({ profile }: { profile: ProfileView }) {
       )}
       {saved && (
         <p className="rounded-lg bg-green-50 px-3 py-2 text-xs text-green-700">
-          Сохранено
+          {t("account.saved")}
         </p>
       )}
 
@@ -743,7 +847,7 @@ function ProfileSection({ profile }: { profile: ProfileView }) {
         onClick={save}
         className="rounded-full bg-stone-950 px-7 py-3 text-sm font-semibold text-white transition hover:bg-[#2b221b] disabled:opacity-60"
       >
-        {pending ? "Сохраняем…" : "Сохранить"}
+        {pending ? t("account.saving") : t("common.save")}
       </button>
     </div>
   );

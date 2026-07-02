@@ -12,7 +12,16 @@ import { signIn, signOut } from "@/auth";
 import { assertAdmin } from "@/lib/admin/guard";
 import { rateLimit, clientIpFromHeaders } from "@/lib/rate-limit";
 import { usersCollection, paymentsCollection, ObjectId } from "@/lib/mongodb";
-import type { PaymentMethod, PaymentStatus, ReviewStatus, CouponType } from "@/lib/mongodb";
+import type {
+  CustomerPaymentMethod,
+  DeliveryMethod,
+  OrderChecklistKey,
+  PaymentMethod,
+  PaymentStatus,
+  ReminderTargetType,
+  ReviewStatus,
+  CouponType,
+} from "@/lib/mongodb";
 import {
   ORDER_STATUSES,
   PRODUCT_STATUSES,
@@ -20,7 +29,14 @@ import {
   PAYMENT_METHOD_LABELS,
   REVIEW_STATUSES,
 } from "@/lib/admin/constants";
-import { addOrderNote, updateOrderStatus, updateTrackingNumber } from "@/lib/admin/orders";
+import { deliveryOptions, paymentOptions } from "@/lib/order-options";
+import {
+  addOrderNote,
+  createManualOrder,
+  updateOrderChecklistItem,
+  updateOrderStatus,
+  updateTrackingNumber,
+} from "@/lib/admin/orders";
 import {
   createProduct,
   deleteProduct,
@@ -41,6 +57,11 @@ import {
 import { saveSettings, type AdminSettings } from "@/lib/admin/settings";
 import { deleteMedia } from "@/lib/admin/media";
 import { notifyPaymentSuccess, testTelegramConnection } from "@/lib/notify";
+import {
+  completeReminder,
+  createCustomerCrmNote,
+  createReminder,
+} from "@/lib/admin/operations";
 
 export type ActionState = { ok?: boolean; error?: string | null };
 
@@ -154,6 +175,227 @@ export async function addOrderNoteAction(
   const ok = await addOrderNote(parsed.data.id, parsed.data.text, author);
   if (!ok) return { error: "Заказ не найден" };
   revalidatePath(`/admin/orders/${parsed.data.id}`);
+  return { ok: true };
+}
+
+const checklistKeys: OrderChecklistKey[] = [
+  "contacted",
+  "availabilityConfirmed",
+  "addressConfirmed",
+  "paymentAgreed",
+  "handedToDelivery",
+];
+
+export async function setOrderChecklistItemAction(
+  _prev: ActionState,
+  formData: FormData,
+): Promise<ActionState> {
+  const session = await assertAdmin();
+  const id = String(formData.get("id") ?? "");
+  const key = String(formData.get("key") ?? "") as OrderChecklistKey;
+  const checked = formData.get("checked") === "true";
+  if (!checklistKeys.includes(key)) return { error: "Неизвестный пункт чеклиста" };
+
+  const author = session.user?.name || session.user?.email || "admin";
+  const ok = await updateOrderChecklistItem(id, key, checked, author);
+  if (!ok) return { error: "Заказ не найден" };
+  revalidatePath(`/admin/orders/${id}`);
+  revalidatePath("/admin/orders");
+  return { ok: true };
+}
+
+const manualOrderItemSchema = z.object({
+  slug: z.string().trim().min(1),
+  title: z.string().trim().min(1),
+  brand: z.string().trim().default("SÓRA"),
+  color: z.string().trim().default("—"),
+  qty: z.coerce.number().int().positive(),
+  price: z.coerce.number().int().nonnegative(),
+});
+
+const manualOrderSchema = z.object({
+  name: z.string().trim().min(2, "Укажите клиента"),
+  phone: z.string().trim().min(6, "Укажите телефон"),
+  email: z.string().trim().email("Некорректный e-mail").optional().or(z.literal("")),
+  city: z.string().trim().optional(),
+  address: z.string().trim().optional(),
+  comment: z.string().trim().optional(),
+  deliveryMethod: z.enum(
+    deliveryOptions.map((option) => option.value) as [DeliveryMethod, ...DeliveryMethod[]],
+  ),
+  paymentMethod: z.enum(
+    paymentOptions.map((option) => option.value) as [
+      CustomerPaymentMethod,
+      ...CustomerPaymentMethod[],
+    ],
+  ),
+  items: z.array(manualOrderItemSchema).min(1, "Добавьте хотя бы один товар"),
+});
+
+function slugifyManualItem(title: string, index: number) {
+  const slug = title
+    .toLowerCase()
+    .replace(/[^a-z0-9а-яё]+/gi, "-")
+    .replace(/^-|-$/g, "");
+  return `manual-${slug || `item-${index + 1}`}`;
+}
+
+function parseManualOrderItems(raw: FormDataEntryValue | null) {
+  if (typeof raw !== "string" || !raw.trim()) return [];
+  return raw
+    .split("\n")
+    .map((line) => line.trim())
+    .filter(Boolean)
+    .map((line, index) => {
+      const [title = "", color = "—", qty = "1", price = "0"] = line
+        .split("|")
+        .map((part) => part.trim());
+      return {
+        slug: slugifyManualItem(title, index),
+        title,
+        brand: "SÓRA",
+        color,
+        qty,
+        price,
+      };
+    });
+}
+
+export async function createManualOrderAction(
+  _prev: ActionState,
+  formData: FormData,
+): Promise<ActionState> {
+  await assertAdmin();
+  const parsed = manualOrderSchema.safeParse({
+    name: formData.get("name"),
+    phone: formData.get("phone"),
+    email: formData.get("email") || undefined,
+    city: formData.get("city") || undefined,
+    address: formData.get("address") || undefined,
+    comment: formData.get("comment") || undefined,
+    deliveryMethod: formData.get("deliveryMethod"),
+    paymentMethod: formData.get("paymentMethod"),
+    items: parseManualOrderItems(formData.get("items")),
+  });
+
+  if (!parsed.success) {
+    return { error: parsed.error.issues[0]?.message ?? "Проверьте поля заказа" };
+  }
+
+  const items = parsed.data.items.map((item) => ({
+    slug: item.slug,
+    title: item.title,
+    brand: item.brand,
+    color: item.color,
+    qty: item.qty,
+    price: item.price,
+  }));
+  const total = items.reduce((sum, item) => sum + item.qty * item.price, 0);
+  const orderId = await createManualOrder({
+    customer: {
+      name: parsed.data.name,
+      phone: parsed.data.phone,
+      email: parsed.data.email || undefined,
+      city: parsed.data.city,
+      address: parsed.data.address,
+      comment: parsed.data.comment,
+    },
+    deliveryMethod: parsed.data.deliveryMethod,
+    paymentMethod: parsed.data.paymentMethod,
+    items,
+    total,
+  });
+
+  revalidatePath("/admin/orders");
+  revalidatePath("/admin");
+  redirect(`/admin/orders/${orderId}`);
+}
+
+const reminderSchema = z.object({
+  title: z.string().trim().min(2, "Укажите напоминание"),
+  targetType: z.enum(["order", "customer", "general"]),
+  targetId: z.string().optional(),
+  targetLabel: z.string().optional(),
+  dueAt: z.string().optional(),
+  returnTo: z.string().optional(),
+});
+
+export async function createReminderAction(
+  _prev: ActionState,
+  formData: FormData,
+): Promise<ActionState> {
+  const session = await assertAdmin();
+  const parsed = reminderSchema.safeParse({
+    title: formData.get("title"),
+    targetType: formData.get("targetType") || "general",
+    targetId: formData.get("targetId") || undefined,
+    targetLabel: formData.get("targetLabel") || undefined,
+    dueAt: formData.get("dueAt") || undefined,
+    returnTo: formData.get("returnTo") || undefined,
+  });
+  if (!parsed.success) {
+    return { error: parsed.error.issues[0]?.message ?? "Проверьте напоминание" };
+  }
+  await createReminder({
+    title: parsed.data.title,
+    targetType: parsed.data.targetType as ReminderTargetType,
+    targetId: parsed.data.targetId,
+    targetLabel: parsed.data.targetLabel,
+    dueAt: parsed.data.dueAt ? new Date(parsed.data.dueAt) : undefined,
+    author: session.user?.name || session.user?.email || "admin",
+  });
+  revalidatePath("/admin");
+  if (parsed.data.returnTo) revalidatePath(parsed.data.returnTo);
+  return { ok: true };
+}
+
+export async function completeReminderAction(
+  _prev: ActionState,
+  formData: FormData,
+): Promise<ActionState> {
+  await assertAdmin();
+  const id = String(formData.get("id") ?? "");
+  const returnTo = String(formData.get("returnTo") ?? "/admin");
+  const ok = await completeReminder(id);
+  if (!ok) return { error: "Напоминание не найдено" };
+  revalidatePath("/admin");
+  revalidatePath(returnTo);
+  return { ok: true };
+}
+
+const crmNoteSchema = z.object({
+  customerId: z.string().min(1),
+  text: z.string().trim().min(2, "Укажите заметку"),
+  tags: z.string().trim().optional(),
+  isVip: z.string().optional(),
+});
+
+export async function addCustomerCrmNoteAction(
+  _prev: ActionState,
+  formData: FormData,
+): Promise<ActionState> {
+  const session = await assertAdmin();
+  const parsed = crmNoteSchema.safeParse({
+    customerId: formData.get("customerId"),
+    text: formData.get("text"),
+    tags: formData.get("tags") || undefined,
+    isVip: formData.get("isVip") || undefined,
+  });
+  if (!parsed.success) {
+    return { error: parsed.error.issues[0]?.message ?? "Проверьте CRM-заметку" };
+  }
+  const ok = await createCustomerCrmNote({
+    customerId: parsed.data.customerId,
+    text: parsed.data.text,
+    tags: (parsed.data.tags ?? "")
+      .split(",")
+      .map((tag) => tag.trim())
+      .filter(Boolean),
+    isVip: parsed.data.isVip === "on",
+    author: session.user?.name || session.user?.email || "admin",
+  });
+  if (!ok) return { error: "Клиент не найден" };
+  revalidatePath(`/admin/customers/${parsed.data.customerId}`);
   return { ok: true };
 }
 

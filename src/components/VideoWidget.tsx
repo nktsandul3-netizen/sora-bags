@@ -1,9 +1,9 @@
 "use client";
 
-import { useCallback, useEffect, useLayoutEffect, useMemo, useRef, useState } from "react";
-import Link from "next/link";
+import { useCallback, useEffect, useMemo, useRef, useState, useSyncExternalStore } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { brand, videoWidget, type VideoWidgetTikTokItem } from "@/lib/config";
+import { useMenuOpen } from "@/context/menu-open";
 import { parseTikTokVideoId } from "@/lib/tiktok";
 
 const EXPAND_EASE = [0.42, 0, 0.58, 1] as const;
@@ -11,19 +11,40 @@ const EXPAND_MS = 0.4;
 
 type ResolvedTikTokItem = VideoWidgetTikTokItem & {
   videoId: string;
-  tiktokUrl: string;
+  ctaHref: string;
+  ctaIsExternal: boolean;
 };
 
 function resolveTikTokItems(items: readonly VideoWidgetTikTokItem[]): ResolvedTikTokItem[] {
-  return items.flatMap((item) => {
+  return items.flatMap((item, index) => {
     const videoId = parseTikTokVideoId(item.url);
-    if (!videoId) return [];
-    const tiktokUrl =
-      item.shareUrl?.trim() ||
-      (item.url.trim().startsWith("http")
-        ? item.url.trim()
-        : `https://www.tiktok.com/video/${videoId}`);
-    return [{ ...item, videoId, tiktokUrl }];
+    if (videoId) {
+      const tiktokUrl =
+        item.shareUrl?.trim() ||
+        (item.url.trim().startsWith("http")
+          ? item.url.trim()
+          : `https://www.tiktok.com/video/${videoId}`);
+      return [
+        {
+          ...item,
+          videoId,
+          ctaHref: tiktokUrl,
+          ctaIsExternal: true,
+        },
+      ];
+    }
+    if (item.mp4Src) {
+      const ctaHref = item.shareUrl?.trim() || brand.social.tiktok;
+      return [
+        {
+          ...item,
+          videoId: item.mp4Src.replace(/\W/g, "") || `local-${index}`,
+          ctaHref,
+          ctaIsExternal: true,
+        },
+      ];
+    }
+    return [];
   });
 }
 
@@ -53,23 +74,40 @@ function SoundOffIcon({ className }: { className?: string }) {
   );
 }
 
+const DESKTOP_QUERY = "(min-width: 768px)";
+
+function subscribeToDesktopQuery(onStoreChange: () => void) {
+  const mq = window.matchMedia(DESKTOP_QUERY);
+  mq.addEventListener("change", onStoreChange);
+  return () => mq.removeEventListener("change", onStoreChange);
+}
+
+function getDesktopSnapshot() {
+  return window.matchMedia(DESKTOP_QUERY).matches;
+}
+
+function getServerDesktopSnapshot() {
+  return false;
+}
+
 function useIsDesktop() {
-  const [isDesktop, setIsDesktop] = useState(false);
-  useLayoutEffect(() => {
-    const mq = window.matchMedia("(min-width: 768px)");
-    setIsDesktop(mq.matches);
-    const onChange = () => setIsDesktop(mq.matches);
-    mq.addEventListener("change", onChange);
-    return () => mq.removeEventListener("change", onChange);
-  }, []);
-  return isDesktop;
+  return useSyncExternalStore(
+    subscribeToDesktopQuery,
+    getDesktopSnapshot,
+    getServerDesktopSnapshot,
+  );
 }
 
 export default function VideoWidget() {
+  const { menuOpen } = useMenuOpen();
+  const [mounted, setMounted] = useState(false);
   const [dismissed, setDismissed] = useState(false);
   const [expanded, setExpanded] = useState(false);
   const [muted, setMuted] = useState(true);
   const [activeIndex, setActiveIndex] = useState(0);
+  const [showMobileWidget, setShowMobileWidget] = useState(
+    () => typeof window !== "undefined" && window.scrollY > 260,
+  );
   const videoRef = useRef<HTMLVideoElement | null>(null);
   const containerRef = useRef<HTMLDivElement | null>(null);
   const isDesktop = useIsDesktop();
@@ -88,23 +126,44 @@ export default function VideoWidget() {
   const posterSrc =
     useTikTok && activeTikTok?.posterSrc ? activeTikTok.posterSrc : videoWidget.posterSrc;
   const ctaHref =
-    useTikTok && activeTikTok ? activeTikTok.tiktokUrl : videoWidget.collectionHref;
-  const ctaIsExternal = useTikTok && !!activeTikTok;
+    useTikTok && activeTikTok ? activeTikTok.ctaHref : brand.social.tiktok;
 
-  const collapsedW = isDesktop ? 130 : 92;
-  const collapsedH = isDesktop ? 231 : 164;
+  const collapsedW = isDesktop ? 130 : 76;
+  const collapsedH = isDesktop ? 231 : 135;
   const vh = typeof window !== "undefined" ? window.innerHeight : 900;
   const vw = typeof window !== "undefined" ? window.innerWidth : 1280;
   // Разворачиваем в вертикальный формат 9:16, как на Lancaster.
-  const expandedH = isDesktop ? Math.min(480, vh * 0.72) : Math.min(420, vh * 0.65);
+  const expandedH = isDesktop ? Math.min(480, vh * 0.72) : Math.min(360, vh * 0.58);
   const expandedW = isDesktop
     ? Math.round(expandedH * (9 / 16))
     : Math.min(Math.round(expandedH * (9 / 16)), vw - 24);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   const goNext = useCallback(() => {
     if (!isTikTokMode || expanded) return;
     setActiveIndex((i) => (i + 1) % tiktokItems.length);
   }, [expanded, isTikTokMode, tiktokItems.length]);
+
+  const selectStory = useCallback(
+    (index: number) => {
+      if (!isTikTokMode || tiktokItems.length === 0) return;
+      setActiveIndex(((index % tiktokItems.length) + tiktokItems.length) % tiktokItems.length);
+    },
+    [isTikTokMode, tiktokItems.length],
+  );
+
+  const goPrevStory = useCallback(() => {
+    if (!isTikTokMode) return;
+    setActiveIndex((i) => (i - 1 + tiktokItems.length) % tiktokItems.length);
+  }, [isTikTokMode, tiktokItems.length]);
+
+  const goNextStory = useCallback(() => {
+    if (!isTikTokMode) return;
+    setActiveIndex((i) => (i + 1) % tiktokItems.length);
+  }, [isTikTokMode, tiktokItems.length]);
 
   useEffect(() => {
     if (!isTikTokMode || dismissed || expanded) return;
@@ -116,6 +175,8 @@ export default function VideoWidget() {
     if (!expanded) return;
     const onKey = (e: KeyboardEvent) => {
       if (e.key === "Escape") setExpanded(false);
+      if (e.key === "ArrowLeft") goPrevStory();
+      if (e.key === "ArrowRight") goNextStory();
     };
     const onPointerDown = (e: PointerEvent) => {
       if (containerRef.current && !containerRef.current.contains(e.target as Node)) {
@@ -128,7 +189,14 @@ export default function VideoWidget() {
       window.removeEventListener("keydown", onKey);
       document.removeEventListener("pointerdown", onPointerDown);
     };
-  }, [expanded]);
+  }, [expanded, goNextStory, goPrevStory]);
+
+  useEffect(() => {
+    if (isDesktop) return;
+    const updateVisibility = () => setShowMobileWidget(window.scrollY > 260);
+    window.addEventListener("scroll", updateVisibility, { passive: true });
+    return () => window.removeEventListener("scroll", updateVisibility);
+  }, [isDesktop]);
 
   useEffect(() => {
     const v = videoRef.current;
@@ -162,7 +230,7 @@ export default function VideoWidget() {
     setExpanded(false);
   }
 
-  if (!videoWidget.enabled || dismissed) return null;
+  if (!mounted || !videoWidget.enabled || dismissed || menuOpen || (!isDesktop && !showMobileWidget)) return null;
 
   return (
     <>
@@ -172,8 +240,8 @@ export default function VideoWidget() {
         layoutRoot
         className="fixed z-[70]"
         style={{
-          bottom: isDesktop ? 40 : 20,
-          right: isDesktop ? 20 : 12,
+          bottom: isDesktop ? 40 : 88,
+          right: isDesktop ? 20 : 10,
           transformOrigin: "bottom right",
         }}
         initial={{ opacity: 0, y: 24 }}
@@ -245,17 +313,23 @@ export default function VideoWidget() {
                     transition={{ duration: 0.2 }}
                     className="pointer-events-none absolute inset-x-0 bottom-0 z-20"
                   >
-                    <p className="absolute bottom-4 left-3 right-3 text-center text-[8px] font-medium uppercase leading-snug tracking-[0.1em] text-white drop-shadow-[0_1px_3px_rgba(0,0,0,0.8)] md:bottom-6 md:text-[10px] md:tracking-[0.12em]">
-                      {cardTitle}
-                    </p>
                     {useTikTok && tiktokItems.length > 1 ? (
-                      <div className="absolute inset-x-0 bottom-2 flex justify-center gap-1 md:bottom-4">
+                      <div className="pointer-events-auto absolute inset-x-0 bottom-2 flex justify-center gap-1.5 md:bottom-4">
                         {tiktokItems.map((item, i) => (
-                          <span
+                          <button
                             key={item.videoId}
+                            type="button"
+                            aria-label={`Сторис ${i + 1}`}
+                            aria-current={i === activeIndex ? "true" : undefined}
+                            onClick={(e) => {
+                              e.stopPropagation();
+                              selectStory(i);
+                            }}
                             className={
-                              "h-1 rounded-full transition-all " +
-                              (i === activeIndex ? "w-2.5 bg-white" : "w-1 bg-white/40")
+                              "rounded-full transition-all " +
+                              (i === activeIndex
+                                ? "h-1.5 w-2.5 bg-white"
+                                : "h-1.5 w-1.5 bg-white/40 hover:bg-white/70")
                             }
                           />
                         ))}
@@ -271,41 +345,57 @@ export default function VideoWidget() {
                     transition={{ duration: 0.25, delay: 0.1 }}
                     className="absolute inset-0 z-20"
                   >
-                    <div className="absolute inset-x-0 top-0 z-30 flex gap-1 px-3 pt-3">
+                    {useTikTok && tiktokItems.length > 1 ? (
+                      <div className="absolute inset-x-0 top-20 bottom-24 z-[15] flex">
+                        <button
+                          type="button"
+                          aria-label="Предыдущее видео"
+                          onClick={goPrevStory}
+                          className="w-2/5"
+                        />
+                        <div className="w-1/5" />
+                        <button
+                          type="button"
+                          aria-label="Следующее видео"
+                          onClick={goNextStory}
+                          className="w-2/5"
+                        />
+                      </div>
+                    ) : null}
+
+                    <div className="absolute inset-x-0 top-0 z-30 flex items-start gap-1 px-3 pt-3">
                       {(useTikTok && tiktokItems.length > 1 ? tiktokItems : [null]).map(
-                        (_, i) => (
-                          <div
-                            key={i}
-                            className="h-[2px] flex-1 overflow-hidden rounded-full bg-white/30"
+                        (item, i) => (
+                          <button
+                            key={item?.videoId ?? i}
+                            type="button"
+                            aria-label={`Сторис ${i + 1}`}
+                            aria-current={i === activeIndex ? "true" : undefined}
+                            onClick={() => selectStory(i)}
+                            className="group -my-3 flex flex-1 items-start py-3"
                           >
-                            <div
-                              className={
-                                "h-full rounded-full bg-white transition-all duration-300 " +
-                                (useTikTok && tiktokItems.length > 1
-                                  ? i === activeIndex
-                                    ? "w-full"
-                                    : "w-0"
-                                  : "w-full")
-                              }
-                            />
-                          </div>
+                            <span className="block h-[3px] w-full overflow-hidden rounded-full bg-white/30 transition group-hover:bg-white/50">
+                              <span
+                                className={
+                                  "block h-full rounded-full bg-white transition-all duration-300 " +
+                                  (useTikTok && tiktokItems.length > 1
+                                    ? i === activeIndex
+                                      ? "w-full"
+                                      : "w-0"
+                                    : "w-full")
+                                }
+                              />
+                            </span>
+                          </button>
                         ),
                       )}
                     </div>
 
                     <div className="absolute inset-x-0 top-0 flex items-start justify-between px-4 pb-4 pt-7 md:px-5 md:pt-8">
-                      <div className="flex min-w-0 items-center gap-2.5 pr-4">
-                        <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-white/10 ring-1 ring-white/20 backdrop-blur-sm">
-                          <span className="font-serif text-[11px] tracking-[0.14em] text-white">
-                            {brand.name}
-                          </span>
-                        </div>
-                        <div className="min-w-0">
-                          <p className="truncate text-[11px] font-semibold uppercase leading-tight tracking-[0.1em] text-white md:text-xs">
-                            {cardTitle}
-                          </p>
-                          <p className="mt-0.5 text-[10px] text-white/55">{brand.name}</p>
-                        </div>
+                      <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-white/10 ring-1 ring-white/20 backdrop-blur-sm">
+                        <span className="font-serif text-[11px] tracking-[0.14em] text-red-600">
+                          {brand.name}
+                        </span>
                       </div>
 
                       <div className="flex shrink-0 flex-col gap-2">
@@ -332,26 +422,16 @@ export default function VideoWidget() {
                       </div>
                     </div>
 
-                    <div className="absolute inset-x-0 bottom-0 px-4 pb-5 pt-16 md:px-5 md:pb-6">
-                      {ctaIsExternal ? (
-                        <a
-                          href={ctaHref}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          onClick={collapseWidget}
-                          className="flex w-full items-center justify-center rounded-sm bg-black py-3.5 text-[11px] font-medium uppercase tracking-[0.14em] text-white transition hover:bg-stone-900 md:text-xs"
-                        >
-                          {videoWidget.collectionLabel}
-                        </a>
-                      ) : (
-                        <Link
-                          href={ctaHref}
-                          onClick={collapseWidget}
-                          className="flex w-full items-center justify-center rounded-sm bg-black py-3.5 text-[11px] font-medium uppercase tracking-[0.14em] text-white transition hover:bg-stone-900 md:text-xs"
-                        >
-                          {videoWidget.collectionLabel}
-                        </Link>
-                      )}
+                    <div className="absolute inset-x-0 bottom-0 z-30 px-4 pb-5 pt-16 md:px-5 md:pb-6">
+                      <a
+                        href={ctaHref}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        onClick={collapseWidget}
+                        className="flex w-full items-center justify-center rounded-sm bg-black py-3.5 text-[11px] font-medium uppercase tracking-[0.14em] text-white transition hover:bg-stone-900 md:text-xs"
+                      >
+                        {videoWidget.collectionLabel}
+                      </a>
                     </div>
                   </motion.div>
                 )}

@@ -56,6 +56,8 @@ export type OrderStatus =
   | "cancelled";
 
 export type OrderPaymentStatus = "pending" | "paid" | "failed" | "refunded";
+export type DeliveryMethod = "courier_chisinau" | "moldova_delivery" | "pickup";
+export type CustomerPaymentMethod = "cash_on_delivery" | "bank_transfer";
 
 export interface OrderNote {
   text: string;
@@ -85,6 +87,15 @@ export interface OrderTimelineEvent {
   createdAt: Date;
 }
 
+export type OrderChecklistKey =
+  | "contacted"
+  | "availabilityConfirmed"
+  | "addressConfirmed"
+  | "paymentAgreed"
+  | "handedToDelivery";
+
+export type OrderProcessingChecklist = Partial<Record<OrderChecklistKey, boolean>>;
+
 export interface OrderDoc {
   _id?: ObjectId;
   userId: ObjectId | null;
@@ -110,6 +121,11 @@ export interface OrderDoc {
   address?: string;
   city?: string;
   shippingAddress?: ShippingAddress;
+  deliveryMethod?: DeliveryMethod;
+  customerPaymentMethod?: CustomerPaymentMethod;
+  privacyConsent?: boolean;
+  privacyConsentAt?: Date;
+  privacyPolicyUrl?: string;
   tracking_number?: string;
   trackingNumber?: string;
   items: OrderItem[];
@@ -118,6 +134,7 @@ export interface OrderDoc {
   total_amount?: number;
   notes?: OrderNote[];
   timeline?: OrderTimelineEvent[];
+  processingChecklist?: OrderProcessingChecklist;
   createdAt: Date;
   created_at?: Date;
   updatedAt?: Date;
@@ -275,6 +292,65 @@ export interface WishlistDoc {
   updatedAt: Date;
 }
 
+export type AnalyticsEventType =
+  | "visit"
+  | "product_view"
+  | "wishlist_add"
+  | "cart_add"
+  | "checkout_start"
+  | "order_created"
+  | "payment_paid";
+
+export interface AnalyticsEventDoc {
+  _id?: ObjectId;
+  type: AnalyticsEventType;
+  productSlug?: string;
+  productTitle?: string;
+  userId?: ObjectId | null;
+  sessionId: string;
+  orderId?: ObjectId;
+  orderNumber?: string;
+  amount?: number;
+  quantity?: number;
+  city?: string;
+  country?: string;
+  source?: string;
+  utmSource?: string;
+  utmMedium?: string;
+  utmCampaign?: string;
+  ipHash?: string;
+  userAgent?: string;
+  referrer?: string;
+  path?: string;
+  createdAt: Date;
+}
+
+export interface CustomerCrmNoteDoc {
+  _id?: ObjectId;
+  customerId: ObjectId;
+  text: string;
+  tags: string[];
+  isVip: boolean;
+  author: string;
+  createdAt: Date;
+}
+
+export type ReminderStatus = "open" | "done";
+export type ReminderTargetType = "order" | "customer" | "general";
+
+export interface AdminReminderDoc {
+  _id?: ObjectId;
+  title: string;
+  status: ReminderStatus;
+  targetType: ReminderTargetType;
+  targetId?: ObjectId;
+  targetLabel?: string;
+  dueAt?: Date;
+  author: string;
+  createdAt: Date;
+  completedAt?: Date;
+}
+
 // ──────────────────────────────────────────────────────────────
 // Подключение (кэшируется между запросами, как рекомендовано для serverless)
 // ──────────────────────────────────────────────────────────────
@@ -342,6 +418,15 @@ async function ensureIndexes(db: Db): Promise<void> {
     db.collection<MediaDoc>("media").createIndex({ folder: 1, createdAt: -1 }),
     db.collection<MediaDoc>("media").createIndex({ filename: "text" }),
     db.collection<SettingsDoc>("settings").createIndex({ key: 1 }, { unique: true }),
+    db.collection<AnalyticsEventDoc>("analytics_events").createIndex({ type: 1, createdAt: -1 }),
+    db.collection<AnalyticsEventDoc>("analytics_events").createIndex({ productSlug: 1, type: 1, createdAt: -1 }),
+    db.collection<AnalyticsEventDoc>("analytics_events").createIndex({ sessionId: 1, createdAt: -1 }),
+    db.collection<AnalyticsEventDoc>("analytics_events").createIndex({ userId: 1, createdAt: -1 }),
+    db.collection<AnalyticsEventDoc>("analytics_events").createIndex({ source: 1, createdAt: -1 }),
+    db.collection<AnalyticsEventDoc>("analytics_events").createIndex({ createdAt: -1 }),
+    db.collection<CustomerCrmNoteDoc>("customer_crm_notes").createIndex({ customerId: 1, createdAt: -1 }),
+    db.collection<AdminReminderDoc>("admin_reminders").createIndex({ status: 1, dueAt: 1 }),
+    db.collection<AdminReminderDoc>("admin_reminders").createIndex({ targetType: 1, targetId: 1 }),
   ]);
 }
 
@@ -391,6 +476,18 @@ export async function mediaCollection(): Promise<Collection<MediaDoc>> {
 
 export async function settingsCollection(): Promise<Collection<SettingsDoc>> {
   return (await getDb()).collection<SettingsDoc>("settings");
+}
+
+export async function analyticsEventsCollection(): Promise<Collection<AnalyticsEventDoc>> {
+  return (await getDb()).collection<AnalyticsEventDoc>("analytics_events");
+}
+
+export async function customerCrmNotesCollection(): Promise<Collection<CustomerCrmNoteDoc>> {
+  return (await getDb()).collection<CustomerCrmNoteDoc>("customer_crm_notes");
+}
+
+export async function adminRemindersCollection(): Promise<Collection<AdminReminderDoc>> {
+  return (await getDb()).collection<AdminReminderDoc>("admin_reminders");
 }
 
 let passwordResetIndexesReady = false;

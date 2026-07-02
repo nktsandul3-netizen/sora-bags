@@ -1,3 +1,5 @@
+import { stripLocaleFromPathname } from "@/lib/i18n";
+
 export type CatalogBannerSection = "new" | "bags" | "accessories";
 
 export const categoryBanners: Record<
@@ -21,7 +23,7 @@ export const categoryBanners: Record<
   },
 };
 
-export function isCatalogBannerPath(_pathname: string | null): boolean {
+export function isCatalogBannerPath(): boolean {
   return false;
 }
 
@@ -34,7 +36,18 @@ const INFO_HERO_OVERLAY_PAGES = new Set([
 
 export function isHeroOverlayPath(pathname: string | null): boolean {
   if (!pathname) return false;
-  if (pathname === "/") return true;
-  if (pathname.startsWith("/info/")) return INFO_HERO_OVERLAY_PAGES.has(pathname);
+  const path = stripLocaleFromPathname(pathname);
+  if (path === "/") return true;
+  if (path === "/bags") return true;
+  if (path === "/bags/clutches") return true;
+  if (path === "/bags/vanity") return true;
+  if (path === "/bags/bucket-bags-women") return true;
+  if (path === "/bags/bowling-bags") return true;
+  if (path === "/bags/handbags-women") return true;
+  if (path === "/bags/rectangular-bags") return true;
+  if (path === "/bags/tote-bags-women") return true;
+  if (path === "/bags/shoulder-bags-women") return true;
+  if (path === "/bags/crossbody-bags-women") return true;
+  if (path.startsWith("/info/")) return INFO_HERO_OVERLAY_PAGES.has(path);
   return false;
 }

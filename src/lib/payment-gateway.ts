@@ -1,5 +1,6 @@
 import { ordersCollection, paymentsCollection, ObjectId } from "@/lib/mongodb";
 import type { PaymentMethod } from "@/lib/mongodb";
+import { trackAnalyticsEvent } from "@/lib/analytics";
 
 export type PaymentProvider = "paynet" | "maib" | "stripe";
 
@@ -56,6 +57,16 @@ export async function markOrderPaid(input: PaymentSuccessInput): Promise<boolean
       },
     },
   );
+
+  await trackAnalyticsEvent({
+    type: "payment_paid",
+    sessionId: "payment-gateway",
+    orderId: input.orderId,
+    orderNumber: order.number ?? order.order_number,
+    amount: order.total ?? order.total_amount ?? 0,
+    userId: order.userId?.toString(),
+    city: order.customer?.city ?? order.city,
+  });
 
   return true;
 }

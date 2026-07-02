@@ -9,6 +9,8 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import AnnouncementBar from "@/components/AnnouncementBar";
 import StorefrontChrome from "@/components/StorefrontChrome";
+import AnalyticsTracker from "@/components/AnalyticsTracker";
+import { getServerLocale } from "@/lib/server-i18n";
 
 const inter = Inter({
   variable: "--font-inter",
@@ -31,17 +33,19 @@ export const metadata: Metadata = {
   description: brand.description,
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const locale = await getServerLocale();
   return (
-    <html lang="ru" className={`${inter.variable} ${playfair.variable} h-full antialiased`}>
-      <body className="flex min-h-full flex-col bg-white text-stone-900">
+    <html lang={locale} className={`${inter.variable} ${playfair.variable} h-full antialiased`}>
+      <body className="flex min-h-full flex-col bg-background text-stone-900">
         <SessionProviderWrapper>
           <CartProvider>
             <WishlistProvider>
+              <AnalyticsTracker />
               <StorefrontChrome
                 announcementBar={<AnnouncementBar />}
                 header={<Header />}

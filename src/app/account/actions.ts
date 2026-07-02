@@ -8,39 +8,50 @@ import {
   usersCollection,
   ObjectId,
 } from "@/lib/mongodb";
+import { getServerLocale } from "@/lib/server-i18n";
+import { translate, type TranslationKey } from "@/lib/messages";
+
+type Translator = (key: TranslationKey) => string;
+
+async function getT(): Promise<Translator> {
+  const locale = await getServerLocale();
+  return (key: TranslationKey) => translate(locale, key);
+}
 
 async function requireUserId(): Promise<string> {
   const session = await auth();
   const id = session?.user?.id;
-  if (!id) throw new Error("Не авторизован");
+  if (!id) throw new Error("unauthorized");
   return id;
 }
 
 export type ActionResult = { ok: true } | { ok: false; error: string };
 
-const addressSchema = z.object({
-  label: z.string().trim().min(1, "Укажите название адреса"),
-  recipient: z.string().trim().min(2, "Укажите получателя"),
-  phone: z.string().trim().min(6, "Укажите телефон"),
-  city: z.string().trim().min(2, "Укажите город"),
-  street: z.string().trim().min(2, "Укажите улицу и дом"),
-  comment: z.string().trim().optional(),
-  isDefault: z.boolean().optional(),
-});
+const addressSchema = (t: Translator) =>
+  z.object({
+    label: z.string().trim().min(1, t("api.errAddressLabel")),
+    recipient: z.string().trim().min(2, t("api.errAddressRecipient")),
+    phone: z.string().trim().min(6, t("api.errAddressPhone")),
+    city: z.string().trim().min(2, t("api.errAddressCity")),
+    street: z.string().trim().min(2, t("api.errAddressStreet")),
+    comment: z.string().trim().optional(),
+    isDefault: z.boolean().optional(),
+  });
 
-export type AddressInput = z.input<typeof addressSchema>;
+export type AddressInput = z.input<ReturnType<typeof addressSchema>>;
 
 export async function addAddress(input: AddressInput): Promise<ActionResult> {
+  const t = await getT();
   let userId: string;
   try {
     userId = await requireUserId();
   } catch {
-    return { ok: false, error: "Сессия истекла. Войдите снова." };
+    return { ok: false, error: t("api.errSessionExpired") };
   }
 
-  const parsed = addressSchema.safeParse(input);
+  const parsed = addressSchema(t).safeParse(input);
   if (!parsed.success) {
-    return { ok: false, error: parsed.error.issues[0]?.message ?? "Проверьте поля" };
+    return { ok: false, error: parsed.error.issues[0]?.message ?? t("api.errCheckFields") };
   }
 
   try {
@@ -69,23 +80,24 @@ export async function addAddress(input: AddressInput): Promise<ActionResult> {
     return { ok: true };
   } catch (err) {
     console.error("[addAddress] error:", err);
-    return { ok: false, error: "Не удалось сохранить адрес." };
+    return { ok: false, error: t("api.errSaveAddress") };
   }
 }
 
 export async function deleteAddress(id: string): Promise<ActionResult> {
+  const t = await getT();
   let userId: string;
   try {
     userId = await requireUserId();
   } catch {
-    return { ok: false, error: "Сессия истекла. Войдите снова." };
+    return { ok: false, error: t("api.errSessionExpired") };
   }
 
   try {
     const addresses = await addressesCollection();
     const uid = new ObjectId(userId);
     const target = await addresses.findOne({ _id: new ObjectId(id), userId: uid });
-    if (!target) return { ok: false, error: "Адрес не найден." };
+    if (!target) return { ok: false, error: t("api.errAddressNotFound") };
 
     await addresses.deleteOne({ _id: new ObjectId(id), userId: uid });
 
@@ -105,16 +117,17 @@ export async function deleteAddress(id: string): Promise<ActionResult> {
     return { ok: true };
   } catch (err) {
     console.error("[deleteAddress] error:", err);
-    return { ok: false, error: "Не удалось удалить адрес." };
+    return { ok: false, error: t("api.errDeleteAddress") };
   }
 }
 
 export async function setDefaultAddress(id: string): Promise<ActionResult> {
+  const t = await getT();
   let userId: string;
   try {
     userId = await requireUserId();
   } catch {
-    return { ok: false, error: "Сессия истекла. Войдите снова." };
+    return { ok: false, error: t("api.errSessionExpired") };
   }
 
   try {
@@ -129,27 +142,29 @@ export async function setDefaultAddress(id: string): Promise<ActionResult> {
     return { ok: true };
   } catch (err) {
     console.error("[setDefaultAddress] error:", err);
-    return { ok: false, error: "Не удалось обновить адрес." };
+    return { ok: false, error: t("api.errUpdateAddress") };
   }
 }
 
-const profileSchema = z.object({
-  name: z.string().trim().min(2, "Имя не короче 2 символов"),
-});
+const profileSchema = (t: Translator) =>
+  z.object({
+    name: z.string().trim().min(2, t("api.errNameShort")),
+  });
 
-export type ProfileInput = z.input<typeof profileSchema>;
+export type ProfileInput = z.input<ReturnType<typeof profileSchema>>;
 
 export async function updateProfile(input: ProfileInput): Promise<ActionResult> {
+  const t = await getT();
   let userId: string;
   try {
     userId = await requireUserId();
   } catch {
-    return { ok: false, error: "Сессия истекла. Войдите снова." };
+    return { ok: false, error: t("api.errSessionExpired") };
   }
 
-  const parsed = profileSchema.safeParse(input);
+  const parsed = profileSchema(t).safeParse(input);
   if (!parsed.success) {
-    return { ok: false, error: parsed.error.issues[0]?.message ?? "Проверьте поля" };
+    return { ok: false, error: parsed.error.issues[0]?.message ?? t("api.errCheckFields") };
   }
 
   try {
@@ -162,6 +177,6 @@ export async function updateProfile(input: ProfileInput): Promise<ActionResult> 
     return { ok: true };
   } catch (err) {
     console.error("[updateProfile] error:", err);
-    return { ok: false, error: "Не удалось обновить профиль." };
+    return { ok: false, error: t("api.errUpdateProfile") };
   }
 }

@@ -1,17 +1,128 @@
 "use client";
 
 import { useEffect, useMemo, useState } from "react";
-import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import type { Product, ProductImageAsset } from "@/lib/types";
 import { useCart } from "@/context/cart";
+import { brand } from "@/lib/config";
 import { formatPrice } from "@/lib/format";
-import { getDeliveryInfo } from "@/lib/delivery";
+import { useLocale, useT } from "@/lib/useI18n";
+import {
+  localizeColorName,
+  localizeProductDescription,
+  localizeProductHighlights,
+  localizeProductSpec,
+  localizeProductTitle,
+  localizeStaticText,
+  getVisibleProductSpecs,
+} from "@/lib/product-i18n";
 import ProductImage from "./ProductImage";
+import { getColorImages } from "./ProductColorSwatches";
 import WishlistButton from "./WishlistButton";
+import PreorderStatusBadge from "./PreorderStatusBadge";
+import BrandStories from "./BrandStories";
+
+const reserveButton: Record<string, string> = {
+  ru: "Забронировать в магазине",
+  ro: "Rezervă în magazin",
+  en: "Reserve in store",
+};
+
+const reserveLabel: Record<string, string> = {
+  ru: "Здравствуйте! Хочу забронировать в магазине",
+  ro: "Bună ziua! Doresc să rezerv în magazin",
+  en: "Hello! I would like to reserve in store",
+};
+
+const contactPrompt: Record<string, string> = {
+  ru: "Выберите удобный мессенджер",
+  ro: "Alegeți un mesager",
+  en: "Choose a messenger",
+};
+
+const contactHints: Record<string, { whatsapp: string; telegram: string; viber: string }> = {
+  ru: {
+    whatsapp: "Сообщение уже готово",
+    telegram: "Открыть чат",
+    viber: "Открыть чат",
+  },
+  ro: {
+    whatsapp: "Mesajul este deja pregătit",
+    telegram: "Deschide chatul",
+    viber: "Deschide chatul",
+  },
+  en: {
+    whatsapp: "Message is ready to send",
+    telegram: "Open chat",
+    viber: "Open chat",
+  },
+};
+
+function MessengerIcon({ name }: { name: "whatsapp" | "telegram" | "viber" }) {
+  const common = {
+    viewBox: "0 0 24 24",
+    className: "h-5 w-5",
+    fill: "currentColor",
+    "aria-hidden": true,
+  } as const;
+  if (name === "whatsapp") {
+    return (
+      <svg {...common}>
+        <path d="M12.04 2c-5.5 0-9.96 4.46-9.96 9.96 0 1.76.46 3.45 1.34 4.95L2 22l5.25-1.38a9.9 9.9 0 0 0 4.79 1.22h.01c5.5 0 9.96-4.46 9.96-9.96 0-2.66-1.04-5.16-2.92-7.04A9.9 9.9 0 0 0 12.04 2Zm0 18.02h-.01a8.2 8.2 0 0 1-4.18-1.15l-.3-.18-3.11.82.83-3.04-.2-.31a8.25 8.25 0 0 1-1.26-4.4c0-4.55 3.7-8.25 8.25-8.25 2.2 0 4.27.86 5.83 2.42a8.2 8.2 0 0 1 2.42 5.84c0 4.55-3.71 8.25-8.25 8.25Zm4.52-6.18c-.25-.12-1.47-.72-1.69-.81-.23-.08-.39-.12-.56.13-.16.25-.64.8-.79.97-.14.17-.29.19-.54.06-.25-.12-1.05-.39-1.99-1.23-.74-.66-1.23-1.47-1.38-1.72-.14-.25-.01-.38.11-.51.11-.11.25-.29.37-.43.13-.14.17-.25.25-.41.08-.17.04-.31-.02-.43-.06-.12-.56-1.35-.77-1.85-.2-.48-.41-.42-.56-.42l-.48-.01c-.17 0-.43.06-.66.31-.23.25-.86.85-.86 2.07 0 1.22.89 2.4 1.01 2.57.12.17 1.75 2.67 4.23 3.74.59.26 1.05.41 1.41.52.59.19 1.13.16 1.56.1.48-.07 1.47-.6 1.68-1.18.21-.58.21-1.07.14-1.18-.06-.11-.22-.17-.47-.29Z" />
+      </svg>
+    );
+  }
+  if (name === "telegram") {
+    return (
+      <svg {...common}>
+        <path d="M21.94 4.64 18.9 19a1.2 1.2 0 0 1-1.79.72l-4.36-3.22-2.1 2.02c-.23.23-.43.43-.88.43l.31-4.46 8.11-7.33c.35-.31-.08-.49-.55-.18L7.7 13.13l-4.32-1.35c-.94-.29-.96-.94.2-1.39l16.9-6.52c.78-.29 1.47.18 1.46 1.07Z" />
+      </svg>
+    );
+  }
+  return (
+    <svg {...common}>
+      <path d="M12.5 2C8 2 3.6 2.3 3.6 8.1v6.2c0 2 1.3 3.6 2.8 4.2v3a.6.6 0 0 0 1 .43l2.5-2.4c.86.05 1.74.05 2.6 0 4.5 0 8.9-.3 8.9-6.1V8.1C21.4 2.3 17 2 12.5 2Zm4.9 12.1c-.4.85-1.5 1.4-2.3 1.55-.25.05-.55.1-.95-.05-.95-.35-2.3-.85-3.95-2.3a10.7 10.7 0 0 1-2.6-3.55c-.2-.55-.3-1-.3-1.45 0-.6.3-1 .6-1.25.2-.2.45-.3.7-.3h.5c.2 0 .35.05.55.45.2.45.65 1.55.7 1.65.05.1.1.25 0 .4-.1.2-.2.3-.35.45-.1.1-.25.25-.1.5.15.25.65 1.05 1.4 1.7.95.85 1.7 1.1 1.95 1.25.2.1.35.05.5-.1.15-.2.6-.7.75-.95.15-.25.3-.2.5-.1.2.05 1.25.6 1.45.7.2.1.35.15.4.25.05.1.05.5-.15.95Z" />
+    </svg>
+  );
+}
 
 function getImages(product: Product, colorIdx: number): ProductImageAsset[] {
   return product.colors[colorIdx]?.images ?? product.images ?? [];
+}
+
+type ProductSpec = NonNullable<Product["specs"]>[number];
+
+const specGroupOrder = [
+  "Размеры",
+  "Особенности",
+  "Материал и уход",
+  "Доставка и возврат",
+] as const;
+
+type SpecGroupTitle = (typeof specGroupOrder)[number];
+
+const dimensionSpecLabels = new Set(["Размер", "Размеры", "Ширина", "Объём", "Совместимость"]);
+const deliverySpecLabels = new Set(["Доставка", "Возврат"]);
+const materialSpecLabels = new Set(["Материал", "Кожа", "Материалы", "Подкладка", "Фурнитура", "Отделка", "Страна производства", "Уход"]);
+
+function getSpecGroupTitle(label: string): SpecGroupTitle {
+  if (dimensionSpecLabels.has(label)) return "Размеры";
+  if (deliverySpecLabels.has(label)) return "Доставка и возврат";
+  if (materialSpecLabels.has(label)) return "Материал и уход";
+  return "Особенности";
+}
+
+function groupProductSpecs(specs: ProductSpec[]): { title: SpecGroupTitle; specs: ProductSpec[] }[] {
+  const grouped = new Map<SpecGroupTitle, ProductSpec[]>();
+  for (const title of specGroupOrder) {
+    grouped.set(title, []);
+  }
+  for (const spec of specs) {
+    grouped.get(getSpecGroupTitle(spec.label))?.push(spec);
+  }
+  return specGroupOrder
+    .map((title) => ({ title, specs: grouped.get(title) ?? [] }))
+    .filter((group) => group.specs.length > 0);
 }
 
 function ArrowIcon({ direction }: { direction: "left" | "right" }) {
@@ -44,6 +155,8 @@ export default function ProductDetailView({
   brandName: string;
 }) {
   const { add, openCart } = useCart();
+  const locale = useLocale();
+  const t = useT();
   const searchParams = useSearchParams();
   const initialColorIdx = useMemo(
     () => getInitialColorIdx(product, searchParams.get("color")),
@@ -52,6 +165,7 @@ export default function ProductDetailView({
   const [colorIdx, setColorIdx] = useState(initialColorIdx);
   const [imageIdx, setImageIdx] = useState(0);
   const [added, setAdded] = useState(false);
+  const [contactOpen, setContactOpen] = useState(false);
 
   useEffect(() => {
     fetch(`/api/products/${product.slug}/view`, { method: "POST" }).catch(() => {});
@@ -66,11 +180,47 @@ export default function ProductDetailView({
   const images = getImages(product, colorIdx);
   const safeImageIdx = images.length ? Math.min(imageIdx, images.length - 1) : 0;
   const activeImage = images[safeImageIdx];
+  const backdropImage = images[0] ?? activeImage;
   const onSale = product.oldPrice && product.oldPrice > product.price;
   const hasGallery = images.length > 1;
-  const isLifestyle = activeImage?.src.includes("lifestyle");
-  const delivery = getDeliveryInfo(product);
   const canBuy = product.status !== "out_of_stock";
+  const galleryFit = product.galleryFit ?? "cover";
+  const galleryImageClass =
+    galleryFit === "contain"
+      ? "object-contain object-center p-3 sm:p-4"
+      : "object-cover object-center";
+  const localizedColor = localizeColorName(color, locale);
+  const localizedDescription = localizeProductDescription(product, locale);
+  const localizedTitle = localizeProductTitle(product, locale);
+  const specGroups = useMemo(() => groupProductSpecs(getVisibleProductSpecs(product.specs)), [product.specs]);
+  const leftSpecGroups = specGroups.filter((group) => group.title === "Размеры" || group.title === "Особенности");
+  const rightSpecGroups = specGroups.filter((group) => group.title === "Материал и уход" || group.title === "Доставка и возврат");
+  const reserveMessage = `${reserveLabel[locale] ?? reserveLabel.ru}: ${localizedTitle}, ${t(
+    "catalog.color",
+  ).toLowerCase()}: ${localizedColor}`;
+  const contactOptions = [
+    {
+      name: "WhatsApp" as const,
+      icon: "whatsapp" as const,
+      href: `${brand.social.whatsapp}?text=${encodeURIComponent(reserveMessage)}`,
+      color: "#25D366",
+      hint: contactHints[locale]?.whatsapp ?? contactHints.ru.whatsapp,
+    },
+    {
+      name: "Telegram" as const,
+      icon: "telegram" as const,
+      href: brand.social.telegram,
+      color: "#229ED9",
+      hint: contactHints[locale]?.telegram ?? contactHints.ru.telegram,
+    },
+    {
+      name: "Viber" as const,
+      icon: "viber" as const,
+      href: brand.social.viber,
+      color: "#7360F2",
+      hint: contactHints[locale]?.viber ?? contactHints.ru.viber,
+    },
+  ];
 
   useEffect(() => {
     setImageIdx(0);
@@ -100,28 +250,36 @@ export default function ProductDetailView({
   }
 
   return (
-    <div className="mt-6 grid gap-10 lg:grid-cols-2">
-      <div className="grid gap-3">
-        <div className="group relative overflow-hidden rounded-3xl bg-stone-50">
-          <ProductImage
-            key={`${colorIdx}-${safeImageIdx}-${activeImage?.src ?? "placeholder"}`}
-            hex={color.hex}
-            section={product.section}
-            src={activeImage?.src}
-            alt={activeImage?.alt ?? product.title}
-            sizes="(min-width: 1024px) 50vw, 100vw"
-            imageClassName={
-              "object-center transition-transform duration-700 group-hover:scale-[1.015] " +
-              (isLifestyle ? "object-cover object-[50%_35%]" : "object-contain")
-            }
-            className={isLifestyle ? "aspect-[3/4] w-full" : "aspect-[4/5] w-full"}
-          />
+    <div className="mt-6">
+      <div className="grid gap-10 lg:grid-cols-[minmax(0,0.82fr)_minmax(0,1.18fr)]">
+      <div>
+        <div className="group relative aspect-[4/5] overflow-hidden border border-stone-950/20 bg-white">
+          {activeImage?.src ? (
+            /* eslint-disable-next-line @next/next/no-img-element */
+            <img
+              key={`${colorIdx}-${safeImageIdx}-${activeImage.src}`}
+              src={activeImage.src}
+              alt={activeImage.alt ?? localizedTitle}
+              loading="eager"
+              className={`h-full w-full transition-transform duration-700 group-hover:scale-[1.015] ${galleryImageClass}`}
+            />
+          ) : (
+            <ProductImage
+              key={`${colorIdx}-${safeImageIdx}-placeholder`}
+              hex={color.hex}
+              section={product.section}
+              alt={localizedTitle}
+              sizes="(min-width: 1024px) 50vw, 100vw"
+              imageClassName="object-contain object-center"
+              className="aspect-[4/5] w-full"
+            />
+          )}
 
           {hasGallery && (
             <>
               <button
                 type="button"
-                aria-label="Предыдущее фото"
+                aria-label={t("common.previousPhoto")}
                 onClick={() => showImage("prev")}
                 className="absolute left-4 top-1/2 flex h-11 w-11 -translate-y-1/2 items-center justify-center rounded-full border border-white/70 bg-white/75 text-stone-900 opacity-0 shadow-sm backdrop-blur transition hover:bg-white group-hover:opacity-100 max-lg:opacity-100"
               >
@@ -129,7 +287,7 @@ export default function ProductDetailView({
               </button>
               <button
                 type="button"
-                aria-label="Следующее фото"
+                aria-label={t("common.nextPhoto")}
                 onClick={() => showImage("next")}
                 className="absolute right-4 top-1/2 flex h-11 w-11 -translate-y-1/2 items-center justify-center rounded-full border border-white/70 bg-white/75 text-stone-900 opacity-0 shadow-sm backdrop-blur transition hover:bg-white group-hover:opacity-100 max-lg:opacity-100"
               >
@@ -141,7 +299,7 @@ export default function ProductDetailView({
                   <button
                     key={`${image.alt}-dot-${i}`}
                     type="button"
-                    aria-label={`Показать фото ${i + 1}`}
+                    aria-label={`${t("common.photo")} ${i + 1}`}
                     onClick={() => setImageIdx(i)}
                     className={
                       "h-1.5 rounded-full transition-all " +
@@ -154,134 +312,275 @@ export default function ProductDetailView({
           )}
         </div>
 
-        <div className="grid grid-cols-4 gap-3">
-          {(images.length > 0 ? images : product.colors.map((c) => ({ src: "", alt: c.name }))).map(
-            (image, i) => (
-              <button
-                key={`${colorIdx}-${image.src}-${i}`}
-                type="button"
-                onClick={() => setImageIdx(i)}
-                className={
-                  "overflow-hidden rounded-2xl border bg-stone-50 transition " +
-                  (i === safeImageIdx
-                    ? "border-stone-950 opacity-100"
-                    : "border-transparent opacity-70 hover:border-stone-300 hover:opacity-100")
-                }
-              >
-                <ProductImage
-                  key={`${colorIdx}-${image.src}-${i}`}
-                  hex={color.hex}
-                  section={product.section}
-                  src={image.src || undefined}
-                  alt={image.alt}
-                  sizes="(min-width: 1024px) 12vw, 25vw"
-                  imageClassName="object-contain object-center"
-                  className="aspect-square w-full"
-                />
-              </button>
-            ),
-          )}
-        </div>
       </div>
 
-      <div>
-        <Link
-          href={`/brand/${product.brandSlug}`}
-          className="text-xs font-semibold uppercase tracking-[0.14em] text-stone-400 hover:text-stone-700"
-        >
-          {brandName}
-        </Link>
-        <h1 className="mt-2 font-serif text-2xl leading-snug text-stone-950 sm:text-3xl">
-          {product.title}
-        </h1>
-
-        <div className="mt-5 flex items-baseline gap-3">
-          <span className="text-2xl font-semibold text-stone-950">
-            {formatPrice(product.price)}
+      <div className="self-start">
+        <div className="relative overflow-hidden rounded-3xl">
+          <div aria-hidden className="pointer-events-none absolute inset-0">
+            {backdropImage?.src ? (
+              /* eslint-disable-next-line @next/next/no-img-element */
+              <img
+                key={`backdrop-${colorIdx}-${backdropImage.src}`}
+                src={backdropImage.src}
+                alt=""
+                className="h-full w-full scale-[1.85] object-cover blur-3xl saturate-[1.35]"
+              />
+            ) : null}
+            <div
+              className="absolute inset-0 opacity-[0.32]"
+              style={{ backgroundColor: color.hex }}
+            />
+            <div className="absolute inset-0 bg-gradient-to-b from-white/40 via-white/68 to-white/95" />
+          </div>
+          <div className="relative p-6 sm:p-7 lg:p-8">
+        <div className="flex flex-wrap items-center gap-3.5">
+          <span className="text-[15px] font-medium leading-none text-stone-950">
+            SÓRA
           </span>
-          {onSale && (
-            <span className="text-lg text-stone-400 line-through">
-              {formatPrice(product.oldPrice!)}
+          <div className="inline-flex items-center gap-2 rounded-[5px] bg-white px-2.5 py-1.5 text-[14px] font-medium leading-none text-stone-800 shadow-sm ring-1 ring-stone-200/70">
+            <span className="flex h-4 w-5 overflow-hidden rounded-[2px]" aria-hidden>
+              <span className="flex-1 bg-[#009246]" />
+              <span className="flex-1 bg-white" />
+              <span className="flex-1 bg-[#ce2b37]" />
             </span>
+            Made in Italy
+          </div>
+          {product.isVintage && (
+            <div className="inline-flex items-center gap-2 rounded-[5px] bg-[#fbf3e7] px-2.5 py-1.5 text-[14px] font-medium leading-none text-[#8a5a22] shadow-sm ring-1 ring-[#e6cfa3]">
+              <svg aria-hidden viewBox="0 0 24 24" className="h-4 w-4 shrink-0 text-[#b8862f]" fill="currentColor">
+                <path d="M12 1.5 14.9 8.6 22.5 9.3 16.8 14.3 18.5 21.8 12 17.8 5.5 21.8 7.2 14.3 1.5 9.3 9.1 8.6 12 1.5Z" />
+              </svg>
+              Vintage
+            </div>
           )}
         </div>
-        <div className="mt-6">
-          <p className="text-sm font-medium text-stone-700">
-            Цвет: <span className="text-stone-500">{color.name}</span>
-            {color.status && (
-              <span className="ml-2 rounded-full bg-stone-100 px-2 py-0.5 text-xs text-stone-500">
-                {color.status}
+        <div className="mt-4 flex items-start justify-between gap-5">
+          <h1 className="min-w-0 flex-1 font-sans text-[17px] font-normal leading-[1.25] tracking-[-0.01em] text-stone-950 sm:text-[19px]">
+            {localizedTitle}
+          </h1>
+          <div className="flex shrink-0 items-baseline gap-2 pt-0.5">
+            {onSale && (
+              <span className="price-strike text-[16px] font-normal text-stone-400">
+                {formatPrice(product.oldPrice!, locale)}
               </span>
             )}
+            <span
+              className={
+                "leading-none tracking-[-0.01em] " +
+                (onSale
+                  ? "text-[20px] font-bold text-sale sm:text-[22px]"
+                  : "text-[18px] font-normal text-stone-950 sm:text-[20px]")
+              }
+            >
+              {formatPrice(product.price, locale)}
+            </span>
+          </div>
+        </div>
+        <PreorderStatusBadge status={product.status} className="mt-2" />
+        <div className="mt-8">
+          <p className="text-base text-stone-950">
+            <span className="font-semibold">{t("catalog.color")}</span>{" "}
+            <span className="font-normal text-stone-500">{localizedColor}</span>
           </p>
-          <div className="mt-2 flex flex-wrap gap-2.5">
-            {product.colors.map((c, i) => (
-              <button
-                key={`${c.name}-${i}`}
-                type="button"
-                onClick={() => setColorIdx(i)}
-                aria-label={c.name}
-                title={c.status ? `${c.name} — ${c.status}` : c.name}
-                className={
-                  "h-9 w-9 rounded-full border-2 transition " +
-                  (i === colorIdx
-                    ? "border-stone-900 ring-2 ring-stone-900/15"
-                    : "border-stone-200 hover:border-stone-400")
-                }
-                style={{ backgroundColor: c.hex }}
-              />
-            ))}
+          <div className="mt-3 flex flex-wrap gap-3">
+            {product.colors.map((c, i) => {
+              const thumb = getColorImages(c)[0];
+              const selected = i === colorIdx;
+              const cName = localizeColorName(c, locale);
+              const cStatus = localizeStaticText(c.status, locale);
+              return (
+                <button
+                  key={`${c.name}-${i}`}
+                  type="button"
+                  onClick={() => setColorIdx(i)}
+                  aria-label={cName}
+                  aria-pressed={selected}
+                  title={cStatus ? `${cName} — ${cStatus}` : cName}
+                  className={
+                    "relative h-[5.5rem] w-[5.5rem] shrink-0 overflow-hidden bg-stone-50 transition sm:h-[6rem] sm:w-[6rem] " +
+                    (selected
+                      ? "ring-1 ring-stone-950"
+                      : "ring-1 ring-transparent hover:ring-stone-300")
+                  }
+                >
+                  <ProductImage
+                    hex={c.hex}
+                    section={product.section}
+                    src={thumb?.src}
+                    alt={thumb?.alt ?? c.name}
+                    sizes="72px"
+                    imageClassName="object-contain object-center"
+                    className="h-full w-full"
+                  />
+                </button>
+              );
+            })}
           </div>
         </div>
 
-        <div className="mt-7 rounded-2xl border border-stone-200 bg-stone-50 p-5">
-          <p className="flex items-center gap-2.5 text-sm font-medium tracking-wide text-stone-900">
-            <span className="h-1.5 w-1.5 rounded-full bg-stone-400" aria-hidden />
-            {delivery.title}
-          </p>
-          <p className="mt-1.5 pl-[18px] text-sm text-stone-600">
-            {delivery.leadTime}
-          </p>
-          <p className="mt-3 pl-[18px] text-[13px] leading-relaxed text-stone-500">
-            {delivery.description}
-          </p>
-        </div>
-
-        <button
-          type="button"
-          onClick={handleAdd}
-          disabled={!canBuy}
-          className="mt-5 w-full rounded-full bg-stone-900 px-8 py-4 text-sm font-semibold tracking-wide text-white transition hover:bg-stone-800 disabled:cursor-not-allowed disabled:opacity-50 sm:w-auto"
-        >
-          {canBuy ? (added ? "Добавлено в корзину ✓" : "Добавить в корзину") : "Нет в наличии"}
-        </button>
-        <div className="mt-3">
-          <WishlistButton slug={product.slug} variant="full" />
-        </div>
-
-        <p className="mt-8 whitespace-pre-line leading-relaxed text-stone-600">
-          {product.description}
-        </p>
-
-        <dl className="mt-8 divide-y divide-stone-200 border-y border-stone-200">
-          <div className="flex justify-between gap-6 py-3 text-sm">
-            <dt className="text-stone-500">Материал</dt>
-            <dd className="text-right text-stone-800">{product.material}</dd>
-          </div>
-          {product.specs?.map((s) => (
-            <div key={s.label} className="flex justify-between gap-6 py-3 text-sm">
-              <dt className="text-stone-500">{s.label}</dt>
-              <dd className="text-right text-stone-800">{s.value}</dd>
+        <div className="mt-8 flex flex-col gap-3">
+          <button
+            type="button"
+            onClick={handleAdd}
+            disabled={!canBuy}
+            className="w-full rounded-sm bg-stone-950 px-7 py-[1.125rem] text-base font-medium text-white transition hover:bg-stone-800 disabled:cursor-not-allowed disabled:opacity-50"
+          >
+            {canBuy ? (added ? `${t("common.addedToCart")} ✓` : t("common.addToCart")) : t("common.outOfStock")}
+          </button>
+          <div className="flex gap-2">
+            <button
+              type="button"
+              onClick={() => setContactOpen((v) => !v)}
+              aria-expanded={contactOpen}
+              className="flex min-h-14 flex-1 items-center justify-center gap-2.5 rounded-sm border border-stone-200 bg-white px-5 py-4 text-base font-medium text-stone-950 transition hover:border-stone-400"
+            >
+              {reserveButton[locale] ?? reserveButton.ru}
+              <svg
+                viewBox="0 0 24 24"
+                className={"h-5 w-5 transition-transform " + (contactOpen ? "rotate-180" : "")}
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="1.8"
+                aria-hidden
+              >
+                <path d="M6 9l6 6 6-6" strokeLinecap="round" strokeLinejoin="round" />
+              </svg>
+            </button>
+            <div className="h-14 w-14">
+              <WishlistButton slug={product.slug} variant="square" />
             </div>
-          ))}
-        </dl>
+          </div>
 
-        <div className="mt-6 grid gap-2 text-sm text-stone-500">
-          <p>• Доставка по Кишинёву и всей Молдове.</p>
-          <p>• Возврат и обмен в течение 14 дней.</p>
-          <p>• Гарантия 30 дней на производственные дефекты.</p>
+          {contactOpen && (
+            <div className="overflow-hidden rounded-xl border border-stone-200 bg-white shadow-[0_12px_40px_-18px_rgba(28,25,23,0.45)] animate-[contactReveal_0.25s_ease-out]">
+              <p className="border-b border-stone-100 px-5 py-3.5 text-[12px] font-semibold uppercase tracking-[0.16em] text-stone-400">
+                {contactPrompt[locale] ?? contactPrompt.ru}
+              </p>
+              <div className="divide-y divide-stone-100">
+                {contactOptions.map((option) => (
+                  <a
+                    key={option.name}
+                    href={option.href}
+                    target="_blank"
+                    rel="noreferrer"
+                    onClick={() => setContactOpen(false)}
+                    className="group flex items-center gap-4 px-5 py-3.5 transition hover:bg-stone-50"
+                  >
+                    <span
+                      className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full text-white transition group-hover:scale-105"
+                      style={{ backgroundColor: option.color }}
+                    >
+                      <MessengerIcon name={option.icon} />
+                    </span>
+                    <span className="min-w-0 flex-1">
+                      <span className="block text-sm font-medium text-stone-950">{option.name}</span>
+                      <span className="block text-xs text-stone-400">{option.hint}</span>
+                    </span>
+                    <svg
+                      viewBox="0 0 24 24"
+                      className="h-4 w-4 shrink-0 text-stone-300 transition group-hover:translate-x-0.5 group-hover:text-stone-500"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="1.8"
+                      aria-hidden
+                    >
+                      <path d="M9 6l6 6-6 6" strokeLinecap="round" strokeLinejoin="round" />
+                    </svg>
+                  </a>
+                ))}
+              </div>
+            </div>
+          )}
+        </div>
+
+        <BrandStories productSlug={product.slug} className="mt-8 scale-110 origin-top-left justify-start" />
+          </div>
         </div>
       </div>
+      </div>
+
+        <div className="mt-16 w-full lg:mt-24">
+          <div className="grid w-full gap-x-12 gap-y-10 lg:grid-cols-[minmax(0,0.9fr)_minmax(0,1.6fr)] xl:gap-x-16">
+            <div className="border-b border-stone-200 lg:border-b-0">
+              <section className="border-t border-stone-200 py-5">
+                <div className="flex items-center justify-between gap-6">
+                  <h2 className="text-[13px] font-medium leading-none text-stone-500">
+                    {localizeStaticText("Описание", locale)}
+                  </h2>
+                  <span className="text-sm leading-none text-stone-400" aria-hidden>
+                    −
+                  </span>
+                </div>
+                <div className="mt-4 text-[12px] leading-[1.65] text-stone-700">
+                  <p className="whitespace-pre-line">{localizedDescription}</p>
+                  {product.highlights && product.highlights.length > 0 && (
+                    <ul className="mt-4 list-disc space-y-1.5 pl-4">
+                      {localizeProductHighlights(product, locale).map((item) => (
+                        <li key={item}>{item}</li>
+                      ))}
+                    </ul>
+                  )}
+                </div>
+              </section>
+            </div>
+
+            {(rightSpecGroups.length > 0 || leftSpecGroups.length > 0) && (
+              <div className="grid w-full gap-x-10 gap-y-0 lg:grid-cols-2 xl:gap-x-14">
+                <div className="border-b border-stone-200">
+                  {rightSpecGroups.map((group) => (
+                    <section key={group.title} className="border-t border-stone-200 py-5">
+                      <div className="flex items-center justify-between gap-6">
+                        <h2 className="text-[13px] font-medium leading-none text-stone-500">
+                          {localizeStaticText(group.title, locale)}
+                        </h2>
+                        <span className="text-sm leading-none text-stone-400" aria-hidden>
+                          −
+                        </span>
+                      </div>
+                      <ul className="mt-4 list-disc space-y-1.5 pl-4 text-[12px] leading-[1.65] text-stone-700">
+                        {group.specs.map((s) => {
+                          const localized = localizeProductSpec(s, locale);
+                          return (
+                            <li key={`${group.title}-${s.label}`}>
+                              <span className="font-medium text-stone-800">{localized.label}:</span>{" "}
+                              {localized.value}
+                            </li>
+                          );
+                        })}
+                      </ul>
+                    </section>
+                  ))}
+                </div>
+
+                <div className="border-b border-stone-200">
+                  {leftSpecGroups.map((group) => (
+                    <section key={group.title} className="border-t border-stone-200 py-5">
+                      <div className="flex items-center justify-between gap-6">
+                        <h2 className="text-[13px] font-medium leading-none text-stone-500">
+                          {localizeStaticText(group.title, locale)}
+                        </h2>
+                        <span className="text-sm leading-none text-stone-400" aria-hidden>
+                          −
+                        </span>
+                      </div>
+                      <ul className="mt-4 list-disc space-y-1.5 pl-4 text-[12px] leading-[1.65] text-stone-700">
+                        {group.specs.map((s) => {
+                          const localized = localizeProductSpec(s, locale);
+                          return (
+                            <li key={`${group.title}-${s.label}`}>
+                              <span className="font-medium text-stone-800">{localized.label}:</span>{" "}
+                              {localized.value}
+                            </li>
+                          );
+                        })}
+                      </ul>
+                    </section>
+                  ))}
+                </div>
+              </div>
+            )}
+          </div>
+        </div>
     </div>
   );
 }

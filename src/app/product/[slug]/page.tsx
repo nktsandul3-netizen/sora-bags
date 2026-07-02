@@ -11,6 +11,10 @@ import {
   getProduct,
   products,
 } from "@/lib/data";
+import { getServerLocale, getServerT } from "@/lib/server-i18n";
+import { categoryName } from "@/lib/catalog-i18n";
+import { localizeProductDescription, localizeProductTitle } from "@/lib/product-i18n";
+import { getRelatedProducts } from "@/lib/recommendations";
 
 export function generateStaticParams() {
   return products.map((p) => ({ slug: p.slug }));
@@ -23,9 +27,10 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { slug } = await params;
   const p = getProduct(slug);
+  const locale = await getServerLocale();
   return {
-    title: p?.title ?? "Товар",
-    description: p?.description,
+    title: p ? localizeProductTitle(p, locale) : "Товар",
+    description: p ? localizeProductDescription(p, locale) : undefined,
   };
 }
 
@@ -38,22 +43,21 @@ export default async function ProductPage({
   const product = getProduct(slug);
   if (!product) notFound();
 
+  const [locale, t] = await Promise.all([getServerLocale(), getServerT()]);
   const cat = getCategory(product.categorySlug);
   const sectionPath = product.section === "bags" ? "/bags" : "/accessories";
-  const sectionLabel = product.section === "bags" ? "Сумки" : "Аксессуары";
+  const sectionLabel = product.section === "bags" ? t("nav.bags") : t("nav.accessories");
   const brandName = getBrandName(product.brandSlug);
 
-  const related = products
-    .filter((p) => p.categorySlug === product.categorySlug && p.slug !== product.slug)
-    .slice(0, 4);
+  const related = getRelatedProducts(product, 4);
 
   return (
     <div className="mx-auto max-w-7xl px-4 py-8 sm:px-6">
       <Breadcrumbs
         items={[
           { label: sectionLabel, href: sectionPath },
-          ...(cat ? [{ label: cat.name, href: `${sectionPath}/${cat.slug}` }] : []),
-          { label: product.title },
+          ...(cat ? [{ label: categoryName(cat.slug, cat.name, locale), href: `${sectionPath}/${cat.slug}` }] : []),
+          { label: localizeProductTitle(product, locale) },
         ]}
       />
 
@@ -63,7 +67,7 @@ export default async function ProductPage({
 
       {related.length > 0 && (
         <section className="mt-20">
-          <SectionTitle title="Похожие модели" />
+          <SectionTitle title={t("catalog.related")} />
           <ProductGrid products={related} />
         </section>
       )}

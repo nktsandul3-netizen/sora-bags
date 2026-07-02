@@ -9,6 +9,7 @@ import {
   useState,
   type ReactNode,
 } from "react";
+import { sendAnalyticsEvent } from "@/components/AnalyticsTracker";
 
 export interface CartItem {
   slug: string;
@@ -112,7 +113,15 @@ export function CartProvider({ children }: { children: ReactNode }) {
       count,
       total,
       isOpen,
-      add: (item, qty) => dispatch({ type: "add", item, qty }),
+      add: (item, qty) => {
+        dispatch({ type: "add", item, qty });
+        sendAnalyticsEvent({
+          type: "cart_add",
+          productSlug: item.slug,
+          productTitle: item.title,
+          quantity: qty ?? 1,
+        });
+      },
       remove: (slug, color) => dispatch({ type: "remove", slug, color }),
       setQty: (slug, color, qty) => dispatch({ type: "setQty", slug, color, qty }),
       clear: () => dispatch({ type: "clear" }),
