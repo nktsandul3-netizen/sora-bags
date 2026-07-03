@@ -142,7 +142,6 @@ export const brandStories = {
     "womens-pebbled-leather-turn-lock-top-handle-bag",
     "womens-soft-leather-draped-flap-bag",
     "the-essential-shoulder-bag-tan-cognac",
-    "vintage-frame-leather-handbag-burgundy",
     "womens-pebbled-leather-accordion-buckle-shoulder-bag",
     "premium-leather-travel-tote-bag-black",
     "structured-leather-tote-bag-burgundy",
@@ -248,33 +247,6 @@ export const brandStories = {
             {
               type: "image",
               src: "/products/the-essential-shoulder-bag/tan-cognac-lifestyle-v3.png",
-            },
-          ],
-        },
-      },
-    },
-    "vintage-frame-leather-handbag-burgundy": {
-      highlights: {
-        "as-seen-on": {
-          cover: "/products/vintage-frame-leather-handbag/as-seen-on-black-cafe.jpg",
-          ringGradient:
-            "conic-gradient(from 140deg, #e7e5e4, #78716c, #292524, #78716c, #e7e5e4)",
-          slides: [
-            {
-              type: "image",
-              src: "/products/vintage-frame-leather-handbag/as-seen-on-black-cafe.jpg",
-            },
-            {
-              type: "image",
-              src: "/products/vintage-frame-leather-handbag/as-seen-on-black-street.jpg",
-            },
-            {
-              type: "image",
-              src: "/products/vintage-frame-leather-handbag/as-seen-on-black-interior.jpg",
-            },
-            {
-              type: "image",
-              src: "/products/vintage-frame-leather-handbag/as-seen-on-off-white-street.jpg",
             },
           ],
         },

@@ -6,18 +6,40 @@ import { useCart } from "@/context/cart";
 import { getProduct } from "@/lib/data";
 import { formatPrice } from "@/lib/format";
 import { getDeliveryInfo } from "@/lib/delivery";
-import { withLocalePath } from "@/lib/i18n";
+import { withLocalePath, type Locale } from "@/lib/i18n";
 import { useLocale, useT } from "@/lib/useI18n";
-import { localizeProductTitle } from "@/lib/product-i18n";
+import { localizeColorName, localizeProductTitle } from "@/lib/product-i18n";
 import Breadcrumbs from "@/components/Breadcrumbs";
 import ProductImage from "@/components/ProductImage";
 import CheckoutForm from "@/components/CheckoutForm";
+
+function getCartItemCountLabel(count: number, locale: Locale) {
+  if (locale === "ru") {
+    const mod10 = count % 10;
+    const mod100 = count % 100;
+    const word =
+      mod10 === 1 && mod100 !== 11
+        ? "товар"
+        : mod10 >= 2 && mod10 <= 4 && (mod100 < 12 || mod100 > 14)
+          ? "товара"
+          : "товаров";
+
+    return `${count} ${word}`;
+  }
+
+  if (locale === "ro") {
+    return count === 1 ? "1 produs" : `${count} produse`;
+  }
+
+  return count === 1 ? "1 item" : `${count} items`;
+}
 
 export default function CartPage() {
   const router = useRouter();
   const { items, total, setQty, remove, clear } = useCart();
   const locale = useLocale();
   const t = useT();
+  const itemCount = items.reduce((sum, item) => sum + item.qty, 0);
 
   function handleOrdered(order: { id: string; number: string }) {
     clear();
@@ -42,14 +64,24 @@ export default function CartPage() {
   }
 
   return (
-    <div className="mx-auto max-w-5xl px-4 py-8 sm:px-6">
+    <div className="mx-auto max-w-6xl px-4 py-8 sm:px-6">
       <Breadcrumbs items={[{ label: t("common.cart") }]} />
-      <h1 className="mt-5 mb-8 font-serif text-3xl text-stone-950 sm:text-4xl">
-        {t("common.cart")}
-      </h1>
+      <div className="mt-5 mb-8 rounded-[2rem] bg-[#fbfaf8] p-5 sm:p-7">
+        <p className="text-[10px] font-semibold uppercase tracking-[0.22em] text-stone-400">
+          {getCartItemCountLabel(itemCount, locale)}
+        </p>
+        <div className="mt-2">
+          <h1 className="text-3xl font-semibold uppercase tracking-[0.04em] text-stone-950 sm:text-5xl">
+            {t("common.cart")}
+          </h1>
+          <p className="mt-3 max-w-xl text-sm leading-relaxed text-stone-600">
+            {total >= 15000 ? t("cart.freeDeliveryUnlocked") : t("cart.deliveryCalculated")}
+          </p>
+        </div>
+      </div>
 
-      <div className="grid gap-10 lg:grid-cols-[1fr_320px]">
-        <div className="divide-y divide-stone-200 border-y border-stone-200">
+      <div className="grid gap-6 lg:grid-cols-[1fr_360px]">
+        <div className="space-y-3">
           {items.map((it) => {
             const product = getProduct(it.slug);
             const color = product?.colors.find((c) => c.name === it.color);
@@ -62,7 +94,10 @@ export default function CartPage() {
             const localizedTitle = product ? localizeProductTitle(product, locale) : localizeProductTitle(it.title, locale);
 
             return (
-            <div key={it.slug + it.color} className="flex gap-4 py-5">
+            <div
+              key={it.slug + it.color}
+              className="grid grid-cols-[80px_1fr] gap-4 rounded-[1.5rem] border border-stone-200 bg-white p-4 shadow-sm shadow-stone-200/60 sm:grid-cols-[96px_1fr_auto]"
+            >
               <Link href={withLocalePath(`/product/${it.slug}`, locale)} className="block shrink-0">
                 <ProductImage
                   hex={thumbHex}
@@ -70,38 +105,39 @@ export default function CartPage() {
                   src={thumbSrc}
                   alt={localizedTitle}
                   sizes="80px"
-                  className="h-24 w-20 rounded-xl"
-                  imageClassName="object-cover object-center"
+                  className="h-24 w-20 rounded-[1.2rem] bg-[#f7f3ee] shadow-sm"
+                  imageClassName="object-contain object-center"
                 />
               </Link>
-              <div className="flex-1">
+              <div className="min-w-0">
+                <p className="text-[11px] font-semibold uppercase tracking-[0.14em] text-stone-400">{it.brand}</p>
                 <Link
                   href={withLocalePath(`/product/${it.slug}`, locale)}
-                  className="text-sm leading-snug text-stone-800 hover:text-stone-950"
+                  className="mt-1.5 block text-base font-semibold leading-snug text-stone-950 hover:text-stone-700"
                 >
                   {localizedTitle}
                 </Link>
-                <p className="mt-1 text-xs text-stone-400">
-                  {it.brand} · {it.color}
+                <p className="mt-2 inline-flex rounded-full bg-stone-100 px-2.5 py-1 text-xs text-stone-600">
+                  {t("catalog.color")}: {localizeColorName(it.color, locale)}
                 </p>
                 {delivery && (
-                  <p className="mt-1.5 text-xs leading-relaxed text-stone-500">
+                  <p className="mt-2 text-xs leading-relaxed text-stone-500">
                     {delivery.leadTime}
                   </p>
                 )}
                 <button
                   onClick={() => remove(it.slug, it.color)}
-                  className="mt-2 text-xs text-stone-400 underline-offset-2 hover:text-stone-700 hover:underline"
+                  className="mt-3 text-xs font-medium text-stone-400 underline-offset-2 hover:text-stone-700 hover:underline"
                 >
                   {t("common.delete")}
                 </button>
               </div>
 
-              <div className="flex flex-col items-end gap-2">
-                <span className="text-sm font-semibold text-stone-950">
+              <div className="col-span-2 flex items-center justify-between border-t border-stone-100 pt-3 sm:col-span-1 sm:flex-col sm:items-end sm:border-t-0 sm:pt-0">
+                <span className="text-base font-semibold text-stone-950">
                   {formatPrice(it.price * it.qty, locale)}
                 </span>
-                <div className="flex items-center rounded-full border border-stone-200">
+                <div className="flex items-center rounded-full border border-stone-200 bg-stone-50">
                   <button
                     onClick={() => setQty(it.slug, it.color, it.qty - 1)}
                     className="px-3 py-1 text-stone-500 hover:text-stone-900"
@@ -122,18 +158,18 @@ export default function CartPage() {
             </div>
             );
           })}
-          <div className="py-4">
+          <div className="flex justify-end pt-2">
             <button
               onClick={clear}
-              className="text-xs text-stone-400 hover:text-stone-700"
+              className="rounded-full border border-stone-200 px-4 py-2 text-xs font-medium text-stone-400 hover:border-stone-300 hover:text-stone-700"
             >
               {t("common.delete")}
             </button>
           </div>
         </div>
 
-        <aside className="h-fit rounded-2xl border border-stone-200 p-6">
-          <h2 className="font-serif text-xl text-stone-950">{t("checkout.summary")}</h2>
+        <aside className="h-fit rounded-[1.75rem] border border-stone-200 bg-[#fbfaf8] p-5 shadow-sm shadow-stone-200/60 lg:sticky lg:top-28">
+          <h2 className="text-xl font-semibold uppercase tracking-[0.06em] text-stone-950">{t("checkout.summary")}</h2>
           <div className="mt-4 space-y-2 text-sm">
             <div className="flex justify-between">
               <span className="text-stone-500">{t("checkout.items")}</span>
@@ -146,7 +182,7 @@ export default function CartPage() {
               </span>
             </div>
           </div>
-          <div className="mt-4 flex justify-between border-t border-stone-200 pt-4">
+          <div className="mt-4 flex justify-between rounded-2xl bg-white px-4 py-3">
             <span className="font-semibold text-stone-900">{t("checkout.total")}</span>
             <span className="text-lg font-semibold text-stone-950">
               {formatPrice(total, locale)}

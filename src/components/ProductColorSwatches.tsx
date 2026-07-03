@@ -69,7 +69,7 @@ function ColorSwatch({
       }
     >
       <span
-        className="block h-4 w-4 rounded-full border border-stone-300/70 sm:h-[18px] sm:w-[18px]"
+        className="block h-3 w-3 rounded-full border border-stone-300/70 sm:h-3.5 sm:w-3.5"
         style={{ backgroundColor: color.hex }}
       />
     </Link>
@@ -80,12 +80,14 @@ export default function ProductColorSwatches({
   productSlug,
   colors,
   previewIndex = null,
+  defaultIndex = 0,
   onPreview,
   className = "",
 }: {
   productSlug: string;
   colors: ProductColor[];
   previewIndex?: number | null;
+  defaultIndex?: number;
   onPreview?: (index: number | null) => void;
   className?: string;
 }) {
@@ -94,11 +96,11 @@ export default function ProductColorSwatches({
   if (colors.length === 0) return null;
 
   const swatchItems = getSwatchItems(colors);
-  const highlightIndex = previewIndex ?? 0;
+  const highlightIndex = previewIndex ?? defaultIndex;
 
   return (
     <div
-      className={"flex flex-wrap items-center gap-2 sm:gap-2.5 " + className}
+      className={"flex flex-wrap items-center gap-1.5 sm:gap-2 " + className}
       onMouseLeave={() => onPreview?.(null)}
     >
       {swatchItems.map((item) =>
@@ -115,7 +117,7 @@ export default function ProductColorSwatches({
           <Link
             key="overflow"
             href={withLocalePath(`/product/${productSlug}`, locale)}
-            className="inline-flex h-4 w-4 shrink-0 items-center justify-center rounded-full bg-stone-100 text-[9px] font-medium leading-none text-stone-700 transition hover:bg-stone-200 sm:h-[18px] sm:w-[18px] sm:text-[10px]"
+            className="inline-flex h-3 w-3 shrink-0 items-center justify-center rounded-full bg-stone-100 text-[8px] font-medium leading-none text-stone-700 transition hover:bg-stone-200 sm:h-3.5 sm:w-3.5 sm:text-[9px]"
             aria-label={`${t("common.moreColors")} ${item.count}`}
           >
             +{item.count}

@@ -277,7 +277,6 @@ const productTitles: Record<string, Partial<Record<Locale, string>>> = {
   "Talia — классическая сумка на плечо": { ro: "Talia — geantă de umăr clasică", en: "Talia — classic shoulder bag" },
   "Vittoria — классическая сумка-тоут": { ro: "Vittoria — geantă tote clasică", en: "Vittoria — classic tote bag" },
   "Romina — сумка-боулинг": { ro: "Romina — geantă bowling", en: "Romina — bowling bag" },
-  "Odette — сумка с металлической рамкой": { ro: "Odette — geantă cu ramă metalică", en: "Odette — metal-frame bag" },
   "Amara — сумка-хобо": { ro: "Amara — geantă hobo", en: "Amara — hobo bag" },
   "Liora — сумка-хобо": { ro: "Liora — geantă hobo", en: "Liora — hobo bag" },
   "Serena — сумка-хобо из гладкой кожи": { ro: "Serena — geantă hobo din piele netedă", en: "Serena — smooth leather hobo bag" },
@@ -285,12 +284,10 @@ const productTitles: Record<string, Partial<Record<Locale, string>>> = {
   "Selene — сумка-полумесяц на плечо": { ro: "Selene — geantă semilună de umăr", en: "Selene — crescent shoulder bag" },
   "Faustine — дорожная сумка-тоут": { ro: "Faustine — geantă tote de călătorie", en: "Faustine — travel tote bag" },
   "Marisol — плетёная сумка-хобо": { ro: "Marisol — geantă hobo împletită", en: "Marisol — woven hobo bag" },
-  "Ibiza — пляжная сумка-тоут с бахромой": { ro: "Ibiza — geantă tote de plajă cu franjuri", en: "Ibiza — fringed beach tote bag" },
   "Provence — плетёная сумка-тоут в винтажном стиле": { ro: "Provence — geantă tote împletită în stil vintage", en: "Provence — vintage-style woven tote bag" },
   "Taormina — плетёная сумка веерообразной формы": { ro: "Taormina — geantă împletită în formă de evantai", en: "Taormina — fan-shaped woven bag" },
   "Cuore — плетёная сумка с ручками в форме сердца": { ro: "Cuore — geantă împletită cu mânere în formă de inimă", en: "Cuore — woven bag with heart-shaped handles" },
   "Ravello — плетёная сумка-мешок": { ro: "Ravello — geantă sac împletită", en: "Ravello — woven bucket bag" },
-  "Sirmione — плетёная vanity-сумка кроссбоди": { ro: "Sirmione — geantă vanity crossbody împletită", en: "Sirmione — woven vanity crossbody bag" },
   "Elodie — сумка через плечо": { ro: "Elodie — geantă crossbody", en: "Elodie — crossbody bag" },
   "Corinne — фактурная сумка через плечо": { ro: "Corinne — geantă crossbody texturată", en: "Corinne — textured crossbody bag" },
   "Luna — сумка-полумесяц": { ro: "Luna — geantă semilună", en: "Luna — crescent bag" },
@@ -341,7 +338,7 @@ const productTitles: Record<string, Partial<Record<Locale, string>>> = {
   "Ischia — плетёная сумка с замком-защёлкой": { ro: "Ischia — geantă împletită cu clichet", en: "Ischia — woven turn-lock bag" },
   "Procida — плетёная сумка-ведро на шнурке": { ro: "Procida — geantă bucket împletită cu șnur", en: "Procida — woven drawstring bucket bag" },
   "Sperlonga — круглая плетёная сумка-ведро": { ro: "Sperlonga — geantă bucket rotundă împletită", en: "Sperlonga — round woven bucket bag" },
-  "Margaux — плетёная сумка с кристальным акцентом": { ro: "Margaux — geantă împletită cu accent din cristal", en: "Margaux — woven bag with crystal accent" },
+  "Violette — плетёная сумка-хобо": { ro: "Violette — geantă hobo împletită", en: "Violette — woven hobo bag" },
   "Avignon — плетёная сумка с чехлом": { ro: "Avignon — geantă împletită cu husă", en: "Avignon — woven bag with pouch" },
   "Honfleur — плетёная сумка-хобо с кожаными звеньями": { ro: "Honfleur — geantă hobo împletită cu inele din piele", en: "Honfleur — woven hobo bag with leather links" },
   "Deauville — компактная сумка с металлизированной отделкой": { ro: "Deauville — geantă compactă cu finisaj metalizat", en: "Deauville — compact bag with metallic trim" },
@@ -530,18 +527,6 @@ const productCopyBySlug: Record<string, ProductLocalizedCopy> = {
       "en": "Romina — bowling bag is a bowling bag crafted from natural leather, designed for everyday styling, office looks and relaxed evening plans. The silhouette feels polished without looking stiff, making it easy to style with a considered everyday wardrobe.\n\nSecure zip closure. The interior is made for daily essentials such as a phone, wallet, keys and small cosmetics. This style is available to order, with delivery in 7–14 days."
     }
   },
-  "vintage-frame-leather-handbag-burgundy": {
-    "title": {
-      "ru": "Odette — сумка с металлической рамкой",
-      "ro": "Odette — geantă cu ramă metalică",
-      "en": "Odette — metal-frame bag"
-    },
-    "description": {
-      "ru": "Odette — сумка с металлической рамкой. Модель выполнена из натуральной кожи и создана для повседневного гардероба, офиса и спокойных вечерних выходов. Силуэт выглядит собранно, но остаётся лёгким в повседневной носке: аксессуар не перегружает образ и хорошо сочетается с базовым гардеробом.\n\nУниверсальный силуэт для города. Внутреннее пространство рассчитано на ежедневные вещи — телефон, кошелёк, ключи и небольшую косметику. Модель доступна под заказ: срок доставки 7–14 дней.",
-      "ro": "Odette — geantă cu ramă metalică este o geantă rectangulară din piele naturală, creată pentru garderoba de zi cu zi, birou și ieșiri de seară relaxate. Silueta rămâne elegantă fără să pară rigidă, iar proporțiile sunt ușor de integrat în garderoba de zi cu zi.\n\nSiluetă versatilă pentru oraș. Interiorul este gândit pentru lucrurile esențiale: telefon, portofel, chei și mici accesorii. Modelul este disponibil la comandă: livrare în 7–14 zile.",
-      "en": "Odette — metal-frame bag is a rectangular bag crafted from natural leather, designed for everyday styling, office looks and relaxed evening plans. The silhouette feels polished without looking stiff, making it easy to style with a considered everyday wardrobe.\n\nVersatile city-ready shape. The interior is made for daily essentials such as a phone, wallet, keys and small cosmetics. This style is available to order, with delivery in 7–14 days."
-    }
-  },
   "elegant-leather-hobo-bag-pink": {
     "title": {
       "ru": "Amara — сумка-хобо",
@@ -616,26 +601,14 @@ const productCopyBySlug: Record<string, ProductLocalizedCopy> = {
   },
   "premium-woven-hobo-bag-natural-beige": {
     "title": {
-      "ru": "Плетёная сумка хобо",
-      "ro": "Geantă hobo împletită",
-      "en": "Premium Woven Hobo Bag"
+      "ru": "Violette — плетёная сумка-хобо",
+      "ro": "Violette — geantă hobo împletită",
+      "en": "Violette — woven hobo bag"
     },
     "description": {
-      "ru": "Плетёная сумка хобо. Модель выполнена из плетёной фактуры с кожаными деталями и создана для повседневного гардероба, офиса и спокойных вечерних выходов. Силуэт выглядит собранно, но остаётся лёгким в повседневной носке: аксессуар не перегружает образ и хорошо сочетается с базовым гардеробом.\n\nУниверсальный силуэт для города. Внутреннее пространство рассчитано на ежедневные вещи — телефон, кошелёк, ключи и небольшую косметику. Модель доступна под заказ: срок доставки 7–14 дней.",
-      "ro": "Geantă hobo împletită este o geantă din textură împletită cu detalii din piele, creată pentru garderoba de zi cu zi, birou și ieșiri de seară relaxate. Silueta rămâne elegantă fără să pară rigidă, iar proporțiile sunt ușor de integrat în garderoba de zi cu zi.\n\nSiluetă versatilă pentru oraș. Interiorul este gândit pentru lucrurile esențiale: telefon, portofel, chei și mici accesorii. Modelul este disponibil la comandă: livrare în 7–14 zile.",
-      "en": "Premium Woven Hobo Bag is a handbag crafted from a woven texture with leather details, designed for everyday styling, office looks and relaxed evening plans. The silhouette feels polished without looking stiff, making it easy to style with a considered everyday wardrobe.\n\nVersatile city-ready shape. The interior is made for daily essentials such as a phone, wallet, keys and small cosmetics. This style is available to order, with delivery in 7–14 days."
-    }
-  },
-  "premium-fringe-beach-tote-bag-natural-beige": {
-    "title": {
-      "ru": "Ibiza — пляжная сумка-тоут с бахромой",
-      "ro": "Ibiza — geantă tote de plajă cu franjuri",
-      "en": "Ibiza — fringed beach tote bag"
-    },
-    "description": {
-      "ru": "Ibiza — пляжная сумка-тоут с бахромой в стиле boho-chic: премиальное плетение, декоративная бахрома по периметру и натуральные бамбуковые ручки.\n\nПросторное отделение для прогулок, отдыха и путешествий. Лёгкая конструкция и натуральные материалы — для тёплого сезона каждый день. Модель доступна под заказ: доставка 7–14 дней.",
-      "ro": "Ibiza — geantă tote de plajă cu franjuri în stil boho-chic: împletitură premium, franjuri decorative pe contur și mânere din bambus natural.\n\nCompartiment încăpător pentru plimbări, vacanță și călătorii. Construcție ușoară și materiale naturale — pentru sezonul cald, zi de zi. Model disponibil la comandă: livrare 7–14 zile.",
-      "en": "Ibiza — fringed beach tote in boho-chic style: premium handwoven texture, decorative fringe around the perimeter and natural bamboo handles.\n\nRoomy interior for strolls, holidays and travel. Lightweight build and natural materials for warm-season everyday wear. Available to order, delivery in 7–14 days."
+      "ru": "Violette — плетёная сумка-хобо с кожаными деталями и широким регулируемым ремнём — для города, офиса и спокойных вечерних выходов.\n\nМягкий силуэт и натуральная фактура плетения легко вписываются в повседневный гардероб. Модель доступна под заказ: срок доставки 7–14 дней.",
+      "ro": "Violette — geantă hobo împletită cu detalii din piele și curea lată reglabilă — pentru oraș, birou și ieșiri de seară relaxate.\n\nSilueta moale și textura naturală a împletiturii se integrează ușor în garderoba de zi cu zi. Model disponibil la comandă: livrare în 7–14 zile.",
+      "en": "Violette — woven hobo bag with leather details and a wide adjustable strap — for city days, office looks and relaxed evenings.\n\nThe soft silhouette and natural woven texture fit easily into an everyday wardrobe. Available to order, delivery in 7–14 days."
     }
   },
   "premium-vintage-straw-tote-bag-natural-beige": {
@@ -672,18 +645,6 @@ const productCopyBySlug: Record<string, ProductLocalizedCopy> = {
       "ru": "Плетёная сумка-ведро. Модель выполнена из плетёной фактуры с кожаными деталями и создана для летних образов, прогулок и расслабленного smart casual. Силуэт выглядит собранно, но остаётся лёгким в повседневной носке: аксессуар не перегружает образ и хорошо сочетается с базовым гардеробом.\n\nМягкое закрытие на шнурке. Внутреннее пространство рассчитано на ежедневные вещи — телефон, кошелёк, ключи и небольшую косметику. Модель доступна под заказ: срок доставки 7–14 дней.",
       "ro": "Geantă bucket împletită este o geantă bucket din textură împletită cu detalii din piele, creată pentru ținute de vară, plimbări și smart casual relaxat. Silueta rămâne elegantă fără să pară rigidă, iar proporțiile sunt ușor de integrat în garderoba de zi cu zi.\n\nÎnchidere lejeră cu șnur. Interiorul este gândit pentru lucrurile esențiale: telefon, portofel, chei și mici accesorii. Modelul este disponibil la comandă: livrare în 7–14 zile.",
       "en": "Premium Woven Bucket Bag is a bucket bag crafted from a woven texture with leather details, designed for summer looks, walks and relaxed smart casual styling. The silhouette feels polished without looking stiff, making it easy to style with a considered everyday wardrobe.\n\nRelaxed drawstring closure. The interior is made for daily essentials such as a phone, wallet, keys and small cosmetics. This style is available to order, with delivery in 7–14 days."
-    }
-  },
-  "premium-woven-vanity-crossbody-bag-black": {
-    "title": {
-      "ru": "Sirmione — плетёная vanity-сумка кроссбоди",
-      "ro": "Sirmione — geantă vanity crossbody împletită",
-      "en": "Sirmione — woven vanity crossbody bag"
-    },
-    "description": {
-      "ru": "Sirmione — плетёная vanity-сумка кроссбоди с двойной молнией, верхней ручкой и съёмным ремнём — для отдыха, путешествий и летних прогулок.\n\nКомпактное отделение вмещает телефон, кошелёк, ключи и косметику. Модель доступна под заказ: доставка 7–14 дней.",
-      "ro": "Sirmione — geantă vanity crossbody împletită, cu fermoar dublu, mâner superior și curea detașabilă — pentru vacanță, călătorii și plimbări de vară.\n\nCompartimentul compact încăpe telefon, portofel, chei și cosmetice. Model disponibil la comandă: livrare 7–14 zile.",
-      "en": "Sirmione — woven vanity crossbody with a double zip, top handle and detachable strap — for holidays, travel and summer strolls.\n\nThe compact interior fits a phone, wallet, keys and cosmetics. Available to order, delivery in 7–14 days."
     }
   },
   "elegant-leather-crossbody-bag-white": {

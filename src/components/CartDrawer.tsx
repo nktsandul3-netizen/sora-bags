@@ -5,7 +5,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { AnimatePresence, motion } from "framer-motion";
 import { useCart } from "@/context/cart";
-import { getProduct } from "@/lib/data";
+import { getBrandName, getProduct } from "@/lib/data";
 import { formatPrice } from "@/lib/format";
 import { getDeliveryInfo } from "@/lib/delivery";
 import { withLocalePath, type Locale } from "@/lib/i18n";
@@ -30,7 +30,7 @@ function CartLineImage({ slug, colorName, title }: { slug: string; colorName: st
       src={image?.src}
       alt={image?.alt ?? title}
       sizes="80px"
-      className="h-24 w-20 rounded-xl bg-stone-50"
+      className="h-24 w-20 rounded-[1.2rem] bg-[#f7f3ee] shadow-sm"
       imageClassName="object-contain object-center"
     />
   );
@@ -41,27 +41,59 @@ function RecommendationCard({ product, locale }: { product: Product; locale: Loc
   const localizedTitle = localizeProductTitle(product, locale);
 
   return (
-    <Link href={withLocalePath(`/product/${product.slug}`, locale)} className="group block" aria-label={localizedTitle}>
-      <div className="relative h-28 overflow-hidden rounded-lg bg-white">
+    <Link
+      href={withLocalePath(`/product/${product.slug}`, locale)}
+      className="group flex gap-3 rounded-2xl border border-white/70 bg-white/80 p-2.5 shadow-sm shadow-stone-200/50 transition duration-300 hover:bg-white"
+      aria-label={localizedTitle}
+    >
+      <div className="relative h-16 w-14 shrink-0 overflow-hidden rounded-xl bg-[#f8f4ee]">
         {image ? (
           <Image
             src={image.src}
             alt={image.alt || localizedTitle}
             fill
-            sizes="320px"
-            className="object-contain object-center p-3 transition-transform duration-500 group-hover:scale-105"
+            sizes="56px"
+            className="object-contain object-center p-1.5 transition-transform duration-500 group-hover:scale-105"
           />
         ) : null}
       </div>
-      <p className="mt-3 line-clamp-2 text-sm leading-snug text-stone-900">{localizedTitle}</p>
+      <div className="min-w-0 flex-1">
+        <p className="truncate text-[9px] font-semibold uppercase tracking-[0.14em] text-stone-400">
+          {getBrandName(product.brandSlug)}
+        </p>
+        <p className="mt-0.5 line-clamp-2 text-xs leading-snug text-stone-900">{localizedTitle}</p>
+        <p className="mt-1 text-[11px] font-semibold text-stone-950">{formatPrice(product.price, locale)}</p>
+      </div>
     </Link>
   );
+}
+
+function getItemCountLabel(count: number, locale: Locale) {
+  if (locale === "ru") {
+    const mod10 = count % 10;
+    const mod100 = count % 100;
+    const word =
+      mod10 === 1 && mod100 !== 11
+        ? "товар"
+        : mod10 >= 2 && mod10 <= 4 && (mod100 < 12 || mod100 > 14)
+          ? "товара"
+          : "товаров";
+
+    return `${count} ${word}`;
+  }
+
+  if (locale === "ro") {
+    return count === 1 ? "1 produs" : `${count} produse`;
+  }
+
+  return count === 1 ? "1 item" : `${count} items`;
 }
 
 export default function CartDrawer() {
   const { items, total, isOpen, closeCart, remove, setQty } = useCart();
   const locale = useLocale();
   const t = useT();
+  const itemCount = items.reduce((sum, item) => sum + item.qty, 0);
   const recommendations = useMemo(
     () => getCartRecommendations(items.map((item) => item.slug), 3),
     [items],
@@ -93,7 +125,7 @@ export default function CartDrawer() {
           onClick={closeCart}
         >
           <motion.aside
-            className="absolute right-0 top-0 flex h-full w-full max-w-[760px] bg-white shadow-[-24px_0_70px_rgba(28,25,23,0.18)]"
+            className="absolute right-0 top-0 flex h-full w-full max-w-[920px] overflow-hidden bg-[#fbfaf8] shadow-[-24px_0_80px_rgba(28,25,23,0.2)]"
             initial={{ x: "100%" }}
             animate={{ x: 0 }}
             exit={{ x: "100%" }}
@@ -101,11 +133,14 @@ export default function CartDrawer() {
             onClick={(event) => event.stopPropagation()}
             aria-label={t("common.cart")}
           >
-            <div className="hidden w-[38%] border-r border-stone-200 p-8 lg:block">
-              <h2 className="text-xl font-semibold uppercase tracking-[0.08em] text-stone-950">
+            <div className="hidden w-[34%] shrink-0 flex-col border-r border-stone-200/80 bg-[#f4eee6] p-5 lg:flex">
+              <p className="text-[10px] font-semibold uppercase tracking-[0.22em] text-stone-500">
+                SORA Atelier
+              </p>
+              <h2 className="mt-2 text-lg font-semibold uppercase leading-tight tracking-[0.08em] text-stone-950">
                 {t("cart.recommendation")}
               </h2>
-              <div className="mt-8 space-y-7">
+              <div className="mt-5 space-y-2.5">
                 {recommendations.map((product) => (
                   <RecommendationCard key={product.slug} product={product} locale={locale} />
                 ))}
@@ -113,13 +148,16 @@ export default function CartDrawer() {
             </div>
 
             <div className="flex min-w-0 flex-1 flex-col">
-              <header className="px-6 pt-7 sm:px-9">
+              <header className="px-5 pt-6 sm:px-8">
                 <div className="flex items-start justify-between gap-6">
                   <div>
-                    <h2 className="text-3xl font-semibold uppercase tracking-[0.04em] text-stone-950">
+                    <p className="text-[10px] font-semibold uppercase tracking-[0.22em] text-stone-400">
+                      {getItemCountLabel(itemCount, locale)}
+                    </p>
+                    <h2 className="mt-2 text-3xl font-semibold uppercase tracking-[0.04em] text-stone-950 sm:text-4xl">
                       {t("common.cart")}
                     </h2>
-                    <p className="mt-4 text-sm text-stone-600">
+                    <p className="mt-3 max-w-sm text-sm leading-relaxed text-stone-600">
                       {total >= 15000
                         ? t("cart.freeDeliveryUnlocked")
                         : t("cart.deliveryCalculated")}
@@ -136,7 +174,6 @@ export default function CartDrawer() {
                     </svg>
                   </button>
                 </div>
-                <div className="mt-5 h-0.5 w-full bg-stone-950" />
               </header>
 
               {items.length === 0 ? (
@@ -152,8 +189,8 @@ export default function CartDrawer() {
                 </div>
               ) : (
                 <>
-                  <div className="min-h-0 flex-1 overflow-y-auto px-6 py-2 sm:px-9">
-                    <div className="divide-y divide-stone-200">
+                  <div className="min-h-0 flex-1 overflow-y-auto px-5 py-5 sm:px-8">
+                    <div className="space-y-3">
                       {items.map((item) => {
                         const product = getProduct(item.slug);
                         const delivery = product ? getDeliveryInfo(product, locale) : null;
@@ -162,28 +199,33 @@ export default function CartDrawer() {
                           : localizeProductTitle(item.title, locale);
 
                         return (
-                        <article key={`${item.slug}-${item.color}`} className="grid grid-cols-[80px_1fr_auto] gap-4 py-7">
+                        <article
+                          key={`${item.slug}-${item.color}`}
+                          className="grid grid-cols-[80px_1fr] gap-4 rounded-[1.35rem] border border-stone-200/80 bg-white p-3.5 shadow-sm shadow-stone-200/60 sm:grid-cols-[80px_1fr_auto] sm:p-4"
+                        >
                           <Link href={withLocalePath(`/product/${item.slug}`, locale)} onClick={closeCart} className="block">
                             <CartLineImage slug={item.slug} colorName={item.color} title={localizedTitle} />
                           </Link>
 
                           <div className="min-w-0">
-                            <p className="text-sm text-stone-500">{item.brand}</p>
+                            <p className="text-[11px] font-semibold uppercase tracking-[0.14em] text-stone-400">{item.brand}</p>
                             <Link
                               href={withLocalePath(`/product/${item.slug}`, locale)}
                               onClick={closeCart}
-                              className="mt-1 block text-lg font-semibold leading-snug text-stone-950 hover:text-stone-700"
+                              className="mt-1.5 block text-base font-semibold leading-snug text-stone-950 hover:text-stone-700 sm:text-lg"
                             >
                               {localizedTitle}
                             </Link>
-                            <p className="mt-1 text-sm text-stone-500">{t("catalog.color")}: {localizeColorName(item.color, locale)}</p>
+                            <p className="mt-2 inline-flex rounded-full bg-stone-100 px-2.5 py-1 text-xs text-stone-600">
+                              {t("catalog.color")}: {localizeColorName(item.color, locale)}
+                            </p>
                             {delivery && (
-                              <p className="mt-1.5 text-xs leading-relaxed text-stone-500">
+                              <p className="mt-2 text-xs leading-relaxed text-stone-500">
                                 {delivery.leadTime}
                               </p>
                             )}
 
-                            <div className="mt-4 inline-flex items-center border border-stone-200">
+                            <div className="mt-4 inline-flex items-center rounded-full border border-stone-200 bg-stone-50">
                               <button
                                 type="button"
                                 onClick={() => setQty(item.slug, item.color, item.qty - 1)}
@@ -204,16 +246,16 @@ export default function CartDrawer() {
                             </div>
                           </div>
 
-                          <div className="flex flex-col items-end justify-between">
+                          <div className="col-span-2 flex items-center justify-between border-t border-stone-100 pt-3 sm:col-span-1 sm:flex-col sm:items-end sm:border-t-0 sm:pt-0">
                             <button
                               type="button"
                               onClick={() => remove(item.slug, item.color)}
-                              className="text-stone-400 transition hover:text-stone-900"
+                              className="flex h-8 w-8 items-center justify-center rounded-full bg-stone-50 text-stone-400 transition hover:bg-stone-100 hover:text-stone-900"
                               aria-label={t("cart.removeItem")}
                             >
                               ×
                             </button>
-                            <p className="text-lg font-medium text-stone-950">
+                            <p className="text-base font-semibold text-stone-950 sm:text-lg">
                               {formatPrice(item.price * item.qty, locale)}
                             </p>
                           </div>
@@ -223,16 +265,23 @@ export default function CartDrawer() {
                     </div>
                   </div>
 
-                  <footer className="border-t border-stone-200 px-6 py-6 sm:px-9">
+                  <footer className="border-t border-stone-200 bg-white/90 px-5 py-5 shadow-[0_-18px_40px_rgba(28,25,23,0.07)] backdrop-blur sm:px-8">
+                    <div className="mb-3 flex items-center justify-between gap-4 text-xs uppercase tracking-[0.14em] text-stone-400">
+                      <span>{getItemCountLabel(itemCount, locale)}</span>
+                      <span>{total >= 15000 ? t("checkout.free") : t("checkout.byTariff")}</span>
+                    </div>
                     <Link
                       href={withLocalePath("/cart", locale)}
                       onClick={closeCart}
-                      className="flex w-full items-center justify-center gap-5 rounded-md bg-stone-950 px-6 py-4 text-sm font-semibold text-white transition hover:bg-stone-800"
+                      className="flex w-full items-center justify-between gap-4 rounded-[1rem] bg-stone-950 px-5 py-4 text-sm font-semibold text-white shadow-lg shadow-stone-950/15 transition hover:-translate-y-0.5 hover:bg-stone-800"
                     >
-                      {t("checkout.placeOrder")}
-                      <span aria-hidden>—</span>
+                      <span>{t("checkout.placeOrder")}</span>
+                      <span aria-hidden className="text-stone-500">→</span>
                       <span>{formatPrice(total, locale)}</span>
                     </Link>
+                    <p className="mt-3 text-center text-xs leading-relaxed text-stone-400">
+                      {t("cart.checkoutHint")}
+                    </p>
                   </footer>
                 </>
               )}

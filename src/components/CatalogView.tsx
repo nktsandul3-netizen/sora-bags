@@ -6,10 +6,18 @@ import Image from "next/image";
 import type { CategoryDef, Product } from "@/lib/types";
 import {
   bagMenuCategories,
+  compareByCuratedBagGrid,
   compareByCategoryThenNewest,
   compareByNewest,
-  getBrandName,
 } from "@/lib/data";
+import {
+  buildCatalogFacets,
+  countActiveCatalogFilters,
+  EMPTY_CATALOG_FILTERS,
+  productMatchesCatalogFilters,
+  type CatalogFilters,
+  type MultiSelectFilterKey,
+} from "@/lib/catalog-filters";
 import { withLocalePath } from "@/lib/i18n";
 import { useLocale, useT } from "@/lib/useI18n";
 import { categoryName } from "@/lib/catalog-i18n";
@@ -17,37 +25,11 @@ import ProductGrid from "./ProductGrid";
 
 type SortKey = "new" | "price-asc" | "price-desc";
 
-interface Filters {
-  priceMin: string;
-  priceMax: string;
-  brands: string[];
-  colors: string[];
-  materials: string[];
-}
-
-const EMPTY_FILTERS: Filters = {
-  priceMin: "",
-  priceMax: "",
-  brands: [],
-  colors: [],
-  materials: [],
-};
-
-function countActive(filters: Filters): number {
-  return (
-    (filters.priceMin ? 1 : 0) +
-    (filters.priceMax ? 1 : 0) +
-    filters.brands.length +
-    filters.colors.length +
-    filters.materials.length
-  );
-}
-
 function Chevron({ open }: { open?: boolean }) {
   return (
     <svg
       viewBox="0 0 24 24"
-      className={"h-4 w-4 transition-transform " + (open ? "rotate-180" : "")}
+      className={"h-3.5 w-3.5 transition-transform " + (open ? "rotate-180" : "")}
       fill="none"
       stroke="currentColor"
       strokeWidth="1.6"
@@ -100,51 +82,25 @@ export default function CatalogView({
   const [sortKey, setSortKey] = useState<SortKey>("new");
   const perPage = 60;
   const [visible, setVisible] = useState(60);
-  const [applied, setApplied] = useState<Filters>(EMPTY_FILTERS);
-  const [draft, setDraft] = useState<Filters>(EMPTY_FILTERS);
+  const [applied, setApplied] = useState<CatalogFilters>(EMPTY_CATALOG_FILTERS);
+  const [draft, setDraft] = useState<CatalogFilters>(EMPTY_CATALOG_FILTERS);
   const [openMenu, setOpenMenu] = useState<"sort" | null>(null);
   const groupByCategory = activeSlug === "vse-sumki" || activeSlug === "vse-aksessuary";
+  const useCuratedBagOrder = categories?.[0]?.section === "bags";
 
-  const facets = useMemo(() => {
-    const brandSlugs = new Set<string>();
-    const colors = new Set<string>();
-    const materials = new Set<string>();
-    for (const p of products) {
-      brandSlugs.add(p.brandSlug);
-      p.colors.forEach((c) => colors.add(c.name));
-      if (p.material) materials.add(p.material);
-    }
-    return {
-      brands: [...brandSlugs].sort((a, b) =>
-        getBrandName(a).localeCompare(getBrandName(b), locale),
-      ),
-      colors: [...colors].sort((a, b) => a.localeCompare(b, locale)),
-      materials: [...materials].sort((a, b) => a.localeCompare(b, locale)),
-    };
-  }, [locale, products]);
+  const facets = useMemo(() => buildCatalogFacets(products, locale), [locale, products]);
 
   const filtered = useMemo(() => {
-    const list = products.filter((p) => {
-      if (applied.priceMin && p.price < Number(applied.priceMin)) return false;
-      if (applied.priceMax && p.price > Number(applied.priceMax)) return false;
-      if (applied.brands.length && !applied.brands.includes(p.brandSlug)) return false;
-      if (
-        applied.colors.length &&
-        !p.colors.some((c) => applied.colors.includes(c.name))
-      )
-        return false;
-      if (applied.materials.length && !applied.materials.includes(p.material))
-        return false;
-      return true;
-    });
+    const list = products.filter((product) => productMatchesCatalogFilters(product, applied));
     if (sortKey === "price-asc") list.sort((a, b) => a.price - b.price);
     else if (sortKey === "price-desc") list.sort((a, b) => b.price - a.price);
+    else if (useCuratedBagOrder) list.sort((a, b) => compareByCuratedBagGrid(a, b, activeSlug));
     else list.sort(groupByCategory ? compareByCategoryThenNewest : compareByNewest);
     return list;
-  }, [products, applied, sortKey, groupByCategory]);
+  }, [products, applied, sortKey, groupByCategory, useCuratedBagOrder, activeSlug]);
 
   const shown = filtered.slice(0, visible);
-  const activeCount = countActive(applied);
+  const activeCount = countActiveCatalogFilters(applied);
   const isBags = categories?.[0]?.section === "bags";
   const sectionLabel = isBags ? t("nav.bags") : t("nav.accessories");
   const navCategories = isBags
@@ -167,11 +123,11 @@ export default function CatalogView({
     setShowFilter(false);
   }
   function resetDraft() {
-    setDraft(EMPTY_FILTERS);
-    setApplied(EMPTY_FILTERS);
+    setDraft(EMPTY_CATALOG_FILTERS);
+    setApplied(EMPTY_CATALOG_FILTERS);
     setVisible(perPage);
   }
-  function toggle(key: keyof Filters, value: string) {
+  function toggle(key: MultiSelectFilterKey, value: string) {
     setDraft((d) => {
       const arr = d[key] as string[];
       const next = arr.includes(value)
@@ -330,16 +286,16 @@ export default function CatalogView({
       ) : null}
 
       {/* Панель управления: фильтр / сортировка / количество товаров */}
-      <div className="relative mb-7 flex items-center justify-between gap-4 border-b border-stone-200 pb-3 text-[11px] font-medium text-stone-950">
-        <div className="flex items-center gap-4">
+      <div className="relative mb-7 flex items-center justify-between gap-4 border-b border-stone-200 pb-3 text-[10px] font-medium text-stone-950">
+        <div className="flex items-center gap-2.5">
           <button
             type="button"
             onClick={openDrawer}
-            className="inline-flex h-9 min-w-[76px] items-center justify-center gap-2 rounded-sm border border-stone-100 bg-white px-5 text-[10px] shadow-[0_2px_10px_rgba(0,0,0,0.03)] transition hover:border-stone-300"
+            className="inline-flex h-7 min-w-[64px] items-center justify-center gap-1.5 rounded-sm border border-stone-100 bg-white px-3 text-[9px] shadow-[0_2px_10px_rgba(0,0,0,0.03)] transition hover:border-stone-300"
           >
             <span>{t("catalog.filter")}</span>
             {activeCount > 0 && (
-              <span className="rounded-full bg-stone-900 px-1.5 py-0.5 text-[10px] leading-none text-white">
+              <span className="rounded-full bg-stone-900 px-1 py-px text-[8px] leading-none text-white">
                 {activeCount}
               </span>
             )}
@@ -349,7 +305,7 @@ export default function CatalogView({
             <button
               type="button"
               onClick={() => setOpenMenu((m) => (m === "sort" ? null : "sort"))}
-              className="inline-flex h-9 min-w-[132px] items-center justify-between gap-4 rounded-sm border border-stone-100 bg-white px-5 text-[10px] shadow-[0_2px_10px_rgba(0,0,0,0.03)] transition hover:border-stone-300"
+              className="inline-flex h-7 min-w-[108px] items-center justify-between gap-2 rounded-sm border border-stone-100 bg-white px-3 text-[9px] shadow-[0_2px_10px_rgba(0,0,0,0.03)] transition hover:border-stone-300"
             >
               <span>{t("catalog.sortBy")}</span>
               <Chevron open={openMenu === "sort"} />
@@ -450,13 +406,15 @@ export default function CatalogView({
               </div>
             </FilterSection>
 
-            <FilterSection title={t("catalog.brand")}>
-              <CheckboxList
-                items={facets.brands.map((b) => ({ value: b, label: getBrandName(b) }))}
-                selected={draft.brands}
-                onToggle={(v) => toggle("brands", v)}
-              />
-            </FilterSection>
+            {facets.categories.length > 0 && (
+              <FilterSection title={t("catalog.category")}>
+                <CheckboxList
+                  items={facets.categories}
+                  selected={draft.categories}
+                  onToggle={(value) => toggle("categories", value)}
+                />
+              </FilterSection>
+            )}
 
             {navCategories && basePath && (
               <FilterSection title={sectionLabel}>
@@ -479,21 +437,65 @@ export default function CatalogView({
               </FilterSection>
             )}
 
-            <FilterSection title={t("catalog.color")}>
-              <CheckboxList
-                items={facets.colors.map((c) => ({ value: c, label: c }))}
-                selected={draft.colors}
-                onToggle={(v) => toggle("colors", v)}
-              />
-            </FilterSection>
+            {facets.colors.length > 0 && (
+              <FilterSection title={t("catalog.color")}>
+                <CheckboxList
+                  items={facets.colors}
+                  selected={draft.colors}
+                  onToggle={(value) => toggle("colors", value)}
+                />
+              </FilterSection>
+            )}
 
-            <FilterSection title={t("catalog.material")}>
-              <CheckboxList
-                items={facets.materials.map((m) => ({ value: m, label: m }))}
-                selected={draft.materials}
-                onToggle={(v) => toggle("materials", v)}
-              />
-            </FilterSection>
+            {facets.materials.length > 0 && (
+              <FilterSection title={t("catalog.material")}>
+                <CheckboxList
+                  items={facets.materials}
+                  selected={draft.materials}
+                  onToggle={(value) => toggle("materials", value)}
+                />
+              </FilterSection>
+            )}
+
+            {facets.sizes.length > 0 && (
+              <FilterSection title={t("catalog.size")}>
+                <CheckboxList
+                  items={facets.sizes}
+                  selected={draft.sizes}
+                  onToggle={(value) => toggle("sizes", value)}
+                />
+              </FilterSection>
+            )}
+
+            {facets.strapTypes.length > 0 && (
+              <FilterSection title={t("catalog.strapType")}>
+                <CheckboxList
+                  items={facets.strapTypes}
+                  selected={draft.strapTypes}
+                  onToggle={(value) => toggle("strapTypes", value)}
+                />
+              </FilterSection>
+            )}
+
+            {facets.closureTypes.length > 0 && (
+              <FilterSection title={t("catalog.closureType")}>
+                <CheckboxList
+                  items={facets.closureTypes}
+                  selected={draft.closureTypes}
+                  onToggle={(value) => toggle("closureTypes", value)}
+                />
+              </FilterSection>
+            )}
+
+            {facets.availability.length > 0 && (
+              <FilterSection title={t("catalog.availability")}>
+                <CheckboxList
+                  items={facets.availability}
+                  selected={draft.availability}
+                  onToggle={(value) => toggle("availability", value)}
+                />
+              </FilterSection>
+            )}
 
           </div>
 

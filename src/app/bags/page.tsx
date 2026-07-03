@@ -22,10 +22,10 @@ export default async function BagsPage() {
         alt: "All bags SÓRA",
         width: 1024,
         height: 576,
-        objectPosition: "50% 50%",
+        objectPosition: "50% 43%",
         copyTone: "light",
         bgClassName: "bg-[#c4b8a8]",
-        fit: "full-width",
+        aspectClass: "h-[max(120px,calc(100vw*576/1024-4.5cm))]",
       }}
     />
   );

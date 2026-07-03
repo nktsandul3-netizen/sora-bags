@@ -40,6 +40,10 @@ export interface Product {
   oldPrice?: number;
   status?: ProductStatus;
   colors: ProductColor[];
+  /** Editorial position for curated catalog grids. Lower values appear first. */
+  catalogOrder?: number;
+  /** Preferred color name for catalog cards when a visual color rhythm is needed. */
+  featuredColorName?: string;
   images?: ProductImageAsset[];
   material: string;
   description: string;

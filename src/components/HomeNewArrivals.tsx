@@ -5,7 +5,7 @@ import Link from "next/link";
 import Image from "next/image";
 import type { Product } from "@/lib/types";
 import { formatPrice } from "@/lib/format";
-import { getBrandName } from "@/lib/data";
+import { getBrandName, getFeaturedColorIndex } from "@/lib/data";
 import { withLocalePath } from "@/lib/i18n";
 import { useIsDesktop } from "@/lib/useIsDesktop";
 import { useLocale, useT } from "@/lib/useI18n";
@@ -59,7 +59,8 @@ function ShowcaseCard({ product }: { product: Product }) {
   const onSale = product.oldPrice && product.oldPrice > product.price;
   const localizedTitle = localizeProductTitle(product, locale);
   const colors = product.colors;
-  const displayIdx = previewIdx ?? 0;
+  const defaultColorIdx = getFeaturedColorIndex(product);
+  const displayIdx = previewIdx ?? defaultColorIdx;
   const activeColor = colors[displayIdx] ?? colors[0];
   const colorImages = activeColor ? getColorImages(activeColor) : [];
   const primary = colorImages[0];
@@ -165,6 +166,7 @@ function ShowcaseCard({ product }: { product: Product }) {
           productSlug={product.slug}
           colors={colors}
           previewIndex={previewIdx}
+          defaultIndex={defaultColorIdx}
           onPreview={setPreviewIdx}
           className="mt-3 px-1"
         />
@@ -201,7 +203,7 @@ function ShowcaseCard({ product }: { product: Product }) {
         <button
           type="button"
           onClick={openQuickView}
-          className="absolute inset-x-1 top-0 flex h-10 translate-y-2 items-center justify-center rounded-md bg-stone-950 px-4 text-[12px] font-semibold text-white opacity-0 shadow-sm transition-all duration-300 ease-out hover:bg-stone-800 group-hover:translate-y-0 group-hover:opacity-100 max-lg:translate-y-0 max-lg:opacity-100 lg:h-14 lg:text-[13px]"
+          className="absolute inset-x-1 top-0 flex h-7 translate-y-2 items-center justify-center rounded-md bg-stone-950 px-2 text-[9px] font-semibold text-white opacity-0 shadow-sm transition-all duration-300 ease-out hover:bg-stone-800 group-hover:translate-y-0 group-hover:opacity-100 max-lg:translate-y-0 max-lg:opacity-100 sm:h-8 sm:px-2.5 sm:text-[10px] lg:h-9 lg:text-[11px]"
         >
           {t("common.buy")} {formatPrice(product.price, locale)}
         </button>

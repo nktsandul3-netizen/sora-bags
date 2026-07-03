@@ -1,13 +1,10 @@
 import type { BrandDef, CategoryDef, Product } from "./types";
 
 export const bagCategories: CategoryDef[] = [
-  { slug: "vse-sumki", name: "Все сумки", section: "bags" },
   { slug: "clutches", name: "Clutches", section: "bags" },
-  { slug: "vanity", name: "Vanity", section: "bags" },
   { slug: "bucket-bags-women", name: "Bucket Bags Women", section: "bags" },
   { slug: "bowling-bags", name: "Bowling Bags", section: "bags" },
   { slug: "handbags-women", name: "Handbags Women", section: "bags" },
-  { slug: "rectangular-bags", name: "Rectangular Bags", section: "bags" },
   { slug: "tote-bags-women", name: "Tote Bags Women", section: "bags" },
   { slug: "shoulder-bags-women", name: "Shoulder Bags Women", section: "bags" },
   { slug: "crossbody-bags-women", name: "Crossbody Bags Women", section: "bags" },
@@ -375,7 +372,7 @@ export const products: Product[] = [
     title: "Ortigia — тоут с каркасным силуэтом",
     brandSlug: "luma-atelier",
     section: "bags",
-    categorySlug: "handbags-women",
+    categorySlug: "tote-bags-women",
     price: 1600,
     galleryFit: "contain",
     colors: [
@@ -840,87 +837,11 @@ export const products: Product[] = [
     ],
   },
   {
-    slug: "vintage-frame-leather-handbag-burgundy",
-    title: "Odette — сумка с металлической рамкой",
-    brandSlug: "luma-atelier",
-    section: "bags",
-    categorySlug: "rectangular-bags",
-    price: 1600,
-    galleryFit: "contain",
-    images: [
-      { src: "/products/vintage-frame-leather-handbag/frame-burgundy-1.png", alt: "Odette Burgundy — вид сбоку" },
-    ],
-    colors: [
-      {
-        name: "Burgundy",
-        hex: C.burgundy.hex,
-        status: "Доставка 7–14 дней",
-        images: [
-          { src: "/products/vintage-frame-leather-handbag/frame-burgundy-1.png", alt: "Odette Burgundy — вид сбоку" },
-          { src: "/products/vintage-frame-leather-handbag/frame-burgundy-2.png", alt: "Odette Burgundy — внутри" },
-          { src: "/products/vintage-frame-leather-handbag/frame-burgundy-3.png", alt: "Odette Burgundy — вид с ремнём" },
-        ],
-      },
-      {
-        name: "Black",
-        hex: C.jetBlack.hex,
-        status: "Доставка 7–14 дней",
-        images: [
-          { src: "/products/vintage-frame-leather-handbag/frame-black-1.png", alt: "Odette Black — вид сбоку" },
-          { src: "/products/vintage-frame-leather-handbag/frame-black-2.png", alt: "Odette Black — вид с ремнём" },
-          { src: "/products/vintage-frame-leather-handbag/frame-black-3.png", alt: "Odette Black — внутри" },
-        ],
-      },
-      {
-        name: "Cognac",
-        hex: C.cognac.hex,
-        status: "Доставка 7–14 дней",
-        images: [
-          { src: "/products/vintage-frame-leather-handbag/frame-cognac-1.png", alt: "Odette Cognac — вид сбоку" },
-          { src: "/products/vintage-frame-leather-handbag/frame-cognac-2.png", alt: "Odette Cognac — внутри" },
-          { src: "/products/vintage-frame-leather-handbag/frame-cognac-3.png", alt: "Odette Cognac — вид с ремнём" },
-        ],
-      },
-      {
-        ...C.offWhite,
-        status: "Доставка 7–14 дней",
-        images: [
-          { src: "/products/vintage-frame-leather-handbag/frame-off-white-1.png", alt: "Odette Off-White — вид сбоку" },
-          { src: "/products/vintage-frame-leather-handbag/frame-off-white-2.png", alt: "Odette Off-White — внутри" },
-          { src: "/products/vintage-frame-leather-handbag/frame-off-white-3.png", alt: "Odette Off-White — вид с ремнём" },
-        ],
-      },
-    ],
-    material: "Premium Leather",
-    description:
-      "Элегантная женская сумка из премиальной кожи, вдохновлённая эстетикой винтажных аксессуаров и современной итальянской модой. Изящный удлинённый силуэт, жёсткая конструкция и металлическая рамочная застёжка придают модели утончённый характер и делают её эффектным акцентом любого образа.\n\nКомпактная форма позволяет удобно разместить самые необходимые вещи, сохраняя элегантность и лёгкость. Сумку можно носить в руке благодаря удобной верхней ручке или использовать съёмный ремень для ношения на плече.\n\nБлагородные оттенки кожи и лаконичный дизайн делают модель универсальным выбором как для повседневных выходов, так и для вечерних мероприятий.",
-    highlights: [
-      "Премиальная гладкая кожа",
-      "Винтажная рамочная застёжка",
-      "Съёмный плечевой ремень",
-      "Премиальная металлическая фурнитура золотого цвета",
-    ],
-    specs: [
-      { label: "Размер", value: "28.5 × 11.5 × 10 см" },
-      { label: "Форма", value: "Прямоугольная структурная сумка" },
-      { label: "Застёжка", value: "Винтажная рамочная застёжка" },
-      { label: "Ручки", value: "Удобная верхняя ручка" },
-      { label: "Ремень", value: "Съёмный плечевой ремень" },
-      { label: "Карманы и отделения", value: "Вместительное основное отделение" },
-      { label: "Материал", value: "Натуральная кожа" },
-      { label: "Фурнитура", value: "Премиальная металлическая фурнитура золотого цвета" },
-      { label: "Страна производства", value: "Италия" },
-      { label: "Уход", value: "Очищать мягкой сухой тканью; избегать влаги, жары и прямого солнца" },
-      { label: "Доставка", value: "7–14 дней" },
-      { label: "Возврат", value: "14 дней" },
-    ],
-  },
-  {
     slug: "elegant-leather-hobo-bag-pink",
     title: "Amara — сумка-хобо",
     brandSlug: "luma-atelier",
     section: "bags",
-    categorySlug: "handbags-women",
+    categorySlug: "shoulder-bags-women",
     price: 1600,
     colors: [
       {
@@ -1020,7 +941,7 @@ export const products: Product[] = [
     title: "Liora — сумка-хобо",
     brandSlug: "luma-atelier",
     section: "bags",
-    categorySlug: "handbags-women",
+    categorySlug: "shoulder-bags-women",
     price: 1600,
     colors: [
       {
@@ -1144,7 +1065,7 @@ export const products: Product[] = [
     title: "Serena — сумка-хобо из гладкой кожи",
     brandSlug: "luma-atelier",
     section: "bags",
-    categorySlug: "handbags-women",
+    categorySlug: "shoulder-bags-women",
     price: 1600,
     images: [
       { src: "/products/elegant-leather-hobo-bag-smooth/smooth-white-lifestyle.png", alt: "Elegant Leather Hobo Bag White в образе" },
@@ -1503,10 +1424,10 @@ export const products: Product[] = [
   },
   {
     slug: "premium-woven-hobo-bag-natural-beige",
-    title: "Premium Woven Hobo Bag",
+    title: "Violette — плетёная сумка-хобо",
     brandSlug: "luma-atelier",
     section: "bags",
-    categorySlug: "handbags-women",
+    categorySlug: "shoulder-bags-women",
     price: 1600,
     colors: [
       {
@@ -1514,8 +1435,8 @@ export const products: Product[] = [
         hex: "#c9a474",
         status: "Доставка 7–14 дней",
         images: [
-          { src: "/products/premium-woven-hobo-bag/woven-hobo-natural-beige-1.png", alt: "Premium Woven Hobo Bag Natural Beige — вид спереди" },
-          { src: "/products/premium-woven-hobo-bag/woven-hobo-natural-beige-2.png", alt: "Premium Woven Hobo Bag Natural Beige — внутри" },
+          { src: "/products/premium-woven-hobo-bag/woven-hobo-natural-beige-1.png", alt: "Violette Natural Beige — вид спереди" },
+          { src: "/products/premium-woven-hobo-bag/woven-hobo-natural-beige-2.png", alt: "Violette Natural Beige — внутри" },
         ],
       },
       {
@@ -1523,8 +1444,8 @@ export const products: Product[] = [
         hex: C.ivory.hex,
         status: "Доставка 7–14 дней",
         images: [
-          { src: "/products/premium-woven-hobo-bag/woven-hobo-ivory-cream-1.png", alt: "Premium Woven Hobo Bag Ivory Cream — вид спереди" },
-          { src: "/products/premium-woven-hobo-bag/woven-hobo-ivory-cream-2.png", alt: "Premium Woven Hobo Bag Ivory Cream — внутри" },
+          { src: "/products/premium-woven-hobo-bag/woven-hobo-ivory-cream-1.png", alt: "Violette Ivory Cream — вид спереди" },
+          { src: "/products/premium-woven-hobo-bag/woven-hobo-ivory-cream-2.png", alt: "Violette Ivory Cream — внутри" },
         ],
       },
     ],
@@ -1543,55 +1464,6 @@ export const products: Product[] = [
       { label: "Карманы и отделения", value: "Вместительное основное отделение" },
       { label: "Материал", value: "Плетёный материал + кожа" },
       { label: "Фурнитура", value: "Отделка из натуральной кожи" },
-      { label: "Страна производства", value: "Италия" },
-      { label: "Уход", value: "Очищать мягкой сухой тканью; избегать влаги, жары и прямого солнца" },
-      { label: "Доставка", value: "7–14 дней" },
-      { label: "Возврат", value: "14 дней" },
-    ],
-  },
-  {
-    slug: "premium-fringe-beach-tote-bag-natural-beige",
-    title: "Ibiza — пляжная сумка-тоут с бахромой",
-    brandSlug: "luma-atelier",
-    section: "bags",
-    categorySlug: "tote-bags-women",
-    price: 1600,
-    galleryFit: "contain",
-    colors: [
-      {
-        name: "Natural Beige",
-        hex: "#c9a474",
-        status: "Доставка 7–14 дней",
-        images: [
-          { src: "/products/premium-fringe-beach-tote-bag/fringe-natural-beige-1.png", alt: "Ibiza Natural Beige — вид спереди" },
-          { src: "/products/premium-fringe-beach-tote-bag/fringe-natural-beige-2.png", alt: "Ibiza Natural Beige — внутри" },
-        ],
-      },
-      {
-        name: "Ivory Cream",
-        hex: C.ivory.hex,
-        status: "Доставка 7–14 дней",
-        images: [
-          { src: "/products/premium-fringe-beach-tote-bag/fringe-ivory-cream-1.png", alt: "Ibiza Ivory Cream — вид спереди" },
-          { src: "/products/premium-fringe-beach-tote-bag/fringe-ivory-cream-2.png", alt: "Ibiza Ivory Cream — внутри" },
-        ],
-      },
-    ],
-    material: "Premium Handwoven Straw",
-    description:
-      "Эффектная летняя сумка в стиле boho-chic, выполненная из премиального плетёного материала с декоративной бахромой по периметру. Натуральные бамбуковые ручки придают модели особый характер и подчёркивают её курортную эстетику.\n\nПросторное внутреннее отделение позволяет удобно разместить все необходимые вещи для прогулок, отдыха или путешествий. Лёгкая конструкция и натуральные материалы делают сумку комфортным аксессуаром для ежедневного использования в тёплый сезон.\n\nСочетание ручного плетения, декоративных кистей, деревянных элементов и итальянского дизайна создаёт выразительный аксессуар, который идеально дополняет летние и пляжные образы.",
-    highlights: [
-      "Premium Handwoven Straw",
-      "Натуральные бамбуковые ручки",
-      "Декоративная бахрома по периметру",
-      "Премиальное ручное плетение",
-    ],
-    specs: [
-      { label: "Форма", value: "Сумка-тоут" },
-      { label: "Ручки", value: "Натуральные бамбуковые ручки" },
-      { label: "Карманы и отделения", value: "Вместительное основное отделение" },
-      { label: "Материал", value: "Плетёный материал" },
-      { label: "Фурнитура", value: "Декоративная бахрома по периметру" },
       { label: "Страна производства", value: "Италия" },
       { label: "Уход", value: "Очищать мягкой сухой тканью; избегать влаги, жары и прямого солнца" },
       { label: "Доставка", value: "7–14 дней" },
@@ -1732,111 +1604,6 @@ export const products: Product[] = [
       { label: "Ручки", value: "Удобная верхняя ручка" },
       { label: "Ремень", value: "Съёмный регулируемый плечевой ремень" },
       { label: "Карманы и отделения", value: "Внутренний текстильный мешочек с затяжкой" },
-      { label: "Материал", value: "Плетёный материал + кожа" },
-      { label: "Фурнитура", value: "Отделка из натуральной кожи" },
-      { label: "Страна производства", value: "Италия" },
-      { label: "Уход", value: "Очищать мягкой сухой тканью; избегать влаги, жары и прямого солнца" },
-      { label: "Доставка", value: "7–14 дней" },
-      { label: "Возврат", value: "14 дней" },
-    ],
-  },
-  {
-    slug: "premium-woven-vanity-crossbody-bag-black",
-    title: "Sirmione — плетёная vanity-сумка кроссбоди",
-    brandSlug: "luma-atelier",
-    section: "bags",
-    categorySlug: "vanity",
-    price: 1600,
-    isNew: true,
-    galleryFit: "contain",
-    colors: [
-      {
-        name: "Black",
-        hex: C.jetBlack.hex,
-        status: "Доставка 7–14 дней",
-        images: [
-          { src: "/products/premium-woven-vanity-crossbody-bag/vanity-black-lifestyle.png", alt: "Sirmione Black в образе", fit: "contain" },
-          { src: "/products/premium-woven-vanity-crossbody-bag/vanity-black-1.png", alt: "Sirmione Black — вид спереди" },
-          { src: "/products/premium-woven-vanity-crossbody-bag/vanity-black-2.png", alt: "Sirmione Black — внутри" },
-          { src: "/products/premium-woven-vanity-crossbody-bag/vanity-black-3.png", alt: "Sirmione Black — сбоку" },
-        ],
-      },
-      {
-        name: "Cognac",
-        hex: C.cognac.hex,
-        status: "Доставка 7–14 дней",
-        images: [
-          { src: "/products/premium-woven-vanity-crossbody-bag/vanity-cognac-1.png", alt: "Sirmione Cognac — вид спереди" },
-          { src: "/products/premium-woven-vanity-crossbody-bag/vanity-cognac-2.png", alt: "Sirmione Cognac — сбоку" },
-          { src: "/products/premium-woven-vanity-crossbody-bag/vanity-cognac-3.png", alt: "Sirmione Cognac — внутри" },
-        ],
-      },
-      {
-        name: "Beige",
-        hex: C.beige.hex,
-        status: "Доставка 7–14 дней",
-        images: [
-          { src: "/products/premium-woven-vanity-crossbody-bag/vanity-beige-1.png", alt: "Sirmione Beige — сбоку" },
-          { src: "/products/premium-woven-vanity-crossbody-bag/vanity-beige-2.png", alt: "Sirmione Beige — вид спереди" },
-          { src: "/products/premium-woven-vanity-crossbody-bag/vanity-beige-3.png", alt: "Sirmione Beige — внутри" },
-        ],
-      },
-      {
-        name: "Butter Yellow",
-        hex: C.butterYellow.hex,
-        status: "Доставка 7–14 дней",
-        images: [
-          { src: "/products/premium-woven-vanity-crossbody-bag/vanity-butter-yellow-1.png", alt: "Sirmione Butter Yellow — сбоку" },
-          { src: "/products/premium-woven-vanity-crossbody-bag/vanity-butter-yellow-2.png", alt: "Sirmione Butter Yellow — внутри" },
-          { src: "/products/premium-woven-vanity-crossbody-bag/vanity-butter-yellow-3.png", alt: "Sirmione Butter Yellow — вид спереди" },
-        ],
-      },
-      {
-        name: "Sky Blue",
-        hex: C.skyBlue.hex,
-        status: "Доставка 7–14 дней",
-        images: [
-          { src: "/products/premium-woven-vanity-crossbody-bag/vanity-sky-blue-1.png", alt: "Sirmione Sky Blue — вид спереди" },
-          { src: "/products/premium-woven-vanity-crossbody-bag/vanity-sky-blue-2.png", alt: "Sirmione Sky Blue — сбоку" },
-          { src: "/products/premium-woven-vanity-crossbody-bag/vanity-sky-blue-3.png", alt: "Sirmione Sky Blue — внутри" },
-        ],
-      },
-      {
-        name: "Olive Green",
-        hex: C.sageGreen.hex,
-        status: "Доставка 7–14 дней",
-        images: [
-          { src: "/products/premium-woven-vanity-crossbody-bag/vanity-olive-green-1.png", alt: "Sirmione Olive Green — внутри" },
-          { src: "/products/premium-woven-vanity-crossbody-bag/vanity-olive-green-2.png", alt: "Sirmione Olive Green — вид спереди" },
-          { src: "/products/premium-woven-vanity-crossbody-bag/vanity-olive-green-3.png", alt: "Sirmione Olive Green — сбоку" },
-        ],
-      },
-      {
-        name: "Red",
-        hex: C.red.hex,
-        status: "Доставка 7–14 дней",
-        images: [
-          { src: "/products/premium-woven-vanity-crossbody-bag/vanity-red-1.png", alt: "Sirmione Red — вид спереди" },
-          { src: "/products/premium-woven-vanity-crossbody-bag/vanity-red-2.png", alt: "Sirmione Red — сбоку" },
-          { src: "/products/premium-woven-vanity-crossbody-bag/vanity-red-3.png", alt: "Sirmione Red — внутри" },
-        ],
-      },
-    ],
-    material: "Premium Woven Straw & Genuine Leather Details",
-    description:
-      "Стильная женская сумка премиального класса, выполненная из высококачественного плетёного материала с отделкой из натуральной кожи. Компактный силуэт в формате vanity bag сочетает элегантность, практичность и актуальный летний дизайн.\n\nУдобная верхняя ручка и съёмный регулируемый плечевой ремень позволяют носить сумку в руке, на плече или через плечо. Благодаря продуманной конструкции модель идеально подходит для хранения телефона, кошелька, ключей, косметики и других необходимых мелочей.\n\nПлетёная фактура, благородная золотистая фурнитура и безупречное итальянское исполнение делают сумку универсальным аксессуаром для отдыха, путешествий, прогулок по городу и летних мероприятий.",
-    highlights: [
-      "Premium Woven Straw & Genuine Leather Details",
-      "Надёжная двойная застёжка-молния",
-      "Съёмный регулируемый плечевой ремень",
-      "Премиальная металлическая фурнитура золотого цвета",
-    ],
-    specs: [
-      { label: "Форма", value: "Сумка-бьюти-кейс" },
-      { label: "Застёжка", value: "Надёжная двойная застёжка-молния" },
-      { label: "Ручки", value: "Удобная верхняя ручка" },
-      { label: "Ремень", value: "Съёмный регулируемый плечевой ремень" },
-      { label: "Карманы и отделения", value: "Вместительное основное отделение" },
       { label: "Материал", value: "Плетёный материал + кожа" },
       { label: "Фурнитура", value: "Отделка из натуральной кожи" },
       { label: "Страна производства", value: "Италия" },
@@ -2015,7 +1782,7 @@ export const products: Product[] = [
     title: "Elara — кожаная сумка полумесяцем",
     brandSlug: "luma-atelier",
     section: "bags",
-    categorySlug: "handbags-women",
+    categorySlug: "shoulder-bags-women",
     price: 1600,
     colors: [
       {
@@ -2189,7 +1956,7 @@ export const products: Product[] = [
     title: "Capucine — сумка-пауч",
     brandSlug: "luma-atelier",
     section: "bags",
-    categorySlug: "tote-bags-women",
+    categorySlug: "clutches",
     price: 1600,
     colors: [
       {
@@ -2435,7 +2202,7 @@ export const products: Product[] = [
     title: "Woven Leather Hobo Bag",
     brandSlug: "luma-atelier",
     section: "bags",
-    categorySlug: "handbags-women",
+    categorySlug: "shoulder-bags-women",
     price: 2000,
     colors: [
       {
@@ -2539,7 +2306,7 @@ export const products: Product[] = [
     title: "Adele — базовая сумка на плечо",
     brandSlug: "luma-atelier",
     section: "bags",
-    categorySlug: "tote-bags-women",
+    categorySlug: "shoulder-bags-women",
     price: 1200,
     colors: [
       {
@@ -2769,7 +2536,7 @@ export const products: Product[] = [
     title: "Мягкая сумка-хобо Aurelia из зернистой кожи коньячного цвета",
     brandSlug: "aurelia",
     section: "bags",
-    categorySlug: "handbags-women",
+    categorySlug: "shoulder-bags-women",
     price: 18900,
     oldPrice: 24900,
     colors: [C.cognac, C.black, C.beige],
@@ -2799,7 +2566,7 @@ export const products: Product[] = [
     title: "Сумка-багет Aurelia на короткой ручке из гладкой кожи чёрного цвета",
     brandSlug: "aurelia",
     section: "bags",
-    categorySlug: "handbags-women",
+    categorySlug: "shoulder-bags-women",
     price: 15400,
     colors: [C.black, C.bordo],
     material: "Натуральная кожа",
@@ -2858,7 +2625,7 @@ export const products: Product[] = [
     title: "Мини-сумка Vionetta через плечо на цепочке пудрового цвета",
     brandSlug: "vionetta",
     section: "bags",
-    categorySlug: "handbags-women",
+    categorySlug: "crossbody-bags-women",
     price: 12900,
     colors: [C.rose, C.black, C.beige],
     material: "Натуральная кожа",
@@ -2978,7 +2745,7 @@ export const products: Product[] = [
     title: "Сумка через плечо Marrone с двумя карманами коньячного цвета",
     brandSlug: "marrone",
     section: "bags",
-    categorySlug: "shoulder-bags-women",
+    categorySlug: "crossbody-bags-women",
     price: 16400,
     oldPrice: 19900,
     colors: [C.cognac, C.brown, C.green],
@@ -3092,7 +2859,7 @@ export const products: Product[] = [
     title: "Сумка-мешок Vionetta на затяжке из кожи зелёного цвета",
     brandSlug: "vionetta",
     section: "bags",
-    categorySlug: "handbags-women",
+    categorySlug: "bucket-bags-women",
     price: 17900,
     colors: [C.green, C.cognac, C.black],
     material: "Натуральная кожа",
@@ -3147,7 +2914,7 @@ export const products: Product[] = [
     title: "Небольшая сумка через плечо Marrone синего цвета",
     brandSlug: "marrone",
     section: "bags",
-    categorySlug: "shoulder-bags-women",
+    categorySlug: "crossbody-bags-women",
     price: 13900,
     oldPrice: 16900,
     colors: [C.navy, C.black, C.bordo],
@@ -3286,8 +3053,7 @@ export const products: Product[] = [
     title: "Fabrizia — мини-тоут",
     brandSlug: "luma-atelier",
     section: "bags",
-    categorySlug: "handbags-women",
-    additionalCategorySlugs: ["tote-bags-women"],
+    categorySlug: "tote-bags-women",
     price: 1600,
     status: "in_stock",
     isNew: true,
@@ -3351,8 +3117,7 @@ export const products: Product[] = [
     title: "Lucrezia — сумка хобо на плечо",
     brandSlug: "luma-atelier",
     section: "bags",
-    categorySlug: "handbags-women",
-    additionalCategorySlugs: ["shoulder-bags-women"],
+    categorySlug: "shoulder-bags-women",
     price: 1600,
     status: "in_stock",
     isNew: true,
@@ -3464,7 +3229,6 @@ export const products: Product[] = [
     brandSlug: "luma-atelier",
     section: "bags",
     categorySlug: "tote-bags-women",
-    additionalCategorySlugs: ["shoulder-bags-women"],
     price: 1600,
     status: "in_stock",
     isNew: true,
@@ -3547,7 +3311,7 @@ export const products: Product[] = [
     title: "Luna — мягкая сумка хобо",
     brandSlug: "luma-atelier",
     section: "bags",
-    categorySlug: "handbags-women",
+    categorySlug: "shoulder-bags-women",
     price: 1600,
     status: "in_stock",
     isNew: true,
@@ -3645,7 +3409,7 @@ export const products: Product[] = [
     title: "Perrine — багет на плечо",
     brandSlug: "luma-atelier",
     section: "bags",
-    categorySlug: "handbags-women",
+    categorySlug: "shoulder-bags-women",
     price: 1600,
     status: "in_stock",
     isNew: true,
@@ -3694,8 +3458,7 @@ export const products: Product[] = [
     title: "Anaelle — компактный багет",
     brandSlug: "luma-atelier",
     section: "bags",
-    categorySlug: "handbags-women",
-    additionalCategorySlugs: ["handbags-women"],
+    categorySlug: "shoulder-bags-women",
     price: 1600,
     status: "in_stock",
     isNew: true,
@@ -3843,7 +3606,7 @@ export const products: Product[] = [
     title: "Colline — сумка хобо полумесяцем",
     brandSlug: "luma-atelier",
     section: "bags",
-    categorySlug: "handbags-women",
+    categorySlug: "shoulder-bags-women",
     price: 1600,
     status: "in_stock",
     isNew: true,
@@ -3939,7 +3702,6 @@ export const products: Product[] = [
     brandSlug: "luma-atelier",
     section: "bags",
     categorySlug: "shoulder-bags-women",
-    additionalCategorySlugs: ["handbags-women"],
     price: 1600,
     status: "in_stock",
     isNew: true,
@@ -4028,7 +3790,7 @@ export const products: Product[] = [
     title: "Paloma — сумка с фермуаром",
     brandSlug: "luma-atelier",
     section: "bags",
-    categorySlug: "handbags-women",
+    categorySlug: "clutches",
     price: 1600,
     status: "in_stock",
     isNew: true,
@@ -4390,7 +4152,6 @@ export const products: Product[] = [
     brandSlug: "luma-atelier",
     section: "bags",
     categorySlug: "tote-bags-women",
-    additionalCategorySlugs: ["shoulder-bags-women"],
     price: 1600,
     status: "in_stock",
     isNew: true,
@@ -4604,7 +4365,7 @@ export const products: Product[] = [
     title: "Amabel — сумка хобо на молнии",
     brandSlug: "luma-atelier",
     section: "bags",
-    categorySlug: "handbags-women",
+    categorySlug: "shoulder-bags-women",
     price: 1600,
     status: "in_stock",
     isNew: true,
@@ -4675,8 +4436,7 @@ export const products: Product[] = [
     title: "Ottilie — гладкий компактный багет",
     brandSlug: "luma-atelier",
     section: "bags",
-    categorySlug: "handbags-women",
-    additionalCategorySlugs: ["handbags-women"],
+    categorySlug: "shoulder-bags-women",
     price: 1600,
     status: "in_stock",
     isNew: true,
@@ -4783,7 +4543,7 @@ export const products: Product[] = [
     title: "Rosalind — гладкая хобо полумесяцем",
     brandSlug: "luma-atelier",
     section: "bags",
-    categorySlug: "handbags-women",
+    categorySlug: "shoulder-bags-women",
     price: 1600,
     status: "in_stock",
     isNew: true,
@@ -4968,11 +4728,11 @@ export const products: Product[] = [
         ],
       },
     ],
-    material: "Плетёная основа + кожа",
+    material: "Плетёный материал + кожа",
     description:
       "Сумка-мешок на завязках с плетёным основанием — фактура плетения внизу и гладкая кожа сверху создают контраст на одном силуэте.\n\nЗакрывается стяжкой-шнурком, внутри одно свободное отделение.",
     highlights: [
-      "Плетёная основа + кожа",
+      "Плетёный материал + кожа",
       "Верх на завязках-шнурке",
       "Форма мешка",
       "Одно свободное отделение",
@@ -4981,7 +4741,7 @@ export const products: Product[] = [
       { label: "Размер", value: "20 × 21 × 11 см" },
       { label: "Форма", value: "Сумка-бакет" },
       { label: "Застёжка", value: "Завязки-шнурок" },
-      { label: "Материал", value: "Плетёная кожа" },
+      { label: "Материал", value: "Плетёный материал + кожа" },
       { label: "Страна производства", value: "Уточняется по бирке/поставщику" },
       { label: "Уход", value: "Очищать мягкой сухой тканью; избегать влаги, жары и прямого солнца" },
       { label: "Доставка", value: "1–3 дня" },
@@ -4993,7 +4753,7 @@ export const products: Product[] = [
     title: "Fantine — хобо с плетёным основанием",
     brandSlug: "luma-atelier",
     section: "bags",
-    categorySlug: "handbags-women",
+    categorySlug: "shoulder-bags-women",
     price: 1600,
     status: "in_stock",
     isNew: true,
@@ -5018,11 +4778,11 @@ export const products: Product[] = [
         ],
       },
     ],
-    material: "Плетёная основа + кожа",
+    material: "Плетёный материал + кожа",
     description:
       "Хобо с плетёным основанием и кожаной ручкой-цепочкой из соединённых звеньев — фактурная деталь, которая держит форму ручки, не провисая.\n\nМягкий верх и более плотный низ создают устойчивый, но не жёсткий силуэт.",
     highlights: [
-      "Плетёная основа + кожа",
+      "Плетёный материал + кожа",
       "Ручка из кожаных звеньев",
       "Мягкий верх, плотное основание",
       "Одно отделение",
@@ -5031,7 +4791,7 @@ export const products: Product[] = [
       { label: "Размер", value: "35 × 19 × 11 см" },
       { label: "Форма", value: "Сумка-хобо" },
       { label: "Ручки", value: "Кожаные звенья" },
-      { label: "Материал", value: "Плетёная кожа" },
+      { label: "Материал", value: "Плетёный материал + кожа" },
       { label: "Страна производства", value: "Уточняется по бирке/поставщику" },
       { label: "Уход", value: "Очищать мягкой сухой тканью; избегать влаги, жары и прямого солнца" },
       { label: "Доставка", value: "1–3 дня" },
@@ -5070,11 +4830,11 @@ export const products: Product[] = [
         ],
       },
     ],
-    material: "Плетёная основа + кожа",
+    material: "Плетёный материал + кожа",
     description:
       "Структурная сумка с плетёным основанием и открытым верхом, в комплекте — косметичка того же цвета.\n\nПлетение снизу облегчает силуэт визуально, при этом сумка не теряет устойчивую форму.",
     highlights: [
-      "Плетёная основа + кожа",
+      "Плетёный материал + кожа",
       "Открытый верх",
       "В комплекте косметичка того же цвета",
       "Устойчивое основание",
@@ -5085,7 +4845,7 @@ export const products: Product[] = [
       { label: "Застёжка", value: "Открытый верх" },
       { label: "Ручки", value: "Двойные ручки" },
       { label: "Комплектация", value: "Сумка и косметичка" },
-      { label: "Материал", value: "Плетёная кожа" },
+      { label: "Материал", value: "Плетёный материал + кожа" },
       { label: "Страна производства", value: "Уточняется по бирке/поставщику" },
       { label: "Уход", value: "Очищать мягкой сухой тканью; избегать влаги, жары и прямого солнца" },
       { label: "Доставка", value: "1–3 дня" },
@@ -5111,11 +4871,11 @@ export const products: Product[] = [
         ],
       },
     ],
-    material: "Плетёная основа + кожа",
+    material: "Плетёный материал + кожа",
     description:
       "Круглая сумка-мешок с плетёным основанием — мягкая округлая форма без жёстких граней.\n\nКомпактный повседневный объём, простой силуэт без лишней фурнитуры.",
     highlights: [
-      "Плетёная основа + кожа",
+      "Плетёный материал + кожа",
       "Округлая форма мешка",
       "Компактный объём",
       "Минимум фурнитуры",
@@ -5123,7 +4883,7 @@ export const products: Product[] = [
     specs: [
       { label: "Размер", value: "17 × 14.5 × 14 см" },
       { label: "Форма", value: "Сумка-бакет" },
-      { label: "Материал", value: "Плетёная кожа" },
+      { label: "Материал", value: "Плетёный материал + кожа" },
       { label: "Страна производства", value: "Уточняется по бирке/поставщику" },
       { label: "Уход", value: "Очищать мягкой сухой тканью; избегать влаги, жары и прямого солнца" },
       { label: "Доставка", value: "1–3 дня" },
@@ -5151,11 +4911,11 @@ export const products: Product[] = [
         ],
       },
     ],
-    material: "Плетёная основа + кожа",
+    material: "Плетёный материал + кожа",
     description:
       "Сумка на короткой ручке с плетёным основанием и поворотным замком спереди — сочетание фактурного низа и гладкой кожаной верхней части.\n\nКомпактный повседневный формат для города.",
     highlights: [
-      "Плетёная основа + кожа",
+      "Плетёный материал + кожа",
       "Поворотный замок спереди",
       "Короткая ручка",
       "Компактный формат",
@@ -5165,7 +4925,7 @@ export const products: Product[] = [
       { label: "Форма", value: "Сумка с верхней ручкой" },
       { label: "Застёжка", value: "Поворотный замок" },
       { label: "Ручки", value: "Короткая верхняя ручка" },
-      { label: "Материал", value: "Плетёная кожа" },
+      { label: "Материал", value: "Плетёный материал + кожа" },
       { label: "Страна производства", value: "Уточняется по бирке/поставщику" },
       { label: "Уход", value: "Очищать мягкой сухой тканью; избегать влаги, жары и прямого солнца" },
       { label: "Доставка", value: "1–3 дня" },
@@ -5200,11 +4960,11 @@ export const products: Product[] = [
         ],
       },
     ],
-    material: "Плетёная основа + кожа",
+    material: "Плетёный материал + кожа",
     description:
       "Компактная структурная сумка на молнии с плетёным основанием — небольшой жёсткий корпус для самого необходимого.\n\nЗастёгивается полностью по верху, поэтому подходит для активного дня в городе.",
     highlights: [
-      "Плетёная основа + кожа",
+      "Плетёный материал + кожа",
       "Молния по всему верху",
       "Компактный жёсткий корпус",
       "Короткая ручка",
@@ -5213,7 +4973,7 @@ export const products: Product[] = [
       { label: "Размер", value: "28.5 × 20 × 16 см" },
       { label: "Форма", value: "Сумка" },
       { label: "Застёжка", value: "Молния" },
-      { label: "Материал", value: "Плетёная кожа" },
+      { label: "Материал", value: "Плетёный материал + кожа" },
       { label: "Страна производства", value: "Уточняется по бирке/поставщику" },
       { label: "Уход", value: "Очищать мягкой сухой тканью; избегать влаги, жары и прямого солнца" },
       { label: "Доставка", value: "1–3 дня" },
@@ -5248,11 +5008,11 @@ export const products: Product[] = [
         ],
       },
     ],
-    material: "Плетёная основа + кожа",
+    material: "Плетёный материал + кожа",
     description:
       "Структурная сумка на молнии с плетёным основанием — устойчивый корпус побольше, чем у компактной версии этой же линии.\n\nПодходит для рабочих дней: вмещает документы и повседневные вещи.",
     highlights: [
-      "Плетёная основа + кожа",
+      "Плетёный материал + кожа",
       "Молния по всему верху",
       "Устойчивый структурный корпус",
       "Короткая ручка",
@@ -5261,7 +5021,7 @@ export const products: Product[] = [
       { label: "Размер", value: "38 × 21 × 15 см" },
       { label: "Форма", value: "Сумка" },
       { label: "Застёжка", value: "Молния" },
-      { label: "Материал", value: "Плетёная кожа" },
+      { label: "Материал", value: "Плетёный материал + кожа" },
       { label: "Страна производства", value: "Уточняется по бирке/поставщику" },
       { label: "Уход", value: "Очищать мягкой сухой тканью; избегать влаги, жары и прямого солнца" },
       { label: "Доставка", value: "1–3 дня" },
@@ -5322,7 +5082,7 @@ export const products: Product[] = [
     title: "Manon — плетёная хобо полумесяцем",
     brandSlug: "luma-atelier",
     section: "bags",
-    categorySlug: "handbags-women",
+    categorySlug: "shoulder-bags-women",
     price: 1600,
     status: "in_stock",
     isNew: true,
@@ -5369,20 +5129,20 @@ export const products: Product[] = [
     galleryFit: "contain",
     colors: [
       {
-        ...C.magenta,
-        images: [
-          { src: "/products/womens-woven-flap-top-handle-bag/magenta-front-alt-card.png", alt: "Noriane Magenta — карточка товара" },
-          { src: "/products/womens-woven-flap-top-handle-bag/magenta-front-v2.png", alt: "Noriane Magenta — вид спереди" },
-          { src: "/products/womens-woven-flap-top-handle-bag/magenta-inside.png", alt: "Noriane Magenta — внутри" },
-        ],
-      },
-      {
         ...C.naturalBeige,
         images: [
           { src: "/products/womens-woven-flap-top-handle-bag/natural-beige-front-alt-card.png", alt: "Noriane Natural Beige — карточка товара" },
           { src: "/products/womens-woven-flap-top-handle-bag/natural-beige-front-v2.png", alt: "Noriane Natural Beige — вид спереди" },
           { src: "/products/womens-woven-flap-top-handle-bag/natural-beige-front-alt.png", alt: "Noriane Natural Beige — альтернативный вид" },
           { src: "/products/womens-woven-flap-top-handle-bag/natural-beige-inside.png", alt: "Noriane Natural Beige — внутри" },
+        ],
+      },
+      {
+        ...C.magenta,
+        images: [
+          { src: "/products/womens-woven-flap-top-handle-bag/magenta-front-alt-card.png", alt: "Noriane Magenta — карточка товара" },
+          { src: "/products/womens-woven-flap-top-handle-bag/magenta-front-v2.png", alt: "Noriane Magenta — вид спереди" },
+          { src: "/products/womens-woven-flap-top-handle-bag/magenta-inside.png", alt: "Noriane Magenta — внутри" },
         ],
       },
     ],
@@ -5478,16 +5238,16 @@ export const products: Product[] = [
       {
         ...C.naturalTan,
         images: [
-          { src: "/products/womens-woven-oval-handle-tote-bag/natural-tan-front-card.png", alt: "Celia Natural Tan — карточка товара" },
+          { src: "/products/womens-woven-oval-handle-tote-bag/natural-tan-front.png", alt: "Celia Natural Tan — вид спереди" },
           { src: "/products/womens-woven-oval-handle-tote-bag/natural-tan-inside.png", alt: "Celia Natural Tan — внутри" },
         ],
       },
     ],
-    material: "Плетёная фактура",
+    material: "Плетёный материал + кожа",
     description:
       "Тоут с округлыми овальными ручками и плетёной фактурой полотна — летняя, лёгкая на вид сумка для повседневных выходов.\n\nОткрытый верх, одно просторное отделение внутри.",
     highlights: [
-      "Плетёная фактура",
+      "Плетёный материал + кожа",
       "Овальные ручки",
       "Открытый верх",
       "Просторное отделение",
@@ -5497,7 +5257,7 @@ export const products: Product[] = [
       { label: "Форма", value: "Сумка-тоут" },
       { label: "Застёжка", value: "Открытый верх" },
       { label: "Ручки", value: "Овальные ручки" },
-      { label: "Материал", value: "Зернистая кожа" },
+      { label: "Материал", value: "Плетёный материал + кожа" },
       { label: "Страна производства", value: "Уточняется по бирке/поставщику" },
       { label: "Уход", value: "Очищать мягкой сухой тканью; избегать влаги, жары и прямого солнца" },
       { label: "Доставка", value: "1–3 дня" },
@@ -5526,11 +5286,11 @@ export const products: Product[] = [
         ],
       },
     ],
-    material: "Плетёная фактура + кожа",
+    material: "Плетёный материал + кожа",
     description:
       "Структурная сумка на короткой ручке с плетёной панелью и небольшой декоративной вставкой на застёжке — единственный акцентный блеск на спокойном силуэте.\n\nЖёсткий корпус держит форму, внутри одно отделение.",
     highlights: [
-      "Плетёная фактура + кожа",
+      "Плетёный материал + кожа",
       "Декоративная вставка на застёжке",
       "Жёсткий структурный корпус",
       "Короткая ручка",
@@ -5539,7 +5299,7 @@ export const products: Product[] = [
       { label: "Размер", value: "17 × 24 × 11 см" },
       { label: "Форма", value: "Сумка с верхней ручкой" },
       { label: "Ручки", value: "Короткая верхняя ручка" },
-      { label: "Материал", value: "Плетёная кожа" },
+      { label: "Материал", value: "Плетёный материал + кожа" },
       { label: "Страна производства", value: "Уточняется по бирке/поставщику" },
       { label: "Уход", value: "Очищать мягкой сухой тканью; избегать влаги, жары и прямого солнца" },
       { label: "Доставка", value: "1–3 дня" },
@@ -5576,11 +5336,11 @@ export const products: Product[] = [
         ],
       },
     ],
-    material: "Плетёная фактура + зернистая кожа",
+    material: "Плетёный материал + кожа",
     description:
       "Сумка на короткой ручке, где плетёная панель сочетается с зернистой кожей — фактурный контраст на компактном структурном силуэте.\n\nВнутри одно отделение, снаружи — ничего лишнего.",
     highlights: [
-      "Плетёная фактура + зернистая кожа",
+      "Плетёный материал + кожа",
       "Короткая ручка",
       "Структурный корпус",
       "Одно отделение",
@@ -5589,7 +5349,7 @@ export const products: Product[] = [
       { label: "Размер", value: "22 × 18 × 12 см" },
       { label: "Форма", value: "Сумка с верхней ручкой" },
       { label: "Ручки", value: "Короткая верхняя ручка" },
-      { label: "Материал", value: "Плетёная кожа" },
+      { label: "Материал", value: "Плетёный материал + кожа" },
       { label: "Страна производства", value: "Уточняется по бирке/поставщику" },
       { label: "Уход", value: "Очищать мягкой сухой тканью; избегать влаги, жары и прямого солнца" },
       { label: "Доставка", value: "1–3 дня" },
@@ -5602,7 +5362,6 @@ export const products: Product[] = [
     brandSlug: "luma-atelier",
     section: "bags",
     categorySlug: "tote-bags-women",
-    additionalCategorySlugs: ["shoulder-bags-women"],
     price: 1600,
     status: "in_stock",
     isNew: true,
@@ -5686,6 +5445,7 @@ export const products: Product[] = [
     price: 1600,
     status: "in_stock",
     isNew: true,
+    isVintage: true,
     galleryFit: "contain",
     colors: [
       {
@@ -6131,7 +5891,6 @@ export function productsBySection(section: "bags" | "accessories"): Product[] {
 }
 
 export function productsByCategory(slug: string): Product[] {
-  if (slug === "vse-sumki") return productsBySection("bags");
   if (slug === "vse-aksessuary") return productsBySection("accessories");
   return products.filter((p) => p.categorySlug === slug);
 }
@@ -6148,18 +5907,274 @@ export function productHasPhotos(p: Product): boolean {
   return p.colors.some((c) => c.images && c.images.length > 0);
 }
 
+const curatedBagGridOrder = [
+  "premium-leather-kelly-shoulder-bag-black",
+  "mini-elegance-top-handle-bag-white",
+  "classic-leather-tote-bag-black",
+  "milano-classic-shoulder-bag-black",
+  "structured-leather-top-handle-bag-black",
+  "premium-leather-travel-tote-bag-black",
+  "elegant-leather-hobo-bag-pink",
+  "womens-pebbled-leather-turn-lock-top-handle-bag",
+  "premium-woven-beach-tote-bag-natural-black",
+  "elegant-leather-hobo-bag-taupe",
+  "womens-pebbled-leather-rectangular-handbag",
+  "womens-pebbled-leather-turn-lock-strap-tote-bag",
+  "elegant-leather-moon-bag-cognac",
+  "womens-woven-base-zip-top-compact-structured-bag",
+  "womens-pebbled-leather-structured-shopper-tote",
+  "elegant-leather-hobo-bag-smooth-black",
+  "womens-woven-flap-top-handle-bag",
+  "womens-pebbled-leather-tote-bag",
+  "premium-woven-hobo-bag-natural-beige",
+  "womens-woven-panel-crystal-accent-structured-top-handle-bag",
+  "premium-vintage-straw-tote-bag-natural-beige",
+  "womens-pebbled-leather-crescent-hobo-bag",
+  "womens-woven-panel-pebbled-leather-top-handle-bag",
+  "womens-woven-base-open-top-structured-bag-with-pouch",
+  "womens-pebbled-leather-half-moon-shoulder-bag",
+  "womens-pebbled-leather-contrast-trim-turn-lock-structured-top-handle-bag",
+  "womens-woven-oval-handle-tote-bag-natural-tan",
+  "womens-hobo-shoulder-bag",
+  "womens-pebbled-leather-satchel-bag",
+  "womens-woven-spiral-panel-shoulder-tote-bag",
+  "womens-smooth-leather-contrast-trim-flap-shoulder-bag",
+  "womens-pebbled-leather-structured-handbag",
+  "elegant-leather-tote-bag-black",
+  "womens-pebbled-leather-turn-lock-flap-shoulder-bag-black",
+  "womens-woven-base-zip-top-structured-bag",
+  "womens-knitted-openwork-panel-tote-bag",
+  "womens-pebbled-leather-zip-hobo-bag",
+  "premium-fan-straw-handbag-natural-cognac",
+  "womens-tote-shopper-bag",
+  "womens-luna-soft-hobo-bag",
+  "womens-pebbled-leather-contrast-trim-structured-top-handle-bag",
+  "womens-leather-tote-shoulder-bag",
+  "womens-soft-leather-draped-flap-bag",
+  "womens-woven-base-turn-lock-top-handle-bag",
+  "womens-pebbled-leather-drawstring-tote-bag",
+  "womens-pebbled-leather-baguette-bag",
+  "womens-compact-woven-panel-metallic-top-handle-bag",
+  "womens-duo-mini-tote-bag",
+  "womens-woven-base-leather-link-handle-hobo-bag",
+  "womens-pebbled-leather-turn-lock-placket-tote-with-pouch",
+  "womens-pebbled-leather-compact-baguette-bag",
+  "womens-woven-crescent-hobo-bag",
+  "womens-pebbled-leather-structured-tote-bag-with-pouch",
+  "womens-smooth-leather-compact-baguette-bag",
+  "womens-smooth-leather-crescent-hobo-bag",
+  "milano-cage-tote-bag-black-red",
+  "womens-pebbled-leather-turn-lock-flap-shoulder-tote-bag",
+  "womens-woven-buckle-handle-tote-bag",
+  "womens-woven-oval-handle-tote-bag",
+  "womens-woven-triangular-shoulder-bag",
+  "elegant-leather-crossbody-bag-white",
+  "elegant-leather-crossbody-bag-beige",
+  "womens-woven-zip-crossbody-bag",
+  "premium-woven-bucket-bag-cream",
+  "womens-woven-base-drawstring-bucket-bag",
+  "womens-woven-base-round-bucket-bag",
+  "womens-pebbled-leather-kiss-lock-pouch-bag-ivory",
+  "womens-pebbled-leather-kiss-lock-pouch-bag-light-blue",
+  "classic-leather-bowling-bag-black",
+] as const;
+
+const curatedBagCategoryOrder: Record<string, readonly string[]> = {
+  "shoulder-bags-women": [
+    "milano-classic-shoulder-bag-black",
+    "premium-leather-kelly-shoulder-bag-black",
+    "elegant-leather-hobo-bag-pink",
+    "elegant-leather-hobo-bag-taupe",
+    "elegant-leather-moon-bag-cognac",
+    "elegant-leather-hobo-bag-smooth-black",
+    "womens-pebbled-leather-accordion-buckle-shoulder-bag",
+    "premium-leather-crescent-shoulder-bag-black",
+    "womens-pebbled-leather-crescent-hobo-bag",
+    "premium-woven-hobo-bag-natural-beige",
+    "womens-pebbled-leather-half-moon-shoulder-bag",
+    "womens-hobo-shoulder-bag",
+    "womens-smooth-leather-contrast-trim-flap-shoulder-bag",
+    "womens-pebbled-leather-turn-lock-flap-shoulder-bag-black",
+    "womens-woven-triangular-shoulder-bag",
+    "womens-pebbled-leather-zip-hobo-bag",
+    "womens-luna-soft-hobo-bag",
+    "womens-soft-leather-draped-flap-bag",
+    "womens-pebbled-leather-baguette-bag",
+    "womens-woven-base-leather-link-handle-hobo-bag",
+    "womens-pebbled-leather-compact-baguette-bag",
+    "womens-woven-crescent-hobo-bag",
+    "womens-smooth-leather-compact-baguette-bag",
+    "womens-smooth-leather-crescent-hobo-bag",
+  ],
+  "handbags-women": [
+    "womens-pebbled-leather-rectangular-handbag",
+    "mini-elegance-top-handle-bag-white",
+    "womens-pebbled-leather-turn-lock-top-handle-bag",
+    "structured-leather-top-handle-bag-black",
+    "womens-woven-panel-crystal-accent-structured-top-handle-bag",
+    "premium-fan-straw-handbag-natural-cognac",
+    "womens-woven-panel-pebbled-leather-top-handle-bag",
+    "womens-pebbled-leather-contrast-trim-structured-top-handle-bag",
+    "womens-woven-base-zip-top-compact-structured-bag",
+    "womens-pebbled-leather-contrast-trim-turn-lock-structured-top-handle-bag",
+    "womens-woven-flap-top-handle-bag",
+    "womens-pebbled-leather-satchel-bag",
+    "womens-woven-base-zip-top-structured-bag",
+    "womens-pebbled-leather-structured-handbag",
+    "womens-compact-woven-panel-metallic-top-handle-bag",
+    "womens-woven-base-turn-lock-top-handle-bag",
+  ],
+  "tote-bags-women": [
+    "womens-leather-tote-shoulder-bag",
+    "milano-cage-tote-bag-black-red",
+    "womens-pebbled-leather-drawstring-tote-bag",
+    "womens-duo-mini-tote-bag",
+    "womens-pebbled-leather-structured-tote-bag-with-pouch",
+    "womens-woven-base-open-top-structured-bag-with-pouch",
+    "premium-woven-beach-tote-bag-natural-black",
+    "womens-pebbled-leather-turn-lock-placket-tote-with-pouch",
+    "classic-leather-tote-bag-black",
+    "premium-leather-travel-tote-bag-black",
+    "premium-vintage-straw-tote-bag-natural-beige",
+    "womens-pebbled-leather-turn-lock-strap-tote-bag",
+    "womens-knitted-openwork-panel-tote-bag",
+    "womens-pebbled-leather-structured-shopper-tote",
+    "womens-pebbled-leather-tote-bag",
+    "womens-tote-shopper-bag",
+    "womens-woven-oval-handle-tote-bag-natural-tan",
+    "womens-woven-spiral-panel-shoulder-tote-bag",
+    "elegant-leather-tote-bag-black",
+    "womens-pebbled-leather-turn-lock-flap-shoulder-tote-bag",
+    "womens-woven-buckle-handle-tote-bag",
+    "womens-woven-oval-handle-tote-bag",
+  ],
+  "crossbody-bags-women": [
+    "elegant-leather-crossbody-bag-white",
+    "elegant-leather-crossbody-bag-beige",
+    "womens-woven-zip-crossbody-bag",
+  ],
+  "bucket-bags-women": [
+    "premium-woven-bucket-bag-cream",
+    "womens-woven-base-drawstring-bucket-bag",
+    "womens-woven-base-round-bucket-bag",
+  ],
+  clutches: [
+    "womens-pebbled-leather-kiss-lock-pouch-bag-ivory",
+    "womens-pebbled-leather-kiss-lock-pouch-bag-light-blue",
+  ],
+  "bowling-bags": ["classic-leather-bowling-bag-black"],
+};
+
+const featuredColorByProductSlug: Record<string, string> = {
+  "elegant-leather-hobo-bag-pink": "Taupe",
+  "elegant-leather-hobo-bag-taupe": "White",
+  "elegant-leather-hobo-bag-smooth-black": "White",
+  "elegant-leather-moon-bag-cognac": "Beige",
+  "womens-hobo-shoulder-bag": "Camel",
+  "womens-luna-soft-hobo-bag": "White",
+  "womens-pebbled-leather-accordion-buckle-shoulder-bag": "Black",
+  "womens-pebbled-leather-baguette-bag": "Taupe",
+  "womens-pebbled-leather-compact-baguette-bag": "Silver",
+  "womens-pebbled-leather-zip-hobo-bag": "Ivory",
+  "womens-smooth-leather-compact-baguette-bag": "Olive Green",
+  "womens-smooth-leather-contrast-trim-flap-shoulder-bag": "White",
+  "womens-soft-leather-draped-flap-bag": "Ivory",
+  "womens-woven-base-leather-link-handle-hobo-bag": "Taupe",
+  "mini-elegance-top-handle-bag-white": "White",
+  "structured-leather-top-handle-bag-black": "Black",
+  "womens-pebbled-leather-contrast-trim-structured-top-handle-bag": "Ivory",
+  "womens-pebbled-leather-rectangular-handbag": "Camel",
+  "womens-pebbled-leather-satchel-bag": "White",
+  "womens-pebbled-leather-structured-handbag": "Camel",
+  "womens-pebbled-leather-turn-lock-top-handle-bag": "Camel",
+  "womens-woven-base-zip-top-compact-structured-bag": "Camel",
+  "womens-woven-flap-top-handle-bag": "Natural Beige",
+  "womens-woven-panel-pebbled-leather-top-handle-bag": "Taupe",
+  "classic-leather-tote-bag-black": "Black",
+  "elegant-leather-tote-bag-black": "Cognac",
+  "premium-leather-travel-tote-bag-black": "Black",
+  "womens-duo-mini-tote-bag": "Ivory",
+  "womens-leather-tote-shoulder-bag": "Taupe",
+  "womens-pebbled-leather-turn-lock-strap-tote-bag": "Ivory",
+  "womens-pebbled-leather-turn-lock-placket-tote-with-pouch": "White",
+  "womens-tote-shopper-bag": "Ivory",
+  "womens-woven-buckle-handle-tote-bag": "Blush",
+  "womens-woven-oval-handle-tote-bag": "Dusty Turquoise",
+  "elegant-leather-crossbody-bag-white": "Off-White",
+  "elegant-leather-crossbody-bag-beige": "Beige",
+  "premium-woven-bucket-bag-cream": "Cream",
+  "classic-leather-bowling-bag-black": "Off-White",
+};
+
 const productOrder = new Map(products.map((p, i) => [p.slug, i]));
+const curatedBagGridOrderMap = new Map<string, number>(
+  curatedBagGridOrder.map((slug, index) => [slug, index]),
+);
+const curatedBagCategoryOrderMaps = new Map(
+  Object.entries(curatedBagCategoryOrder).map(([categorySlug, slugs]) => [
+    categorySlug,
+    new Map<string, number>(slugs.map((slug, index) => [slug, index])),
+  ]),
+);
+
+function getCuratedOrder(product: Product, contextSlug?: string): number | undefined {
+  if (typeof product.catalogOrder === "number") return product.catalogOrder;
+
+  const categoryMap =
+    contextSlug && contextSlug !== "vse-sumki"
+      ? curatedBagCategoryOrderMaps.get(contextSlug)
+      : undefined;
+  return categoryMap?.get(product.slug) ?? curatedBagGridOrderMap.get(product.slug);
+}
+
+function normalizeColorName(name: string): string {
+  return name.trim().toLocaleLowerCase("en-US");
+}
+
+function getAvailabilityRank(product: Product): number {
+  if (product.status === "in_stock") return 0;
+  if (product.status === "out_of_stock") return 2;
+  return 1;
+}
+
+function compareByAvailability(a: Product, b: Product): number {
+  return getAvailabilityRank(a) - getAvailabilityRank(b);
+}
 
 export function compareByNewest(a: Product, b: Product): number {
+  const availability = compareByAvailability(a, b);
+  if (availability !== 0) return availability;
+
   const aNew = a.isNew ? 1 : 0;
   const bNew = b.isNew ? 1 : 0;
   if (aNew !== bNew) return bNew - aNew;
   return (productOrder.get(b.slug) ?? 0) - (productOrder.get(a.slug) ?? 0);
 }
 
+export function compareByCuratedBagGrid(a: Product, b: Product, contextSlug?: string): number {
+  const availability = compareByAvailability(a, b);
+  if (availability !== 0) return availability;
+
+  const aOrder = getCuratedOrder(a, contextSlug);
+  const bOrder = getCuratedOrder(b, contextSlug);
+  if (aOrder !== undefined || bOrder !== undefined) {
+    return (aOrder ?? Number.MAX_SAFE_INTEGER) - (bOrder ?? Number.MAX_SAFE_INTEGER);
+  }
+  return compareByNewest(a, b);
+}
+
 export function compareByCategoryThenNewest(a: Product, b: Product): number {
   if (a.categorySlug !== b.categorySlug) return a.categorySlug.localeCompare(b.categorySlug);
   return compareByNewest(a, b);
+}
+
+export function getFeaturedColorIndex(product: Product): number {
+  const featuredColorName = product.featuredColorName ?? featuredColorByProductSlug[product.slug];
+  if (!featuredColorName) return 0;
+
+  const featured = normalizeColorName(featuredColorName);
+  const index = product.colors.findIndex((color) => normalizeColorName(color.name) === featured);
+  return index >= 0 ? index : 0;
 }
 
 const categorySlugsWithPhotos = new Set(
@@ -6168,5 +6183,5 @@ const categorySlugsWithPhotos = new Set(
 
 // Категории сумок, в которых есть реальные товары с фотографиями (для навигации).
 export const bagMenuCategories = bagCategories.filter(
-  (c) => c.slug !== "vse-sumki" && categorySlugsWithPhotos.has(c.slug),
+  (c) => categorySlugsWithPhotos.has(c.slug),
 );

@@ -4,7 +4,7 @@ import { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import type { Product } from "@/lib/types";
-import { getBrandName } from "@/lib/data";
+import { getBrandName, getFeaturedColorIndex } from "@/lib/data";
 import { formatPrice } from "@/lib/format";
 import { withLocalePath } from "@/lib/i18n";
 import { useIsDesktop } from "@/lib/useIsDesktop";
@@ -27,7 +27,8 @@ export default function ProductCard({ product }: { product: Product }) {
   const onSale = Boolean(product.oldPrice && product.oldPrice > product.price);
   const localizedTitle = localizeProductTitle(product, locale);
   const colors = product.colors;
-  const displayIdx = previewIdx ?? 0;
+  const defaultColorIdx = getFeaturedColorIndex(product);
+  const displayIdx = previewIdx ?? defaultColorIdx;
   const activeColor = colors[displayIdx] ?? colors[0];
   const colorImages = activeColor ? getColorImages(activeColor) : [];
   const primary = colorImages[0];
@@ -141,6 +142,7 @@ export default function ProductCard({ product }: { product: Product }) {
           productSlug={product.slug}
           colors={colors}
           previewIndex={previewIdx}
+          defaultIndex={defaultColorIdx}
           onPreview={setPreviewIdx}
           className="mt-2 px-0.5 sm:mt-3"
         />
@@ -199,7 +201,7 @@ export default function ProductCard({ product }: { product: Product }) {
         <button
           type="button"
           onClick={openQuickView}
-          className="absolute inset-x-0 top-0 flex h-9 translate-y-2 items-center justify-center rounded-md bg-stone-950 px-3 text-[11px] font-semibold text-white opacity-0 shadow-sm transition-all duration-300 ease-out hover:bg-stone-800 group-hover:translate-y-0 group-hover:opacity-100 max-lg:translate-y-0 max-lg:opacity-100 sm:h-10 sm:px-4 sm:text-[12px] lg:h-14 lg:text-[13px]"
+          className="absolute inset-x-0 top-0 flex h-7 translate-y-2 items-center justify-center rounded-md bg-stone-950 px-2 text-[9px] font-semibold text-white opacity-0 shadow-sm transition-all duration-300 ease-out hover:bg-stone-800 group-hover:translate-y-0 group-hover:opacity-100 max-lg:translate-y-0 max-lg:opacity-100 sm:h-8 sm:px-2.5 sm:text-[10px] lg:h-9 lg:text-[11px]"
         >
           {t("common.buy")} {formatPrice(product.price, locale)}
         </button>

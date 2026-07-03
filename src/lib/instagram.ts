@@ -8,12 +8,6 @@ export interface InstagramPost {
 
 const fallbackInstagramPosts: InstagramPost[] = [
   {
-    id: "fallback-vanity",
-    imageUrl: "/products/premium-woven-vanity-crossbody-bag/vanity-black-lifestyle-v2.png",
-    mediaType: "IMAGE",
-    permalink: "https://www.instagram.com/sora.italy",
-  },
-  {
     id: "fallback-crossbody",
     imageUrl: "/products/elegant-leather-crossbody-bag-beige/cross-black-lifestyle-v2.png",
     mediaType: "IMAGE",
