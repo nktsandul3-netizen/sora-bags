@@ -1,32 +1,56 @@
 "use client";
 
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
-import { brand, brandStories, type BrandStoryHighlight, type BrandStoryProductOverride } from "@/lib/config";
+import { brand, brandStories, type BrandStoryHighlight, type BrandStoryHighlightOverride, type BrandStoryProductOverride } from "@/lib/config";
 import { useLocale } from "@/lib/useI18n";
 
-const IMAGE_DURATION = 4500;
+const IMAGE_DURATION = 5000;
+
+const PROGRESS_TRACK = "rgba(255, 255, 255, 0.35)";
+const PROGRESS_FILL = "#ffffff";
 
 const DEFAULT_RING_GRADIENT =
   "conic-gradient(from 140deg, #f59e0b, #f97316, #ef4444, #f97316, #f59e0b)";
 
-function getRingGradient(productSlug?: string) {
-  const overrides = brandStories.productOverrides as Record<string, BrandStoryProductOverride>;
-  return (productSlug && overrides[productSlug]?.ringGradient) || DEFAULT_RING_GRADIENT;
+function getHighlightOverride(
+  productSlug: string | undefined,
+  highlightId: string,
+): BrandStoryHighlightOverride | undefined {
+  if (!productSlug) return undefined;
+  const productOverride = (brandStories.productOverrides as Record<string, BrandStoryProductOverride>)[productSlug];
+  if (!productOverride) return undefined;
+  if (productOverride.highlights?.[highlightId]) return productOverride.highlights[highlightId];
+  if (highlightId === "in-motion" && (productOverride.cover || productOverride.slides)) {
+    return productOverride;
+  }
+  return undefined;
+}
+
+function getRingGradient(productSlug: string | undefined, highlightId: string) {
+  return getHighlightOverride(productSlug, highlightId)?.ringGradient ?? DEFAULT_RING_GRADIENT;
 }
 
 function getItemsForProduct(productSlug?: string): BrandStoryHighlight[] {
-  const overrides = brandStories.productOverrides as Record<
-    string,
-    Partial<Pick<BrandStoryHighlight, "cover" | "slides" | "cta" | "ctaHref">>
-  >;
-  const override = productSlug ? overrides[productSlug] : undefined;
-  return brandStories.items.map((item) => ({
-    ...item,
-    ...(override?.cover ? { cover: override.cover } : {}),
-    ...(override?.slides ? { slides: override.slides } : {}),
-    ...(override?.cta ? { cta: override.cta } : {}),
-    ...(override?.ctaHref ? { ctaHref: override.ctaHref } : {}),
-  }));
+  const productOverride = productSlug
+    ? (brandStories.productOverrides as Record<string, BrandStoryProductOverride>)[productSlug]
+    : undefined;
+  const scopedHighlights = productOverride?.highlights;
+
+  return brandStories.items
+    .map((item) => {
+      if (scopedHighlights && !(item.id in scopedHighlights)) {
+        return { ...item, slides: [] };
+      }
+      const override = getHighlightOverride(productSlug, item.id);
+      return {
+        ...item,
+        ...(override?.cover ? { cover: override.cover } : {}),
+        ...(override?.slides ? { slides: override.slides } : {}),
+        ...(override?.cta ? { cta: override.cta } : {}),
+        ...(override?.ctaHref ? { ctaHref: override.ctaHref } : {}),
+      };
+    })
+    .filter((item) => item.slides.length > 0);
 }
 
 type Locale = "ru" | "ro" | "en";
@@ -80,6 +104,40 @@ function SoundOffIcon({ className }: { className?: string }) {
   );
 }
 
+function StoryProgressBars({
+  count,
+  activeIndex,
+  progress,
+}: {
+  count: number;
+  activeIndex: number;
+  progress: number;
+}) {
+  return (
+    <div className="pointer-events-none absolute inset-x-0 top-0 z-30 flex gap-1.5 px-3 pt-5">
+      {Array.from({ length: count }, (_, i) => {
+        const fill =
+          i < activeIndex ? 100 : i === activeIndex ? Math.min(100, Math.max(0, progress * 100)) : 0;
+        return (
+          <span
+            key={i}
+            className="h-[3.5px] flex-1 overflow-hidden rounded-full"
+            style={{ backgroundColor: PROGRESS_TRACK }}
+          >
+            <span
+              className="block h-full rounded-full"
+              style={{
+                width: `${fill}%`,
+                backgroundColor: PROGRESS_FILL,
+                transition: i === activeIndex ? "none" : "width 200ms ease-out",
+              }}
+            />
+          </span>
+        );
+      })}
+    </div>
+  );
+}
 function ChevronIcon({ direction, className }: { direction: "left" | "right"; className?: string }) {
   return (
     <svg viewBox="0 0 24 24" className={className} fill="none" aria-hidden="true">
@@ -103,7 +161,6 @@ export default function BrandStories({
 }) {
   const locale = useLocale() as Locale;
   const items = useMemo(() => getItemsForProduct(productSlug), [productSlug]);
-  const ringGradient = useMemo(() => getRingGradient(productSlug), [productSlug]);
 
   const [openIdx, setOpenIdx] = useState<number | null>(null);
   const [slide, setSlide] = useState(0);
@@ -137,32 +194,43 @@ export default function BrandStories({
     elapsedRef.current = 0;
   }, []);
 
+  const goToSlide = useCallback((highlightIndex: number, slideIndex: number) => {
+    setOpenIdx(highlightIndex);
+    setSlide(slideIndex);
+    setProgress(0);
+    elapsedRef.current = 0;
+  }, []);
+
   const advance = useCallback(
     (dir: 1 | -1) => {
       if (openIdx === null) return;
-      let ni = openIdx;
-      let ns = slide + dir;
-      if (ns >= items[openIdx].slides.length) {
-        ni = openIdx + 1;
-        ns = 0;
-      } else if (ns < 0) {
-        ni = openIdx - 1;
-        ns = 0;
-      }
-      if (ni >= items.length) {
-        close();
+
+      if (dir === 1) {
+        const slideCount = items[openIdx].slides.length;
+        if (slide + 1 < slideCount) {
+          goToSlide(openIdx, slide + 1);
+          return;
+        }
+        if (openIdx + 1 >= items.length) {
+          close();
+          return;
+        }
+        goToSlide(openIdx + 1, 0);
         return;
       }
-      if (ni < 0) {
-        ni = 0;
-        ns = 0;
+
+      if (slide > 0) {
+        goToSlide(openIdx, slide - 1);
+        return;
       }
-      setOpenIdx(ni);
-      setSlide(ns);
-      setProgress(0);
-      elapsedRef.current = 0;
+      if (openIdx === 0) {
+        goToSlide(0, 0);
+        return;
+      }
+      const prevHighlight = openIdx - 1;
+      goToSlide(prevHighlight, items[prevHighlight].slides.length - 1);
     },
-    [openIdx, slide, items, close],
+    [openIdx, slide, items, close, goToSlide],
   );
 
   const next = useCallback(() => advance(1), [advance]);
@@ -251,7 +319,9 @@ export default function BrandStories({
   return (
     <>
       <div className={"flex flex-wrap items-start gap-x-5 gap-y-4 " + (className ?? "")}>
-        {items.map((item, i) => (
+        {items.map((item, i) => {
+          const itemRingGradient = getRingGradient(productSlug, item.id);
+          return (
           <button
             key={item.id}
             type="button"
@@ -262,11 +332,11 @@ export default function BrandStories({
             <span className="relative block h-[68px] w-[68px]">
               <span
                 aria-hidden
-                style={{ background: ringGradient }}
-                className="absolute inset-0 rounded-full animate-[storyPulse_2.6s_ease-out_infinite]"
+                style={{ background: itemRingGradient }}
+                className="absolute inset-0 rounded-full blur-[1px] saturate-150 animate-[storyPulse_1.65s_ease-out_infinite]"
               />
               <span
-                style={{ background: ringGradient }}
+                style={{ background: itemRingGradient }}
                 className="relative block h-full w-full rounded-full p-[2.5px]"
               >
                 <span className="block h-full w-full rounded-full bg-white p-[2px]">
@@ -291,7 +361,8 @@ export default function BrandStories({
               {item.label}
             </span>
           </button>
-        ))}
+          );
+        })}
       </div>
 
       {open && highlight && (
@@ -320,7 +391,7 @@ export default function BrandStories({
             {isVideo ? (
               <video
                 ref={videoRef}
-                key={current.src}
+                key={`${openIdx}-${slide}-${current.src}`}
                 className="absolute inset-0 h-full w-full object-cover"
                 src={current.src}
                 poster={current.poster}
@@ -330,8 +401,11 @@ export default function BrandStories({
                 preload="auto"
                 onEnded={next}
                 onTimeUpdate={(e) => {
+                  if (paused) return;
                   const v = e.currentTarget;
-                  if (v.duration) setProgress(v.currentTime / v.duration);
+                  if (v.duration && Number.isFinite(v.duration)) {
+                    setProgress(v.currentTime / v.duration);
+                  }
                 }}
               />
             ) : (
@@ -344,37 +418,24 @@ export default function BrandStories({
               />
             )}
 
-            {/* Tap zones for prev/next (middle band keeps header & footer clickable). */}
+            {/* Tap zones for prev/next */}
             <button
               type="button"
               aria-label="Предыдущее"
               onClick={prev}
-              className="absolute bottom-28 left-0 top-16 z-10 w-1/3"
+              className="absolute bottom-28 left-0 top-14 z-10 w-1/3"
             />
             <button
               type="button"
               aria-label="Следующее"
               onClick={next}
-              className="absolute bottom-28 right-0 top-16 z-10 w-1/3"
+              className="absolute bottom-28 right-0 top-14 z-10 w-1/3"
             />
 
-            {/* Progress bars */}
-            <div className="absolute inset-x-0 top-0 z-20 flex gap-1 px-3 pt-3">
-              {slides.map((s, i) => (
-                <span key={`${s.src}-${i}`} className="h-[3px] flex-1 overflow-hidden rounded-full bg-white/30">
-                  <span
-                    className="block h-full rounded-full bg-white"
-                    style={{
-                      width: i < slide ? "100%" : i === slide ? `${progress * 100}%` : "0%",
-                      transition: i === slide ? "width 80ms linear" : "none",
-                    }}
-                  />
-                </span>
-              ))}
-            </div>
+            <StoryProgressBars count={slides.length} activeIndex={slide} progress={progress} />
 
             {/* Header */}
-            <div className="absolute inset-x-0 top-0 z-20 flex items-center justify-between gap-3 px-4 pt-6">
+            <div className="absolute inset-x-0 top-0 z-20 flex items-center justify-between gap-3 px-4 pt-11">
               <div className="flex min-w-0 items-center gap-2.5">
                 <span className="grid h-9 w-9 shrink-0 place-items-center rounded-full bg-white/10 ring-1 ring-white/25 backdrop-blur-sm">
                   <span className="font-serif text-[10px] tracking-[0.12em] text-red-500">{brand.name}</span>

@@ -23,14 +23,8 @@ function isLifestyleImage(src?: string) {
 function cardImageClassName(
   src: string | undefined,
   hovered: boolean,
-  galleryFit: "cover" | "contain" = "cover",
 ) {
-  const fit =
-    galleryFit === "contain"
-      ? "object-contain object-center p-1 sm:p-2"
-      : isLifestyleImage(src)
-        ? "object-cover object-[50%_35%]"
-        : "object-cover object-center";
+  const fit = isLifestyleImage(src) ? "object-cover object-[50%_35%]" : "object-cover object-center";
 
   return (
     fit +
@@ -73,8 +67,6 @@ function ShowcaseCard({ product }: { product: Product }) {
   const hasSwap = Boolean(isDesktop && secondary && secondary.src !== primary?.src);
   const showSecondary = imageHovered && previewIdx === null && hasSwap;
   const showSwatches = colors.length > 0;
-  const galleryFit = product.galleryFit ?? "cover";
-
   function openQuickView() {
     setQuickViewMounted(true);
     setQuickViewOpen(true);
@@ -85,10 +77,14 @@ function ShowcaseCard({ product }: { product: Product }) {
       <div className="relative">
         <Link href={withLocalePath(`/product/${product.slug}`, locale)} className="block">
         <div
-          className="relative aspect-[4/5] w-full overflow-hidden border border-stone-950/20 bg-white"
+          className="relative aspect-[4/5] w-full overflow-hidden rounded-[22px] border border-white/80 bg-gradient-to-br from-stone-50 via-[#f7f1e9] to-white shadow-[0_18px_55px_-42px_rgba(28,25,23,0.65)] ring-1 ring-stone-950/10 transition duration-500 group-hover:-translate-y-1 group-hover:shadow-[0_26px_70px_-44px_rgba(28,25,23,0.85)]"
           onMouseEnter={() => setImageHovered(true)}
           onMouseLeave={() => setImageHovered(false)}
         >
+        <div aria-hidden className="pointer-events-none absolute inset-0">
+          <div className="absolute inset-x-8 bottom-3 h-16 rounded-full bg-stone-950/10 blur-2xl" />
+          <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_16%,rgba(255,255,255,0.9),transparent_34%),linear-gradient(135deg,rgba(255,255,255,0.36),transparent_56%)]" />
+        </div>
         {primary?.src ? (
           <>
             <div
@@ -104,11 +100,7 @@ function ShowcaseCard({ product }: { product: Product }) {
                 fill
                 sizes="(min-width: 1024px) 25vw, 82vw"
                 quality={90}
-                className={cardImageClassName(
-                  primary.src,
-                  imageHovered && previewIdx === null,
-                  galleryFit,
-                )}
+                className={cardImageClassName(primary.src, imageHovered && previewIdx === null)}
               />
             </div>
             {hasSwap && (
@@ -125,7 +117,7 @@ function ShowcaseCard({ product }: { product: Product }) {
                   fill
                   sizes="(min-width: 1024px) 25vw, 82vw"
                   quality={90}
-                  className={cardImageClassName(secondary!.src, showSecondary, galleryFit)}
+                  className={cardImageClassName(secondary!.src, showSecondary)}
                 />
               </div>
             )}
@@ -137,19 +129,27 @@ function ShowcaseCard({ product }: { product: Product }) {
             section={product.section}
             alt={localizedTitle}
             sizes="(min-width: 1024px) 25vw, 82vw"
-            imageClassName={cardImageClassName(
-              undefined,
-              imageHovered && previewIdx === null,
-              galleryFit,
-            )}
+            imageClassName={cardImageClassName(undefined, imageHovered && previewIdx === null)}
             className="h-full w-full"
           />
         )}
 
         <div className="absolute left-3 top-3 hidden items-center gap-2 text-[10px] font-semibold uppercase tracking-[0.14em] text-stone-950 lg:flex">
-          {onSale && <span>{t("catalog.badgeSale")}</span>}
-          {product.isNew && <span>{t("catalog.badgeNew")}</span>}
-          {product.hasVideo && <span>{t("catalog.badgeVideo")}</span>}
+          {onSale && (
+            <span className="rounded-full border border-white/70 bg-white/75 px-2.5 py-1 shadow-sm backdrop-blur-md">
+              {t("catalog.badgeSale")}
+            </span>
+          )}
+          {product.isNew && (
+            <span className="rounded-full border border-white/70 bg-white/75 px-2.5 py-1 shadow-sm backdrop-blur-md">
+              {t("catalog.badgeNew")}
+            </span>
+          )}
+          {product.hasVideo && (
+            <span className="rounded-full border border-white/70 bg-white/75 px-2.5 py-1 shadow-sm backdrop-blur-md">
+              {t("catalog.badgeVideo")}
+            </span>
+          )}
         </div>
 
         <div className="absolute right-3 top-3 hidden lg:block">

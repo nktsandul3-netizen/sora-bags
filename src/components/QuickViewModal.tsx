@@ -20,7 +20,7 @@ import {
   localizeStaticText,
   getVisibleProductSpecs,
 } from "@/lib/product-i18n";
-import { getColorImages } from "./ProductColorSwatches";
+import { getColorImages, getColorSwatchImage } from "./ProductColorSwatches";
 import ProductImage from "./ProductImage";
 import WishlistButton from "./WishlistButton";
 import PreorderStatusBadge from "./PreorderStatusBadge";
@@ -181,6 +181,7 @@ export default function QuickViewModal({
     : 0;
   const activeImage = galleryImages[safeImageIdx];
   const hasGallery = galleryImages.length > 1;
+  const canNavigateMedia = hasGallery || product.colors.length > 1;
   const onSale = Boolean(product.oldPrice && product.oldPrice > product.price);
   const delivery = getDeliveryInfo(product, locale);
   const canBuy = product.status !== "out_of_stock";
@@ -204,11 +205,19 @@ export default function QuickViewModal({
   }
 
   function showImage(direction: "prev" | "next") {
-    if (!hasGallery) return;
-    setSelectedImageIdx((current) =>
+    if (hasGallery) {
+      setSelectedImageIdx((current) =>
+        direction === "next"
+          ? (current + 1) % galleryImages.length
+          : (current - 1 + galleryImages.length) % galleryImages.length,
+      );
+      return;
+    }
+    if (product.colors.length < 2) return;
+    setSelectedColorIdx(
       direction === "next"
-        ? (current + 1) % galleryImages.length
-        : (current - 1 + galleryImages.length) % galleryImages.length,
+        ? (colorIdx + 1) % product.colors.length
+        : (colorIdx - 1 + product.colors.length) % product.colors.length,
     );
   }
 
@@ -244,26 +253,36 @@ export default function QuickViewModal({
 
             <div className="min-h-0 overflow-y-auto lg:flex lg:w-full lg:overflow-visible">
               {/* Фото */}
-              <div className="relative shrink-0 bg-stone-50 lg:w-[46%]">
-                <div className="group relative aspect-[4/5] max-h-[44vh] w-full sm:max-h-[50vh] lg:h-full lg:max-h-none lg:min-h-[560px]">
-                  <ProductImage
-                    key={`${colorIdx}-${safeImageIdx}-${activeImage?.src ?? "placeholder"}`}
-                    hex={color?.hex ?? "#d6d3d1"}
-                    section={product.section}
-                    src={activeImage?.src}
-                    alt={activeImage?.alt ?? localizedTitle}
-                    sizes="(min-width: 1024px) 40vw, 100vw"
-                    imageClassName="object-contain object-center"
-                    className="absolute inset-0 h-full w-full"
-                  />
+              <div className="relative shrink-0 bg-gradient-to-br from-stone-50 via-[#f7f1e9] to-white p-3 lg:w-[46%]">
+                <div className="group relative aspect-[4/5] max-h-[44vh] w-full overflow-hidden rounded-[22px] border border-white/80 bg-white/70 shadow-[0_20px_60px_-42px_rgba(28,25,23,0.8)] ring-1 ring-stone-950/10 sm:max-h-[50vh] lg:h-full lg:max-h-none lg:min-h-[560px]">
+                  <div aria-hidden className="pointer-events-none absolute inset-0">
+                    <div
+                      className="absolute -left-16 -top-14 h-44 w-44 rounded-full opacity-25 blur-3xl"
+                      style={{ backgroundColor: color?.hex ?? "#d6d3d1" }}
+                    />
+                    <div className="absolute inset-x-10 bottom-4 h-20 rounded-full bg-stone-950/10 blur-3xl" />
+                    <div className="absolute inset-0 bg-[radial-gradient(circle_at_28%_18%,rgba(255,255,255,0.92),transparent_35%)]" />
+                  </div>
+                  <div className="absolute inset-2 overflow-hidden rounded-[17px] bg-white/75 shadow-inner ring-1 ring-white/80">
+                    <ProductImage
+                      key={`${colorIdx}-${safeImageIdx}-${activeImage?.src ?? "placeholder"}`}
+                      hex={color?.hex ?? "#d6d3d1"}
+                      section={product.section}
+                      src={activeImage?.src}
+                      alt={activeImage?.alt ?? localizedTitle}
+                      sizes="(min-width: 1024px) 40vw, 100vw"
+                      imageClassName="object-contain object-center"
+                      className="absolute inset-0 h-full w-full"
+                    />
+                  </div>
 
-                  {hasGallery && (
+                  {canNavigateMedia && (
                     <>
                       <button
                         type="button"
                         aria-label={t("common.previousPhoto")}
                         onClick={() => showImage("prev")}
-                        className="absolute left-3 top-1/2 flex h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full border border-white/70 bg-white/80 text-stone-900 shadow-sm backdrop-blur transition hover:bg-white"
+                        className="absolute left-4 top-1/2 z-20 flex h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full border border-white/70 bg-white/70 text-stone-900 shadow-[0_12px_32px_-18px_rgba(28,25,23,0.75)] backdrop-blur-md transition hover:scale-105 hover:bg-white"
                       >
                         <ArrowIcon direction="left" />
                       </button>
@@ -271,11 +290,15 @@ export default function QuickViewModal({
                         type="button"
                         aria-label={t("common.nextPhoto")}
                         onClick={() => showImage("next")}
-                        className="absolute right-3 top-1/2 flex h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full border border-white/70 bg-white/80 text-stone-900 shadow-sm backdrop-blur transition hover:bg-white"
+                        className="absolute right-4 top-1/2 z-20 flex h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full border border-white/70 bg-white/70 text-stone-900 shadow-[0_12px_32px_-18px_rgba(28,25,23,0.75)] backdrop-blur-md transition hover:scale-105 hover:bg-white"
                       >
                         <ArrowIcon direction="right" />
                       </button>
-                      <div className="absolute bottom-3 left-1/2 flex -translate-x-1/2 items-center gap-1.5 rounded-full bg-white/80 px-2.5 py-1.5 shadow-sm backdrop-blur">
+                      <div className="absolute right-4 top-4 z-20 rounded-full border border-white/70 bg-white/75 px-2.5 py-1 text-[10px] font-medium tabular-nums tracking-[0.12em] text-stone-700 shadow-sm backdrop-blur-md">
+                        {hasGallery ? `${safeImageIdx + 1}/${galleryImages.length}` : `${colorIdx + 1}/${product.colors.length}`}
+                      </div>
+                      {hasGallery ? (
+                      <div className="absolute bottom-5 left-1/2 z-20 flex -translate-x-1/2 items-center gap-1.5 rounded-full border border-white/70 bg-white/75 px-3 py-2 shadow-[0_10px_28px_-18px_rgba(28,25,23,0.7)] backdrop-blur-md">
                         {galleryImages.map((image, i) => (
                           <button
                             key={`${image.src}-dot-${i}`}
@@ -284,11 +307,12 @@ export default function QuickViewModal({
                             onClick={() => setSelectedImageIdx(i)}
                             className={
                               "h-1.5 rounded-full transition-all " +
-                              (i === safeImageIdx ? "w-5 bg-stone-950" : "w-1.5 bg-stone-400")
+                              (i === safeImageIdx ? "w-5 bg-stone-950" : "w-1.5 bg-stone-400/70")
                             }
                           />
                         ))}
                       </div>
+                      ) : null}
                     </>
                   )}
                 </div>
@@ -326,7 +350,7 @@ export default function QuickViewModal({
                   {product.colors.length > 1 && (
                     <div className="mt-2.5 flex flex-wrap gap-2.5">
                       {product.colors.map((c, i) => {
-                        const thumb = getColorImages(c)[0];
+                        const thumb = getColorSwatchImage(c);
                         const selected = i === colorIdx;
                         return (
                           <button
@@ -336,7 +360,7 @@ export default function QuickViewModal({
                             aria-label={localizeColorName(c, locale)}
                             title={localizeColorName(c, locale)}
                             className={
-                              "relative h-16 w-16 overflow-hidden rounded-xl border bg-white transition " +
+                              "relative h-12 w-12 overflow-hidden rounded-lg border bg-stone-50 transition " +
                               (selected
                                 ? "border-stone-950 ring-1 ring-stone-950"
                                 : "border-stone-200 hover:border-stone-400")
@@ -348,8 +372,8 @@ export default function QuickViewModal({
                                 section={product.section}
                                 src={thumb.src}
                                 alt={thumb.alt || c.name}
-                                sizes="64px"
-                                imageClassName="object-contain object-center"
+                                sizes="48px"
+                                imageClassName="object-cover object-center"
                                 className="absolute inset-0 h-full w-full"
                               />
                             ) : (

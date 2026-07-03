@@ -55,6 +55,8 @@ const ru = {
   home: {
     announcement: "Летняя распродажа уже в SÓRA — скидки до 50% на избранные модели.",
     follow: "Подписывайтесь",
+    instagramFeed: "Мы в Instagram",
+    instagramFeedHint: "Новые образы и поступления",
     messengers: "Наши мессенджеры",
     newArrivals: "Новинки",
     toCatalog: "В каталог",
@@ -401,6 +403,8 @@ const ro: typeof ru = {
   home: {
     announcement: "Reduceri de vară la SÓRA — până la 50% la modele selectate.",
     follow: "Urmăriți-ne",
+    instagramFeed: "Pe Instagram",
+    instagramFeedHint: "Ținute noi și noutăți",
     messengers: "Messenger-ele noastre",
     newArrivals: "Noutăți",
     toCatalog: "În catalog",
@@ -747,6 +751,8 @@ const en: typeof ru = {
   home: {
     announcement: "Summer sale is live at SÓRA — up to 50% off selected models.",
     follow: "Follow us",
+    instagramFeed: "On Instagram",
+    instagramFeedHint: "New looks and arrivals",
     messengers: "Our messengers",
     newArrivals: "New arrivals",
     toCatalog: "To catalog",

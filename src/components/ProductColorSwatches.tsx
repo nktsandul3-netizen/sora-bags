@@ -13,6 +13,16 @@ export function getColorImages(color: ProductColor) {
   return (color.images ?? []).filter((img) => img.src);
 }
 
+/** Front-facing shot for color picker / card thumbnails (avoids angle or inside views). */
+export function getColorSwatchImage(color: ProductColor) {
+  const images = getColorImages(color);
+  if (!images.length) return undefined;
+  const front = images.find((img) =>
+    /\/[^/]*front(?!-alt)[^/?]*\.(?:png|jpe?g|webp)$/i.test(img.src),
+  );
+  return front ?? images[0];
+}
+
 export function getProductColorHref(productSlug: string, colorName: string) {
   return `/product/${productSlug}?color=${encodeURIComponent(colorName)}`;
 }

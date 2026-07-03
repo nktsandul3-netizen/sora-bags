@@ -24,6 +24,8 @@ export interface ProductColor {
 export interface ProductImageAsset {
   src: string;
   alt: string;
+  /** Перекрывает product.galleryFit для отдельных фото (например lifestyle → cover) */
+  fit?: "cover" | "contain";
 }
 
 export interface Product {

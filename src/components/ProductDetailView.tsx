@@ -17,7 +17,7 @@ import {
   getVisibleProductSpecs,
 } from "@/lib/product-i18n";
 import ProductImage from "./ProductImage";
-import { getColorImages } from "./ProductColorSwatches";
+import { getColorImages, getColorSwatchImage } from "./ProductColorSwatches";
 import WishlistButton from "./WishlistButton";
 import PreorderStatusBadge from "./PreorderStatusBadge";
 import BrandStories from "./BrandStories";
@@ -183,10 +183,12 @@ export default function ProductDetailView({
   const backdropImage = images[0] ?? activeImage;
   const onSale = product.oldPrice && product.oldPrice > product.price;
   const hasGallery = images.length > 1;
+  const canNavigateMedia = hasGallery || product.colors.length > 1;
   const canBuy = product.status !== "out_of_stock";
   const galleryFit = product.galleryFit ?? "cover";
+  const activeImageFit = activeImage?.fit ?? galleryFit;
   const galleryImageClass =
-    galleryFit === "contain"
+    activeImageFit === "contain"
       ? "object-contain object-center p-3 sm:p-4"
       : "object-cover object-center";
   const localizedColor = localizeColorName(color, locale);
@@ -241,11 +243,20 @@ export default function ProductDetailView({
   }
 
   function showImage(direction: "prev" | "next") {
-    if (!hasGallery) return;
-    setImageIdx((current) =>
+    if (hasGallery) {
+      setImageIdx((current) =>
+        direction === "next"
+          ? (current + 1) % images.length
+          : (current - 1 + images.length) % images.length,
+      );
+      return;
+    }
+    if (product.colors.length < 2) return;
+    setImageIdx(0);
+    setColorIdx((current) =>
       direction === "next"
-        ? (current + 1) % images.length
-        : (current - 1 + images.length) % images.length,
+        ? (current + 1) % product.colors.length
+        : (current - 1 + product.colors.length) % product.colors.length,
     );
   }
 
@@ -253,35 +264,45 @@ export default function ProductDetailView({
     <div className="mt-6">
       <div className="grid gap-10 lg:grid-cols-[minmax(0,0.82fr)_minmax(0,1.18fr)]">
       <div>
-        <div className="group relative aspect-[4/5] overflow-hidden border border-stone-950/20 bg-white">
-          {activeImage?.src ? (
-            /* eslint-disable-next-line @next/next/no-img-element */
-            <img
-              key={`${colorIdx}-${safeImageIdx}-${activeImage.src}`}
-              src={activeImage.src}
-              alt={activeImage.alt ?? localizedTitle}
-              loading="eager"
-              className={`h-full w-full transition-transform duration-700 group-hover:scale-[1.015] ${galleryImageClass}`}
+        <div className="group relative aspect-[4/5] overflow-hidden rounded-[28px] border border-white/80 bg-gradient-to-br from-stone-50 via-[#f7f1e9] to-white shadow-[0_24px_70px_-42px_rgba(28,25,23,0.75)] ring-1 ring-stone-950/10">
+          <div aria-hidden className="pointer-events-none absolute inset-0">
+            <div
+              className="absolute -left-20 -top-16 h-64 w-64 rounded-full opacity-25 blur-3xl"
+              style={{ backgroundColor: color.hex }}
             />
-          ) : (
-            <ProductImage
-              key={`${colorIdx}-${safeImageIdx}-placeholder`}
-              hex={color.hex}
-              section={product.section}
-              alt={localizedTitle}
-              sizes="(min-width: 1024px) 50vw, 100vw"
-              imageClassName="object-contain object-center"
-              className="aspect-[4/5] w-full"
-            />
-          )}
+            <div className="absolute inset-x-8 bottom-6 h-28 rounded-full bg-stone-950/10 blur-3xl" />
+            <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_18%,rgba(255,255,255,0.95),transparent_34%),linear-gradient(135deg,rgba(255,255,255,0.42),transparent_52%)]" />
+          </div>
+          <div className="absolute inset-3 overflow-hidden rounded-[22px] bg-white/70 shadow-inner ring-1 ring-white/70">
+            {activeImage?.src ? (
+              /* eslint-disable-next-line @next/next/no-img-element */
+              <img
+                key={`${colorIdx}-${safeImageIdx}-${activeImage.src}`}
+                src={activeImage.src}
+                alt={activeImage.alt ?? localizedTitle}
+                loading="eager"
+                className={`relative z-10 h-full w-full transition-transform duration-700 group-hover:scale-[1.018] ${galleryImageClass}`}
+              />
+            ) : (
+              <ProductImage
+                key={`${colorIdx}-${safeImageIdx}-placeholder`}
+                hex={color.hex}
+                section={product.section}
+                alt={localizedTitle}
+                sizes="(min-width: 1024px) 50vw, 100vw"
+                imageClassName="object-contain object-center"
+                className="h-full w-full"
+              />
+            )}
+          </div>
 
-          {hasGallery && (
+          {canNavigateMedia && (
             <>
               <button
                 type="button"
                 aria-label={t("common.previousPhoto")}
                 onClick={() => showImage("prev")}
-                className="absolute left-4 top-1/2 flex h-11 w-11 -translate-y-1/2 items-center justify-center rounded-full border border-white/70 bg-white/75 text-stone-900 opacity-0 shadow-sm backdrop-blur transition hover:bg-white group-hover:opacity-100 max-lg:opacity-100"
+                className="absolute left-5 top-1/2 z-20 flex h-12 w-12 -translate-y-1/2 items-center justify-center rounded-full border border-white/70 bg-white/75 text-stone-900 shadow-[0_14px_35px_-18px_rgba(28,25,23,0.8)] backdrop-blur-md transition hover:scale-105 hover:bg-white"
               >
                 <ArrowIcon direction="left" />
               </button>
@@ -289,12 +310,17 @@ export default function ProductDetailView({
                 type="button"
                 aria-label={t("common.nextPhoto")}
                 onClick={() => showImage("next")}
-                className="absolute right-4 top-1/2 flex h-11 w-11 -translate-y-1/2 items-center justify-center rounded-full border border-white/70 bg-white/75 text-stone-900 opacity-0 shadow-sm backdrop-blur transition hover:bg-white group-hover:opacity-100 max-lg:opacity-100"
+                className="absolute right-5 top-1/2 z-20 flex h-12 w-12 -translate-y-1/2 items-center justify-center rounded-full border border-white/70 bg-white/75 text-stone-900 shadow-[0_14px_35px_-18px_rgba(28,25,23,0.8)] backdrop-blur-md transition hover:scale-105 hover:bg-white"
               >
                 <ArrowIcon direction="right" />
               </button>
 
-              <div className="absolute bottom-4 left-1/2 flex -translate-x-1/2 items-center gap-2 rounded-full bg-white/75 px-3 py-2 shadow-sm backdrop-blur">
+              <div className="absolute right-5 top-5 z-20 rounded-full border border-white/70 bg-white/70 px-3 py-1.5 text-[11px] font-medium tabular-nums tracking-[0.12em] text-stone-700 shadow-sm backdrop-blur-md">
+                {hasGallery ? `${safeImageIdx + 1}/${images.length}` : `${colorIdx + 1}/${product.colors.length}`}
+              </div>
+
+              {hasGallery ? (
+              <div className="absolute bottom-6 left-1/2 z-20 flex -translate-x-1/2 items-center gap-2 rounded-full border border-white/70 bg-white/70 px-3.5 py-2.5 shadow-[0_12px_30px_-20px_rgba(28,25,23,0.7)] backdrop-blur-md">
                 {images.map((image, i) => (
                   <button
                     key={`${image.alt}-dot-${i}`}
@@ -303,11 +329,12 @@ export default function ProductDetailView({
                     onClick={() => setImageIdx(i)}
                     className={
                       "h-1.5 rounded-full transition-all " +
-                      (i === safeImageIdx ? "w-6 bg-stone-950" : "w-1.5 bg-stone-400")
+                      (i === safeImageIdx ? "w-7 bg-stone-950" : "w-1.5 bg-stone-400/70")
                     }
                   />
                 ))}
               </div>
+              ) : null}
             </>
           )}
         </div>
@@ -384,7 +411,7 @@ export default function ProductDetailView({
           </p>
           <div className="mt-3 flex flex-wrap gap-3">
             {product.colors.map((c, i) => {
-              const thumb = getColorImages(c)[0];
+              const thumb = getColorSwatchImage(c);
               const selected = i === colorIdx;
               const cName = localizeColorName(c, locale);
               const cStatus = localizeStaticText(c.status, locale);
@@ -397,7 +424,7 @@ export default function ProductDetailView({
                   aria-pressed={selected}
                   title={cStatus ? `${cName} — ${cStatus}` : cName}
                   className={
-                    "relative h-[5.5rem] w-[5.5rem] shrink-0 overflow-hidden bg-stone-50 transition sm:h-[6rem] sm:w-[6rem] " +
+                    "relative h-[4.25rem] w-[4.25rem] shrink-0 overflow-hidden bg-stone-50 transition sm:h-[4.5rem] sm:w-[4.5rem] " +
                     (selected
                       ? "ring-1 ring-stone-950"
                       : "ring-1 ring-transparent hover:ring-stone-300")
@@ -408,8 +435,8 @@ export default function ProductDetailView({
                     section={product.section}
                     src={thumb?.src}
                     alt={thumb?.alt ?? c.name}
-                    sizes="72px"
-                    imageClassName="object-contain object-center"
+                    sizes="64px"
+                    imageClassName="object-cover object-center"
                     className="h-full w-full"
                   />
                 </button>
