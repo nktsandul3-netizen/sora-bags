@@ -16,6 +16,7 @@ const categoryLabels: Record<string, Partial<Record<Locale, string>>> = {
   "womens-wallets-women": { ru: "Women's Wallets", ro: "Women's Wallets", en: "Women's Wallets" },
   "womens-belts-women": { ru: "Women's Belts", ro: "Women's Belts", en: "Women's Belts" },
   "womens-scarves-women": { ru: "Women's Scarves", ro: "Women's Scarves", en: "Women's Scarves" },
+  "bag-charms": { ru: "Брелки", ro: "Brelocuri", en: "Bag charms" },
 };
 
 const heroCopyLabels: Record<
@@ -173,6 +174,23 @@ const heroCopyLabels: Record<
       title: "Crossbody bags",
       description:
         "Freedom of movement and urban chic — SÓRA crossbody bags combine ease, compact style and elegance for every day.",
+    },
+  },
+  "bag-charms": {
+    ru: {
+      title: "Брелки",
+      description:
+        "Кожаные брелки и подвески для сумок — небольшой акцент, который меняет характер любой модели. Золотая фурнитура, карабин и итальянское исполнение.",
+    },
+    ro: {
+      title: "Brelocuri",
+      description:
+        "Brelocuri și accesorii din piele pentru genți — un accent mic care schimbă caracterul oricărei modele. Feronerie aurie, carabină și execuție italiană.",
+    },
+    en: {
+      title: "Bag charms",
+      description:
+        "Leather bag charms and accessories — a small accent that changes the character of any bag. Gold hardware, a carabiner clip and Italian craftsmanship.",
     },
   },
 };

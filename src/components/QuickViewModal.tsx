@@ -185,6 +185,10 @@ export default function QuickViewModal({
   const onSale = Boolean(product.oldPrice && product.oldPrice > product.price);
   const delivery = getDeliveryInfo(product, locale);
   const canBuy = product.status !== "out_of_stock";
+  const swatchImageClass =
+    (product.galleryFit ?? "cover") === "contain"
+      ? "object-contain object-center p-0.5"
+      : "object-cover object-center";
   const localizedColor = localizeColorName(color, locale);
   const localizedDescription = localizeProductDescription(product, locale);
   const localizedTitle = localizeProductTitle(product, locale);
@@ -373,7 +377,8 @@ export default function QuickViewModal({
                                 src={thumb.src}
                                 alt={thumb.alt || c.name}
                                 sizes="48px"
-                                imageClassName="object-cover object-center"
+                                unoptimized
+                                imageClassName={swatchImageClass}
                                 className="absolute inset-0 h-full w-full"
                               />
                             ) : (

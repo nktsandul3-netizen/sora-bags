@@ -63,6 +63,7 @@ export default function ProductImage({
   alt = "",
   sizes = "(min-width: 1024px) 25vw, 50vw",
   imageClassName = "object-cover object-center",
+  unoptimized = false,
 }: {
   hex: string;
   section: Section;
@@ -71,6 +72,7 @@ export default function ProductImage({
   alt?: string;
   sizes?: string;
   imageClassName?: string;
+  unoptimized?: boolean;
 }) {
   if (src) {
     return (
@@ -82,6 +84,7 @@ export default function ProductImage({
           fill
           sizes={sizes}
           quality={90}
+          unoptimized={unoptimized}
           className={imageClassName}
         />
       </div>

@@ -358,6 +358,7 @@ export const specValues: SpecTranslationMap = {
   "Плетёный материал + кожа": { ro: "Material împletit + piele", en: "Woven material + leather" },
   "Подарочный набор": { ro: "Set cadou", en: "Gift set" },
   "Подвеска для сумки": { ro: "Accesoriu pentru geantă", en: "Bag charm" },
+  "Брелок для сумки": { ro: "Breloc pentru geantă", en: "Bag charm" },
   "Структурная прямоугольная сумка": { ro: "Geantă rectangulară structurată", en: "Structured rectangular bag" },
   "Сумка": { ro: "Geantă", en: "Bag" },
   "в руке": { ro: "în mână", en: "hand carry" },

@@ -437,6 +437,14 @@ const accessoryCategoryIcons: Record<string, React.ReactNode> = {
       <path d="M10 10.5 9.4 15M14 10.5l.6 4.5" />
     </CatIcon>
   ),
+  "bag-charms": (
+    <CatIcon>
+      <circle cx="12" cy="7.5" r="2.2" />
+      <path d="M12 9.7v3.2" />
+      <path d="M9.2 16.2c0-1.5 1.2-2.7 2.8-2.7s2.8 1.2 2.8 2.7" />
+      <path d="M7.5 16.2h9" />
+    </CatIcon>
+  ),
 };
 
 function MobileMenu({ onClose }: { onClose: () => void }) {

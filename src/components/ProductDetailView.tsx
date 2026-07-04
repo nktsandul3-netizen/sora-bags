@@ -58,6 +58,18 @@ const contactHints: Record<string, { whatsapp: string; telegram: string; viber: 
   },
 };
 
+const leatherBadgeLabel: Record<string, string> = {
+  ru: "100% натуральная кожа",
+  ro: "100% piele naturală",
+  en: "100% genuine leather",
+};
+
+const vintageBadgeLabel: Record<string, string> = {
+  ru: "Коллекция Vintage",
+  ro: "Vintage Collection",
+  en: "Vintage Collection",
+};
+
 function MessengerIcon({ name }: { name: "whatsapp" | "telegram" | "viber" }) {
   const common = {
     viewBox: "0 0 24 24",
@@ -140,6 +152,67 @@ function ArrowIcon({ direction }: { direction: "left" | "right" }) {
   );
 }
 
+function LeatherHideIcon() {
+  return (
+    <svg viewBox="0 0 64 64" className="h-[18px] w-[18px] shrink-0 text-[#7a4f2d]" aria-hidden>
+      <path
+        d="M22 6h20c.6 7.7 5.3 12.2 14 11.3l5 10.4c-7.8 3.8-9.8 9.8-5 17.4L46 58c-6.9-4.9-21.1-4.9-28 0L8 45.1c4.8-7.6 2.8-13.6-5-17.4l5-10.4c8.7.9 13.4-3.6 14-11.3Z"
+        fill="none"
+        stroke="currentColor"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        strokeWidth="4.4"
+      />
+      <path
+        d="M23.8 11.5h16.4M10.4 25.4c4.4.9 8.3.1 11.6-2.4M53.6 25.4c-4.4.9-8.3.1-11.6-2.4M14 42.6c3.9-1 7.4-.5 10.7 1.4M50 42.6c-3.9-1-7.4-.5-10.7 1.4"
+        fill="none"
+        stroke="currentColor"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        strokeWidth="2"
+        opacity="0.55"
+      />
+    </svg>
+  );
+}
+
+function isPureLeatherMaterial(value: string) {
+  const text = value.trim().toLowerCase();
+  const hasLeather = text.includes("кож") || /\b(leather|calf)\b/.test(text);
+  if (!hasLeather) return false;
+
+  const mixedMaterialMarkers = [
+    "+",
+    "&",
+    "замша",
+    "suede",
+    "рафи",
+    "raffia",
+    "rattan",
+    "солом",
+    "straw",
+    "шелк",
+    "шёлк",
+    "silk",
+    "плетёный материал",
+    "плетеный материал",
+    "details",
+    "trim",
+  ];
+
+  return !mixedMaterialMarkers.some((marker) => text.includes(marker));
+}
+
+function hasPureLeatherMaterial(product: Product) {
+  if (isPureLeatherMaterial(product.material)) return true;
+
+  return product.specs?.some((spec) => {
+    const label = spec.label.trim().toLowerCase();
+    const isMaterialSpec = label === "материал" || label === "материалы" || label === "кожа";
+    return isMaterialSpec && isPureLeatherMaterial(spec.value);
+  });
+}
+
 function getInitialColorIdx(product: Product, colorParam: string | null) {
   if (!colorParam) return 0;
   const normalized = colorParam.trim().toLowerCase();
@@ -186,7 +259,12 @@ export default function ProductDetailView({
   const canNavigateMedia = hasGallery || product.colors.length > 1;
   const canBuy = product.status !== "out_of_stock";
   const galleryFit = product.galleryFit ?? "cover";
+  const showLeatherBadge = hasPureLeatherMaterial(product);
   const activeImageFit = activeImage?.fit ?? galleryFit;
+  const swatchImageClass =
+    galleryFit === "contain"
+      ? "object-contain object-center p-1"
+      : "object-cover object-center";
   const galleryImageClass =
     activeImageFit === "contain"
       ? "object-contain object-center p-3 sm:p-4"
@@ -360,8 +438,8 @@ export default function ProductDetailView({
             <div className="absolute inset-0 bg-gradient-to-b from-white/40 via-white/68 to-white/95" />
           </div>
           <div className="relative p-6 sm:p-7 lg:p-8">
-        <div className="flex flex-wrap items-center gap-3.5">
-          <span className="text-[15px] font-medium leading-none text-stone-950">
+        <div className="flex flex-wrap items-center gap-3.5 leading-none">
+          <span className="inline-flex h-[27px] items-center text-[15px] font-medium text-stone-950">
             SÓRA
           </span>
           <div className="inline-flex items-center gap-2 rounded-[5px] bg-white px-2.5 py-1.5 text-[14px] font-medium leading-none text-stone-800 shadow-sm ring-1 ring-stone-200/70">
@@ -372,12 +450,29 @@ export default function ProductDetailView({
             </span>
             Made in Italy
           </div>
+          {showLeatherBadge && (
+            <div className="inline-flex items-center gap-1.5 rounded-[5px] bg-white px-2 py-1.5 text-[12px] font-medium leading-none text-stone-700 shadow-sm ring-1 ring-stone-200/70">
+              <LeatherHideIcon />
+              {leatherBadgeLabel[locale] ?? leatherBadgeLabel.ru}
+            </div>
+          )}
           {product.isVintage && (
-            <div className="inline-flex items-center gap-2 rounded-[5px] bg-[#fbf3e7] px-2.5 py-1.5 text-[14px] font-medium leading-none text-[#8a5a22] shadow-sm ring-1 ring-[#e6cfa3]">
-              <svg aria-hidden viewBox="0 0 24 24" className="h-4 w-4 shrink-0 text-[#b8862f]" fill="currentColor">
-                <path d="M12 1.5 14.9 8.6 22.5 9.3 16.8 14.3 18.5 21.8 12 17.8 5.5 21.8 7.2 14.3 1.5 9.3 9.1 8.6 12 1.5Z" />
+            <div className="inline-flex items-center gap-1 rounded-[5px] bg-[#fbf3e7]/55 px-1.5 py-1.5 text-[11px] font-normal leading-none text-[#9a6d34]/85 shadow-sm ring-1 ring-[#e6cfa3]/40">
+              <svg aria-hidden viewBox="0 0 24 24" className="h-3 w-3 shrink-0 text-[#b8862f]/75" fill="none">
+                <path
+                  d="M12 3.2 19.8 12 12 20.8 4.2 12 12 3.2Z"
+                  stroke="currentColor"
+                  strokeLinejoin="round"
+                  strokeWidth="1.55"
+                />
+                <path
+                  d="M8.9 12h6.2M12 8.9v6.2"
+                  stroke="currentColor"
+                  strokeLinecap="round"
+                  strokeWidth="1.2"
+                />
               </svg>
-              Vintage
+              {vintageBadgeLabel[locale] ?? vintageBadgeLabel.en}
             </div>
           )}
         </div>
@@ -436,7 +531,8 @@ export default function ProductDetailView({
                     src={thumb?.src}
                     alt={thumb?.alt ?? c.name}
                     sizes="64px"
-                    imageClassName="object-cover object-center"
+                    unoptimized
+                    imageClassName={swatchImageClass}
                     className="h-full w-full"
                   />
                 </button>

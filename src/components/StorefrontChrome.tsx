@@ -27,10 +27,11 @@ export default function StorefrontChrome({
   const pathname = usePathname();
   const path = stripLocaleFromPathname(pathname || "/");
   const isAdmin = path.startsWith("/admin");
+  const isPrintCatalog = path === "/catalog/print";
   const isHome = path === "/";
   const isHeroOverlay = isHeroOverlayPath(pathname);
 
-  if (isAdmin) {
+  if (isAdmin || isPrintCatalog) {
     return <main className="flex-1">{children}</main>;
   }
 

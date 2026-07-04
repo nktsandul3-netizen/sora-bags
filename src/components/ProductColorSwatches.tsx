@@ -17,8 +17,10 @@ export function getColorImages(color: ProductColor) {
 export function getColorSwatchImage(color: ProductColor) {
   const images = getColorImages(color);
   if (!images.length) return undefined;
+  const frontCard = images.find((img) => /-front-card\.(?:png|jpe?g|webp)(?:\?|$)/i.test(img.src));
+  if (frontCard) return frontCard;
   const front = images.find((img) =>
-    /\/[^/]*front(?!-alt)[^/?]*\.(?:png|jpe?g|webp)$/i.test(img.src),
+    /\/[^/]*front(?!-alt)[^/?]*\.(?:png|jpe?g|webp)(?:\?|$)/i.test(img.src),
   );
   return front ?? images[0];
 }

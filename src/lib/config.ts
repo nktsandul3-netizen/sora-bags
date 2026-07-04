@@ -147,6 +147,9 @@ export const brandStories = {
     "structured-leather-tote-bag-burgundy",
     "womens-pebbled-leather-crescent-hobo-bag",
     "womens-pebbled-leather-kiss-lock-pouch-bag-light-blue",
+    "womens-pleated-leather-frame-clutch",
+    "womens-pebbled-leather-side-drawstring-shoulder-bag",
+    "womens-pebbled-leather-two-tone-bowling-bag",
     "womens-pebbled-leather-turn-lock-flap-shoulder-bag-black",
     "elegant-leather-hobo-bag-taupe",
     "elegant-leather-hobo-bag-smooth-black",
@@ -443,6 +446,64 @@ export const brandStories = {
           poster: "/products/womens-pebbled-leather-crescent-hobo-bag/white-front.png",
         },
       ],
+    },
+    "womens-pleated-leather-frame-clutch": {
+      cover: "/products/womens-pleated-leather-frame-clutch/cognac-front-alt.png",
+      ringGradient:
+        "conic-gradient(from 140deg, #d4a574, #a0643f, #7c4a2d, #a0643f, #d4a574)",
+      slides: [
+        {
+          type: "video",
+          src: "/videos/sora-story-in-motion-pleated-frame-clutch.mp4",
+          poster: "/products/womens-pleated-leather-frame-clutch/cognac-front-alt.png",
+        },
+      ],
+    },
+    "womens-pebbled-leather-side-drawstring-shoulder-bag": {
+      highlights: {
+        "as-seen-on": {
+          cover: "/products/womens-pebbled-leather-side-drawstring-shoulder-bag/as-seen-on-mirror-2.png",
+          ringGradient:
+            "conic-gradient(from 140deg, #9ca3af, #4b5563, #1f2937, #4b5563, #9ca3af)",
+          slides: [
+            {
+              type: "image",
+              src: "/products/womens-pebbled-leather-side-drawstring-shoulder-bag/as-seen-on-mirror-1.png",
+            },
+            {
+              type: "image",
+              src: "/products/womens-pebbled-leather-side-drawstring-shoulder-bag/as-seen-on-mirror-2.png",
+            },
+            {
+              type: "image",
+              src: "/products/womens-pebbled-leather-side-drawstring-shoulder-bag/as-seen-on-mirror-3.png",
+            },
+          ],
+        },
+      },
+    },
+    "womens-pebbled-leather-two-tone-bowling-bag": {
+      highlights: {
+        "as-seen-on": {
+          cover: "/products/womens-pebbled-leather-two-tone-bowling-bag/as-seen-on-mirror-2.png",
+          ringGradient:
+            "conic-gradient(from 140deg, #b5a498, #7b6658, #4b3429, #7b6658, #b5a498)",
+          slides: [
+            {
+              type: "image",
+              src: "/products/womens-pebbled-leather-two-tone-bowling-bag/as-seen-on-mirror-1.png",
+            },
+            {
+              type: "image",
+              src: "/products/womens-pebbled-leather-two-tone-bowling-bag/as-seen-on-mirror-2.png",
+            },
+            {
+              type: "image",
+              src: "/products/womens-pebbled-leather-two-tone-bowling-bag/as-seen-on-mirror-3.png",
+            },
+          ],
+        },
+      },
     },
   } satisfies Record<string, BrandStoryProductOverride>,
 } as const;

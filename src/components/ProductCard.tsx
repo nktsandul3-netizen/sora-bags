@@ -38,7 +38,14 @@ export default function ProductCard({ product }: { product: Product }) {
   const hasSwap = Boolean(isDesktop && secondary && secondary.src !== primary?.src);
   const showSecondary = imageHovered && previewIdx === null && hasSwap;
   const showSwatches = colors.length > 0;
-  const cardImageClass = "object-cover object-center";
+  const galleryFit = product.galleryFit ?? "cover";
+  const cardImageClass =
+    galleryFit === "contain"
+      ? "object-contain object-center"
+      : "object-cover object-center";
+  const cardFrameClass =
+    "relative aspect-[4/5] w-full overflow-hidden rounded-[22px] border border-white/80 shadow-[0_18px_55px_-42px_rgba(28,25,23,0.65)] ring-1 ring-stone-950/10 transition duration-500 group-hover:-translate-y-1 group-hover:shadow-[0_26px_70px_-44px_rgba(28,25,23,0.85)] " +
+    (galleryFit === "contain" ? "bg-white" : "bg-gradient-to-br from-stone-50 via-[#f7f1e9] to-white");
 
   function openQuickView() {
     setQuickViewMounted(true);
@@ -50,14 +57,16 @@ export default function ProductCard({ product }: { product: Product }) {
       <div className="relative">
         <Link href={withLocalePath(`/product/${product.slug}`, locale)} className="block">
         <div
-          className="relative aspect-[4/5] w-full overflow-hidden rounded-[22px] border border-white/80 bg-gradient-to-br from-stone-50 via-[#f7f1e9] to-white shadow-[0_18px_55px_-42px_rgba(28,25,23,0.65)] ring-1 ring-stone-950/10 transition duration-500 group-hover:-translate-y-1 group-hover:shadow-[0_26px_70px_-44px_rgba(28,25,23,0.85)]"
+          className={cardFrameClass}
           onMouseEnter={() => setImageHovered(true)}
           onMouseLeave={() => setImageHovered(false)}
         >
-        <div aria-hidden className="pointer-events-none absolute inset-0">
-          <div className="absolute inset-x-8 bottom-3 h-16 rounded-full bg-stone-950/10 blur-2xl" />
-          <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_16%,rgba(255,255,255,0.9),transparent_34%),linear-gradient(135deg,rgba(255,255,255,0.36),transparent_56%)]" />
-        </div>
+        {galleryFit !== "contain" ? (
+          <div aria-hidden className="pointer-events-none absolute inset-0">
+            <div className="absolute inset-x-8 bottom-3 h-16 rounded-full bg-stone-950/10 blur-2xl" />
+            <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_16%,rgba(255,255,255,0.9),transparent_34%),linear-gradient(135deg,rgba(255,255,255,0.36),transparent_56%)]" />
+          </div>
+        ) : null}
         {primary?.src ? (
           <>
             <div
@@ -201,7 +210,7 @@ export default function ProductCard({ product }: { product: Product }) {
         <button
           type="button"
           onClick={openQuickView}
-          className="absolute inset-x-0 top-0 flex h-7 translate-y-2 items-center justify-center rounded-md bg-stone-950 px-2 text-[9px] font-semibold text-white opacity-0 shadow-sm transition-all duration-300 ease-out hover:bg-stone-800 group-hover:translate-y-0 group-hover:opacity-100 max-lg:translate-y-0 max-lg:opacity-100 sm:h-8 sm:px-2.5 sm:text-[10px] lg:h-9 lg:text-[11px]"
+          className="absolute inset-x-0 top-0 flex h-7 translate-y-2 items-center justify-center rounded-md border border-stone-950 bg-stone-950 px-2 text-[9px] font-semibold text-white opacity-0 shadow-sm transition-all duration-300 ease-out hover:bg-white hover:text-stone-950 group-hover:translate-y-0 group-hover:opacity-100 max-lg:translate-y-0 max-lg:opacity-100 sm:h-8 sm:px-2.5 sm:text-[10px] lg:h-9 lg:text-[11px]"
         >
           {t("common.buy")} {formatPrice(product.price, locale)}
         </button>

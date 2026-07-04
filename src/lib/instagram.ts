@@ -52,11 +52,34 @@ interface InstagramMediaResponse {
   data?: InstagramMediaItem[];
 }
 
-export async function getInstagramPosts(limit = 6): Promise<InstagramPost[]> {
-  const userId = process.env.INSTAGRAM_USER_ID;
-  const accessToken = process.env.INSTAGRAM_ACCESS_TOKEN;
+interface InstagramProfileResponse {
+  id?: string;
+  username?: string;
+}
 
-  if (!userId || !accessToken) {
+async function resolveInstagramUserId(accessToken: string, userId?: string): Promise<string | null> {
+  if (userId) return userId;
+
+  try {
+    const url = new URL("https://graph.instagram.com/me");
+    url.searchParams.set("fields", "id,username");
+    url.searchParams.set("access_token", accessToken);
+
+    const response = await fetch(url, { next: { revalidate: 60 * 60 * 24 } });
+    if (!response.ok) return null;
+
+    const profile = (await response.json()) as InstagramProfileResponse;
+    return profile.id ?? null;
+  } catch {
+    return null;
+  }
+}
+
+export async function getInstagramPosts(limit = 6): Promise<InstagramPost[]> {
+  const accessToken = process.env.INSTAGRAM_ACCESS_TOKEN;
+  const userId = await resolveInstagramUserId(accessToken ?? "", process.env.INSTAGRAM_USER_ID);
+
+  if (!accessToken || !userId) {
     return fallbackInstagramPosts.slice(0, limit);
   }
 

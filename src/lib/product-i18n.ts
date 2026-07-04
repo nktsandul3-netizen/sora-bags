@@ -361,7 +361,11 @@ const productTitles: Record<string, Partial<Record<Locale, string>>> = {
   "Paola — плетёная сумка с клапаном": { ro: "Paola — geantă împletită cu clapă", en: "Paola — woven flap bag" },
   "Greta — сумка-тоут с замком": { ro: "Greta — geantă tote cu încuietoare", en: "Greta — turn-lock tote bag" },
   "Francesca — кошелёк на молнии": { ro: "Francesca — portofel cu fermoar", en: "Francesca — zip-around wallet" },
+  "Federica — кошелёк на клапане": { ro: "Federica — portofel cu clapă", en: "Federica — flap wallet" },
+  "Fabiana — плетёный кошелёк на клапане": { ro: "Fabiana — portofel împletit cu clapă", en: "Fabiana — woven flap wallet" },
   "Giulietta — кошелёк-гармошка на молнии": { ro: "Giulietta — portofel acordeon cu fermoar", en: "Giulietta — accordion zip wallet" },
+  "Seraphina — плетёный кошелёк на молнии": { ro: "Seraphina — portofel împletit cu fermoar", en: "Seraphina — woven zip-around wallet" },
+  "Flavia — плетёный кошелёк на молнии с кнопкой": { ro: "Flavia — portofel împletit cu fermoar și capsă", en: "Flavia — woven zip snap wallet" },
   "Nerissa — сумка на короткой ручке": { ro: "Nerissa — geantă cu mâner scurt", en: "Nerissa — top handle bag" },
   "Fabrizia — мини-тоут": { ro: "Fabrizia — mini tote", en: "Fabrizia — mini tote bag" },
   "Lucrezia — сумка хобо на плечо": { ro: "Lucrezia — geantă hobo de umăr", en: "Lucrezia — hobo shoulder bag" },
@@ -378,6 +382,9 @@ const productTitles: Record<string, Partial<Record<Locale, string>>> = {
   "Maelle — тоут на завязках": { ro: "Maelle — geantă tote cu șnur", en: "Maelle — drawstring tote bag" },
   "Livia — сумка полумесяц на плечо": { ro: "Livia — geantă semilună de umăr", en: "Livia — half-moon shoulder bag" },
   "Cassia — клатч с рамочным замком": { ro: "Cassia — clutch cu încuietoare tip cadru", en: "Cassia — kiss-lock clutch" },
+  "Fiamma — клатч с металлической рамкой": { ro: "Fiamma — clutch cu cadru metalic", en: "Fiamma — metal-frame clutch" },
+  "Gioia — сумка на плечо с боковыми завязками": { ro: "Gioia — geantă de umăr cu șnururi laterale", en: "Gioia — side-drawstring shoulder bag" },
+  "Giorgia — боулинг-сумка двухцветная": { ro: "Giorgia — geantă bowling bicoloră", en: "Giorgia — two-tone bowling bag" },
   "Aurea — прямоугольная сумка в руке": { ro: "Aurea — geantă dreptunghiulară de mână", en: "Aurea — rectangular handbag" },
   "Halle — сумка-сэтчел": { ro: "Halle — geantă satchel", en: "Halle — satchel bag" },
   "Romilly — структурная сумка в руке": { ro: "Romilly — geantă structurată de mână", en: "Romilly — structured handbag" },
@@ -420,6 +427,14 @@ const productTitles: Record<string, Partial<Record<Locale, string>>> = {
   "Noelle — обложка для паспорта": { ro: "Noelle — copertă pentru pașaport", en: "Noelle — passport cover" },
   "Amalia — ремень": { ro: "Amalia — curea", en: "Amalia — belt" },
   "Zelie — подвеска для сумки": { ro: "Zelie — breloc pentru geantă", en: "Zelie — bag charm" },
+  "Bat — брелок для сумки La Via Firenze": { ro: "Bat — breloc La Via Firenze", en: "Bat — La Via Firenze bag charm" },
+  "Flower — брелок для сумки La Via Firenze": { ro: "Flower — breloc La Via Firenze", en: "Flower — La Via Firenze bag charm" },
+  "Cat — брелок для сумки La Via Firenze": { ro: "Cat — breloc La Via Firenze", en: "Cat — La Via Firenze bag charm" },
+  "Bear — брелок для сумки La Via Firenze": { ro: "Bear — breloc La Via Firenze", en: "Bear — La Via Firenze bag charm" },
+  "Pegaso — кожаный брелок для сумки": { ro: "Pegaso — breloc din piele", en: "Pegaso — leather bag charm" },
+  "Bassotto — кожаный брелок для сумки": { ro: "Bassotto — breloc din piele", en: "Bassotto — leather bag charm" },
+  "Fiocco — шёлковый брелок-бант": { ro: "Fiocco — breloc fundă din mătase", en: "Fiocco — silk bow bag charm" },
+  "Mix — брелок-набор для сумки": { ro: "Mix — set breloc pentru geantă", en: "Mix — bag charm set" },
   "Aimee — подарочный набор: кошелёк и картхолдер": { ro: "Aimee — set cadou: portofel și portcard", en: "Aimee — gift set: wallet and card holder" },
   "Rosalie — кошелёк на кнопке": { ro: "Rosalie — portofel cu capsă", en: "Rosalie — snap wallet" },
 };
@@ -1115,6 +1130,42 @@ const productCopyBySlug: Record<string, ProductLocalizedCopy> = {
       "en": "Cassia — compact kiss-lock clutch crafted from textured leather with a soft draped finish, designed for evenings, events and minimal outings. The silhouette feels polished without looking bulky.\n\nCompact format for going out. The interior fits a phone, cards, lipstick and small essentials. This style is in stock, with delivery in 1–3 days."
     }
   },
+  "womens-pleated-leather-frame-clutch": {
+    "title": {
+      "ru": "Fiamma — клатч с металлической рамкой",
+      "ro": "Fiamma — clutch cu cadru metalic",
+      "en": "Fiamma — metal-frame clutch"
+    },
+    "description": {
+      "ru": "Fiamma — мягкий клатч с вертикальной драпировкой и геометричной металлической рамкой-ручкой. Магнитная застёжка, просторное отделение и съёмный регулируемый плечевой ремень.\n\nНосить в руке за рамку или через плечо на ремне. Доставка 7–14 дней.",
+      "ro": "Fiamma — clutch moale cu drapaj vertical și mâner-cadru metalic geometric. Închidere magnetică, compartiment spațios și curea de umăr detașabilă, reglabilă.\n\nSe poate purta în mână sau pe umăr. Livrare în 7–14 zile.",
+      "en": "Fiamma — soft clutch with vertical draping and a geometric metal frame handle. Magnetic closure, a roomy single compartment and a detachable adjustable shoulder strap.\n\nCarry by the frame or wear crossbody on the strap. Delivery in 7–14 days."
+    }
+  },
+  "womens-pebbled-leather-side-drawstring-shoulder-bag": {
+    "title": {
+      "ru": "Gioia — сумка на плечо с боковыми завязками",
+      "ro": "Gioia — geantă de umăr cu șnururi laterale",
+      "en": "Gioia — side-drawstring shoulder bag"
+    },
+    "description": {
+      "ru": "Gioia — сумка на плечо из зернистой кожи с тонкими ремнями и декоративными боковыми завязками с золотыми наконечниками. Верх на молнии, одно просторное отделение.\n\nУдлинённый силуэт для города. Доставка 7–14 дней.",
+      "ro": "Gioia — geantă de umăr din piele granulată, cu curele subțiri și șnururi decorative laterale cu capete aurii. Închidere cu fermoar, un compartiment spațios.\n\nSiluetă alungită pentru oraș. Livrare în 7–14 zile.",
+      "en": "Gioia — pebbled leather shoulder bag with thin straps and decorative side drawstrings finished with gold tips. Zip-top closure and a roomy single compartment.\n\nElongated city silhouette. Delivery in 7–14 days."
+    }
+  },
+  "womens-pebbled-leather-two-tone-bowling-bag": {
+    "title": {
+      "ru": "Giorgia — боулинг-сумка двухцветная",
+      "ro": "Giorgia — geantă bowling bicoloră",
+      "en": "Giorgia — two-tone bowling bag"
+    },
+    "description": {
+      "ru": "Giorgia — структурная боулинг-сумка из зернистой кожи. Доступна в двухцветном сочетании taupe и однотонных оттенках. Верх на молнии, просторное отделение с карманом, золотая фурнитура.\n\nСобранный силуэт для города. Доставка 7–14 дней.",
+      "ro": "Giorgia — geantă bowling structurată din piele granulată, disponibilă bicolor sau monocoloră. Închidere cu fermoar, compartiment spațios cu buzunar, accesorii aurii.\n\nSiluetă elegantă pentru oraș. Livrare în 7–14 zile.",
+      "en": "Giorgia — structured pebbled leather bowling bag in two-tone and solid colorways. Zip-top closure, roomy compartment with a slip pocket and gold hardware.\n\nPolished city silhouette. Delivery in 7–14 days."
+    }
+  },
   "womens-pebbled-leather-kiss-lock-pouch-bag-light-blue": {
     "title": {
       "ru": "Paloma — сумка с фермуаром",
@@ -1643,6 +1694,30 @@ const productCopyBySlug: Record<string, ProductLocalizedCopy> = {
       "en": "Francesca — women's wallet is a women's wallet crafted from natural leather, designed for keeping cards, notes and everyday small essentials neatly arranged. The silhouette feels polished without looking stiff, making it easy to style with a considered everyday wardrobe.\n\nSecure zip closure. The interior is made for daily essentials such as a phone, wallet, keys and small cosmetics. This style is in stock, with delivery in 1–3 days."
     }
   },
+  "womens-flap-leather-trifold-wallet": {
+    "title": {
+      "ru": "Federica — кошелёк на клапане",
+      "ro": "Federica — portofel cu clapă",
+      "en": "Federica — flap wallet"
+    },
+    "description": {
+      "ru": "Federica — трёхсложный кошелёк с клапаном на кнопке. Внутри — отделения для карт и купюр, окно для документов, монетница на кнопке и карман на молнии. Зернистая кожа с винтажной фактурой.\n\nМодель есть в наличии: доставим за 1–3 дня.",
+      "ro": "Federica — portofel tri-fold cu clapă și capsă. Interiorul are compartimente pentru carduri și bancnote, fereastră pentru acte, buzunar pentru monede cu capsă și buzunar cu fermoar. Piele granulată cu aspect vintage.\n\nModelul este în stoc: livrare în 1–3 zile.",
+      "en": "Federica — tri-fold flap wallet with a snap closure. Inside you'll find card and note slots, an ID window, a snap coin pocket and a zip compartment. Pebbled leather with a vintage finish.\n\nThis style is in stock, with delivery in 1–3 days."
+    }
+  },
+  "womens-woven-flap-trifold-wallet": {
+    "title": {
+      "ru": "Fabiana — плетёный кошелёк на клапане",
+      "ro": "Fabiana — portofel împletit cu clapă",
+      "en": "Fabiana — woven flap wallet"
+    },
+    "description": {
+      "ru": "Fabiana — трёхсложный кошелёк с клапаном и плетением intrecciato. Внутри — отделения для карт и купюр, окно для документов, монетница на кнопке и карман на молнии.\n\nВыразительная фактура плетёной кожи делает аксессуар заметным даже в минималистичном образе. Модель есть в наличии: доставим за 1–3 дня.",
+      "ro": "Fabiana — portofel tri-fold cu clapă și model intrecciato. Interiorul are compartimente pentru carduri și bancnote, fereastră pentru acte, buzunar pentru monede cu capsă și buzunar cu fermoar.\n\nTextura împletită face accesoriul remarcabil chiar și într-o ținută minimalistă. Modelul este în stoc: livrare în 1–3 zile.",
+      "en": "Fabiana — tri-fold flap wallet with an intrecciato weave. Inside you'll find card and note slots, an ID window, a snap coin pocket and a zip compartment.\n\nThe woven texture makes the piece stand out even in a minimal look. This style is in stock, with delivery in 1–3 days."
+    }
+  },
   "womens-vintage-accordion-zip-wallet": {
     "title": {
       "ru": "Giulietta — кошелёк-гармошка на молнии",
@@ -1653,6 +1728,126 @@ const productCopyBySlug: Record<string, ProductLocalizedCopy> = {
       "ru": "Giulietta — кошелёк-гармошка на молнии. Модель выполнена из натуральной кожи и создана для аккуратного хранения карт, купюр и ежедневных мелочей. Силуэт выглядит собранно, но остаётся лёгким в повседневной носке: аксессуар не перегружает образ и хорошо сочетается с базовым гардеробом.\n\nНадёжная застёжка на молнии. Внутреннее пространство рассчитано на ежедневные вещи — телефон, кошелёк, ключи и небольшую косметику. Модель есть в наличии: доставим за 1–3 дня.",
       "ro": "Giulietta — portofel pentru femei este un portofel pentru femei din piele naturală, creată pentru organizarea cardurilor, bancnotelor și lucrurilor mici de zi cu zi. Silueta rămâne elegantă fără să pară rigidă, iar proporțiile sunt ușor de integrat în garderoba de zi cu zi.\n\nÎnchidere sigură cu fermoar. Interiorul este gândit pentru lucrurile esențiale: telefon, portofel, chei și mici accesorii. Modelul este în stoc: livrare în 1–3 zile.",
       "en": "Giulietta — women's wallet is a women's wallet crafted from natural leather, designed for keeping cards, notes and everyday small essentials neatly arranged. The silhouette feels polished without looking stiff, making it easy to style with a considered everyday wardrobe.\n\nSecure zip closure. The interior is made for daily essentials such as a phone, wallet, keys and small cosmetics. This style is in stock, with delivery in 1–3 days."
+    }
+  },
+  "womens-woven-leather-zip-around-wallet": {
+    "title": {
+      "ru": "Seraphina — плетёный кошелёк на молнии",
+      "ro": "Seraphina — portofel împletit cu fermoar",
+      "en": "Seraphina — woven zip-around wallet"
+    },
+    "description": {
+      "ru": "Seraphina — плетёный кошелёк на молнии с фирменным переплетением intrecciato. Молния по периметру надёжно закрывает карты, купюры и мелочь; внутри — отделения для карт, окно для документов и монетница.\n\nВыразительная фактура плетёной кожи делает аксессуар заметным даже в минималистичном образе. Модель есть в наличии: доставим за 1–3 дня.",
+      "ro": "Seraphina — portofel împletit cu fermoar, cu model intrecciato distinctiv. Fermoarul pe contur închide în siguranță cardurile, bancnotele și monedele; interiorul are compartimente pentru carduri, fereastră pentru acte și buzunar pentru monede.\n\nTextura împletită a pielii face accesoriul remarcabil chiar și într-o ținută minimalistă. Modelul este în stoc: livrare în 1–3 zile.",
+      "en": "Seraphina — woven zip-around wallet with a signature intrecciato weave. The perimeter zip keeps cards, notes and coins secure; inside you'll find card slots, an ID window and a zip coin pocket.\n\nThe woven leather texture makes the piece stand out even in a minimal look. This style is in stock, with delivery in 1–3 days."
+    }
+  },
+  "womens-woven-leather-zip-snap-wallet": {
+    "title": {
+      "ru": "Flavia — плетёный кошелёк на молнии с кнопкой",
+      "ro": "Flavia — portofel împletit cu fermoar și capsă",
+      "en": "Flavia — woven zip snap wallet"
+    },
+    "description": {
+      "ru": "Flavia — кошелёк с плетением intrecciato, молнией по периметру и ремешком на кнопке для дополнительной фиксации. Внутри — отделения для карт, окно для документов и монетница на молнии.\n\nВыразительная фактура плетёной кожи и насыщенный оттенок делают аксессуар заметным акцентом в образе. Модель есть в наличии: доставим за 1–3 дня.",
+      "ro": "Flavia — portofel împletit intrecciato, cu fermoar pe contur și curea cu capsă pentru fixare suplimentară. Interiorul are compartimente pentru carduri, fereastră pentru acte și buzunar pentru monede cu fermoar.\n\nTextura împletită și nuanța intensă fac accesoriul un accent remarcabil. Modelul este în stoc: livrare în 1–3 zile.",
+      "en": "Flavia — intrecciato woven wallet with a perimeter zip and a snap strap for extra security. Inside you'll find card slots, an ID window and a zip coin pocket.\n\nThe woven texture and rich colour make it a standout everyday piece. This style is in stock, with delivery in 1–3 days."
+    }
+  },
+  "la-via-firenze-bat-bag-charm": {
+    "title": {
+      "ru": "Bat — брелок для сумки La Via Firenze",
+      "ro": "Bat — breloc La Via Firenze",
+      "en": "Bat — La Via Firenze bag charm"
+    },
+    "description": {
+      "ru": "Брелок La Via Firenze в форме летучей мыши из зернистой чёрной кожи с жёлтой кожаной маской. Кожаный шнур, золотая цепочка и миниатюрный ключ с гравировкой LA VIA — характерная подпись бренда.\n\nКрепится на карабин к ручке или ремню сумки. Поставляется на фирменной карточке Made in Italy. Модель есть в наличии: доставим за 1–3 дня.",
+      "ro": "Breloc La Via Firenze în formă de liliac din piele neagră granulată, cu mască galbenă din piele. Șnur din piele, lanț auriu și cheiță miniatură gravată LA VIA — semnătura distinctivă a brandului.\n\nSe prinde cu carabină de mânerul sau cureaua genții. Livrat pe cardul de brand Made in Italy. Modelul este în stoc: livrare în 1–3 zile.",
+      "en": "La Via Firenze bag charm shaped like a bat in pebbled black leather with a yellow leather mask. A leather cord, gold chain and miniature key engraved LA VIA — the brand's signature detail.\n\nClips onto a bag handle or strap with a carabiner. Comes on a Made in Italy brand card. This style is in stock, with delivery in 1–3 days."
+    }
+  },
+  "la-via-firenze-flower-bag-charm": {
+    "title": {
+      "ru": "Flower — брелок для сумки La Via Firenze",
+      "ro": "Flower — breloc La Via Firenze",
+      "en": "Flower — La Via Firenze bag charm"
+    },
+    "description": {
+      "ru": "Брелок La Via Firenze с многослойным цветком из чёрной, коньячной и белой кожи. Кремовый кожаный шнур с декоративным узлом, золотая цепочка и миниатюрный ключ с гравировкой LA VIA.\n\nКрепится на карабин к ручке или ремню сумки. Поставляется на фирменной карточке Made in Italy. Модель есть в наличии: доставим за 1–3 дня.",
+      "ro": "Breloc La Via Firenze cu floare stratificată din piele neagră, coniac și albă. Șnur din piele crem cu nod decorativ, lanț auriu și cheiță miniatură gravată LA VIA.\n\nSe prinde cu carabină de mânerul sau cureaua genții. Livrat pe cardul de brand Made in Italy. Modelul este în stoc: livrare în 1–3 zile.",
+      "en": "La Via Firenze bag charm with a layered flower in black, cognac and white leather. A cream leather cord with a decorative knot, gold chain and miniature key engraved LA VIA.\n\nClips onto a bag handle or strap with a carabiner. Comes on a Made in Italy brand card. This style is in stock, with delivery in 1–3 days."
+    }
+  },
+  "la-via-firenze-cat-bag-charm": {
+    "title": {
+      "ru": "Cat — брелок для сумки La Via Firenze",
+      "ro": "Cat — breloc La Via Firenze",
+      "en": "Cat — La Via Firenze bag charm"
+    },
+    "description": {
+      "ru": "Брелок La Via Firenze с мордочкой кота из чёрной и белой кожи, декоративным бантом из принтованного шёлка и золотой цепочкой с ключом LA VIA.\n\nКрепится на карабин к ручке или ремню сумки. Поставляется на фирменной карточке Made in Italy. Модель есть в наличии: доставим за 1–3 дня.",
+      "ro": "Breloc La Via Firenze cu cap de pisică din piele neagră și albă, fundă decorativă din mătase imprimată și lanț auriu cu cheia LA VIA.\n\nSe prinde cu carabină de mânerul sau cureaua genții. Livrat pe cardul de brand Made in Italy. Modelul este în stoc: livrare în 1–3 zile.",
+      "en": "La Via Firenze bag charm with a cat face in black and white leather, a decorative printed silk bow and a gold chain with an LA VIA key.\n\nClips onto a bag handle or strap with a carabiner. Comes on a Made in Italy brand card. This style is in stock, with delivery in 1–3 days."
+    }
+  },
+  "la-via-firenze-bear-bag-charm": {
+    "title": {
+      "ru": "Bear — брелок для сумки La Via Firenze",
+      "ro": "Bear — breloc La Via Firenze",
+      "en": "Bear — La Via Firenze bag charm"
+    },
+    "description": {
+      "ru": "Брелок La Via Firenze в форме медвежонка из коньячной кожи с тёмно-коричневыми акцентами на ушах и лапках. Золотая цепочка с кожаной вставкой и ключ с гравировкой LA VIA.\n\nКрепится на карабин к ручке или ремню сумки. Поставляется на фирменной карточке Made in Italy. Модель есть в наличии: доставим за 1–3 дня.",
+      "ro": "Breloc La Via Firenze în formă de ursuleț din piele coniac, cu accente maro închis pe urechi și labe. Lanț auriu cu insert din piele și cheie gravată LA VIA.\n\nSe prinde cu carabină de mânerul sau cureaua genții. Livrat pe cardul de brand Made in Italy. Modelul este în stoc: livrare în 1–3 zile.",
+      "en": "La Via Firenze bag charm shaped like a bear in cognac leather with dark brown accents on the ears and paws. A gold chain with a leather insert and an LA VIA engraved key.\n\nClips onto a bag handle or strap with a carabiner. Comes on a Made in Italy brand card. This style is in stock, with delivery in 1–3 days."
+    }
+  },
+  "luma-pegasus-leather-bag-charm": {
+    "title": {
+      "ru": "Pegaso — кожаный брелок для сумки",
+      "ro": "Pegaso — breloc din piele",
+      "en": "Pegaso — leather bag charm"
+    },
+    "description": {
+      "ru": "Кожаный брелок Pegaso в форме крылатого коня: объёмное тело, крыло, грива и хвост из полосок кожи, контрастная строчка по контуру. Петля на спине крепится на ручку или ремешок сумки.\n\nРучная отделка и насыщенные оттенки — заметный акцент к любой модели. Модель есть в наличии: доставим за 1–3 дня.",
+      "ro": "Breloc Pegaso din piele în formă de cal înaripat: corp voluminos, aripă, coamă și coadă din fâșii de piele, cusătură contrastantă pe contur. Bucla de pe spate se prinde de mânerul sau cureaua genții.\n\nExecuție manuală și nuanțe intense — accent remarcabil pentru orice geantă. Modelul este în stoc: livrare în 1–3 zile.",
+      "en": "Pegaso leather bag charm shaped like a winged horse: a padded body, wing, fringed mane and tail, and contrast stitching around the edges. The loop on the back slips over a bag handle or strap.\n\nHand-finished leather in rich colours — a standout accent for any bag. This style is in stock, with delivery in 1–3 days."
+    }
+  },
+  "luma-dachshund-leather-bag-charm": {
+    "title": {
+      "ru": "Bassotto — кожаный брелок для сумки",
+      "ro": "Bassotto — breloc din piele",
+      "en": "Bassotto — leather bag charm"
+    },
+    "description": {
+      "ru": "Кожаный брелок Bassotto в форме таксы: вытянутый силуэт, контрастные лапки и мордочка, глаз из белой и чёрной кожи, строчка по контуру. Петля на спине крепится на ручку или ремешок сумки.\n\nИгривый акцент для повседневных и вечерних образов. Модель есть в наличии: доставим за 1–3 дня.",
+      "ro": "Breloc Bassotto din piele în formă de câine teckel: siluetă alungită, labe și bot contrastante, ochi din piele albă și neagră, cusătură pe contur. Bucla de pe spate se prinde de mânerul sau cureaua genții.\n\nAccent jucăuș pentru ținute de zi și de seară. Modelul este în stoc: livrare în 1–3 zile.",
+      "en": "Bassotto leather bag charm shaped like a dachshund: an elongated silhouette, contrasting paws and muzzle, an eye in white and black leather, and perimeter stitching. The loop on the back slips over a bag handle or strap.\n\nA playful accent for everyday and evening looks. This style is in stock, with delivery in 1–3 days."
+    }
+  },
+  "luma-silk-bow-bag-charm": {
+    "title": {
+      "ru": "Fiocco — шёлковый брелок-бант",
+      "ro": "Fiocco — breloc fundă din mătase",
+      "en": "Fiocco — silk bow bag charm"
+    },
+    "description": {
+      "ru": "Шёлковый брелок-бант на карабине: принтованная лента заплетена у основания и завязана в объёмный бант с заострёнными концами. Золотой карабин крепится к ручке, ремню или молнии сумки.\n\nЛёгкий акцент, который меняет характер базовой модели. Модель есть в наличии: доставим за 1–3 дня.",
+      "ro": "Breloc fundă din mătase cu carabină: panglica imprimată este împletită la bază și legată într-o fundă voluminoasă cu vârfuri ascuțite. Carabina aurie se prinde de mâner, curea sau fermoarul genții.\n\nAccent ușor care schimbă caracterul unei genți de bază. Modelul este în stoc: livrare în 1–3 zile.",
+      "en": "Fiocco silk bow bag charm on a carabiner clip: a printed ribbon is braided at the base and tied into a full bow with pointed tails. The gold carabiner attaches to a bag handle, strap or zip pull.\n\nA light accent that changes the character of a basic bag. This style is in stock, with delivery in 1–3 days."
+    }
+  },
+  "luma-dachshund-mix-bag-charm": {
+    "title": {
+      "ru": "Mix — брелок-набор для сумки",
+      "ro": "Mix — set breloc pentru geantă",
+      "en": "Mix — bag charm set"
+    },
+    "description": {
+      "ru": "Брелок-набор на кольце: кожаная такса, миниатюрная «шоколадка», плетёный шнур с узлом, кожаные ремешки и пружинящий шнур с карабином. Несколько элементов на одном кольце — сразу заметный акцент на сумке.\n\nИгривый микс фактур и материалов. Модель есть в наличии: доставим за 1–3 дня.",
+      "ro": "Set de brelocuri pe inel: teckel din piele, mini „tabletă de ciocolată”, frânghie împletită cu nod, curele din piele și cablu spiralat cu carabină. Mai multe elemente pe un singur inel — accent imediat pe geantă.\n\nMix jucăuș de texturi și materiale. Modelul este în stoc: livrare în 1–3 zile.",
+      "en": "Bag charm set on a split ring: a leather dachshund, a miniature chocolate bar, a braided cord with a knot, leather ties and a coiled cord with a carabiner. Several elements on one ring — an instant accent on any bag.\n\nA playful mix of textures and materials. This style is in stock, with delivery in 1–3 days."
     }
   }
 };
