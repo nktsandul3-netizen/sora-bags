@@ -7,8 +7,40 @@ import HomeNewArrivals from "@/components/HomeNewArrivals";
 import InstagramFeed from "@/components/InstagramFeed";
 import SocialIcon from "@/components/SocialIcon";
 import TileVideo from "@/components/TileVideo";
+import HeroBannerSlider, { type HeroSlide } from "@/components/HeroBannerSlider";
 import { getServerLocale, getServerT } from "@/lib/server-i18n";
-import { withLocalePath } from "@/lib/i18n";
+import { withLocalePath, type Locale } from "@/lib/i18n";
+
+const wovenBannerCopy: Record<Locale, { subtitle: string; ctaLabel: string }> = {
+  ru: {
+    subtitle: "Плетёные сумки в стиле итальянского побережья",
+    ctaLabel: "Смотреть коллекцию",
+  },
+  ro: {
+    subtitle: "Genți împletite în stilul coastei italiene",
+    ctaLabel: "Vezi colecția",
+  },
+  en: {
+    subtitle: "Woven bags inspired by the Italian coastline",
+    ctaLabel: "View the collection",
+  },
+};
+
+function getHeroSlides(locale: Locale): HeroSlide[] {
+  const copy = wovenBannerCopy[locale] ?? wovenBannerCopy.ru;
+  return [
+    {
+      type: "video",
+      src: "/videos/home-banner-2.mp4",
+      caption: {
+        title: "Luxuriare Amalfi Collection",
+        subtitle: copy.subtitle,
+        ctaLabel: copy.ctaLabel,
+        ctaHref: withLocalePath("/collections/amalfi-woven", locale),
+      },
+    },
+  ];
+}
 
 const heroTiles: {
   labelKey: "nav.new" | "nav.bags" | "nav.accessories";
@@ -34,19 +66,8 @@ export default async function Home() {
   ]);
   return (
     <div>
-      {/* Hero */}
-      <section className="relative w-full overflow-hidden bg-stone-100">
-        <Image
-          src="/hero-amalfi-terrace-hq.jpg"
-          alt={brand.name}
-          width={2400}
-          height={1600}
-          priority
-          quality={100}
-          sizes="100vw"
-          className="h-auto w-full object-contain [filter:brightness(0.78)_saturate(0.72)_contrast(0.98)]"
-        />
-      </section>
+      {/* Hero: чередуются фото и видео каждые 5 секунд */}
+      <HeroBannerSlider slides={getHeroSlides(locale)} />
 
       {/* Плитки разделов: Новинки / Сумки / Аксессуары */}
       <section className="mt-0 w-full">

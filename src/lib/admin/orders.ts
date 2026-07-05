@@ -7,6 +7,7 @@ import type {
   OrderProcessingChecklist,
   OrderDoc,
   OrderItem,
+  OrderKind,
   OrderPaymentStatus,
   OrderStatus,
   OrderTimelineEvent,
@@ -33,6 +34,7 @@ export interface AdminOrderListItem {
   id: string;
   number: string;
   status: OrderStatus;
+  orderKind: OrderKind;
   paymentStatus: OrderPaymentStatus;
   customerName: string;
   customerPhone: string;
@@ -82,6 +84,7 @@ export interface CreateManualOrderInput {
 export interface ListOrdersParams {
   search?: string;
   status?: OrderStatus | "paid" | "all";
+  orderKind?: OrderKind | "all";
   page?: number;
   pageSize?: number;
 }
@@ -97,7 +100,7 @@ export interface ListOrdersResult {
 export async function listOrders(
   params: ListOrdersParams = {},
 ): Promise<ListOrdersResult> {
-  const { search, status = "all", page = 1, pageSize = 20 } = params;
+  const { search, status = "all", orderKind = "all", page = 1, pageSize = 20 } = params;
   const orders = await ordersCollection();
 
   const filter: Filter<OrderDoc> = {};
@@ -107,6 +110,9 @@ export async function listOrders(
     } else {
       filter.status = status;
     }
+  }
+  if (orderKind && orderKind !== "all") {
+    filter.orderKind = orderKind;
   }
   if (search && search.trim()) {
     const rx = new RegExp(escapeRegex(search.trim()), "i");
@@ -389,6 +395,7 @@ function toListItem(doc: OrderDoc): AdminOrderListItem {
     id: doc._id!.toString(),
     number: doc.number ?? doc.order_number ?? "—",
     status: normalizeOrderStatus((doc.status ?? doc.order_status) as string),
+    orderKind: doc.orderKind ?? doc.order_kind ?? "standard",
     paymentStatus: doc.paymentStatus ?? doc.payment_status ?? "pending",
     customerName: doc.customer?.name ?? doc.customer_name ?? "—",
     customerPhone: doc.customer?.phone ?? doc.phone ?? "",

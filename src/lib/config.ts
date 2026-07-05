@@ -154,6 +154,12 @@ export const brandStories = {
     "elegant-leather-hobo-bag-taupe",
     "elegant-leather-hobo-bag-smooth-black",
     "woven-leather-shopper-tote-black",
+    "womens-smooth-leather-chain-strap-crescent-hobo-bag",
+    "womens-suede-wing-tote-bag",
+    "womens-pebbled-leather-ring-handle-structured-bag",
+    "womens-pebbled-leather-wing-flap-tote-bag",
+    "womens-woven-suede-flap-clutch-bag",
+    "womens-smooth-leather-metal-ring-crescent-hobo-bag",
   ],
   items: [
     {
@@ -500,6 +506,125 @@ export const brandStories = {
             {
               type: "image",
               src: "/products/womens-pebbled-leather-two-tone-bowling-bag/as-seen-on-mirror-3.png",
+            },
+          ],
+        },
+      },
+    },
+    "womens-smooth-leather-chain-strap-crescent-hobo-bag": {
+      highlights: {
+        "as-seen-on": {
+          cover: "/products/womens-smooth-leather-chain-strap-crescent-hobo-bag/as-seen-on-mirror-2.png",
+          ringGradient:
+            "conic-gradient(from 140deg, #9ca3af, #4b5563, #1f2937, #4b5563, #9ca3af)",
+          slides: [
+            {
+              type: "image",
+              src: "/products/womens-smooth-leather-chain-strap-crescent-hobo-bag/as-seen-on-mirror-1.png",
+            },
+            {
+              type: "image",
+              src: "/products/womens-smooth-leather-chain-strap-crescent-hobo-bag/as-seen-on-mirror-2.png",
+            },
+            {
+              type: "image",
+              src: "/products/womens-smooth-leather-chain-strap-crescent-hobo-bag/as-seen-on-mirror-3.png",
+            },
+          ],
+        },
+      },
+    },
+    "womens-suede-wing-tote-bag": {
+      highlights: {
+        "in-motion": {
+          cover: "/products/womens-suede-wing-tote-bag/dark-chocolate-front.png",
+          ringGradient:
+            "conic-gradient(from 140deg, #d4a574, #8b5a2b, #3a2a20, #8b5a2b, #d4a574)",
+          slides: [
+            {
+              type: "video",
+              src: "/videos/sora-story-in-motion-suede-wing-tote-bag.mp4",
+              poster: "/products/womens-suede-wing-tote-bag/dark-chocolate-front.png",
+            },
+          ],
+        },
+        "as-seen-on": {
+          cover: "/products/womens-suede-wing-tote-bag/as-seen-on-1.png",
+          ringGradient:
+            "conic-gradient(from 140deg, #d4a574, #8b5a2b, #3a2a20, #8b5a2b, #d4a574)",
+          slides: [
+            {
+              type: "image",
+              src: "/products/womens-suede-wing-tote-bag/as-seen-on-1.png",
+            },
+            {
+              type: "image",
+              src: "/products/womens-suede-wing-tote-bag/as-seen-on-2.png",
+            },
+          ],
+        },
+      },
+    },
+    "womens-pebbled-leather-ring-handle-structured-bag": {
+      highlights: {
+        "as-seen-on": {
+          cover: "/products/womens-pebbled-leather-ring-handle-structured-bag/as-seen-on-1.png",
+          ringGradient:
+            "conic-gradient(from 140deg, #f5f5f0, #e7e5e4, #d6d3d1, #e7e5e4, #f5f5f0)",
+          slides: [
+            {
+              type: "image",
+              src: "/products/womens-pebbled-leather-ring-handle-structured-bag/as-seen-on-1.png",
+            },
+          ],
+        },
+      },
+    },
+    "womens-pebbled-leather-wing-flap-tote-bag": {
+      cover: "/products/womens-pebbled-leather-wing-flap-tote-bag/light-blue-front-alt.png",
+      ringGradient:
+        "conic-gradient(from 140deg, #bae6fd, #7dd3fc, #38bdf8, #7dd3fc, #bae6fd)",
+      slides: [
+        {
+          type: "video",
+          src: "/videos/sora-story-in-motion-wing-flap-tote-bag.mp4",
+          poster: "/products/womens-pebbled-leather-wing-flap-tote-bag/light-blue-front-alt.png",
+        },
+      ],
+    },
+    "womens-woven-suede-flap-clutch-bag": {
+      highlights: {
+        "as-seen-on": {
+          cover: "/products/womens-woven-suede-flap-clutch-bag/as-seen-on-1.png",
+          ringGradient:
+            "conic-gradient(from 140deg, #fca5a5, #9f1239, #541f2d, #9f1239, #fca5a5)",
+          slides: [
+            {
+              type: "image",
+              src: "/products/womens-woven-suede-flap-clutch-bag/as-seen-on-1.png",
+            },
+            {
+              type: "image",
+              src: "/products/womens-woven-suede-flap-clutch-bag/as-seen-on-2.png",
+            },
+          ],
+        },
+      },
+    },
+    "womens-smooth-leather-metal-ring-crescent-hobo-bag": {
+      highlights: {
+        "as-seen-on": {
+          cover: "/products/womens-smooth-leather-metal-ring-crescent-hobo-bag/as-seen-on-1.png",
+          ringGradient:
+            "conic-gradient(from 140deg, #d4a574, #8a4b27, #5c3317, #8a4b27, #d4a574)",
+          slides: [
+            {
+              type: "image",
+              src: "/products/womens-smooth-leather-metal-ring-crescent-hobo-bag/as-seen-on-1.png",
+            },
+            {
+              type: "image",
+              src: "/products/womens-smooth-leather-metal-ring-crescent-hobo-bag/as-seen-on-2.png",
             },
           ],
         },

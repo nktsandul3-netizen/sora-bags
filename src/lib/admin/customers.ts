@@ -108,6 +108,7 @@ export async function getCustomerById(
     id: d._id!.toString(),
     number: d.number ?? d.order_number ?? "—",
     status: normalizeOrderStatus((d.status ?? d.order_status) as string),
+    orderKind: d.orderKind ?? d.order_kind ?? "standard",
     paymentStatus: d.paymentStatus ?? d.payment_status ?? "pending",
     customerName: d.customer?.name ?? d.customer_name ?? user.name,
     customerPhone: d.customer?.phone ?? d.phone ?? "",

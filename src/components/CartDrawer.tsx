@@ -90,10 +90,24 @@ function getItemCountLabel(count: number, locale: Locale) {
 }
 
 export default function CartDrawer() {
-  const { items, total, isOpen, closeCart, remove, setQty } = useCart();
+  const {
+    items,
+    total,
+    standardItems,
+    preorderItems,
+    standardTotal,
+    preorderTotal,
+    isOpen,
+    closeCart,
+    remove,
+    setQty,
+  } = useCart();
   const locale = useLocale();
   const t = useT();
   const itemCount = items.reduce((sum, item) => sum + item.qty, 0);
+  const hasStandard = standardItems.length > 0;
+  const hasPreorder = preorderItems.length > 0;
+  const hasMixedCart = hasStandard && hasPreorder;
   const recommendations = useMemo(
     () => getCartRecommendations(items.map((item) => item.slug), 3),
     [items],
@@ -190,8 +204,24 @@ export default function CartDrawer() {
               ) : (
                 <>
                   <div className="min-h-0 flex-1 overflow-y-auto px-5 py-5 sm:px-8">
-                    <div className="space-y-3">
-                      {items.map((item) => {
+                    {hasMixedCart && (
+                      <p className="mb-4 rounded-2xl border border-amber-100 bg-amber-50/80 px-4 py-3 text-xs leading-relaxed text-amber-950">
+                        {t("checkout.mixedCartHint")}
+                      </p>
+                    )}
+                    {[
+                      { title: t("checkout.standardSectionTitle"), items: standardItems },
+                      { title: t("checkout.preorderSectionTitle"), items: preorderItems },
+                    ]
+                      .filter((section) => section.items.length > 0)
+                      .map((section) => (
+                        <section key={section.title} className="space-y-3">
+                          {hasMixedCart && (
+                            <h3 className="px-1 text-xs font-semibold uppercase tracking-[0.16em] text-stone-400">
+                              {section.title}
+                            </h3>
+                          )}
+                          {section.items.map((item) => {
                         const product = getProduct(item.slug);
                         const delivery = product ? getDeliveryInfo(product, locale) : null;
                         const localizedTitle = product
@@ -200,7 +230,7 @@ export default function CartDrawer() {
 
                         return (
                         <article
-                          key={`${item.slug}-${item.color}`}
+                          key={`${item.slug}-${item.color}-${item.purchaseKind}`}
                           className="grid grid-cols-[80px_1fr] gap-4 rounded-[1.35rem] border border-stone-200/80 bg-white p-3.5 shadow-sm shadow-stone-200/60 sm:grid-cols-[80px_1fr_auto] sm:p-4"
                         >
                           <Link href={withLocalePath(`/product/${item.slug}`, locale)} onClick={closeCart} className="block">
@@ -228,7 +258,7 @@ export default function CartDrawer() {
                             <div className="mt-4 inline-flex items-center rounded-full border border-stone-200 bg-stone-50">
                               <button
                                 type="button"
-                                onClick={() => setQty(item.slug, item.color, item.qty - 1)}
+                                onClick={() => setQty(item.slug, item.color, item.qty - 1, item.purchaseKind)}
                                 className="px-3 py-1.5 text-stone-500 transition hover:text-stone-950"
                                 aria-label={t("cart.decreaseQty")}
                               >
@@ -237,7 +267,7 @@ export default function CartDrawer() {
                               <span className="w-8 text-center text-sm">{item.qty}</span>
                               <button
                                 type="button"
-                                onClick={() => setQty(item.slug, item.color, item.qty + 1)}
+                                onClick={() => setQty(item.slug, item.color, item.qty + 1, item.purchaseKind)}
                                 className="px-3 py-1.5 text-stone-500 transition hover:text-stone-950"
                                 aria-label={t("cart.increaseQty")}
                               >
@@ -249,7 +279,7 @@ export default function CartDrawer() {
                           <div className="col-span-2 flex items-center justify-between border-t border-stone-100 pt-3 sm:col-span-1 sm:flex-col sm:items-end sm:border-t-0 sm:pt-0">
                             <button
                               type="button"
-                              onClick={() => remove(item.slug, item.color)}
+                              onClick={() => remove(item.slug, item.color, item.purchaseKind)}
                               className="flex h-8 w-8 items-center justify-center rounded-full bg-stone-50 text-stone-400 transition hover:bg-stone-100 hover:text-stone-900"
                               aria-label={t("cart.removeItem")}
                             >
@@ -261,8 +291,9 @@ export default function CartDrawer() {
                           </div>
                         </article>
                         );
-                      })}
-                    </div>
+                          })}
+                        </section>
+                      ))}
                   </div>
 
                   <footer className="border-t border-stone-200 bg-white/90 px-5 py-5 shadow-[0_-18px_40px_rgba(28,25,23,0.07)] backdrop-blur sm:px-8">
@@ -270,17 +301,32 @@ export default function CartDrawer() {
                       <span>{getItemCountLabel(itemCount, locale)}</span>
                       <span>{total >= 15000 ? t("checkout.free") : t("checkout.byTariff")}</span>
                     </div>
-                    <Link
-                      href={withLocalePath("/cart", locale)}
-                      onClick={closeCart}
-                      className="flex w-full items-center justify-between gap-4 rounded-[1rem] bg-stone-950 px-5 py-4 text-sm font-semibold text-white shadow-lg shadow-stone-950/15 transition hover:-translate-y-0.5 hover:bg-stone-800"
-                    >
-                      <span>{t("checkout.placeOrder")}</span>
-                      <span aria-hidden className="text-stone-500">→</span>
-                      <span>{formatPrice(total, locale)}</span>
-                    </Link>
+                    <div className="space-y-2">
+                      {hasStandard && (
+                        <Link
+                          href={withLocalePath("/cart", locale)}
+                          onClick={closeCart}
+                          className="flex w-full items-center justify-between gap-4 rounded-[1rem] bg-stone-950 px-5 py-4 text-sm font-semibold text-white shadow-lg shadow-stone-950/15 transition hover:-translate-y-0.5 hover:bg-stone-800"
+                        >
+                          <span>{hasMixedCart ? t("cart.goToCheckout") : t("checkout.placeOrder")}</span>
+                          <span aria-hidden className="text-stone-500">→</span>
+                          <span>{formatPrice(standardTotal, locale)}</span>
+                        </Link>
+                      )}
+                      {hasPreorder && (
+                        <Link
+                          href={withLocalePath("/cart", locale)}
+                          onClick={closeCart}
+                          className="flex w-full items-center justify-between gap-4 rounded-[1rem] bg-amber-600 px-5 py-4 text-sm font-semibold text-white shadow-lg shadow-amber-900/10 transition hover:-translate-y-0.5 hover:bg-amber-700"
+                        >
+                          <span>{t("cart.goToPreorder")}</span>
+                          <span aria-hidden className="text-amber-200">→</span>
+                          <span>{formatPrice(preorderTotal, locale)}</span>
+                        </Link>
+                      )}
+                    </div>
                     <p className="mt-3 text-center text-xs leading-relaxed text-stone-400">
-                      {t("cart.checkoutHint")}
+                      {hasPreorder ? t("checkout.preorderHint") : t("cart.checkoutHint")}
                     </p>
                   </footer>
                 </>

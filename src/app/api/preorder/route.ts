@@ -1,6 +1,9 @@
 import { auth } from "@/auth";
 import { createOrder } from "@/lib/account";
 import { readAnalyticsSessionId } from "@/lib/analytics";
+import { getProduct } from "@/lib/data";
+import { getPurchaseKindForItem } from "@/lib/purchase-kind";
+import type { OrderKind } from "@/lib/mongodb";
 import { notifyNewOrder } from "@/lib/notify";
 import {
   getDeliveryOptions,
@@ -20,6 +23,7 @@ interface PreorderItem {
   color: string;
   qty: number;
   price: number;
+  purchaseKind?: OrderKind;
 }
 
 interface PreorderPayload {
@@ -30,6 +34,7 @@ interface PreorderPayload {
   address?: string;
   deliveryMethod?: DeliveryMethod;
   paymentMethod?: CustomerPaymentMethod;
+  orderKind?: OrderKind;
   comment?: string;
   consent?: boolean;
   items?: PreorderItem[];
@@ -50,7 +55,9 @@ export async function POST(request: Request) {
   const name = data.name?.trim();
   const phone = data.phone?.trim();
   const deliveryMethod = data.deliveryMethod ?? "courier_chisinau";
-  const paymentMethod = data.paymentMethod ?? "cash_on_delivery";
+  const orderKind: OrderKind = data.orderKind === "preorder" ? "preorder" : "standard";
+  const paymentMethod: CustomerPaymentMethod =
+    orderKind === "preorder" ? "bank_transfer" : (data.paymentMethod ?? "cash_on_delivery");
 
   if (!name || name.length < 2) {
     return error("checkout.errName");
@@ -77,7 +84,16 @@ export async function POST(request: Request) {
     color: String(item.color),
     qty: Math.max(1, Number(item.qty) || 1),
     price: Math.max(0, Number(item.price) || 0),
+    purchaseKind: orderKind,
   }));
+  for (const item of items) {
+    const product = getProduct(item.slug);
+    if (!product) return error("api.errCheckData");
+    if (product.status === "out_of_stock") return error("api.errCheckData");
+    const expectedKind: OrderKind =
+      getPurchaseKindForItem(product, item.color) === "preorder" ? "preorder" : "standard";
+    if (expectedKind !== orderKind) return error("api.errCheckData");
+  }
   const total = items.reduce((sum, item) => sum + item.price * item.qty, 0);
 
   // Сохраняем заказ в БД: без этого интернет-магазин не должен принимать заказ.
@@ -96,6 +112,7 @@ export async function POST(request: Request) {
       },
       deliveryMethod,
       paymentMethod,
+      orderKind,
       privacyConsent: true,
       analyticsSessionId: readAnalyticsSessionId(request),
       items,
@@ -112,6 +129,7 @@ export async function POST(request: Request) {
   // Уведомления администратору (Telegram + email). Не блокируют покупателя.
   const { telegram, email } = await notifyNewOrder({
     orderNumber: createdOrder.number,
+    orderKind,
     name,
     phone,
     email: data.email,
@@ -133,5 +151,6 @@ export async function POST(request: Request) {
     delivered: telegram || email,
     orderId: createdOrder.id,
     orderNumber: createdOrder.number,
+    orderKind,
   });
 }

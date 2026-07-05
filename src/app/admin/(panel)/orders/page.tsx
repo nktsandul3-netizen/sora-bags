@@ -4,7 +4,7 @@ import { listOrders } from "@/lib/admin/orders";
 import { orderPriority } from "@/lib/admin/operations";
 import type { OrderOperationFlag } from "@/lib/admin/operations";
 import { ORDER_STATUSES } from "@/lib/admin/constants";
-import type { OrderStatus } from "@/lib/mongodb";
+import type { OrderKind, OrderStatus } from "@/lib/mongodb";
 import { OrderPaymentStatusBadge, OrderStatusBadge } from "@/components/admin/Badges";
 import OrderListQuickActions from "@/components/admin/OrderListQuickActions";
 import OrdersToolbar from "@/components/admin/OrdersToolbar";
@@ -18,17 +18,22 @@ function parseStatus(value?: string): OrderStatus | "paid" | "all" {
   return "all";
 }
 
+function parseOrderKind(value?: string): OrderKind | "all" {
+  return value === "preorder" || value === "standard" ? value : "all";
+}
+
 export default async function AdminOrdersPage({
   searchParams,
 }: {
-  searchParams: Promise<{ search?: string; status?: string; page?: string }>;
+  searchParams: Promise<{ search?: string; status?: string; kind?: string; page?: string }>;
 }) {
   const sp = await searchParams;
   const search = sp.search?.trim() || undefined;
   const status = parseStatus(sp.status);
+  const orderKind = parseOrderKind(sp.kind);
   const page = Math.max(1, parseInt(sp.page ?? "1", 10) || 1);
 
-  const result = await listOrders({ search, status, page, pageSize: 20 });
+  const result = await listOrders({ search, status, orderKind, page, pageSize: 20 });
 
   return (
     <div className="space-y-6">
@@ -92,6 +97,11 @@ export default async function AdminOrdersPage({
                     </td>
                     <td className="px-5 py-3">
                       <OrderStatusBadge status={o.status} />
+                      {o.orderKind === "preorder" && (
+                        <span className="mt-1 inline-flex rounded-full bg-amber-100 px-2 py-0.5 text-[11px] font-medium text-amber-800">
+                          Предзаказ
+                        </span>
+                      )}
                       <OrderPriorityBadges flags={orderPriority(o).flags} />
                     </td>
                     <td className="px-5 py-3">

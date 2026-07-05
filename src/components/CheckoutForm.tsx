@@ -14,6 +14,7 @@ import {
   type CustomerPaymentMethod,
   type DeliveryMethod,
 } from "@/lib/order-options";
+import type { PurchaseKind } from "@/lib/purchase-kind";
 import { useLocale, useT } from "@/lib/useI18n";
 import { withLocalePath } from "@/lib/i18n";
 import { getAddressLabelDisplay } from "@/lib/address-label";
@@ -21,7 +22,8 @@ import { getAddressLabelDisplay } from "@/lib/address-label";
 interface CheckoutFormProps {
   items: CartItem[];
   total: number;
-  onSuccess: (order: { id: string; number: string }) => void;
+  mode: PurchaseKind;
+  onSuccess: (order: { id: string; number: string; kind: PurchaseKind }) => void;
 }
 
 interface SavedAddress {
@@ -48,10 +50,11 @@ function inferDeliveryMethod(city: string): DeliveryMethod {
     : "moldova_delivery";
 }
 
-export default function CheckoutForm({ items, total, onSuccess }: CheckoutFormProps) {
+export default function CheckoutForm({ items, total, mode, onSuccess }: CheckoutFormProps) {
   const { status } = useSession();
   const locale = useLocale();
   const t = useT();
+  const isPreorder = mode === "preorder";
   const [name, setName] = useState("");
   const [phone, setPhone] = useState("");
   const [email, setEmail] = useState("");
@@ -60,7 +63,9 @@ export default function CheckoutForm({ items, total, onSuccess }: CheckoutFormPr
   const [savedAddresses, setSavedAddresses] = useState<SavedAddress[]>([]);
   const [selectedAddressId, setSelectedAddressId] = useState<string>("manual");
   const [deliveryMethod, setDeliveryMethod] = useState<DeliveryMethod>("courier_chisinau");
-  const [paymentMethod, setPaymentMethod] = useState<CustomerPaymentMethod>("cash_on_delivery");
+  const [paymentMethod, setPaymentMethod] = useState<CustomerPaymentMethod>(
+    isPreorder ? "bank_transfer" : "cash_on_delivery",
+  );
   const [comment, setComment] = useState("");
   const [consent, setConsent] = useState(false);
   const [step, setStep] = useState<"contacts" | "details">("contacts");
@@ -137,7 +142,8 @@ export default function CheckoutForm({ items, total, onSuccess }: CheckoutFormPr
           city,
           address,
           deliveryMethod,
-          paymentMethod,
+          paymentMethod: isPreorder ? "bank_transfer" : paymentMethod,
+          orderKind: mode,
           comment,
           consent,
           total,
@@ -148,6 +154,7 @@ export default function CheckoutForm({ items, total, onSuccess }: CheckoutFormPr
             color: it.color,
             qty: it.qty,
             price: it.price,
+            purchaseKind: it.purchaseKind,
           })),
         }),
       });
@@ -164,7 +171,7 @@ export default function CheckoutForm({ items, total, onSuccess }: CheckoutFormPr
         return;
       }
 
-      onSuccess({ id: body.orderId, number: body.orderNumber });
+      onSuccess({ id: body.orderId, number: body.orderNumber, kind: mode });
     } catch {
       setError(t("checkout.errConnection"));
     } finally {
@@ -348,35 +355,37 @@ export default function CheckoutForm({ items, total, onSuccess }: CheckoutFormPr
             </div>
           </fieldset>
 
-          <fieldset className="space-y-2">
-            <legend className="px-0.5 text-xs font-medium uppercase tracking-[0.14em] text-stone-400">
-              {t("checkout.paymentMethod")}
-            </legend>
-            <div className="grid gap-2">
-              {paymentOptions.map((option) => (
-                <label key={option.value} className={compactOptionClass}>
-                  <input
-                    type="radio"
-                    name="paymentMethod"
-                    value={option.value}
-                    checked={paymentMethod === option.value}
-                    onChange={() => setPaymentMethod(option.value)}
-                    className="mt-0.5 h-4 w-4 shrink-0 accent-stone-900"
-                  />
-                  <span>
-                    <span className="block text-sm font-medium text-stone-900">
-                      {option.label}
-                    </span>
-                    {paymentMethod === option.value && (
-                      <span className="mt-0.5 block text-xs leading-relaxed text-stone-500">
-                        {option.description}
+          {!isPreorder && (
+            <fieldset className="space-y-2">
+              <legend className="px-0.5 text-xs font-medium uppercase tracking-[0.14em] text-stone-400">
+                {t("checkout.paymentMethod")}
+              </legend>
+              <div className="grid gap-2">
+                {paymentOptions.map((option) => (
+                  <label key={option.value} className={compactOptionClass}>
+                    <input
+                      type="radio"
+                      name="paymentMethod"
+                      value={option.value}
+                      checked={paymentMethod === option.value}
+                      onChange={() => setPaymentMethod(option.value)}
+                      className="mt-0.5 h-4 w-4 shrink-0 accent-stone-900"
+                    />
+                    <span>
+                      <span className="block text-sm font-medium text-stone-900">
+                        {option.label}
                       </span>
-                    )}
-                  </span>
-                </label>
-              ))}
-            </div>
-          </fieldset>
+                      {paymentMethod === option.value && (
+                        <span className="mt-0.5 block text-xs leading-relaxed text-stone-500">
+                          {option.description}
+                        </span>
+                      )}
+                    </span>
+                  </label>
+                ))}
+              </div>
+            </fieldset>
+          )}
 
           <div className="rounded-xl border border-stone-200 bg-stone-50 px-4 py-3">
             <p className="text-xs font-medium uppercase tracking-[0.14em] text-stone-400">
@@ -387,13 +396,13 @@ export default function CheckoutForm({ items, total, onSuccess }: CheckoutFormPr
               <SummaryRow label={t("checkout.phone").replace(" *", "")} value={phone} />
               <SummaryRow label={t("checkout.address")} value={[city, address].filter(Boolean).join(", ")} />
               <SummaryRow label={t("checkout.delivery")} value={selectedDeliveryLabel} />
-              <SummaryRow label={t("checkout.paymentMethod")} value={selectedPaymentLabel} />
+              {!isPreorder && <SummaryRow label={t("checkout.paymentMethod")} value={selectedPaymentLabel} />}
               <SummaryRow label={t("checkout.amount")} value={formatPrice(total, locale)} strong />
             </dl>
           </div>
 
           <div className="rounded-xl border border-emerald-100 bg-emerald-50/70 px-3.5 py-2.5 text-xs leading-relaxed text-emerald-900">
-            {t("checkout.afterOrder")}
+            {isPreorder ? t("checkout.preorderAfterSubmit") : t("checkout.afterOrder")}
           </div>
 
           <label className="flex items-start gap-2.5 text-xs text-stone-500">
@@ -412,7 +421,7 @@ export default function CheckoutForm({ items, total, onSuccess }: CheckoutFormPr
               >
                 {t("checkout.privacyPolicy")}
               </Link>{" "}
-              {t("checkout.consentRest")}
+              {isPreorder ? t("checkout.consentRestPreorder") : t("checkout.consentRest")}
             </span>
           </label>
         </div>
@@ -427,11 +436,19 @@ export default function CheckoutForm({ items, total, onSuccess }: CheckoutFormPr
         disabled={loading}
         className="w-full rounded-full bg-stone-900 px-6 py-3.5 text-sm font-semibold text-white transition hover:bg-stone-800 disabled:cursor-not-allowed disabled:opacity-60"
       >
-        {loading ? t("checkout.placing") : step === "contacts" ? t("checkout.continue") : t("checkout.placeOrder")}
+        {loading
+          ? isPreorder
+            ? t("checkout.placingPreorder")
+            : t("checkout.placing")
+          : step === "contacts"
+            ? t("checkout.continue")
+            : isPreorder
+              ? t("checkout.placePreorder")
+              : t("checkout.placeOrder")}
       </button>
       {step === "details" ? (
         <p className="text-center text-xs text-stone-400">
-          {t("checkout.dataUse")}
+          {isPreorder ? t("checkout.preorderHint") : t("checkout.dataUse")}
         </p>
       ) : (
         <p className="text-center text-xs text-stone-400">

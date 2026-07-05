@@ -4,6 +4,7 @@ import { useState } from "react";
 import type { Product } from "@/lib/types";
 import { getBrandName } from "@/lib/data";
 import { useCart } from "@/context/cart";
+import { getPurchaseKindForItem } from "@/lib/purchase-kind";
 
 export default function ProductPurchase({ product }: { product: Product }) {
   const { add, openCart } = useCart();
@@ -11,6 +12,8 @@ export default function ProductPurchase({ product }: { product: Product }) {
   const [added, setAdded] = useState(false);
 
   const color = product.colors[colorIdx];
+  const purchaseKind = getPurchaseKindForItem(product, color.name);
+  const isPreorder = purchaseKind === "preorder";
 
   function handleAdd() {
     add({
@@ -19,6 +22,7 @@ export default function ProductPurchase({ product }: { product: Product }) {
       brand: getBrandName(product.brandSlug),
       price: product.price,
       color: color.name,
+      purchaseKind,
     });
     openCart();
     setAdded(true);
@@ -53,7 +57,11 @@ export default function ProductPurchase({ product }: { product: Product }) {
         onClick={handleAdd}
         className="mt-7 w-full rounded-full bg-stone-900 px-8 py-4 text-sm font-semibold text-white transition hover:bg-stone-800 sm:w-auto"
       >
-        {added ? "Добавлено в корзину ✓" : "Добавить в корзину"}
+        {added
+          ? `${isPreorder ? "Добавлено в предзаказ" : "Добавлено в корзину"} ✓`
+          : isPreorder
+            ? "Оформить предзаказ"
+            : "Добавить в корзину"}
       </button>
     </div>
   );

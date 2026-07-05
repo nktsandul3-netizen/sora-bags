@@ -360,6 +360,7 @@ const productTitles: Record<string, Partial<Record<Locale, string>>> = {
   "Ines — плетёная сумка-хобо": { ro: "Ines — geantă hobo împletită", en: "Ines — woven hobo bag" },
   "Paola — плетёная сумка с клапаном": { ro: "Paola — geantă împletită cu clapă", en: "Paola — woven flap bag" },
   "Greta — сумка-тоут с замком": { ro: "Greta — geantă tote cu încuietoare", en: "Greta — turn-lock tote bag" },
+  "Georgina — тоут с расклешёнными боками и замком": { ro: "Georgina — tote cu aripi și încuietoare", en: "Georgina — winged turn-lock tote" },
   "Francesca — кошелёк на молнии": { ro: "Francesca — portofel cu fermoar", en: "Francesca — zip-around wallet" },
   "Federica — кошелёк на клапане": { ro: "Federica — portofel cu clapă", en: "Federica — flap wallet" },
   "Fabiana — плетёный кошелёк на клапане": { ro: "Fabiana — portofel împletit cu clapă", en: "Fabiana — woven flap wallet" },
@@ -375,6 +376,7 @@ const productTitles: Record<string, Partial<Record<Locale, string>>> = {
   "Bettina — сумка на плечо с пряжкой": { ro: "Bettina — geantă de umăr cu cataramă", en: "Bettina — buckle shoulder bag" },
   "Perrine — багет на плечо": { ro: "Perrine — geantă baghetă de umăr", en: "Perrine — shoulder baguette bag" },
   "Anaelle — компактный багет": { ro: "Anaelle — geantă baghetă compactă", en: "Anaelle — compact baguette bag" },
+  "Marcelle — компактная сумка-конверт на цепочке": { ro: "Marcelle — geantă plic compactă cu lanț", en: "Marcelle — compact envelope chain bag" },
   "Ninette — структурная сумка с контрастной окантовкой": { ro: "Ninette — geantă structurată cu bordură contrastantă", en: "Ninette — structured bag with contrast trim" },
   "Thea — структурная сумка с поворотным замком": { ro: "Thea — geantă structurată cu încuietoare rotativă", en: "Thea — structured turn-lock bag" },
   "Colline — сумка хобо полумесяцем": { ro: "Colline — geantă hobo semilună", en: "Colline — crescent hobo bag" },
@@ -394,10 +396,12 @@ const productTitles: Record<string, Partial<Record<Locale, string>>> = {
   "Loretta — тоут с клапаном на замке": { ro: "Loretta — geantă tote cu clapă și încuietoare", en: "Loretta — turn-lock flap tote bag" },
   "Cressida — тоут с планкой на замке": { ro: "Cressida — geantă tote cu clapetă și încuietoare", en: "Cressida — turn-lock placket tote bag" },
   "Palmira — сумка с поворотным замком": { ro: "Palmira — geantă cu încuietoare rotativă", en: "Palmira — turn-lock top handle bag" },
+  "Margot — сумка с поворотным замком": { ro: "Margot — geantă cu încuietoare rotativă", en: "Margot — turn-lock top handle bag" },
   "Amabel — сумка хобо на молнии": { ro: "Amabel — geantă hobo cu fermoar", en: "Amabel — zip hobo bag" },
   "Ottilie — гладкий компактный багет": { ro: "Ottilie — geantă baghetă compactă netedă", en: "Ottilie — smooth compact baguette bag" },
   "Perlette — сумка на плечо с клапаном": { ro: "Perlette — geantă de umăr cu clapă", en: "Perlette — flap shoulder bag" },
   "Rosalind — гладкая хобо полумесяцем": { ro: "Rosalind — geantă hobo semilună netedă", en: "Rosalind — smooth crescent hobo bag" },
+  "Odile — хобо полумесяц с цепочкой": { ro: "Odile — geantă hobo semilună cu lanț", en: "Odile — chain-strap crescent hobo bag" },
   "Solaine — сумка с драпированным клапаном": { ro: "Solaine — geantă cu clapă drapată", en: "Solaine — draped flap bag" },
   "Adalina — сумка-шоппер": { ro: "Adalina — geantă shopper", en: "Adalina — shopper bag" },
   "Elowen — сумка-мешок с плетёным основанием": { ro: "Elowen — geantă sac cu bază împletită", en: "Elowen — drawstring bucket bag" },
@@ -1346,6 +1350,78 @@ const productCopyBySlug: Record<string, ProductLocalizedCopy> = {
       "en": "Rosalind — handbag is a handbag crafted from smooth leather, designed for everyday styling, office looks and relaxed evening plans. The silhouette feels polished without looking stiff, making it easy to style with a considered everyday wardrobe.\n\nVersatile city-ready shape. The interior is made for daily essentials such as a phone, wallet, keys and small cosmetics. This style is in stock, with delivery in 1–3 days."
     }
   },
+  "womens-smooth-leather-chain-strap-crescent-hobo-bag": {
+    "title": {
+      "ru": "Odile — хобо полумесяц с цепочкой",
+      "ro": "Odile — geantă hobo semilună cu lanț",
+      "en": "Odile — chain-strap crescent hobo bag"
+    },
+    "description": {
+      "ru": "Odile — хобо полумесяц с цепочкой из гладкой кожи. Плечевой ремень с переплетённой золотистой цепочкой и декоративными металлическими кольцами у основания — характерная деталь модели.\n\nМягкий силуэт без каркаса и застёжка-молния делают сумку удобной для повседневной носки. Модель доступна под заказ: срок доставки 7–14 дней.",
+      "ro": "Odile — geantă hobo semilună din piele netedă, cu curea de umăr în care un lanț auriu este împletit cu fâșii de piele. Inelele metalice decorative de la baza curelei sunt detaliul distinctiv al modelului.\n\nSilueta moale, fără structură rigidă, și fermoarul o fac potrivită pentru purtarea zilnică. Modelul este disponibil la comandă: livrare în 7–14 zile.",
+      "en": "Odile — smooth leather crescent hobo with a shoulder strap where a gold chain is woven through leather strips. Decorative metal rings at the strap base are the signature detail.\n\nThe soft, unstructured silhouette and zip closure make it easy for everyday wear. This style is available to order, with delivery in 7–14 days."
+    }
+  },
+  "womens-suede-wing-tote-bag": {
+    "title": {
+      "ru": "Severine — сумка-тоут из замши",
+      "ro": "Severine — shopper din piele întoarsă",
+      "en": "Severine — suede tote bag"
+    },
+    "description": {
+      "ru": "Severine — сумка-тоут из замши с трапециевидным силуэтом и расклешёнными боками. Тонкие кожаные плечевые ремни с декоративными концами и магнитная застёжка — характерные детали модели.\n\nПросторное внутреннее отделение с контрастной подкладкой и косметичка в комплекте делают сумку удобной для повседневной носки. Модель доступна под заказ: срок доставки 7–14 дней.",
+      "ro": "Severine — shopper din piele întoarsă, cu siluetă trapezoidală și laterale evazate. Curelele subțiri din piele, cu capete decorative, și închiderea magnetică sunt detaliile distinctive ale modelului.\n\nInteriorul spațios, cu captuseală contrastantă, și un pouch inclus în set o fac potrivită pentru purtarea zilnică. Modelul este disponibil la comandă: livrare în 7–14 zile.",
+      "en": "Severine — suede tote with a trapezoid silhouette and flared sides. Slim leather shoulder straps with decorative hanging ends and a magnetic closure are the signature details.\n\nA roomy interior with contrast lining and a matching pouch make it easy for everyday wear. This style is available to order, with delivery in 7–14 days."
+    }
+  },
+  "womens-pebbled-leather-ring-handle-structured-bag": {
+    "title": {
+      "ru": "Callista — сумка с кольцевой ручкой",
+      "ro": "Callista — geantă cu mâner circular",
+      "en": "Callista — ring-handle structured bag"
+    },
+    "description": {
+      "ru": "Callista — структурная сумка из зернистой кожи с архитектурным силуэтом и кольцевой ручкой. Центральная треугольная панель и боковая молния — характерные детали модели.\n\nСъёмный плечевой ремень позволяет носить сумку в руке или через плечо. Модель доступна под заказ: срок доставки 7–14 дней.",
+      "ro": "Callista — geantă structurată din piele granulată, cu siluetă arhitecturală și mâner circular. Panoul central triunghiular și fermoarul lateral sunt detaliile distinctive ale modelului.\n\nCurea detașabilă de umăr permite purtarea în mână sau pe umăr. Modelul este disponibil la comandă: livrare în 7–14 zile.",
+      "en": "Callista — pebbled leather structured bag with an architectural silhouette and a ring handle. The central triangular panel and side zip are the signature details.\n\nA detachable shoulder strap lets you carry it by hand or on the shoulder. This style is available to order, with delivery in 7–14 days."
+    }
+  },
+  "womens-woven-suede-flap-clutch-bag": {
+    "title": {
+      "ru": "Damiana — плетёный клатч из замши",
+      "ro": "Damiana — clutch împletit din piele întoarsă",
+      "en": "Damiana — woven suede flap clutch"
+    },
+    "description": {
+      "ru": "Damiana — клатч из плетёной замши с диагональным переплетением и клапаном на магнитной кнопке. Тонкий ремешок с декоративными узлами — характерная деталь модели.\n\nПодходит для вечера и повседневных выходов: внутри помещаются телефон, карты и косметика. Модель доступна под заказ: срок доставки 7–14 рабочих дней.",
+      "ro": "Damiana — clutch din piele întoarsă împletită, cu împletitură diagonală și clapetă cu capsa magnetică. Curea subțire cu noduri decorative este detaliul distinctiv al modelului.\n\nPotrivit pentru seară și ieșiri zilnice: interiorul încăpe telefon, carduri și cosmetice. Modelul este disponibil la comandă: livrare în 7–14 zile lucrătoare.",
+      "en": "Damiana — woven suede clutch with a diagonal weave and a magnetic flap closure. A slim strap with decorative knots is the signature detail.\n\nWorks for evenings and everyday outings — the interior fits a phone, cards and cosmetics. Available on pre-order, with delivery in 7–14 business days."
+    }
+  },
+  "womens-smooth-leather-metal-ring-crescent-hobo-bag": {
+    "title": {
+      "ru": "Mirabel — сумка-полумесяц с металлическим кольцом",
+      "ro": "Mirabel — geantă semilună cu inel metalic",
+      "en": "Mirabel — metal-ring crescent hobo bag"
+    },
+    "description": {
+      "ru": "Mirabel — сумка-полумесяц из гладкой кожи с округлым силуэтом и встроенным плечевым ремнём. Серебристое декоративное кольцо у нижнего края — характерная деталь модели.\n\nМягкий силуэт без каркаса и одно отделение через верхний проём подходят для повседневного минимума. Модель доступна под заказ: срок доставки 7–14 рабочих дней.",
+      "ro": "Mirabel — geantă semilună din piele netedă, cu siluetă rotunjită și curea de umăr integrată. Inelul decorativ argintiu de la baza geantii este detaliul distinctiv al modelului.\n\nSilueta moale, fără structură rigidă, și un singur compartiment prin deschiderea de sus o fac potrivită pentru esențialele zilnice. Modelul este disponibil la comandă: livrare în 7–14 zile lucrătoare.",
+      "en": "Mirabel — smooth leather crescent bag with a rounded silhouette and an integrated shoulder strap. The silver decorative ring at the base is the signature detail.\n\nThe soft, unstructured shape and single compartment through the top opening work for everyday essentials. Available on pre-order, with delivery in 7–14 business days."
+    }
+  },
+  "womens-woven-leather-turn-lock-clutch-bag": {
+    "title": {
+      "ru": "Annabel — плетёная сумка с замком-вертушкой",
+      "ro": "Annabel — geantă împletită cu incuietoare rotativă",
+      "en": "Annabel — woven leather turn-lock clutch"
+    },
+    "description": {
+      "ru": "Annabel — горизонтальная сумка из плетёной кожи с диагональным переплетением и клапаном на замке-вертушке. Плоская верхняя ручка и съёмный плечевой ремень — характерные детали модели.\n\nВытянутый силуэт подходит для вечера и повседневных выходов: внутри помещаются телефон, карты и косметика. Модель доступна под заказ: срок доставки 7–14 рабочих дней.",
+      "ro": "Annabel — geantă orizontală din piele împletită, cu împletitură diagonală și clapetă cu incuietoare rotativă. Mânerul plat de sus și curea detașabilă de umăr sunt detaliile distinctive ale modelului.\n\nSilueta alungită este potrivită pentru seară și ieșiri zilnice: interiorul încăpe telefon, carduri și cosmetice. Modelul este disponibil la comandă: livrare în 7–14 zile lucrătoare.",
+      "en": "Annabel — horizontal woven leather bag with a diagonal weave and a turn-lock flap closure. A flat top handle and detachable shoulder strap are the signature details.\n\nThe elongated silhouette works for evenings and everyday outings — the interior fits a phone, cards and cosmetics. Available on pre-order, with delivery in 7–14 business days."
+    }
+  },
   "womens-soft-leather-draped-flap-bag": {
     "title": {
       "ru": "Solaine — сумка с драпированным клапаном",
@@ -1512,6 +1588,18 @@ const productCopyBySlug: Record<string, ProductLocalizedCopy> = {
       "ru": "Celia — тоут с овальными ручками и плетёной фактурой полотна. Лёгкий открытый силуэт подойдёт для повседневных выходов, прогулок и тёплого сезона.\n\nВнутри одно просторное отделение для телефона, кошелька, ключей и небольших аксессуаров. Модель есть в наличии: доставим за 1–3 дня.",
       "ro": "Celia — geantă tote cu mânere ovale și textură împletită. Silueta lejeră, cu partea superioară deschisă, este potrivită pentru ținute de zi, plimbări și sezonul cald.\n\nInteriorul are un compartiment încăpător pentru telefon, portofel, chei și accesorii mici. Modelul este în stoc: livrare în 1–3 zile.",
       "en": "Celia — oval handle tote bag with a woven texture. The light open-top silhouette works for everyday outings, walks and warm-season styling.\n\nThe interior has one roomy compartment for a phone, wallet, keys and small accessories. This style is in stock, with delivery in 1–3 days."
+    }
+  },
+  "womens-woven-oval-handle-tote-bag-mokko": {
+    "title": {
+      "ru": "Roxane — тоут с овальными ручками",
+      "ro": "Roxane — geantă tote cu mânere ovale",
+      "en": "Roxane — oval handle tote bag"
+    },
+    "description": {
+      "ru": "Roxane — тоут с овальными ручками и плетёной фактурой полотна. Лёгкий открытый силуэт подойдёт для повседневных выходов, прогулок и тёплого сезона.\n\nВнутри одно просторное отделение для телефона, кошелька, ключей и небольших аксессуаров. Модель есть в наличии: доставим за 1–3 дня.",
+      "ro": "Roxane — geantă tote cu mânere ovale și textură împletită. Silueta lejeră, cu partea superioară deschisă, este potrivită pentru ținute de zi, plimbări și sezonul cald.\n\nInteriorul are un compartiment încăpător pentru telefon, portofel, chei și accesorii mici. Modelul este în stoc: livrare în 1–3 zile.",
+      "en": "Roxane — oval handle tote bag with a woven texture. The light open-top silhouette works for everyday outings, walks and warm-season styling.\n\nThe interior has one roomy compartment for a phone, wallet, keys and small accessories. This style is in stock, with delivery in 1–3 days."
     }
   },
   "womens-woven-panel-crystal-accent-structured-top-handle-bag": {

@@ -11,13 +11,13 @@ import { formatPrice } from "@/lib/format";
 import { getDeliveryInfo } from "@/lib/delivery";
 import { withLocalePath } from "@/lib/i18n";
 import { useLocale, useT } from "@/lib/useI18n";
+import { getPurchaseKind, getPurchaseKindForItem } from "@/lib/purchase-kind";
 import {
   localizeColorName,
   localizeProductDescription,
   localizeProductHighlights,
   localizeProductSpec,
   localizeProductTitle,
-  localizeStaticText,
   getVisibleProductSpecs,
 } from "@/lib/product-i18n";
 import { getColorImages, getColorSwatchImage } from "./ProductColorSwatches";
@@ -185,6 +185,8 @@ export default function QuickViewModal({
   const onSale = Boolean(product.oldPrice && product.oldPrice > product.price);
   const delivery = getDeliveryInfo(product, locale);
   const canBuy = product.status !== "out_of_stock";
+  const purchaseKind = color ? getPurchaseKindForItem(product, color.name) : getPurchaseKind(product);
+  const isPreorder = purchaseKind === "preorder";
   const swatchImageClass =
     (product.galleryFit ?? "cover") === "contain"
       ? "object-contain object-center p-0.5"
@@ -201,6 +203,7 @@ export default function QuickViewModal({
       brand: brandName,
       price: product.price,
       color: color.name,
+      purchaseKind,
     });
     onClose();
     openCart();
@@ -402,7 +405,13 @@ export default function QuickViewModal({
                     disabled={!canBuy}
                     className="flex-1 rounded-full bg-stone-950 px-6 py-3.5 text-sm font-semibold tracking-wide text-white transition hover:bg-stone-800 disabled:cursor-not-allowed disabled:opacity-50"
                   >
-                    {canBuy ? (showAdded ? `${t("common.addedToCart")} ✓` : t("common.addToCart")) : t("common.outOfStock")}
+                    {canBuy
+                      ? showAdded
+                        ? `${isPreorder ? t("common.addedToPreorder") : t("common.addedToCart")} ✓`
+                        : isPreorder
+                          ? t("common.placePreorder")
+                          : t("common.addToCart")
+                      : t("common.outOfStock")}
                   </button>
                   <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full border border-stone-200">
                     <WishlistButton slug={product.slug} />

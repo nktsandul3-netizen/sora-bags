@@ -9,21 +9,34 @@ export const metadata: Metadata = { title: "Заказ оформлен" };
 export default async function OrderConfirmationPage({
   searchParams,
 }: {
-  searchParams: Promise<{ order?: string }>;
+  searchParams: Promise<{ order?: string; kind?: string }>;
 }) {
-  const { order } = await searchParams;
+  const { order, kind } = await searchParams;
   const [locale, t] = await Promise.all([getServerLocale(), getServerT()]);
+  const isPreorder = kind === "preorder";
   const whatsappText = order
-    ? locale === "ru"
-      ? `Здравствуйте, я оформил(а) заказ ${order} на sorabags.md. Хочу согласовать детали.`
-      : locale === "ro"
-        ? `Bună, am plasat comanda ${order} pe sorabags.md. Aș dori să confirm detaliile.`
-        : `Hello, I placed order ${order} on sorabags.md. I would like to confirm the details.`
-    : locale === "ru"
-      ? "Здравствуйте, я оформил(а) заказ на sorabags.md. Хочу согласовать детали."
+    ? isPreorder
+      ? locale === "ru"
+        ? `Здравствуйте, я оформил(а) предзаказ ${order} на sorabags.md. Хочу согласовать детали.`
+        : locale === "ro"
+          ? `Bună, am plasat precomanda ${order} pe sorabags.md. Aș dori să confirm detaliile.`
+          : `Hello, I placed pre-order ${order} on sorabags.md. I would like to confirm the details.`
+      : locale === "ru"
+        ? `Здравствуйте, я оформил(а) заказ ${order} на sorabags.md. Хочу согласовать детали.`
+        : locale === "ro"
+          ? `Bună, am plasat comanda ${order} pe sorabags.md. Aș dori să confirm detaliile.`
+          : `Hello, I placed order ${order} on sorabags.md. I would like to confirm the details.`
+    : isPreorder
+      ? locale === "ru"
+        ? "Здравствуйте, я оформил(а) предзаказ на sorabags.md. Хочу согласовать детали."
+        : locale === "ro"
+          ? "Bună, am plasat o precomandă pe sorabags.md. Aș dori să confirm detaliile."
+          : "Hello, I placed a pre-order on sorabags.md. I would like to confirm the details."
       : locale === "ro"
         ? "Bună, am plasat o comandă pe sorabags.md. Aș dori să confirm detaliile."
-        : "Hello, I placed an order on sorabags.md. I would like to confirm the details.";
+        : locale === "ru"
+          ? "Здравствуйте, я оформил(а) заказ на sorabags.md. Хочу согласовать детали."
+          : "Hello, I placed an order on sorabags.md. I would like to confirm the details.";
   const whatsappHref = `${brand.social.whatsapp}?text=${encodeURIComponent(whatsappText)}`;
 
   return (
@@ -32,7 +45,7 @@ export default async function OrderConfirmationPage({
         SÓRA Bags
       </p>
       <h1 className="mt-3 font-serif text-3xl text-stone-950 sm:text-4xl">
-        {t("order.confirmation")}
+        {isPreorder ? t("order.preorderConfirmation") : t("order.confirmation")}
       </h1>
       {order ? (
         <p className="mt-4 text-sm font-medium text-stone-900">
@@ -40,7 +53,7 @@ export default async function OrderConfirmationPage({
         </p>
       ) : null}
       <p className="mt-4 leading-relaxed text-stone-600">
-        {t("order.thanks")}
+        {isPreorder ? t("order.preorderThanks") : t("order.thanks")}
       </p>
       <div className="mt-6 rounded-2xl border border-stone-200 bg-stone-50 px-5 py-4">
         <p className="text-sm font-medium text-stone-900">

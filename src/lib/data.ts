@@ -2125,7 +2125,7 @@ export const products: Product[] = [
     section: "bags",
     categorySlug: "tote-bags-women",
     price: 2000,
-    status: "in_stock",
+    status: "pre_order",
     galleryFit: "contain",
     colors: [
       {
@@ -2202,7 +2202,7 @@ export const products: Product[] = [
       { label: "Фурнитура", value: "Премиальная фурнитура золотистого цвета" },
       { label: "Страна производства", value: "Италия" },
       { label: "Уход", value: "Очищать мягкой сухой тканью; избегать влаги, жары и прямого солнца" },
-      { label: "Доставка", value: "1–3 дня" },
+      { label: "Доставка", value: "7–14 дней" },
       { label: "Возврат", value: "14 дней" },
     ],
   },
@@ -2952,7 +2952,7 @@ export const products: Product[] = [
     brandSlug: "luma-atelier",
     section: "bags",
     categorySlug: "tote-bags-women",
-    price: 1600,
+    price: 3099,
     status: "in_stock",
     isNew: true,
     galleryFit: "contain",
@@ -3012,7 +3012,7 @@ export const products: Product[] = [
     brandSlug: "luma-atelier",
     section: "bags",
     categorySlug: "handbags-women",
-    price: 1600,
+    price: 1599,
     status: "in_stock",
     isNew: true,
     galleryFit: "contain",
@@ -3062,7 +3062,7 @@ export const products: Product[] = [
     brandSlug: "luma-atelier",
     section: "bags",
     categorySlug: "tote-bags-women",
-    price: 1600,
+    price: 2299,
     status: "in_stock",
     isNew: true,
     colors: [
@@ -3126,7 +3126,7 @@ export const products: Product[] = [
     brandSlug: "luma-atelier",
     section: "bags",
     categorySlug: "shoulder-bags-women",
-    price: 1600,
+    price: 2199,
     status: "in_stock",
     isNew: true,
     colors: [
@@ -3197,7 +3197,7 @@ export const products: Product[] = [
     brandSlug: "luma-atelier",
     section: "bags",
     categorySlug: "tote-bags-women",
-    price: 1600,
+    price: 1499,
     status: "in_stock",
     isNew: true,
     galleryFit: "contain",
@@ -3237,7 +3237,7 @@ export const products: Product[] = [
     brandSlug: "luma-atelier",
     section: "bags",
     categorySlug: "tote-bags-women",
-    price: 1600,
+    price: 2199,
     status: "in_stock",
     isNew: true,
     colors: [
@@ -3320,7 +3320,7 @@ export const products: Product[] = [
     brandSlug: "luma-atelier",
     section: "bags",
     categorySlug: "shoulder-bags-women",
-    price: 1600,
+    price: 1999,
     status: "in_stock",
     isNew: true,
     colors: [
@@ -3369,7 +3369,7 @@ export const products: Product[] = [
     brandSlug: "luma-atelier",
     section: "bags",
     categorySlug: "shoulder-bags-women",
-    price: 1600,
+    price: 1799,
     status: "in_stock",
     isNew: true,
     colors: [
@@ -3418,7 +3418,7 @@ export const products: Product[] = [
     brandSlug: "luma-atelier",
     section: "bags",
     categorySlug: "shoulder-bags-women",
-    price: 1600,
+    price: 2599,
     status: "in_stock",
     isNew: true,
     colors: [
@@ -3467,7 +3467,7 @@ export const products: Product[] = [
     brandSlug: "luma-atelier",
     section: "bags",
     categorySlug: "shoulder-bags-women",
-    price: 1600,
+    price: 1699,
     status: "in_stock",
     isNew: true,
     galleryFit: "contain",
@@ -3513,7 +3513,7 @@ export const products: Product[] = [
     brandSlug: "luma-atelier",
     section: "bags",
     categorySlug: "handbags-women",
-    price: 1600,
+    price: 2499,
     status: "in_stock",
     isNew: true,
     galleryFit: "contain",
@@ -3564,7 +3564,7 @@ export const products: Product[] = [
     brandSlug: "luma-atelier",
     section: "bags",
     categorySlug: "handbags-women",
-    price: 1600,
+    price: 2199,
     status: "in_stock",
     isNew: true,
     galleryFit: "contain",
@@ -3615,7 +3615,7 @@ export const products: Product[] = [
     brandSlug: "luma-atelier",
     section: "bags",
     categorySlug: "shoulder-bags-women",
-    price: 1600,
+    price: 1399,
     status: "in_stock",
     isNew: true,
     colors: [
@@ -3662,7 +3662,7 @@ export const products: Product[] = [
     brandSlug: "luma-atelier",
     section: "bags",
     categorySlug: "tote-bags-women",
-    price: 1600,
+    price: 1499,
     status: "in_stock",
     isNew: true,
     colors: [
@@ -3710,7 +3710,7 @@ export const products: Product[] = [
     brandSlug: "luma-atelier",
     section: "bags",
     categorySlug: "shoulder-bags-women",
-    price: 1600,
+    price: 1799,
     status: "in_stock",
     isNew: true,
     colors: [
@@ -3759,7 +3759,7 @@ export const products: Product[] = [
     brandSlug: "luma-atelier",
     section: "bags",
     categorySlug: "clutches",
-    price: 1600,
+    price: 3099,
     status: "in_stock",
     isNew: true,
     colors: [
@@ -3959,7 +3959,7 @@ export const products: Product[] = [
     brandSlug: "luma-atelier",
     section: "bags",
     categorySlug: "clutches",
-    price: 1600,
+    price: 3499,
     status: "in_stock",
     isNew: true,
     colors: [
@@ -3999,7 +3999,7 @@ export const products: Product[] = [
     brandSlug: "luma-atelier",
     section: "bags",
     categorySlug: "handbags-women",
-    price: 1600,
+    price: 2199,
     status: "in_stock",
     isNew: true,
     colors: [
@@ -4046,7 +4046,7 @@ export const products: Product[] = [
     brandSlug: "luma-atelier",
     section: "bags",
     categorySlug: "handbags-women",
-    price: 1600,
+    price: 2499,
     status: "in_stock",
     isNew: true,
     colors: [
@@ -4095,7 +4095,7 @@ export const products: Product[] = [
     brandSlug: "luma-atelier",
     section: "bags",
     categorySlug: "handbags-women",
-    price: 1600,
+    price: 2399,
     status: "in_stock",
     isNew: true,
     colors: [
@@ -4158,7 +4158,7 @@ export const products: Product[] = [
     brandSlug: "luma-atelier",
     section: "bags",
     categorySlug: "tote-bags-women",
-    price: 1600,
+    price: 2699,
     status: "in_stock",
     isNew: true,
     colors: [
@@ -4205,7 +4205,7 @@ export const products: Product[] = [
     brandSlug: "luma-atelier",
     section: "bags",
     categorySlug: "tote-bags-women",
-    price: 1600,
+    price: 1499,
     status: "in_stock",
     isNew: true,
     colors: [
@@ -4258,7 +4258,7 @@ export const products: Product[] = [
     brandSlug: "luma-atelier",
     section: "bags",
     categorySlug: "tote-bags-women",
-    price: 1600,
+    price: 2699,
     status: "in_stock",
     isNew: true,
     colors: [
@@ -4320,7 +4320,7 @@ export const products: Product[] = [
     brandSlug: "luma-atelier",
     section: "bags",
     categorySlug: "tote-bags-women",
-    price: 1600,
+    price: 4400,
     status: "in_stock",
     isNew: true,
     galleryFit: "contain",
@@ -4361,7 +4361,7 @@ export const products: Product[] = [
     brandSlug: "luma-atelier",
     section: "bags",
     categorySlug: "tote-bags-women",
-    price: 1650,
+    price: 2499,
     status: "in_stock",
     isNew: true,
     galleryFit: "contain",
@@ -4414,12 +4414,81 @@ export const products: Product[] = [
     ],
   },
   {
+    slug: "womens-pebbled-leather-wing-turn-lock-tote-bag",
+    title: "Georgina — тоут с расклешёнными боками и замком",
+    brandSlug: "luma-atelier",
+    section: "bags",
+    categorySlug: "tote-bags-women",
+    price: 2499,
+    status: "in_stock",
+    isNew: true,
+    galleryFit: "contain",
+    colors: [
+      {
+        ...C.black,
+        images: [
+          { src: "/products/womens-pebbled-leather-wing-turn-lock-tote-bag/black-front.png", alt: "Georgina Чёрный — вид спереди" },
+          { src: "/products/womens-pebbled-leather-wing-turn-lock-tote-bag/black-back.png", alt: "Georgina Чёрный — сзади" },
+          { src: "/products/womens-pebbled-leather-wing-turn-lock-tote-bag/black-inside.png", alt: "Georgina Чёрный — внутри" },
+        ],
+      },
+      {
+        ...C.cognac,
+        images: [
+          { src: "/products/womens-pebbled-leather-wing-turn-lock-tote-bag/cognac-front.png", alt: "Georgina Коньячный — вид спереди" },
+          { src: "/products/womens-pebbled-leather-wing-turn-lock-tote-bag/cognac-back.png", alt: "Georgina Коньячный — сзади" },
+        ],
+      },
+      {
+        ...C.taupe,
+        images: [
+          { src: "/products/womens-pebbled-leather-wing-turn-lock-tote-bag/taupe-front.png", alt: "Georgina Taupe — вид спереди" },
+          { src: "/products/womens-pebbled-leather-wing-turn-lock-tote-bag/taupe-back.png", alt: "Georgina Taupe — сзади" },
+        ],
+      },
+      {
+        ...C.ivory,
+        images: [
+          { src: "/products/womens-pebbled-leather-wing-turn-lock-tote-bag/ivory-front.png", alt: "Georgina Ivory — вид спереди" },
+        ],
+      },
+      {
+        ...C.lightGrey,
+        images: [
+          { src: "/products/womens-pebbled-leather-wing-turn-lock-tote-bag/light-grey-front.png", alt: "Georgina Light Grey — вид спереди" },
+        ],
+      },
+    ],
+    material: "Зернистая кожа",
+    description:
+      "Тоут трапециевидной формы с расклешёнными боками: широкий верх и собранный центр держат силуэт архитектурным даже без наполнения. Зернистая кожа и золотистая фурнитура — спокойная, но заметная комбинация.\n\nПланка с поворотным замком фиксирует верх, внутри — отделение с центральной перегородкой на молнии и карман на молнии у стенки. В комплекте съёмный плечевой ремень.",
+    highlights: [
+      "Зернистая кожа",
+      "Расклешённые боковые панели",
+      "Поворотный замок на передней планке",
+      "Съёмный плечевой ремень",
+    ],
+    specs: [
+      { label: "Размер", value: "38 × 22 × 18 см" },
+      { label: "Форма", value: "Сумка-тоут" },
+      { label: "Застёжка", value: "Поворотный замок" },
+      { label: "Ручки", value: "Двойные ручки + съёмный ремень" },
+      { label: "Карманы и отделения", value: "Центральная перегородка на молнии, внутренний карман на молнии" },
+      { label: "Кожа", value: "Зернистая кожа" },
+      { label: "Фурнитура", value: "Золотистая фурнитура" },
+      { label: "Страна производства", value: "Италия" },
+      { label: "Уход", value: "Очищать мягкой сухой тканью; избегать влаги, жары и прямого солнца" },
+      { label: "Доставка", value: "1–3 дня" },
+      { label: "Возврат", value: "14 дней" },
+    ],
+  },
+  {
     slug: "womens-pebbled-leather-turn-lock-placket-tote-with-pouch",
     title: "Cressida — тоут с планкой на замке",
     brandSlug: "luma-atelier",
     section: "bags",
     categorySlug: "tote-bags-women",
-    price: 1600,
+    price: 1599,
     status: "in_stock",
     isNew: true,
     colors: [
@@ -4492,7 +4561,7 @@ export const products: Product[] = [
     brandSlug: "luma-atelier",
     section: "bags",
     categorySlug: "handbags-women",
-    price: 1600,
+    price: 2199,
     status: "in_stock",
     isNew: true,
     colors: [
@@ -4514,13 +4583,54 @@ export const products: Product[] = [
           { src: "/products/womens-pebbled-leather-turn-lock-top-handle-bag/camel-inside.png", alt: "Palmira Camel — внутри" },
         ],
       },
+    ],
+    material: "Кожа",
+    description:
+      "Сумка на короткой ручке с поворотным замком на клапане — щёлкающая застёжка, которая быстро открывается одной рукой.\n\nАккуратные пропорции подходят и для офиса, и для города.",
+    highlights: [
+      "Кожа",
+      "Поворотный замок на клапане",
+      "Короткая ручка",
+      "Одно отделение",
+    ],
+    specs: [
+      { label: "Размер", value: "22 × 18 × 12 см" },
+      { label: "Форма", value: "Сумка с верхней ручкой" },
+      { label: "Застёжка", value: "Поворотный замок" },
+      { label: "Ручки", value: "Короткая верхняя ручка" },
+      { label: "Материал", value: "Кожа" },
+      { label: "Страна производства", value: "Италия" },
+      { label: "Уход", value: "Очищать мягкой сухой тканью; избегать влаги, жары и прямого солнца" },
+      { label: "Доставка", value: "1–3 дня" },
+      { label: "Возврат", value: "14 дней" },
+    ],
+  },
+  {
+    slug: "womens-pebbled-leather-turn-lock-top-handle-bag-white",
+    title: "Margot — сумка с поворотным замком",
+    brandSlug: "luma-atelier",
+    section: "bags",
+    categorySlug: "handbags-women",
+    price: 2099,
+    status: "in_stock",
+    isNew: true,
+    colors: [
       {
         ...C.white,
         images: [
-          { src: "/products/womens-pebbled-leather-turn-lock-top-handle-bag/white-front.png", alt: "Palmira White — вид спереди" },
-          { src: "/products/womens-pebbled-leather-turn-lock-top-handle-bag/white-back.png", alt: "Palmira White — сзади" },
-          { src: "/products/womens-pebbled-leather-turn-lock-top-handle-bag/white-side.png", alt: "Palmira White — сбоку" },
-          { src: "/products/womens-pebbled-leather-turn-lock-top-handle-bag/white-inside.png", alt: "Palmira White — внутри" },
+          { src: "/products/womens-pebbled-leather-turn-lock-top-handle-bag/white-front.png", alt: "Margot White — вид спереди" },
+          { src: "/products/womens-pebbled-leather-turn-lock-top-handle-bag/white-back.png", alt: "Margot White — сзади" },
+          { src: "/products/womens-pebbled-leather-turn-lock-top-handle-bag/white-side.png", alt: "Margot White — сбоку" },
+          { src: "/products/womens-pebbled-leather-turn-lock-top-handle-bag/white-inside.png", alt: "Margot White — внутри" },
+        ],
+      },
+      {
+        ...C.cognac,
+        images: [
+          { src: "/products/womens-pebbled-leather-turn-lock-top-handle-bag/cognac-front.png", alt: "Margot Коньячный — вид спереди" },
+          { src: "/products/womens-pebbled-leather-turn-lock-top-handle-bag/cognac-back.png", alt: "Margot Коньячный — сзади" },
+          { src: "/products/womens-pebbled-leather-turn-lock-top-handle-bag/cognac-side.png", alt: "Margot Коньячный — сбоку" },
+          { src: "/products/womens-pebbled-leather-turn-lock-top-handle-bag/cognac-inside.png", alt: "Margot Коньячный — внутри" },
         ],
       },
     ],
@@ -4551,7 +4661,7 @@ export const products: Product[] = [
     brandSlug: "luma-atelier",
     section: "bags",
     categorySlug: "shoulder-bags-women",
-    price: 1600,
+    price: 2599,
     status: "in_stock",
     isNew: true,
     colors: [
@@ -4592,7 +4702,7 @@ export const products: Product[] = [
     brandSlug: "luma-atelier",
     section: "bags",
     categorySlug: "shoulder-bags-women",
-    price: 1600,
+    price: 1699,
     status: "in_stock",
     isNew: true,
     colors: [
@@ -4663,7 +4773,7 @@ export const products: Product[] = [
     brandSlug: "luma-atelier",
     section: "bags",
     categorySlug: "shoulder-bags-women",
-    price: 1600,
+    price: 1899,
     status: "in_stock",
     isNew: true,
     colors: [
@@ -4712,7 +4822,7 @@ export const products: Product[] = [
     brandSlug: "luma-atelier",
     section: "bags",
     categorySlug: "shoulder-bags-women",
-    price: 1600,
+    price: 2099,
     status: "in_stock",
     isNew: true,
     colors: [
@@ -4770,7 +4880,7 @@ export const products: Product[] = [
     brandSlug: "luma-atelier",
     section: "bags",
     categorySlug: "shoulder-bags-women",
-    price: 1600,
+    price: 1999,
     status: "in_stock",
     isNew: true,
     colors: [
@@ -4804,12 +4914,335 @@ export const products: Product[] = [
     ],
   },
   {
+    slug: "womens-smooth-leather-chain-strap-crescent-hobo-bag",
+    title: "Odile — хобо полумесяц с цепочкой",
+    brandSlug: "luma-atelier",
+    section: "bags",
+    categorySlug: "shoulder-bags-women",
+    price: 1600,
+    status: "pre_order",
+    isNew: true,
+    galleryFit: "contain",
+    colors: [
+      {
+        ...C.black,
+        images: [
+          { src: "/products/womens-smooth-leather-chain-strap-crescent-hobo-bag/black-front-card.png", alt: "Odile Чёрный — карточка товара" },
+        ],
+      },
+      {
+        ...C.darkChocolate,
+        images: [
+          { src: "/products/womens-smooth-leather-chain-strap-crescent-hobo-bag/cognac-front-card.png", alt: "Odile Dark Chocolate — карточка товара" },
+        ],
+      },
+      {
+        ...C.burgundy,
+        images: [
+          { src: "/products/womens-smooth-leather-chain-strap-crescent-hobo-bag/burgundy-front-card.png", alt: "Odile Burgundy — карточка товара" },
+        ],
+      },
+    ],
+    material: "Гладкая кожа",
+    description:
+      "Хобо в форме полумесяца из гладкой кожи с плечевым ремнём, в котором золотистая цепочка переплетена с кожаными полосками. Декоративные металлические кольца у основания ремня и мягкий силуэт без каркаса.\n\nОсновное отделение на молнии вмещает повседневный минимум — телефон, кошелёк, ключи и косметику.",
+    highlights: [
+      "Гладкая кожа",
+      "Форма полумесяца",
+      "Ремень с переплетённой золотистой цепочкой",
+      "Застёжка-молния",
+    ],
+    specs: [
+      { label: "Размер", value: "67 × 30 см" },
+      { label: "Форма", value: "Сумка-полумесяц" },
+      { label: "Ремень", value: "Плечевой ремень с цепочкой" },
+      { label: "Застёжка", value: "Молния" },
+      { label: "Материал", value: "Гладкая кожа" },
+      { label: "Фурнитура", value: "Золотистая металлическая фурнитура" },
+      { label: "Страна производства", value: "Италия" },
+      { label: "Уход", value: "Очищать мягкой сухой тканью; избегать влаги, жары и прямого солнца" },
+      { label: "Доставка", value: "7–14 дней" },
+      { label: "Возврат", value: "14 дней" },
+    ],
+  },
+  {
+    slug: "womens-suede-wing-tote-bag",
+    title: "Severine — сумка-тоут из замши",
+    brandSlug: "luma-atelier",
+    section: "bags",
+    categorySlug: "tote-bags-women",
+    price: 1600,
+    status: "pre_order",
+    isNew: true,
+    galleryFit: "contain",
+    colors: [
+      {
+        ...C.darkChocolate,
+        images: [
+          { src: "/products/womens-suede-wing-tote-bag/dark-chocolate-front.png", alt: "Severine Dark Chocolate — вид спереди" },
+          { src: "/products/womens-suede-wing-tote-bag/dark-chocolate-set.png", alt: "Severine Dark Chocolate — комплект с косметичкой" },
+          { src: "/products/womens-suede-wing-tote-bag/dark-chocolate-inside.png", alt: "Severine Dark Chocolate — внутри" },
+        ],
+      },
+      {
+        ...C.black,
+        images: [
+          { src: "/products/womens-suede-wing-tote-bag/black-front.png", alt: "Severine Чёрный — вид спереди" },
+          { src: "/products/womens-suede-wing-tote-bag/black-set.png", alt: "Severine Чёрный — комплект с косметичкой" },
+          { src: "/products/womens-suede-wing-tote-bag/black-inside.png", alt: "Severine Чёрный — внутри" },
+        ],
+      },
+    ],
+    material: "Замша",
+    description:
+      "Severine — сумка-тоут из замши с трапециевидным силуэтом и расклешёнными боками. Тонкие кожаные плечевые ремни проходят через петли у верхнего края, а их концы свободно свисают спереди как декоративный акцент.\n\nВерх закрывается на магнитные кнопки, внутри — просторное отделение с контрастной подкладкой. В комплекте — небольшая замшевая косметичка на молнии.",
+    highlights: [
+      "Замша",
+      "Трапециевидный силуэт с расклешёнными боками",
+      "Плечевые ремни с декоративными концами",
+      "Магнитная застёжка",
+    ],
+    specs: [
+      { label: "Размер", value: "50 × 26 × 13,5 см" },
+      { label: "Форма", value: "Сумка-тоут" },
+      { label: "Застёжка", value: "Магнитные кнопки" },
+      { label: "Ремень", value: "Плечевые ремни из кожи" },
+      { label: "Кожа", value: "Замша, кожаные ремни" },
+      { label: "Страна производства", value: "Италия" },
+      { label: "Уход", value: "Очищать мягкой сухой тканью; избегать влаги, жары и прямого солнца" },
+      { label: "Доставка", value: "7–14 дней" },
+      { label: "Возврат", value: "14 дней" },
+    ],
+  },
+  {
+    slug: "womens-pebbled-leather-ring-handle-structured-bag",
+    title: "Callista — сумка с кольцевой ручкой",
+    brandSlug: "luma-atelier",
+    section: "bags",
+    categorySlug: "handbags-women",
+    price: 1600,
+    status: "pre_order",
+    isNew: true,
+    galleryFit: "contain",
+    colors: [
+      {
+        ...C.cognac,
+        images: [
+          { src: "/products/womens-pebbled-leather-ring-handle-structured-bag/cognac-front.png", alt: "Callista Cognac — вид спереди" },
+          { src: "/products/womens-pebbled-leather-ring-handle-structured-bag/cognac-side.png", alt: "Callista Cognac — сбоку" },
+        ],
+      },
+      {
+        ...C.taupe,
+        images: [
+          { src: "/products/womens-pebbled-leather-ring-handle-structured-bag/taupe-front.png", alt: "Callista Taupe — вид спереди" },
+          { src: "/products/womens-pebbled-leather-ring-handle-structured-bag/taupe-side.png", alt: "Callista Taupe — сбоку" },
+        ],
+      },
+      {
+        ...C.black,
+        images: [
+          { src: "/products/womens-pebbled-leather-ring-handle-structured-bag/black-front.png", alt: "Callista Чёрный — вид спереди" },
+          { src: "/products/womens-pebbled-leather-ring-handle-structured-bag/black-side.png", alt: "Callista Чёрный — сбоку" },
+        ],
+      },
+      {
+        ...C.ivory,
+        images: [
+          { src: "/products/womens-pebbled-leather-ring-handle-structured-bag/ivory-front.png", alt: "Callista Ivory — вид спереди" },
+          { src: "/products/womens-pebbled-leather-ring-handle-structured-bag/ivory-side.png", alt: "Callista Ivory — сбоку" },
+        ],
+      },
+    ],
+    material: "Зернистая кожа",
+    description:
+      "Callista — структурная сумка из зернистой кожи с архитектурным силуэтом: широкое основание, расклешённые бока и центральная треугольная панель спереди. Кольцевая ручка — главная деталь модели.\n\nЗастёжка-молния по боковой панели и съёмный плечевой ремень дают выбор между ношением в руке и через плечо. Внутри — одно просторное отделение.",
+    highlights: [
+      "Зернистая кожа",
+      "Архитектурный силуэт с треугольной панелью",
+      "Кольцевая ручка",
+      "Боковая застёжка-молния",
+    ],
+    specs: [
+      { label: "Размер", value: "39 × 19 × 11,5 см" },
+      { label: "Форма", value: "Сумка" },
+      { label: "Ручки", value: "Кольцевая ручка" },
+      { label: "Ремень", value: "Съёмный плечевой ремень" },
+      { label: "Застёжка", value: "Молния" },
+      { label: "Кожа", value: "Зернистая кожа" },
+      { label: "Фурнитура", value: "Серебристая металлическая фурнитура" },
+      { label: "Страна производства", value: "Италия" },
+      { label: "Уход", value: "Очищать мягкой сухой тканью; избегать влаги, жары и прямого солнца" },
+      { label: "Доставка", value: "7–14 дней" },
+      { label: "Возврат", value: "14 дней" },
+    ],
+  },
+  {
+    slug: "womens-woven-suede-flap-clutch-bag",
+    title: "Damiana — плетёный клатч из замши",
+    brandSlug: "luma-atelier",
+    section: "bags",
+    categorySlug: "clutches",
+    price: 1600,
+    status: "pre_order",
+    isNew: true,
+    galleryFit: "contain",
+    colors: [
+      {
+        ...C.burgundy,
+        images: [
+          { src: "/products/womens-woven-suede-flap-clutch-bag/burgundy-front.png", alt: "Damiana Burgundy — вид спереди" },
+          { src: "/products/womens-woven-suede-flap-clutch-bag/burgundy-open.png", alt: "Damiana Burgundy — открытый вид" },
+        ],
+      },
+      {
+        ...C.taupe,
+        images: [
+          { src: "/products/womens-woven-suede-flap-clutch-bag/taupe-front.png", alt: "Damiana Taupe — вид спереди" },
+          { src: "/products/womens-woven-suede-flap-clutch-bag/taupe-open.png", alt: "Damiana Taupe — открытый вид" },
+        ],
+      },
+      {
+        ...C.darkNavy,
+        images: [
+          { src: "/products/womens-woven-suede-flap-clutch-bag/dark-navy-front.png", alt: "Damiana Dark Navy — вид спереди" },
+          { src: "/products/womens-woven-suede-flap-clutch-bag/dark-navy-open.png", alt: "Damiana Dark Navy — открытый вид" },
+        ],
+      },
+    ],
+    material: "Плетёная замша",
+    description:
+      "Damiana — клатч из плетёной замши с диагональным переплетением и клапаном на магнитной кнопке. Мягкий прямоугольный силуэт держит форму за счёт плотного плетения, при этом остаётся лёгким на ощупь.\n\nТонкий ремешок с декоративными узлами можно носить на плече или убрать — сумка работает и как клатч, и как мини-сумка через плечо. Внутри одно отделение под телефон, карты и косметику.",
+    highlights: [
+      "Плетёная замша",
+      "Диагональное плетение intrecciato",
+      "Клапан на магнитной кнопке",
+      "Съёмный ремешок с узлами",
+    ],
+    specs: [
+      { label: "Размер", value: "32 × 7,5 × 18 см" },
+      { label: "Форма", value: "Клатч" },
+      { label: "Застёжка", value: "Магнитная кнопка" },
+      { label: "Ремень", value: "Тонкий ремешок с узлами" },
+      { label: "Кожа", value: "Плетёная замша" },
+      { label: "Страна производства", value: "Италия" },
+      { label: "Уход", value: "Очищать мягкой сухой тканью; избегать влаги, жары и прямого солнца" },
+      { label: "Доставка", value: "7–14 дней" },
+      { label: "Возврат", value: "14 дней" },
+    ],
+  },
+  {
+    slug: "womens-smooth-leather-metal-ring-crescent-hobo-bag",
+    title: "Mirabel — сумка-полумесяц с металлическим кольцом",
+    brandSlug: "luma-atelier",
+    section: "bags",
+    categorySlug: "shoulder-bags-women",
+    price: 1600,
+    status: "pre_order",
+    isNew: true,
+    galleryFit: "contain",
+    colors: [
+      {
+        ...C.cognac,
+        images: [
+          { src: "/products/womens-smooth-leather-metal-ring-crescent-hobo-bag/cognac-front.png", alt: "Mirabel Cognac — вид спереди" },
+          { src: "/products/womens-smooth-leather-metal-ring-crescent-hobo-bag/cognac-detail.png", alt: "Mirabel Cognac — деталь фурнитуры" },
+        ],
+      },
+      {
+        ...C.black,
+        images: [
+          { src: "/products/womens-smooth-leather-metal-ring-crescent-hobo-bag/black-front.png", alt: "Mirabel Чёрный — вид спереди" },
+          { src: "/products/womens-smooth-leather-metal-ring-crescent-hobo-bag/black-detail.png", alt: "Mirabel Чёрный — деталь фурнитуры" },
+        ],
+      },
+      {
+        ...C.ivory,
+        images: [
+          { src: "/products/womens-smooth-leather-metal-ring-crescent-hobo-bag/ivory-front.png", alt: "Mirabel Ivory — вид спереди" },
+          { src: "/products/womens-smooth-leather-metal-ring-crescent-hobo-bag/ivory-detail.png", alt: "Mirabel Ivory — деталь фурнитуры" },
+        ],
+      },
+    ],
+    material: "Гладкая кожа",
+    description:
+      "Mirabel — сумка-полумесяц из гладкой кожи с округлым силуэтом и встроенным плечевым ремнём. Верхний вырез формирует ручку, которая продолжается в ремень без дополнительной фурнитуры.\n\nДекоративное серебристое кольцо проходит через усиленное отверстие у нижнего края — характерная деталь модели. Мягкий силуэт без каркаса и одно отделение через верхний проём подходят для повседневного минимума.",
+    highlights: [
+      "Гладкая кожа",
+      "Округлый силуэт полумесяца",
+      "Встроенный плечевой ремень",
+      "Декоративное серебристое кольцо",
+    ],
+    specs: [
+      { label: "Размер", value: "30 × 31 см" },
+      { label: "Форма", value: "Сумка-полумесяц" },
+      { label: "Ремень", value: "Встроенный плечевой ремень" },
+      { label: "Кожа", value: "Гладкая кожа" },
+      { label: "Фурнитура", value: "Серебристое металлическое кольцо" },
+      { label: "Страна производства", value: "Италия" },
+      { label: "Уход", value: "Очищать мягкой сухой тканью; избегать влаги, жары и прямого солнца" },
+      { label: "Доставка", value: "7–14 дней" },
+      { label: "Возврат", value: "14 дней" },
+    ],
+  },
+  {
+    slug: "womens-woven-leather-turn-lock-clutch-bag",
+    title: "Annabel — плетёная сумка с замком-вертушкой",
+    brandSlug: "luma-atelier",
+    section: "bags",
+    categorySlug: "clutches",
+    price: 1600,
+    status: "pre_order",
+    isNew: true,
+    galleryFit: "contain",
+    colors: [
+      {
+        ...C.cognac,
+        images: [
+          { src: "/products/womens-woven-leather-turn-lock-clutch-bag/cognac-front.png", alt: "Annabel Cognac — вид спереди" },
+          { src: "/products/womens-woven-leather-turn-lock-clutch-bag/cognac-angle.png", alt: "Annabel Cognac — ракурс" },
+          { src: "/products/womens-woven-leather-turn-lock-clutch-bag/cognac-set.png", alt: "Annabel Cognac — с ремнём" },
+        ],
+      },
+      {
+        ...C.black,
+        images: [
+          { src: "/products/womens-woven-leather-turn-lock-clutch-bag/black-front.png", alt: "Annabel Чёрный — вид спереди" },
+          { src: "/products/womens-woven-leather-turn-lock-clutch-bag/black-angle.png", alt: "Annabel Чёрный — ракурс" },
+          { src: "/products/womens-woven-leather-turn-lock-clutch-bag/black-set.png", alt: "Annabel Чёрный — с ремнём" },
+        ],
+      },
+    ],
+    material: "Плетёная кожа",
+    description:
+      "Annabel — горизонтальная сумка из плетёной кожи с диагональным переплетением intrecciato и клапаном на замке-вертушке. Вытянутый прямоугольный силуэт держит форму за счёт плотного плетения.\n\nПлоская верхняя ручка для ношения в руке и съёмный плечевой ремень с золотистой фурнитурой — сумка работает и как клатч, и через плечо.",
+    highlights: [
+      "Плетёная кожа",
+      "Диагональное плетение intrecciato",
+      "Замок-вертушка",
+      "Съёмный плечевой ремень",
+    ],
+    specs: [
+      { label: "Размер", value: "30,5 × 13 см" },
+      { label: "Форма", value: "Клатч" },
+      { label: "Застёжка", value: "Замок-вертушка" },
+      { label: "Ручки", value: "Верхняя ручка" },
+      { label: "Ремень", value: "Съёмный плечевой ремень" },
+      { label: "Кожа", value: "Плетёная кожа" },
+      { label: "Фурнитура", value: "Золотистая металлическая фурнитура" },
+      { label: "Страна производства", value: "Италия" },
+      { label: "Уход", value: "Очищать мягкой сухой тканью; избегать влаги, жары и прямого солнца" },
+      { label: "Доставка", value: "7–14 дней" },
+      { label: "Возврат", value: "14 дней" },
+    ],
+  },
+  {
     slug: "womens-soft-leather-draped-flap-bag",
     title: "Solaine — сумка с драпированным клапаном",
     brandSlug: "luma-atelier",
     section: "bags",
     categorySlug: "shoulder-bags-women",
-    price: 1600,
+    price: 2400,
     status: "in_stock",
     isNew: true,
     colors: [
@@ -4856,7 +5289,7 @@ export const products: Product[] = [
     brandSlug: "luma-atelier",
     section: "bags",
     categorySlug: "tote-bags-women",
-    price: 1600,
+    price: 1499,
     status: "in_stock",
     isNew: true,
     colors: [
@@ -4939,7 +5372,7 @@ export const products: Product[] = [
     brandSlug: "luma-atelier",
     section: "bags",
     categorySlug: "bucket-bags-women",
-    price: 1600,
+    price: 1799,
     status: "in_stock",
     isNew: true,
     galleryFit: "contain",
@@ -4980,7 +5413,7 @@ export const products: Product[] = [
     brandSlug: "luma-atelier",
     section: "bags",
     categorySlug: "shoulder-bags-women",
-    price: 1600,
+    price: 1999,
     status: "in_stock",
     isNew: true,
     galleryFit: "contain",
@@ -5030,7 +5463,7 @@ export const products: Product[] = [
     brandSlug: "luma-atelier",
     section: "bags",
     categorySlug: "tote-bags-women",
-    price: 1600,
+    price: 1999,
     status: "in_stock",
     isNew: true,
     galleryFit: "contain",
@@ -5084,7 +5517,7 @@ export const products: Product[] = [
     brandSlug: "luma-atelier",
     section: "bags",
     categorySlug: "bucket-bags-women",
-    price: 1600,
+    price: 1799,
     status: "in_stock",
     isNew: true,
     galleryFit: "contain",
@@ -5122,7 +5555,7 @@ export const products: Product[] = [
     brandSlug: "luma-atelier",
     section: "bags",
     categorySlug: "handbags-women",
-    price: 1600,
+    price: 2099,
     status: "in_stock",
     isNew: true,
     galleryFit: "contain",
@@ -5164,7 +5597,7 @@ export const products: Product[] = [
     brandSlug: "luma-atelier",
     section: "bags",
     categorySlug: "handbags-women",
-    price: 1600,
+    price: 2099,
     status: "in_stock",
     isNew: true,
     galleryFit: "contain",
@@ -5212,7 +5645,7 @@ export const products: Product[] = [
     brandSlug: "luma-atelier",
     section: "bags",
     categorySlug: "handbags-women",
-    price: 1600,
+    price: 2399,
     status: "in_stock",
     isNew: true,
     galleryFit: "contain",
@@ -5260,7 +5693,7 @@ export const products: Product[] = [
     brandSlug: "luma-atelier",
     section: "bags",
     categorySlug: "tote-bags-women",
-    price: 1600,
+    price: 3900,
     status: "in_stock",
     isNew: true,
     galleryFit: "contain",
@@ -5309,7 +5742,7 @@ export const products: Product[] = [
     brandSlug: "luma-atelier",
     section: "bags",
     categorySlug: "shoulder-bags-women",
-    price: 1600,
+    price: 3900,
     status: "in_stock",
     isNew: true,
     galleryFit: "contain",
@@ -5349,7 +5782,7 @@ export const products: Product[] = [
     brandSlug: "luma-atelier",
     section: "bags",
     categorySlug: "handbags-women",
-    price: 1600,
+    price: 2300,
     status: "in_stock",
     isNew: true,
     galleryFit: "contain",
@@ -5399,7 +5832,7 @@ export const products: Product[] = [
     brandSlug: "luma-atelier",
     section: "bags",
     categorySlug: "tote-bags-women",
-    price: 1600,
+    price: 3500,
     status: "in_stock",
     isNew: true,
     galleryFit: "contain",
@@ -5420,12 +5853,45 @@ export const products: Product[] = [
           { src: "/products/womens-woven-oval-handle-tote-bag/dusty-turquoise-inside.png", alt: "Oriane Dusty Turquoise — внутри" },
         ],
       },
+    ],
+    material: "Плетёная фактура",
+    description:
+      "Тоут с округлыми овальными ручками и плетёной фактурой полотна — летняя, лёгкая на вид сумка для повседневных выходов.\n\nОткрытый верх, одно просторное отделение внутри.",
+    highlights: [
+      "Плетёная фактура",
+      "Овальные ручки",
+      "Открытый верх",
+      "Просторное отделение",
+    ],
+    specs: [
+      { label: "Размер", value: "42 × 25 × 14 см" },
+      { label: "Форма", value: "Сумка-тоут" },
+      { label: "Застёжка", value: "Открытый верх" },
+      { label: "Ручки", value: "Овальные ручки" },
+      { label: "Материал", value: "Зернистая кожа" },
+      { label: "Страна производства", value: "Италия" },
+      { label: "Уход", value: "Очищать мягкой сухой тканью; избегать влаги, жары и прямого солнца" },
+      { label: "Доставка", value: "1–3 дня" },
+      { label: "Возврат", value: "14 дней" },
+    ],
+  },
+  {
+    slug: "womens-woven-oval-handle-tote-bag-mokko",
+    title: "Roxane — тоут с овальными ручками",
+    brandSlug: "luma-atelier",
+    section: "bags",
+    categorySlug: "tote-bags-women",
+    price: 4100,
+    status: "in_stock",
+    isNew: true,
+    galleryFit: "contain",
+    colors: [
       {
         ...C.mokko,
         images: [
-          { src: "/products/womens-woven-oval-handle-tote-bag/mokko-front-card.png", alt: "Oriane Mokko — карточка товара" },
-          { src: "/products/womens-woven-oval-handle-tote-bag/mokko-inside-alt.png", alt: "Oriane Mokko — отделения внутри" },
-          { src: "/products/womens-woven-oval-handle-tote-bag/mokko-inside.png", alt: "Oriane Mokko — внутри" },
+          { src: "/products/womens-woven-oval-handle-tote-bag/mokko-front-card.png", alt: "Roxane Mokko — карточка товара" },
+          { src: "/products/womens-woven-oval-handle-tote-bag/mokko-inside.png", alt: "Roxane Mokko — внутри" },
+          { src: "/products/womens-woven-oval-handle-tote-bag/mokko-inside-alt.png", alt: "Roxane Mokko — отделения внутри" },
         ],
       },
     ],
@@ -5456,7 +5922,7 @@ export const products: Product[] = [
     brandSlug: "luma-atelier",
     section: "bags",
     categorySlug: "tote-bags-women",
-    price: 1600,
+    price: 1799,
     status: "in_stock",
     isNew: true,
     galleryFit: "contain",
@@ -5496,7 +5962,7 @@ export const products: Product[] = [
     brandSlug: "luma-atelier",
     section: "bags",
     categorySlug: "handbags-women",
-    price: 1600,
+    price: 2099,
     status: "in_stock",
     isNew: true,
     galleryFit: "contain",
@@ -5538,7 +6004,7 @@ export const products: Product[] = [
     brandSlug: "luma-atelier",
     section: "bags",
     categorySlug: "handbags-women",
-    price: 1600,
+    price: 1899,
     status: "in_stock",
     isNew: true,
     galleryFit: "contain",
@@ -5588,7 +6054,7 @@ export const products: Product[] = [
     brandSlug: "luma-atelier",
     section: "bags",
     categorySlug: "tote-bags-women",
-    price: 1600,
+    price: 1499,
     status: "in_stock",
     isNew: true,
     galleryFit: "contain",
@@ -5630,7 +6096,7 @@ export const products: Product[] = [
     brandSlug: "luma-atelier",
     section: "bags",
     categorySlug: "shoulder-bags-women",
-    price: 1600,
+    price: 1499,
     status: "in_stock",
     isNew: true,
     galleryFit: "contain",
@@ -5668,7 +6134,7 @@ export const products: Product[] = [
     brandSlug: "luma-atelier",
     section: "bags",
     categorySlug: "crossbody-bags-women",
-    price: 1600,
+    price: 2500,
     status: "in_stock",
     isNew: true,
     isVintage: true,
@@ -5971,12 +6437,20 @@ export const products: Product[] = [
     brandSlug: "luma-atelier",
     section: "accessories",
     categorySlug: "womens-wallets-women",
-    price: 1600,
+    price: 1200,
     status: "in_stock",
     isNew: true,
     isVintage: true,
     galleryFit: "contain",
     colors: [
+      {
+        ...C.red,
+        images: [
+          { src: "/products/womens-full-grain-leather-zip-around-wallet/red-front-card.png", alt: "Francesca Red — вид спереди" },
+          { src: "/products/womens-full-grain-leather-zip-around-wallet/red-inside.png", alt: "Francesca Red — внутри" },
+          { src: "/products/womens-full-grain-leather-zip-around-wallet/red-inside-alt.png", alt: "Francesca Red — отделения внутри" },
+        ],
+      },
       {
         ...C.darkNavy,
         images: [
@@ -5999,14 +6473,6 @@ export const products: Product[] = [
           { src: "/products/womens-full-grain-leather-zip-around-wallet/forest-green-front-card.png", alt: "Francesca Forest Green — вид спереди" },
           { src: "/products/womens-full-grain-leather-zip-around-wallet/forest-green-inside-v5.png", alt: "Francesca Forest Green — внутри" },
           { src: "/products/womens-full-grain-leather-zip-around-wallet/forest-green-inside-alt.png", alt: "Francesca Forest Green — отделения внутри" },
-        ],
-      },
-      {
-        ...C.red,
-        images: [
-          { src: "/products/womens-full-grain-leather-zip-around-wallet/red-front-card.png", alt: "Francesca Red — вид спереди" },
-          { src: "/products/womens-full-grain-leather-zip-around-wallet/red-inside.png", alt: "Francesca Red — внутри" },
-          { src: "/products/womens-full-grain-leather-zip-around-wallet/red-inside-alt.png", alt: "Francesca Red — отделения внутри" },
         ],
       },
     ],
@@ -6038,13 +6504,13 @@ export const products: Product[] = [
     section: "accessories",
     categorySlug: "womens-wallets-women",
     price: 1600,
-    status: "in_stock",
     isNew: true,
     isVintage: true,
     galleryFit: "contain",
     colors: [
       {
         ...C.forestGreen,
+        status: "Доставка 7–14 дней",
         images: [
           { src: "/products/womens-flap-leather-trifold-wallet/forest-green-front-card.png", alt: "Federica Forest Green — вид спереди" },
           { src: "/products/womens-flap-leather-trifold-wallet/forest-green-inside.png", alt: "Federica Forest Green — внутри" },
@@ -6053,6 +6519,7 @@ export const products: Product[] = [
       },
       {
         ...C.cognac,
+        status: "Доставка 7–14 дней",
         images: [
           { src: "/products/womens-flap-leather-trifold-wallet/cognac-front-card.png", alt: "Federica Коньячный — вид спереди" },
           { src: "/products/womens-flap-leather-trifold-wallet/cognac-inside.png", alt: "Federica Коньячный — внутри" },
@@ -6061,6 +6528,7 @@ export const products: Product[] = [
       },
       {
         ...C.jetBlack,
+        status: "Доставка 7–14 дней",
         images: [
           { src: "/products/womens-flap-leather-trifold-wallet/black-front-card.png", alt: "Federica Чёрный — вид спереди" },
           { src: "/products/womens-flap-leather-trifold-wallet/black-inside.png", alt: "Federica Чёрный — внутри" },
@@ -6069,6 +6537,7 @@ export const products: Product[] = [
       },
       {
         ...C.chocolateBrown,
+        status: "Доставка 7–14 дней",
         images: [
           { src: "/products/womens-flap-leather-trifold-wallet/dark-brown-front-card.png", alt: "Federica Dark Brown — вид спереди" },
           { src: "/products/womens-flap-leather-trifold-wallet/dark-brown-inside.png", alt: "Federica Dark Brown — внутри" },
@@ -6093,7 +6562,7 @@ export const products: Product[] = [
       { label: "Материал", value: "Натуральная кожа" },
       { label: "Страна производства", value: "Италия" },
       { label: "Уход", value: "Очищать мягкой сухой тканью; избегать влаги, жары и прямого солнца" },
-      { label: "Доставка", value: "1–3 дня" },
+      { label: "Доставка", value: "7–14 дней" },
       { label: "Возврат", value: "14 дней" },
     ],
   },
@@ -6104,12 +6573,12 @@ export const products: Product[] = [
     section: "accessories",
     categorySlug: "womens-wallets-women",
     price: 1600,
-    status: "in_stock",
     isNew: true,
     galleryFit: "contain",
     colors: [
       {
         ...C.red,
+        status: "Доставка 7–14 дней",
         images: [
           { src: "/products/womens-woven-flap-trifold-wallet/red-front-card.png", alt: "Fabiana Red — вид спереди" },
           { src: "/products/womens-woven-flap-trifold-wallet/red-inside.png", alt: "Fabiana Red — внутри" },
@@ -6118,6 +6587,7 @@ export const products: Product[] = [
       },
       {
         ...C.chocolateBrown,
+        status: "Доставка 7–14 дней",
         images: [
           { src: "/products/womens-woven-flap-trifold-wallet/dark-brown-front-card.png", alt: "Fabiana Chocolate Brown — вид спереди" },
           { src: "/products/womens-woven-flap-trifold-wallet/dark-brown-inside.png", alt: "Fabiana Chocolate Brown — внутри" },
@@ -6142,7 +6612,7 @@ export const products: Product[] = [
       { label: "Материал", value: "Натуральная кожа" },
       { label: "Страна производства", value: "Италия" },
       { label: "Уход", value: "Очищать мягкой сухой тканью; избегать влаги, жары и прямого солнца" },
-      { label: "Доставка", value: "1–3 дня" },
+      { label: "Доставка", value: "7–14 дней" },
       { label: "Возврат", value: "14 дней" },
     ],
   },
@@ -6152,7 +6622,7 @@ export const products: Product[] = [
     brandSlug: "luma-atelier",
     section: "accessories",
     categorySlug: "womens-wallets-women",
-    price: 1600,
+    price: 1500,
     status: "in_stock",
     isNew: true,
     isVintage: true,
@@ -6210,7 +6680,7 @@ export const products: Product[] = [
     brandSlug: "luma-atelier",
     section: "accessories",
     categorySlug: "womens-wallets-women",
-    price: 1600,
+    price: 1500,
     status: "in_stock",
     isNew: true,
     galleryFit: "contain",
@@ -6247,6 +6717,7 @@ export const products: Product[] = [
       },
       {
         ...C.cobaltBlue,
+        status: "Доставка 7–14 дней",
         images: [
           { src: "/products/womens-woven-leather-zip-around-wallet/cobalt-blue-front-card.png", alt: "Seraphina Cobalt Blue — вид спереди" },
           { src: "/products/womens-woven-leather-zip-around-wallet/cobalt-blue-front-alt.png", alt: "Seraphina Cobalt Blue — под углом" },
@@ -6293,7 +6764,7 @@ export const products: Product[] = [
     brandSlug: "luma-atelier",
     section: "accessories",
     categorySlug: "womens-wallets-women",
-    price: 1600,
+    price: 1700,
     status: "in_stock",
     isNew: true,
     galleryFit: "contain",
@@ -6336,7 +6807,7 @@ export const products: Product[] = [
     brandSlug: "la-via-firenze",
     section: "accessories",
     categorySlug: "bag-charms",
-    price: 2900,
+    price: 749,
     status: "in_stock",
     isNew: true,
     galleryFit: "contain",
@@ -6373,7 +6844,7 @@ export const products: Product[] = [
     brandSlug: "la-via-firenze",
     section: "accessories",
     categorySlug: "bag-charms",
-    price: 2900,
+    price: 749,
     status: "in_stock",
     isNew: true,
     galleryFit: "contain",
@@ -6410,7 +6881,7 @@ export const products: Product[] = [
     brandSlug: "la-via-firenze",
     section: "accessories",
     categorySlug: "bag-charms",
-    price: 2900,
+    price: 749,
     status: "in_stock",
     isNew: true,
     galleryFit: "contain",
@@ -6447,7 +6918,7 @@ export const products: Product[] = [
     brandSlug: "la-via-firenze",
     section: "accessories",
     categorySlug: "bag-charms",
-    price: 2900,
+    price: 749,
     status: "in_stock",
     isNew: true,
     galleryFit: "contain",
@@ -6484,7 +6955,7 @@ export const products: Product[] = [
     brandSlug: "luma-atelier",
     section: "accessories",
     categorySlug: "bag-charms",
-    price: 2200,
+    price: 499,
     status: "in_stock",
     isNew: true,
     galleryFit: "contain",
@@ -6559,7 +7030,7 @@ export const products: Product[] = [
     brandSlug: "luma-atelier",
     section: "accessories",
     categorySlug: "bag-charms",
-    price: 2200,
+    price: 349,
     status: "in_stock",
     isNew: true,
     galleryFit: "contain",
@@ -6615,7 +7086,7 @@ export const products: Product[] = [
     brandSlug: "luma-atelier",
     section: "accessories",
     categorySlug: "bag-charms",
-    price: 2400,
+    price: 349,
     status: "in_stock",
     isNew: true,
     galleryFit: "contain",
@@ -6674,7 +7145,7 @@ export const products: Product[] = [
     brandSlug: "luma-atelier",
     section: "accessories",
     categorySlug: "bag-charms",
-    price: 3200,
+    price: 399,
     status: "in_stock",
     isNew: true,
     galleryFit: "contain",
@@ -6723,6 +7194,74 @@ export const products: Product[] = [
       { label: "Возврат", value: "14 дней" },
     ],
   },
+  {
+    slug: "womens-pebbled-leather-envelope-turn-lock-chain-bag",
+    title: "Marcelle — компактная сумка-конверт на цепочке",
+    brandSlug: "luma-atelier",
+    section: "bags",
+    categorySlug: "shoulder-bags-women",
+    price: 1699,
+    status: "in_stock",
+    isNew: true,
+    galleryFit: "contain",
+    colors: [
+      {
+        ...C.sageGreen,
+        images: [
+          { src: "/products/womens-pebbled-leather-envelope-turn-lock-chain-bag/sage-green-front-card.png", alt: "Marcelle Sage Green — карточка товара" },
+          { src: "/products/womens-pebbled-leather-envelope-turn-lock-chain-bag/sage-green-front-alt.png", alt: "Marcelle Sage Green — альтернативный вид" },
+          { src: "/products/womens-pebbled-leather-envelope-turn-lock-chain-bag/sage-green-inside.png", alt: "Marcelle Sage Green — внутри" },
+        ],
+      },
+      {
+        ...C.lightBlue,
+        images: [
+          { src: "/products/womens-pebbled-leather-envelope-turn-lock-chain-bag/light-blue-front-card.png", alt: "Marcelle Light Blue — карточка товара" },
+          { src: "/products/womens-pebbled-leather-envelope-turn-lock-chain-bag/light-blue-front-alt.png", alt: "Marcelle Light Blue — альтернативный вид" },
+          { src: "/products/womens-pebbled-leather-envelope-turn-lock-chain-bag/light-blue-inside.png", alt: "Marcelle Light Blue — внутри" },
+        ],
+      },
+      {
+        ...C.red,
+        images: [
+          { src: "/products/womens-pebbled-leather-envelope-turn-lock-chain-bag/red-front-card.png", alt: "Marcelle Red — карточка товара" },
+          { src: "/products/womens-pebbled-leather-envelope-turn-lock-chain-bag/red-front-alt.png", alt: "Marcelle Red — альтернативный вид" },
+          { src: "/products/womens-pebbled-leather-envelope-turn-lock-chain-bag/red-inside.png", alt: "Marcelle Red — внутри" },
+        ],
+      },
+      {
+        name: "Mauve",
+        hex: "#9a8589",
+        images: [
+          { src: "/products/womens-pebbled-leather-envelope-turn-lock-chain-bag/mauve-front-card.png", alt: "Marcelle Mauve — карточка товара" },
+          { src: "/products/womens-pebbled-leather-envelope-turn-lock-chain-bag/mauve-front-alt.png", alt: "Marcelle Mauve — альтернативный вид" },
+          { src: "/products/womens-pebbled-leather-envelope-turn-lock-chain-bag/mauve-inside.png", alt: "Marcelle Mauve — внутри" },
+        ],
+      },
+    ],
+    material: "Зернистая кожа",
+    description:
+      "Компактная структурная сумка с конвертным клапаном и поворотным замком: зернистая кожа, золотистая цепочка и собранный прямоугольный силуэт.\n\nВнутри — два отделения с чёрной подкладкой и контрастной строчкой по краю. Подходит для вечера и для городских выходов, когда нужен аккуратный акцент без лишнего объёма.",
+    highlights: [
+      "Зернистая кожа",
+      "Конвертный клапан на поворотном замке",
+      "Золотистая цепочка",
+      "Два отделения внутри",
+    ],
+    specs: [
+      { label: "Размер", value: "18 × 12 × 5 см" },
+      { label: "Форма", value: "Сумка на плечо" },
+      { label: "Застёжка", value: "Поворотный замок на конвертном клапане" },
+      { label: "Ремень", value: "Золотистая цепочка" },
+      { label: "Отделение", value: "Два отделения" },
+      { label: "Подкладка", value: "Чёрная" },
+      { label: "Кожа", value: "Зернистая кожа" },
+      { label: "Страна производства", value: "Италия" },
+      { label: "Уход", value: "Очищать мягкой сухой тканью; избегать влаги, жары и прямого солнца" },
+      { label: "Доставка", value: "1–3 дня" },
+      { label: "Возврат", value: "14 дней" },
+    ],
+  },
 ];
 
 // ——— Хелперы выборки ———
@@ -6759,6 +7298,40 @@ export function productsByBrand(slug: string): Product[] {
 export const newProducts = products.filter((p) => p.isNew);
 export const saleProducts = products.filter((p) => p.oldPrice && p.oldPrice > p.price);
 
+function hasWovenMaterial(p: Product): boolean {
+  const materialSpecValues = (p.specs ?? [])
+    .filter((s) => s.label === "Материал" || s.label === "Кожа")
+    .map((s) => s.value);
+  const text = [p.material, ...materialSpecValues].filter(Boolean).join(" ").toLowerCase();
+  return text.includes("плет") || text.includes("woven") || text.includes("intrecciato");
+}
+
+// Вручную исключены из витрины Amalfi Woven Collection по запросу.
+const wovenBagExcludedSlugs = new Set([
+  "womens-woven-zip-crossbody-bag", // Gwenaelle
+  "womens-woven-oval-handle-tote-bag", // Oriane
+  "womens-woven-crescent-hobo-bag", // Manon
+  "womens-woven-buckle-handle-tote-bag", // Lisette
+  "womens-woven-leather-turn-lock-clutch-bag", // Annabel
+  "womens-woven-suede-flap-clutch-bag", // Damiana
+  "womens-woven-flap-top-handle-bag", // Noriane
+  "womens-woven-oval-handle-tote-bag-mokko", // Roxane
+]);
+
+// Вручную добавлены в витрину Amalfi Woven Collection по запросу (например, материал не содержит "плет").
+const wovenBagIncludedSlugs = new Set([
+  "womens-knitted-openwork-panel-tote-bag", // Ginevra
+  "womens-woven-spiral-panel-shoulder-tote-bag", // Cendrine
+  "womens-woven-triangular-shoulder-bag", // Dorine
+]);
+
+export const wovenBagProducts = products.filter(
+  (p) =>
+    p.section === "bags" &&
+    !wovenBagExcludedSlugs.has(p.slug) &&
+    (hasWovenMaterial(p) || wovenBagIncludedSlugs.has(p.slug)),
+);
+
 export function productHasPhotos(p: Product): boolean {
   if (p.images && p.images.length > 0) return true;
   return p.colors.some((c) => c.images && c.images.length > 0);
@@ -6793,6 +7366,7 @@ const curatedBagGridOrder = [
   "womens-pebbled-leather-half-moon-shoulder-bag",
   "womens-pebbled-leather-contrast-trim-turn-lock-structured-top-handle-bag",
   "womens-woven-oval-handle-tote-bag-natural-tan",
+  "womens-woven-oval-handle-tote-bag-mokko",
   "womens-hobo-shoulder-bag",
   "womens-pebbled-leather-satchel-bag",
   "womens-woven-spiral-panel-shoulder-tote-bag",
@@ -6821,6 +7395,12 @@ const curatedBagGridOrder = [
   "womens-pebbled-leather-structured-tote-bag-with-pouch",
   "womens-smooth-leather-compact-baguette-bag",
   "womens-smooth-leather-crescent-hobo-bag",
+  "womens-smooth-leather-chain-strap-crescent-hobo-bag",
+  "womens-suede-wing-tote-bag",
+  "womens-pebbled-leather-ring-handle-structured-bag",
+  "womens-woven-suede-flap-clutch-bag",
+  "womens-smooth-leather-metal-ring-crescent-hobo-bag",
+  "womens-woven-leather-turn-lock-clutch-bag",
   "milano-cage-tote-bag-black-red",
   "womens-pebbled-leather-turn-lock-flap-shoulder-tote-bag",
   "womens-woven-buckle-handle-tote-bag",
@@ -6863,6 +7443,8 @@ const curatedBagCategoryOrder: Record<string, readonly string[]> = {
     "womens-woven-crescent-hobo-bag",
     "womens-smooth-leather-compact-baguette-bag",
     "womens-smooth-leather-crescent-hobo-bag",
+    "womens-smooth-leather-chain-strap-crescent-hobo-bag",
+    "womens-smooth-leather-metal-ring-crescent-hobo-bag",
   ],
   "handbags-women": [
     "womens-pebbled-leather-rectangular-handbag",
@@ -6879,6 +7461,7 @@ const curatedBagCategoryOrder: Record<string, readonly string[]> = {
     "womens-pebbled-leather-satchel-bag",
     "womens-woven-base-zip-top-structured-bag",
     "womens-pebbled-leather-structured-handbag",
+    "womens-pebbled-leather-ring-handle-structured-bag",
     "womens-compact-woven-panel-metallic-top-handle-bag",
     "womens-woven-base-turn-lock-top-handle-bag",
   ],
@@ -6892,6 +7475,7 @@ const curatedBagCategoryOrder: Record<string, readonly string[]> = {
     "premium-woven-beach-tote-bag-natural-black",
     "womens-pebbled-leather-turn-lock-placket-tote-with-pouch",
     "womens-pebbled-leather-wing-flap-tote-bag",
+    "womens-suede-wing-tote-bag",
     "classic-leather-tote-bag-black",
     "premium-leather-travel-tote-bag-black",
     "premium-vintage-straw-tote-bag-natural-beige",
@@ -6901,6 +7485,7 @@ const curatedBagCategoryOrder: Record<string, readonly string[]> = {
     "womens-pebbled-leather-tote-bag",
     "womens-tote-shopper-bag",
     "womens-woven-oval-handle-tote-bag-natural-tan",
+    "womens-woven-oval-handle-tote-bag-mokko",
     "womens-woven-spiral-panel-shoulder-tote-bag",
     "elegant-leather-tote-bag-black",
     "womens-pebbled-leather-turn-lock-flap-shoulder-tote-bag",
@@ -6918,6 +7503,8 @@ const curatedBagCategoryOrder: Record<string, readonly string[]> = {
     "womens-woven-base-round-bucket-bag",
   ],
   clutches: [
+    "womens-woven-leather-turn-lock-clutch-bag",
+    "womens-woven-suede-flap-clutch-bag",
     "womens-pebbled-leather-kiss-lock-pouch-bag-ivory",
     "womens-pebbled-leather-kiss-lock-pouch-bag-light-blue",
   ],
@@ -6936,6 +7523,12 @@ const featuredColorByProductSlug: Record<string, string> = {
   "womens-pebbled-leather-compact-baguette-bag": "Silver",
   "womens-pebbled-leather-zip-hobo-bag": "Ivory",
   "womens-smooth-leather-compact-baguette-bag": "Olive Green",
+  "womens-smooth-leather-chain-strap-crescent-hobo-bag": "Dark Chocolate",
+  "womens-suede-wing-tote-bag": "Dark Chocolate",
+  "womens-pebbled-leather-ring-handle-structured-bag": "Cognac",
+  "womens-woven-suede-flap-clutch-bag": "Burgundy",
+  "womens-smooth-leather-metal-ring-crescent-hobo-bag": "Cognac",
+  "womens-woven-leather-turn-lock-clutch-bag": "Cognac",
   "womens-smooth-leather-contrast-trim-flap-shoulder-bag": "White",
   "womens-soft-leather-draped-flap-bag": "Ivory",
   "womens-woven-base-leather-link-handle-hobo-bag": "Taupe",

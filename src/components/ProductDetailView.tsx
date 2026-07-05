@@ -7,6 +7,7 @@ import { useCart } from "@/context/cart";
 import { brand } from "@/lib/config";
 import { formatPrice } from "@/lib/format";
 import { useLocale, useT } from "@/lib/useI18n";
+import { getPurchaseKindForItem } from "@/lib/purchase-kind";
 import {
   localizeColorName,
   localizeProductDescription,
@@ -17,7 +18,7 @@ import {
   getVisibleProductSpecs,
 } from "@/lib/product-i18n";
 import ProductImage from "./ProductImage";
-import { getColorImages, getColorSwatchImage } from "./ProductColorSwatches";
+import { getColorSwatchImage } from "./ProductColorSwatches";
 import WishlistButton from "./WishlistButton";
 import PreorderStatusBadge from "./PreorderStatusBadge";
 import BrandStories from "./BrandStories";
@@ -245,6 +246,7 @@ export default function ProductDetailView({
   }, [product.slug]);
 
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setColorIdx(initialColorIdx);
     setImageIdx(0);
   }, [initialColorIdx, product.slug]);
@@ -258,6 +260,8 @@ export default function ProductDetailView({
   const hasGallery = images.length > 1;
   const canNavigateMedia = hasGallery || product.colors.length > 1;
   const canBuy = product.status !== "out_of_stock";
+  const purchaseKind = getPurchaseKindForItem(product, color.name);
+  const isPreorder = purchaseKind === "preorder";
   const galleryFit = product.galleryFit ?? "cover";
   const showLeatherBadge = hasPureLeatherMaterial(product);
   const activeImageFit = activeImage?.fit ?? galleryFit;
@@ -303,6 +307,7 @@ export default function ProductDetailView({
   ];
 
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setImageIdx(0);
   }, [colorIdx]);
 
@@ -314,6 +319,7 @@ export default function ProductDetailView({
       brand: brandName,
       price: product.price,
       color: color.name,
+      purchaseKind,
     });
     openCart();
     setAdded(true);
@@ -498,7 +504,10 @@ export default function ProductDetailView({
             </span>
           </div>
         </div>
-        <PreorderStatusBadge status={product.status} className="mt-2" />
+        <PreorderStatusBadge
+          status={isPreorder ? "pre_order" : product.status}
+          className="mt-2"
+        />
         <div className="mt-8">
           <p className="text-base text-stone-950">
             <span className="font-semibold">{t("catalog.color")}</span>{" "}
@@ -548,7 +557,13 @@ export default function ProductDetailView({
             disabled={!canBuy}
             className="w-full rounded-sm bg-stone-950 px-7 py-[1.125rem] text-base font-medium text-white transition hover:bg-stone-800 disabled:cursor-not-allowed disabled:opacity-50"
           >
-            {canBuy ? (added ? `${t("common.addedToCart")} ✓` : t("common.addToCart")) : t("common.outOfStock")}
+            {canBuy
+              ? added
+                ? `${isPreorder ? t("common.addedToPreorder") : t("common.addedToCart")} ✓`
+                : isPreorder
+                  ? t("common.placePreorder")
+                  : t("common.addToCart")
+              : t("common.outOfStock")}
           </button>
           <div className="flex gap-2">
             <button

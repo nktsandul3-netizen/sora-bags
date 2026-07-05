@@ -11,6 +11,7 @@ import {
   type OrderItem,
 } from "@/lib/mongodb";
 import type { OrderPaymentStatus, OrderStatus } from "@/lib/mongodb";
+import type { OrderKind } from "@/lib/mongodb";
 import { trackAnalyticsEvent } from "@/lib/analytics";
 
 const PRIVACY_POLICY_URL = "/info/politika-konfidentsialnosti";
@@ -140,6 +141,7 @@ export interface CreateOrderInput {
   };
   deliveryMethod: DeliveryMethod;
   paymentMethod: CustomerPaymentMethod;
+  orderKind?: OrderKind;
   privacyConsent: boolean;
   analyticsSessionId?: string;
   items: OrderItem[];
@@ -177,6 +179,8 @@ async function insertOrderWithUniqueNumber(
     order_number: number,
     status,
     order_status: status,
+    orderKind: input.orderKind ?? "standard",
+    order_kind: input.orderKind ?? "standard",
     paymentStatus,
     payment_status: paymentStatus,
     customer: input.customer,
@@ -199,7 +203,7 @@ async function insertOrderWithUniqueNumber(
     timeline: [
       {
         type: "created",
-        message: "Заказ создан",
+        message: input.orderKind === "preorder" ? "Предзаказ создан" : "Заказ создан",
         createdAt: now,
       },
     ],

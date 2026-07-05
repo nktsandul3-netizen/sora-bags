@@ -8,7 +8,7 @@ export default function TileVideo({
   className,
 }: {
   src: string;
-  poster: string;
+  poster?: string;
   className?: string;
 }) {
   const videoRef = useRef<HTMLVideoElement | null>(null);

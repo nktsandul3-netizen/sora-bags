@@ -45,6 +45,7 @@ export interface OrderItem {
   color: string;
   qty: number;
   price: number;
+  purchaseKind?: "standard" | "preorder";
 }
 
 /** Канонические статусы заказа (ключи). Метки — в src/lib/admin/constants.ts */
@@ -58,6 +59,7 @@ export type OrderStatus =
 export type OrderPaymentStatus = "pending" | "paid" | "failed" | "refunded";
 export type DeliveryMethod = "courier_chisinau" | "moldova_delivery" | "pickup";
 export type CustomerPaymentMethod = "cash_on_delivery" | "bank_transfer";
+export type OrderKind = "standard" | "preorder";
 
 export interface OrderNote {
   text: string;
@@ -103,6 +105,8 @@ export interface OrderDoc {
   order_number?: string;
   status: OrderStatus;
   order_status?: OrderStatus;
+  orderKind?: OrderKind;
+  order_kind?: OrderKind;
   paymentStatus: OrderPaymentStatus;
   payment_status?: OrderPaymentStatus;
   paymentProvider?: string;

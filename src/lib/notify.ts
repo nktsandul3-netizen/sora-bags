@@ -3,6 +3,7 @@ import { getTelegramConfig } from "@/lib/admin/settings";
 
 export interface NewOrderNotification {
   orderNumber?: string;
+  orderKind?: "standard" | "preorder";
   name: string;
   phone: string;
   email?: string;
@@ -23,6 +24,7 @@ function escapeHtml(value: string): string {
 }
 
 function buildEmailHtml(data: NewOrderNotification): string {
+  const orderLabel = data.orderKind === "preorder" ? "Новый предзаказ" : "Новый заказ";
   const rows = data.items
     .map(
       (it) =>
@@ -37,7 +39,7 @@ function buildEmailHtml(data: NewOrderNotification): string {
 
   return `
   <div style="font-family:Arial,Helvetica,sans-serif;color:#1c1917;max-width:640px;">
-    <h2 style="margin:0 0 4px;">Новый заказ${data.orderNumber ? ` — ${escapeHtml(data.orderNumber)}` : ""}</h2>
+    <h2 style="margin:0 0 4px;">${orderLabel}${data.orderNumber ? ` — ${escapeHtml(data.orderNumber)}` : ""}</h2>
     <table style="border-collapse:collapse;margin:16px 0 20px;">
       <tr><td style="padding:4px 12px 4px 0;color:#78716c;">Имя</td><td style="padding:4px 0;font-weight:600;">${escapeHtml(data.name)}</td></tr>
       <tr><td style="padding:4px 12px 4px 0;color:#78716c;">Телефон</td><td style="padding:4px 0;font-weight:600;">${escapeHtml(data.phone)}</td></tr>
@@ -65,8 +67,9 @@ function buildEmailHtml(data: NewOrderNotification): string {
 }
 
 function buildTelegramText(data: NewOrderNotification): string {
+  const orderLabel = data.orderKind === "preorder" ? "Новый предзаказ" : "Новый заказ";
   const lines = [
-    `🛍 *Новый заказ${data.orderNumber ? ` ${data.orderNumber}` : ""}*`,
+    `🛍 *${orderLabel}${data.orderNumber ? ` ${data.orderNumber}` : ""}*`,
     "",
     `👤 ${data.name}`,
     `📞 ${data.phone}`,
@@ -131,7 +134,7 @@ async function sendEmail(data: NewOrderNotification): Promise<boolean> {
         from,
         to: [to],
         reply_to: data.email || undefined,
-        subject: `Новый заказ${data.orderNumber ? ` ${data.orderNumber}` : ""} — ${data.name} (${data.phone})`,
+        subject: `${data.orderKind === "preorder" ? "Новый предзаказ" : "Новый заказ"}${data.orderNumber ? ` ${data.orderNumber}` : ""} — ${data.name} (${data.phone})`,
         html: buildEmailHtml(data),
       }),
     });

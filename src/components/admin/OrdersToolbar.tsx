@@ -8,8 +8,9 @@ export default function OrdersToolbar() {
   const params = useSearchParams();
   const [search, setSearch] = useState(params.get("search") ?? "");
   const status = params.get("status") ?? "all";
+  const kind = params.get("kind") ?? "all";
 
-  function apply(next: { search?: string; status?: string }) {
+  function apply(next: { search?: string; status?: string; kind?: string }) {
     const sp = new URLSearchParams(params.toString());
     if (next.search !== undefined) {
       if (next.search) sp.set("search", next.search);
@@ -18,6 +19,10 @@ export default function OrdersToolbar() {
     if (next.status !== undefined) {
       if (next.status && next.status !== "all") sp.set("status", next.status);
       else sp.delete("status");
+    }
+    if (next.kind !== undefined) {
+      if (next.kind && next.kind !== "all") sp.set("kind", next.kind);
+      else sp.delete("kind");
     }
     sp.delete("page");
     router.push(`/admin/orders?${sp.toString()}`);
@@ -64,6 +69,27 @@ export default function OrdersToolbar() {
               (status === item.value
                 ? "bg-[#A01D26] text-white"
                 : "bg-white text-stone-600 ring-1 ring-stone-200 hover:text-[#A01D26]")
+            }
+          >
+            {item.label}
+          </button>
+        ))}
+      </div>
+      <div className="flex flex-wrap gap-2">
+        {[
+          { value: "all", label: "Все типы" },
+          { value: "standard", label: "Обычные" },
+          { value: "preorder", label: "Предзаказы" },
+        ].map((item) => (
+          <button
+            key={item.value}
+            type="button"
+            onClick={() => apply({ kind: item.value })}
+            className={
+              "px-3 py-1.5 text-xs font-medium transition " +
+              (kind === item.value
+                ? "bg-amber-600 text-white"
+                : "bg-white text-stone-600 ring-1 ring-stone-200 hover:text-amber-700")
             }
           >
             {item.label}
