@@ -1,6 +1,9 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
+  outputFileTracingExcludes: {
+    "/*": ["./public/**/*"],
+  },
   images: {
     qualities: [75, 90, 100],
     remotePatterns: [
