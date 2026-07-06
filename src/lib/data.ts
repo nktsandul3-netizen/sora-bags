@@ -246,7 +246,7 @@ export const products: Product[] = [
     brandSlug: "luma-atelier",
     section: "bags",
     categorySlug: "tote-bags-women",
-    price: 1600,
+    price: 3899,
     colors: [
       {
         name: "Black",
@@ -340,7 +340,7 @@ export const products: Product[] = [
     brandSlug: "luma-atelier",
     section: "bags",
     categorySlug: "tote-bags-women",
-    price: 1600,
+    price: 2199,
     colors: [
       {
         name: "Natural / Black",
@@ -381,7 +381,7 @@ export const products: Product[] = [
     brandSlug: "luma-atelier",
     section: "bags",
     categorySlug: "tote-bags-women",
-    price: 1600,
+    price: 1599,
     galleryFit: "contain",
     colors: [
       {
@@ -482,11 +482,11 @@ export const products: Product[] = [
   },
   {
     slug: "mini-elegance-top-handle-bag-white",
-    title: "Mini Elegance Top Handle Bag",
+    title: "Micaela — мини-сумка с верхней ручкой",
     brandSlug: "luma-atelier",
     section: "bags",
     categorySlug: "handbags-women",
-    price: 1600,
+    price: 1499,
     colors: [
       {
         name: "White",
@@ -569,6 +569,7 @@ export const products: Product[] = [
       "Премиальная металлическая фурнитура золотого цвета",
     ],
     specs: [
+      { label: "Размер", value: "22 × 16 × 6 см" },
       { label: "Форма", value: "Сумка с верхней ручкой" },
       { label: "Застёжка", value: "Надёжная застёжка-молния" },
       { label: "Ручки", value: "Две удобные верхние ручки" },
@@ -698,7 +699,7 @@ export const products: Product[] = [
     brandSlug: "luma-atelier",
     section: "bags",
     categorySlug: "tote-bags-women",
-    price: 1600,
+    price: 2499,
     colors: [
       {
         name: "Black",
@@ -756,7 +757,7 @@ export const products: Product[] = [
       "Металлическая премиального качества",
     ],
     specs: [
-      { label: "Размер", value: "39 × 18 × 27 см" },
+      { label: "Размер", value: "20 × 24 × 15 см" },
       { label: "Форма", value: "Сумка-тоут" },
       { label: "Застёжка", value: "Поворотный замок" },
       { label: "Ручки", value: "Две прочные верхние ручки" },
@@ -775,7 +776,7 @@ export const products: Product[] = [
     brandSlug: "luma-atelier",
     section: "bags",
     categorySlug: "bowling-bags",
-    price: 1600,
+    price: 2399,
     images: [
       { src: "/products/classic-leather-bowling-bag/off-white-lifestyle-v2.jpg", alt: "Classic Leather Bowling Bag в образе" },
     ],
@@ -850,7 +851,7 @@ export const products: Product[] = [
     brandSlug: "luma-atelier",
     section: "bags",
     categorySlug: "shoulder-bags-women",
-    price: 1600,
+    price: 1299,
     colors: [
       {
         ...C.taupe,
@@ -931,7 +932,6 @@ export const products: Product[] = [
       "Вместительное основное отделение",
     ],
     specs: [
-      { label: "Размер", value: "26.5 × 10 × 18 см" },
       { label: "Форма", value: "Сумка-хобо" },
       { label: "Ручки", value: "Широкая мягкая ручка" },
       { label: "Ремень", value: "Съёмный регулируемый плечевой ремень" },
@@ -1074,7 +1074,7 @@ export const products: Product[] = [
     brandSlug: "luma-atelier",
     section: "bags",
     categorySlug: "shoulder-bags-women",
-    price: 1600,
+    price: 2599,
     images: [
       { src: "/products/elegant-leather-hobo-bag-smooth/smooth-white-lifestyle.png", alt: "Elegant Leather Hobo Bag White в образе" },
     ],
@@ -1141,7 +1141,6 @@ export const products: Product[] = [
       "Премиальная металлическая фурнитура золотистого цвета",
     ],
     specs: [
-      { label: "Размер", value: "31 × 11 × 14 см" },
       { label: "Форма", value: "Сумка-хобо" },
       { label: "Застёжка", value: "Надёжная застёжка-молния" },
       { label: "Ручки", value: "Удобная для ношения на плече" },
@@ -1160,7 +1159,7 @@ export const products: Product[] = [
     brandSlug: "luma-atelier",
     section: "bags",
     categorySlug: "handbags-women",
-    price: 1600,
+    price: 1599,
     images: [
       { src: "/products/structured-leather-top-handle-bag/top-handle-black-lifestyle-v2.png", alt: "Structured Leather Top Handle Bag Black в образе" },
     ],
@@ -1275,7 +1274,6 @@ export const products: Product[] = [
       "Премиальная металлическая фурнитура",
     ],
     specs: [
-      { label: "Размер", value: "17 × 6 × 10 см" },
       { label: "Форма", value: "Сумка с верхней ручкой" },
       { label: "Застёжка", value: "Клапан с надёжной застёжкой" },
       { label: "Ручки", value: "Верхняя ручка для ношения в руке" },
@@ -1533,7 +1531,7 @@ export const products: Product[] = [
     brandSlug: "luma-atelier",
     section: "bags",
     categorySlug: "handbags-women",
-    price: 1600,
+    price: 1599,
     isNew: true,
     colors: [
       {
@@ -1622,11 +1620,11 @@ export const products: Product[] = [
   },
   {
     slug: "elegant-leather-crossbody-bag-white",
-    title: "Elegant Leather Crossbody Bag",
+    title: "Noelia — кожаная сумка кроссбоди",
     brandSlug: "luma-atelier",
     section: "bags",
     categorySlug: "crossbody-bags-women",
-    price: 1600,
+    price: 1899,
     colors: [
       {
         name: "Black",
@@ -1699,7 +1697,7 @@ export const products: Product[] = [
     brandSlug: "luma-atelier",
     section: "bags",
     categorySlug: "crossbody-bags-women",
-    price: 1600,
+    price: 1599,
     images: [
       { src: "/products/elegant-leather-crossbody-bag-beige/cross-black-lifestyle-v2.png", alt: "Elegant Leather Crossbody Bag Black в образе" },
     ],
@@ -1791,7 +1789,7 @@ export const products: Product[] = [
     brandSlug: "luma-atelier",
     section: "bags",
     categorySlug: "shoulder-bags-women",
-    price: 1600,
+    price: 1399,
     colors: [
       {
         name: "Beige",
@@ -1877,7 +1875,7 @@ export const products: Product[] = [
     brandSlug: "luma-atelier",
     section: "bags",
     categorySlug: "tote-bags-women",
-    price: 1600,
+    price: 1899,
     isNew: true,
     images: [
       { src: "/products/elegant-leather-tote-bag/tote-cognac-lifestyle-v2.png", alt: "Violaine Cognac в образе" },
@@ -1965,7 +1963,7 @@ export const products: Product[] = [
     brandSlug: "luma-atelier",
     section: "bags",
     categorySlug: "clutches",
-    price: 1600,
+    price: 1599,
     colors: [
       {
         ...C.blackOnyx,
@@ -2123,7 +2121,7 @@ export const products: Product[] = [
     brandSlug: "luma-atelier",
     section: "bags",
     categorySlug: "tote-bags-women",
-    price: 2000,
+    price: 2699,
     status: "pre_order",
     galleryFit: "contain",
     colors: [
@@ -2315,7 +2313,7 @@ export const products: Product[] = [
     brandSlug: "luma-atelier",
     section: "bags",
     categorySlug: "shoulder-bags-women",
-    price: 1200,
+    price: 3399,
     colors: [
       {
         ...C.tanCognac,
@@ -3798,7 +3796,7 @@ export const products: Product[] = [
     brandSlug: "luma-atelier",
     section: "bags",
     categorySlug: "clutches",
-    price: 1600,
+    price: 3199,
     status: "pre_order",
     isNew: true,
     galleryFit: "contain",
@@ -3855,7 +3853,7 @@ export const products: Product[] = [
     brandSlug: "luma-atelier",
     section: "bags",
     categorySlug: "shoulder-bags-women",
-    price: 1600,
+    price: 2199,
     status: "pre_order",
     isNew: true,
     galleryFit: "contain",
@@ -3908,7 +3906,7 @@ export const products: Product[] = [
     brandSlug: "luma-atelier",
     section: "bags",
     categorySlug: "bowling-bags",
-    price: 1600,
+    price: 3499,
     status: "pre_order",
     isNew: true,
     galleryFit: "contain",
@@ -4970,7 +4968,7 @@ export const products: Product[] = [
     brandSlug: "luma-atelier",
     section: "bags",
     categorySlug: "tote-bags-women",
-    price: 1600,
+    price: 3599,
     status: "pre_order",
     isNew: true,
     galleryFit: "contain",
@@ -5019,7 +5017,7 @@ export const products: Product[] = [
     brandSlug: "luma-atelier",
     section: "bags",
     categorySlug: "handbags-women",
-    price: 1600,
+    price: 3199,
     status: "pre_order",
     isNew: true,
     galleryFit: "contain",
@@ -5082,7 +5080,7 @@ export const products: Product[] = [
     brandSlug: "luma-atelier",
     section: "bags",
     categorySlug: "clutches",
-    price: 1600,
+    price: 3599,
     status: "pre_order",
     isNew: true,
     galleryFit: "contain",
@@ -5136,7 +5134,7 @@ export const products: Product[] = [
     brandSlug: "luma-atelier",
     section: "bags",
     categorySlug: "shoulder-bags-women",
-    price: 1600,
+    price: 3599,
     status: "pre_order",
     isNew: true,
     galleryFit: "contain",
@@ -5190,7 +5188,7 @@ export const products: Product[] = [
     brandSlug: "luma-atelier",
     section: "bags",
     categorySlug: "clutches",
-    price: 1600,
+    price: 2599,
     status: "pre_order",
     isNew: true,
     galleryFit: "contain",

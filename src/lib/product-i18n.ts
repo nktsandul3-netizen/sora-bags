@@ -557,9 +557,9 @@ const productCopyBySlug: Record<string, ProductLocalizedCopy> = {
   },
   "mini-elegance-top-handle-bag-white": {
     "title": {
-      "ru": "Мини-сумка с верхней ручкой",
-      "ro": "Geantă mini cu mâner superior",
-      "en": "Mini Elegance Top Handle Bag"
+      "ru": "Micaela — мини-сумка с верхней ручкой",
+      "ro": "Micaela — geantă mini cu mâner superior",
+      "en": "Micaela — mini top handle bag"
     },
     "description": {
       "ru": "Мини-сумка с верхней ручкой. Модель выполнена из натуральной кожи и создана для повседневного гардероба, офиса и спокойных вечерних выходов. Силуэт выглядит собранно, но остаётся лёгким в повседневной носке: аксессуар не перегружает образ и хорошо сочетается с базовым гардеробом.\n\nНадёжная застёжка на молнии. Внутреннее пространство рассчитано на ежедневные вещи — телефон, кошелёк, ключи и небольшую косметику. Модель доступна под заказ: срок доставки 7–14 дней.",
@@ -725,14 +725,14 @@ const productCopyBySlug: Record<string, ProductLocalizedCopy> = {
   },
   "elegant-leather-crossbody-bag-white": {
     "title": {
-      "ru": "Элегантная кожаная сумка кроссбоди",
-      "ro": "Geantă crossbody elegantă din piele",
-      "en": "Elegant Leather Crossbody Bag"
+      "ru": "Noelia — кожаная сумка кроссбоди",
+      "ro": "Noelia — geantă crossbody din piele",
+      "en": "Noelia — leather crossbody bag"
     },
     "description": {
-      "ru": "Элегантная кожаная сумка кроссбоди. Модель выполнена из натуральной кожи и создана для прогулок, поездок и динамичных дней, когда руки должны оставаться свободными. Силуэт выглядит собранно, но остаётся лёгким в повседневной носке: аксессуар не перегружает образ и хорошо сочетается с базовым гардеробом.\n\nПрактичная магнитная фиксация. Внутреннее пространство рассчитано на ежедневные вещи — телефон, кошелёк, ключи и небольшую косметику. Модель доступна под заказ: срок доставки 7–14 дней.",
-      "ro": "Geantă crossbody elegantă din piele este o geantă crossbody din piele naturală, creată pentru plimbări, călătorii și zile dinamice în care mâinile rămân libere. Silueta rămâne elegantă fără să pară rigidă, iar proporțiile sunt ușor de integrat în garderoba de zi cu zi.\n\nFixare magnetică practică. Interiorul este gândit pentru lucrurile esențiale: telefon, portofel, chei și mici accesorii. Modelul este disponibil la comandă: livrare în 7–14 zile.",
-      "en": "Elegant Leather Crossbody Bag is a crossbody bag crafted from natural leather, designed for walks, travel and busy days when your hands should stay free. The silhouette feels polished without looking stiff, making it easy to style with a considered everyday wardrobe.\n\nPractical magnetic fastening. The interior is made for daily essentials such as a phone, wallet, keys and small cosmetics. This style is available to order, with delivery in 7–14 days."
+      "ru": "Noelia — кожаная сумка кроссбоди. Модель выполнена из натуральной кожи и создана для прогулок, поездок и динамичных дней, когда руки должны оставаться свободными. Силуэт выглядит собранно, но остаётся лёгким в повседневной носке: аксессуар не перегружает образ и хорошо сочетается с базовым гардеробом.\n\nПрактичная магнитная фиксация. Внутреннее пространство рассчитано на ежедневные вещи — телефон, кошелёк, ключи и небольшую косметику. Модель доступна под заказ: срок доставки 7–14 дней.",
+      "ro": "Noelia — geantă crossbody din piele naturală, creată pentru plimbări, călătorii și zile dinamice în care mâinile rămân libere. Silueta rămâne elegantă fără să pară rigidă, iar proporțiile sunt ușor de integrat în garderoba de zi cu zi.\n\nFixare magnetică practică. Interiorul este gândit pentru lucrurile esențiale: telefon, portofel, chei și mici accesorii. Modelul este disponibil la comandă: livrare în 7–14 zile.",
+      "en": "Noelia — leather crossbody bag crafted from natural leather, designed for walks, travel and busy days when your hands should stay free. The silhouette feels polished without looking stiff, making it easy to style with a considered everyday wardrobe.\n\nPractical magnetic fastening. The interior is made for daily essentials such as a phone, wallet, keys and small cosmetics. This style is available to order, with delivery in 7–14 days."
     }
   },
   "elegant-leather-crossbody-bag-beige": {
