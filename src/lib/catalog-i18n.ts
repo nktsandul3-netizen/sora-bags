@@ -14,7 +14,6 @@ const categoryLabels: Record<string, Partial<Record<Locale, string>>> = {
   "vse-aksessuary": { ru: "Все аксессуары", ro: "Toate accesoriile", en: "All accessories" },
   "card-holders-women": { ru: "Card Holders Women", ro: "Card Holders Women", en: "Card Holders Women" },
   "womens-wallets-women": { ru: "Women's Wallets", ro: "Women's Wallets", en: "Women's Wallets" },
-  "womens-belts-women": { ru: "Women's Belts", ro: "Women's Belts", en: "Women's Belts" },
   "womens-scarves-women": { ru: "Women's Scarves", ro: "Women's Scarves", en: "Women's Scarves" },
   "bag-charms": { ru: "Брелки", ro: "Brelocuri", en: "Bag charms" },
 };

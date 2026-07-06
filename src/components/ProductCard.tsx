@@ -37,7 +37,7 @@ export default function ProductCard({ product }: { product: Product }) {
   // ховера нет, поэтому это лишняя загрузка, которая тормозит каталог.
   const hasSwap = Boolean(isDesktop && secondary && secondary.src !== primary?.src);
   const showSecondary = imageHovered && previewIdx === null && hasSwap;
-  const showSwatches = colors.length > 0;
+  const showSwatches = colors.length > 1;
   const galleryFit = product.galleryFit ?? "cover";
   const cardImageClass =
     galleryFit === "contain"
@@ -153,6 +153,7 @@ export default function ProductCard({ product }: { product: Product }) {
           previewIndex={previewIdx}
           defaultIndex={defaultColorIdx}
           onPreview={setPreviewIdx}
+          swatchFit={galleryFit}
           className="mt-2 px-0.5 sm:mt-3"
         />
       ) : null}

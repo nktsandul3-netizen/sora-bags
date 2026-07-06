@@ -72,7 +72,7 @@ function ShowcaseCard({ product }: { product: Product }) {
   const secondary = colorImages[1];
   const hasSwap = Boolean(isDesktop && secondary && secondary.src !== primary?.src);
   const showSecondary = imageHovered && previewIdx === null && hasSwap;
-  const showSwatches = colors.length > 0;
+  const showSwatches = colors.length > 1;
   const galleryFit = product.galleryFit ?? "cover";
   const cardFrameClass =
     "relative aspect-[4/5] w-full overflow-hidden rounded-[22px] border border-white/80 shadow-[0_18px_55px_-42px_rgba(28,25,23,0.65)] ring-1 ring-stone-950/10 transition duration-500 group-hover:-translate-y-1 group-hover:shadow-[0_26px_70px_-44px_rgba(28,25,23,0.85)] " +
@@ -179,6 +179,7 @@ function ShowcaseCard({ product }: { product: Product }) {
           previewIndex={previewIdx}
           defaultIndex={defaultColorIdx}
           onPreview={setPreviewIdx}
+          swatchFit={galleryFit}
           className="mt-3 px-1"
         />
       ) : null}

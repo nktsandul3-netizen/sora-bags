@@ -412,23 +412,6 @@ const accessoryCategoryIcons: Record<string, React.ReactNode> = {
       <path d="M15.7 12.9h3.2" />
     </CatIcon>
   ),
-  "womens-belts-women": (
-    <svg
-      viewBox="0 0 64 64"
-      className="h-[26px] w-[26px] shrink-0"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      aria-hidden
-    >
-      <path d="M10 25.5C10 18.8 54 18.8 54 25.5C54 32.2 10 32.2 10 25.5Z" />
-      <path d="M14 28.5C20.5 34 43.5 34 50 28.5" />
-      <rect x="27" y="31" width="10" height="8" rx="1.5" />
-      <path d="M32 31V39" />
-    </svg>
-  ),
   "womens-scarves-women": (
     <CatIcon>
       <path d="M6.1 8.2c2.2-3.1 9.6-3.1 11.8 0" />

@@ -7,6 +7,7 @@ import { fileURLToPath } from "node:url";
 import { dirname, join } from "node:path";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
+const GRAPH_API_VERSION = "v25.0";
 
 function loadEnvLocal() {
   try {
@@ -29,6 +30,12 @@ function loadEnvLocal() {
   }
 }
 
+async function fetchJson(url) {
+  const response = await fetch(url);
+  const payload = await response.json();
+  return { ok: response.ok, payload };
+}
+
 loadEnvLocal();
 
 const accessToken = process.env.INSTAGRAM_ACCESS_TOKEN;
@@ -38,55 +45,78 @@ if (!accessToken) {
   console.error("❌ INSTAGRAM_ACCESS_TOKEN не задан в .env.local");
   console.log(`
 Как получить токен:
-1. Откройте https://developers.facebook.com/apps/
-2. Создайте приложение → Use case: Other → Business
-3. Добавьте продукт «Instagram» → «API setup with Instagram login»
-4. Подключите аккаунт @sora.italy (Business или Creator)
-5. Сгенерируйте User access token с правами instagram_basic, instagram_manage_insights
-6. Добавьте в .env.local:
+1. Откройте https://developers.facebook.com/tools/explorer/
+2. Выберите приложение Sora Bags Website
+3. Добавьте права instagram_basic и pages_show_list
+4. Нажмите Generate Access Token и войдите через Facebook, связанный с @sora.italy
+5. Добавьте в .env.local:
    INSTAGRAM_ACCESS_TOKEN=ваш_токен
+   INSTAGRAM_USER_ID=1951366815535576
 `);
   process.exit(1);
 }
 
 async function main() {
-  const meUrl = new URL("https://graph.instagram.com/me");
-  meUrl.searchParams.set("fields", "id,username");
-  meUrl.searchParams.set("access_token", accessToken);
+  let resolvedUserId = userId;
+  let username;
 
-  const meRes = await fetch(meUrl);
-  const me = await meRes.json();
+  if (resolvedUserId) {
+    const profileUrl = new URL(`https://graph.facebook.com/${GRAPH_API_VERSION}/${resolvedUserId}`);
+    profileUrl.searchParams.set("fields", "id,username");
+    profileUrl.searchParams.set("access_token", accessToken);
 
-  if (!meRes.ok) {
-    console.error("❌ Не удалось получить профиль Instagram:", me.error?.message ?? meRes.statusText);
-    process.exit(1);
+    const profile = await fetchJson(profileUrl);
+    if (profile.ok) {
+      username = profile.payload.username;
+      console.log(`✓ Аккаунт: @${username ?? "unknown"} (id: ${profile.payload.id})`);
+    } else {
+      console.error("❌ INSTAGRAM_USER_ID указан неверно. Это должен быть ID Instagram Business Account, а не ID приложения Meta.");
+      console.error("   Удалите INSTAGRAM_USER_ID из .env.local и запустите команду снова.");
+      process.exit(1);
+    }
+  } else {
+    const pagesUrl = new URL(`https://graph.facebook.com/${GRAPH_API_VERSION}/me/accounts`);
+    pagesUrl.searchParams.set("fields", "instagram_business_account{id,username}");
+    pagesUrl.searchParams.set("access_token", accessToken);
+
+    const pages = await fetchJson(pagesUrl);
+    if (!pages.ok) {
+      console.error("❌ Не удалось получить Instagram-аккаунт:", pages.payload.error?.message ?? "unknown error");
+      process.exit(1);
+    }
+
+    const account = pages.payload.data?.find((page) => page.instagram_business_account?.id)?.instagram_business_account;
+    if (!account?.id) {
+      console.error("❌ Не найден Instagram Business Account у связанных Facebook-страниц.");
+      console.error("   Проверьте:");
+      console.error("   1. @sora.italy — Business/Creator и привязан к Facebook-странице");
+      console.error("   2. Токен создан через Facebook-аккаунт администратора этой страницы");
+      console.error("   3. В Graph API Explorer добавлены права instagram_basic и pages_show_list");
+      process.exit(1);
+    }
+
+    resolvedUserId = account.id;
+    username = account.username;
+    console.log(`✓ Аккаунт: @${username ?? "unknown"} (id: ${account.id})`);
+    console.log(`→ Добавьте в .env.local: INSTAGRAM_USER_ID=${account.id}`);
   }
 
-  const resolvedUserId = userId || me.id;
-  console.log(`✓ Аккаунт: @${me.username} (id: ${me.id})`);
-
-  if (!userId) {
-    console.log(`→ Добавьте в .env.local: INSTAGRAM_USER_ID=${me.id}`);
-  }
-
-  const mediaUrl = new URL(`https://graph.instagram.com/v25.0/${resolvedUserId}/media`);
+  const mediaUrl = new URL(`https://graph.facebook.com/${GRAPH_API_VERSION}/${resolvedUserId}/media`);
   mediaUrl.searchParams.set("fields", "id,caption,media_type,permalink,timestamp");
   mediaUrl.searchParams.set("limit", "6");
   mediaUrl.searchParams.set("access_token", accessToken);
 
-  const mediaRes = await fetch(mediaUrl);
-  const media = await mediaRes.json();
-
-  if (!mediaRes.ok) {
-    console.error("❌ Не удалось получить посты:", media.error?.message ?? mediaRes.statusText);
+  const media = await fetchJson(mediaUrl);
+  if (!media.ok) {
+    console.error("❌ Не удалось получить посты:", media.payload.error?.message ?? "unknown error");
     process.exit(1);
   }
 
-  const count = media.data?.length ?? 0;
+  const count = media.payload.data?.length ?? 0;
   console.log(`✓ Получено постов: ${count}`);
   if (count > 0) {
     console.log("  Последние:");
-    for (const post of media.data.slice(0, 3)) {
+    for (const post of media.payload.data.slice(0, 3)) {
       console.log(`  - ${post.media_type} ${post.permalink}`);
     }
   }

@@ -6,114 +6,58 @@ export interface InstagramPost {
   permalink: string;
 }
 
-const fallbackInstagramPosts: InstagramPost[] = [
+/** Ручной список постов @sora.italy — без Instagram API. */
+const manualInstagramPosts: InstagramPost[] = [
   {
-    id: "fallback-crossbody",
-    imageUrl: "/products/elegant-leather-crossbody-bag-beige/cross-black-lifestyle-v2.png",
-    mediaType: "IMAGE",
-    permalink: "https://www.instagram.com/sora.italy",
+    id: "DaAlYOktYC-",
+    imageUrl: "/instagram/DaAlYOktYC-.jpg",
+    mediaType: "VIDEO",
+    permalink: "https://www.instagram.com/reel/DaAlYOktYC-/",
   },
   {
-    id: "fallback-beach-tote",
-    imageUrl: "/products/premium-woven-beach-tote-bag/beach-natural-black-1.png",
-    mediaType: "IMAGE",
-    permalink: "https://www.instagram.com/sora.italy",
+    id: "DaIV_Zaty51",
+    imageUrl: "/instagram/DaIV_Zaty51.jpg",
+    mediaType: "VIDEO",
+    permalink: "https://www.instagram.com/reel/DaIV_Zaty51/",
   },
   {
-    id: "fallback-calf-tote",
-    imageUrl: "/products/calf-leather-tote-bag/off-white-lifestyle-v2.png",
-    mediaType: "IMAGE",
-    permalink: "https://www.instagram.com/sora.italy",
+    id: "Daaz_qutQIz",
+    imageUrl: "/instagram/Daaz_qutQIz.jpg",
+    mediaType: "VIDEO",
+    permalink: "https://www.instagram.com/reel/Daaz_qutQIz/",
   },
   {
-    id: "fallback-shopper",
-    imageUrl: "/products/woven-leather-shopper-tote/as-seen-on-lifestyle-1.jpg",
+    id: "DaYE_FGjVix",
+    imageUrl: "/instagram/DaYE_FGjVix.jpg",
     mediaType: "IMAGE",
-    permalink: "https://www.instagram.com/sora.italy",
+    permalink: "https://www.instagram.com/p/DaYE_FGjVix/",
   },
   {
-    id: "fallback-shoulder",
-    imageUrl: "/products/the-essential-shoulder-bag/tan-cognac-lifestyle-v3.png",
+    id: "DZ8Q9SINk3w",
+    imageUrl: "/instagram/DZ8Q9SINk3w.jpg",
+    mediaType: "VIDEO",
+    permalink: "https://www.instagram.com/reel/DZ8Q9SINk3w/",
+  },
+  {
+    id: "DZ7YbJ1NqNT",
+    imageUrl: "/instagram/DZ7YbJ1NqNT.jpg",
+    mediaType: "VIDEO",
+    permalink: "https://www.instagram.com/reel/DZ7YbJ1NqNT/",
+  },
+  {
+    id: "DZ0Qm_DDRW7",
+    imageUrl: "/instagram/DZ0Qm_DDRW7.jpg",
     mediaType: "IMAGE",
-    permalink: "https://www.instagram.com/sora.italy",
+    permalink: "https://www.instagram.com/p/DZ0Qm_DDRW7/",
+  },
+  {
+    id: "DZ7YM3Bt6VZ",
+    imageUrl: "/instagram/DZ7YM3Bt6VZ.jpg",
+    mediaType: "IMAGE",
+    permalink: "https://www.instagram.com/p/DZ7YM3Bt6VZ/",
   },
 ];
 
-interface InstagramMediaItem {
-  id?: string;
-  caption?: string;
-  media_type?: "IMAGE" | "VIDEO" | "CAROUSEL_ALBUM";
-  media_url?: string;
-  thumbnail_url?: string;
-  permalink?: string;
-}
-
-interface InstagramMediaResponse {
-  data?: InstagramMediaItem[];
-}
-
-interface InstagramProfileResponse {
-  id?: string;
-  username?: string;
-}
-
-async function resolveInstagramUserId(accessToken: string, userId?: string): Promise<string | null> {
-  if (userId) return userId;
-
-  try {
-    const url = new URL("https://graph.instagram.com/me");
-    url.searchParams.set("fields", "id,username");
-    url.searchParams.set("access_token", accessToken);
-
-    const response = await fetch(url, { next: { revalidate: 60 * 60 * 24 } });
-    if (!response.ok) return null;
-
-    const profile = (await response.json()) as InstagramProfileResponse;
-    return profile.id ?? null;
-  } catch {
-    return null;
-  }
-}
-
-export async function getInstagramPosts(limit = 6): Promise<InstagramPost[]> {
-  const accessToken = process.env.INSTAGRAM_ACCESS_TOKEN;
-  const userId = await resolveInstagramUserId(accessToken ?? "", process.env.INSTAGRAM_USER_ID);
-
-  if (!accessToken || !userId) {
-    return fallbackInstagramPosts.slice(0, limit);
-  }
-
-  const fields = "id,caption,media_type,media_url,thumbnail_url,permalink,timestamp";
-  const url = new URL(`https://graph.instagram.com/v25.0/${userId}/media`);
-  url.searchParams.set("fields", fields);
-  url.searchParams.set("limit", String(limit));
-  url.searchParams.set("access_token", accessToken);
-
-  try {
-    const response = await fetch(url, { next: { revalidate: 60 * 60 } });
-    if (!response.ok) {
-      return fallbackInstagramPosts.slice(0, limit);
-    }
-
-    const payload = (await response.json()) as InstagramMediaResponse;
-    const posts =
-      payload.data
-        ?.map((item): InstagramPost | null => {
-          const imageUrl = item.media_type === "VIDEO" ? item.thumbnail_url : item.media_url;
-          if (!item.id || !imageUrl || !item.permalink || !item.media_type) return null;
-
-          return {
-            id: item.id,
-            caption: item.caption,
-            imageUrl,
-            mediaType: item.media_type,
-            permalink: item.permalink,
-          };
-        })
-        .filter((post): post is InstagramPost => Boolean(post)) ?? [];
-
-    return posts.length ? posts : fallbackInstagramPosts.slice(0, limit);
-  } catch {
-    return fallbackInstagramPosts.slice(0, limit);
-  }
+export async function getInstagramPosts(limit = manualInstagramPosts.length): Promise<InstagramPost[]> {
+  return manualInstagramPosts.slice(0, limit);
 }

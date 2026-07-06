@@ -1,10 +1,11 @@
 import Link from "next/link";
 import Image from "next/image";
 import { brand } from "@/lib/config";
-import { newProducts } from "@/lib/data";
+import { newProducts, products } from "@/lib/data";
 import { getInstagramPosts } from "@/lib/instagram";
 import HomeNewArrivals from "@/components/HomeNewArrivals";
 import InstagramFeed from "@/components/InstagramFeed";
+import ProductCard from "@/components/ProductCard";
 import SocialIcon from "@/components/SocialIcon";
 import TileVideo from "@/components/TileVideo";
 import HeroBannerSlider, { type HeroSlide } from "@/components/HeroBannerSlider";
@@ -58,11 +59,22 @@ const heroTiles: {
   },
 ];
 
+const blueEditProductSlugs = [
+  "womens-pebbled-leather-zip-hobo-bag",
+  "womens-metallic-leather-bifold-cardholder-electric-blue",
+  "womens-blue-multicolor-brushstroke-silk-scarf",
+  "luma-silk-bow-bag-charm",
+];
+
+const blueEditProducts = blueEditProductSlugs
+  .map((slug) => products.find((product) => product.slug === slug))
+  .filter((product): product is NonNullable<typeof product> => Boolean(product));
+
 export default async function Home() {
   const [locale, t, instagramPosts] = await Promise.all([
     getServerLocale(),
     getServerT(),
-    getInstagramPosts(6),
+    getInstagramPosts(),
   ]);
   return (
     <div>
@@ -111,6 +123,38 @@ export default async function Home() {
       {/* Новинки */}
       <HomeNewArrivals products={newProducts.slice(0, 8)} />
 
+      {/* Подборка с баннером и товарами */}
+      <section className="bg-[#f7f5f0] px-4 py-10 sm:px-6 lg:px-10 lg:py-14">
+        <div className="grid gap-4 lg:grid-cols-[minmax(0,1.08fr)_minmax(0,1fr)] lg:gap-6">
+          <Link
+            href={withLocalePath("/product/womens-pebbled-leather-kiss-lock-pouch-bag-light-blue", locale)}
+            className="group relative min-h-[420px] overflow-hidden rounded-[28px] bg-stone-100 sm:min-h-[560px] lg:min-h-[760px]"
+          >
+            <Image
+              src="/banners/home-blue-edit-lifestyle-sharp-v2.png"
+              alt="Голубой акцент — образ с сумкой и платком"
+              fill
+              sizes="(min-width: 1024px) 52vw, 100vw"
+              quality={100}
+              unoptimized
+              className="object-cover object-center"
+            />
+          </Link>
+
+          <div className="grid grid-cols-2 gap-x-3 gap-y-8 sm:gap-x-5 sm:gap-y-10">
+            {blueEditProducts.map((product) => (
+              <ProductCard key={product.slug} product={product} />
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <InstagramFeed
+        posts={instagramPosts}
+        title={t("home.instagramFeed")}
+        hint={t("home.instagramFeedHint")}
+      />
+
       {/* Соцсети / мессенджеры */}
       <section className="relative flex min-h-[calc(360px+6cm)] w-full items-center justify-center overflow-hidden sm:min-h-[calc(460px+6cm)]">
         <Image
@@ -151,12 +195,6 @@ export default async function Home() {
           </div>
         </div>
       </section>
-
-      <InstagramFeed
-        posts={instagramPosts}
-        title={t("home.instagramFeed")}
-        hint={t("home.instagramFeedHint")}
-      />
 
     </div>
   );

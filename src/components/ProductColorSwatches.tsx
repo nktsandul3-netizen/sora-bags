@@ -5,6 +5,7 @@ import type { ProductColor } from "@/lib/types";
 import { withLocalePath } from "@/lib/i18n";
 import { useLocale, useT } from "@/lib/useI18n";
 import { localizeColorName } from "@/lib/product-i18n";
+import ProductImage from "./ProductImage";
 
 export const MAX_SWATCHES = 5;
 const VISIBLE_BEFORE_OVERFLOW = MAX_SWATCHES - 1;
@@ -51,13 +52,23 @@ function ColorSwatch({
   href,
   onPreview,
   label,
+  swatchFit = "cover",
 }: {
   color: ProductColor;
   highlighted: boolean;
   href: string;
   onPreview: () => void;
   label: string;
+  swatchFit?: "cover" | "contain";
 }) {
+  const thumb = getColorSwatchImage(color);
+  const hasThumb = Boolean(thumb?.src);
+  const sizeClass = hasThumb ? "h-5 w-5 sm:h-[22px] sm:w-[22px]" : "h-3 w-3 sm:h-3.5 sm:w-3.5";
+  const swatchImageClass =
+    swatchFit === "contain"
+      ? "object-contain object-center p-0.5"
+      : "object-cover object-center";
+
   return (
     <Link
       href={href}
@@ -65,15 +76,29 @@ function ColorSwatch({
       title={label}
       onMouseEnter={onPreview}
       onFocus={onPreview}
+      onTouchStart={onPreview}
       className={
-        "relative shrink-0 rounded-full bg-white transition-all duration-200 ease-out " +
+        "relative shrink-0 overflow-hidden rounded-full bg-white transition-all duration-200 ease-out " +
         (highlighted ? "p-[2px] ring-1 ring-black" : "p-0 ring-0")
       }
     >
-      <span
-        className="block h-3 w-3 rounded-full border border-stone-300/70 sm:h-3.5 sm:w-3.5"
-        style={{ backgroundColor: color.hex }}
-      />
+      {hasThumb ? (
+        <ProductImage
+          hex={color.hex}
+          section="accessories"
+          src={thumb!.src}
+          alt=""
+          sizes="24px"
+          unoptimized
+          imageClassName={swatchImageClass}
+          className={"block rounded-full bg-stone-50 " + sizeClass}
+        />
+      ) : (
+        <span
+          className={"block rounded-full border border-stone-300/70 " + sizeClass}
+          style={{ backgroundColor: color.hex }}
+        />
+      )}
     </Link>
   );
 }
@@ -84,6 +109,7 @@ export default function ProductColorSwatches({
   previewIndex = null,
   defaultIndex = 0,
   onPreview,
+  swatchFit = "cover",
   className = "",
 }: {
   productSlug: string;
@@ -91,6 +117,7 @@ export default function ProductColorSwatches({
   previewIndex?: number | null;
   defaultIndex?: number;
   onPreview?: (index: number | null) => void;
+  swatchFit?: "cover" | "contain";
   className?: string;
 }) {
   const locale = useLocale();
@@ -114,6 +141,7 @@ export default function ProductColorSwatches({
             href={withLocalePath(getProductColorHref(productSlug, item.color.name), locale)}
             onPreview={() => onPreview?.(item.index)}
             label={localizeColorName(item.color, locale)}
+            swatchFit={swatchFit}
           />
         ) : (
           <Link

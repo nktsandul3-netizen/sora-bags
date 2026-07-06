@@ -258,6 +258,26 @@ const colors: Record<string, Partial<Record<Locale, string>>> = {
   "Light Grey": { ro: "Gri deschis", en: "Light grey" },
   Grey: { ro: "Gri", en: "Grey" },
   "Sage Green": { ro: "Sage green", en: "Sage green" },
+  "Abstract Print": { ro: "Imprimeu abstract", en: "Abstract print" },
+  "Lavender Wave": { ro: "Val lavandă", en: "Lavender wave" },
+  "Pastel Tie-Dye": { ro: "Tie-dye pastel", en: "Pastel tie-dye" },
+  "Aqua Wave": { ro: "Val aqua", en: "Aqua wave" },
+  "Slate Geometric": { ro: "Geometric ardezie", en: "Slate geometric" },
+  "Mustard Wave": { ro: "Val muștar", en: "Mustard wave" },
+  "Rainbow Pastel": { ro: "Pastel curcubeu", en: "Rainbow pastel" },
+  "Heart Leopard": { ro: "Leopard inimi", en: "Heart leopard" },
+  "Landscape Hills": { ro: "Dealuri peisaj", en: "Landscape hills" },
+  "Grey Stripe": { ro: "Dungă gri", en: "Grey stripe" },
+  "Mint Abstract": { ro: "Abstract mentă", en: "Mint abstract" },
+  "Dusty Blue Abstract": { ro: "Abstract albastru prăfuit", en: "Dusty blue abstract" },
+  "Lavender Ink": { ro: "Cerneală lavandă", en: "Lavender ink" },
+  "Colorful Brushstroke": { ro: "Tușe colorate", en: "Colorful brushstroke" },
+  "Cherry Print": { ro: "Imprimeu cireșe", en: "Cherry print" },
+  "Green Geometric": { ro: "Geometric verde", en: "Green geometric" },
+  "Red Floral": { ro: "Floral roșu", en: "Red floral" },
+  "Watercolor Circles": { ro: "Cercuri acuarelă", en: "Watercolor circles" },
+  "Blue Multicolor Brushstroke": { ro: "Tușe multicolore albastru", en: "Blue multicolor brushstroke" },
+  "Whale Print": { ro: "Imprimeu balene", en: "Whale print" },
 };
 
 /**
@@ -426,6 +446,23 @@ const productTitles: Record<string, Partial<Record<Locale, string>>> = {
   "Vivienne — сумка-тоут": { ro: "Vivienne — geantă tote", en: "Vivienne — tote bag" },
   "Nadine — кошелёк на молнии": { ro: "Nadine — portofel cu fermoar", en: "Nadine — zip wallet" },
   "Suzette — картхолдер": { ro: "Suzette — portcard", en: "Suzette — card holder" },
+  "Rosalia — картхолдер": { ro: "Rosalia — portcard", en: "Rosalia — card holder" },
+  "Azzurina — картхолдер": { ro: "Azzurina — portcard", en: "Azzurina — card holder" },
+  "Turchese — картхолдер": { ro: "Turchese — portcard", en: "Turchese — card holder" },
+  "Bianca — картхолдер": { ro: "Bianca — portcard", en: "Bianca — card holder" },
+  "Liliana — картхолдер": { ro: "Liliana — portcard", en: "Liliana — card holder" },
+  "Limona — картхолдер": { ro: "Limona — portcard", en: "Limona — card holder" },
+  "Smeralda — картхолдер": { ro: "Smeralda — portcard", en: "Smeralda — card holder" },
+  "Bruna — картхолдер": { ro: "Bruna — portcard", en: "Bruna — card holder" },
+  "Olivetta — картхолдер": { ro: "Olivetta — portcard", en: "Olivetta — card holder" },
+  "Salvia — кошелёк": { ro: "Salvia — portofel", en: "Salvia — wallet" },
+  "Cenere — картхолдер": { ro: "Cenere — portcard", en: "Cenere — card holder" },
+  "Rubina — картхолдер": { ro: "Rubina — portcard", en: "Rubina — card holder" },
+  "Avorio — картхолдер": { ro: "Avorio — portcard", en: "Avorio — card holder" },
+  "Notte — картхолдер": { ro: "Notte — portcard", en: "Notte — card holder" },
+  "Cremisi — кошелёк": { ro: "Cremisi — portofel", en: "Cremisi — wallet" },
+  "Perla — кошелёк": { ro: "Perla — portofel", en: "Perla — wallet" },
+  "Nera — картхолдер": { ro: "Nera — portcard", en: "Nera — card holder" },
   "Brielle — ключница": { ro: "Brielle — port-chei", en: "Brielle — key holder" },
   "Camea — косметичка": { ro: "Camea — trusă cosmetică", en: "Camea — cosmetic pouch" },
   "Noelle — обложка для паспорта": { ro: "Noelle — copertă pentru pașaport", en: "Noelle — passport cover" },
@@ -439,6 +476,26 @@ const productTitles: Record<string, Partial<Record<Locale, string>>> = {
   "Bassotto — кожаный брелок для сумки": { ro: "Bassotto — breloc din piele", en: "Bassotto — leather bag charm" },
   "Fiocco — шёлковый брелок-бант": { ro: "Fiocco — breloc fundă din mătase", en: "Fiocco — silk bow bag charm" },
   "Mix — брелок-набор для сумки": { ro: "Mix — set breloc pentru geantă", en: "Mix — bag charm set" },
+  "Serenella — шёлковый платок": { ro: "Serenella — eșarfă din mătase", en: "Serenella — silk scarf" },
+  "Marcelline — шёлковый платок": { ro: "Marcelline — eșarfă din mătase", en: "Marcelline — silk scarf" },
+  "Celestina — шёлковый платок": { ro: "Celestina — eșarfă din mătase", en: "Celestina — silk scarf" },
+  "Marina — шёлковый платок": { ro: "Marina — eșarfă din mătase", en: "Marina — silk scarf" },
+  "Costanza — шёлковый платок": { ro: "Costanza — eșarfă din mătase", en: "Costanza — silk scarf" },
+  "Doriana — шёлковый платок": { ro: "Doriana — eșarfă din mătase", en: "Doriana — silk scarf" },
+  "Iride — шёлковый платок": { ro: "Iride — eșarfă din mătase", en: "Iride — silk scarf" },
+  "Amorette — шёлковый платок": { ro: "Amorette — eșarfă din mătase", en: "Amorette — silk scarf" },
+  "Colomba — шёлковый платок": { ro: "Colomba — eșarfă din mătase", en: "Colomba — silk scarf" },
+  "Nebbia — шёлковый платок": { ro: "Nebbia — eșarfă din mătase", en: "Nebbia — silk scarf" },
+  "Clarissa — шёлковый платок": { ro: "Clarissa — eșarfă din mătase", en: "Clarissa — silk scarf" },
+  "Azzurra — шёлковый платок": { ro: "Azzurra — eșarfă din mătase", en: "Azzurra — silk scarf" },
+  "Lavinia — шёлковый платок": { ro: "Lavinia — eșarfă din mătase", en: "Lavinia — silk scarf" },
+  "Artemisia — шёлковый платок": { ro: "Artemisia — eșarfă din mătase", en: "Artemisia — silk scarf" },
+  "Rosetta — шёлковый платок": { ro: "Rosetta — eșarfă din mătase", en: "Rosetta — silk scarf" },
+  "Verdiana — шёлковый платок": { ro: "Verdiana — eșarfă din mătase", en: "Verdiana — silk scarf" },
+  "Fiorina — шёлковый платок": { ro: "Fiorina — eșarfă din mătase", en: "Fiorina — silk scarf" },
+  "Cerelia — шёлковый платок": { ro: "Cerelia — eșarfă din mătase", en: "Cerelia — silk scarf" },
+  "Teodora — шёлковый платок": { ro: "Teodora — eșarfă din mătase", en: "Teodora — silk scarf" },
+  "Delphina — шёлковый платок": { ro: "Delphina — eșarfă din mătase", en: "Delphina — silk scarf" },
   "Aimee — подарочный набор: кошелёк и картхолдер": { ro: "Aimee — set cadou: portofel și portcard", en: "Aimee — gift set: wallet and card holder" },
   "Rosalie — кошелёк на кнопке": { ro: "Rosalie — portofel cu capsă", en: "Rosalie — snap wallet" },
 };
@@ -1722,18 +1779,6 @@ const productCopyBySlug: Record<string, ProductLocalizedCopy> = {
       "en": "Card holder is a card holder crafted from natural leather, designed for cards, documents and compact organization inside a bag. The silhouette feels polished without looking stiff, making it easy to style with a considered everyday wardrobe.\n\nFits easily into a bag. The interior is made for daily essentials such as a phone, wallet, keys and small cosmetics. This style is available to order, with delivery in 7–14 days."
     }
   },
-  "pelle-nova-belt-black": {
-    "title": {
-      "ru": "Ремень Pelle Nova из гладкой кожи чёрного цвета",
-      "ro": "Curea",
-      "en": "Belt"
-    },
-    "description": {
-      "ru": "Ремень Pelle Nova из гладкой кожи чёрного цвета. Модель выполнена из натуральной кожи и создана для повседневного гардероба, офиса и спокойных вечерних выходов. Силуэт выглядит собранно, но остаётся лёгким в повседневной носке: аксессуар не перегружает образ и хорошо сочетается с базовым гардеробом.\n\nЛегко сочетается с базовым гардеробом. Внутреннее пространство рассчитано на ежедневные вещи — телефон, кошелёк, ключи и небольшую косметику. Модель доступна под заказ: срок доставки 7–14 дней.",
-      "ro": "Curea este o curea din piele naturală, creată pentru garderoba de zi cu zi, birou și ieșiri de seară relaxate. Silueta rămâne elegantă fără să pară rigidă, iar proporțiile sunt ușor de integrat în garderoba de zi cu zi.\n\nUșor de integrat în garderoba de bază. Interiorul este gândit pentru lucrurile esențiale: telefon, portofel, chei și mici accesorii. Modelul este disponibil la comandă: livrare în 7–14 zile.",
-      "en": "Belt is a belt crafted from natural leather, designed for everyday styling, office looks and relaxed evening plans. The silhouette feels polished without looking stiff, making it easy to style with a considered everyday wardrobe.\n\nEasy to pair with a core wardrobe. The interior is made for daily essentials such as a phone, wallet, keys and small cosmetics. This style is available to order, with delivery in 7–14 days."
-    }
-  },
   "luma-bag-charm-cognac": {
     "title": {
       "ru": "Подвеска для сумки SÓRA Atelier из кожи коньячного цвета",
@@ -1936,6 +1981,635 @@ const productCopyBySlug: Record<string, ProductLocalizedCopy> = {
       "ru": "Брелок-набор на кольце: кожаная такса, миниатюрная «шоколадка», плетёный шнур с узлом, кожаные ремешки и пружинящий шнур с карабином. Несколько элементов на одном кольце — сразу заметный акцент на сумке.\n\nИгривый микс фактур и материалов. Модель есть в наличии: доставим за 1–3 дня.",
       "ro": "Set de brelocuri pe inel: teckel din piele, mini „tabletă de ciocolată”, frânghie împletită cu nod, curele din piele și cablu spiralat cu carabină. Mai multe elemente pe un singur inel — accent imediat pe geantă.\n\nMix jucăuș de texturi și materiale. Modelul este în stoc: livrare în 1–3 zile.",
       "en": "Bag charm set on a split ring: a leather dachshund, a miniature chocolate bar, a braided cord with a knot, leather ties and a coiled cord with a carabiner. Several elements on one ring — an instant accent on any bag.\n\nA playful mix of textures and materials. This style is in stock, with delivery in 1–3 days."
+    }
+  },
+  "womens-abstract-geometric-silk-scarf": {
+    "title": {
+      "ru": "Serenella — шёлковый платок",
+      "ro": "Serenella — eșarfă din mătase",
+      "en": "Serenella — silk scarf"
+    },
+    "description": {
+      "ru": "Квадратный шёлковый платок с абстрактным геометрическим принтом: терракотовые и коралловые формы, графичные круги, контрастные линии и акценты тёмно-синего и чёрного. Лёгкая ткань с мягким блеском держит форму и красиво драпируется — на шее, на сумке или как акцент на плечах.\n\nТонкая ручная отделка по краю делает платок заметным аксессуаром сезона.",
+      "ro": "Eșarfă pătrată din mătase cu imprimeu abstract geometric: forme terracotta și coral, cercuri grafice, linii contrastante și accente bleumarin și negre. Țesătura ușoară, cu luciu discret, își păstrează forma și cade frumos — la gât, pe geantă sau pe umeri.\n\nFinisarea fină pe margine face din această eșarfă un accesoriu remarcabil al sezonului.",
+      "en": "Square silk scarf with an abstract geometric print: terracotta and coral shapes, graphic circles, contrasting lines and deep navy and black accents. The lightweight fabric has a soft sheen, holds its shape and drapes beautifully — around the neck, on a bag or over the shoulders.\n\nFine edge finishing makes this scarf a standout seasonal accessory."
+    },
+    "highlights": {
+      "ru": ["Чистый шёлк", "Абстрактный геометрический принт", "Квадратный формат 90 × 90 см", "Ручная отделка по краю"],
+      "ro": ["Mătase pură", "Imprimeu abstract geometric", "Format pătrat 90 × 90 cm", "Finisare manuală pe margine"],
+      "en": ["Pure silk", "Abstract geometric print", "Square format 90 × 90 cm", "Hand-finished edge"]
+    }
+  },
+  "womens-lavender-wave-silk-scarf": {
+    "title": {
+      "ru": "Marcelline — шёлковый платок",
+      "ro": "Marcelline — eșarfă din mătase",
+      "en": "Marcelline — silk scarf"
+    },
+    "description": {
+      "ru": "Квадратный шёлковый платок с абстрактным принтом на лавандовом фоне: волнистые лаймовые штрихи с контрастными тёмными акцентами. Лёгкая ткань с мягким блеском держит форму и красиво драпируется — на шее, на сумке или как акцент на плечах.\n\nТонкая ручная отделка по краю делает платок заметным аксессуаром сезона.",
+      "ro": "Eșarfă pătrată din mătase cu imprimeu abstract pe fundal lavandă: tușe ondulate lime cu accente închise contrastante. Țesătura ușoară, cu luciu discret, își păstrează forma și cade frumos — la gât, pe geantă sau pe umeri.\n\nFinisarea fină pe margine face din această eșarfă un accesoriu remarcabil al sezonului.",
+      "en": "Square silk scarf with an abstract print on a lavender ground: wavy lime brushstrokes with contrasting dark accents. The lightweight fabric has a soft sheen, holds its shape and drapes beautifully — around the neck, on a bag or over the shoulders.\n\nFine edge finishing makes this scarf a standout seasonal accessory."
+    },
+    "highlights": {
+      "ru": ["Чистый шёлк", "Лавандовый принт с волнистыми штрихами", "Квадратный формат 90 × 90 см", "Ручная отделка по краю"],
+      "ro": ["Mătase pură", "Imprimeu lavandă cu tușe ondulate", "Format pătrat 90 × 90 cm", "Finisare manuală pe margine"],
+      "en": ["Pure silk", "Lavender print with wavy brushstrokes", "Square format 90 × 90 cm", "Hand-finished edge"]
+    }
+  },
+  "womens-pastel-tie-dye-silk-scarf": {
+    "title": {
+      "ru": "Celestina — шёлковый платок",
+      "ro": "Celestina — eșarfă din mătase",
+      "en": "Celestina — silk scarf"
+    },
+    "description": {
+      "ru": "Квадратный шёлковый платок с мягким принтом в технике тай-дай: нежные розовые, мятные и лавандовые пятна, плавно переходящие друг в друга на светлом фоне. Лёгкая ткань с мягким блеском держит форму и красиво драпируется — на шее, на сумке или как акцент на плечах.\n\nТонкая ручная отделка по краю делает платок заметным аксессуаром сезона.",
+      "ro": "Eșarfă pătrată din mătase cu imprimeu tie-dye delicat: pete roz, mentă și lavandă care se estompează una în alta pe un fundal deschis. Țesătura ușoară, cu luciu discret, își păstrează forma și cade frumos — la gât, pe geantă sau pe umeri.\n\nFinisarea fină pe margine face din această eșarfă un accesoriu remarcabil al sezonului.",
+      "en": "Square silk scarf with a soft tie-dye print: gentle pink, mint and lavender patches blending into each other on a light ground. The lightweight fabric has a soft sheen, holds its shape and drapes beautifully — around the neck, on a bag or over the shoulders.\n\nFine edge finishing makes this scarf a standout seasonal accessory."
+    },
+    "highlights": {
+      "ru": ["Чистый шёлк", "Пастельный тай-дай принт", "Квадратный формат 90 × 90 см", "Ручная отделка по краю"],
+      "ro": ["Mătase pură", "Imprimeu tie-dye pastel", "Format pătrat 90 × 90 cm", "Finisare manuală pe margine"],
+      "en": ["Pure silk", "Pastel tie-dye print", "Square format 90 × 90 cm", "Hand-finished edge"]
+    }
+  },
+  "womens-aqua-wave-silk-scarf": {
+    "title": {
+      "ru": "Marina — шёлковый платок",
+      "ro": "Marina — eșarfă din mătase",
+      "en": "Marina — silk scarf"
+    },
+    "description": {
+      "ru": "Квадратный шёлковый платок с абстрактным принтом на аквамариновом фоне: волнистые лаймовые штрихи с контрастными тёмными акцентами, напоминающие движение воды. Лёгкая ткань с мягким блеском держит форму и красиво драпируется — на шее, на сумке или как акцент на плечах.\n\nТонкая ручная отделка по краю делает платок заметным аксессуаром сезона.",
+      "ro": "Eșarfă pătrată din mătase cu imprimeu abstract pe fundal aqua: tușe ondulate lime cu accente închise contrastante, ca mișcarea apei. Țesătura ușoară, cu luciu discret, își păstrează forma și cade frumos — la gât, pe geantă sau pe umeri.\n\nFinisarea fină pe margine face din această eșarfă un accesoriu remarcabil al sezonului.",
+      "en": "Square silk scarf with an abstract print on an aqua ground: wavy lime brushstrokes with contrasting dark accents, like moving water. The lightweight fabric has a soft sheen, holds its shape and drapes beautifully — around the neck, on a bag or over the shoulders.\n\nFine edge finishing makes this scarf a standout seasonal accessory."
+    },
+    "highlights": {
+      "ru": ["Чистый шёлк", "Аквамариновый принт с волнистыми штрихами", "Квадратный формат 90 × 90 см", "Ручная отделка по краю"],
+      "ro": ["Mătase pură", "Imprimeu aqua cu tușe ondulate", "Format pătrat 90 × 90 cm", "Finisare manuală pe margine"],
+      "en": ["Pure silk", "Aqua print with wavy brushstrokes", "Square format 90 × 90 cm", "Hand-finished edge"]
+    }
+  },
+  "womens-slate-geometric-silk-scarf": {
+    "title": {
+      "ru": "Costanza — шёлковый платок",
+      "ro": "Costanza — eșarfă din mătase",
+      "en": "Costanza — silk scarf"
+    },
+    "description": {
+      "ru": "Квадратный шёлковый платок с графичным абстрактным принтом: сланцево-синие и серые блоки, контрастные белые полосы, коричневые акценты и полукруглые формы. Лёгкая ткань с мягким блеском держит форму и красиво драпируется — на шее, на сумке или как акцент на плечах.\n\nТонкая ручная отделка по краю делает платок заметным аксессуаром сезона.",
+      "ro": "Eșarfă pătrată din mătase cu imprimeu abstract grafic: blocuri albastru-ardoziu și gri, dungi albe contrastante, accente maro și forme semicirculare. Țesătura ușoară, cu luciu discret, își păstrează forma și cade frumos — la gât, pe geantă sau pe umeri.\n\nFinisarea fină pe margine face din această eșarfă un accesoriu remarcabil al sezonului.",
+      "en": "Square silk scarf with a graphic abstract print: slate-blue and grey blocks, contrasting white stripes, brown accents and semicircular shapes. The lightweight fabric has a soft sheen, holds its shape and drapes beautifully — around the neck, on a bag or over the shoulders.\n\nFine edge finishing makes this scarf a standout seasonal accessory."
+    },
+    "highlights": {
+      "ru": ["Чистый шёлк", "Графичный геометрический принт", "Квадратный формат 90 × 90 см", "Ручная отделка по краю"],
+      "ro": ["Mătase pură", "Imprimeu geometric grafic", "Format pătrat 90 × 90 cm", "Finisare manuală pe margine"],
+      "en": ["Pure silk", "Graphic geometric print", "Square format 90 × 90 cm", "Hand-finished edge"]
+    }
+  },
+  "womens-mustard-wave-silk-scarf": {
+    "title": {
+      "ru": "Doriana — шёлковый платок",
+      "ro": "Doriana — eșarfă din mătase",
+      "en": "Doriana — silk scarf"
+    },
+    "description": {
+      "ru": "Квадратный шёлковый платок с абстрактным принтом на кремовом фоне: волнистые горчично-жёлтые линии с живописной фактурой. Лёгкая ткань с мягким блеском держит форму и красиво драпируется — на шее, на сумке или как акцент на плечах.\n\nТонкая ручная отделка по краю делает платок заметным аксессуаром сезона.",
+      "ro": "Eșarfă pătrată din mătase cu imprimeu abstract pe fundal crem: linii ondulate galben-muștar cu textură picturală. Țesătura ușoară, cu luciu discret, își păstrează forma și cade frumos — la gât, pe geantă sau pe umeri.\n\nFinisarea fină pe margine face din această eșarfă un accesoriu remarcabil al sezonului.",
+      "en": "Square silk scarf with an abstract print on a cream ground: wavy mustard-yellow lines with a painterly texture. The lightweight fabric has a soft sheen, holds its shape and drapes beautifully — around the neck, on a bag or over the shoulders.\n\nFine edge finishing makes this scarf a standout seasonal accessory."
+    },
+    "highlights": {
+      "ru": ["Чистый шёлк", "Горчичный принт с волнистыми линиями", "Квадратный формат 90 × 90 см", "Ручная отделка по краю"],
+      "ro": ["Mătase pură", "Imprimeu muștar cu linii ondulate", "Format pătrat 90 × 90 cm", "Finisare manuală pe margine"],
+      "en": ["Pure silk", "Mustard print with wavy lines", "Square format 90 × 90 cm", "Hand-finished edge"]
+    }
+  },
+  "womens-rainbow-pastel-silk-scarf": {
+    "title": {
+      "ru": "Iride — шёлковый платок",
+      "ro": "Iride — eșarfă din mătase",
+      "en": "Iride — silk scarf"
+    },
+    "description": {
+      "ru": "Квадратный шёлковый платок с акварельным радужным принтом: нежные розовые, жёлтые, голубые и лавандовые пятна, плавно переходящие друг в друга. Лёгкая ткань с мягким блеском держит форму и красиво драпируется — на шее, на сумке или как акцент на плечах.\n\nТонкая ручная отделка по краю делает платок заметным аксессуаром сезона.",
+      "ro": "Eșarfă pătrată din mătase cu imprimeu acuarelă curcubeu: pete delicate roz, galben, albastru și lavandă care se estompează una în alta. Țesătura ușoară, cu luciu discret, își păstrează forma și cade frumos — la gât, pe geantă sau pe umeri.\n\nFinisarea fină pe margine face din această eșarfă un accesoriu remarcabil al sezonului.",
+      "en": "Square silk scarf with a watercolor rainbow print: soft pink, yellow, blue and lavender patches blending into each other. The lightweight fabric has a soft sheen, holds its shape and drapes beautifully — around the neck, on a bag or over the shoulders.\n\nFine edge finishing makes this scarf a standout seasonal accessory."
+    },
+    "highlights": {
+      "ru": ["Чистый шёлк", "Акварельный радужный принт", "Квадратный формат 90 × 90 см", "Ручная отделка по краю"],
+      "ro": ["Mătase pură", "Imprimeu acuarelă curcubeu", "Format pătrat 90 × 90 cm", "Finisare manuală pe margine"],
+      "en": ["Pure silk", "Watercolor rainbow print", "Square format 90 × 90 cm", "Hand-finished edge"]
+    }
+  },
+  "womens-heart-leopard-silk-scarf": {
+    "title": {
+      "ru": "Amorette — шёлковый платок",
+      "ro": "Amorette — eșarfă din mătase",
+      "en": "Amorette — silk scarf"
+    },
+    "description": {
+      "ru": "Квадратный шёлковый платок с игривым принтом «сердечный леопард»: стилизованные сердца в чёрно-серых тонах на кремовом фоне. Лёгкая ткань с мягким блеском держит форму и красиво драпируется — на шее, на сумке или как акцент на плечах.\n\nТонкая ручная отделка по краю делает платок заметным аксессуаром сезона.",
+      "ro": "Eșarfă pătrată din mătase cu imprimeu jucăuș „leopard inimi”: inimi stilizate în tonuri negru-gri pe fundal crem. Țesătura ușoară, cu luciu discret, își păstrează forma și cade frumos — la gât, pe geantă sau pe umeri.\n\nFinisarea fină pe margine face din această eșarfă un accesoriu remarcabil al sezonului.",
+      "en": "Square silk scarf with a playful heart-leopard print: stylised hearts in black and grey tones on a cream ground. The lightweight fabric has a soft sheen, holds its shape and drapes beautifully — around the neck, on a bag or over the shoulders.\n\nFine edge finishing makes this scarf a standout seasonal accessory."
+    },
+    "highlights": {
+      "ru": ["Чистый шёлк", "Принт «сердечный леопард»", "Квадратный формат 90 × 90 см", "Ручная отделка по краю"],
+      "ro": ["Mătase pură", "Imprimeu leopard inimi", "Format pătrat 90 × 90 cm", "Finisare manuală pe margine"],
+      "en": ["Pure silk", "Heart leopard print", "Square format 90 × 90 cm", "Hand-finished edge"]
+    }
+  },
+  "womens-landscape-hills-silk-scarf": {
+    "title": {
+      "ru": "Colomba — шёлковый платок",
+      "ro": "Colomba — eșarfă din mătase",
+      "en": "Colomba — silk scarf"
+    },
+    "description": {
+      "ru": "Квадратный шёлковый платок с абстрактным пейзажным принтом: волнистые полосы зелёных, охристых и терракотовых оттенков, разделённые графичными чёрными контурами. Лёгкая ткань с мягким блеском держит форму и красиво драпируется — на шее, на сумке или как акцент на плечах.\n\nТонкая ручная отделка по краю делает платок заметным аксессуаром сезона.",
+      "ro": "Eșarfă pătrată din mătase cu imprimeu abstract peisagistic: benzi ondulate în nuanțe de verde, ocru și teracotă, separate de contururi negre grafice. Țesătura ușoară, cu luciu discret, își păstrează forma și cade frumos — la gât, pe geantă sau pe umeri.\n\nFinisarea fină pe margine face din această eșarfă un accesoriu remarcabil al sezonului.",
+      "en": "Square silk scarf with an abstract landscape print: wavy bands of green, ochre and terracotta tones separated by graphic black outlines. The lightweight fabric has a soft sheen, holds its shape and drapes beautifully — around the neck, on a bag or over the shoulders.\n\nFine edge finishing makes this scarf a standout seasonal accessory."
+    },
+    "highlights": {
+      "ru": ["Чистый шёлк", "Пейзажный принт с волнистыми линиями", "Квадратный формат 90 × 90 см", "Ручная отделка по краю"],
+      "ro": ["Mătase pură", "Imprimeu peisagistic cu linii ondulate", "Format pătrat 90 × 90 cm", "Finisare manuală pe margine"],
+      "en": ["Pure silk", "Landscape print with wavy lines", "Square format 90 × 90 cm", "Hand-finished edge"]
+    }
+  },
+  "womens-grey-stripe-silk-scarf": {
+    "title": {
+      "ru": "Nebbia — шёлковый платок",
+      "ro": "Nebbia — eșarfă din mătase",
+      "en": "Nebbia — silk scarf"
+    },
+    "description": {
+      "ru": "Квадратный шёлковый платок с фактурным принтом в полоску: мягкий серый тон с вертикальными полосами и лёгкой морщинистой фактурой. Лёгкая ткань с мягким блеском держит форму и красиво драпируется — на шее, на сумке или как акцент на плечах.\n\nТонкая ручная отделка по краю делает платок заметным аксессуаром сезона.",
+      "ro": "Eșarfă pătrată din mătase cu imprimeu texturat în dungi: ton gri moale cu dungi verticale și o ușoară textură plisată. Țesătura ușoară, cu luciu discret, își păstrează forma și cade frumos — la gât, pe geantă sau pe umeri.\n\nFinisarea fină pe margine face din această eșarfă un accesoriu remarcabil al sezonului.",
+      "en": "Square silk scarf with a textured stripe print: soft grey tone with vertical stripes and a light crinkled texture. The lightweight fabric has a soft sheen, holds its shape and drapes beautifully — around the neck, on a bag or over the shoulders.\n\nFine edge finishing makes this scarf a standout seasonal accessory."
+    },
+    "highlights": {
+      "ru": ["Чистый шёлк", "Фактурный принт в полоску", "Квадратный формат 90 × 90 см", "Ручная отделка по краю"],
+      "ro": ["Mătase pură", "Imprimeu texturat în dungi", "Format pătrat 90 × 90 cm", "Finisare manuală pe margine"],
+      "en": ["Pure silk", "Textured stripe print", "Square format 90 × 90 cm", "Hand-finished edge"]
+    }
+  },
+  "womens-mint-abstract-silk-scarf": {
+    "title": {
+      "ru": "Clarissa — шёлковый платок",
+      "ro": "Clarissa — eșarfă din mătase",
+      "en": "Clarissa — silk scarf"
+    },
+    "description": {
+      "ru": "Квадратный шёлковый платок с абстрактным принтом на мятном фоне: органические формы в тёмно-зелёных, чёрных и бежевых тонах, круговой мотив и фактурные акценты. Лёгкая ткань с мягким блеском держит форму и красиво драпируется — на шее, на сумке или как акцент на плечах.\n\nТонкая ручная отделка по краю делает платок заметным аксессуаром сезона.",
+      "ro": "Eșarfă pătrată din mătase cu imprimeu abstract pe fundal mentă: forme organice în tonuri verde închis, negru și bej, motiv circular și accente texturate. Țesătura ușoară, cu luciu discret, își păstrează forma și cade frumos — la gât, pe geantă sau pe umeri.\n\nFinisarea fină pe margine face din această eșarfă un accesoriu remarcabil al sezonului.",
+      "en": "Square silk scarf with an abstract print on a mint ground: organic shapes in dark green, black and beige tones, a circular motif and textured accents. The lightweight fabric has a soft sheen, holds its shape and drapes beautifully — around the neck, on a bag or over the shoulders.\n\nFine edge finishing makes this scarf a standout seasonal accessory."
+    },
+    "highlights": {
+      "ru": ["Чистый шёлк", "Абстрактный принт на мятном фоне", "Квадратный формат 90 × 90 см", "Ручная отделка по краю"],
+      "ro": ["Mătase pură", "Imprimeu abstract pe fundal mentă", "Format pătrat 90 × 90 cm", "Finisare manuală pe margine"],
+      "en": ["Pure silk", "Abstract print on mint ground", "Square format 90 × 90 cm", "Hand-finished edge"]
+    }
+  },
+  "womens-dusty-blue-abstract-silk-scarf": {
+    "title": {
+      "ru": "Azzurra — шёлковый платок",
+      "ro": "Azzurra — eșarfă din mătase",
+      "en": "Azzurra — silk scarf"
+    },
+    "description": {
+      "ru": "Квадратный шёлковый платок с художественным абстрактным принтом на пыльно-голубом фоне: оливково-зелёные формы, бежевые акценты, круговой мотив и тёмно-коричневые штрихи. Лёгкая ткань с мягким блеском держит форму и красиво драпируется — на шее, на сумке или как акцент на плечах.\n\nТонкая ручная отделка по краю делает платок заметным аксессуаром сезона.",
+      "ro": "Eșarfă pătrată din mătase cu imprimeu abstract artistic pe fundal albastru prăfuit: forme verde măsliniu, accente bej, motiv circular și tușe maro închis. Țesătura ușoară, cu luciu discret, își păstrează forma și cade frumos — la gât, pe geantă sau pe umeri.\n\nFinisarea fină pe margine face din această eșarfă un accesoriu remarcabil al sezonului.",
+      "en": "Square silk scarf with an artistic abstract print on a dusty blue ground: olive-green shapes, beige accents, a circular motif and deep brown brushstrokes. The lightweight fabric has a soft sheen, holds its shape and drapes beautifully — around the neck, on a bag or over the shoulders.\n\nFine edge finishing makes this scarf a standout seasonal accessory."
+    },
+    "highlights": {
+      "ru": ["Чистый шёлк", "Абстрактный принт на пыльно-голубом фоне", "Квадратный формат 90 × 90 см", "Ручная отделка по краю"],
+      "ro": ["Mătase pură", "Imprimeu abstract pe fundal albastru prăfuit", "Format pătrat 90 × 90 cm", "Finisare manuală pe margine"],
+      "en": ["Pure silk", "Abstract print on dusty blue ground", "Square format 90 × 90 cm", "Hand-finished edge"]
+    }
+  },
+  "womens-lavender-ink-silk-scarf": {
+    "title": {
+      "ru": "Lavinia — шёлковый платок",
+      "ro": "Lavinia — eșarfă din mătase",
+      "en": "Lavinia — silk scarf"
+    },
+    "description": {
+      "ru": "Квадратный шёлковый платок с акварельным принтом: мягкие лавандовые, фиолетовые и шалфейно-зелёные пятна с чёрными каплями чернил и фактурными штрихами. Лёгкая ткань с мягким блеском держит форму и красиво драпируется — на шее, на сумке или как акцент на плечах.\n\nТонкая ручная отделка по краю делает платок заметным аксессуаром сезона.",
+      "ro": "Eșarfă pătrată din mătase cu imprimeu acuarelă: pete moi lavandă, violet și verde salvie cu picături negre de cerneală și tușe texturate. Țesătura ușoară, cu luciu discret, își păstrează forma și cade frumos — la gât, pe geantă sau pe umeri.\n\nFinisarea fină pe margine face din această eșarfă un accesoriu remarcabil al sezonului.",
+      "en": "Square silk scarf with a watercolor print: soft lavender, purple and sage-green patches with black ink drops and textured brushstrokes. The lightweight fabric has a soft sheen, holds its shape and drapes beautifully — around the neck, on a bag or over the shoulders.\n\nFine edge finishing makes this scarf a standout seasonal accessory."
+    },
+    "highlights": {
+      "ru": ["Чистый шёлк", "Акварельный принт с каплями чернил", "Квадратный формат 90 × 90 см", "Ручная отделка по краю"],
+      "ro": ["Mătase pură", "Imprimeu acuarelă cu picături de cerneală", "Format pătrat 90 × 90 cm", "Finisare manuală pe margine"],
+      "en": ["Pure silk", "Watercolor print with ink drops", "Square format 90 × 90 cm", "Hand-finished edge"]
+    }
+  },
+  "womens-colorful-brushstroke-silk-scarf": {
+    "title": {
+      "ru": "Artemisia — шёлковый платок",
+      "ro": "Artemisia — eșarfă din mătase",
+      "en": "Artemisia — silk scarf"
+    },
+    "description": {
+      "ru": "Квадратный шёлковый платок с живописным абстрактным принтом: смелые мазки тёмно-синего, жёлтого, лаймового и малинового на светлом фоне. Лёгкая ткань с мягким блеском держит форму и красиво драпируется — на шее, на сумке или как акцент на плечах.\n\nТонкая ручная отделка по краю делает платок заметным аксессуаром сезона.",
+      "ro": "Eșarfă pătrată din mătase cu imprimeu abstract pictural: tușe îndrăznețe bleumarin, galben, lime și magenta pe fundal deschis. Țesătura ușoară, cu luciu discret, își păstrează forma și cade frumos — la gât, pe geantă sau pe umeri.\n\nFinisarea fină pe margine face din această eșarfă un accesoriu remarcabil al sezonului.",
+      "en": "Square silk scarf with a painterly abstract print: bold strokes of deep navy, yellow, lime and magenta on a light ground. The lightweight fabric has a soft sheen, holds its shape and drapes beautifully — around the neck, on a bag or over the shoulders.\n\nFine edge finishing makes this scarf a standout seasonal accessory."
+    },
+    "highlights": {
+      "ru": ["Чистый шёлк", "Живописный принт с цветными мазками", "Квадратный формат 90 × 90 см", "Ручная отделка по краю"],
+      "ro": ["Mătase pură", "Imprimeu pictural cu tușe colorate", "Format pătrat 90 × 90 cm", "Finisare manuală pe margine"],
+      "en": ["Pure silk", "Painterly print with colorful brushstrokes", "Square format 90 × 90 cm", "Hand-finished edge"]
+    }
+  },
+  "womens-cherry-print-silk-scarf": {
+    "title": {
+      "ru": "Rosetta — шёлковый платок",
+      "ro": "Rosetta — eșarfă din mătase",
+      "en": "Rosetta — silk scarf"
+    },
+    "description": {
+      "ru": "Квадратный шёлковый платок с игривым принтом: пары красных вишен с зелёными листьями на пыльно-голубом фоне. Лёгкая ткань с мягким блеском держит форму и красиво драпируется — на шее, на сумке или как акцент на плечах.\n\nТонкая ручная отделка по краю делает платок заметным аксессуаром сезона.",
+      "ro": "Eșarfă pătrată din mătase cu imprimeu jucăuș: perechi de cireșe roșii cu frunze verzi pe fundal albastru prăfuit. Țesătura ușoară, cu luciu discret, își păstrează forma și cade frumos — la gât, pe geantă sau pe umeri.\n\nFinisarea fină pe margine face din această eșarfă un accesoriu remarcabil al sezonului.",
+      "en": "Square silk scarf with a playful print: pairs of red cherries with green leaves on a dusty blue ground. The lightweight fabric has a soft sheen, holds its shape and drapes beautifully — around the neck, on a bag or over the shoulders.\n\nFine edge finishing makes this scarf a standout seasonal accessory."
+    },
+    "highlights": {
+      "ru": ["Чистый шёлк", "Принт с вишнями", "Квадратный формат 90 × 90 см", "Ручная отделка по краю"],
+      "ro": ["Mătase pură", "Imprimeu cu cireșe", "Format pătrat 90 × 90 cm", "Finisare manuală pe margine"],
+      "en": ["Pure silk", "Cherry print", "Square format 90 × 90 cm", "Hand-finished edge"]
+    }
+  },
+  "womens-green-geometric-silk-scarf": {
+    "title": {
+      "ru": "Verdiana — шёлковый платок",
+      "ro": "Verdiana — eșarfă din mătase",
+      "en": "Verdiana — silk scarf"
+    },
+    "description": {
+      "ru": "Квадратный шёлковый платок с графичным абстрактным принтом на зелёном фоне: органические формы, полоски, круговые мотивы и контрастные тёмно-синие акценты. Лёгкая ткань с мягким блеском держит форму и красиво драпируется — на шее, на сумке или как акцент на плечах.\n\nТонкая ручная отделка по краю делает платок заметным аксессуаром сезона.",
+      "ro": "Eșarfă pătrată din mătase cu imprimeu abstract grafic pe fundal verde: forme organice, dungi, motive circulare și accente bleumarin contrastante. Țesătura ușoară, cu luciu discret, își păstrează forma și cade frumos — la gât, pe geantă sau pe umeri.\n\nFinisarea fină pe margine face din această eșarfă un accesoriu remarcabil al sezonului.",
+      "en": "Square silk scarf with a graphic abstract print on a green ground: organic shapes, stripes, circular motifs and contrasting deep navy accents. The lightweight fabric has a soft sheen, holds its shape and drapes beautifully — around the neck, on a bag or over the shoulders.\n\nFine edge finishing makes this scarf a standout seasonal accessory."
+    },
+    "highlights": {
+      "ru": ["Чистый шёлк", "Графичный геометрический принт", "Квадратный формат 90 × 90 см", "Ручная отделка по краю"],
+      "ro": ["Mătase pură", "Imprimeu geometric grafic", "Format pătrat 90 × 90 cm", "Finisare manuală pe margine"],
+      "en": ["Pure silk", "Graphic geometric print", "Square format 90 × 90 cm", "Hand-finished edge"]
+    }
+  },
+  "womens-red-floral-silk-scarf": {
+    "title": {
+      "ru": "Fiorina — шёлковый платок",
+      "ro": "Fiorina — eșarfă din mătase",
+      "en": "Fiorina — silk scarf"
+    },
+    "description": {
+      "ru": "Квадратный шёлковый платок с художественным цветочным принтом: крупные розовые цветы с чёрными контурами и мелкие линейные мотивы на насыщенном красном фоне. Лёгкая ткань с мягким блеском держит форму и красиво драпируется — на шее, на сумке или как акцент на плечах.\n\nТонкая ручная отделка по краю делает платок заметным аксессуаром сезона.",
+      "ro": "Eșarfă pătrată din mătase cu imprimeu floral artistic: flori mari roz cu contururi negre și motive liniare mici pe fundal roșu intens. Țesătura ușoară, cu luciu discret, își păstrează forma și cade frumos — la gât, pe geantă sau pe umeri.\n\nFinisarea fină pe margine face din această eșarfă un accesoriu remarcabil al sezonului.",
+      "en": "Square silk scarf with an artistic floral print: large pink flowers with black outlines and small line motifs on a rich red ground. The lightweight fabric has a soft sheen, holds its shape and drapes beautifully — around the neck, on a bag or over the shoulders.\n\nFine edge finishing makes this scarf a standout seasonal accessory."
+    },
+    "highlights": {
+      "ru": ["Чистый шёлк", "Цветочный принт на красном фоне", "Квадратный формат 90 × 90 см", "Ручная отделка по краю"],
+      "ro": ["Mătase pură", "Imprimeu floral pe fundal roșu", "Format pătrat 90 × 90 cm", "Finisare manuală pe margine"],
+      "en": ["Pure silk", "Floral print on red ground", "Square format 90 × 90 cm", "Hand-finished edge"]
+    }
+  },
+  "womens-watercolor-circles-silk-scarf": {
+    "title": {
+      "ru": "Cerelia — шёлковый платок",
+      "ro": "Cerelia — eșarfă din mătase",
+      "en": "Cerelia — silk scarf"
+    },
+    "description": {
+      "ru": "Квадратный шёлковый платок с акварельным принтом: перекрывающиеся круги розовых, фиолетовых, зелёных и голубых оттенков на светлом фоне. Лёгкая ткань с мягким блеском держит форму и красиво драпируется — на шее, на сумке или как акцент на плечах.\n\nТонкая ручная отделка по краю делает платок заметным аксессуаром сезона.",
+      "ro": "Eșarfă pătrată din mătase cu imprimeu acuarelă: cercuri suprapuse în nuanțe de roz, violet, verde și albastru pe fundal deschis. Țesătura ușoară, cu luciu discret, își păstrează forma și cade frumos — la gât, pe geantă sau pe umeri.\n\nFinisarea fină pe margine face din această eșarfă un accesoriu remarcabil al sezonului.",
+      "en": "Square silk scarf with a watercolor print: overlapping circles in pink, purple, green and blue tones on a light ground. The lightweight fabric has a soft sheen, holds its shape and drapes beautifully — around the neck, on a bag or over the shoulders.\n\nFine edge finishing makes this scarf a standout seasonal accessory."
+    },
+    "highlights": {
+      "ru": ["Чистый шёлк", "Акварельный принт с кругами", "Квадратный формат 90 × 90 см", "Ручная отделка по краю"],
+      "ro": ["Mătase pură", "Imprimeu acuarelă cu cercuri", "Format pătrat 90 × 90 cm", "Finisare manuală pe margine"],
+      "en": ["Pure silk", "Watercolor print with circles", "Square format 90 × 90 cm", "Hand-finished edge"]
+    }
+  },
+  "womens-blue-multicolor-brushstroke-silk-scarf": {
+    "title": {
+      "ru": "Teodora — шёлковый платок",
+      "ro": "Teodora — eșarfă din mătase",
+      "en": "Teodora — silk scarf"
+    },
+    "description": {
+      "ru": "Квадратный шёлковый платок с живописным абстрактным принтом на синем фоне: многоцветные мазки жёлтого, зелёного, розового и тёмно-синего с фактурной tie-dye отделкой. Лёгкая ткань с мягким блеском держит форму и красиво драпируется — на шее, на сумке или как акцент на плечах.\n\nТонкая ручная отделка по краю делает платок заметным аксессуаром сезона.",
+      "ro": "Eșarfă pătrată din mătase cu imprimeu abstract pictural pe fundal albastru: tușe multicolore galben, verde, roz și bleumarin închis cu finisaj tie-dye texturat. Țesătura ușoară, cu luciu discret, își păstrează forma și cade frumos — la gât, pe geantă sau pe umeri.\n\nFinisarea fină pe margine face din această eșarfă un accesoriu remarcabil al sezonului.",
+      "en": "Square silk scarf with a painterly abstract print on a blue ground: multicolor strokes of yellow, green, pink and deep navy with a textured tie-dye finish. The lightweight fabric has a soft sheen, holds its shape and drapes beautifully — around the neck, on a bag or over the shoulders.\n\nFine edge finishing makes this scarf a standout seasonal accessory."
+    },
+    "highlights": {
+      "ru": ["Чистый шёлк", "Многоцветные мазки на синем фоне", "Квадратный формат 90 × 90 см", "Ручная отделка по краю"],
+      "ro": ["Mătase pură", "Tușe multicolore pe fundal albastru", "Format pătrat 90 × 90 cm", "Finisare manuală pe margine"],
+      "en": ["Pure silk", "Multicolor brushstrokes on blue ground", "Square format 90 × 90 cm", "Hand-finished edge"]
+    }
+  },
+  "womens-whale-print-silk-scarf": {
+    "title": {
+      "ru": "Delphina — шёлковый платок",
+      "ro": "Delphina — eșarfă din mătase",
+      "en": "Delphina — silk scarf"
+    },
+    "description": {
+      "ru": "Квадратный шёлковый платок с игривым принтом: стилизованные киты в синих и голубых тонах на нейтральном таupe-фоне. Лёгкая ткань с мягким блеском держит форму и красиво драпируется — на шее, на сумке или как акцент на плечах.\n\nТонкая ручная отделка по краю делает платок заметным аксессуаром сезона.",
+      "ro": "Eșarfă pătrată din mătase cu imprimeu jucăuș: balene stilizate în tonuri albastre și cyan pe fundal taupe neutru. Țesătura ușoară, cu luciu discret, își păstrează forma și cade frumos — la gât, pe geantă sau pe umeri.\n\nFinisarea fină pe margine face din această eșarfă un accesoriu remarcabil al sezonului.",
+      "en": "Square silk scarf with a playful print: stylised whales in blue and cyan tones on a neutral taupe ground. The lightweight fabric has a soft sheen, holds its shape and drapes beautifully — around the neck, on a bag or over the shoulders.\n\nFine edge finishing makes this scarf a standout seasonal accessory."
+    },
+    "highlights": {
+      "ru": ["Чистый шёлк", "Принт с китами", "Квадратный формат 90 × 90 см", "Ручная отделка по краю"],
+      "ro": ["Mătase pură", "Imprimeu cu balene", "Format pătrat 90 × 90 cm", "Finisare manuală pe margine"],
+      "en": ["Pure silk", "Whale print", "Square format 90 × 90 cm", "Hand-finished edge"]
+    }
+  },
+  "womens-metallic-leather-bifold-cardholder-fuchsia": {
+    "title": {
+      "ru": "Rosalia — картхолдер",
+      "ro": "Rosalia — portcard",
+      "en": "Rosalia — card holder"
+    },
+    "description": {
+      "ru": "Компактный картхолдер из зернистой кожи с металлическим фуксиевым покрытием: яркий блеск и выразительная фактура без лишнего объёма. Складная конструкция раскрывается на четыре вертикальных слота для карт — по два с каждой стороны.\n\nТональная строчка по контуру, аккуратная окраска торцов и золотое тиснение «Genuine Leather / Made in Italy» внутри подчёркивают итальянское происхождение. Помещается в карман сумки или куртки и хорошо сочетается с вечерними образами.",
+      "ro": "Portcard compact din piele granulată cu finisaj metalic fuxia: strălucire intensă și textură expresivă, fără volum inutil. Construcție pliabilă cu patru sloturi verticale pentru carduri — câte două pe fiecare parte.\n\nCusătură tonală pe contur, margini fin finisate și imprimare aurie „Genuine Leather / Made in Italy” în interior confirmă originea italiană. Se potrivește în buzunarul genții sau al jachetei și completează ținute de seară.",
+      "en": "Compact card holder in grained leather with a metallic fuchsia finish: vivid shine and expressive texture without extra bulk. The bifold design opens to four vertical card slots — two on each side.\n\nTonal edge stitching, clean edge paint and gold-foil “Genuine Leather / Made in Italy” stamping inside underline the Italian origin. Fits in a bag or jacket pocket and pairs well with evening looks."
+    },
+    "highlights": {
+      "ru": ["Металлическая кожа", "Складная конструкция", "4 слота для карт", "Made in Italy"],
+      "ro": ["Piele metalizată", "Construcție pliabilă", "4 sloturi pentru carduri", "Made in Italy"],
+      "en": ["Metallic leather", "Bifold design", "4 card slots", "Made in Italy"]
+    }
+  },
+  "womens-metallic-leather-bifold-cardholder-electric-blue": {
+    "title": {
+      "ru": "Azzurina — картхолдер",
+      "ro": "Azzurina — portcard",
+      "en": "Azzurina — card holder"
+    },
+    "description": {
+      "ru": "Компактный картхолдер из зернистой кожи с металлическим электрик-синим покрытием: насыщенный оттенок и зеркальный блеск на каждом изгибе. Складная конструкция раскрывается на четыре вертикальных слота для карт — по два с каждой стороны.\n\nТональная строчка по контуру, аккуратная окраска торцов и золотое тиснение «Genuine Leather / Made in Italy» внутри подчёркивают итальянское происхождение. Помещается в карман сумки или куртки и добавляет акцент даже к спокойному повседневному образу.",
+      "ro": "Portcard compact din piele granulată cu finisaj metalic albastru electric: nuanță intensă și luciu oglindit la fiecare pli. Construcție pliabilă cu patru sloturi verticale pentru carduri — câte două pe fiecare parte.\n\nCusătură tonală pe contur, margini fin finisate și imprimare aurie „Genuine Leather / Made in Italy” în interior confirmă originea italiană. Se potrivește în buzunarul genții sau al jachetei și adaugă un accent chiar și ținutelor de zi cu zi.",
+      "en": "Compact card holder in grained leather with a metallic electric-blue finish: rich colour and mirror-like shine at every fold. The bifold design opens to four vertical card slots — two on each side.\n\nTonal edge stitching, clean edge paint and gold-foil “Genuine Leather / Made in Italy” stamping inside underline the Italian origin. Fits in a bag or jacket pocket and adds a pop even to understated everyday outfits."
+    },
+    "highlights": {
+      "ru": ["Металлическая кожа", "Складная конструкция", "4 слота для карт", "Made in Italy"],
+      "ro": ["Piele metalizată", "Construcție pliabilă", "4 sloturi pentru carduri", "Made in Italy"],
+      "en": ["Metallic leather", "Bifold design", "4 card slots", "Made in Italy"]
+    }
+  },
+  "womens-metallic-leather-bifold-cardholder-teal": {
+    "title": {
+      "ru": "Turchese — картхолдер",
+      "ro": "Turchese — portcard",
+      "en": "Turchese — card holder"
+    },
+    "description": {
+      "ru": "Компактный картхолдер из зернистой кожи с металлическим бирюзовым покрытием: свежий оттенок и мягкий перламутровый блеск на рельефе зерна. Складная конструкция раскрывается на четыре вертикальных слота для карт — по два с каждой стороны.\n\nТональная строчка по контуру, аккуратная окраска торцов и золотое тиснение «Genuine Leather / Made in Italy» внутри подчёркивают итальянское происхождение. Помещается в карман сумки или куртки и хорошо смотрится как самостоятельный акцент.",
+      "ro": "Portcard compact din piele granulată cu finisaj metalic turcoaz: nuanță proaspătă și luciu perlat pe reliefurile grain-ului. Construcție pliabilă cu patru sloturi verticale pentru carduri — câte două pe fiecare parte.\n\nCusătură tonală pe contur, margini fin finisate și imprimare aurie „Genuine Leather / Made in Italy” în interior confirmă originea italiană. Se potrivește în buzunarul genții sau al jachetei și funcționează ca accent de sine stătător.",
+      "en": "Compact card holder in grained leather with a metallic teal finish: a fresh hue and soft pearlescent shine across the grain. The bifold design opens to four vertical card slots — two on each side.\n\nTonal edge stitching, clean edge paint and gold-foil “Genuine Leather / Made in Italy” stamping inside underline the Italian origin. Fits in a bag or jacket pocket and works as a stand-alone accent piece."
+    },
+    "highlights": {
+      "ru": ["Металлическая кожа", "Складная конструкция", "4 слота для карт", "Made in Italy"],
+      "ro": ["Piele metalizată", "Construcție pliabilă", "4 sloturi pentru carduri", "Made in Italy"],
+      "en": ["Metallic leather", "Bifold design", "4 card slots", "Made in Italy"]
+    }
+  },
+  "womens-pebbled-leather-bifold-cardholder-white": {
+    "title": {
+      "ru": "Bianca — картхолдер",
+      "ro": "Bianca — portcard",
+      "en": "Bianca — card holder"
+    },
+    "description": {
+      "ru": "Компактный картхолдер из белой зернистой кожи: чистый минималистичный силуэт без лишних деталей. Складная конструкция раскрывается на несколько вертикальных слотов для карт с обеих сторон.\n\nТональная строчка по контуру, аккуратная окраска торцов и золотое тиснение «Genuine Leather / Made in Italy» внутри подчёркивают итальянское происхождение. Лаконичный аксессуар для повседневного кармана или сумки.",
+      "ro": "Portcard compact din piele granulată albă: siluetă minimalistă, curată, fără detalii inutile. Construcție pliabilă cu mai multe sloturi verticale pentru carduri pe ambele părți.\n\nCusătură tonală pe contur, margini fin finisate și imprimare aurie „Genuine Leather / Made in Italy” în interior confirmă originea italiană. Accesoriu discret pentru buzunarul zilnic sau geantă.",
+      "en": "Compact card holder in white pebbled leather: a clean, minimalist silhouette with no extra details. The bifold design opens to several vertical card slots on both sides.\n\nTonal edge stitching, clean edge paint and gold-foil “Genuine Leather / Made in Italy” stamping inside underline the Italian origin. A understated everyday pocket or bag essential."
+    },
+    "highlights": {
+      "ru": ["Зернистая кожа", "Складная конструкция", "Отделения для карт с обеих сторон", "Made in Italy"],
+      "ro": ["Piele granulată", "Construcție pliabilă", "Compartimente pentru carduri pe ambele părți", "Made in Italy"],
+      "en": ["Pebbled leather", "Bifold design", "Card slots on both sides", "Made in Italy"]
+    }
+  },
+  "womens-pebbled-leather-bifold-cardholder-lavender": {
+    "title": {
+      "ru": "Liliana — картхолдер",
+      "ro": "Liliana — portcard",
+      "en": "Liliana — card holder"
+    },
+    "description": {
+      "ru": "Компактный картхолдер из зернистой кожи нежно-лавандового оттенка: мягкий пастельный тон и выразительная фактура зерна. Складная конструкция с отделениями для карт с обеих сторон — удобно разложить банковские и транспортные карты.\n\nТональная строчка по контуру, аккуратная окраска торцов и золотое тиснение «Made in Italy» внутри. Ненавязчивый акцент для весеннего гардероба.",
+      "ro": "Portcard compact din piele granulată lavandă: nuanță pastelată delicată și textură grain expresivă. Construcție pliabilă cu compartimente pentru carduri pe ambele părți — ideal pentru carduri bancare și de transport.\n\nCusătură tonală pe contur, margini fin finisate și imprimare aurie „Made in Italy” în interior. Accent discret pentru garderoba de primăvară.",
+      "en": "Compact card holder in soft lavender pebbled leather: a gentle pastel hue and expressive grain texture. The bifold design with card compartments on both sides keeps bank and transit cards neatly arranged.\n\nTonal edge stitching, clean edge paint and gold “Made in Italy” stamping inside. A subtle accent for a spring wardrobe."
+    },
+    "highlights": {
+      "ru": ["Зернистая кожа", "Складная конструкция", "Отделения для карт с обеих сторон", "Made in Italy"],
+      "ro": ["Piele granulată", "Construcție pliabilă", "Compartimente pentru carduri pe ambele părți", "Made in Italy"],
+      "en": ["Pebbled leather", "Bifold design", "Card slots on both sides", "Made in Italy"]
+    }
+  },
+  "womens-pebbled-leather-bifold-cardholder-chartreuse": {
+    "title": {
+      "ru": "Limona — картхолдер",
+      "ro": "Limona — portcard",
+      "en": "Limona — card holder"
+    },
+    "description": {
+      "ru": "Компактный картхолдер из зернистой кожи насыщенного лаймово-шартрезового оттенка: яркий акцент без лишнего объёма. Складная конструкция с отделениями для карт с обеих сторон.\n\nТональная строчка по контуру, аккуратная окраска торцов и тиснение «Genuine Leather / Made in Italy» внутри. Смелый цвет для тех, кто любит заметные детали в повседневном образе.",
+      "ro": "Portcard compact din piele granulată chartreuse lime: accent intens fără volum inutil. Construcție pliabilă cu compartimente pentru carduri pe ambele părți.\n\nCusătură tonală pe contur, margini fin finisate și imprimare „Genuine Leather / Made in Italy” în interior. Culoare îndrăzneață pentru cei care apreciază detaliile vizibile în ținutele de zi cu zi.",
+      "en": "Compact card holder in vivid lime-chartreuse pebbled leather: a bold accent without extra bulk. The bifold design with card compartments on both sides.\n\nTonal edge stitching, clean edge paint and “Genuine Leather / Made in Italy” stamping inside. A confident colour for anyone who likes standout details in everyday outfits."
+    },
+    "highlights": {
+      "ru": ["Зернистая кожа", "Складная конструкция", "Отделения для карт с обеих сторон", "Made in Italy"],
+      "ro": ["Piele granulată", "Construcție pliabilă", "Compartimente pentru carduri pe ambele părți", "Made in Italy"],
+      "en": ["Pebbled leather", "Bifold design", "Card slots on both sides", "Made in Italy"]
+    }
+  },
+  "womens-metallic-leather-bifold-cardholder-emerald": {
+    "title": {
+      "ru": "Smeralda — картхолдер",
+      "ro": "Smeralda — portcard",
+      "en": "Smeralda — card holder"
+    },
+    "description": {
+      "ru": "Компактный картхолдер из зернистой кожи с металлическим изумрудным покрытием: насыщенный зелёный оттенок и зеркальный блеск на каждом изгибе. Складная конструкция раскрывается на несколько слотов для карт с обеих сторон.\n\nТональная строчка по контуру, аккуратная окраска торцов и золотое тиснение «Genuine Leather / Made in Italy» внутри подчёркивают итальянское происхождение.",
+      "ro": "Portcard compact din piele granulată cu finisaj metalic smarald: nuanță verde intensă și luciu oglindit la fiecare pli. Construcție pliabilă cu mai multe sloturi pentru carduri pe ambele părți.\n\nCusătură tonală pe contur, margini fin finisate și imprimare aurie „Genuine Leather / Made in Italy” în interior confirmă originea italiană.",
+      "en": "Compact card holder in grained leather with a metallic emerald finish: rich green colour and mirror-like shine at every fold. The bifold design opens to several card slots on both sides.\n\nTonal edge stitching, clean edge paint and gold-foil “Genuine Leather / Made in Italy” stamping inside underline the Italian origin."
+    },
+    "highlights": {
+      "ru": ["Металлическая кожа", "Складная конструкция", "Отделения для карт с обеих сторон", "Made in Italy"],
+      "ro": ["Piele metalizată", "Construcție pliabilă", "Compartimente pentru carduri pe ambele părți", "Made in Italy"],
+      "en": ["Metallic leather", "Bifold design", "Card slots on both sides", "Made in Italy"]
+    }
+  },
+  "womens-pebbled-leather-bifold-cardholder-dark-brown": {
+    "title": {
+      "ru": "Bruna — картхолдер",
+      "ro": "Bruna — portcard",
+      "en": "Bruna — card holder"
+    },
+    "description": {
+      "ru": "Компактный картхолдер из зернистой кожи глубокого шоколадно-коричневого оттенка: насыщенный тон и выразительная фактура зерна. Складная конструкция с отделениями для карт с обеих сторон — по три слота на каждой панели.\n\nТональная строчка по контуру, аккуратная окраска торцов и золотое тиснение «Genuine Leather / Made in Italy» внутри. Универсальный тёмный аксессуар на каждый день.",
+      "ro": "Portcard compact din piele granulată maro închis, tip ciocolată: nuanță intensă și textură grain expresivă. Construcție pliabilă cu compartimente pentru carduri pe ambele părți — câte trei sloturi pe fiecare panou.\n\nCusătură tonală pe contur, margini fin finisate și imprimare aurie „Genuine Leather / Made in Italy” în interior. Accesoriu întunecat, versatil, pentru fiecare zi.",
+      "en": "Compact card holder in deep chocolate-brown pebbled leather: a rich hue and expressive grain texture. The bifold design with card compartments on both sides — three slots on each panel.\n\nTonal edge stitching, clean edge paint and gold-foil “Genuine Leather / Made in Italy” stamping inside. A versatile dark everyday accessory."
+    },
+    "highlights": {
+      "ru": ["Зернистая кожа", "Складная конструкция", "Отделения для карт с обеих сторон", "Made in Italy"],
+      "ro": ["Piele granulată", "Construcție pliabilă", "Compartimente pentru carduri pe ambele părți", "Made in Italy"],
+      "en": ["Pebbled leather", "Bifold design", "Card slots on both sides", "Made in Italy"]
+    }
+  },
+  "womens-pebbled-leather-snap-strap-rfid-cardholder-sage": {
+    "title": {
+      "ru": "Olivetta — картхолдер",
+      "ro": "Olivetta — portcard",
+      "en": "Olivetta — card holder"
+    },
+    "description": {
+      "ru": "Компактный картхолдер из зернистой кожи приглушённого оливково-шалфейного оттенка: вертикальные слоты на лицевой стороне и кожаный ремешок с кнопкой, который фиксирует карты. Внутри — дополнительные отделения и защита RFID.\n\nТональная строчка по контуру, тиснение «Genuine Leather / Vera Pelle» и маркировка RFID на подкладке. Удобный формат, когда нужны 4–6 карт под рукой и не хочется носить полноразмерный кошелёк.",
+      "ro": "Portcard compact din piele granulată verde măsliniu-salvie: sloturi verticale pe față și curea din piele cu capse care fixează cardurile. În interior — compartimente suplimentare și protecție RFID.\n\nCusătură tonală pe contur, imprimare „Genuine Leather / Vera Pelle” și marcaj RFID pe căptușeală. Format practic când ai nevoie de 4–6 carduri la îndemână, fără un portofel complet.",
+      "en": "Compact card holder in muted olive-sage pebbled leather: vertical slots on the front and a leather strap with a snap that secures your cards. Inside — additional compartments and RFID protection.\n\nTonal edge stitching, “Genuine Leather / Vera Pelle” embossing and RFID marking on the lining. A practical format when you need 4–6 cards at hand without a full-size wallet."
+    },
+    "highlights": {
+      "ru": ["Зернистая кожа", "Слоты для карт на лицевой стороне", "Ремешок с кнопкой", "Защита RFID"],
+      "ro": ["Piele granulată", "Sloturi pentru carduri pe față", "Curea cu capse", "Protecție RFID"],
+      "en": ["Pebbled leather", "Front card slots", "Snap strap", "RFID protection"]
+    }
+  },
+  "womens-pebbled-leather-snap-strap-rfid-wallet-sage": {
+    "title": {
+      "ru": "Salvia — кошелёк",
+      "ro": "Salvia — portofel",
+      "en": "Salvia — wallet"
+    },
+    "description": {
+      "ru": "Компактный кошелёк из зернистой кожи приглушённого оливково-шалфейного оттенка: вертикальный формат, кожаный ремешок с кнопкой и продуманная внутренняя организация. Внутри — отделение на молнии, слоты для карт, прозрачные окна для документов и защита RFID.\n\nТональная строчка по контуру и маркировка RFID на подкладке. Спокойный природный оттенок для повседневного кармана.",
+      "ro": "Portofel compact din piele granulată verde măsliniu-salvie: format vertical, curea din piele cu capse și organizare interioară atentă. În interior — compartiment cu fermoar, sloturi pentru carduri, ferestre transparente pentru documente și protecție RFID.\n\nCusătură tonală pe contur și marcaj RFID pe căptușeală. Nuanță naturală, calmă, pentru buzunarul de zi cu zi.",
+      "en": "Compact wallet in muted olive-sage pebbled leather: a vertical format, leather snap strap and a well-organised interior. Inside — a zip compartment, card slots, clear document windows and RFID protection.\n\nTonal edge stitching and RFID marking on the lining. A calm natural hue for an everyday pocket."
+    },
+    "highlights": {
+      "ru": ["Зернистая кожа", "Ремешок с кнопкой", "Отделение на молнии", "Защита RFID"],
+      "ro": ["Piele granulată", "Curea cu capse", "Compartiment cu fermoar", "Protecție RFID"],
+      "en": ["Pebbled leather", "Snap strap", "Zip compartment", "RFID protection"]
+    }
+  },
+  "womens-pebbled-leather-snap-strap-rfid-cardholder-grey": {
+    "title": {
+      "ru": "Cenere — картхолдер",
+      "ro": "Cenere — portcard",
+      "en": "Cenere — card holder"
+    },
+    "description": {
+      "ru": "Компактный картхолдер из зернистой кожи светло-серого оттенка: вертикальные слоты на лицевой стороне и кожаный ремешок с кнопкой, который фиксирует карты. Внутри — шесть слотов для карт с обеих сторон и защита RFID.\n\nТональная строчка по контуру, тиснение «Genuine Leather / Vera Pelle» и маркировка RFID на подкладке. Спокойный нейтральный тон для повседневного кармана.",
+      "ro": "Portcard compact din piele granulată gri deschis: sloturi verticale pe față și curea din piele cu capse care fixează cardurile. În interior — șase sloturi pentru carduri pe ambele părți și protecție RFID.\n\nCusătură tonală pe contur, imprimare „Genuine Leather / Vera Pelle” și marcaj RFID pe căptușeală. Ton neutru, calm, pentru buzunarul de zi cu zi.",
+      "en": "Compact card holder in light grey pebbled leather: vertical slots on the front and a leather snap strap that secures your cards. Inside — six card slots on both sides and RFID protection.\n\nTonal edge stitching, “Genuine Leather / Vera Pelle” embossing and RFID marking on the lining. A calm neutral tone for an everyday pocket."
+    },
+    "highlights": {
+      "ru": ["Зернистая кожа", "Слоты для карт на лицевой стороне", "Ремешок с кнопкой", "Защита RFID"],
+      "ro": ["Piele granulată", "Sloturi pentru carduri pe față", "Curea cu capse", "Protecție RFID"],
+      "en": ["Pebbled leather", "Front card slots", "Snap strap", "RFID protection"]
+    }
+  },
+  "womens-pebbled-leather-snap-strap-rfid-cardholder-red": {
+    "title": {
+      "ru": "Rubina — картхолдер",
+      "ro": "Rubina — portcard",
+      "en": "Rubina — card holder"
+    },
+    "description": {
+      "ru": "Компактный картхолдер из зернистой кожи насыщенного красного оттенка: вертикальные слоты на лицевой стороне и кожаный ремешок с кнопкой, который фиксирует карты. Внутри — дополнительные отделения и защита RFID.\n\nТональная строчка по контуру, тиснение «Genuine Leather / Vera Pelle» и маркировка RFID на подкладке. Яркий акцентный оттенок для повседневного кармана.",
+      "ro": "Portcard compact din piele granulată roșu intens: sloturi verticale pe față și curea din piele cu capse care fixează cardurile. În interior — compartimente suplimentare și protecție RFID.\n\nCusătură tonală pe contur, imprimare „Genuine Leather / Vera Pelle” și marcaj RFID pe căptușeală. Nuanță accent, vie, pentru buzunarul de zi cu zi.",
+      "en": "Compact card holder in rich red pebbled leather: vertical slots on the front and a leather strap with a snap that secures your cards. Inside — additional compartments and RFID protection.\n\nTonal edge stitching, “Genuine Leather / Vera Pelle” embossing and RFID marking on the lining. A vivid accent hue for an everyday pocket."
+    },
+    "highlights": {
+      "ru": ["Зернистая кожа", "Слоты для карт на лицевой стороне", "Ремешок с кнопкой", "Защита RFID"],
+      "ro": ["Piele granulată", "Sloturi pentru carduri pe față", "Curea cu capse", "Protecție RFID"],
+      "en": ["Pebbled leather", "Front card slots", "Snap strap", "RFID protection"]
+    }
+  },
+  "womens-pebbled-leather-snap-strap-rfid-cardholder-cream": {
+    "title": {
+      "ru": "Avorio — картхолдер",
+      "ro": "Avorio — portcard",
+      "en": "Avorio — card holder"
+    },
+    "description": {
+      "ru": "Компактный картхолдер из зернистой кожи нежного кремово-бежевого оттенка: вертикальные слоты на лицевой стороне и кожаный ремешок с кнопкой, который фиксирует карты. Внутри — дополнительные отделения и защита RFID.\n\nТональная строчка по контуру, тиснение «Genuine Leather / Vera Pelle» и маркировка RFID на подкладке. Спокойный нейтральный тон для повседневного кармана.",
+      "ro": "Portcard compact din piele granulată bej-crem delicat: sloturi verticale pe față și curea din piele cu capse care fixează cardurile. În interior — compartimente suplimentare și protecție RFID.\n\nCusătură tonală pe contur, imprimare „Genuine Leather / Vera Pelle” și marcaj RFID pe căptușeală. Ton neutru, calm, pentru buzunarul de zi cu zi.",
+      "en": "Compact card holder in soft cream-beige pebbled leather: vertical slots on the front and a leather strap with a snap that secures your cards. Inside — additional compartments and RFID protection.\n\nTonal edge stitching, “Genuine Leather / Vera Pelle” embossing and RFID marking on the lining. A calm neutral tone for an everyday pocket."
+    },
+    "highlights": {
+      "ru": ["Зернистая кожа", "Слоты для карт на лицевой стороне", "Ремешок с кнопкой", "Защита RFID"],
+      "ro": ["Piele granulată", "Sloturi pentru carduri pe față", "Curea cu capse", "Protecție RFID"],
+      "en": ["Pebbled leather", "Front card slots", "Snap strap", "RFID protection"]
+    }
+  },
+  "womens-pebbled-leather-snap-strap-rfid-cardholder-black": {
+    "title": {
+      "ru": "Notte — картхолдер",
+      "ro": "Notte — portcard",
+      "en": "Notte — card holder"
+    },
+    "description": {
+      "ru": "Компактный картхолдер из зернистой чёрной кожи: вертикальные слоты на лицевой стороне и кожаный ремешок с кнопкой, который фиксирует карты. Внутри — дополнительные отделения и защита RFID.\n\nТональная строчка по контуру, тиснение «Genuine Leather / Vera Pelle» и маркировка RFID на подкладке. Классический чёрный аксессуар для повседневного кармана.",
+      "ro": "Portcard compact din piele granulată neagră: sloturi verticale pe față și curea din piele cu capse care fixează cardurile. În interior — compartimente suplimentare și protecție RFID.\n\nCusătură tonală pe contur, imprimare „Genuine Leather / Vera Pelle” și marcaj RFID pe căptușeală. Accesoriu clasic negru pentru buzunarul de zi cu zi.",
+      "en": "Compact card holder in black pebbled leather: vertical slots on the front and a leather strap with a snap that secures your cards. Inside — additional compartments and RFID protection.\n\nTonal edge stitching, “Genuine Leather / Vera Pelle” embossing and RFID marking on the lining. A classic black accessory for an everyday pocket."
+    },
+    "highlights": {
+      "ru": ["Зернистая кожа", "Слоты для карт на лицевой стороне", "Ремешок с кнопкой", "Защита RFID"],
+      "ro": ["Piele granulată", "Sloturi pentru carduri pe față", "Curea cu capse", "Protecție RFID"],
+      "en": ["Pebbled leather", "Front card slots", "Snap strap", "RFID protection"]
+    }
+  },
+  "womens-pebbled-leather-snap-strap-rfid-wallet-red": {
+    "title": {
+      "ru": "Cremisi — кошелёк",
+      "ro": "Cremisi — portofel",
+      "en": "Cremisi — wallet"
+    },
+    "description": {
+      "ru": "Компактный кошелёк из зернистой кожи насыщенного красного оттенка: вертикальный формат, кожаный ремешок с кнопкой и продуманная внутренняя организация. Внутри — отделение на молнии, слоты для карт, прозрачные окна для документов и защита RFID.\n\nТональная строчка по контуру и маркировка RFID на подкладке. Яркий акцентный оттенок для повседневного кармана.",
+      "ro": "Portofel compact din piele granulată roșu intens: format vertical, curea din piele cu capse și organizare interioară atentă. În interior — compartiment cu fermoar, sloturi pentru carduri, ferestre transparente pentru documente și protecție RFID.\n\nCusătură tonală pe contur și marcaj RFID pe căptușeală. Nuanță accent, vie, pentru buzunarul de zi cu zi.",
+      "en": "Compact wallet in rich red pebbled leather: a vertical format, leather snap strap and a well-organised interior. Inside — a zip compartment, card slots, clear document windows and RFID protection.\n\nTonal edge stitching and RFID marking on the lining. A vivid accent hue for an everyday pocket."
+    },
+    "highlights": {
+      "ru": ["Зернистая кожа", "Ремешок с кнопкой", "Отделение на молнии", "Защита RFID"],
+      "ro": ["Piele granulată", "Curea cu capse", "Compartiment cu fermoar", "Protecție RFID"],
+      "en": ["Pebbled leather", "Snap strap", "Zip compartment", "RFID protection"]
+    }
+  },
+  "womens-pebbled-leather-snap-strap-rfid-cardholder-beige": {
+    "title": {
+      "ru": "Perla — кошелёк",
+      "ro": "Perla — portofel",
+      "en": "Perla — wallet"
+    },
+    "description": {
+      "ru": "Компактный кошелёк из зернистой кожи нежного бежевого оттенка: вертикальный формат, кожаный ремешок с кнопкой и продуманная внутренняя организация. Внутри — отделение на молнии, слоты для карт и прозрачные окна для документов, а также защита RFID.\n\nТональная строчка по контуру и маркировка RFID на подкладке. Спокойный нейтральный цвет, который легко сочетается с сумками любых оттенков.",
+      "ro": "Portofel compact din piele granulată bej delicat: format vertical, curea din piele cu capse și organizare interioară atentă. În interior — compartiment cu fermoar, sloturi pentru carduri și ferestre transparente pentru documente, plus protecție RFID.\n\nCusătură tonală pe contur și marcaj RFID pe căptușeală. Culoare neutră, calmă, ușor de asortat cu genți în orice nuanță.",
+      "en": "Compact wallet in soft beige pebbled leather: a vertical format, leather snap strap and a well-organised interior. Inside — a zip compartment, card slots and clear document windows, plus RFID protection.\n\nTonal edge stitching and RFID marking on the lining. A calm neutral colour that pairs easily with bags in any shade."
+    },
+    "highlights": {
+      "ru": ["Зернистая кожа", "Ремешок с кнопкой", "Отделение на молнии", "Защита RFID"],
+      "ro": ["Piele granulată", "Curea cu capse", "Compartiment cu fermoar", "Protecție RFID"],
+      "en": ["Pebbled leather", "Snap strap", "Zip compartment", "RFID protection"]
+    }
+  },
+  "womens-pebbled-leather-trifold-rfid-cardholder-black": {
+    "title": {
+      "ru": "Nera — картхолдер",
+      "ro": "Nera — portcard",
+      "en": "Nera — card holder"
+    },
+    "description": {
+      "ru": "Компактный картхолдер из зернистой чёрной кожи: трёхслойная складная конструкция с клапаном и застёжками на кнопках. Внутри — девять слотов для карт и защита RFID.\n\nТональная строчка по контуру, тиснение «Genuine Leather / Vera Pelle» и маркировка RFID на подкладке. Классический чёрный аксессуар, который подходит к любому образу.",
+      "ro": "Portcard compact din piele granulată neagră: construcție pliabilă cu trei panouri, clapă și capse. În interior — nouă sloturi pentru carduri și protecție RFID.\n\nCusătură tonală pe contur, imprimare „Genuine Leather / Vera Pelle” și marcaj RFID pe căptușeală. Accesoriu clasic negru, potrivit oricărei ținute.",
+      "en": "Compact card holder in black pebbled leather: a tri-fold design with a flap and snap closures. Inside — nine card slots and RFID protection.\n\nTonal edge stitching, “Genuine Leather / Vera Pelle” embossing and RFID marking on the lining. A classic black accessory that suits any outfit."
+    },
+    "highlights": {
+      "ru": ["Зернистая кожа", "Трёхслойная конструкция", "Застёжки на кнопках", "Защита RFID"],
+      "ro": ["Piele granulată", "Construcție cu trei panouri", "Capse", "Protecție RFID"],
+      "en": ["Pebbled leather", "Tri-fold design", "Snap closures", "RFID protection"]
     }
   }
 };
