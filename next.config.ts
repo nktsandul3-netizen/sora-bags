@@ -5,7 +5,7 @@ const nextConfig: NextConfig = {
     "/*": ["./public/**/*"],
   },
   images: {
-    qualities: [75, 90, 100],
+    qualities: [75, 86, 90, 100],
     remotePatterns: [
       {
         protocol: "https",

@@ -439,7 +439,7 @@ export default function CatalogView({
 
             {facets.colors.length > 0 && (
               <FilterSection title={t("catalog.color")}>
-                <CheckboxList
+                <ColorCheckboxList
                   items={facets.colors}
                   selected={draft.colors}
                   onToggle={(value) => toggle("colors", value)}
@@ -583,6 +583,64 @@ function CheckboxList({
               className="sr-only"
               checked={checked}
               onChange={() => onToggle(item.value)}
+            />
+            <span className="leading-snug">{item.label}</span>
+          </label>
+        );
+      })}
+    </div>
+  );
+}
+
+const MULTI_SWATCH_GRADIENT =
+  "conic-gradient(from 90deg, #c41e3a, #e07a2f, #e8c547, #4a5d3a, #34517a, #7a5c8a, #c41e3a)";
+
+function ColorCheckboxList({
+  items,
+  selected,
+  onToggle,
+}: {
+  items: { value: string; label: string; swatch?: string }[];
+  selected: string[];
+  onToggle: (value: string) => void;
+}) {
+  return (
+    <div className="flex max-h-64 flex-col gap-2.5 overflow-y-auto pr-1">
+      {items.map((item) => {
+        const checked = selected.includes(item.value);
+        return (
+          <label
+            key={item.value}
+            className="flex cursor-pointer items-center gap-2.5 text-[13px] text-stone-700"
+          >
+            <span
+              className={
+                "flex h-4 w-4 shrink-0 items-center justify-center rounded-[3px] border transition " +
+                (checked ? "border-stone-900 bg-stone-900 text-white" : "border-stone-300")
+              }
+            >
+              {checked && (
+                <svg viewBox="0 0 16 16" className="h-3 w-3" fill="none" aria-hidden>
+                  <path
+                    d="M3 8.5l3 3 7-7"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  />
+                </svg>
+              )}
+            </span>
+            <input
+              type="checkbox"
+              className="sr-only"
+              checked={checked}
+              onChange={() => onToggle(item.value)}
+            />
+            <span
+              aria-hidden
+              className="h-3.5 w-3.5 shrink-0 rounded-full border border-stone-300/70"
+              style={item.swatch ? { backgroundColor: item.swatch } : { background: MULTI_SWATCH_GRADIENT }}
             />
             <span className="leading-snug">{item.label}</span>
           </label>

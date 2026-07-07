@@ -233,10 +233,17 @@ function ShowcaseCard({ product }: { product: Product }) {
   );
 }
 
-export default function HomeNewArrivals({ products }: { products: Product[] }) {
+export default function HomeNewArrivals({
+  products,
+  catalogHref = "/new",
+}: {
+  products: Product[];
+  catalogHref?: string;
+}) {
   const railRef = useRef<HTMLDivElement>(null);
   const locale = useLocale();
   const t = useT();
+  const catalogPath = withLocalePath(catalogHref, locale);
 
   function scroll(direction: "left" | "right") {
     const rail = railRef.current;
@@ -250,9 +257,12 @@ export default function HomeNewArrivals({ products }: { products: Product[] }) {
   return (
     <section className="py-12">
       <div className="mb-8 text-center">
-        <h2 className="text-base font-semibold uppercase tracking-[0.12em] text-stone-950">
+        <Link
+          href={catalogPath}
+          className="inline-block text-base font-semibold uppercase tracking-[0.12em] text-stone-950 transition-colors duration-150 hover:text-stone-600"
+        >
           {t("home.newArrivals")}
-        </h2>
+        </Link>
       </div>
 
       <div className="relative">
@@ -288,10 +298,10 @@ export default function HomeNewArrivals({ products }: { products: Product[] }) {
 
       <div className="mt-8 flex justify-center">
         <Link
-          href={withLocalePath("/new", locale)}
+          href={catalogPath}
           className="border border-stone-200 px-16 py-3 text-[11px] font-semibold uppercase tracking-[0.16em] text-stone-950 transition hover:border-stone-950"
         >
-          {t("home.toCatalog")}
+          {t("home.viewAllNew")}
         </Link>
       </div>
     </section>

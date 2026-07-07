@@ -121,7 +121,6 @@ public/products/womens-compact-woven-panel-metallic-top-handle-bag/gold-front.pn
 public/products/womens-compact-woven-panel-metallic-top-handle-bag/silver-front.png
 public/products/womens-full-grain-leather-zip-around-wallet/cognac-front-alt-v5.png
 public/products/womens-full-grain-leather-zip-around-wallet/cognac-front.png
-public/products/womens-full-grain-leather-zip-around-wallet/cognac-inside-alt.png
 public/products/womens-full-grain-leather-zip-around-wallet/cognac-inside.png
 public/products/womens-full-grain-leather-zip-around-wallet/dark-navy-front-v2.png
 public/products/womens-full-grain-leather-zip-around-wallet/dark-navy-front-v3.png
@@ -130,10 +129,8 @@ public/products/womens-full-grain-leather-zip-around-wallet/dark-navy-front.png
 public/products/womens-full-grain-leather-zip-around-wallet/dark-navy-inside.png
 public/products/womens-full-grain-leather-zip-around-wallet/forest-green-front-alt-v5.png
 public/products/womens-full-grain-leather-zip-around-wallet/forest-green-front.png
-public/products/womens-full-grain-leather-zip-around-wallet/forest-green-inside-alt.png
 public/products/womens-full-grain-leather-zip-around-wallet/forest-green-inside.png
 public/products/womens-full-grain-leather-zip-around-wallet/red-front.png
-public/products/womens-full-grain-leather-zip-around-wallet/red-inside-alt.png
 public/products/womens-hobo-shoulder-bag/black-1.png
 public/products/womens-hobo-shoulder-bag/black-2.png
 public/products/womens-hobo-shoulder-bag/black-3.png
@@ -300,10 +297,8 @@ public/products/womens-tote-shopper-bag/orange-2.png
 public/products/womens-tote-shopper-bag/orange-3.png
 public/products/womens-tote-shopper-bag/orange-4.png
 public/products/womens-tote-shopper-bag/orange-5.png
-public/products/womens-vintage-accordion-zip-wallet/cognac-front-alt.png
 public/products/womens-vintage-accordion-zip-wallet/cognac-front.png
 public/products/womens-vintage-accordion-zip-wallet/dark-navy-front.png
-public/products/womens-vintage-accordion-zip-wallet/forest-green-front-alt.png
 public/products/womens-vintage-accordion-zip-wallet/forest-green-front.png
 public/products/womens-woven-base-drawstring-bucket-bag/black-front.png
 public/products/womens-woven-base-leather-link-handle-hobo-bag/black-front.png
@@ -318,7 +313,6 @@ public/products/womens-woven-base-zip-top-structured-bag/ivory-front.png
 public/products/womens-woven-base-zip-top-structured-bag/white-front.png
 public/products/womens-woven-buckle-handle-tote-bag/blush-front.png
 public/products/womens-woven-buckle-handle-tote-bag/forest-green-front.png
-public/products/womens-woven-crescent-hobo-bag/plum-front-alt.png
 public/products/womens-woven-crescent-hobo-bag/plum-front.png
 public/products/womens-woven-flap-top-handle-bag/magenta-front-alt.png
 public/products/womens-woven-flap-top-handle-bag/magenta-front.png
@@ -345,8 +339,13 @@ public/return-banner-v6.png
 public/return-banner-v7-hq.jpg
 public/return-banner-v8-hq.jpg
 public/return-banner.jpg
+public/stores/chisinau-stefan-cel-mare/hero-1.png
+public/stores/chisinau-stefan-cel-mare/port-mall-hero.png
 public/tile-bags.png
+public/tile-bags-square.jpg
+public/tile-bags-summer-v2.jpg
 public/tile-new.jpg
+public/tile-sale-square.jpg
 public/vercel.svg
 public/warranty-banner-v2.png
 public/warranty-banner.jpg

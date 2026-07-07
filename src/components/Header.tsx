@@ -91,7 +91,6 @@ function StoreLocatorLink({ overlay, compact = false }: { overlay: boolean; comp
 
 export default function Header() {
   const pathname = usePathname();
-  const locale = useLocale();
   const t = useT();
   const { menuOpen, setMenuOpen } = useMenuOpen();
   const isHeroOverlay = isHeroOverlayPath(pathname);
@@ -485,7 +484,6 @@ function MobileMenu({ onClose }: { onClose: () => void }) {
         { label: t("nav.warranty"), href: withLocalePath("/info/garantiya", locale) },
         { label: t("nav.paymentDelivery"), href: withLocalePath("/info/oplata-i-dostavka", locale) },
         { label: t("nav.gifts"), href: withLocalePath("/info/podarochnye-sertifikaty", locale) },
-        { label: t("nav.contacts"), href: withLocalePath("/contacts", locale) },
       ],
     },
   ];

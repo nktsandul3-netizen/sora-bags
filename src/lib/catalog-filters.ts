@@ -1,5 +1,5 @@
 import type { Locale } from "@/lib/i18n";
-import { localizeColorName } from "@/lib/product-i18n";
+import { COLOR_FAMILY_ORDER, colorFamilyLabel, colorFamilySwatch, getColorFamilies } from "@/lib/color-taxonomy";
 import type { Product } from "@/lib/types";
 
 export interface CatalogFilters {
@@ -19,6 +19,8 @@ export type MultiSelectFilterKey = Exclude<keyof CatalogFilters, "priceMin" | "p
 export interface CatalogFilterOption {
   value: string;
   label: string;
+  /** Цвет кружка-иконки (только для фильтра по цвету). */
+  swatch?: string;
 }
 
 export interface CatalogFacets {
@@ -232,7 +234,7 @@ export function countActiveCatalogFilters(filters: CatalogFilters) {
 
 export function buildCatalogFacets(products: Product[], locale: Locale): CatalogFacets {
   const categories = new Set<string>();
-  const colors = new Set<string>();
+  const colorFamilies = new Set<string>();
   const materials = new Set<string>();
   const sizes = new Set<string>();
   const strapTypes = new Set<string>();
@@ -241,7 +243,7 @@ export function buildCatalogFacets(products: Product[], locale: Locale): Catalog
 
   for (const product of products) {
     getProductCategories(product).forEach((value) => categories.add(value));
-    product.colors.forEach((color) => colors.add(color.name));
+    product.colors.forEach((color) => getColorFamilies(color.name).forEach((family) => colorFamilies.add(family)));
     if (product.material) materials.add(product.material);
     getProductSizes(product).forEach((value) => sizes.add(value));
     getProductStrapTypes(product).forEach((value) => strapTypes.add(value));
@@ -251,9 +253,11 @@ export function buildCatalogFacets(products: Product[], locale: Locale): Catalog
 
   return {
     categories: makeOptions(categories, Object.keys(bagCategoryLabels), bagCategoryLabels),
-    colors: [...colors]
-      .sort((a, b) => localizeColorName(a, locale).localeCompare(localizeColorName(b, locale), locale))
-      .map((value) => ({ value, label: localizeColorName(value, locale) })),
+    colors: COLOR_FAMILY_ORDER.filter((key) => colorFamilies.has(key)).map((key) => ({
+      value: key,
+      label: colorFamilyLabel(key, locale),
+      swatch: colorFamilySwatch(key),
+    })),
     materials: [...materials].sort((a, b) => a.localeCompare(b, locale)).map((value) => ({ value, label: value })),
     sizes: makeLocalizedOptions(sizes, ["mini", "small", "medium", "large"], locale, sizeLabels),
     strapTypes: makeLocalizedOptions(strapTypes, ["crossbody-strap", "shoulder-strap", "top-handle", "no-strap"], locale, strapTypeLabels),
@@ -273,7 +277,7 @@ export function productMatchesCatalogFilters(product: Product, filters: CatalogF
   if (typeof min === "number" && !Number.isNaN(min) && product.price < min) return false;
   if (typeof max === "number" && !Number.isNaN(max) && product.price > max) return false;
   if (!matchesSelected(filters.categories, getProductCategories(product))) return false;
-  if (!matchesSelected(filters.colors, product.colors.map((color) => color.name))) return false;
+  if (!matchesSelected(filters.colors, product.colors.flatMap((color) => getColorFamilies(color.name)))) return false;
   if (!matchesSelected(filters.materials, product.material ? [product.material] : [])) return false;
   if (!matchesSelected(filters.sizes, getProductSizes(product))) return false;
   if (!matchesSelected(filters.strapTypes, getProductStrapTypes(product))) return false;

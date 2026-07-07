@@ -4,6 +4,7 @@ import Link from "next/link";
 import Image from "next/image";
 import type { ReactNode } from "react";
 import { brand } from "@/lib/config";
+import { getStoreAddress, getStoreHours, getStoreName, primaryStore } from "@/lib/stores";
 import { withLocalePath } from "@/lib/i18n";
 import { useLocale, useT } from "@/lib/useI18n";
 
@@ -141,7 +142,7 @@ const socials = [
 
 function FooterHeading({ children }: { children: ReactNode }) {
   return (
-    <h4 className="mb-4 text-[11px] font-semibold uppercase tracking-[0.22em] text-stone-400">
+    <h4 className="mb-4 text-[11px] font-semibold uppercase tracking-[0.16em] text-stone-400">
       {children}
     </h4>
   );
@@ -149,10 +150,10 @@ function FooterHeading({ children }: { children: ReactNode }) {
 
 function FooterLinks({ links }: { links: { href: string; label: string }[] }) {
   return (
-    <ul className="space-y-3 text-sm leading-snug text-stone-600">
+    <ul className="space-y-2.5 text-sm leading-snug text-stone-600">
       {links.map((link) => (
         <li key={link.href}>
-          <Link href={link.href} className="transition hover:text-stone-950">
+          <Link href={link.href} className="transition-colors duration-150 hover:text-stone-950">
             {link.label}
           </Link>
         </li>
@@ -166,9 +167,10 @@ export default function Footer() {
   const t = useT();
   const brandText = {
     tagline: locale === "ru" ? brand.tagline : locale === "ro" ? "Genți și accesorii italiene din piele naturală" : "Italian bags and accessories in genuine leather",
-    workingHours: locale === "ru" ? brand.workingHours : locale === "ro" ? "Lun-Dum: 10:00 - 21:00" : "Mon-Sun: 10:00 - 21:00",
-    address: locale === "ru" ? brand.address : locale === "ro" ? "Chișinău, Republica Moldova" : "Chisinau, Republic of Moldova",
   };
+  const storeHours = getStoreHours(primaryStore, locale)[0];
+  const storeAddress = getStoreAddress(primaryStore, locale);
+  const storeName = getStoreName(primaryStore, locale);
   const catalog = [
     { href: "/new", label: t("nav.new") },
     { href: "/bags", label: t("nav.bags") },
@@ -182,7 +184,6 @@ export default function Footer() {
     { href: "/info/podarochnye-sertifikaty", label: t("nav.gifts") },
     { href: "/info/optom", label: t("nav.wholesale") },
     { href: "/info/vozvrat", label: t("nav.returns") },
-    { href: "/contacts", label: t("nav.contacts") },
   ];
   const legal = [
     { href: "/info/politika-konfidentsialnosti", label: t("nav.privacy") },
@@ -192,101 +193,116 @@ export default function Footer() {
   const localizeLinks = (links: { href: string; label: string }[]) =>
     links.map((link) => ({ ...link, href: withLocalePath(link.href, locale) }));
   return (
-    <footer className="relative overflow-hidden border-t border-stone-200 bg-[#f7f5f3]">
-      <div className="relative overflow-hidden">
+    <footer id="site-footer" className="relative overflow-hidden border-t border-stone-200 bg-[#f7f5f3]">
+      <div className="relative">
         <div
           aria-hidden="true"
-          className="pointer-events-none absolute inset-y-0 right-0 hidden w-[46%] max-w-[540px] select-none lg:block [mask-image:linear-gradient(to_left,black_74%,transparent)]"
+          className="pointer-events-none absolute inset-y-0 right-0 hidden w-[28%] max-w-[320px] select-none opacity-[0.28] xl:block [mask-image:linear-gradient(to_left,black_42%,transparent_92%)]"
         >
           <Image
             src="/footer-bag-cognac.png"
             alt=""
             fill
-            sizes="540px"
-            className="object-cover object-right"
+            sizes="320px"
+            className="object-contain object-right-bottom translate-x-6 translate-y-4 scale-[0.88]"
           />
         </div>
 
-      <div className="relative z-10 mx-auto grid max-w-7xl gap-10 px-4 py-14 sm:px-6 sm:grid-cols-2 lg:grid-cols-12 lg:gap-x-10 lg:gap-y-12 lg:py-16 lg:pr-48 xl:pr-60">
-        <div className="sm:col-span-2 lg:col-span-4">
-          <span className="font-serif text-3xl tracking-[0.18em] text-stone-950">
-            {brand.name}
-          </span>
-          <p className="mt-3 max-w-xs text-sm leading-relaxed text-stone-500">
-            {brandText.tagline}.
-          </p>
-          <div className="mt-5 flex gap-2.5">
-            {socials.map(({ label, href, Icon }) => (
-              <a
-                key={label}
-                href={href}
-                target="_blank"
-                rel="noreferrer"
-                aria-label={label}
-                className="inline-flex h-9 w-9 items-center justify-center rounded-full border border-stone-300 text-stone-500 transition hover:border-stone-900 hover:text-stone-900"
-              >
-                <Icon className="h-[17px] w-[17px]" />
-              </a>
-            ))}
+        <div className="relative z-10 mx-auto grid max-w-7xl gap-x-8 gap-y-10 px-4 py-12 sm:px-6 md:grid-cols-2 lg:grid-cols-12 lg:gap-x-10 lg:py-14">
+          <div className="md:col-span-2 lg:col-span-4">
+            <span className="font-serif text-[1.65rem] tracking-[0.16em] text-stone-950 sm:text-3xl sm:tracking-[0.18em]">
+              {brand.name}
+            </span>
+            <p className="mt-3 max-w-xs text-sm leading-relaxed text-stone-500">
+              {brandText.tagline}.
+            </p>
+            <div className="mt-5 flex flex-wrap gap-2">
+              {socials.map(({ label, href, Icon }) => (
+                <a
+                  key={label}
+                  href={href}
+                  target="_blank"
+                  rel="noreferrer"
+                  aria-label={label}
+                  className="inline-flex h-9 w-9 items-center justify-center rounded-full border border-stone-200 bg-white/70 text-stone-500 transition-colors duration-150 hover:border-stone-400 hover:text-stone-900"
+                >
+                  <Icon className="h-[17px] w-[17px]" />
+                </a>
+              ))}
+            </div>
           </div>
-        </div>
 
-        <div className="lg:col-span-2">
-          <FooterHeading>{t("nav.catalog")}</FooterHeading>
-          <FooterLinks links={localizeLinks(catalog)} />
-        </div>
+          <div className="lg:col-span-2">
+            <FooterHeading>{t("nav.catalog")}</FooterHeading>
+            <FooterLinks links={localizeLinks(catalog)} />
+          </div>
 
-        <div className="lg:col-span-3">
-          <FooterHeading>{t("nav.info")}</FooterHeading>
-          <FooterLinks links={localizeLinks(info)} />
-        </div>
+          <div className="lg:col-span-3">
+            <FooterHeading>{t("nav.info")}</FooterHeading>
+            <FooterLinks links={localizeLinks(info)} />
+          </div>
 
-        <div className="lg:col-span-3">
-          <FooterHeading>{t("nav.contacts")}</FooterHeading>
-          <ul className="space-y-3.5 text-sm leading-snug text-stone-600">
-            {brand.phones.map((ph) => (
-              <li key={ph} className="flex items-start gap-2.5">
+          <div className="lg:col-span-3">
+            <FooterHeading>{t("nav.contacts")}</FooterHeading>
+            <ul className="space-y-3 text-sm leading-snug text-stone-600">
+              <li className="flex items-start gap-2.5">
                 <IconPhone className="mt-0.5 h-4 w-4 shrink-0 text-stone-400" />
-                <a href={`tel:${ph.replace(/\s/g, "")}`} className="transition hover:text-stone-950">
-                  {ph}
+                <a
+                  href={`tel:${primaryStore.phone.replace(/\s/g, "")}`}
+                  className="transition-colors duration-150 hover:text-stone-950"
+                >
+                  {primaryStore.phone}
                 </a>
               </li>
-            ))}
-            <li className="flex items-start gap-2.5">
-              <IconMail className="mt-0.5 h-4 w-4 shrink-0 text-stone-400" />
-              <a href={`mailto:${brand.email}`} className="transition hover:text-stone-950">
-                {brand.email}
-              </a>
-            </li>
-            <li className="flex items-start gap-2.5">
-              <IconClock className="mt-0.5 h-4 w-4 shrink-0 text-stone-400" />
-              <span className="text-stone-500">{brandText.workingHours}</span>
-            </li>
-            <li className="flex items-start gap-2.5">
-              <IconPin className="mt-0.5 h-4 w-4 shrink-0 text-stone-400" />
-              <span className="max-w-[14rem] text-stone-500">{brandText.address}</span>
-            </li>
-          </ul>
+              <li className="flex items-start gap-2.5">
+                <IconMail className="mt-0.5 h-4 w-4 shrink-0 text-stone-400" />
+                <a
+                  href={`mailto:${primaryStore.email}`}
+                  className="transition-colors duration-150 hover:text-stone-950"
+                >
+                  {primaryStore.email}
+                </a>
+              </li>
+              <li className="flex items-start gap-2.5">
+                <IconClock className="mt-0.5 h-4 w-4 shrink-0 text-stone-400" />
+                <span className="text-stone-500">{storeHours}</span>
+              </li>
+              <li className="flex items-start gap-2.5">
+                <IconPin className="mt-0.5 h-4 w-4 shrink-0 text-stone-400" />
+                <Link
+                  href={withLocalePath("/info/nashi-magaziny", locale)}
+                  className="max-w-[16rem] text-stone-500 transition-colors duration-150 hover:text-stone-950"
+                >
+                  <span className="block font-medium text-stone-700">{storeName}</span>
+                  <span className="mt-0.5 block">{storeAddress}</span>
+                </Link>
+              </li>
+            </ul>
+          </div>
         </div>
       </div>
-      </div>
 
-      <div className="relative z-10 border-t border-stone-200">
-        <div className="mx-auto flex max-w-7xl flex-col gap-4 px-4 py-5 text-xs text-stone-400 sm:px-6 lg:flex-row lg:items-center lg:justify-between lg:gap-6 lg:pr-48 xl:pr-60">
-          <p className="shrink-0">
-            © {new Date().getFullYear()} {brand.legalName}. {locale === "ru" ? "Все права защищены." : locale === "ro" ? "Toate drepturile rezervate." : "All rights reserved."}
+      <div className="relative z-10 border-t border-stone-200/80">
+        <div className="mx-auto flex max-w-7xl flex-col gap-5 px-4 py-6 sm:px-6 lg:flex-row lg:items-center lg:justify-between lg:gap-8 lg:py-7">
+          <p className="text-xs leading-relaxed text-stone-400 lg:max-w-[18rem] lg:shrink-0">
+            © {new Date().getFullYear()} {brand.legalName}.{" "}
+            {locale === "ru"
+              ? "Все права защищены."
+              : locale === "ro"
+                ? "Toate drepturile rezervate."
+                : "All rights reserved."}
           </p>
-          <div className="flex flex-wrap items-center gap-x-4 gap-y-2">
+          <nav className="flex flex-wrap items-center gap-x-4 gap-y-2 text-xs text-stone-400 lg:flex-1 lg:justify-center">
             {localizeLinks(legal).map((link, index) => (
               <span key={link.href} className="flex items-center gap-4">
-                {index > 0 ? <span className="hidden text-stone-300 sm:inline">|</span> : null}
-                <Link href={link.href} className="transition hover:text-stone-700">
+                {index > 0 ? <span className="hidden text-stone-300 sm:inline" aria-hidden="true">|</span> : null}
+                <Link href={link.href} className="transition-colors duration-150 hover:text-stone-700">
                   {link.label}
                 </Link>
               </span>
             ))}
-          </div>
-          <div className="flex items-center gap-2">
+          </nav>
+          <div className="flex shrink-0 items-center gap-2 lg:justify-end">
             <PayVisa />
             <PayMastercard />
             <PayApple />

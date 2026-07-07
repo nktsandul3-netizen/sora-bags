@@ -634,3 +634,124 @@ export const brandStories = {
 } as const;
 
 export type BrandStoriesConfig = typeof brandStories;
+
+export type HomeStoryRailTile = {
+  id: string;
+  label: string;
+  cover: string;
+  slides: BrandStorySlide[];
+};
+
+export const homeAsOnMeRail = {
+  title: "AS ON ME",
+  tiles: [
+      {
+        id: "accordion",
+        label: "ACCORDION",
+        cover: "/products/womens-pebbled-leather-accordion-buckle-shoulder-bag/as-seen-on-yellow-mirror-1.jpg",
+        slides: [
+          {
+            type: "image",
+            src: "/products/womens-pebbled-leather-accordion-buckle-shoulder-bag/as-seen-on-yellow-mirror-1.jpg",
+          },
+          {
+            type: "image",
+            src: "/products/womens-pebbled-leather-accordion-buckle-shoulder-bag/as-seen-on-yellow-mirror-2.jpg",
+          },
+          {
+            type: "image",
+            src: "/products/womens-pebbled-leather-accordion-buckle-shoulder-bag/as-seen-on-yellow-mirror-3.jpg",
+          },
+        ],
+      },
+      {
+        id: "kiss-lock",
+        label: "KISS LOCK",
+        cover: "/products/womens-pebbled-leather-kiss-lock-pouch-bag/as-seen-on-light-blue-mirror-1.jpg",
+        slides: [
+          {
+            type: "image",
+            src: "/products/womens-pebbled-leather-kiss-lock-pouch-bag/as-seen-on-light-blue-mirror-1.jpg",
+          },
+          {
+            type: "image",
+            src: "/products/womens-pebbled-leather-kiss-lock-pouch-bag/as-seen-on-light-blue-mirror-2.jpg",
+          },
+        ],
+      },
+      {
+        id: "travel-tote",
+        label: "TRAVEL TOTE",
+        cover: "/products/premium-leather-travel-tote-bag/as-seen-on-cognac-storefront-2.jpg",
+        slides: [
+          {
+            type: "image",
+            src: "/products/premium-leather-travel-tote-bag/as-seen-on-cognac-storefront-1.jpg",
+          },
+          {
+            type: "image",
+            src: "/products/premium-leather-travel-tote-bag/as-seen-on-cognac-storefront-2.jpg",
+          },
+          {
+            type: "image",
+            src: "/products/premium-leather-travel-tote-bag/as-seen-on-cognac-storefront-3.jpg",
+          },
+        ],
+      },
+      {
+        id: "woven-tote",
+        label: "WOVEN TOTE",
+        cover: "/products/woven-leather-shopper-tote/as-seen-on-mirror-1.jpg",
+        slides: [
+          {
+            type: "image",
+            src: "/products/woven-leather-shopper-tote/as-seen-on-mirror-1.jpg",
+          },
+          {
+            type: "image",
+            src: "/products/woven-leather-shopper-tote/as-seen-on-mirror-2.jpg",
+          },
+          {
+            type: "image",
+            src: "/products/woven-leather-shopper-tote/as-seen-on-lifestyle-1.jpg",
+          },
+        ],
+      },
+      {
+        id: "suede-wing",
+        label: "SUEDE WING",
+        cover: "/products/womens-suede-wing-tote-bag/as-seen-on-1.png",
+        slides: [
+          {
+            type: "image",
+            src: "/products/womens-suede-wing-tote-bag/as-seen-on-1.png",
+          },
+          {
+            type: "image",
+            src: "/products/womens-suede-wing-tote-bag/as-seen-on-2.png",
+          },
+        ],
+      },
+      {
+        id: "bowling",
+        label: "BOWLING",
+        cover: "/products/womens-pebbled-leather-two-tone-bowling-bag/as-seen-on-mirror-2.png",
+        slides: [
+          {
+            type: "image",
+            src: "/products/womens-pebbled-leather-two-tone-bowling-bag/as-seen-on-mirror-1.png",
+          },
+          {
+            type: "image",
+            src: "/products/womens-pebbled-leather-two-tone-bowling-bag/as-seen-on-mirror-2.png",
+          },
+          {
+            type: "image",
+            src: "/products/womens-pebbled-leather-two-tone-bowling-bag/as-seen-on-mirror-3.png",
+          },
+        ],
+      },
+    ] satisfies HomeStoryRailTile[],
+} as const;
+
+export type HomeAsOnMeRailConfig = typeof homeAsOnMeRail;

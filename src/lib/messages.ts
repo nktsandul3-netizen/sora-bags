@@ -37,6 +37,7 @@ const ru = {
   },
   nav: {
     new: "Новинки",
+    sale: "Скидки",
     bags: "Сумки",
     accessories: "Аксессуары",
     customers: "Покупателям",
@@ -62,6 +63,12 @@ const ru = {
     messengers: "Наши мессенджеры",
     newArrivals: "Новинки",
     toCatalog: "В каталог",
+    viewAllNew: "Все новинки",
+    brandStoryTitle: "SÓRA",
+    brandStory1:
+      "В основе коллекции SÓRA — итальянские сумки и аксессуары, отобранные с особым вниманием к качеству, удобству и современному дизайну. Каждая модель продумана так, чтобы легко вписываться в повседневный гардероб и оставаться актуальной вне зависимости от сезона.",
+    brandStory3:
+      "Коллекция создана для тех, кто ценит спокойную роскошь, универсальность и качество, которое ощущается каждый день. SÓRA — это сумки, которые не просто дополняют образ, а становятся его естественной частью.",
   },
   search: {
     placeholder: "Поиск по каталогу…",
@@ -411,6 +418,7 @@ const ro: typeof ru = {
   },
   nav: {
     new: "Noutăți",
+    sale: "Reduceri",
     bags: "Genți",
     accessories: "Accesorii",
     customers: "Pentru clienți",
@@ -436,6 +444,12 @@ const ro: typeof ru = {
     messengers: "Messenger-ele noastre",
     newArrivals: "Noutăți",
     toCatalog: "În catalog",
+    viewAllNew: "Toate noutățile",
+    brandStoryTitle: "SÓRA",
+    brandStory1:
+      "Colecția SÓRA se bazează pe genți și accesorii italiene, selectate cu atenție deosebită la calitate, confort și design modern. Fiecare model este gândit să se integreze ușor în garderoba de zi cu zi și să rămână actual indiferent de sezon.",
+    brandStory3:
+      "Colecția este creată pentru cei care apreciază luxul discret, versatilitatea și calitatea care se simte în fiecare zi. SÓRA înseamnă genți care nu doar completează ținuta, ci devin o parte naturală a ei.",
   },
   search: {
     placeholder: "Căutare în catalog...",
@@ -785,6 +799,7 @@ const en: typeof ru = {
   },
   nav: {
     new: "New",
+    sale: "Sale",
     bags: "Bags",
     accessories: "Accessories",
     customers: "Customer care",
@@ -810,6 +825,12 @@ const en: typeof ru = {
     messengers: "Our messengers",
     newArrivals: "New arrivals",
     toCatalog: "To catalog",
+    viewAllNew: "All new arrivals",
+    brandStoryTitle: "SÓRA",
+    brandStory1:
+      "At the heart of the SÓRA collection are Italian bags and accessories, selected with special attention to quality, comfort and modern design. Every piece is designed to fit easily into everyday wardrobes and remain relevant regardless of season.",
+    brandStory3:
+      "The collection is created for those who value quiet luxury, versatility and quality that is felt every day. SÓRA is about bags that do not simply complete a look, but become a natural part of it.",
   },
   search: {
     placeholder: "Search the catalog...",

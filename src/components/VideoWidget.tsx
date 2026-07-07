@@ -8,6 +8,10 @@ import { parseTikTokVideoId } from "@/lib/tiktok";
 
 const EXPAND_EASE = [0.42, 0, 0.58, 1] as const;
 const EXPAND_MS = 0.4;
+const DEFAULT_BOTTOM_DESKTOP = 28;
+const DEFAULT_BOTTOM_MOBILE = 72;
+const FOOTER_GAP = 20;
+const CLOSE_BUTTON_OVERHANG = 12;
 
 type ResolvedTikTokItem = VideoWidgetTikTokItem & {
   videoId: string;
@@ -105,12 +109,17 @@ export default function VideoWidget() {
   const [expanded, setExpanded] = useState(false);
   const [muted, setMuted] = useState(true);
   const [activeIndex, setActiveIndex] = useState(0);
-  const [showMobileWidget, setShowMobileWidget] = useState(
-    () => typeof window !== "undefined" && window.scrollY > 260,
-  );
   const videoRef = useRef<HTMLVideoElement | null>(null);
   const containerRef = useRef<HTMLDivElement | null>(null);
   const isDesktop = useIsDesktop();
+  const defaultBottom = isDesktop ? DEFAULT_BOTTOM_DESKTOP : DEFAULT_BOTTOM_MOBILE;
+  const [showMobileWidget, setShowMobileWidget] = useState(
+    () => typeof window !== "undefined" && window.scrollY > 260,
+  );
+  const [footerLayout, setFooterLayout] = useState({
+    bottom: DEFAULT_BOTTOM_MOBILE,
+    blocked: false,
+  });
 
   const tiktokItems = useMemo(
     () => (videoWidget.mode === "tiktok" ? resolveTikTokItems(videoWidget.tiktokVideos) : []),
@@ -128,8 +137,8 @@ export default function VideoWidget() {
   const ctaHref =
     useTikTok && activeTikTok ? activeTikTok.ctaHref : brand.social.tiktok;
 
-  const collapsedW = isDesktop ? 130 : 76;
-  const collapsedH = isDesktop ? 231 : 135;
+  const collapsedW = isDesktop ? 118 : 68;
+  const collapsedH = isDesktop ? 210 : 120;
   const vh = typeof window !== "undefined" ? window.innerHeight : 900;
   const vw = typeof window !== "undefined" ? window.innerWidth : 1280;
   // Разворачиваем в вертикальный формат 9:16, как на Lancaster.
@@ -199,6 +208,53 @@ export default function VideoWidget() {
   }, [isDesktop]);
 
   useEffect(() => {
+    const updateFooterLayout = () => {
+      const footer = document.getElementById("site-footer");
+      const baseBottom = isDesktop ? DEFAULT_BOTTOM_DESKTOP : DEFAULT_BOTTOM_MOBILE;
+
+      if (!footer) {
+        setFooterLayout({ bottom: baseBottom, blocked: false });
+        return;
+      }
+
+      const footerTop = footer.getBoundingClientRect().top;
+      const viewportHeight = window.innerHeight;
+      const widgetHeight = expanded ? expandedH : collapsedH;
+      const totalHeight = widgetHeight + CLOSE_BUTTON_OVERHANG;
+
+      if (footerTop >= viewportHeight) {
+        setFooterLayout({ bottom: baseBottom, blocked: false });
+        return;
+      }
+
+      const liftedBottom = viewportHeight - footerTop + FOOTER_GAP;
+      const maxBottom = Math.max(baseBottom, viewportHeight - totalHeight - 8);
+
+      if (liftedBottom > maxBottom) {
+        setFooterLayout({ bottom: baseBottom, blocked: true });
+        if (expanded) {
+          setExpanded(false);
+          setMuted(true);
+        }
+        return;
+      }
+
+      setFooterLayout({
+        bottom: Math.max(baseBottom, Math.min(liftedBottom, maxBottom)),
+        blocked: false,
+      });
+    };
+
+    updateFooterLayout();
+    window.addEventListener("scroll", updateFooterLayout, { passive: true });
+    window.addEventListener("resize", updateFooterLayout);
+    return () => {
+      window.removeEventListener("scroll", updateFooterLayout);
+      window.removeEventListener("resize", updateFooterLayout);
+    };
+  }, [collapsedH, expanded, expandedH, isDesktop]);
+
+  useEffect(() => {
     const v = videoRef.current;
     if (!v) return;
     v.muted = expanded ? muted : true;
@@ -230,7 +286,16 @@ export default function VideoWidget() {
     setExpanded(false);
   }
 
-  if (!mounted || !videoWidget.enabled || dismissed || menuOpen || (!isDesktop && !showMobileWidget)) return null;
+  if (
+    !mounted ||
+    !videoWidget.enabled ||
+    dismissed ||
+    menuOpen ||
+    footerLayout.blocked ||
+    (!isDesktop && !showMobileWidget)
+  ) {
+    return null;
+  }
 
   return (
     <>
@@ -240,18 +305,22 @@ export default function VideoWidget() {
         layoutRoot
         className="fixed z-[70]"
         style={{
-          bottom: isDesktop ? 40 : 88,
-          right: isDesktop ? 20 : 10,
+          right: isDesktop ? 24 : 12,
           transformOrigin: "bottom right",
         }}
-        initial={{ opacity: 0, y: 24 }}
+        initial={{ opacity: 0, y: 24, bottom: defaultBottom }}
         animate={{
           opacity: 1,
           y: 0,
+          bottom: footerLayout.bottom,
           width: expanded ? expandedW : collapsedW,
           height: expanded ? expandedH : collapsedH,
         }}
-        transition={{ duration: EXPAND_MS, ease: EXPAND_EASE }}
+        transition={{
+          duration: EXPAND_MS,
+          ease: EXPAND_EASE,
+          bottom: { duration: 0.22, ease: [0.4, 0, 0.2, 1] },
+        }}
       >
         <div
           className={
@@ -264,7 +333,7 @@ export default function VideoWidget() {
               type="button"
               onClick={dismissWidget}
               aria-label="Закрыть виджет"
-              className="absolute -right-2 -top-2 z-30 inline-flex h-7 w-7 items-center justify-center rounded-full bg-black text-white shadow-md transition hover:bg-stone-900 md:h-8 md:w-8"
+              className="absolute -right-1.5 -top-1.5 z-30 inline-flex h-6 w-6 items-center justify-center rounded-full bg-stone-900/90 text-white shadow-sm transition hover:bg-stone-950 md:h-7 md:w-7"
             >
               <CloseIcon className="h-4 w-4" />
             </button>

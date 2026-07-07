@@ -5927,7 +5927,7 @@ export const products: Product[] = [
       {
         ...C.naturalTan,
         images: [
-          { src: "/products/womens-woven-oval-handle-tote-bag/natural-tan-front.png", alt: "Celia Natural Tan — вид спереди" },
+          { src: "/products/womens-woven-oval-handle-tote-bag/natural-tan-front-card.png", alt: "Celia Natural Tan — карточка товара" },
           { src: "/products/womens-woven-oval-handle-tote-bag/natural-tan-inside.png", alt: "Celia Natural Tan — внутри" },
         ],
       },
@@ -8730,7 +8730,7 @@ export function productsByBrand(slug: string): Product[] {
   return products.filter((p) => p.brandSlug === slug);
 }
 
-export const newProducts = products.filter((p) => p.isNew);
+export const newProducts = products.filter((p) => p.isNew && p.status === "in_stock");
 export const saleProducts = products.filter((p) => p.oldPrice && p.oldPrice > p.price);
 
 function hasWovenMaterial(p: Product): boolean {

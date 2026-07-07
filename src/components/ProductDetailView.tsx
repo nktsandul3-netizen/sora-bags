@@ -5,6 +5,7 @@ import { useSearchParams } from "next/navigation";
 import type { Product, ProductImageAsset } from "@/lib/types";
 import { useCart } from "@/context/cart";
 import { brand } from "@/lib/config";
+import { primaryStore } from "@/lib/stores";
 import { formatPrice } from "@/lib/format";
 import { useLocale, useT } from "@/lib/useI18n";
 import { getPurchaseKindForItem } from "@/lib/purchase-kind";
@@ -24,7 +25,7 @@ import PreorderStatusBadge from "./PreorderStatusBadge";
 import BrandStories from "./BrandStories";
 
 const reserveButton: Record<string, string> = {
-  ru: "Забронировать в магазине",
+  ru: "Заказать по телефону",
   ro: "Rezervă în magazin",
   en: "Reserve in store",
 };
@@ -35,10 +36,10 @@ const reserveLabel: Record<string, string> = {
   en: "Hello! I would like to reserve in store",
 };
 
-const contactPrompt: Record<string, string> = {
-  ru: "Выберите удобный мессенджер",
-  ro: "Alegeți un mesager",
-  en: "Choose a messenger",
+const phoneCallCopy: Record<string, { title: string; hint: string }> = {
+  ru: { title: "Позвонить напрямую", hint: "Нажмите, чтобы позвонить" },
+  ro: { title: "Sună direct", hint: "Apasă pentru apel" },
+  en: { title: "Call directly", hint: "Tap to call" },
 };
 
 const contactHints: Record<string, { whatsapp: string; telegram: string; viber: string }> = {
@@ -70,6 +71,23 @@ const vintageBadgeLabel: Record<string, string> = {
   ro: "Vintage Collection",
   en: "Vintage Collection",
 };
+
+function PhoneIcon() {
+  return (
+    <svg
+      viewBox="0 0 24 24"
+      className="h-5 w-5"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1.5"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      aria-hidden
+    >
+      <path d="M8.5 4.5h2l1.2 4.8a1 1 0 0 1-.46 1.08l-1.52 1.01a11 11 0 0 0 5.6 5.6l1.01-1.52a1 1 0 0 1 1.08-.46l4.8 1.2v2a1 1 0 0 1-1 1A14.5 14.5 0 0 1 7.5 5.5a1 1 0 0 1 1-1Z" />
+    </svg>
+  );
+}
 
 function MessengerIcon({ name }: { name: "whatsapp" | "telegram" | "viber" }) {
   const common = {
@@ -565,17 +583,21 @@ export default function ProductDetailView({
                   : t("common.addToCart")
               : t("common.outOfStock")}
           </button>
-          <div className="flex gap-2">
+          <div className="flex flex-col">
+            <div className="flex gap-2">
             <button
               type="button"
               onClick={() => setContactOpen((v) => !v)}
               aria-expanded={contactOpen}
-              className="flex min-h-14 flex-1 items-center justify-center gap-2.5 rounded-sm border border-stone-200 bg-white px-5 py-4 text-base font-medium text-stone-950 transition hover:border-stone-400"
+              className="flex min-h-14 flex-1 items-center justify-center gap-2.5 rounded-sm border border-stone-200 bg-white px-5 py-4 text-base font-medium text-stone-950 outline-none transition-[background-color,border-color,box-shadow,transform] duration-200 hover:border-stone-300 hover:bg-[#fafafa] hover:shadow-[0_2px_8px_rgba(0,0,0,0.04)] active:scale-[0.995] active:bg-[#f5f5f5] focus-visible:outline focus-visible:outline-2 focus-visible:outline-[#111] focus-visible:outline-offset-[3px] motion-reduce:transition-none motion-reduce:active:scale-100"
             >
               {reserveButton[locale] ?? reserveButton.ru}
               <svg
                 viewBox="0 0 24 24"
-                className={"h-5 w-5 transition-transform " + (contactOpen ? "rotate-180" : "")}
+                className={
+                  "h-5 w-5 shrink-0 transition-transform duration-[225ms] ease-out motion-reduce:transition-none " +
+                  (contactOpen ? "rotate-180" : "rotate-0")
+                }
                 fill="none"
                 stroke="currentColor"
                 strokeWidth="1.8"
@@ -587,13 +609,44 @@ export default function ProductDetailView({
             <div className="h-14 w-14">
               <WishlistButton slug={product.slug} variant="square" />
             </div>
-          </div>
+            </div>
 
-          {contactOpen && (
-            <div className="overflow-hidden rounded-xl border border-stone-200 bg-white shadow-[0_12px_40px_-18px_rgba(28,25,23,0.45)] animate-[contactReveal_0.25s_ease-out]">
-              <p className="border-b border-stone-100 px-5 py-3.5 text-[12px] font-semibold uppercase tracking-[0.16em] text-stone-400">
-                {contactPrompt[locale] ?? contactPrompt.ru}
-              </p>
+            <div
+              className="grid transition-[grid-template-rows] duration-300 ease-[cubic-bezier(0.4,0,0.2,1)] motion-reduce:transition-none"
+              style={{ gridTemplateRows: contactOpen ? "1fr" : "0fr" }}
+              aria-hidden={!contactOpen}
+            >
+              <div className="min-h-0 overflow-hidden">
+                <div
+                  inert={!contactOpen ? true : undefined}
+                  className={
+                    "mt-3 overflow-hidden rounded-xl border border-stone-200 bg-white shadow-[0_12px_40px_-18px_rgba(28,25,23,0.45)] transition-[opacity,transform] duration-[280ms] ease-[cubic-bezier(0.4,0,0.2,1)] motion-reduce:transition-none motion-reduce:transform-none " +
+                    (contactOpen
+                      ? "pointer-events-auto opacity-100 translate-y-0"
+                      : "pointer-events-none opacity-0 -translate-y-1.5")
+                  }
+                >
+              <div className="border-b border-stone-100 p-2.5 sm:p-3">
+                <a
+                  href={`tel:${primaryStore.phone.replace(/\s/g, "")}`}
+                  className="flex min-h-14 items-center gap-3 rounded-lg border border-[#e1e1e1] bg-white px-3.5 py-3 outline-none transition-[background-color,border-color,transform] duration-150 hover:border-[#bdbdbd] hover:bg-[#fafafa] active:scale-[0.995] active:bg-[#f5f5f5] focus-visible:outline focus-visible:outline-2 focus-visible:outline-[#111] focus-visible:outline-offset-[3px] motion-reduce:transition-none motion-reduce:active:scale-100"
+                >
+                  <span className="flex h-9 w-9 shrink-0 self-center items-center justify-center rounded-full border border-stone-100 bg-white text-stone-900">
+                    <PhoneIcon />
+                  </span>
+                  <span className="min-w-0 flex-1 text-left">
+                    <span className="block text-xs font-medium leading-snug text-stone-600">
+                      {phoneCallCopy[locale]?.title ?? phoneCallCopy.ru.title}
+                    </span>
+                    <span className="mt-0.5 block text-lg font-bold leading-tight tracking-tight text-[#111] sm:text-xl">
+                      {primaryStore.phone}
+                    </span>
+                    <span className="mt-1 block text-[11px] leading-snug text-stone-500">
+                      {phoneCallCopy[locale]?.hint ?? phoneCallCopy.ru.hint}
+                    </span>
+                  </span>
+                </a>
+              </div>
               <div className="divide-y divide-stone-100">
                 {contactOptions.map((option) => (
                   <a
@@ -627,8 +680,10 @@ export default function ProductDetailView({
                   </a>
                 ))}
               </div>
+                </div>
+              </div>
             </div>
-          )}
+          </div>
         </div>
 
         <BrandStories productSlug={product.slug} className="mt-8 scale-110 origin-top-left justify-start" />
