@@ -8006,7 +8006,7 @@ export const products: Product[] = [
     brandSlug: "luma-atelier",
     section: "bags",
     categorySlug: "handbags-women",
-    price: 1600,
+    price: 1399,
     status: "in_stock",
     isNew: true,
     galleryFit: "contain",
