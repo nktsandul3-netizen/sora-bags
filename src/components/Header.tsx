@@ -133,7 +133,7 @@ export default function Header() {
 
         <div className="flex items-center gap-1 sm:gap-1.5">
           <CartIcon hoverClassName={iconHoverClass} />
-          <span className="ml-1 translate-x-1 sm:ml-1.5 sm:translate-x-1.5">
+          <span className="ml-2 translate-x-2 sm:ml-3 sm:translate-x-3">
             <LanguageSwitcher overlay={isHeroOverlay} reversed />
           </span>
         </div>
@@ -168,7 +168,7 @@ export default function Header() {
               </svg>
               {t("common.menu")}
             </button>
-            <span className="ml-1 translate-x-1 lg:translate-x-1.5">
+            <span className="ml-2 translate-x-2 lg:ml-3 lg:translate-x-3">
               <LanguageSwitcher overlay={isHeroOverlay} reversed />
             </span>
           </div>
@@ -283,10 +283,10 @@ function LanguageSwitcher({ overlay = false, reversed = false }: { overlay?: boo
   return (
     <div
       className={
-        "inline-flex flex-col items-center gap-0.5 rounded-full px-1 py-2 text-[10px] font-semibold uppercase tracking-[0.12em] sm:text-[11px] " +
+        "inline-flex flex-row items-center gap-0.5 rounded-full px-1.5 py-1 text-[10px] font-semibold uppercase tracking-[0.12em] sm:text-[11px] " +
         (overlay
-          ? "border border-white/25 bg-white/10"
-          : "border border-stone-200/80 bg-white/70 backdrop-blur-[2px]")
+          ? "bg-white/10"
+          : "bg-white/70 backdrop-blur-[2px]")
       }
     >
       {languageOptions.map((item) => (
