@@ -84,7 +84,7 @@ function StoreLocatorLink({ overlay, compact = false }: { overlay: boolean; comp
         <path d="M12 21s7-5.15 7-11a7 7 0 1 0-14 0c0 5.85 7 11 7 11Z" />
         <circle cx="12" cy="10" r="2.35" />
       </svg>
-      {compact ? null : <span className="hidden sm:inline">OUR STORES</span>}
+      {compact ? null : <span>OUR STORES</span>}
     </Link>
   );
 }

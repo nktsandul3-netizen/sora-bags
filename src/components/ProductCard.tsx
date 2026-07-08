@@ -146,33 +146,37 @@ export default function ProductCard({ product }: { product: Product }) {
       </Link>
       </div>
 
-      {showSwatches ? (
-        <ProductColorSwatches
-          productSlug={product.slug}
-          colors={colors}
-          previewIndex={previewIdx}
-          defaultIndex={defaultColorIdx}
-          onPreview={setPreviewIdx}
-          swatchFit={galleryFit}
-          className="mt-2 px-0.5 sm:mt-3"
-        />
-      ) : null}
-
-      <div className="mt-1.5 px-0.5 sm:mt-2.5 lg:hidden">
-        <WishlistButton slug={product.slug} variant="compact" />
+      {/* Свотчи слева + сердечко справа: слот фиксированной высоты, чтобы карточки не прыгали */}
+      <div className="mt-2 flex min-h-[26px] items-center justify-between gap-2 px-0.5 sm:mt-3">
+        {showSwatches ? (
+          <ProductColorSwatches
+            productSlug={product.slug}
+            colors={colors}
+            previewIndex={previewIdx}
+            defaultIndex={defaultColorIdx}
+            onPreview={setPreviewIdx}
+            swatchFit={galleryFit}
+          />
+        ) : (
+          <span aria-hidden />
+        )}
+        <span className="lg:hidden">
+          <WishlistButton slug={product.slug} variant="compact" />
+        </span>
       </div>
 
-      <Link href={withLocalePath(`/product/${product.slug}`, locale)} className={"flex flex-1 flex-col px-0.5 " + (showSwatches ? "mt-1.5 sm:mt-2.5" : "mt-2.5 sm:mt-3.5")}>
+      <Link href={withLocalePath(`/product/${product.slug}`, locale)} className="mt-1.5 flex flex-1 flex-col px-0.5 sm:mt-2.5">
         <p className="text-[10px] font-medium uppercase tracking-[0.18em] text-stone-400">
           {getBrandName(product.brandSlug)}
         </p>
-        <h3 className="mt-1.5 line-clamp-2 text-[10px] font-normal leading-snug tracking-[-0.01em] text-stone-700 transition-colors group-hover:text-stone-950 sm:text-[10.5px]">
+        <h3 className="mt-1.5 line-clamp-2 min-h-[2.75em] text-[10px] font-normal leading-snug tracking-[-0.01em] text-stone-700 transition-colors group-hover:text-stone-950 sm:text-[10.5px]">
           {localizedTitle}
         </h3>
       </Link>
 
       <div className="relative mt-1.5 px-0.5 sm:mt-2 lg:mt-2.5">
-        <div className="transition-all duration-300 group-hover:pointer-events-none group-hover:-translate-y-1 group-hover:opacity-0 max-lg:hidden">
+        {/* Десктоп: цена + статус, по ховеру заменяются кнопкой */}
+        <div className="hidden transition-all duration-300 group-hover:pointer-events-none group-hover:-translate-y-1 group-hover:opacity-0 lg:block">
           <div className="flex items-baseline gap-2">
             {onSale && (
               <span className="price-strike text-[12px] font-normal text-stone-400">
@@ -190,28 +194,39 @@ export default function ProductCard({ product }: { product: Product }) {
           </div>
           <PreorderStatusBadge status={product.status} compact className="mt-1.5" />
         </div>
-        <div className="mb-1.5 lg:hidden">
-          <div className="flex items-baseline gap-2">
-            {onSale && (
-              <span className="price-strike text-[10px] font-normal text-stone-400">
-                {formatPrice(product.oldPrice!, locale)}
+        {/* Мобильные: цена, статус и кнопка в обычном потоке — без наложений */}
+        <div className="lg:hidden">
+          <div className="flex flex-wrap items-center justify-between gap-x-2 gap-y-1">
+            <span className="flex items-baseline gap-1.5">
+              {onSale && (
+                <span className="price-strike text-[10px] font-normal text-stone-400">
+                  {formatPrice(product.oldPrice!, locale)}
+                </span>
+              )}
+              <span
+                className={
+                  "font-bold uppercase tracking-[0.08em] " +
+                  (onSale ? "text-[12px] text-sale" : "text-[11px] text-stone-950")
+                }
+              >
+                {formatPrice(product.price, locale)}
               </span>
-            )}
-            <span
-              className={
-                "font-bold uppercase tracking-[0.08em] " +
-                (onSale ? "text-[12px] text-sale" : "text-[11px] text-stone-950")
-              }
-            >
-              {formatPrice(product.price, locale)}
             </span>
+            <PreorderStatusBadge status={product.status} compact />
           </div>
-          <PreorderStatusBadge status={product.status} compact className="mt-1.5" />
+          <button
+            type="button"
+            onClick={openQuickView}
+            className="mt-2 flex h-8 w-full items-center justify-center rounded-md border border-stone-950 bg-stone-950 px-2 text-[10px] font-semibold uppercase tracking-[0.1em] text-white shadow-sm transition hover:bg-white hover:text-stone-950 sm:h-9"
+          >
+            {t("common.buy")}
+          </button>
         </div>
+        {/* Десктоп: кнопка появляется по ховеру поверх цены */}
         <button
           type="button"
           onClick={openQuickView}
-          className="absolute inset-x-0 top-0 flex h-7 translate-y-2 items-center justify-center rounded-md border border-stone-950 bg-stone-950 px-2 text-[9px] font-semibold text-white opacity-0 shadow-sm transition-all duration-300 ease-out hover:bg-white hover:text-stone-950 group-hover:translate-y-0 group-hover:opacity-100 max-lg:translate-y-0 max-lg:opacity-100 sm:h-8 sm:px-2.5 sm:text-[10px] lg:h-9 lg:text-[11px]"
+          className="absolute inset-x-0 top-0 hidden h-9 translate-y-2 items-center justify-center rounded-md border border-stone-950 bg-stone-950 px-2 text-[11px] font-semibold text-white opacity-0 shadow-sm transition-all duration-300 ease-out hover:bg-white hover:text-stone-950 group-hover:translate-y-0 group-hover:opacity-100 lg:flex"
         >
           {t("common.buy")} {formatPrice(product.price, locale)}
         </button>

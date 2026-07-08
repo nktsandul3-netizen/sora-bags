@@ -172,50 +172,62 @@ function ShowcaseCard({ product }: { product: Product }) {
       </Link>
       </div>
 
-      {showSwatches ? (
-        <ProductColorSwatches
-          productSlug={product.slug}
-          colors={colors}
-          previewIndex={previewIdx}
-          defaultIndex={defaultColorIdx}
-          onPreview={setPreviewIdx}
-          swatchFit={galleryFit}
-          className="mt-3 px-1"
-        />
-      ) : null}
-
-      <div className="mt-2.5 px-1 lg:hidden">
-        <WishlistButton slug={product.slug} variant="compact" />
+      {/* Свотчи слева + сердечко справа: слот фиксированной высоты, чтобы карточки не прыгали */}
+      <div className="mt-2.5 flex min-h-[26px] items-center justify-between gap-2 px-1 sm:mt-3">
+        {showSwatches ? (
+          <ProductColorSwatches
+            productSlug={product.slug}
+            colors={colors}
+            previewIndex={previewIdx}
+            defaultIndex={defaultColorIdx}
+            onPreview={setPreviewIdx}
+            swatchFit={galleryFit}
+          />
+        ) : (
+          <span aria-hidden />
+        )}
+        <span className="lg:hidden">
+          <WishlistButton slug={product.slug} variant="compact" />
+        </span>
       </div>
 
       <Link
         href={withLocalePath(`/product/${product.slug}`, locale)}
-        className={
-          "grid grid-cols-[1fr_auto] gap-x-5 gap-y-2 px-1 text-[11px] uppercase tracking-[0.08em] " +
-          (showSwatches ? "mt-2.5" : "mt-4")
-        }
+        className="mt-2 grid grid-cols-[1fr_auto] gap-x-5 gap-y-1.5 px-1 text-[11px] uppercase tracking-[0.08em] sm:mt-2.5"
       >
         <p className="font-semibold text-stone-950">{getBrandName(product.brandSlug)}</p>
-        <h3 className="col-span-2 line-clamp-2 leading-snug text-stone-700">{localizedTitle}</h3>
+        <h3 className="col-span-2 line-clamp-2 min-h-[2.75em] leading-snug text-stone-700">{localizedTitle}</h3>
       </Link>
 
       <div className="relative mt-2 px-1 lg:mt-2.5">
-        <div className="transition-all duration-300 group-hover:pointer-events-none group-hover:-translate-y-1 group-hover:opacity-0 max-lg:hidden">
+        {/* Десктоп: цена + статус, по ховеру заменяются кнопкой */}
+        <div className="hidden transition-all duration-300 group-hover:pointer-events-none group-hover:-translate-y-1 group-hover:opacity-0 lg:block">
           <p className="text-[11px] font-semibold uppercase tracking-[0.08em] text-stone-950">
             {formatPrice(product.price, locale)}
           </p>
           <PreorderStatusBadge status={product.status} compact className="mt-1.5" />
         </div>
-        <div className="mb-1.5 lg:hidden">
-          <p className="text-[11px] font-semibold uppercase tracking-[0.08em] text-stone-950">
-            {formatPrice(product.price, locale)}
-          </p>
-          <PreorderStatusBadge status={product.status} compact className="mt-1.5" />
+        {/* Мобильные: цена, статус и кнопка в обычном потоке — без наложений */}
+        <div className="lg:hidden">
+          <div className="flex flex-wrap items-center justify-between gap-x-2 gap-y-1">
+            <span className="text-[11px] font-bold uppercase tracking-[0.08em] text-stone-950">
+              {formatPrice(product.price, locale)}
+            </span>
+            <PreorderStatusBadge status={product.status} compact />
+          </div>
+          <button
+            type="button"
+            onClick={openQuickView}
+            className="mt-2 flex h-9 w-full items-center justify-center rounded-md border border-stone-950 bg-stone-950 px-2 text-[10px] font-semibold uppercase tracking-[0.1em] text-white shadow-sm transition hover:bg-white hover:text-stone-950"
+          >
+            {t("common.buy")}
+          </button>
         </div>
+        {/* Десктоп: кнопка появляется по ховеру поверх цены */}
         <button
           type="button"
           onClick={openQuickView}
-          className="absolute inset-x-1 top-0 flex h-7 translate-y-2 items-center justify-center rounded-md border border-stone-950 bg-stone-950 px-2 text-[9px] font-semibold text-white opacity-0 shadow-sm transition-all duration-300 ease-out hover:bg-white hover:text-stone-950 group-hover:translate-y-0 group-hover:opacity-100 max-lg:translate-y-0 max-lg:opacity-100 sm:h-8 sm:px-2.5 sm:text-[10px] lg:h-9 lg:text-[11px]"
+          className="absolute inset-x-1 top-0 hidden h-9 translate-y-2 items-center justify-center rounded-md border border-stone-950 bg-stone-950 px-2 text-[11px] font-semibold text-white opacity-0 shadow-sm transition-all duration-300 ease-out hover:bg-white hover:text-stone-950 group-hover:translate-y-0 group-hover:opacity-100 lg:flex"
         >
           {t("common.buy")} {formatPrice(product.price, locale)}
         </button>
