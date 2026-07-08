@@ -122,16 +122,14 @@ export default function Header() {
             <svg viewBox="0 0 24 24" className="h-[18px] w-[18px]" fill="none" stroke="currentColor" strokeWidth="1.8">
               <path d="M4 7h16M4 12h16M4 17h16" strokeLinecap="round" />
             </svg>
-            <span className="hidden text-[11px] font-medium uppercase tracking-[0.22em] xs:inline">
-              {t("common.menu")}
-            </span>
           </button>
           <StoreLocatorLink overlay={isHeroOverlay} />
         </div>
 
         <BrandLogoLink overlay={isHeroOverlay} size="mobile" />
 
-        <div className="flex shrink-0 items-center gap-1.5 sm:gap-2">
+        <div className="flex shrink-0 items-center gap-0.5 sm:gap-1.5">
+          <ProfileMenu overlay={isHeroOverlay} iconOnly />
           <CartIcon hoverClassName={iconHoverClass} />
           <LanguageSwitcher overlay={isHeroOverlay} reversed />
         </div>
