@@ -1,7 +1,7 @@
 import type { Locale } from "@/lib/i18n";
 
-const phone = "+373 68 935 619";
-const phoneHref = "tel:+37368935619";
+const phone = "+373 60 066 665";
+const phoneHref = "tel:+37360066665";
 
 function InfoCard({
   title,
