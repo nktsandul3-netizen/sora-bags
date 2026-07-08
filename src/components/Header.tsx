@@ -32,10 +32,10 @@ function BrandLogoLink({
   const nameClass =
     size === "desktop"
       ? "font-serif text-[2.25rem] font-normal uppercase leading-none tracking-[0.48em] xl:text-[2.6rem] xl:tracking-[0.52em]"
-      : "font-serif text-[2rem] font-normal uppercase leading-none tracking-[0.38em]";
+      : "font-serif text-[1.55rem] font-normal uppercase leading-none tracking-[0.26em] sm:text-[2rem] sm:tracking-[0.38em]";
 
   const originClass =
-    "mt-1.5 inline-flex -translate-x-2.5 items-center gap-2 text-[8px] font-medium uppercase tracking-[0.36em] sm:-translate-x-3 sm:text-[9px] xl:mt-2 xl:-translate-x-4 xl:text-[9px] xl:tracking-[0.42em]";
+    "mt-1 inline-flex -translate-x-1.5 items-center gap-1.5 whitespace-nowrap text-[7px] font-medium uppercase tracking-[0.28em] sm:mt-1.5 sm:-translate-x-3 sm:gap-2 sm:text-[9px] sm:tracking-[0.36em] xl:mt-2 xl:-translate-x-4 xl:text-[9px] xl:tracking-[0.42em]";
 
   return (
     <Link
@@ -84,7 +84,7 @@ function StoreLocatorLink({ overlay, compact = false }: { overlay: boolean; comp
         <path d="M12 21s7-5.15 7-11a7 7 0 1 0-14 0c0 5.85 7 11 7 11Z" />
         <circle cx="12" cy="10" r="2.35" />
       </svg>
-      {compact ? null : <span>OUR STORES</span>}
+      {compact ? null : <span className="hidden whitespace-nowrap md:inline">OUR STORES</span>}
     </Link>
   );
 }
