@@ -113,8 +113,8 @@ export default function Header() {
             className={
               "-ml-1 inline-flex items-center gap-2.5 rounded-sm px-2.5 py-1.5 transition sm:px-3 sm:py-2 " +
               (isHeroOverlay
-                ? "bg-[#6f808d]/90 text-white backdrop-blur-[2px]"
-                : "bg-[#788899] text-white hover:bg-[#6f7f8c]")
+                ? "text-white hover:opacity-75"
+                : "text-stone-950 hover:opacity-60")
             }
             onClick={() => setMenuOpen(true)}
             aria-label={t("common.menu")}
