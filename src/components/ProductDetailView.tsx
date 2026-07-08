@@ -443,7 +443,7 @@ export default function ProductDetailView({
       </div>
 
       <div className="self-start">
-        <div className="relative overflow-hidden rounded-3xl">
+        <div className="relative -mx-4 overflow-hidden sm:-mx-6 lg:mx-0 lg:rounded-3xl">
           <div aria-hidden className="pointer-events-none absolute inset-0">
             {backdropImage?.src ? (
               /* eslint-disable-next-line @next/next/no-img-element */

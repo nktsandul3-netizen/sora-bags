@@ -277,7 +277,7 @@ export default function HomeNewArrivals({
 
         <div
           ref={railRef}
-          className="grid auto-cols-[82vw] grid-flow-col gap-0 overflow-x-auto scroll-smooth px-4 pb-4 [scrollbar-width:none] sm:auto-cols-[48vw] sm:px-6 lg:auto-cols-[25vw] lg:px-0 [&::-webkit-scrollbar]:hidden"
+          className="grid auto-cols-[46vw] grid-flow-col gap-0 overflow-x-auto scroll-smooth px-4 pb-4 [scrollbar-width:none] sm:auto-cols-[34vw] sm:px-6 lg:auto-cols-[19vw] lg:px-0 [&::-webkit-scrollbar]:hidden"
         >
           {products.map((product) => (
             <div key={product.slug} className="px-2 lg:px-3">

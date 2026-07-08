@@ -131,11 +131,9 @@ export default function Header() {
 
         <BrandLogoLink overlay={isHeroOverlay} size="mobile" />
 
-        <div className="flex items-center gap-1 sm:gap-1.5">
+        <div className="flex shrink-0 items-center gap-1.5 sm:gap-2">
           <CartIcon hoverClassName={iconHoverClass} />
-          <span className="ml-2 translate-x-2 sm:ml-3 sm:translate-x-3">
-            <LanguageSwitcher overlay={isHeroOverlay} reversed />
-          </span>
+          <LanguageSwitcher overlay={isHeroOverlay} reversed />
         </div>
       </div>
 
@@ -168,9 +166,7 @@ export default function Header() {
               </svg>
               {t("common.menu")}
             </button>
-            <span className="ml-2 translate-x-2 lg:ml-3 lg:translate-x-3">
-              <LanguageSwitcher overlay={isHeroOverlay} reversed />
-            </span>
+            <LanguageSwitcher overlay={isHeroOverlay} reversed />
           </div>
         </div>
       </div>
@@ -281,14 +277,7 @@ function LanguageSwitcher({ overlay = false, reversed = false }: { overlay?: boo
   const suffix = useCurrentUrlSuffix();
   const languageOptions = reversed ? [...locales].reverse() : locales;
   return (
-    <div
-      className={
-        "inline-flex flex-row items-center gap-0.5 rounded-full px-1.5 py-1 text-[10px] font-semibold uppercase tracking-[0.12em] sm:text-[11px] " +
-        (overlay
-          ? "bg-white/10"
-          : "bg-white/70 backdrop-blur-[2px]")
-      }
-    >
+    <div className="inline-flex shrink-0 flex-row items-center gap-1 text-[10px] font-semibold uppercase tracking-[0.1em] sm:gap-1.5 sm:text-[11px]">
       {languageOptions.map((item) => (
         <Link
           key={item}
@@ -300,14 +289,14 @@ function LanguageSwitcher({ overlay = false, reversed = false }: { overlay?: boo
             router.refresh();
           }}
           className={
-            "rounded-full px-1.5 py-0.5 transition " +
+            "rounded-full px-0.5 py-0.5 transition " +
             (item === locale
               ? overlay
-                ? "bg-white text-stone-950"
-                : "bg-stone-950 text-white"
+                ? "text-white"
+                : "text-stone-950"
               : overlay
-                ? "text-white/80 hover:text-white"
-                : "text-stone-500 hover:text-stone-950")
+                ? "text-white/60 hover:text-white/90"
+                : "text-stone-400 hover:text-stone-700")
           }
         >
           {item}
