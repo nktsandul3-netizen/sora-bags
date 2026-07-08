@@ -141,6 +141,7 @@ const rawColorFamilies: Record<string, ColorFamilyKey[]> = {
   Blush: ["pink"],
   Mauve: ["pink"],
   Magenta: ["pink"],
+  Fuchsia: ["pink"],
   "Metallic Fuchsia": ["pink"],
 
   // Фиолетовые
@@ -149,6 +150,7 @@ const rawColorFamilies: Record<string, ColorFamilyKey[]> = {
 
   // Оранжевые / жёлтые
   Orange: ["orange"],
+  Yellow: ["yellow"],
   "Butter Yellow": ["yellow"],
   Mustard: ["yellow"],
   "Mustard Yellow": ["yellow"],

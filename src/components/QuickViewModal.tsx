@@ -305,18 +305,23 @@ export default function QuickViewModal({
                         {hasGallery ? `${safeImageIdx + 1}/${galleryImages.length}` : `${colorIdx + 1}/${product.colors.length}`}
                       </div>
                       {hasGallery ? (
-                      <div className="absolute bottom-5 left-1/2 z-20 flex -translate-x-1/2 items-center gap-1.5 rounded-full border border-white/70 bg-white/75 px-3 py-2 shadow-[0_10px_28px_-18px_rgba(28,25,23,0.7)] backdrop-blur-md">
+                      <div className="absolute bottom-5 left-1/2 z-20 flex -translate-x-1/2 items-center rounded-full border border-white/70 bg-white/75 px-1.5 py-1 shadow-[0_10px_28px_-18px_rgba(28,25,23,0.7)] backdrop-blur-md">
                         {galleryImages.map((image, i) => (
                           <button
                             key={`${image.src}-dot-${i}`}
                             type="button"
                             aria-label={`${t("common.photo")} ${i + 1}`}
                             onClick={() => setSelectedImageIdx(i)}
-                            className={
-                              "h-1.5 rounded-full transition-all " +
-                              (i === safeImageIdx ? "w-5 bg-stone-950" : "w-1.5 bg-stone-400/70")
-                            }
-                          />
+                            className="flex items-center justify-center p-2"
+                          >
+                            <span
+                              aria-hidden
+                              className={
+                                "block h-1.5 rounded-full transition-all " +
+                                (i === safeImageIdx ? "w-5 bg-stone-950" : "w-1.5 bg-stone-400/70")
+                              }
+                            />
+                          </button>
                         ))}
                       </div>
                       ) : null}

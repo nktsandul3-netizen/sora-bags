@@ -8,7 +8,7 @@ import PaymentDeliveryPageContent from "@/components/payment/PaymentDeliveryPage
 import ReturnPageContent from "@/components/return/ReturnPageContent";
 import WarrantyPageContent from "@/components/warranty/WarrantyPageContent";
 import GiftCertificatePageContent from "@/components/gift/GiftCertificatePageContent";
-import WholesalePageContent from "@/components/wholesale/WholesalePageContent";
+import OfferPageContent from "@/components/offer/OfferPageContent";
 import RekvizityContent from "@/components/RekvizityContent";
 import PrivacyPolicyContent from "@/components/PrivacyPolicyContent";
 import { getInfoBody, getInfoPage, getInfoTitle, infoPages, navInfoPages } from "@/lib/info";
@@ -77,10 +77,6 @@ export default async function InfoPageRoute({
 
   if (page.slug === "podarochnye-sertifikaty") {
     return <GiftCertificatePageContent locale={locale} />;
-  }
-
-  if (page.slug === "optom") {
-    return <WholesalePageContent locale={locale} />;
   }
 
   if (page.slug === "vozvrat") {
@@ -180,6 +176,8 @@ export default async function InfoPageRoute({
         <article>
           {page.slug === "politika-konfidentsialnosti" ? (
             <PrivacyPolicyContent locale={locale} />
+          ) : page.slug === "publichnaya-oferta" ? (
+            <OfferPageContent locale={locale} />
           ) : page.slug === "rekvizity" ? (
             <RekvizityContent locale={locale} />
           ) : (

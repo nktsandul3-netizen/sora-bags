@@ -413,18 +413,17 @@ const accessoryCategoryIcons: Record<string, React.ReactNode> = {
   ),
   "womens-scarves-women": (
     <CatIcon>
-      <path d="M6.1 8.2c2.2-3.1 9.6-3.1 11.8 0" />
-      <path d="M6.1 8.2c1.5 2.4 10.3 2.4 11.8 0" />
-      <path d="M8.1 9.5 7 17.8l3.3-2.1 2.7 2.5 3.2-2.3 2.6 2-1-8.4" />
-      <path d="M10 10.5 9.4 15M14 10.5l.6 4.5" />
+      <path d="M5.5 8.2c3.4 1.9 9.6 1.9 13 0" />
+      <path d="M6.8 8.2 8.2 16.6 12 14.1 15.8 16.6 17.2 8.2" />
+      <path d="M10.1 9.8 9.6 13.2" />
+      <path d="M13.9 9.8 14.4 13.2" />
     </CatIcon>
   ),
   "bag-charms": (
     <CatIcon>
-      <circle cx="12" cy="7.5" r="2.2" />
-      <path d="M12 9.7v3.2" />
-      <path d="M9.2 16.2c0-1.5 1.2-2.7 2.8-2.7s2.8 1.2 2.8 2.7" />
-      <path d="M7.5 16.2h9" />
+      <circle cx="12" cy="7.3" r="2.1" />
+      <path d="M12 9.4v2.8" />
+      <circle cx="12" cy="15.7" r="2.7" />
     </CatIcon>
   ),
 };

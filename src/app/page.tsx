@@ -1,6 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
-import { newProducts, products } from "@/lib/data";
+import { homeNewArrivals, products } from "@/lib/data";
 import { getInstagramPosts } from "@/lib/instagram";
 import HomeNewArrivals from "@/components/HomeNewArrivals";
 import InstagramFeed from "@/components/InstagramFeed";
@@ -74,7 +74,7 @@ export default async function Home() {
       <HeroBannerSlider slides={getHeroSlides(locale)} />
 
       {/* Новинки */}
-      <HomeNewArrivals products={newProducts.slice(0, 8)} />
+      <HomeNewArrivals products={homeNewArrivals} />
 
       {/* Плитки разделов: Сумки / Аксессуары */}
       <section className="mt-0 w-full">
@@ -109,7 +109,7 @@ export default async function Home() {
 
       {/* Брендовый текст под плитками */}
       <section className="bg-white px-4 pt-12 pb-6 sm:px-6 sm:pt-14 sm:pb-8 lg:px-10 lg:pt-16 lg:pb-10">
-        <div className="ml-[7cm] max-w-[520px]">
+        <div className="max-w-[520px] lg:ml-[7cm]">
           <h2 className="text-[22px] font-bold uppercase text-stone-950 sm:text-2xl">
             {t("home.brandStoryTitle")}
           </h2>

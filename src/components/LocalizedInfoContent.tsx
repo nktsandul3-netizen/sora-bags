@@ -60,13 +60,6 @@ const copy: Record<Locale, Record<string, { title: string; intro: string; sectio
         { title: "Utilizare", paragraphs: ["După cumpărare, certificatul este trimis electronic cu un număr unic.", "Poate fi folosit pentru produse disponibile în magazinul SÓRA."] },
       ],
     },
-    optom: {
-      title: "Comenzi en-gros",
-      intro: "SÓRA Bags invită magazine, showroom-uri și antreprenori la colaborare.",
-      sections: [
-        { title: "Avantaje", paragraphs: ["Oferim sortiment actual, suport în alegerea modelelor și condiții flexibile în funcție de volum.", "Pentru detalii, contactați-ne prin pagina de contacte."] },
-      ],
-    },
     "politika-konfidentsialnosti": {
       title: "Politica de confidențialitate",
       intro: "Folosim datele personale doar pentru procesarea comenzilor, livrare, comunicare și îmbunătățirea serviciilor.",
@@ -99,7 +92,7 @@ const copy: Record<Locale, Record<string, { title: string; intro: string; sectio
       title: "Payment and delivery",
       intro: "After you place an order, a SÓRA manager contacts you to confirm availability, delivery and payment.",
       sections: [
-        { title: "Delivery", paragraphs: ["We deliver in Chisinau and across Moldova.", "Delivery time depends on availability: in-stock items ship faster, while pre-order models may take 7–14 business days."] },
+        { title: "Delivery", paragraphs: ["We deliver in Chișinău and across Moldova.", "Delivery time depends on availability: in-stock items ship faster, while pre-order models may take 7–14 business days."] },
         { title: "Payment", paragraphs: ["Payment method is confirmed with the manager after ordering.", "Depending on the order, payment on delivery, bank transfer or payment link may be available."] },
       ],
     },
@@ -126,11 +119,6 @@ const copy: Record<Locale, Record<string, { title: string; intro: string; sectio
         { title: "Terms", paragraphs: ["Certificates are available from 500 MDL and are valid for 6 months.", "A certificate cannot be exchanged for cash."] },
         { title: "How to use", paragraphs: ["After purchase, the certificate is sent electronically with a unique number.", "It can be used for products available at SÓRA."] },
       ],
-    },
-    optom: {
-      title: "Wholesale orders",
-      intro: "SÓRA Bags welcomes boutiques, showrooms and entrepreneurs for cooperation.",
-      sections: [{ title: "Benefits", paragraphs: ["We offer a curated assortment, model selection support and flexible conditions depending on volume.", "For details, please contact us through the contacts page."] }],
     },
     "politika-konfidentsialnosti": {
       title: "Privacy policy",

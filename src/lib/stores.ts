@@ -26,7 +26,7 @@ export const stores: StoreLocation[] = [
     name: {
       ru: "Port Mall · Кишинёв",
       ro: "Port Mall · Chișinău",
-      en: "Port Mall · Chisinau",
+      en: "Port Mall · Chișinău",
     },
     address: {
       ru: "Strada Mihai Sadoveanu 42/6, Chișinău, MD-2075",

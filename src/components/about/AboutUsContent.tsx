@@ -95,7 +95,7 @@ const copy = {
     modern: "Clasic modern",
     modernText: [
       "SÓRA Bags a apărut din dragoste pentru clasicul modern. Multe cliente aleg între accesibilitate și calitate, iar misiunea noastră este să oferim produse cu aspect premium, materiale bune și preț corect.",
-      "Ne dorim să fim mai mult decât un magazin: un loc unde fiecare femeie găsește accesoriul potrivit stilului ei de viață, de la întâlniri de business până la plimbări sau evenimente speciale.",
+      "Ne dorim să fim mai mult decât un magazin: un loc unde fiecare femeie găsește accesoriul potrivit stilului ei de viață, de la întâlniri de afaceri până la plimbări sau evenimente speciale.",
     ],
     details: "Eleganță în detalii",
     detailsText: [

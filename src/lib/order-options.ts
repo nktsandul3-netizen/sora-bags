@@ -50,7 +50,7 @@ const localizedDelivery: Record<Locale, typeof deliveryOptions> = {
     { value: "pickup", label: "Ridicare cu confirmare", description: "Potrivit dacă doriți să ridicați comanda personal după confirmare." },
   ],
   en: [
-    { value: "courier_chisinau", label: "Courier in Chisinau", description: "We will contact you and agree on a convenient delivery time." },
+    { value: "courier_chisinau", label: "Courier in Chișinău", description: "We will contact you and agree on a convenient delivery time." },
     { value: "moldova_delivery", label: "Delivery across Moldova", description: "We will ship the order after confirming details with a manager." },
     { value: "pickup", label: "Pickup by arrangement", description: "Suitable if you want to collect the order personally after confirmation." },
   ],

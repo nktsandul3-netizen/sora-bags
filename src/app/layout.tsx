@@ -7,7 +7,6 @@ import { WishlistProvider } from "@/context/wishlist";
 import SessionProviderWrapper from "@/components/SessionProviderWrapper";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
-import AnnouncementBar from "@/components/AnnouncementBar";
 import StorefrontChrome from "@/components/StorefrontChrome";
 import AnalyticsTracker from "@/components/AnalyticsTracker";
 import { getServerLocale } from "@/lib/server-i18n";
@@ -46,11 +45,7 @@ export default async function RootLayout({
           <CartProvider>
             <WishlistProvider>
               <AnalyticsTracker />
-              <StorefrontChrome
-                announcementBar={<AnnouncementBar />}
-                header={<Header />}
-                footer={<Footer />}
-              >
+              <StorefrontChrome header={<Header />} footer={<Footer />}>
                 {children}
               </StorefrontChrome>
             </WishlistProvider>

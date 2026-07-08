@@ -103,11 +103,11 @@ export default function WarrantyPageContent({ locale = "ru" }: { locale?: Locale
           warrantyText: [
             "Pentru toate produsele SÓRA Bags se oferă garanție de 30 de zile calendaristice din momentul cumpărării.",
             "Garanția acoperă doar defectele de fabricație identificate cu respectarea regulilor de utilizare și îngrijire.",
-            "Dacă observați un defect în perioada de garanție, contactați-ne prin metoda convenabilă. Analizarea solicitării durează până la 10 zile lucrătoare.",
+            "Dacă observați un defect în perioada de garanție, contactați-ne prin orice metodă convenabilă. Analizarea solicitării durează până la 10 zile lucrătoare.",
           ],
           decisions: "Soluții posibile",
           decisionIntro: "În urma verificării poate fi propusă una dintre soluțiile:",
-          decisionItems: ["Rambursarea banilor", "Reparație gratuită prin acordul părților", "Expertiză independentă a calității produsului"],
+          decisionItems: ["Rambursarea sumei achitate", "Reparație gratuită, cu acordul părților", "Expertiză independentă a calității produsului"],
           decisionNote: "Dacă defectul de fabricație se confirmă, cumpărătorului i se rambursează suma integrală sau produsul este înlocuit. Dacă defectul nu se confirmă, produsul se returnează fără reparație.",
           notCovered: "Garanția nu acoperă",
           notCoveredItems: ["Urme naturale de utilizare", "Zgârieturi fine, rosături și cute ale pielii", "Deteriorări cauzate de utilizare incorectă", "Decolorări cauzate de umezeală", "Uzură naturală în timpul folosirii"],
@@ -130,7 +130,7 @@ export default function WarrantyPageContent({ locale = "ru" }: { locale?: Locale
           title: "Warranty and care",
           warranty: "Warranty",
           warrantyText: [
-            "All SÓRA Bags items include a 30 calendar day warranty from the purchase date.",
+            "All SÓRA Bags items include a 30-calendar-day warranty from the purchase date.",
             "The warranty covers only manufacturing defects found when use and care rules are followed.",
             "If you notice a defect during the warranty period, contact us in any convenient way. Review takes up to 10 business days.",
           ],

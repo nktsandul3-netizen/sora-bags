@@ -44,16 +44,19 @@ function CategoryIcon({ id }: { id: string }) {
   if (id === "womens-scarves-women") {
     return (
       <svg {...common}>
-        <path d="M6 8c3 2 9 2 12 0v8c-3 2-9 2-12 0V8Z" strokeLinejoin="round" />
+        <path d="M5.5 8.2c3.4 1.9 9.6 1.9 13 0" strokeLinecap="round" />
+        <path d="M6.8 8.2 8.2 16.6 12 14.1 15.8 16.6 17.2 8.2" strokeLinejoin="round" />
+        <path d="M10.1 9.8 9.6 13.2" strokeLinecap="round" />
+        <path d="M13.9 9.8 14.4 13.2" strokeLinecap="round" />
       </svg>
     );
   }
   if (id === "bag-charms") {
     return (
       <svg {...common}>
-        <circle cx="8" cy="8" r="3" />
-        <path d="M10.5 10.5 18 18" strokeLinecap="round" />
-        <circle cx="18" cy="18" r="2" />
+        <circle cx="12" cy="7.3" r="2.1" />
+        <path d="M12 9.4v2.8" strokeLinecap="round" />
+        <circle cx="12" cy="15.7" r="2.7" />
       </svg>
     );
   }
@@ -119,7 +122,7 @@ export default function StoreDetailContent({
         ))}
 
         {store.images.length > 1 ? (
-          <div className="absolute inset-x-0 bottom-5 z-10 flex items-center justify-center gap-2">
+          <div className="absolute inset-x-0 bottom-5 z-10 flex items-center justify-center">
             {store.images.map((src, i) => (
               <button
                 key={src}
@@ -127,11 +130,16 @@ export default function StoreDetailContent({
                 aria-label={`${copy.slide} ${i + 1}`}
                 aria-current={i === activeSlide}
                 onClick={() => setActiveSlide(i)}
-                className={
-                  "h-1.5 rounded-full transition-all duration-300 " +
-                  (i === activeSlide ? "w-6 bg-stone-950" : "w-1.5 bg-stone-400 hover:bg-stone-600")
-                }
-              />
+                className="flex items-center justify-center p-2"
+              >
+                <span
+                  aria-hidden
+                  className={
+                    "block h-1.5 rounded-full transition-all duration-300 " +
+                    (i === activeSlide ? "w-6 bg-stone-950" : "w-1.5 bg-stone-400 hover:bg-stone-600")
+                  }
+                />
+              </button>
             ))}
           </div>
         ) : null}

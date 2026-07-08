@@ -9,17 +9,15 @@ import { stripLocaleFromPathname } from "@/lib/i18n";
 import { MenuOpenProvider } from "@/context/menu-open";
 
 /**
- * Прячет витринный «обвес» (анонс-бар, шапку, подвал) в разделе /admin,
+ * Прячет витринный «обвес» (шапку, подвал) в разделе /admin,
  * чтобы админ-панель занимала весь экран без магазинной навигации.
  * Сами header/footer рендерятся на сервере и передаются пропсами.
  */
 export default function StorefrontChrome({
-  announcementBar,
   header,
   footer,
   children,
 }: {
-  announcementBar: ReactNode;
   header: ReactNode;
   footer: ReactNode;
   children: ReactNode;

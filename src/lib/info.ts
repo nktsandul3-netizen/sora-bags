@@ -58,11 +58,6 @@ export const infoPages: InfoPage[] = [
     body: [],
   },
   {
-    slug: "optom",
-    title: "Оптовые заказы",
-    body: [],
-  },
-  {
     slug: "nashi-magaziny",
     title: "Наши магазины",
     body: [
@@ -82,6 +77,11 @@ export const infoPages: InfoPage[] = [
     body: [],
   },
   {
+    slug: "publichnaya-oferta",
+    title: "Публичная оферта",
+    body: [],
+  },
+  {
     slug: "politika-konfidentsialnosti",
     title: "Политика конфиденциальности",
     body: [],
@@ -91,8 +91,8 @@ export const infoPages: InfoPage[] = [
 const hiddenInfoNavSlugs = new Set([
   "vozvrat",
   "rekvizity",
-  "optom",
   "politika-konfidentsialnosti",
+  "publichnaya-oferta",
 ]);
 
 /** Info pages shown in header, footer, and info sidebar navigation. */
@@ -107,10 +107,10 @@ const localizedInfoTitles: Record<string, { ro: string; en: string }> = {
   "oplata-i-dostavka": { ro: "Plată și livrare", en: "Payment and delivery" },
   vozvrat: { ro: "Retur", en: "Returns" },
   garantiya: { ro: "Garanția calității", en: "Quality warranty" },
-  optom: { ro: "Comenzi en-gros", en: "Wholesale orders" },
   "nashi-magaziny": { ro: "Magazinele noastre", en: "Our stores" },
   "podarochnye-sertifikaty": { ro: "Certificate cadou", en: "Gift certificates" },
   rekvizity: { ro: "Date companie", en: "Company details" },
+  "publichnaya-oferta": { ro: "Ofertă publică", en: "Public offer" },
   "politika-konfidentsialnosti": { ro: "Politica de confidențialitate", en: "Privacy policy" },
 };
 

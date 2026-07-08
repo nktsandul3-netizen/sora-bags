@@ -14,7 +14,7 @@ export default async function ContactsPage() {
     phones: locale === "ru" ? "Телефоны" : locale === "ro" ? "Telefoane" : "Phones",
     addressHours: locale === "ru" ? "Адрес и часы работы" : locale === "ro" ? "Adresă și program" : "Address and working hours",
     messengers: locale === "ru" ? "Мессенджеры и соцсети" : locale === "ro" ? "Messenger și rețele sociale" : "Messengers and social media",
-    address: locale === "ru" ? brand.address : locale === "ro" ? "Chișinău, Republica Moldova" : "Chisinau, Republic of Moldova",
+    address: locale === "ru" ? brand.address : locale === "ro" ? "Chișinău, Republica Moldova" : "Chișinău, Republic of Moldova",
     hours: locale === "ru" ? brand.workingHours : locale === "ro" ? "Lun-Dum: 10:00 - 21:00" : "Mon-Sun: 10:00 - 21:00",
     write: locale === "ru" ? "Напишите нам" : locale === "ro" ? "Scrieți-ne" : "Write to us",
     formText: locale === "ru" ? "Ответим в рабочее время. Поможем с выбором и оформлением заказа." : locale === "ro" ? "Răspundem în timpul programului. Vă ajutăm cu alegerea și plasarea comenzii." : "We reply during working hours and help with product choice and ordering.",

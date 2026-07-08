@@ -8,7 +8,7 @@ import {
 import type { Product, ProductColor } from "@/lib/types";
 
 const text: Record<string, Partial<Record<Locale, string>>> = {
-  "Доставка 7–14 дней": { ro: "Livrare 7-14 zile", en: "Delivery 7-14 days" },
+  "Доставка 7–14 дней": { ro: "Livrare 7–14 zile", en: "Delivery 7–14 days" },
   Женский: { ro: "Femei", en: "Women" },
   Италия: { ro: "Italia", en: "Italy" },
   Пол: { ro: "Gen", en: "Gender" },
@@ -51,7 +51,7 @@ const text: Record<string, Partial<Record<Locale, string>>> = {
   "Съёмный регулируемый плечевой ремень": { ro: "Curea de umăr detașabilă și reglabilă", en: "Detachable adjustable shoulder strap" },
   "Надёжный поворотный замок": { ro: "Încuietoare rotativă sigură", en: "Secure turn lock" },
   "Премиальная металлическая фурнитура золотого цвета": { ro: "Feronerie metalică aurie premium", en: "Premium gold-tone metal hardware" },
-  "Для повседневных, деловых и вечерних образов": { ro: "Pentru ținute zilnice, business și de seară", en: "For everyday, business and evening looks" },
+  "Для повседневных, деловых и вечерних образов": { ro: "Pentru ținute de zi cu zi, de afaceri și de seară", en: "For everyday, business and evening looks" },
   "Средняя / вместительная сумка": { ro: "Medie / încăpătoare", en: "Medium / spacious" },
   "Металлическая регулируемая пряжка на ремне": { ro: "Cataramă metalică reglabilă pe curea", en: "Metal adjustable buckle on strap" },
   "Одно основное отделение, внутри карман на молнии": { ro: "Un compartiment principal, cu buzunar interior cu fermoar", en: "One main compartment with an inner zip pocket" },
@@ -63,7 +63,7 @@ const text: Record<string, Partial<Record<Locale, string>>> = {
   "Удобные двойные ручки": { ro: "Mânere duble comode", en: "Comfortable double handles" },
   "Съёмный плечевой ремень": { ro: "Curea de umăr detașabilă", en: "Detachable shoulder strap" },
   "Кожаный клатч-органайзер": { ro: "Clutch-organizator din piele", en: "Leather organizer clutch" },
-  "Для повседневных и деловых образов": { ro: "Pentru ținute zilnice și business", en: "For everyday and business looks" },
+  "Для повседневных и деловых образов": { ro: "Pentru ținute de zi cu zi și de afaceri", en: "For everyday and business looks" },
   "38 × 28 × 13 см": { ro: "38 × 28 × 13 cm", en: "38 × 28 × 13 cm" },
   "30 × 37 × 10 см": { ro: "30 × 37 × 10 cm", en: "30 × 37 × 10 cm" },
   "Один плечевой ремень, регулируемый": {
@@ -112,7 +112,7 @@ const text: Record<string, Partial<Record<Locale, string>>> = {
     ro: "Un compartiment principal mare, cu buzunar interior cu fermoar",
     en: "One large main compartment with an inner zip pocket",
   },
-  "Магнитная кнопка + кожаная завязка": { ro: "Capse magnetică + șnur din piele", en: "Magnetic snap + leather tie" },
+  "Магнитная кнопка + кожаная завязка": { ro: "Capsă magnetică + șnur din piele", en: "Magnetic snap + leather tie" },
   "Металлическая, цвет зависит от партии/модели": {
     ro: "Metalică, culoarea depinde de lot/model",
     en: "Metal, color varies by batch/model",
@@ -141,7 +141,7 @@ const text: Record<string, Partial<Record<Locale, string>>> = {
     en: "Zip pocket inside the bag",
   },
   "Магнитная кнопка / внутренняя фиксация сверху": {
-    ro: "Capse magnetică / fixare interioară în partea superioară",
+    ro: "Capsă magnetică / fixare interioară în partea superioară",
     en: "Magnetic snap / inner top fastening",
   },
   "Металлическая, серебристого цвета": {
@@ -153,7 +153,7 @@ const text: Record<string, Partial<Record<Locale, string>>> = {
     en: "Red textile lining inside",
   },
   "Casual, office, everyday, базовый гардероб": {
-    ro: "Casual, office, everyday, garderobă de bază",
+    ro: "Casual, birou, zi cu zi, garderobă de bază",
     en: "Casual, office, everyday, core wardrobe",
   },
   "Leather Tote / Shoulder Bag": {
@@ -202,7 +202,7 @@ const text: Record<string, Partial<Record<Locale, string>>> = {
     en: "Beige/caramel interior",
   },
   "Casual, city, office, базовый гардероб": {
-    ro: "Casual, city, office, garderobă de bază",
+    ro: "Casual, oraș, birou, garderobă de bază",
     en: "Casual, city, office, core wardrobe",
   },
   "Удобный формат 2-в-1: сумка + внутренний карман/косметичка": {
@@ -277,11 +277,13 @@ const colors: Record<string, Record<Locale, string>> = {
   Blush: { ru: "Пудрово-розовый", ro: "Roz pudrat", en: "Blush" },
   Mauve: { ru: "Мов", ro: "Mov deschis", en: "Mauve" },
   Magenta: { ru: "Маджента", ro: "Magenta", en: "Magenta" },
+  Fuchsia: { ru: "Фуксия", ro: "Fucsia", en: "Fuchsia" },
   "Metallic Fuchsia": { ru: "Металлик фуксия", ro: "Fucsia metalizat", en: "Metallic fuchsia" },
   Plum: { ru: "Сливовый", ro: "Prună", en: "Plum" },
   Lavender: { ru: "Лавандовый", ro: "Lavandă", en: "Lavender" },
 
   // Жёлтые / зелёные
+  Yellow: { ru: "Жёлтый", ro: "Galben", en: "Yellow" },
   "Butter Yellow": { ru: "Масляно-жёлтый", ro: "Galben unt", en: "Butter yellow" },
   Mustard: { ru: "Горчичный", ro: "Muștar", en: "Mustard" },
   "Mustard Yellow": { ru: "Горчично-жёлтый", ro: "Galben muștar", en: "Mustard yellow" },
@@ -296,7 +298,7 @@ const colors: Record<string, Record<Locale, string>> = {
 
   // Синие / бирюзовые
   "Light Blue": { ru: "Голубой", ro: "Albastru deschis", en: "Light blue" },
-  "Baby Blue": { ru: "Нежно-голубой", ro: "Bleu bebe", en: "Baby blue" },
+  "Baby Blue": { ru: "Нежно-голубой", ro: "Albastru bebeluș", en: "Baby blue" },
   "Sky Blue": { ru: "Небесно-голубой", ro: "Albastru cer", en: "Sky blue" },
   Blue: { ru: "Синий", ro: "Albastru", en: "Blue" },
   "Dusty Blue": { ru: "Пыльно-голубой", ro: "Albastru prăfuit", en: "Dusty blue" },
@@ -321,19 +323,19 @@ const colors: Record<string, Record<Locale, string>> = {
   "Cherry Print": { ru: "Принт вишня", ro: "Imprimeu cireșe", en: "Cherry print" },
   "Colorful Brushstroke": { ru: "Цветные мазки", ro: "Tușe colorate", en: "Colorful brushstroke" },
   "Blue Multicolor Brushstroke": { ru: "Синие мазки", ro: "Tușe multicolore albastru", en: "Blue multicolor brushstroke" },
-  "Green Geometric": { ru: "Зелёная геометрия", ro: "Geometric verde", en: "Green geometric" },
+  "Green Geometric": { ru: "Зелёная геометрия", ro: "Geometrie verde", en: "Green geometric" },
   "Slate Geometric": { ru: "Графитовая геометрия", ro: "Geometric ardezie", en: "Slate geometric" },
   "Heart Leopard": { ru: "Леопард-сердца", ro: "Leopard inimioare", en: "Heart leopard" },
   Leopard: { ru: "Леопардовый принт", ro: "Imprimeu leopard", en: "Leopard print" },
   "Landscape Hills": { ru: "Пейзаж холмы", ro: "Peisaj cu dealuri", en: "Landscape hills" },
   "Lavender Ink": { ru: "Лавандовые чернила", ro: "Cerneală lavandă", en: "Lavender ink" },
   "Lavender Wave": { ru: "Лавандовая волна", ro: "Val lavandă", en: "Lavender wave" },
-  "Aqua Wave": { ru: "Волна аква", ro: "Val aqua", en: "Aqua wave" },
+  "Aqua Wave": { ru: "Аква-волна", ro: "Val acvatic", en: "Aqua wave" },
   "Mustard Wave": { ru: "Горчичная волна", ro: "Val muștar", en: "Mustard wave" },
-  "Mint Abstract": { ru: "Мятная абстракция", ro: "Abstract mentă", en: "Mint abstract" },
+  "Mint Abstract": { ru: "Мятная абстракция", ro: "Abstract verde mentă", en: "Mint abstract" },
   "Dusty Blue Abstract": { ru: "Пыльно-голубая абстракция", ro: "Abstract albastru prăfuit", en: "Dusty blue abstract" },
   "Pastel Tie-Dye": { ru: "Пастельный тай-дай", ro: "Tie-dye pastel", en: "Pastel tie-dye" },
-  "Rainbow Pastel": { ru: "Радужный пастель", ro: "Pastel curcubeu", en: "Rainbow pastel" },
+  "Rainbow Pastel": { ru: "Радужная пастель", ro: "Pastel curcubeu", en: "Rainbow pastel" },
   "Poppy Print": { ru: "Принт маки", ro: "Imprimeu maci", en: "Poppy print" },
   "Red Floral": { ru: "Красный цветочный", ro: "Floral roșu", en: "Red floral" },
   "Rose Print": { ru: "Принт розы", ro: "Imprimeu trandafiri", en: "Rose print" },
@@ -388,7 +390,7 @@ const productTitles: Record<string, Partial<Record<Locale, string>>> = {
   "Anouk — мини-сумка через плечо на цепочке": { ro: "Anouk — mini geantă crossbody cu lănțișor", en: "Anouk — mini chain crossbody bag" },
   "Sabina — большой шопер": { ro: "Sabina — shopper mare", en: "Sabina — large shopper bag" },
   "Iris — женский рюкзак": { ro: "Iris — rucsac damă", en: "Iris — women's backpack" },
-  "Cosima — деловой портфель": { ro: "Cosima — servietă office", en: "Cosima — business briefcase" },
+  "Cosima — деловой портфель": { ro: "Cosima — servietă de birou", en: "Cosima — business briefcase" },
   "Delphine — сумка через плечо с карманами": { ro: "Delphine — geantă crossbody cu buzunare", en: "Delphine — crossbody bag with pockets" },
   "Estelle — клатч на цепочке": { ro: "Estelle — clutch cu lănțișor", en: "Estelle — chain clutch" },
   "Renata — дорожная сумка": { ro: "Renata — geantă de călătorie", en: "Renata — travel bag" },
@@ -477,6 +479,7 @@ const productTitles: Record<string, Partial<Record<Locale, string>>> = {
   "Loretta — тоут с клапаном на замке": { ro: "Loretta — geantă tote cu clapă și încuietoare", en: "Loretta — turn-lock flap tote bag" },
   "Cressida — тоут с планкой на замке": { ro: "Cressida — geantă tote cu clapetă și încuietoare", en: "Cressida — turn-lock placket tote bag" },
   "Palmira — сумка с поворотным замком": { ro: "Palmira — geantă cu încuietoare rotativă", en: "Palmira — turn-lock top handle bag" },
+  "Rosalba — сумка в форме сердца": { ro: "Rosalba — geantă în formă de inimă", en: "Rosalba — heart-shaped handbag" },
   "Margot — сумка с поворотным замком": { ro: "Margot — geantă cu încuietoare rotativă", en: "Margot — turn-lock top handle bag" },
   "Amabel — сумка хобо на молнии": { ro: "Amabel — geantă hobo cu fermoar", en: "Amabel — zip hobo bag" },
   "Ottilie — гладкий компактный багет": { ro: "Ottilie — geantă baghetă compactă netedă", en: "Ottilie — smooth compact baguette bag" },
@@ -628,18 +631,6 @@ const productCopyBySlug: Record<string, ProductLocalizedCopy> = {
       "en": "Mini Elegance Top Handle Bag is a handbag crafted from natural leather, designed for everyday styling, office looks and relaxed evening plans. The silhouette feels polished without looking stiff, making it easy to style with a considered everyday wardrobe.\n\nSecure zip closure. The interior is made for daily essentials such as a phone, wallet, keys and small cosmetics. This style is available to order, with delivery in 7–14 days."
     }
   },
-  "milano-classic-shoulder-bag-black": {
-    "title": {
-      "ru": "Классическая сумка на плечо Milano",
-      "ro": "Geantă clasică de umăr Milano",
-      "en": "Milano Classic Shoulder Bag"
-    },
-    "description": {
-      "ru": "Классическая сумка на плечо Milano. Модель выполнена из натуральной кожи и создана для городского дня, встреч и образов, где важны свобода движения и аккуратный силуэт. Силуэт выглядит собранно, но остаётся лёгким в повседневной носке: аксессуар не перегружает образ и хорошо сочетается с базовым гардеробом.\n\nПрактичная магнитная фиксация. Внутреннее пространство рассчитано на ежедневные вещи — телефон, кошелёк, ключи и небольшую косметику. Модель доступна под заказ: срок доставки 7–14 дней.",
-      "ro": "Geantă clasică de umăr Milano este o geantă de umăr din piele naturală, creată pentru zile active în oraș, întâlniri și ținute în care contează libertatea de mișcare. Silueta rămâne elegantă fără să pară rigidă, iar proporțiile sunt ușor de integrat în garderoba de zi cu zi.\n\nFixare magnetică practică. Interiorul este gândit pentru lucrurile esențiale: telefon, portofel, chei și mici accesorii. Modelul este disponibil la comandă: livrare în 7–14 zile.",
-      "en": "Milano Classic Shoulder Bag is a shoulder bag crafted from natural leather, designed for city days, meetings and outfits where easy movement matters. The silhouette feels polished without looking stiff, making it easy to style with a considered everyday wardrobe.\n\nPractical magnetic fastening. The interior is made for daily essentials such as a phone, wallet, keys and small cosmetics. This style is available to order, with delivery in 7–14 days."
-    }
-  },
   "classic-leather-tote-bag-black": {
     "title": {
       "ru": "Claudine — классическая кожаная сумка-тоут",
@@ -712,54 +703,6 @@ const productCopyBySlug: Record<string, ProductLocalizedCopy> = {
       "en": "Structured Leather Top Handle Bag is a handbag crafted from natural leather, designed for everyday styling, office looks and relaxed evening plans. The silhouette feels polished without looking stiff, making it easy to style with a considered everyday wardrobe.\n\nVersatile city-ready shape. The interior is made for daily essentials such as a phone, wallet, keys and small cosmetics. This style is available to order, with delivery in 7–14 days."
     }
   },
-  "premium-leather-crescent-shoulder-bag-black": {
-    "title": {
-      "ru": "Кожаная сумка-полумесяц на плечо",
-      "ro": "Geantă de umăr din piele, formă semilună",
-      "en": "Premium Leather Crescent Shoulder Bag"
-    },
-    "description": {
-      "ru": "Кожаная сумка-полумесяц на плечо. Модель выполнена из натуральной кожи и создана для городского дня, встреч и образов, где важны свобода движения и аккуратный силуэт. Силуэт выглядит собранно, но остаётся лёгким в повседневной носке: аксессуар не перегружает образ и хорошо сочетается с базовым гардеробом.\n\nНадёжная застёжка на молнии. Внутреннее пространство рассчитано на ежедневные вещи — телефон, кошелёк, ключи и небольшую косметику. Модель доступна под заказ: срок доставки 7–14 дней.",
-      "ro": "Geantă de umăr din piele, formă semilună este o geantă de umăr din piele naturală, creată pentru zile active în oraș, întâlniri și ținute în care contează libertatea de mișcare. Silueta rămâne elegantă fără să pară rigidă, iar proporțiile sunt ușor de integrat în garderoba de zi cu zi.\n\nÎnchidere sigură cu fermoar. Interiorul este gândit pentru lucrurile esențiale: telefon, portofel, chei și mici accesorii. Modelul este disponibil la comandă: livrare în 7–14 zile.",
-      "en": "Premium Leather Crescent Shoulder Bag is a shoulder bag crafted from natural leather, designed for city days, meetings and outfits where easy movement matters. The silhouette feels polished without looking stiff, making it easy to style with a considered everyday wardrobe.\n\nSecure zip closure. The interior is made for daily essentials such as a phone, wallet, keys and small cosmetics. This style is available to order, with delivery in 7–14 days."
-    }
-  },
-  "premium-leather-travel-tote-bag-black": {
-    "title": {
-      "ru": "Faustine — дорожная сумка-тоут",
-      "ro": "Faustine — geantă tote de călătorie",
-      "en": "Faustine — travel tote bag"
-    },
-    "description": {
-      "ru": "Faustine — дорожная сумка-тоут. Модель выполнена из натуральной кожи и создана для работы, поездок по городу и дней, когда с собой нужно взять больше обычного. Силуэт выглядит собранно, но остаётся лёгким в повседневной носке: аксессуар не перегружает образ и хорошо сочетается с базовым гардеробом.\n\nВместительный формат на каждый день. Внутреннее пространство рассчитано на ежедневные вещи — телефон, кошелёк, ключи и небольшую косметику. Модель доступна под заказ: срок доставки 7–14 дней.",
-      "ro": "Faustine — geantă tote de călătorie este o geantă tote din piele naturală, creată pentru birou, drumuri prin oraș și zile în care aveți nevoie de mai mult spațiu. Silueta rămâne elegantă fără să pară rigidă, iar proporțiile sunt ușor de integrat în garderoba de zi cu zi.\n\nFormat încăpător pentru fiecare zi. Interiorul este gândit pentru lucrurile esențiale: telefon, portofel, chei și mici accesorii. Modelul este disponibil la comandă: livrare în 7–14 zile.",
-      "en": "Faustine — travel tote bag is a tote bag crafted from natural leather, designed for work, city errands and days when you need to carry more. The silhouette feels polished without looking stiff, making it easy to style with a considered everyday wardrobe.\n\nRoomy format for everyday use. The interior is made for daily essentials such as a phone, wallet, keys and small cosmetics. This style is available to order, with delivery in 7–14 days."
-    }
-  },
-  "premium-woven-hobo-bag-natural-beige": {
-    "title": {
-      "ru": "Violette — плетёная сумка-хобо",
-      "ro": "Violette — geantă hobo împletită",
-      "en": "Violette — woven hobo bag"
-    },
-    "description": {
-      "ru": "Violette — плетёная сумка-хобо с кожаными деталями и широким регулируемым ремнём — для города, офиса и спокойных вечерних выходов.\n\nМягкий силуэт и натуральная фактура плетения легко вписываются в повседневный гардероб. Модель доступна под заказ: срок доставки 7–14 дней.",
-      "ro": "Violette — geantă hobo împletită cu detalii din piele și curea lată reglabilă — pentru oraș, birou și ieșiri de seară relaxate.\n\nSilueta moale și textura naturală a împletiturii se integrează ușor în garderoba de zi cu zi. Model disponibil la comandă: livrare în 7–14 zile.",
-      "en": "Violette — woven hobo bag with leather details and a wide adjustable strap — for city days, office looks and relaxed evenings.\n\nThe soft silhouette and natural woven texture fit easily into an everyday wardrobe. Available to order, delivery in 7–14 days."
-    }
-  },
-  "premium-vintage-straw-tote-bag-natural-beige": {
-    "title": {
-      "ru": "Fabienne — винтажная соломенная сумка-тоут",
-      "ro": "Fabienne — geantă tote vintage din paie",
-      "en": "Fabienne — vintage straw tote bag"
-    },
-    "description": {
-      "ru": "Fabienne — винтажная соломенная сумка-тоут с квадратными ручками, кожаными деталями и съёмным ремнём — для лета, города и отдыха.\n\nЛёгкое плетение и вместительное отделение внутри. Модель доступна под заказ: доставка 7–14 дней.",
-      "ro": "Fabienne — geantă tote vintage din paie, cu mânere pătrate, detalii din piele și curea detașabilă — pentru vară, oraș și vacanță.\n\nÎmpletitură ușoară și compartiment interior încăpător. Model disponibil la comandă: livrare 7–14 zile.",
-      "en": "Fabienne — vintage straw tote with square handles, leather details and a detachable strap — for summer, city days and holidays.\n\nLight handwoven texture and a roomy interior. Available to order, delivery in 7–14 days."
-    }
-  },
   "premium-fan-straw-handbag-natural-cognac": {
     "title": {
       "ru": "Соломенная сумка веерной формы",
@@ -770,18 +713,6 @@ const productCopyBySlug: Record<string, ProductLocalizedCopy> = {
       "ru": "Соломенная сумка веерной формы. Модель выполнена из плетёной фактуры с кожаными деталями и создана для повседневного гардероба, офиса и спокойных вечерних выходов. Силуэт выглядит собранно, но остаётся лёгким в повседневной носке: аксессуар не перегружает образ и хорошо сочетается с базовым гардеробом.\n\nУниверсальный силуэт для города. Внутреннее пространство рассчитано на ежедневные вещи — телефон, кошелёк, ключи и небольшую косметику. Модель доступна под заказ: срок доставки 7–14 дней.",
       "ro": "Geantă din paie în formă de evantai este o geantă din textură împletită cu detalii din piele, creată pentru garderoba de zi cu zi, birou și ieșiri de seară relaxate. Silueta rămâne elegantă fără să pară rigidă, iar proporțiile sunt ușor de integrat în garderoba de zi cu zi.\n\nSiluetă versatilă pentru oraș. Interiorul este gândit pentru lucrurile esențiale: telefon, portofel, chei și mici accesorii. Modelul este disponibil la comandă: livrare în 7–14 zile.",
       "en": "Premium Fan Straw Handbag is a handbag crafted from a woven texture with leather details, designed for everyday styling, office looks and relaxed evening plans. The silhouette feels polished without looking stiff, making it easy to style with a considered everyday wardrobe.\n\nVersatile city-ready shape. The interior is made for daily essentials such as a phone, wallet, keys and small cosmetics. This style is available to order, with delivery in 7–14 days."
-    }
-  },
-  "premium-woven-bucket-bag-cream": {
-    "title": {
-      "ru": "Плетёная сумка-ведро",
-      "ro": "Geantă bucket împletită",
-      "en": "Premium Woven Bucket Bag"
-    },
-    "description": {
-      "ru": "Плетёная сумка-ведро. Модель выполнена из плетёной фактуры с кожаными деталями и создана для летних образов, прогулок и расслабленного smart casual. Силуэт выглядит собранно, но остаётся лёгким в повседневной носке: аксессуар не перегружает образ и хорошо сочетается с базовым гардеробом.\n\nМягкое закрытие на шнурке. Внутреннее пространство рассчитано на ежедневные вещи — телефон, кошелёк, ключи и небольшую косметику. Модель доступна под заказ: срок доставки 7–14 дней.",
-      "ro": "Geantă bucket împletită este o geantă bucket din textură împletită cu detalii din piele, creată pentru ținute de vară, plimbări și smart casual relaxat. Silueta rămâne elegantă fără să pară rigidă, iar proporțiile sunt ușor de integrat în garderoba de zi cu zi.\n\nÎnchidere lejeră cu șnur. Interiorul este gândit pentru lucrurile esențiale: telefon, portofel, chei și mici accesorii. Modelul este disponibil la comandă: livrare în 7–14 zile.",
-      "en": "Premium Woven Bucket Bag is a bucket bag crafted from a woven texture with leather details, designed for summer looks, walks and relaxed smart casual styling. The silhouette feels polished without looking stiff, making it easy to style with a considered everyday wardrobe.\n\nRelaxed drawstring closure. The interior is made for daily essentials such as a phone, wallet, keys and small cosmetics. This style is available to order, with delivery in 7–14 days."
     }
   },
   "elegant-leather-crossbody-bag-white": {
@@ -856,18 +787,6 @@ const productCopyBySlug: Record<string, ProductLocalizedCopy> = {
       "en": "Beatrice — structured tote bag is a tote bag crafted from natural leather, designed for work, city errands and days when you need to carry more. The silhouette feels polished without looking stiff, making it easy to style with a considered everyday wardrobe.\n\nSecure zip closure. The interior is made for daily essentials such as a phone, wallet, keys and small cosmetics. This style is in stock, with delivery in 1–3 days."
     }
   },
-  "woven-leather-hobo-bag-black": {
-    "title": {
-      "ru": "Плетёная кожаная сумка хобо",
-      "ro": "Geantă hobo din piele împletită",
-      "en": "Woven Leather Hobo Bag"
-    },
-    "description": {
-      "ru": "Плетёная кожаная сумка хобо. Модель выполнена из натуральной кожи и создана для повседневного гардероба, офиса и спокойных вечерних выходов. Силуэт выглядит собранно, но остаётся лёгким в повседневной носке: аксессуар не перегружает образ и хорошо сочетается с базовым гардеробом.\n\nНадёжная застёжка на молнии. Внутреннее пространство рассчитано на ежедневные вещи — телефон, кошелёк, ключи и небольшую косметику. Модель доступна под заказ: срок доставки 7–14 дней.",
-      "ro": "Geantă hobo din piele împletită este o geantă din piele naturală, creată pentru garderoba de zi cu zi, birou și ieșiri de seară relaxate. Silueta rămâne elegantă fără să pară rigidă, iar proporțiile sunt ușor de integrat în garderoba de zi cu zi.\n\nÎnchidere sigură cu fermoar. Interiorul este gândit pentru lucrurile esențiale: telefon, portofel, chei și mici accesorii. Modelul este disponibil la comandă: livrare în 7–14 zile.",
-      "en": "Woven Leather Hobo Bag is a handbag crafted from natural leather, designed for everyday styling, office looks and relaxed evening plans. The silhouette feels polished without looking stiff, making it easy to style with a considered everyday wardrobe.\n\nSecure zip closure. The interior is made for daily essentials such as a phone, wallet, keys and small cosmetics. This style is available to order, with delivery in 7–14 days."
-    }
-  },
   "the-essential-shoulder-bag-tan-cognac": {
     "title": {
       "ru": "Adele — базовая сумка на плечо",
@@ -878,18 +797,6 @@ const productCopyBySlug: Record<string, ProductLocalizedCopy> = {
       "ru": "Adele — базовая сумка на плечо. Модель выполнена из натуральной кожи и создана для работы, поездок по городу и дней, когда с собой нужно взять больше обычного. Силуэт выглядит собранно, но остаётся лёгким в повседневной носке: аксессуар не перегружает образ и хорошо сочетается с базовым гардеробом.\n\nНадёжная застёжка на молнии. Внутреннее пространство рассчитано на ежедневные вещи — телефон, кошелёк, ключи и небольшую косметику. Модель доступна под заказ: срок доставки 7–14 дней.",
       "ro": "Adele — geantă de umăr esențială este o geantă tote din piele naturală, creată pentru birou, drumuri prin oraș și zile în care aveți nevoie de mai mult spațiu. Silueta rămâne elegantă fără să pară rigidă, iar proporțiile sunt ușor de integrat în garderoba de zi cu zi.\n\nÎnchidere sigură cu fermoar. Interiorul este gândit pentru lucrurile esențiale: telefon, portofel, chei și mici accesorii. Modelul este disponibil la comandă: livrare în 7–14 zile.",
       "en": "Adele — essential shoulder bag is a tote bag crafted from natural leather, designed for work, city errands and days when you need to carry more. The silhouette feels polished without looking stiff, making it easy to style with a considered everyday wardrobe.\n\nSecure zip closure. The interior is made for daily essentials such as a phone, wallet, keys and small cosmetics. This style is available to order, with delivery in 7–14 days."
-    }
-  },
-  "calf-leather-tote-bag-off-white": {
-    "title": {
-      "ru": "Genevieve — сумка-тоут из телячьей кожи",
-      "ro": "Genevieve — geantă tote din piele de vițel",
-      "en": "Genevieve — calf leather tote bag"
-    },
-    "description": {
-      "ru": "Genevieve — сумка-тоут из телячьей кожи с зернистой фактурой, магнитной застёжкой и регулируемым ремнём — для работы, города и поездок.\n\nПросторное отделение вмещает документы, планшет, кошелёк и повседневные мелочи. Модель доступна под заказ: доставка 7–14 дней.",
-      "ro": "Genevieve — geantă tote din piele de vițel, cu textură granulată, închidere magnetică și curea reglabilă — pentru birou, oraș și călătorii.\n\nCompartimentul încăpător încăpe documente, tabletă, portofel și accesorii zilnice. Model disponibil la comandă: livrare 7–14 zile.",
-      "en": "Genevieve — calf leather tote with a pebbled grain, magnetic closure and adjustable strap — for work, city days and travel.\n\nThe roomy interior fits documents, a tablet, a wallet and everyday essentials. Available to order, delivery in 7–14 days."
     }
   },
   "aurelia-soft-hobo-cognac": {
@@ -1380,7 +1287,7 @@ const productCopyBySlug: Record<string, ProductLocalizedCopy> = {
     },
     "description": {
       "ru": "Colette — сумка на плечо с клапаном на замке. Модель выполнена из фактурной кожи и создана для городского дня, встреч и образов, где важны собранный силуэт и удобный доступ к вещам. Конвертный клапан и золотая фурнитура выглядят аккуратно и не перегружают образ.\n\nПлечевой ремень для комфортной носки. Внутри — контрастная красная подкладка и место для телефона, кошелька, ключей и косметики. Модель есть в наличии: доставим за 1–3 дня.",
-      "ro": "Colette — geantă de umăr cu clapetă și încuietoare rotativă. Model din piele texturată, creat pentru zile active în oraș, întâlniri și ținute în care contează un siluet bine definit. Clapeta tip plic și finisajele aurii rămân elegante fără exces.\n\nCurea de umăr pentru purtare comodă. Interior cu captuseală roșie contrastantă, suficient pentru telefon, portofel, chei și cosmetice. Modelul este în stoc: livrare în 1–3 zile.",
+      "ro": "Colette — geantă de umăr cu clapetă și încuietoare rotativă. Model din piele texturată, creat pentru zile active în oraș, întâlniri și ținute în care contează o siluetă bine definită. Clapeta tip plic și finisajele aurii rămân elegante fără exces.\n\nCurea de umăr pentru purtare comodă. Interior cu căptușeală roșie contrastantă, suficient pentru telefon, portofel, chei și cosmetice. Modelul este în stoc: livrare în 1–3 zile.",
       "en": "Colette — turn-lock flap shoulder bag crafted from textured leather, designed for city days, meetings and outfits where a polished silhouette matters. The envelope flap and gold hardware feel refined without looking heavy.\n\nShoulder strap for comfortable wear. Inside, a contrasting red lining offers room for a phone, wallet, keys and cosmetics. This style is in stock, with delivery in 1–3 days."
     }
   },
@@ -1468,18 +1375,6 @@ const productCopyBySlug: Record<string, ProductLocalizedCopy> = {
       "en": "Rosalind — handbag is a handbag crafted from smooth leather, designed for everyday styling, office looks and relaxed evening plans. The silhouette feels polished without looking stiff, making it easy to style with a considered everyday wardrobe.\n\nVersatile city-ready shape. The interior is made for daily essentials such as a phone, wallet, keys and small cosmetics. This style is in stock, with delivery in 1–3 days."
     }
   },
-  "womens-smooth-leather-chain-strap-crescent-hobo-bag": {
-    "title": {
-      "ru": "Odile — хобо полумесяц с цепочкой",
-      "ro": "Odile — geantă hobo semilună cu lanț",
-      "en": "Odile — chain-strap crescent hobo bag"
-    },
-    "description": {
-      "ru": "Odile — хобо полумесяц с цепочкой из гладкой кожи. Плечевой ремень с переплетённой золотистой цепочкой и декоративными металлическими кольцами у основания — характерная деталь модели.\n\nМягкий силуэт без каркаса и застёжка-молния делают сумку удобной для повседневной носки. Модель доступна под заказ: срок доставки 7–14 дней.",
-      "ro": "Odile — geantă hobo semilună din piele netedă, cu curea de umăr în care un lanț auriu este împletit cu fâșii de piele. Inelele metalice decorative de la baza curelei sunt detaliul distinctiv al modelului.\n\nSilueta moale, fără structură rigidă, și fermoarul o fac potrivită pentru purtarea zilnică. Modelul este disponibil la comandă: livrare în 7–14 zile.",
-      "en": "Odile — smooth leather crescent hobo with a shoulder strap where a gold chain is woven through leather strips. Decorative metal rings at the strap base are the signature detail.\n\nThe soft, unstructured silhouette and zip closure make it easy for everyday wear. This style is available to order, with delivery in 7–14 days."
-    }
-  },
   "womens-suede-wing-tote-bag": {
     "title": {
       "ru": "Severine — сумка-тоут из замши",
@@ -1488,7 +1383,7 @@ const productCopyBySlug: Record<string, ProductLocalizedCopy> = {
     },
     "description": {
       "ru": "Severine — сумка-тоут из замши с трапециевидным силуэтом и расклешёнными боками. Тонкие кожаные плечевые ремни с декоративными концами и магнитная застёжка — характерные детали модели.\n\nПросторное внутреннее отделение с контрастной подкладкой и косметичка в комплекте делают сумку удобной для повседневной носки. Модель доступна под заказ: срок доставки 7–14 дней.",
-      "ro": "Severine — shopper din piele întoarsă, cu siluetă trapezoidală și laterale evazate. Curelele subțiri din piele, cu capete decorative, și închiderea magnetică sunt detaliile distinctive ale modelului.\n\nInteriorul spațios, cu captuseală contrastantă, și un pouch inclus în set o fac potrivită pentru purtarea zilnică. Modelul este disponibil la comandă: livrare în 7–14 zile.",
+      "ro": "Severine — shopper din piele întoarsă, cu siluetă trapezoidală și laterale evazate. Curelele subțiri din piele, cu capete decorative, și închiderea magnetică sunt detaliile distinctive ale modelului.\n\nInteriorul spațios, cu căptușeală contrastantă, și un pouch inclus în set o fac potrivită pentru purtarea zilnică. Modelul este disponibil la comandă: livrare în 7–14 zile.",
       "en": "Severine — suede tote with a trapezoid silhouette and flared sides. Slim leather shoulder straps with decorative hanging ends and a magnetic closure are the signature details.\n\nA roomy interior with contrast lining and a matching pouch make it easy for everyday wear. This style is available to order, with delivery in 7–14 days."
     }
   },
@@ -1500,7 +1395,7 @@ const productCopyBySlug: Record<string, ProductLocalizedCopy> = {
     },
     "description": {
       "ru": "Callista — структурная сумка из зернистой кожи с архитектурным силуэтом и кольцевой ручкой. Центральная треугольная панель и боковая молния — характерные детали модели.\n\nСъёмный плечевой ремень позволяет носить сумку в руке или через плечо. Модель доступна под заказ: срок доставки 7–14 дней.",
-      "ro": "Callista — geantă structurată din piele granulată, cu siluetă arhitecturală și mâner circular. Panoul central triunghiular și fermoarul lateral sunt detaliile distinctive ale modelului.\n\nCurea detașabilă de umăr permite purtarea în mână sau pe umăr. Modelul este disponibil la comandă: livrare în 7–14 zile.",
+      "ro": "Callista — geantă structurată din piele granulată, cu siluetă arhitecturală și mâner circular. Panoul central triunghiular și fermoarul lateral sunt detaliile distinctive ale modelului.\n\nCureaua detașabilă de umăr permite purtarea în mână sau pe umăr. Modelul este disponibil la comandă: livrare în 7–14 zile.",
       "en": "Callista — pebbled leather structured bag with an architectural silhouette and a ring handle. The central triangular panel and side zip are the signature details.\n\nA detachable shoulder strap lets you carry it by hand or on the shoulder. This style is available to order, with delivery in 7–14 days."
     }
   },
@@ -1524,7 +1419,7 @@ const productCopyBySlug: Record<string, ProductLocalizedCopy> = {
     },
     "description": {
       "ru": "Mirabel — сумка-полумесяц из гладкой кожи с округлым силуэтом и встроенным плечевым ремнём. Серебристое декоративное кольцо у нижнего края — характерная деталь модели.\n\nМягкий силуэт без каркаса и одно отделение через верхний проём подходят для повседневного минимума. Модель доступна под заказ: срок доставки 7–14 рабочих дней.",
-      "ro": "Mirabel — geantă semilună din piele netedă, cu siluetă rotunjită și curea de umăr integrată. Inelul decorativ argintiu de la baza geantii este detaliul distinctiv al modelului.\n\nSilueta moale, fără structură rigidă, și un singur compartiment prin deschiderea de sus o fac potrivită pentru esențialele zilnice. Modelul este disponibil la comandă: livrare în 7–14 zile lucrătoare.",
+      "ro": "Mirabel — geantă semilună din piele netedă, cu siluetă rotunjită și curea de umăr integrată. Inelul decorativ argintiu de la baza genții este detaliul distinctiv al modelului.\n\nSilueta moale, fără structură rigidă, și un singur compartiment prin deschiderea de sus o fac potrivită pentru esențialele zilnice. Modelul este disponibil la comandă: livrare în 7–14 zile lucrătoare.",
       "en": "Mirabel — smooth leather crescent bag with a rounded silhouette and an integrated shoulder strap. The silver decorative ring at the base is the signature detail.\n\nThe soft, unstructured shape and single compartment through the top opening work for everyday essentials. Available on pre-order, with delivery in 7–14 business days."
     }
   },
@@ -2672,6 +2567,23 @@ const productCopyBySlug: Record<string, ProductLocalizedCopy> = {
       "ro": ["Piele granulată", "Construcție cu trei panouri", "Capse", "Protecție RFID"],
       "en": ["Pebbled leather", "Tri-fold design", "Snap closures", "RFID protection"]
     }
+  },
+  "womens-pebbled-leather-heart-shaped-handbag": {
+    "title": {
+      "ru": "Rosalba — сумка в форме сердца",
+      "ro": "Rosalba — geantă în formă de inimă",
+      "en": "Rosalba — heart-shaped handbag"
+    },
+    "description": {
+      "ru": "Сумка в форме сердца из зернистой кожи — узнаваемый силуэт, который добавляет характер даже к простому образу.\n\nЗолотая молния идёт по верхней линии сердца, а съёмный ремень позволяет носить модель в руке или через плечо. Внутри — красная подкладка и аккордеонные перегородки.",
+      "ro": "Geantă în formă de inimă din piele granulată — o siluetă ușor de recunoscut, care adaugă personalitate chiar și unei ținute simple.\n\nFermoarul auriu urmează linia superioară a inimii, iar cureaua detașabilă permite purtarea în mână sau pe umăr. Interiorul are căptușeală roșie și compartimente tip acordeon.",
+      "en": "A heart-shaped bag in pebbled leather — a distinctive silhouette that adds character even to a simple outfit.\n\nA gold zip follows the top curve of the heart, and a detachable strap lets you carry it by hand or crossbody. Inside — a red leather lining with accordion dividers."
+    },
+    "highlights": {
+      "ru": ["Зернистая кожа", "Силуэт в форме сердца", "Короткая ручка и съёмный ремень", "Застёжка на молнии с золотой фурнитурой"],
+      "ro": ["Piele granulată", "Siluetă în formă de inimă", "Mâner scurt și curea detașabilă", "Fermoar cu accesorii aurii"],
+      "en": ["Pebbled leather", "Heart-shaped silhouette", "Short handle and detachable strap", "Zip closure with gold hardware"]
+    }
   }
 };
 
@@ -2727,7 +2639,7 @@ export function localizeProductDescription(product: Product, locale: Locale = de
   if (locale === "ro") {
     return `${localizeProductTitle(product, locale)} este o piesă atent selectată pentru garderoba de zi cu zi, cu accent pe forma elegantă, materiale de calitate și detalii practice.
 
-Modelul este realizat din ${material} și este potrivit pentru ținute casual, business sau de seară. După plasarea comenzii, echipa SÓRA confirmă disponibilitatea, culoarea aleasă și termenul de livrare.`;
+Modelul este realizat din ${material} și este potrivit pentru ținute casual, de afaceri sau de seară. După plasarea comenzii, echipa SÓRA confirmă disponibilitatea, culoarea aleasă și termenul de livrare.`;
   }
   return `${localizeProductTitle(product, locale)} is a carefully selected piece for an everyday wardrobe, focused on an elegant shape, quality materials and practical details.
 

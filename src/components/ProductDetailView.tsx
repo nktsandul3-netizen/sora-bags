@@ -66,12 +66,6 @@ const leatherBadgeLabel: Record<string, string> = {
   en: "100% genuine leather",
 };
 
-const vintageBadgeLabel: Record<string, string> = {
-  ru: "Коллекция Vintage",
-  ro: "Vintage Collection",
-  en: "Vintage Collection",
-};
-
 function PhoneIcon() {
   return (
     <svg
@@ -422,18 +416,23 @@ export default function ProductDetailView({
               </div>
 
               {hasGallery ? (
-              <div className="absolute bottom-6 left-1/2 z-20 flex -translate-x-1/2 items-center gap-2 rounded-full border border-white/70 bg-white/70 px-3.5 py-2.5 shadow-[0_12px_30px_-20px_rgba(28,25,23,0.7)] backdrop-blur-md">
+              <div className="absolute bottom-6 left-1/2 z-20 flex -translate-x-1/2 items-center rounded-full border border-white/70 bg-white/70 px-2 py-1 shadow-[0_12px_30px_-20px_rgba(28,25,23,0.7)] backdrop-blur-md">
                 {images.map((image, i) => (
                   <button
                     key={`${image.alt}-dot-${i}`}
                     type="button"
                     aria-label={`${t("common.photo")} ${i + 1}`}
                     onClick={() => setImageIdx(i)}
-                    className={
-                      "h-1.5 rounded-full transition-all " +
-                      (i === safeImageIdx ? "w-7 bg-stone-950" : "w-1.5 bg-stone-400/70")
-                    }
-                  />
+                    className="flex items-center justify-center p-2"
+                  >
+                    <span
+                      aria-hidden
+                      className={
+                        "block h-1.5 rounded-full transition-all " +
+                        (i === safeImageIdx ? "w-7 bg-stone-950" : "w-1.5 bg-stone-400/70")
+                      }
+                    />
+                  </button>
                 ))}
               </div>
               ) : null}
@@ -463,10 +462,10 @@ export default function ProductDetailView({
           </div>
           <div className="relative p-6 sm:p-7 lg:p-8">
         <div className="flex flex-wrap items-center gap-3.5 leading-none">
-          <span className="inline-flex h-[27px] items-center text-[15px] font-medium text-stone-950">
+          <span className="product-detail-brand-reveal inline-flex h-[27px] items-center text-[15px] font-medium text-stone-950">
             SÓRA
           </span>
-          <div className="inline-flex items-center gap-2 rounded-[5px] bg-white px-2.5 py-1.5 text-[14px] font-medium leading-none text-stone-800 shadow-sm ring-1 ring-stone-200/70">
+          <div className="product-detail-badge product-detail-badge-delay-1 inline-flex items-center gap-2 rounded-[5px] bg-white px-2.5 py-1.5 text-[14px] font-medium leading-none text-stone-800 shadow-sm ring-1 ring-stone-200/70">
             <span className="flex h-4 w-5 overflow-hidden rounded-[2px]" aria-hidden>
               <span className="flex-1 bg-[#009246]" />
               <span className="flex-1 bg-white" />
@@ -475,36 +474,17 @@ export default function ProductDetailView({
             Made in Italy
           </div>
           {showLeatherBadge && (
-            <div className="inline-flex items-center gap-1.5 rounded-[5px] bg-white px-2 py-1.5 text-[12px] font-medium leading-none text-stone-700 shadow-sm ring-1 ring-stone-200/70">
+            <div className="product-detail-badge product-detail-badge-delay-2 inline-flex items-center gap-1.5 rounded-[5px] bg-white px-2 py-1.5 text-[12px] font-medium leading-none text-stone-700 shadow-sm ring-1 ring-stone-200/70">
               <LeatherHideIcon />
               {leatherBadgeLabel[locale] ?? leatherBadgeLabel.ru}
             </div>
           )}
-          {product.isVintage && (
-            <div className="inline-flex items-center gap-1 rounded-[5px] bg-[#fbf3e7]/55 px-1.5 py-1.5 text-[11px] font-normal leading-none text-[#9a6d34]/85 shadow-sm ring-1 ring-[#e6cfa3]/40">
-              <svg aria-hidden viewBox="0 0 24 24" className="h-3 w-3 shrink-0 text-[#b8862f]/75" fill="none">
-                <path
-                  d="M12 3.2 19.8 12 12 20.8 4.2 12 12 3.2Z"
-                  stroke="currentColor"
-                  strokeLinejoin="round"
-                  strokeWidth="1.55"
-                />
-                <path
-                  d="M8.9 12h6.2M12 8.9v6.2"
-                  stroke="currentColor"
-                  strokeLinecap="round"
-                  strokeWidth="1.2"
-                />
-              </svg>
-              {vintageBadgeLabel[locale] ?? vintageBadgeLabel.en}
-            </div>
-          )}
         </div>
         <div className="mt-4 flex items-start justify-between gap-5">
-          <h1 className="min-w-0 flex-1 font-sans text-[17px] font-normal leading-[1.25] tracking-[-0.01em] text-stone-950 sm:text-[19px]">
+          <h1 className="product-detail-title-reveal min-w-0 flex-1 font-sans text-[17px] font-normal leading-[1.25] tracking-[-0.01em] text-stone-950 sm:text-[19px]">
             {localizedTitle}
           </h1>
-          <div className="flex shrink-0 items-baseline gap-2 pt-0.5">
+          <div className="product-detail-price-reveal flex shrink-0 items-baseline gap-2 pt-0.5">
             {onSale && (
               <span className="price-strike text-[16px] font-normal text-stone-400">
                 {formatPrice(product.oldPrice!, locale)}
@@ -524,7 +504,8 @@ export default function ProductDetailView({
         </div>
         <PreorderStatusBadge
           status={isPreorder ? "pre_order" : product.status}
-          className="mt-2"
+          className="product-detail-status-reveal mt-2"
+          pulse
         />
         <div className="mt-8">
           <p className="text-base text-stone-950">

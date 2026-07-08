@@ -76,8 +76,8 @@ export const videoWidget = {
     },
   ] satisfies VideoWidgetTikTokItem[],
 
-  tiktokLabel: "Открыть в TikTok",
-  collectionLabel: "Смотреть коллекцию",
+  tiktokLabel: "Перейти в TikTok",
+  collectionLabel: "Перейти в TikTok",
 
   // Режим video (если mode: "video")
   title: "NEW CO — GOLDEN ESCAPE",
@@ -143,7 +143,6 @@ export const brandStories = {
     "womens-soft-leather-draped-flap-bag",
     "the-essential-shoulder-bag-tan-cognac",
     "womens-pebbled-leather-accordion-buckle-shoulder-bag",
-    "premium-leather-travel-tote-bag-black",
     "structured-leather-tote-bag-burgundy",
     "womens-pebbled-leather-crescent-hobo-bag",
     "womens-pebbled-leather-kiss-lock-pouch-bag-light-blue",
@@ -154,12 +153,12 @@ export const brandStories = {
     "elegant-leather-hobo-bag-taupe",
     "elegant-leather-hobo-bag-smooth-black",
     "woven-leather-shopper-tote-black",
-    "womens-smooth-leather-chain-strap-crescent-hobo-bag",
     "womens-suede-wing-tote-bag",
     "womens-pebbled-leather-ring-handle-structured-bag",
     "womens-pebbled-leather-wing-flap-tote-bag",
     "womens-woven-suede-flap-clutch-bag",
     "womens-smooth-leather-metal-ring-crescent-hobo-bag",
+    "womens-pebbled-leather-heart-shaped-handbag",
   ],
   items: [
     {
@@ -279,29 +278,6 @@ export const brandStories = {
             {
               type: "image",
               src: "/products/womens-pebbled-leather-accordion-buckle-shoulder-bag/as-seen-on-yellow-mirror-3.jpg",
-            },
-          ],
-        },
-      },
-    },
-    "premium-leather-travel-tote-bag-black": {
-      highlights: {
-        "as-seen-on": {
-          cover: "/products/premium-leather-travel-tote-bag/as-seen-on-cognac-storefront-2.jpg",
-          ringGradient:
-            "conic-gradient(from 140deg, #d4a574, #a0643f, #7c4a2d, #a0643f, #d4a574)",
-          slides: [
-            {
-              type: "image",
-              src: "/products/premium-leather-travel-tote-bag/as-seen-on-cognac-storefront-1.jpg",
-            },
-            {
-              type: "image",
-              src: "/products/premium-leather-travel-tote-bag/as-seen-on-cognac-storefront-2.jpg",
-            },
-            {
-              type: "image",
-              src: "/products/premium-leather-travel-tote-bag/as-seen-on-cognac-storefront-3.jpg",
             },
           ],
         },
@@ -511,29 +487,6 @@ export const brandStories = {
         },
       },
     },
-    "womens-smooth-leather-chain-strap-crescent-hobo-bag": {
-      highlights: {
-        "as-seen-on": {
-          cover: "/products/womens-smooth-leather-chain-strap-crescent-hobo-bag/as-seen-on-mirror-2.png",
-          ringGradient:
-            "conic-gradient(from 140deg, #9ca3af, #4b5563, #1f2937, #4b5563, #9ca3af)",
-          slides: [
-            {
-              type: "image",
-              src: "/products/womens-smooth-leather-chain-strap-crescent-hobo-bag/as-seen-on-mirror-1.png",
-            },
-            {
-              type: "image",
-              src: "/products/womens-smooth-leather-chain-strap-crescent-hobo-bag/as-seen-on-mirror-2.png",
-            },
-            {
-              type: "image",
-              src: "/products/womens-smooth-leather-chain-strap-crescent-hobo-bag/as-seen-on-mirror-3.png",
-            },
-          ],
-        },
-      },
-    },
     "womens-suede-wing-tote-bag": {
       highlights: {
         "in-motion": {
@@ -589,6 +542,18 @@ export const brandStories = {
           type: "video",
           src: "/videos/sora-story-in-motion-wing-flap-tote-bag.mp4",
           poster: "/products/womens-pebbled-leather-wing-flap-tote-bag/light-blue-front-alt.png",
+        },
+      ],
+    },
+    "womens-pebbled-leather-heart-shaped-handbag": {
+      cover: "/products/womens-pebbled-leather-heart-shaped-handbag/yellow-front-set.png",
+      ringGradient:
+        "conic-gradient(from 140deg, #fde68a, #e5b318, #c9287a, #e5b318, #fde68a)",
+      slides: [
+        {
+          type: "video",
+          src: "/videos/sora-story-in-motion-heart-shaped-handbag.mp4",
+          poster: "/products/womens-pebbled-leather-heart-shaped-handbag/yellow-front-set.png",
         },
       ],
     },
@@ -676,25 +641,6 @@ export const homeAsOnMeRail = {
           {
             type: "image",
             src: "/products/womens-pebbled-leather-kiss-lock-pouch-bag/as-seen-on-light-blue-mirror-2.jpg",
-          },
-        ],
-      },
-      {
-        id: "travel-tote",
-        label: "TRAVEL TOTE",
-        cover: "/products/premium-leather-travel-tote-bag/as-seen-on-cognac-storefront-2.jpg",
-        slides: [
-          {
-            type: "image",
-            src: "/products/premium-leather-travel-tote-bag/as-seen-on-cognac-storefront-1.jpg",
-          },
-          {
-            type: "image",
-            src: "/products/premium-leather-travel-tote-bag/as-seen-on-cognac-storefront-2.jpg",
-          },
-          {
-            type: "image",
-            src: "/products/premium-leather-travel-tote-bag/as-seen-on-cognac-storefront-3.jpg",
           },
         ],
       },

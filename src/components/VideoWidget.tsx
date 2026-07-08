@@ -102,9 +102,26 @@ function useIsDesktop() {
   );
 }
 
+function subscribeNoop() {
+  return () => {};
+}
+
+function getMountedSnapshot() {
+  return true;
+}
+
+function getServerMountedSnapshot() {
+  return false;
+}
+
+/** True only after client hydration — mirrors the previous `mounted` state without setState-in-effect. */
+function useMounted() {
+  return useSyncExternalStore(subscribeNoop, getMountedSnapshot, getServerMountedSnapshot);
+}
+
 export default function VideoWidget() {
   const { menuOpen } = useMenuOpen();
-  const [mounted, setMounted] = useState(false);
+  const mounted = useMounted();
   const [dismissed, setDismissed] = useState(false);
   const [expanded, setExpanded] = useState(false);
   const [muted, setMuted] = useState(true);
@@ -146,10 +163,6 @@ export default function VideoWidget() {
   const expandedW = isDesktop
     ? Math.round(expandedH * (9 / 16))
     : Math.min(Math.round(expandedH * (9 / 16)), vw - 24);
-
-  useEffect(() => {
-    setMounted(true);
-  }, []);
 
   const goNext = useCallback(() => {
     if (!isTikTokMode || expanded) return;

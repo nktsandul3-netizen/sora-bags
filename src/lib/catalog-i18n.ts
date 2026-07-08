@@ -2,19 +2,19 @@ import type { Locale } from "@/lib/i18n";
 
 const categoryLabels: Record<string, Partial<Record<Locale, string>>> = {
   "vse-sumki": { ru: "Все сумки", ro: "Toate gențile", en: "All bags" },
-  clutches: { ru: "Clutches", ro: "Clutches", en: "Clutches" },
-  vanity: { ru: "Vanity", ro: "Vanity", en: "Vanity" },
-  "bucket-bags-women": { ru: "Bucket Bags Women", ro: "Bucket Bags Women", en: "Bucket Bags Women" },
-  "bowling-bags": { ru: "Bowling Bags", ro: "Bowling Bags", en: "Bowling Bags" },
-  "handbags-women": { ru: "Handbags Women", ro: "Handbags Women", en: "Handbags Women" },
-  "rectangular-bags": { ru: "Rectangular Bags", ro: "Rectangular Bags", en: "Rectangular Bags" },
-  "tote-bags-women": { ru: "Tote Bags Women", ro: "Tote Bags Women", en: "Tote Bags Women" },
-  "shoulder-bags-women": { ru: "Shoulder Bags Women", ro: "Shoulder Bags Women", en: "Shoulder Bags Women" },
-  "crossbody-bags-women": { ru: "Crossbody Bags Women", ro: "Crossbody Bags Women", en: "Crossbody Bags Women" },
+  clutches: { ru: "Клатчи", ro: "Clutchuri", en: "Clutches" },
+  vanity: { ru: "Косметички и vanity", ro: "Genți vanity", en: "Vanity bags" },
+  "bucket-bags-women": { ru: "Сумки-мешки", ro: "Genți bucket", en: "Bucket bags" },
+  "bowling-bags": { ru: "Сумки-боулинг", ro: "Genți bowling", en: "Bowling bags" },
+  "handbags-women": { ru: "Сумки с ручкой", ro: "Genți de mână", en: "Handbags" },
+  "rectangular-bags": { ru: "Прямоугольные сумки", ro: "Genți dreptunghiulare", en: "Rectangular bags" },
+  "tote-bags-women": { ru: "Тоуты", ro: "Genți tote", en: "Tote bags" },
+  "shoulder-bags-women": { ru: "Сумки на плечо", ro: "Genți de umăr", en: "Shoulder bags" },
+  "crossbody-bags-women": { ru: "Кроссбоди", ro: "Genți crossbody", en: "Crossbody bags" },
   "vse-aksessuary": { ru: "Все аксессуары", ro: "Toate accesoriile", en: "All accessories" },
-  "card-holders-women": { ru: "Card Holders Women", ro: "Card Holders Women", en: "Card Holders Women" },
-  "womens-wallets-women": { ru: "Women's Wallets", ro: "Women's Wallets", en: "Women's Wallets" },
-  "womens-scarves-women": { ru: "Women's Scarves", ro: "Women's Scarves", en: "Women's Scarves" },
+  "card-holders-women": { ru: "Картхолдеры", ro: "Portcarduri", en: "Card holders" },
+  "womens-wallets-women": { ru: "Кошельки", ro: "Portofele", en: "Wallets" },
+  "womens-scarves-women": { ru: "Платки", ro: "Eșarfe", en: "Scarves" },
   "bag-charms": { ru: "Брелки", ro: "Brelocuri", en: "Bag charms" },
 };
 
@@ -58,12 +58,12 @@ const heroCopyLabels: Record<
   },
   "bucket-bags-women": {
     ru: {
-      title: "Bucket bags",
+      title: "Сумки-мешки",
       description:
         "Лёгкость лета и свобода каждого дня — bucket-сумки SÓRA сочетают объём, стиль и удобство для прогулок, пляжа и города.",
     },
     ro: {
-      title: "Bucket bags",
+      title: "Genți bucket",
       description:
         "Ușurința verii și libertatea fiecărei zile — gențile bucket SÓRA îmbină volumul, stilul și confortul pentru plajă, oraș și escapadele de weekend.",
     },
@@ -75,12 +75,12 @@ const heroCopyLabels: Record<
   },
   "bowling-bags": {
     ru: {
-      title: "Bowling bags",
+      title: "Сумки-боулинг",
       description:
         "Уверенный силуэт и спокойная элегантность — bowling-сумки SÓRA сочетают простор, комфорт и стиль для города и путешествий.",
     },
     ro: {
-      title: "Bowling bags",
+      title: "Genți bowling",
       description:
         "Silueta sigură și eleganța discretă — gențile bowling SÓRA îmbină spațiul, confortul și stilul pentru oraș și călătorii.",
     },
@@ -92,12 +92,12 @@ const heroCopyLabels: Record<
   },
   "handbags-women": {
     ru: {
-      title: "Handbags",
+      title: "Сумки с ручкой",
       description:
         "Классический силуэт и мягкая кожа — сумки SÓRA сочетают универсальность, комфорт и изысканный стиль для города и путешествий.",
     },
     ro: {
-      title: "Handbags",
+      title: "Genți de mână",
       description:
         "Silueta clasică și pielea fină — gențile SÓRA îmbină versatilitatea, confortul și stilul rafinat pentru oraș și călătorii.",
     },
@@ -109,12 +109,12 @@ const heroCopyLabels: Record<
   },
   "rectangular-bags": {
     ru: {
-      title: "Rectangular bags",
+      title: "Прямоугольные сумки",
       description:
         "Чёткая геометрия и спокойная элегантность — прямоугольные сумки SÓRA сочетают структуру, вместимость и стиль для города и путешествий.",
     },
     ro: {
-      title: "Rectangular bags",
+      title: "Genți dreptunghiulare",
       description:
         "Geometrie clară și eleganță discretă — gențile dreptunghiulare SÓRA îmbină structura, capacitatea și stilul pentru oraș și călătorii.",
     },
@@ -126,12 +126,12 @@ const heroCopyLabels: Record<
   },
   "tote-bags-women": {
     ru: {
-      title: "Tote bags",
+      title: "Тоуты",
       description:
         "Простор и универсальность — tote-сумки SÓRA сочетают вместимость, лёгкость и элегантный стиль для города, работы и путешествий.",
     },
     ro: {
-      title: "Tote bags",
+      title: "Genți tote",
       description:
         "Spațiu și versatilitate — gențile tote SÓRA îmbină capacitatea, lejeritatea și stilul elegant pentru oraș, birou și călătorii.",
     },
@@ -143,12 +143,12 @@ const heroCopyLabels: Record<
   },
   "shoulder-bags-women": {
     ru: {
-      title: "Shoulder bags",
+      title: "Сумки на плечо",
       description:
         "Свобода движения и городской шик — shoulder-сумки SÓRA сочетают удобство, структуру и элегантный стиль для каждого дня.",
     },
     ro: {
-      title: "Shoulder bags",
+      title: "Genți de umăr",
       description:
         "Libertate de mișcare și chic urban — gențile shoulder SÓRA îmbină confortul, structura și stilul elegant pentru fiecare zi.",
     },
@@ -160,12 +160,12 @@ const heroCopyLabels: Record<
   },
   "crossbody-bags-women": {
     ru: {
-      title: "Crossbody bags",
+      title: "Кроссбоди",
       description:
         "Свобода движения и городской шик — crossbody-сумки SÓRA сочетают удобство, компактность и элегантный стиль для каждого дня.",
     },
     ro: {
-      title: "Crossbody bags",
+      title: "Genți crossbody",
       description:
         "Libertate de mișcare și chic urban — gențile crossbody SÓRA îmbină confortul, compactitatea și stilul elegant pentru fiecare zi.",
     },

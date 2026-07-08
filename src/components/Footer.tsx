@@ -182,13 +182,12 @@ export default function Footer() {
     { href: "/info/garantiya", label: t("nav.warranty") },
     { href: "/info/oplata-i-dostavka", label: t("nav.paymentDelivery") },
     { href: "/info/podarochnye-sertifikaty", label: t("nav.gifts") },
-    { href: "/info/optom", label: t("nav.wholesale") },
     { href: "/info/vozvrat", label: t("nav.returns") },
   ];
   const legal = [
     { href: "/info/politika-konfidentsialnosti", label: t("nav.privacy") },
     { href: "/info/rekvizity", label: t("nav.requisites") },
-    { href: "/info/oplata-i-dostavka", label: t("nav.offer") },
+    { href: "/info/publichnaya-oferta", label: t("nav.offer") },
   ];
   const localizeLinks = (links: { href: string; label: string }[]) =>
     links.map((link) => ({ ...link, href: withLocalePath(link.href, locale) }));

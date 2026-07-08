@@ -59,7 +59,7 @@ function StoryRail({
 
   return (
     <div>
-      <div className="ml-[calc(50%-330px+3cm)] flex max-w-[660px] gap-2.5 overflow-x-auto [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+      <div className="flex max-w-[660px] gap-2.5 overflow-x-auto [scrollbar-width:none] lg:ml-[calc(50%-330px+3cm)] [&::-webkit-scrollbar]:hidden">
         {visibleTiles.map((tile) => (
           <button
             key={tile.id}

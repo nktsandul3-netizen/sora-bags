@@ -34,14 +34,17 @@ export default function HeroBannerSlider({
     return () => window.clearInterval(timer);
   }, [slides.length, intervalMs]);
 
-  const activeSlide = slides[index];
+  const safeIndex = slides.length > 0 ? Math.min(index, slides.length - 1) : 0;
+  const activeSlide = slides[safeIndex];
+
+  if (!activeSlide) return null;
 
   return (
     <section className="relative w-full overflow-hidden bg-stone-100">
       <div className="relative h-[58vh] min-h-[400px] w-full sm:h-[68vh] sm:min-h-[480px] md:h-[96vh] md:min-h-[700px]">
         <AnimatePresence initial={false}>
           <motion.div
-            key={index}
+            key={safeIndex}
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
@@ -53,7 +56,7 @@ export default function HeroBannerSlider({
                 src={activeSlide.src}
                 alt={activeSlide.alt}
                 fill
-                priority={index === 0}
+                priority={safeIndex === 0}
                 quality={100}
                 sizes="100vw"
                 className="object-cover [filter:brightness(0.78)_saturate(0.72)_contrast(0.98)]"
@@ -90,19 +93,24 @@ export default function HeroBannerSlider({
         </AnimatePresence>
 
         {slides.length > 1 && (
-          <div className="absolute inset-x-0 bottom-4 z-10 flex justify-center gap-2">
+          <div className="absolute inset-x-0 bottom-4 z-10 flex justify-center">
             {slides.map((_, i) => (
               <button
                 key={i}
                 type="button"
                 aria-label={`Баннер ${i + 1}`}
-                aria-current={i === index}
+                aria-current={i === safeIndex}
                 onClick={() => setIndex(i)}
-                className={
-                  "h-1.5 rounded-full transition-all " +
-                  (i === index ? "w-7 bg-white" : "w-1.5 bg-white/50 hover:bg-white/80")
-                }
-              />
+                className="flex items-center justify-center p-2.5"
+              >
+                <span
+                  aria-hidden
+                  className={
+                    "block h-1.5 rounded-full transition-all " +
+                    (i === safeIndex ? "w-7 bg-white" : "w-1.5 bg-white/50 hover:bg-white/80")
+                  }
+                />
+              </button>
             ))}
           </div>
         )}

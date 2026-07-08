@@ -413,7 +413,15 @@ export default function CheckoutForm({ items, total, mode, onSuccess }: Checkout
               className="mt-0.5 h-4 w-4 shrink-0 accent-stone-900"
             />
             <span>
-              {t("checkout.consent")}{" "}
+              {t("checkout.consentPrefix")}{" "}
+              <Link
+                href={withLocalePath("/info/publichnaya-oferta", locale)}
+                target="_blank"
+                className="text-stone-800 underline underline-offset-2 transition hover:text-stone-950"
+              >
+                {t("checkout.termsLink")}
+              </Link>
+              ,{" "}
               <Link
                 href={withLocalePath("/info/politika-konfidentsialnosti", locale)}
                 target="_blank"
@@ -421,7 +429,15 @@ export default function CheckoutForm({ items, total, mode, onSuccess }: Checkout
               >
                 {t("checkout.privacyPolicy")}
               </Link>{" "}
-              {isPreorder ? t("checkout.consentRestPreorder") : t("checkout.consentRest")}
+              {t("checkout.consentAnd")}{" "}
+              <Link
+                href={withLocalePath("/info/vozvrat", locale)}
+                target="_blank"
+                className="text-stone-800 underline underline-offset-2 transition hover:text-stone-950"
+              >
+                {t("checkout.returnsLink")}
+              </Link>
+              .
             </span>
           </label>
         </div>
