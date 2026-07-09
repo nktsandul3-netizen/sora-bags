@@ -90,10 +90,18 @@ export default function Header() {
     <header
       className={
         isHeroOverlay
-          ? "absolute left-0 right-0 top-0 z-50 text-white backdrop-blur-[2px] [background:rgba(255,255,255,0.06)]"
+          ? "absolute left-0 right-0 top-0 z-50 text-white"
           : "relative z-50 border-b border-stone-200/80 bg-white text-stone-900"
       }
     >
+      {isHeroOverlay ? (
+        // Blur lives on a separate layer: backdrop-filter on <header> itself
+        // would turn it into the containing block for the fixed menu overlay.
+        <div
+          className="pointer-events-none absolute inset-0 -z-10 backdrop-blur-[2px] [background:rgba(255,255,255,0.06)]"
+          aria-hidden
+        />
+      ) : null}
       {/* Mobile */}
       <div className={`mx-auto flex h-14 max-w-7xl items-center justify-between px-4 sm:px-6 lg:hidden ${iconToneClass}`}>
         <div className="flex items-center gap-2">
