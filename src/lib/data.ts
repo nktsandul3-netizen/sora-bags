@@ -6391,7 +6391,7 @@ export const products: Product[] = [
       {
         ...C.forestGreen,
         images: [
-          { src: "/products/womens-full-grain-leather-zip-around-wallet/forest-green-front-card.png", alt: "Francesca Forest Green — вид спереди" },
+          { src: "/products/womens-full-grain-leather-zip-around-wallet/forest-green-front-card-v2.png", alt: "Francesca Forest Green — вид спереди" },
           { src: "/products/womens-full-grain-leather-zip-around-wallet/forest-green-inside-v5.png", alt: "Francesca Forest Green — внутри" },
           { src: "/products/womens-full-grain-leather-zip-around-wallet/forest-green-inside-alt.png", alt: "Francesca Forest Green — отделения внутри" },
         ],
