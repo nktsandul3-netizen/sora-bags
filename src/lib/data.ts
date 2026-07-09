@@ -5676,7 +5676,7 @@ export const products: Product[] = [
         name: "Metallic Electric Blue",
         hex: "#2563eb",
         images: [
-          { src: "/products/womens-metallic-leather-bifold-cardholder-electric-blue/electric-blue-front-card-v2.png", alt: "Azzurina — вид спереди" },
+          { src: "/products/womens-metallic-leather-bifold-cardholder-electric-blue/electric-blue-front-card.png", alt: "Azzurina — вид спереди" },
           { src: "/products/womens-metallic-leather-bifold-cardholder-electric-blue/electric-blue-inside-v2.png", alt: "Azzurina — внутри" },
         ],
       },

@@ -38,7 +38,7 @@ export const stores: StoreLocation[] = [
       ro: "etajul 3",
       en: "the 3rd floor",
     },
-    phone: "+373 60 066 665",
+    phone: "+373 600 66665",
     email: "info@sorabags.md",
     hours: [
       {

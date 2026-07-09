@@ -1,8 +1,17 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import {
+  Suspense,
+  useCallback,
+  useEffect,
+  useMemo,
+  useState,
+  useTransition,
+  type ReactNode,
+} from "react";
 import Link from "next/link";
 import Image from "next/image";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import type { CategoryDef, Product } from "@/lib/types";
 import {
   bagMenuCategories,
@@ -11,11 +20,19 @@ import {
   compareByNewest,
 } from "@/lib/data";
 import {
+  areCatalogFiltersEqual,
   buildCatalogFacets,
+  buildProductFilterIndexes,
+  catalogSearchParamsEqual,
+  catalogStateToSearchParams,
   countActiveCatalogFilters,
   EMPTY_CATALOG_FILTERS,
-  productMatchesCatalogFilters,
+  filterProductsByCatalogFilters,
+  parseCatalogFiltersFromSearchParams,
+  parseCatalogSort,
+  toggleCatalogFilterValue,
   type CatalogFilters,
+  type CatalogSortKey,
   type MultiSelectFilterKey,
 } from "@/lib/catalog-filters";
 import { withLocalePath } from "@/lib/i18n";
@@ -23,32 +40,9 @@ import { useLocale, useT } from "@/lib/useI18n";
 import { categoryName } from "@/lib/catalog-i18n";
 import ProductGrid from "./ProductGrid";
 
-type SortKey = "new" | "price-asc" | "price-desc";
+const PER_PAGE = 60;
 
-function Chevron({ open }: { open?: boolean }) {
-  return (
-    <svg
-      viewBox="0 0 24 24"
-      className={"h-3.5 w-3.5 transition-transform " + (open ? "rotate-180" : "")}
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="1.6"
-      aria-hidden
-    >
-      <path d="M6 9l6 6 6-6" strokeLinecap="round" strokeLinejoin="round" />
-    </svg>
-  );
-}
-
-export default function CatalogView({
-  title,
-  description,
-  products,
-  categories,
-  basePath,
-  activeSlug,
-  heroBanner,
-}: {
+type CatalogViewProps = {
   title: string;
   description?: string;
   products: Product[];
@@ -70,37 +64,167 @@ export default function CatalogView({
     copyOverlayClass?: string;
     mediaFilterClass?: string;
   };
+};
+
+function Chevron({ open }: { open?: boolean }) {
+  return (
+    <svg
+      viewBox="0 0 24 24"
+      className={"h-3.5 w-3.5 transition-transform " + (open ? "rotate-180" : "")}
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1.6"
+      aria-hidden
+    >
+      <path d="M6 9l6 6 6-6" strokeLinecap="round" strokeLinejoin="round" />
+    </svg>
+  );
+}
+
+function CloseIcon() {
+  return (
+    <svg
+      viewBox="0 0 24 24"
+      className="h-4 w-4"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1.6"
+      aria-hidden
+    >
+      <path d="M6 6l12 12M18 6L6 18" strokeLinecap="round" />
+    </svg>
+  );
+}
+
+export default function CatalogView(props: CatalogViewProps) {
+  return (
+    <Suspense fallback={<CatalogViewFallback title={props.title} heroBanner={props.heroBanner} />}>
+      <CatalogViewInner {...props} />
+    </Suspense>
+  );
+}
+
+function CatalogViewFallback({
+  title,
+  heroBanner,
+}: {
+  title: string;
+  heroBanner?: CatalogViewProps["heroBanner"];
 }) {
+  return (
+    <>
+      {heroBanner ? <HeroBanner heroBanner={heroBanner} /> : null}
+      <div className="mx-auto max-w-7xl px-4 py-6 sm:px-6 sm:py-7">
+        <h1 className="sr-only">{title}</h1>
+        <div className="flex items-center justify-center py-20 text-sm text-stone-500">
+          …
+        </div>
+      </div>
+    </>
+  );
+}
+
+function CatalogViewInner({
+  title,
+  description,
+  products,
+  categories,
+  basePath,
+  activeSlug,
+  heroBanner,
+}: CatalogViewProps) {
   const locale = useLocale();
   const t = useT();
-  const sortLabels: Record<SortKey, string> = {
+  const router = useRouter();
+  const pathname = usePathname();
+  const searchParams = useSearchParams();
+  const [isPending, startTransition] = useTransition();
+
+  const sortLabels: Record<CatalogSortKey, string> = {
     new: t("catalog.sortNew"),
     "price-asc": t("catalog.sortPriceAsc"),
     "price-desc": t("catalog.sortPriceDesc"),
   };
+
+  // URL is the single source of truth for filters + sort (shareable, refresh-safe).
+  const filters = useMemo(
+    () => parseCatalogFiltersFromSearchParams(searchParams),
+    [searchParams],
+  );
+  const sortKey = useMemo(
+    () => parseCatalogSort(searchParams.get("sort")),
+    [searchParams],
+  );
+
   const [showFilter, setShowFilter] = useState(false);
-  const [sortKey, setSortKey] = useState<SortKey>("new");
-  const perPage = 60;
-  const [visible, setVisible] = useState(60);
-  const [applied, setApplied] = useState<CatalogFilters>(EMPTY_CATALOG_FILTERS);
-  const [draft, setDraft] = useState<CatalogFilters>(EMPTY_CATALOG_FILTERS);
   const [openMenu, setOpenMenu] = useState<"sort" | null>(null);
+  const queryKey = searchParams.toString();
+  const [pageState, setPageState] = useState({ key: queryKey, visible: PER_PAGE });
+  const visible = pageState.key === queryKey ? pageState.visible : PER_PAGE;
+
+  const writeUrl = useCallback(
+    (nextFilters: CatalogFilters, nextSort: CatalogSortKey) => {
+      const nextParams = catalogStateToSearchParams(nextFilters, nextSort, searchParams);
+      const currentParams = new URLSearchParams(searchParams.toString());
+      if (catalogSearchParamsEqual(nextParams, currentParams)) return;
+      const qs = nextParams.toString();
+      startTransition(() => {
+        router.replace(qs ? `${pathname}?${qs}` : pathname, { scroll: false });
+      });
+    },
+    [pathname, router, searchParams],
+  );
+
+  const updateFilters = useCallback(
+    (updater: (prev: CatalogFilters) => CatalogFilters) => {
+      const next = updater(filters);
+      if (areCatalogFiltersEqual(filters, next)) return;
+      writeUrl(next, sortKey);
+    },
+    [filters, sortKey, writeUrl],
+  );
+
+  const updateSort = useCallback(
+    (nextSort: CatalogSortKey) => {
+      if (nextSort === sortKey) {
+        setOpenMenu(null);
+        return;
+      }
+      writeUrl(filters, nextSort);
+      setOpenMenu(null);
+    },
+    [filters, sortKey, writeUrl],
+  );
+
+  const resetFilters = useCallback(() => {
+    writeUrl(EMPTY_CATALOG_FILTERS, sortKey);
+  }, [sortKey, writeUrl]);
+
+  const toggle = useCallback(
+    (key: MultiSelectFilterKey, value: string) => {
+      updateFilters((prev) => toggleCatalogFilterValue(prev, key, value));
+    },
+    [updateFilters],
+  );
+
+  const indexes = useMemo(() => buildProductFilterIndexes(products), [products]);
+  const facets = useMemo(() => buildCatalogFacets(products, locale), [locale, products]);
+
   const groupByCategory = activeSlug === "vse-sumki" || activeSlug === "vse-aksessuary";
   const useCuratedBagOrder = categories?.[0]?.section === "bags";
 
-  const facets = useMemo(() => buildCatalogFacets(products, locale), [locale, products]);
-
   const filtered = useMemo(() => {
-    const list = products.filter((product) => productMatchesCatalogFilters(product, applied));
+    const list = filterProductsByCatalogFilters(indexes, filters);
     if (sortKey === "price-asc") list.sort((a, b) => a.price - b.price);
     else if (sortKey === "price-desc") list.sort((a, b) => b.price - a.price);
     else if (useCuratedBagOrder) list.sort((a, b) => compareByCuratedBagGrid(a, b, activeSlug));
     else list.sort(groupByCategory ? compareByCategoryThenNewest : compareByNewest);
     return list;
-  }, [products, applied, sortKey, groupByCategory, useCuratedBagOrder, activeSlug]);
+  }, [indexes, filters, sortKey, groupByCategory, useCuratedBagOrder, activeSlug]);
 
-  const shown = filtered.slice(0, visible);
-  const activeCount = countActiveCatalogFilters(applied);
+  const shown = useMemo(() => filtered.slice(0, visible), [filtered, visible]);
+  const activeCount = countActiveCatalogFilters(filters);
+  const hasActiveFilters = activeCount > 0;
   const isBags = categories?.[0]?.section === "bags";
   const sectionLabel = isBags ? t("nav.bags") : t("nav.accessories");
   const navCategories = isBags
@@ -109,38 +233,428 @@ export default function CatalogView({
   const productCountLabel =
     locale === "ru" ? "товаров" : locale === "ro" ? "produse" : "products";
 
-  function openDrawer() {
-    setDraft(applied);
-    setShowFilter(true);
-  }
-  function closeDrawer() {
-    setDraft(applied);
-    setShowFilter(false);
-  }
-  function applyDraft() {
-    setApplied(draft);
-    setVisible(perPage);
-    setShowFilter(false);
-  }
-  function resetDraft() {
-    setDraft(EMPTY_CATALOG_FILTERS);
-    setApplied(EMPTY_CATALOG_FILTERS);
-    setVisible(perPage);
-  }
-  function toggle(key: MultiSelectFilterKey, value: string) {
-    setDraft((d) => {
-      const arr = d[key] as string[];
-      const next = arr.includes(value)
-        ? arr.filter((v) => v !== value)
-        : [...arr, value];
-      return { ...d, [key]: next };
-    });
-  }
+  // Lock body scroll while the mobile filter drawer is open.
+  useEffect(() => {
+    if (!showFilter) return;
+    const prev = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    return () => {
+      document.body.style.overflow = prev;
+    };
+  }, [showFilter]);
 
-  const copyTone = heroBanner?.copyTone ?? "dark";
+  return (
+    <>
+      {heroBanner ? <HeroBanner heroBanner={heroBanner} /> : null}
+      <div className="mx-auto max-w-7xl px-4 py-6 sm:px-6 sm:py-7">
+        <h1 className="sr-only">{title}</h1>
+        {description ? <p className="sr-only">{description}</p> : null}
+
+        {navCategories && basePath ? (
+          <nav className="mb-7 overflow-x-auto [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+            <div className="flex min-w-max items-center justify-center gap-6 text-[11px] font-medium leading-none text-stone-500 sm:gap-7">
+              {navCategories.map((c) => {
+                const href =
+                  c.slug === "vse-sumki" || c.slug === "vse-aksessuary"
+                    ? basePath
+                    : `${basePath}/${c.slug}`;
+                return (
+                  <Link
+                    key={c.slug}
+                    href={withLocalePath(href, locale)}
+                    className={
+                      "whitespace-nowrap transition hover:text-stone-950 " +
+                      (c.slug === activeSlug
+                        ? "font-semibold text-stone-950"
+                        : "text-stone-500")
+                    }
+                  >
+                    {categoryName(c.slug, c.name, locale)}
+                  </Link>
+                );
+              })}
+            </div>
+          </nav>
+        ) : null}
+
+        <div className="relative mb-7 flex flex-wrap items-center justify-between gap-3 border-b border-stone-200 pb-3 text-[10px] font-medium text-stone-950 sm:gap-4">
+          <div className="flex flex-wrap items-center gap-2 sm:gap-2.5">
+            <button
+              type="button"
+              onClick={() => setShowFilter(true)}
+              className="inline-flex h-8 min-w-[64px] items-center justify-center gap-1.5 rounded-sm border border-stone-100 bg-white px-3 text-[9px] shadow-[0_2px_10px_rgba(0,0,0,0.03)] transition hover:border-stone-300 sm:h-7"
+              aria-expanded={showFilter}
+            >
+              <span>{t("catalog.filter")}</span>
+              {activeCount > 0 && (
+                <span className="rounded-full bg-stone-900 px-1.5 py-px text-[8px] leading-none text-white">
+                  {activeCount}
+                </span>
+              )}
+            </button>
+
+            <div className="relative">
+              <button
+                type="button"
+                onClick={() => setOpenMenu((m) => (m === "sort" ? null : "sort"))}
+                className="inline-flex h-8 min-w-[108px] items-center justify-between gap-2 rounded-sm border border-stone-100 bg-white px-3 text-[9px] shadow-[0_2px_10px_rgba(0,0,0,0.03)] transition hover:border-stone-300 sm:h-7"
+                aria-expanded={openMenu === "sort"}
+              >
+                <span>{t("catalog.sortBy")}</span>
+                <Chevron open={openMenu === "sort"} />
+              </button>
+              {openMenu === "sort" && (
+                <Menu onClose={() => setOpenMenu(null)} align="left">
+                  {(Object.keys(sortLabels) as CatalogSortKey[]).map((key) => (
+                    <button
+                      key={key}
+                      type="button"
+                      onClick={() => updateSort(key)}
+                      className={
+                        "block w-full px-5 py-2.5 text-left text-[13px] normal-case tracking-normal transition hover:bg-stone-50 " +
+                        (key === sortKey ? "text-stone-400" : "text-stone-800")
+                      }
+                    >
+                      {sortLabels[key]}
+                    </button>
+                  ))}
+                </Menu>
+              )}
+            </div>
+
+            {hasActiveFilters && (
+              <button
+                type="button"
+                onClick={resetFilters}
+                className="inline-flex h-8 items-center rounded-sm px-2 text-[9px] uppercase tracking-[0.12em] text-stone-500 transition hover:text-stone-950 sm:h-7"
+              >
+                {t("catalog.reset")}
+              </button>
+            )}
+          </div>
+
+          <div className="flex items-center gap-2 whitespace-nowrap text-[11px] text-stone-800">
+            {isPending && (
+              <span
+                className="inline-flex items-center gap-1.5 text-stone-400"
+                aria-live="polite"
+              >
+                <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-stone-400" />
+                {t("catalog.filtering")}
+              </span>
+            )}
+            <span>
+              {filtered.length} {productCountLabel}
+            </span>
+          </div>
+        </div>
+
+        <div
+          className={
+            "transition-opacity duration-150 " + (isPending ? "opacity-60" : "opacity-100")
+          }
+          aria-busy={isPending}
+        >
+          {filtered.length === 0 ? (
+            <EmptyFilteredState
+              hasActiveFilters={hasActiveFilters}
+              onReset={resetFilters}
+            />
+          ) : (
+            <>
+              <ProductGrid products={shown} />
+              {filtered.length > visible && (
+                <div className="mt-10 flex justify-center">
+                  <button
+                    type="button"
+                    onClick={() =>
+                      setPageState({ key: queryKey, visible: visible + PER_PAGE })
+                    }
+                    className="border border-stone-200 px-16 py-3 text-[11px] font-medium uppercase tracking-[0.16em] text-stone-950 transition hover:border-stone-950"
+                  >
+                    {t("catalog.more")}
+                  </button>
+                </div>
+              )}
+            </>
+          )}
+        </div>
+
+        <FilterDrawer
+          open={showFilter}
+          onClose={() => setShowFilter(false)}
+          filters={filters}
+          facets={facets}
+          activeCount={activeCount}
+          navCategories={navCategories}
+          basePath={basePath}
+          activeSlug={activeSlug}
+          sectionLabel={sectionLabel}
+          locale={locale}
+          onToggle={toggle}
+          onPriceChange={(field, value) =>
+            updateFilters((prev) => ({ ...prev, [field]: value }))
+          }
+          onReset={resetFilters}
+        />
+      </div>
+    </>
+  );
+}
+
+function EmptyFilteredState({
+  hasActiveFilters,
+  onReset,
+}: {
+  hasActiveFilters: boolean;
+  onReset: () => void;
+}) {
+  const t = useT();
+  return (
+    <div className="flex flex-col items-center justify-center px-4 py-16 text-center sm:py-20">
+      <p className="font-serif text-xl text-stone-950 sm:text-2xl">
+        {hasActiveFilters ? t("catalog.emptyFiltered") : t("catalog.empty")}
+      </p>
+      {hasActiveFilters ? (
+        <>
+          <p className="mt-3 max-w-md text-sm text-stone-500">
+            {t("catalog.emptyFilteredHint")}
+          </p>
+          <button
+            type="button"
+            onClick={onReset}
+            className="mt-6 border border-stone-900 bg-stone-900 px-8 py-3 text-[11px] font-medium uppercase tracking-[0.16em] text-white transition hover:bg-stone-800"
+          >
+            {t("catalog.reset")}
+          </button>
+        </>
+      ) : null}
+    </div>
+  );
+}
+
+function FilterDrawer({
+  open,
+  onClose,
+  filters,
+  facets,
+  activeCount,
+  navCategories,
+  basePath,
+  activeSlug,
+  sectionLabel,
+  locale,
+  onToggle,
+  onPriceChange,
+  onReset,
+}: {
+  open: boolean;
+  onClose: () => void;
+  filters: CatalogFilters;
+  facets: ReturnType<typeof buildCatalogFacets>;
+  activeCount: number;
+  navCategories?: CategoryDef[];
+  basePath?: string;
+  activeSlug?: string;
+  sectionLabel: string;
+  locale: "ru" | "ro" | "en";
+  onToggle: (key: MultiSelectFilterKey, value: string) => void;
+  onPriceChange: (field: "priceMin" | "priceMax", value: string) => void;
+  onReset: () => void;
+}) {
+  const t = useT();
+
+  return (
+    <div
+      className={
+        "fixed inset-0 z-50 transition-opacity duration-300 " +
+        (open ? "pointer-events-auto opacity-100" : "pointer-events-none opacity-0")
+      }
+      aria-hidden={!open}
+    >
+      <button
+        type="button"
+        aria-label={t("catalog.hideFilter")}
+        onClick={onClose}
+        className="absolute inset-0 bg-stone-900/30"
+      />
+      <aside
+        className={
+          "absolute left-0 top-0 flex h-full w-[min(100vw,360px)] flex-col bg-white shadow-xl transition-transform duration-300 ease-out sm:w-[88vw] sm:max-w-[360px] " +
+          (open ? "translate-x-0" : "-translate-x-full")
+        }
+        role="dialog"
+        aria-modal="true"
+        aria-label={t("catalog.filter")}
+      >
+        <div className="flex items-center justify-between border-b border-stone-100 px-5 py-4 sm:px-6 sm:py-5">
+          <button
+            type="button"
+            onClick={onClose}
+            className="flex items-center gap-3 text-[12px] font-medium uppercase tracking-[0.16em] text-stone-900"
+          >
+            {t("catalog.hideFilter")}
+            <CloseIcon />
+          </button>
+          {activeCount > 0 && (
+            <span className="rounded-full bg-stone-100 px-2.5 py-1 text-[10px] font-medium text-stone-700">
+              {activeCount}
+            </span>
+          )}
+        </div>
+
+        <div className="flex-1 overflow-y-auto overscroll-contain px-5 sm:px-6">
+          <FilterSection title={t("catalog.price")}>
+            <div className="flex items-center gap-3">
+              <input
+                type="number"
+                inputMode="numeric"
+                min={0}
+                placeholder={t("catalog.from")}
+                value={filters.priceMin}
+                onChange={(e) => onPriceChange("priceMin", e.target.value)}
+                className="w-full rounded-md border border-stone-200 px-3 py-2.5 text-sm outline-none focus:border-stone-900"
+              />
+              <span className="text-stone-400">—</span>
+              <input
+                type="number"
+                inputMode="numeric"
+                min={0}
+                placeholder={t("catalog.to")}
+                value={filters.priceMax}
+                onChange={(e) => onPriceChange("priceMax", e.target.value)}
+                className="w-full rounded-md border border-stone-200 px-3 py-2.5 text-sm outline-none focus:border-stone-900"
+              />
+            </div>
+          </FilterSection>
+
+          {facets.categories.length > 0 && (
+            <FilterSection title={t("catalog.category")}>
+              <CheckboxList
+                items={facets.categories}
+                selected={filters.categories}
+                onToggle={(value) => onToggle("categories", value)}
+              />
+            </FilterSection>
+          )}
+
+          {navCategories && basePath && (
+            <FilterSection title={sectionLabel}>
+              <div className="flex flex-col gap-1">
+                {navCategories.map((c) => (
+                  <Link
+                    key={c.slug}
+                    href={withLocalePath(
+                      c.slug === "vse-sumki" || c.slug === "vse-aksessuary"
+                        ? basePath
+                        : `${basePath}/${c.slug}`,
+                      locale,
+                    )}
+                    onClick={onClose}
+                    className={
+                      "py-1.5 text-[13px] transition " +
+                      (c.slug === activeSlug
+                        ? "font-medium text-stone-950"
+                        : "text-stone-600 hover:text-stone-950")
+                    }
+                  >
+                    {categoryName(c.slug, c.name, locale)}
+                  </Link>
+                ))}
+              </div>
+            </FilterSection>
+          )}
+
+          {facets.colors.length > 0 && (
+            <FilterSection title={t("catalog.color")}>
+              <ColorCheckboxList
+                items={facets.colors}
+                selected={filters.colors}
+                onToggle={(value) => onToggle("colors", value)}
+              />
+            </FilterSection>
+          )}
+
+          {facets.materials.length > 0 && (
+            <FilterSection title={t("catalog.material")}>
+              <CheckboxList
+                items={facets.materials}
+                selected={filters.materials}
+                onToggle={(value) => onToggle("materials", value)}
+              />
+            </FilterSection>
+          )}
+
+          {facets.sizes.length > 0 && (
+            <FilterSection title={t("catalog.size")}>
+              <CheckboxList
+                items={facets.sizes}
+                selected={filters.sizes}
+                onToggle={(value) => onToggle("sizes", value)}
+              />
+            </FilterSection>
+          )}
+
+          {facets.strapTypes.length > 0 && (
+            <FilterSection title={t("catalog.strapType")}>
+              <CheckboxList
+                items={facets.strapTypes}
+                selected={filters.strapTypes}
+                onToggle={(value) => onToggle("strapTypes", value)}
+              />
+            </FilterSection>
+          )}
+
+          {facets.closureTypes.length > 0 && (
+            <FilterSection title={t("catalog.closureType")}>
+              <CheckboxList
+                items={facets.closureTypes}
+                selected={filters.closureTypes}
+                onToggle={(value) => onToggle("closureTypes", value)}
+              />
+            </FilterSection>
+          )}
+
+          {facets.availability.length > 0 && (
+            <FilterSection title={t("catalog.availability")}>
+              <CheckboxList
+                items={facets.availability}
+                selected={filters.availability}
+                onToggle={(value) => onToggle("availability", value)}
+              />
+            </FilterSection>
+          )}
+        </div>
+
+        <div className="flex items-center gap-3 border-t border-stone-200 px-5 py-4 pb-[max(1rem,env(safe-area-inset-bottom))] sm:gap-4 sm:px-6">
+          <button
+            type="button"
+            onClick={onClose}
+            className="flex-1 border border-stone-900 bg-stone-900 px-6 py-3.5 text-[11px] font-medium uppercase tracking-[0.16em] text-white transition hover:bg-stone-800"
+          >
+            {t("catalog.apply")}
+          </button>
+          <button
+            type="button"
+            onClick={onReset}
+            disabled={activeCount === 0}
+            className="text-[11px] font-medium uppercase tracking-[0.16em] text-stone-500 transition hover:text-stone-900 disabled:cursor-not-allowed disabled:opacity-40"
+          >
+            {t("catalog.reset")}
+          </button>
+        </div>
+      </aside>
+    </div>
+  );
+}
+
+function HeroBanner({ heroBanner }: { heroBanner: NonNullable<CatalogViewProps["heroBanner"]> }) {
+  const copyTone = heroBanner.copyTone ?? "dark";
   const isLightCopy = copyTone === "light";
+  const copyOverlayClass = heroBanner.copyOverlayClass ?? "items-center justify-center";
+  const heroMediaFilterClass = heroBanner.mediaFilterClass ?? "catalog-hero-media";
 
-  const heroCopyBlock = heroBanner?.copy ? (
+  const heroCopyBlock = heroBanner.copy ? (
     <div
       className={
         "max-w-2xl text-center " +
@@ -172,363 +686,74 @@ export default function CatalogView({
     </div>
   ) : null;
 
-  const copyOverlayClass =
-    heroBanner?.copyOverlayClass ?? "items-center justify-center";
-
-  const heroMediaFilterClass =
-    heroBanner?.mediaFilterClass ?? "catalog-hero-media";
-
   return (
-    <>
-      {heroBanner ? (
-        <section
+    <section
+      className={
+        "catalog-hero-section relative overflow-hidden " +
+        (heroBanner.bgClassName ?? "bg-[#7b4426]")
+      }
+    >
+      {heroBanner.fit === "full-width" ? (
+        <>
+          <Image
+            src={heroBanner.src}
+            alt={heroBanner.alt}
+            width={heroBanner.width ?? 2560}
+            height={heroBanner.height ?? 1440}
+            priority
+            quality={90}
+            sizes="100vw"
+            className={
+              heroMediaFilterClass + " catalog-hero-image block h-auto w-full max-w-none"
+            }
+          />
+          {heroBanner.copy ? (
+            <div className={"absolute inset-0 flex px-6 sm:px-10 " + copyOverlayClass}>
+              {heroCopyBlock}
+            </div>
+          ) : null}
+        </>
+      ) : (
+        <div
           className={
-            "catalog-hero-section relative overflow-hidden " +
-            (heroBanner.bgClassName ?? "bg-[#7b4426]")
+            "relative w-full " +
+            (heroBanner.fit === "contain"
+              ? ""
+              : (heroBanner.aspectClass ?? "aspect-[2/1] sm:aspect-[5/2]"))
           }
         >
-          {heroBanner.fit === "full-width" ? (
-            <>
-              <Image
-                src={heroBanner.src}
-                alt={heroBanner.alt}
-                width={heroBanner.width ?? 2560}
-                height={heroBanner.height ?? 1440}
-                priority
-                quality={90}
-                sizes="100vw"
-                className={
-                  heroMediaFilterClass +
-                  " catalog-hero-image block h-auto w-full max-w-none"
-                }
-              />
-              {heroBanner.copy ? (
-                <div
-                  className={
-                    "absolute inset-0 flex px-6 sm:px-10 " + copyOverlayClass
-                  }
-                >
-                  {heroCopyBlock}
-                </div>
-              ) : null}
-            </>
-          ) : (
-            <div
-              className={
-                "relative w-full " +
-                (heroBanner.fit === "contain"
-                  ? ""
-                  : heroBanner.aspectClass ?? "aspect-[2/1] sm:aspect-[5/2]")
-              }
-            >
-              <Image
-                src={heroBanner.src}
-                alt={heroBanner.alt}
-                fill={heroBanner.fit !== "contain"}
-                width={heroBanner.fit === "contain" ? heroBanner.width : undefined}
-                height={heroBanner.fit === "contain" ? heroBanner.height : undefined}
-                priority
-                quality={90}
-                sizes="100vw"
-                className={
-                  heroBanner.fit === "contain"
-                    ? heroMediaFilterClass + " block h-auto w-full max-w-none"
-                    : heroMediaFilterClass + " size-full object-cover"
-                }
-                style={
-                  heroBanner.fit === "contain"
-                    ? undefined
-                    : { objectPosition: heroBanner.objectPosition ?? "50% 62%" }
-                }
-              />
-              {heroBanner.copy ? (
-                <div
-                  className={
-                    "absolute inset-0 flex px-6 sm:px-10 " + copyOverlayClass
-                  }
-                >
-                  {heroCopyBlock}
-                </div>
-              ) : null}
+          <Image
+            src={heroBanner.src}
+            alt={heroBanner.alt}
+            fill={heroBanner.fit !== "contain"}
+            width={heroBanner.fit === "contain" ? heroBanner.width : undefined}
+            height={heroBanner.fit === "contain" ? heroBanner.height : undefined}
+            priority
+            quality={90}
+            sizes="100vw"
+            className={
+              heroBanner.fit === "contain"
+                ? heroMediaFilterClass + " block h-auto w-full max-w-none"
+                : heroMediaFilterClass + " size-full object-cover"
+            }
+            style={
+              heroBanner.fit === "contain"
+                ? undefined
+                : { objectPosition: heroBanner.objectPosition ?? "50% 62%" }
+            }
+          />
+          {heroBanner.copy ? (
+            <div className={"absolute inset-0 flex px-6 sm:px-10 " + copyOverlayClass}>
+              {heroCopyBlock}
             </div>
-          )}
-        </section>
-      ) : null}
-      <div className="mx-auto max-w-7xl px-4 py-6 sm:px-6 sm:py-7">
-      <h1 className="sr-only">{title}</h1>
-      {description ? <p className="sr-only">{description}</p> : null}
-
-      {navCategories && basePath ? (
-        <nav className="mb-7 overflow-x-auto [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
-          <div className="flex min-w-max items-center justify-center gap-6 text-[11px] font-medium leading-none text-stone-500 sm:gap-7">
-            {navCategories.map((c) => {
-              const href =
-                c.slug === "vse-sumki" || c.slug === "vse-aksessuary"
-                  ? basePath
-                  : `${basePath}/${c.slug}`;
-              return (
-                <Link
-                  key={c.slug}
-                  href={withLocalePath(href, locale)}
-                  className={
-                    "whitespace-nowrap transition hover:text-stone-950 " +
-                    (c.slug === activeSlug
-                      ? "font-semibold text-stone-950"
-                      : "text-stone-500")
-                  }
-                >
-                  {categoryName(c.slug, c.name, locale)}
-                </Link>
-              );
-            })}
-          </div>
-        </nav>
-      ) : null}
-
-      {/* Панель управления: фильтр / сортировка / количество товаров */}
-      <div className="relative mb-7 flex items-center justify-between gap-4 border-b border-stone-200 pb-3 text-[10px] font-medium text-stone-950">
-        <div className="flex items-center gap-2.5">
-          <button
-            type="button"
-            onClick={openDrawer}
-            className="inline-flex h-7 min-w-[64px] items-center justify-center gap-1.5 rounded-sm border border-stone-100 bg-white px-3 text-[9px] shadow-[0_2px_10px_rgba(0,0,0,0.03)] transition hover:border-stone-300"
-          >
-            <span>{t("catalog.filter")}</span>
-            {activeCount > 0 && (
-              <span className="rounded-full bg-stone-900 px-1 py-px text-[8px] leading-none text-white">
-                {activeCount}
-              </span>
-            )}
-          </button>
-
-          <div className="relative">
-            <button
-              type="button"
-              onClick={() => setOpenMenu((m) => (m === "sort" ? null : "sort"))}
-              className="inline-flex h-7 min-w-[108px] items-center justify-between gap-2 rounded-sm border border-stone-100 bg-white px-3 text-[9px] shadow-[0_2px_10px_rgba(0,0,0,0.03)] transition hover:border-stone-300"
-            >
-              <span>{t("catalog.sortBy")}</span>
-              <Chevron open={openMenu === "sort"} />
-            </button>
-            {openMenu === "sort" && (
-              <Menu onClose={() => setOpenMenu(null)} align="right">
-                {(Object.keys(sortLabels) as SortKey[]).map((key) => (
-                  <button
-                    key={key}
-                    type="button"
-                    onClick={() => {
-                      setSortKey(key);
-                      setOpenMenu(null);
-                    }}
-                    className={
-                      "block w-full px-5 py-2.5 text-left text-[13px] normal-case tracking-normal transition hover:bg-stone-50 " +
-                      (key === sortKey ? "text-stone-400" : "text-stone-800")
-                    }
-                  >
-                    {sortLabels[key]}
-                  </button>
-                ))}
-              </Menu>
-            )}
-          </div>
-        </div>
-
-        <span className="whitespace-nowrap text-[11px] text-stone-800">
-          {filtered.length} {productCountLabel}
-        </span>
-      </div>
-
-      <ProductGrid products={shown} />
-
-      {filtered.length > visible && (
-        <div className="mt-10 flex justify-center">
-          <button
-            type="button"
-            onClick={() => setVisible((v) => v + perPage)}
-            className="border border-stone-200 px-16 py-3 text-[11px] font-medium uppercase tracking-[0.16em] text-stone-950 transition hover:border-stone-950"
-          >
-            {t("catalog.more")}
-          </button>
+          ) : null}
         </div>
       )}
-
-      {/* Выезжающая панель фильтра слева */}
-      <div
-        className={
-          "fixed inset-0 z-50 transition-opacity duration-300 " +
-          (showFilter ? "pointer-events-auto opacity-100" : "pointer-events-none opacity-0")
-        }
-        aria-hidden={!showFilter}
-      >
-        <button
-          type="button"
-          aria-label="Закрыть фильтр"
-          onClick={closeDrawer}
-          className="absolute inset-0 bg-stone-900/30"
-        />
-        <aside
-          className={
-            "absolute left-0 top-0 flex h-full w-[88vw] max-w-[360px] flex-col bg-white shadow-xl transition-transform duration-300 ease-out " +
-            (showFilter ? "translate-x-0" : "-translate-x-full")
-          }
-          role="dialog"
-          aria-label={t("catalog.filter")}
-        >
-          <button
-            type="button"
-            onClick={closeDrawer}
-            className="flex items-center justify-between px-6 py-5 text-[12px] font-medium uppercase tracking-[0.16em] text-stone-900"
-          >
-            {t("catalog.hideFilter")}
-            <CloseIcon />
-          </button>
-
-          <div className="flex-1 overflow-y-auto px-6">
-            <FilterSection title={t("catalog.price")}>
-              <div className="flex items-center gap-3">
-                <input
-                  type="number"
-                  inputMode="numeric"
-                  placeholder={t("catalog.from")}
-                  value={draft.priceMin}
-                  onChange={(e) => setDraft((d) => ({ ...d, priceMin: e.target.value }))}
-                  className="w-full rounded-md border border-stone-200 px-3 py-2 text-sm outline-none focus:border-stone-900"
-                />
-                <span className="text-stone-400">—</span>
-                <input
-                  type="number"
-                  inputMode="numeric"
-                  placeholder={t("catalog.to")}
-                  value={draft.priceMax}
-                  onChange={(e) => setDraft((d) => ({ ...d, priceMax: e.target.value }))}
-                  className="w-full rounded-md border border-stone-200 px-3 py-2 text-sm outline-none focus:border-stone-900"
-                />
-              </div>
-            </FilterSection>
-
-            {facets.categories.length > 0 && (
-              <FilterSection title={t("catalog.category")}>
-                <CheckboxList
-                  items={facets.categories}
-                  selected={draft.categories}
-                  onToggle={(value) => toggle("categories", value)}
-                />
-              </FilterSection>
-            )}
-
-            {navCategories && basePath && (
-              <FilterSection title={sectionLabel}>
-                <div className="flex flex-col gap-1">
-                  {navCategories.map((c) => (
-                    <Link
-                      key={c.slug}
-                      href={withLocalePath(`${basePath}/${c.slug}`, locale)}
-                      className={
-                        "py-1 text-[13px] transition " +
-                        (c.slug === activeSlug
-                          ? "font-medium text-stone-950"
-                          : "text-stone-600 hover:text-stone-950")
-                      }
-                    >
-                      {categoryName(c.slug, c.name, locale)}
-                    </Link>
-                  ))}
-                </div>
-              </FilterSection>
-            )}
-
-            {facets.colors.length > 0 && (
-              <FilterSection title={t("catalog.color")}>
-                <ColorCheckboxList
-                  items={facets.colors}
-                  selected={draft.colors}
-                  onToggle={(value) => toggle("colors", value)}
-                />
-              </FilterSection>
-            )}
-
-            {facets.materials.length > 0 && (
-              <FilterSection title={t("catalog.material")}>
-                <CheckboxList
-                  items={facets.materials}
-                  selected={draft.materials}
-                  onToggle={(value) => toggle("materials", value)}
-                />
-              </FilterSection>
-            )}
-
-            {facets.sizes.length > 0 && (
-              <FilterSection title={t("catalog.size")}>
-                <CheckboxList
-                  items={facets.sizes}
-                  selected={draft.sizes}
-                  onToggle={(value) => toggle("sizes", value)}
-                />
-              </FilterSection>
-            )}
-
-            {facets.strapTypes.length > 0 && (
-              <FilterSection title={t("catalog.strapType")}>
-                <CheckboxList
-                  items={facets.strapTypes}
-                  selected={draft.strapTypes}
-                  onToggle={(value) => toggle("strapTypes", value)}
-                />
-              </FilterSection>
-            )}
-
-            {facets.closureTypes.length > 0 && (
-              <FilterSection title={t("catalog.closureType")}>
-                <CheckboxList
-                  items={facets.closureTypes}
-                  selected={draft.closureTypes}
-                  onToggle={(value) => toggle("closureTypes", value)}
-                />
-              </FilterSection>
-            )}
-
-            {facets.availability.length > 0 && (
-              <FilterSection title={t("catalog.availability")}>
-                <CheckboxList
-                  items={facets.availability}
-                  selected={draft.availability}
-                  onToggle={(value) => toggle("availability", value)}
-                />
-              </FilterSection>
-            )}
-
-          </div>
-
-          <div className="flex items-center gap-4 border-t border-stone-200 px-6 py-4">
-            <button
-              type="button"
-              onClick={applyDraft}
-              className="flex-1 border border-stone-900 bg-stone-900 px-6 py-3 text-[11px] font-medium uppercase tracking-[0.16em] text-white transition hover:bg-stone-800"
-            >
-              {t("catalog.apply")}
-            </button>
-            <button
-              type="button"
-              onClick={resetDraft}
-              className="text-[11px] font-medium uppercase tracking-[0.16em] text-stone-500 transition hover:text-stone-900"
-            >
-              {t("catalog.reset")}
-            </button>
-          </div>
-        </aside>
-      </div>
-      </div>
-    </>
+    </section>
   );
 }
 
-function FilterSection({
-  title,
-  children,
-}: {
-  title: string;
-  children: React.ReactNode;
-}) {
+function FilterSection({ title, children }: { title: string; children: ReactNode }) {
   return (
     <details className="group border-b border-stone-100 py-4" open>
       <summary className="flex cursor-pointer list-none items-center justify-between text-[12px] font-medium uppercase tracking-[0.14em] text-stone-900 [&::-webkit-details-marker]:hidden">
@@ -558,7 +783,7 @@ function CheckboxList({
         return (
           <label
             key={item.value}
-            className="flex cursor-pointer items-center gap-2.5 text-[13px] text-stone-700"
+            className="flex min-h-9 cursor-pointer items-center gap-2.5 text-[13px] text-stone-700"
           >
             <span
               className={
@@ -611,7 +836,7 @@ function ColorCheckboxList({
         return (
           <label
             key={item.value}
-            className="flex cursor-pointer items-center gap-2.5 text-[13px] text-stone-700"
+            className="flex min-h-9 cursor-pointer items-center gap-2.5 text-[13px] text-stone-700"
           >
             <span
               className={
@@ -640,7 +865,11 @@ function ColorCheckboxList({
             <span
               aria-hidden
               className="h-3.5 w-3.5 shrink-0 rounded-full border border-stone-300/70"
-              style={item.swatch ? { backgroundColor: item.swatch } : { background: MULTI_SWATCH_GRADIENT }}
+              style={
+                item.swatch
+                  ? { backgroundColor: item.swatch }
+                  : { background: MULTI_SWATCH_GRADIENT }
+              }
             />
             <span className="leading-snug">{item.label}</span>
           </label>
@@ -655,7 +884,7 @@ function Menu({
   onClose,
   align = "left",
 }: {
-  children: React.ReactNode;
+  children: ReactNode;
   onClose: () => void;
   align?: "left" | "right";
 }) {
@@ -677,13 +906,5 @@ function Menu({
         {children}
       </div>
     </>
-  );
-}
-
-function CloseIcon() {
-  return (
-    <svg viewBox="0 0 24 24" className="h-4 w-4" fill="none" stroke="currentColor" strokeWidth="1.6" aria-hidden>
-      <path d="M6 6l12 12M18 6L6 18" strokeLinecap="round" />
-    </svg>
   );
 }

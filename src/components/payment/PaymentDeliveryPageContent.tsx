@@ -1,8 +1,9 @@
 import Image from "next/image";
+import { brand } from "@/lib/config";
 import type { Locale } from "@/lib/i18n";
 
-const phone = "+373 60 066 665";
-const phoneHref = "tel:+37360066665";
+const phone = brand.phones[0];
+const phoneHref = `tel:${phone.replace(/\s/g, "")}`;
 const heroImage = "/payment-delivery-banner-v5.png";
 
 function PayVisa() {

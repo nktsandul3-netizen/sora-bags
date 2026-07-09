@@ -1,5 +1,7 @@
-const phone = "+373 60 066 665";
-const phoneHref = "tel:+37360066665";
+import { brand } from "@/lib/config";
+
+const phone = brand.phones[0];
+const phoneHref = `tel:${phone.replace(/\s/g, "")}`;
 const email = "info@sorabags.md";
 
 function SectionHeading({ children }: { children: React.ReactNode }) {

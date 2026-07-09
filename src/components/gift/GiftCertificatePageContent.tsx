@@ -1,10 +1,18 @@
 import Image from "next/image";
 import type { Locale } from "@/lib/i18n";
+import SocialIcon from "@/components/SocialIcon";
+import { brand } from "@/lib/config";
 
-const phone = "+373 60 066 665";
-const phoneHref = "tel:+37360066665";
-const email = "info@sorabags.md";
+const phone = brand.phones[0];
+const phoneHref = `tel:${phone.replace(/\s/g, "")}`;
+const email = brand.email;
 const heroImage = "/gift-certificate-sora-boxes.png";
+
+const whatsappPrefill: Record<Locale, string> = {
+  ru: "Здравствуйте! Хочу оформить подарочный сертификат SÓRA.",
+  ro: "Bună ziua! Doresc să comand un certificat cadou SÓRA.",
+  en: "Hello! I would like to order a SÓRA gift certificate.",
+};
 
 function InfoCard({
   title,
@@ -53,8 +61,12 @@ const copy = {
     returns: ["Сертификат не подлежит обмену на денежные средства.", "При возврате товара, оплаченного сертификатом, сумма возвращается в виде нового подарочного сертификата.", "Утерянный сертификат может быть восстановлен при наличии подтверждения покупки.", "Срок действия сертификата не продлевается."],
     useTitle: "Как использовать сертификат",
     use: ["Сертификат можно приобрести онлайн через менеджера SÓRA.", "После получения сертификата его владелец может посетить магазин SÓRA и выбрать любые товары на сумму сертификата.", "Для использования сертификата необходимо предъявить электронный сертификат или его номер сотруднику магазина.", "Сертификат может быть использован только один раз.", "Если стоимость выбранных товаров превышает номинал сертификата, разницу можно доплатить любым удобным способом.", "Если стоимость покупки меньше номинала сертификата, остаток не возвращается и сертификат считается использованным.", "Сертификат можно использовать для оплаты любых товаров, представленных в магазине SÓRA."],
-    contacts: "Контакты",
-    contactText: "Для покупки сертификата или получения дополнительной информации свяжитесь с нами:",
+    contacts: "Оформить сертификат",
+    contactText:
+      "Напишите менеджеру — подберём сумму и отправим электронный сертификат на email.",
+    whatsappCta: "Написать в WhatsApp",
+    telegramCta: "Telegram",
+    orCall: "или свяжитесь напрямую",
   },
   ro: {
     alt: "Certificat cadou SÓRA Bags",
@@ -67,8 +79,12 @@ const copy = {
     returns: ["Certificatul nu poate fi schimbat în numerar.", "La returul unui produs plătit cu certificat, suma se returnează sub forma unui nou certificat cadou.", "Un certificat pierdut poate fi reemis pe baza dovezii de cumpărare.", "Valabilitatea certificatului nu se prelungește."],
     useTitle: "Cum se folosește certificatul",
     use: ["Certificatul poate fi cumpărat online prin managerul SÓRA.", "După primire, titularul poate vizita magazinul SÓRA și alege produse în limita sumei certificatului.", "Pentru utilizare, prezentați certificatul electronic sau numărul acestuia unui angajat.", "Certificatul poate fi folosit o singură dată.", "Dacă valoarea produselor depășește nominalul, diferența poate fi achitată prin orice metodă convenabilă.", "Dacă valoarea cumpărăturii este mai mică, restul nu se returnează și certificatul se consideră folosit.", "Certificatul poate fi folosit pentru orice produse disponibile în magazinul SÓRA."],
-    contacts: "Contacte",
-    contactText: "Pentru cumpărarea certificatului sau informații suplimentare, contactați-ne:",
+    contacts: "Comandă certificatul",
+    contactText:
+      "Scrieți managerului — alegem suma și trimitem certificatul electronic pe email.",
+    whatsappCta: "Scrie pe WhatsApp",
+    telegramCta: "Telegram",
+    orCall: "sau contactați-ne direct",
   },
   en: {
     alt: "SÓRA Bags gift certificate",
@@ -81,13 +97,20 @@ const copy = {
     returns: ["The certificate cannot be exchanged for cash.", "If an item paid for with a certificate is returned, the amount is issued as a new gift certificate.", "A lost certificate can be reissued with proof of purchase.", "The validity period cannot be extended."],
     useTitle: "How to use the certificate",
     use: ["The certificate can be purchased online through a SÓRA manager.", "After receiving it, the holder can visit SÓRA and choose any products up to the certificate amount.", "To use it, show the electronic certificate or its number to a store employee.", "The certificate can be used only once.", "If selected products cost more than the certificate amount, the difference can be paid by any convenient method.", "If the purchase is lower than the certificate amount, the balance is not returned and the certificate is considered used.", "The certificate can be used for any products available at SÓRA."],
-    contacts: "Contacts",
-    contactText: "To buy a certificate or get more information, contact us:",
+    contacts: "Get a certificate",
+    contactText:
+      "Message our manager — we’ll set the amount and send the electronic certificate by email.",
+    whatsappCta: "Message on WhatsApp",
+    telegramCta: "Telegram",
+    orCall: "or reach us directly",
   },
 };
 
 export default function GiftCertificatePageContent({ locale = "ru" }: { locale?: Locale }) {
   const c = copy[locale];
+  const giftWhatsAppHref = `${brand.social.whatsapp}?text=${encodeURIComponent(
+    whatsappPrefill[locale],
+  )}`;
   return (
     <>
       <section className="relative h-[clamp(250px,44vw,580px)] w-full overflow-hidden bg-stone-100">
@@ -132,24 +155,68 @@ export default function GiftCertificatePageContent({ locale = "ru" }: { locale?:
           </div>
         </section>
 
-        <section className="mb-14 rounded-[20px] bg-stone-950 px-8 py-10 text-center sm:mb-16 sm:px-12 sm:py-12 lg:mb-20">
-          <h2 className="font-serif text-2xl text-white sm:text-3xl">{c.contacts}</h2>
-          <p className="mt-3 text-sm text-stone-400 sm:text-[15px]">
-            {c.contactText}
-          </p>
-          <div className="mt-6 flex flex-col items-center gap-3 sm:flex-row sm:justify-center sm:gap-10">
-            <a
-              href={phoneHref}
-              className="font-serif text-xl tracking-wide text-white underline-offset-4 transition hover:underline sm:text-2xl"
-            >
-              {phone}
-            </a>
-            <a
-              href={`mailto:${email}`}
-              className="font-serif text-xl tracking-wide text-white underline-offset-4 transition hover:underline sm:text-2xl"
-            >
-              {email}
-            </a>
+        <section className="relative mb-14 overflow-hidden rounded-[20px] border border-stone-200/80 bg-gradient-to-br from-[#f7f3ee] via-white to-[#efe8df] px-6 py-10 text-center shadow-[0_4px_24px_rgba(28,25,23,0.05)] sm:mb-16 sm:px-12 sm:py-12 lg:mb-20">
+          <div
+            className="pointer-events-none absolute -right-16 -top-20 h-56 w-56 rounded-full bg-[radial-gradient(circle,rgba(168,137,110,0.18),transparent_70%)]"
+            aria-hidden
+          />
+          <div
+            className="pointer-events-none absolute -bottom-24 -left-10 h-64 w-64 rounded-full bg-[radial-gradient(circle,rgba(120,100,80,0.1),transparent_70%)]"
+            aria-hidden
+          />
+
+          <div className="relative">
+            <p className="text-[11px] font-semibold uppercase tracking-[0.22em] text-stone-400">
+              SÓRA
+            </p>
+            <h2 className="mt-3 font-serif text-2xl text-stone-950 sm:text-3xl">
+              {c.contacts}
+            </h2>
+            <p className="mx-auto mt-3 max-w-xl text-sm leading-relaxed text-stone-600 sm:text-[15px]">
+              {c.contactText}
+            </p>
+
+            <div className="mt-7 flex flex-col items-stretch justify-center gap-3 sm:flex-row sm:items-center sm:justify-center">
+              <a
+                href={giftWhatsAppHref}
+                target="_blank"
+                rel="noreferrer"
+                className="inline-flex items-center justify-center gap-2.5 rounded-full border border-stone-300 bg-white/70 px-7 py-3.5 text-sm font-medium text-stone-900 backdrop-blur transition hover:border-stone-500 hover:bg-white"
+              >
+                <SocialIcon name="whatsapp" />
+                {c.whatsappCta}
+              </a>
+              <a
+                href={brand.social.telegram}
+                target="_blank"
+                rel="noreferrer"
+                className="inline-flex items-center justify-center gap-2.5 rounded-full border border-stone-300 bg-white/70 px-7 py-3.5 text-sm font-medium text-stone-900 backdrop-blur transition hover:border-stone-500 hover:bg-white"
+              >
+                <SocialIcon name="telegram" />
+                {c.telegramCta}
+              </a>
+            </div>
+
+            <p className="mt-8 text-[11px] font-semibold uppercase tracking-[0.18em] text-stone-400">
+              {c.orCall}
+            </p>
+            <div className="mt-3 flex flex-col items-center gap-2 sm:flex-row sm:justify-center sm:gap-8">
+              <a
+                href={phoneHref}
+                className="font-serif text-lg tracking-wide text-stone-950 underline-offset-4 transition hover:underline sm:text-xl"
+              >
+                {phone}
+              </a>
+              <span className="hidden text-stone-300 sm:inline" aria-hidden>
+                ·
+              </span>
+              <a
+                href={`mailto:${email}`}
+                className="text-[15px] text-stone-600 underline-offset-4 transition hover:text-stone-950 hover:underline"
+              >
+                {email}
+              </a>
+            </div>
           </div>
         </section>
       </div>

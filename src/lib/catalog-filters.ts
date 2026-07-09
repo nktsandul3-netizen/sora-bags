@@ -14,6 +14,8 @@ export interface CatalogFilters {
   availability: string[];
 }
 
+export type CatalogSortKey = "new" | "price-asc" | "price-desc";
+
 export type MultiSelectFilterKey = Exclude<keyof CatalogFilters, "priceMin" | "priceMax">;
 
 export interface CatalogFilterOption {
@@ -33,6 +35,18 @@ export interface CatalogFacets {
   availability: CatalogFilterOption[];
 }
 
+/** Precomputed attributes for O(1) filter matching. */
+export interface ProductFilterIndex {
+  product: Product;
+  categories: string[];
+  colors: string[];
+  materials: string[];
+  sizes: string[];
+  strapTypes: string[];
+  closureTypes: string[];
+  availability: string[];
+}
+
 export const EMPTY_CATALOG_FILTERS: CatalogFilters = {
   priceMin: "",
   priceMax: "",
@@ -44,6 +58,30 @@ export const EMPTY_CATALOG_FILTERS: CatalogFilters = {
   closureTypes: [],
   availability: [],
 };
+
+const MULTI_FILTER_KEYS: MultiSelectFilterKey[] = [
+  "categories",
+  "colors",
+  "materials",
+  "sizes",
+  "strapTypes",
+  "closureTypes",
+  "availability",
+];
+
+/** URL query keys — short, stable, only non-default values are written. */
+const URL_KEYS = {
+  priceMin: "min",
+  priceMax: "max",
+  categories: "cat",
+  colors: "color",
+  materials: "mat",
+  sizes: "size",
+  strapTypes: "strap",
+  closureTypes: "close",
+  availability: "avail",
+  sort: "sort",
+} as const;
 
 const bagCategoryLabels: Record<string, string> = {
   "tote-bag": "Tote Bag",
@@ -240,10 +278,16 @@ export function buildCatalogFacets(products: Product[], locale: Locale): Catalog
   const strapTypes = new Set<string>();
   const closureTypes = new Set<string>();
   const availability = new Set<string>();
+  const seen = new Set<string>();
 
   for (const product of products) {
+    if (seen.has(product.slug)) continue;
+    seen.add(product.slug);
+
     getProductCategories(product).forEach((value) => categories.add(value));
-    product.colors.forEach((color) => getColorFamilies(color.name).forEach((family) => colorFamilies.add(family)));
+    product.colors.forEach((color) =>
+      getColorFamilies(color.name).forEach((family) => colorFamilies.add(family)),
+    );
     if (product.material) materials.add(product.material);
     getProductSizes(product).forEach((value) => sizes.add(value));
     getProductStrapTypes(product).forEach((value) => strapTypes.add(value));
@@ -258,31 +302,204 @@ export function buildCatalogFacets(products: Product[], locale: Locale): Catalog
       label: colorFamilyLabel(key, locale),
       swatch: colorFamilySwatch(key),
     })),
-    materials: [...materials].sort((a, b) => a.localeCompare(b, locale)).map((value) => ({ value, label: value })),
+    materials: [...materials]
+      .sort((a, b) => a.localeCompare(b, locale))
+      .map((value) => ({ value, label: value })),
     sizes: makeLocalizedOptions(sizes, ["mini", "small", "medium", "large"], locale, sizeLabels),
-    strapTypes: makeLocalizedOptions(strapTypes, ["crossbody-strap", "shoulder-strap", "top-handle", "no-strap"], locale, strapTypeLabels),
-    closureTypes: makeLocalizedOptions(closureTypes, ["zipper", "magnetic", "flap", "drawstring", "open-top"], locale, closureTypeLabels),
-    availability: makeLocalizedOptions(availability, ["in-stock", "out-of-stock"], locale, availabilityLabels),
+    strapTypes: makeLocalizedOptions(
+      strapTypes,
+      ["crossbody-strap", "shoulder-strap", "top-handle", "no-strap"],
+      locale,
+      strapTypeLabels,
+    ),
+    closureTypes: makeLocalizedOptions(
+      closureTypes,
+      ["zipper", "magnetic", "flap", "drawstring", "open-top"],
+      locale,
+      closureTypeLabels,
+    ),
+    availability: makeLocalizedOptions(
+      availability,
+      ["in-stock", "out-of-stock"],
+      locale,
+      availabilityLabels,
+    ),
   };
 }
 
+/** Within one facet: OR. Across facets: AND. Empty facet = no constraint. */
 function matchesSelected(selected: string[], values: string[]) {
-  return selected.length === 0 || values.some((value) => selected.includes(value));
+  if (selected.length === 0) return true;
+  const valueSet = new Set(values);
+  return selected.some((value) => valueSet.has(value));
+}
+
+function parsePriceBound(raw: string): number | undefined {
+  if (!raw.trim()) return undefined;
+  const n = Number(raw);
+  return Number.isFinite(n) ? n : undefined;
+}
+
+export function buildProductFilterIndex(product: Product): ProductFilterIndex {
+  return {
+    product,
+    categories: getProductCategories(product),
+    colors: product.colors.flatMap((color) => getColorFamilies(color.name)),
+    materials: product.material ? [product.material] : [],
+    sizes: getProductSizes(product),
+    strapTypes: getProductStrapTypes(product),
+    closureTypes: getProductClosureTypes(product),
+    availability: getProductAvailability(product),
+  };
+}
+
+export function buildProductFilterIndexes(products: Product[]): ProductFilterIndex[] {
+  const seen = new Set<string>();
+  const indexes: ProductFilterIndex[] = [];
+  for (const product of products) {
+    if (seen.has(product.slug)) continue;
+    seen.add(product.slug);
+    indexes.push(buildProductFilterIndex(product));
+  }
+  return indexes;
+}
+
+export function indexMatchesCatalogFilters(index: ProductFilterIndex, filters: CatalogFilters) {
+  const min = parsePriceBound(filters.priceMin);
+  const max = parsePriceBound(filters.priceMax);
+
+  if (min !== undefined && index.product.price < min) return false;
+  if (max !== undefined && index.product.price > max) return false;
+  if (!matchesSelected(filters.categories, index.categories)) return false;
+  if (!matchesSelected(filters.colors, index.colors)) return false;
+  if (!matchesSelected(filters.materials, index.materials)) return false;
+  if (!matchesSelected(filters.sizes, index.sizes)) return false;
+  if (!matchesSelected(filters.strapTypes, index.strapTypes)) return false;
+  if (!matchesSelected(filters.closureTypes, index.closureTypes)) return false;
+  if (!matchesSelected(filters.availability, index.availability)) return false;
+
+  return true;
 }
 
 export function productMatchesCatalogFilters(product: Product, filters: CatalogFilters) {
-  const min = filters.priceMin ? Number(filters.priceMin) : undefined;
-  const max = filters.priceMax ? Number(filters.priceMax) : undefined;
+  return indexMatchesCatalogFilters(buildProductFilterIndex(product), filters);
+}
 
-  if (typeof min === "number" && !Number.isNaN(min) && product.price < min) return false;
-  if (typeof max === "number" && !Number.isNaN(max) && product.price > max) return false;
-  if (!matchesSelected(filters.categories, getProductCategories(product))) return false;
-  if (!matchesSelected(filters.colors, product.colors.flatMap((color) => getColorFamilies(color.name)))) return false;
-  if (!matchesSelected(filters.materials, product.material ? [product.material] : [])) return false;
-  if (!matchesSelected(filters.sizes, getProductSizes(product))) return false;
-  if (!matchesSelected(filters.strapTypes, getProductStrapTypes(product))) return false;
-  if (!matchesSelected(filters.closureTypes, getProductClosureTypes(product))) return false;
-  if (!matchesSelected(filters.availability, getProductAvailability(product))) return false;
+export function filterProductsByCatalogFilters(
+  indexes: ProductFilterIndex[],
+  filters: CatalogFilters,
+): Product[] {
+  return indexes
+    .filter((index) => indexMatchesCatalogFilters(index, filters))
+    .map((index) => index.product);
+}
 
+function uniqueSorted(values: string[]) {
+  return [...new Set(values)].sort((a, b) => a.localeCompare(b));
+}
+
+export function normalizeCatalogFilters(input: CatalogFilters): CatalogFilters {
+  return {
+    priceMin: input.priceMin.trim(),
+    priceMax: input.priceMax.trim(),
+    categories: uniqueSorted(input.categories),
+    colors: uniqueSorted(input.colors),
+    materials: uniqueSorted(input.materials),
+    sizes: uniqueSorted(input.sizes),
+    strapTypes: uniqueSorted(input.strapTypes),
+    closureTypes: uniqueSorted(input.closureTypes),
+    availability: uniqueSorted(input.availability),
+  };
+}
+
+export function areCatalogFiltersEqual(a: CatalogFilters, b: CatalogFilters) {
+  const na = normalizeCatalogFilters(a);
+  const nb = normalizeCatalogFilters(b);
+  if (na.priceMin !== nb.priceMin || na.priceMax !== nb.priceMax) return false;
+  for (const key of MULTI_FILTER_KEYS) {
+    if (na[key].length !== nb[key].length) return false;
+    if (na[key].some((value, i) => value !== nb[key][i])) return false;
+  }
+  return true;
+}
+
+export function toggleCatalogFilterValue(
+  filters: CatalogFilters,
+  key: MultiSelectFilterKey,
+  value: string,
+): CatalogFilters {
+  const current = filters[key];
+  const next = current.includes(value)
+    ? current.filter((item) => item !== value)
+    : [...current, value];
+  return normalizeCatalogFilters({ ...filters, [key]: next });
+}
+
+export function parseCatalogSort(value: string | null | undefined): CatalogSortKey {
+  if (value === "price-asc" || value === "price-desc" || value === "new") return value;
+  return "new";
+}
+
+export function parseCatalogFiltersFromSearchParams(
+  params: URLSearchParams | ReadonlyURLSearchParamsLike,
+): CatalogFilters {
+  const readList = (key: string) =>
+    uniqueSorted(
+      (params.get(key) ?? "")
+        .split(",")
+        .map((part) => part.trim())
+        .filter(Boolean),
+    );
+
+  return normalizeCatalogFilters({
+    priceMin: params.get(URL_KEYS.priceMin) ?? "",
+    priceMax: params.get(URL_KEYS.priceMax) ?? "",
+    categories: readList(URL_KEYS.categories),
+    colors: readList(URL_KEYS.colors),
+    materials: readList(URL_KEYS.materials),
+    sizes: readList(URL_KEYS.sizes),
+    strapTypes: readList(URL_KEYS.strapTypes),
+    closureTypes: readList(URL_KEYS.closureTypes),
+    availability: readList(URL_KEYS.availability),
+  });
+}
+
+type ReadonlyURLSearchParamsLike = {
+  get(name: string): string | null;
+};
+
+const FILTER_URL_KEY_SET = new Set<string>(Object.values(URL_KEYS));
+
+export function catalogStateToSearchParams(
+  filters: CatalogFilters,
+  sort: CatalogSortKey,
+  current?: URLSearchParams | { toString(): string },
+): URLSearchParams {
+  const next = new URLSearchParams();
+
+  // Preserve unrelated query keys (utm, etc.)
+  if (current) {
+    const existing = new URLSearchParams(current.toString());
+    for (const [key, value] of existing.entries()) {
+      if (!FILTER_URL_KEY_SET.has(key)) next.set(key, value);
+    }
+  }
+
+  const normalized = normalizeCatalogFilters(filters);
+  if (normalized.priceMin) next.set(URL_KEYS.priceMin, normalized.priceMin);
+  if (normalized.priceMax) next.set(URL_KEYS.priceMax, normalized.priceMax);
+  for (const key of MULTI_FILTER_KEYS) {
+    if (normalized[key].length > 0) next.set(URL_KEYS[key], normalized[key].join(","));
+  }
+  if (sort !== "new") next.set(URL_KEYS.sort, sort);
+
+  return next;
+}
+
+export function catalogSearchParamsEqual(a: URLSearchParams, b: URLSearchParams) {
+  const keys = new Set([...a.keys(), ...b.keys()]);
+  for (const key of keys) {
+    if ((a.get(key) ?? "") !== (b.get(key) ?? "")) return false;
+  }
   return true;
 }
