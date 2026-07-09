@@ -2775,21 +2775,20 @@ export const products: Product[] = [
     isNew: true,
     colors: [
       {
-        ...C.lightBlue,
+        name: "Blue",
+        hex: C.lightBlue.hex,
         images: [
-          { src: "/products/womens-pebbled-leather-baguette-bag/light-blue-front.png", alt: "Perrine Light Blue — вид спереди" },
-          { src: "/products/womens-pebbled-leather-baguette-bag/light-blue-front-alt.png", alt: "Perrine Light Blue — альтернативный вид" },
-          { src: "/products/womens-pebbled-leather-baguette-bag/light-blue-side.png", alt: "Perrine Light Blue — сбоку" },
-          { src: "/products/womens-pebbled-leather-baguette-bag/light-blue-inside.png", alt: "Perrine Light Blue — внутри" },
+          { src: "/products/womens-pebbled-leather-baguette-bag/light-blue-front-alt-v3.png", alt: "Perrine Albastru — вид спереди" },
+          { src: "/products/womens-pebbled-leather-baguette-bag/light-blue-side.png", alt: "Perrine Albastru — сбоку" },
+          { src: "/products/womens-pebbled-leather-baguette-bag/light-blue-inside-v3.png", alt: "Perrine Albastru — внутри" },
         ],
       },
       {
         ...C.taupe,
         images: [
-          { src: "/products/womens-pebbled-leather-baguette-bag/taupe-front.png", alt: "Perrine Taupe — вид спереди" },
-          { src: "/products/womens-pebbled-leather-baguette-bag/taupe-front-alt.png", alt: "Perrine Taupe — альтернативный вид" },
-          { src: "/products/womens-pebbled-leather-baguette-bag/taupe-side-v2.png", alt: "Perrine Taupe — сбоку" },
-          { src: "/products/womens-pebbled-leather-baguette-bag/taupe-inside-v2.png", alt: "Perrine Taupe — внутри" },
+          { src: "/products/womens-pebbled-leather-baguette-bag/taupe-front-alt-v3.png", alt: "Perrine Taupe — вид спереди" },
+          { src: "/products/womens-pebbled-leather-baguette-bag/taupe-side-v3.png", alt: "Perrine Taupe — сбоку" },
+          { src: "/products/womens-pebbled-leather-baguette-bag/taupe-inside-v3.png", alt: "Perrine Taupe — внутри" },
         ],
       },
     ],
@@ -4079,16 +4078,6 @@ export const products: Product[] = [
         ],
       },
       {
-        ...C.ivory,
-        images: [
-          { src: "/products/womens-pebbled-leather-zip-hobo-bag/ivory-front-v2.png", alt: "Amabel Ivory — вид спереди" },
-          { src: "/products/womens-pebbled-leather-zip-hobo-bag/ivory-angle-v2.png", alt: "Amabel Ivory — под углом" },
-          { src: "/products/womens-pebbled-leather-zip-hobo-bag/ivory-front-alt-v2.png", alt: "Amabel Ivory — альтернативный вид" },
-          { src: "/products/womens-pebbled-leather-zip-hobo-bag/ivory-side-v2.png", alt: "Amabel Ivory — сбоку" },
-          { src: "/products/womens-pebbled-leather-zip-hobo-bag/ivory-inside-v2.png", alt: "Amabel Ivory — внутри" },
-        ],
-      },
-      {
         ...C.white,
         images: [
           { src: "/products/womens-pebbled-leather-zip-hobo-bag/white-front.png", alt: "Amabel White — вид спереди" },
@@ -4547,19 +4536,19 @@ export const products: Product[] = [
     isNew: true,
     colors: [
       {
+        ...C.red,
+        images: [
+          { src: "/products/womens-soft-leather-draped-flap-bag/red-2-v4.png", alt: "Solaine Red — вид спереди" },
+          { src: "/products/womens-soft-leather-draped-flap-bag/red-1-v4.png", alt: "Solaine Red — альтернативный вид" },
+          { src: "/products/womens-soft-leather-draped-flap-bag/red-3-v4.png", alt: "Solaine Red — внутри" },
+        ],
+      },
+      {
         ...C.ivory,
         images: [
           { src: "/products/womens-soft-leather-draped-flap-bag/ivory-front.png", alt: "Solaine Ivory — вид спереди" },
           { src: "/products/womens-soft-leather-draped-flap-bag/ivory-front-alt.png", alt: "Solaine Ivory — альтернативный вид" },
           { src: "/products/womens-soft-leather-draped-flap-bag/ivory-inside.png", alt: "Solaine Ivory — внутри" },
-        ],
-      },
-      {
-        ...C.red,
-        images: [
-          { src: "/products/womens-soft-leather-draped-flap-bag/red-front.png", alt: "Solaine Red — вид спереди" },
-          { src: "/products/womens-soft-leather-draped-flap-bag/red-front-alt.png", alt: "Solaine Red — альтернативный вид" },
-          { src: "/products/womens-soft-leather-draped-flap-bag/red-inside.png", alt: "Solaine Red — внутри" },
         ],
       },
     ],
@@ -5003,7 +4992,6 @@ export const products: Product[] = [
         images: [
           { src: "/products/womens-woven-buckle-handle-tote-bag/blush-front-card.png", alt: "Lisette Blush — карточка товара" },
           { src: "/products/womens-woven-buckle-handle-tote-bag/blush-inside.png", alt: "Lisette Blush — внутри" },
-          { src: "/products/womens-woven-buckle-handle-tote-bag/blush-inside-alt.png", alt: "Lisette Blush — отделения внутри" },
         ],
       },
       {
@@ -5011,7 +4999,6 @@ export const products: Product[] = [
         images: [
           { src: "/products/womens-woven-buckle-handle-tote-bag/forest-green-front-card.png", alt: "Lisette Forest Green — карточка товара" },
           { src: "/products/womens-woven-buckle-handle-tote-bag/forest-green-inside.png", alt: "Lisette Forest Green — внутри" },
-          { src: "/products/womens-woven-buckle-handle-tote-bag/forest-green-inside-alt.png", alt: "Lisette Forest Green — отделения внутри" },
         ],
       },
     ],
@@ -5042,7 +5029,7 @@ export const products: Product[] = [
     brandSlug: "luma-atelier",
     section: "bags",
     categorySlug: "shoulder-bags-women",
-    price: 3900,
+    price: 3899,
     status: "in_stock",
     isNew: true,
     galleryFit: "contain",
@@ -5092,7 +5079,6 @@ export const products: Product[] = [
         images: [
           { src: "/products/womens-woven-flap-top-handle-bag/natural-beige-front-alt-card.png", alt: "Noriane Natural Beige — карточка товара" },
           { src: "/products/womens-woven-flap-top-handle-bag/natural-beige-front-v2.png", alt: "Noriane Natural Beige — вид спереди" },
-          { src: "/products/womens-woven-flap-top-handle-bag/natural-beige-front-alt.png", alt: "Noriane Natural Beige — альтернативный вид" },
           { src: "/products/womens-woven-flap-top-handle-bag/natural-beige-inside.png", alt: "Noriane Natural Beige — внутри" },
         ],
       },
@@ -5446,7 +5432,6 @@ export const products: Product[] = [
           { src: "/products/womens-woven-zip-crossbody-bag/black-front-card.png", alt: "Gwenaelle Чёрный — карточка товара" },
           { src: "/products/womens-woven-zip-crossbody-bag/black-front-alt.png", alt: "Gwenaelle Чёрный — альтернативный вид" },
           { src: "/products/womens-woven-zip-crossbody-bag/black-inside.png", alt: "Gwenaelle Чёрный — внутри" },
-          { src: "/products/womens-woven-zip-crossbody-bag/black-inside-alt.png", alt: "Gwenaelle Чёрный — отделения внутри" },
         ],
       },
       {
@@ -5455,7 +5440,6 @@ export const products: Product[] = [
           { src: "/products/womens-woven-zip-crossbody-bag/plum-front-card.png", alt: "Gwenaelle Plum — карточка товара" },
           { src: "/products/womens-woven-zip-crossbody-bag/plum-front-alt.png", alt: "Gwenaelle Plum — альтернативный вид" },
           { src: "/products/womens-woven-zip-crossbody-bag/plum-inside.png", alt: "Gwenaelle Plum — внутри" },
-          { src: "/products/womens-woven-zip-crossbody-bag/plum-inside-alt.png", alt: "Gwenaelle Plum — отделения внутри" },
         ],
       },
     ],
@@ -8322,7 +8306,7 @@ const featuredColorByProductSlug: Record<string, string> = {
   "womens-smooth-leather-metal-ring-crescent-hobo-bag": "Cognac",
   "womens-woven-leather-turn-lock-clutch-bag": "Cognac",
   "womens-smooth-leather-contrast-trim-flap-shoulder-bag": "White",
-  "womens-soft-leather-draped-flap-bag": "Ivory",
+  "womens-soft-leather-draped-flap-bag": "Red",
   "womens-woven-base-leather-link-handle-hobo-bag": "Taupe",
   "mini-elegance-top-handle-bag-white": "White",
   "structured-leather-top-handle-bag-black": "Black",
