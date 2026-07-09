@@ -226,7 +226,6 @@ function CatalogViewInner({
   const activeCount = countActiveCatalogFilters(filters);
   const hasActiveFilters = activeCount > 0;
   const isBags = categories?.[0]?.section === "bags";
-  const sectionLabel = isBags ? t("nav.bags") : t("nav.accessories");
   const navCategories = isBags
     ? bagMenuCategories
     : categories?.filter((c) => c.slug !== "vse-aksessuary");
@@ -386,11 +385,6 @@ function CatalogViewInner({
           filters={filters}
           facets={facets}
           activeCount={activeCount}
-          navCategories={navCategories}
-          basePath={basePath}
-          activeSlug={activeSlug}
-          sectionLabel={sectionLabel}
-          locale={locale}
           onToggle={toggle}
           onPriceChange={(field, value) =>
             updateFilters((prev) => ({ ...prev, [field]: value }))
@@ -439,11 +433,6 @@ function FilterDrawer({
   filters,
   facets,
   activeCount,
-  navCategories,
-  basePath,
-  activeSlug,
-  sectionLabel,
-  locale,
   onToggle,
   onPriceChange,
   onReset,
@@ -453,11 +442,6 @@ function FilterDrawer({
   filters: CatalogFilters;
   facets: ReturnType<typeof buildCatalogFacets>;
   activeCount: number;
-  navCategories?: CategoryDef[];
-  basePath?: string;
-  activeSlug?: string;
-  sectionLabel: string;
-  locale: "ru" | "ro" | "en";
   onToggle: (key: MultiSelectFilterKey, value: string) => void;
   onPriceChange: (field: "priceMin" | "priceMax", value: string) => void;
   onReset: () => void;
@@ -528,43 +512,6 @@ function FilterDrawer({
             </div>
           </FilterSection>
 
-          {facets.categories.length > 0 && (
-            <FilterSection title={t("catalog.category")}>
-              <CheckboxList
-                items={facets.categories}
-                selected={filters.categories}
-                onToggle={(value) => onToggle("categories", value)}
-              />
-            </FilterSection>
-          )}
-
-          {navCategories && basePath && (
-            <FilterSection title={sectionLabel}>
-              <div className="flex flex-col gap-1">
-                {navCategories.map((c) => (
-                  <Link
-                    key={c.slug}
-                    href={withLocalePath(
-                      c.slug === "vse-sumki" || c.slug === "vse-aksessuary"
-                        ? basePath
-                        : `${basePath}/${c.slug}`,
-                      locale,
-                    )}
-                    onClick={onClose}
-                    className={
-                      "py-1.5 text-[13px] transition " +
-                      (c.slug === activeSlug
-                        ? "font-medium text-stone-950"
-                        : "text-stone-600 hover:text-stone-950")
-                    }
-                  >
-                    {categoryName(c.slug, c.name, locale)}
-                  </Link>
-                ))}
-              </div>
-            </FilterSection>
-          )}
-
           {facets.colors.length > 0 && (
             <FilterSection title={t("catalog.color")}>
               <ColorCheckboxList
@@ -581,46 +528,6 @@ function FilterDrawer({
                 items={facets.materials}
                 selected={filters.materials}
                 onToggle={(value) => onToggle("materials", value)}
-              />
-            </FilterSection>
-          )}
-
-          {facets.sizes.length > 0 && (
-            <FilterSection title={t("catalog.size")}>
-              <CheckboxList
-                items={facets.sizes}
-                selected={filters.sizes}
-                onToggle={(value) => onToggle("sizes", value)}
-              />
-            </FilterSection>
-          )}
-
-          {facets.strapTypes.length > 0 && (
-            <FilterSection title={t("catalog.strapType")}>
-              <CheckboxList
-                items={facets.strapTypes}
-                selected={filters.strapTypes}
-                onToggle={(value) => onToggle("strapTypes", value)}
-              />
-            </FilterSection>
-          )}
-
-          {facets.closureTypes.length > 0 && (
-            <FilterSection title={t("catalog.closureType")}>
-              <CheckboxList
-                items={facets.closureTypes}
-                selected={filters.closureTypes}
-                onToggle={(value) => onToggle("closureTypes", value)}
-              />
-            </FilterSection>
-          )}
-
-          {facets.availability.length > 0 && (
-            <FilterSection title={t("catalog.availability")}>
-              <CheckboxList
-                items={facets.availability}
-                selected={filters.availability}
-                onToggle={(value) => onToggle("availability", value)}
               />
             </FilterSection>
           )}

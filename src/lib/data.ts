@@ -5781,46 +5781,6 @@ export const products: Product[] = [
     ],
   },
   {
-    slug: "womens-pebbled-leather-bifold-cardholder-lavender",
-    title: "Liliana — картхолдер",
-    brandSlug: "luma-atelier",
-    section: "accessories",
-    categorySlug: "card-holders-women",
-    price: 399,
-    status: "in_stock",
-    isNew: true,
-    galleryFit: "contain",
-    colors: [
-      {
-        name: "Lavender",
-        hex: "#c8b2d1",
-        images: [
-          { src: "/products/womens-pebbled-leather-bifold-cardholder-lavender/lavender-front-card.png", alt: "Liliana — вид спереди" },
-          { src: "/products/womens-pebbled-leather-bifold-cardholder-lavender/lavender-inside.png", alt: "Liliana — внутри" },
-        ],
-      },
-    ],
-    material: "Натуральная кожа",
-    description:
-      "Компактный картхолдер из зернистой кожи нежно-лавандового оттенка: мягкий пастельный тон и выразительная фактура зерна. Складная конструкция с отделениями для карт с обеих сторон — удобно разложить банковские и транспортные карты.\n\nТональная строчка по контуру, аккуратная окраска торцов и золотое тиснение «Made in Italy» внутри. Ненавязчивый акцент для весеннего гардероба.",
-    highlights: [
-      "Зернистая кожа",
-      "Складная конструкция",
-      "Отделения для карт с обеих сторон",
-      "Made in Italy",
-    ],
-    specs: [
-      { label: "Размер", value: "10 × 7.5 см" },
-      { label: "Форма", value: "Картхолдер" },
-      { label: "Карманы и отделения", value: "Отделения для карт с обеих сторон" },
-      { label: "Материал", value: "Натуральная кожа" },
-      { label: "Страна производства", value: "Италия" },
-      { label: "Уход", value: "Очищать мягкой сухой тканью; избегать влаги, жары и прямого солнца" },
-      { label: "Доставка", value: "1–3 дня" },
-      { label: "Возврат", value: "14 дней" },
-    ],
-  },
-  {
     slug: "womens-pebbled-leather-bifold-cardholder-chartreuse",
     title: "Limona — картхолдер",
     brandSlug: "luma-atelier",
@@ -6407,7 +6367,7 @@ export const products: Product[] = [
       {
         ...C.red,
         images: [
-          { src: "/products/womens-full-grain-leather-zip-around-wallet/red-front-card.png", alt: "Francesca Red — вид спереди" },
+          { src: "/products/womens-full-grain-leather-zip-around-wallet/red-front-card-v2.png", alt: "Francesca Red — вид спереди" },
           { src: "/products/womens-full-grain-leather-zip-around-wallet/red-inside.png", alt: "Francesca Red — внутри" },
           { src: "/products/womens-full-grain-leather-zip-around-wallet/red-inside-alt.png", alt: "Francesca Red — отделения внутри" },
         ],
@@ -8101,7 +8061,6 @@ const curatedNewArrivalsOrder = [
   "womens-woven-base-round-bucket-bag",
   "womens-heart-leopard-silk-scarf",
   "womens-pebbled-leather-baguette-bag",
-  "womens-pebbled-leather-bifold-cardholder-lavender",
   "womens-woven-oval-handle-tote-bag-mokko",
   "womens-woven-leather-zip-around-wallet",
   "womens-pebbled-leather-turn-lock-top-handle-bag",

@@ -514,7 +514,6 @@ const productTitles: Record<string, Partial<Record<Locale, string>>> = {
   "Azzurina — картхолдер": { ro: "Azzurina — portcard", en: "Azzurina — card holder" },
   "Turchese — картхолдер": { ro: "Turchese — portcard", en: "Turchese — card holder" },
   "Bianca — картхолдер": { ro: "Bianca — portcard", en: "Bianca — card holder" },
-  "Liliana — картхолдер": { ro: "Liliana — portcard", en: "Liliana — card holder" },
   "Limona — картхолдер": { ro: "Limona — portcard", en: "Limona — card holder" },
   "Smeralda — картхолдер": { ro: "Smeralda — portcard", en: "Smeralda — card holder" },
   "Bruna — картхолдер": { ro: "Bruna — portcard", en: "Bruna — card holder" },
@@ -2340,23 +2339,6 @@ const productCopyBySlug: Record<string, ProductLocalizedCopy> = {
       "ru": "Компактный картхолдер из белой зернистой кожи: чистый минималистичный силуэт без лишних деталей. Складная конструкция раскрывается на несколько вертикальных слотов для карт с обеих сторон.\n\nТональная строчка по контуру, аккуратная окраска торцов и золотое тиснение «Genuine Leather / Made in Italy» внутри подчёркивают итальянское происхождение. Лаконичный аксессуар для повседневного кармана или сумки.",
       "ro": "Portcard compact din piele granulată albă: siluetă minimalistă, curată, fără detalii inutile. Construcție pliabilă cu mai multe sloturi verticale pentru carduri pe ambele părți.\n\nCusătură tonală pe contur, margini fin finisate și imprimare aurie „Genuine Leather / Made in Italy” în interior confirmă originea italiană. Accesoriu discret pentru buzunarul zilnic sau geantă.",
       "en": "Compact card holder in white pebbled leather: a clean, minimalist silhouette with no extra details. The bifold design opens to several vertical card slots on both sides.\n\nTonal edge stitching, clean edge paint and gold-foil “Genuine Leather / Made in Italy” stamping inside underline the Italian origin. A understated everyday pocket or bag essential."
-    },
-    "highlights": {
-      "ru": ["Зернистая кожа", "Складная конструкция", "Отделения для карт с обеих сторон", "Made in Italy"],
-      "ro": ["Piele granulată", "Construcție pliabilă", "Compartimente pentru carduri pe ambele părți", "Made in Italy"],
-      "en": ["Pebbled leather", "Bifold design", "Card slots on both sides", "Made in Italy"]
-    }
-  },
-  "womens-pebbled-leather-bifold-cardholder-lavender": {
-    "title": {
-      "ru": "Liliana — картхолдер",
-      "ro": "Liliana — portcard",
-      "en": "Liliana — card holder"
-    },
-    "description": {
-      "ru": "Компактный картхолдер из зернистой кожи нежно-лавандового оттенка: мягкий пастельный тон и выразительная фактура зерна. Складная конструкция с отделениями для карт с обеих сторон — удобно разложить банковские и транспортные карты.\n\nТональная строчка по контуру, аккуратная окраска торцов и золотое тиснение «Made in Italy» внутри. Ненавязчивый акцент для весеннего гардероба.",
-      "ro": "Portcard compact din piele granulată lavandă: nuanță pastelată delicată și textură grain expresivă. Construcție pliabilă cu compartimente pentru carduri pe ambele părți — ideal pentru carduri bancare și de transport.\n\nCusătură tonală pe contur, margini fin finisate și imprimare aurie „Made in Italy” în interior. Accent discret pentru garderoba de primăvară.",
-      "en": "Compact card holder in soft lavender pebbled leather: a gentle pastel hue and expressive grain texture. The bifold design with card compartments on both sides keeps bank and transit cards neatly arranged.\n\nTonal edge stitching, clean edge paint and gold “Made in Italy” stamping inside. A subtle accent for a spring wardrobe."
     },
     "highlights": {
       "ru": ["Зернистая кожа", "Складная конструкция", "Отделения для карт с обеих сторон", "Made in Italy"],
