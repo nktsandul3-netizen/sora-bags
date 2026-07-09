@@ -5,7 +5,6 @@ import { getInstagramPosts } from "@/lib/instagram";
 import InstagramFeed from "@/components/InstagramFeed";
 import ProductCard from "@/components/ProductCard";
 import HeroBannerSlider, { type HeroSlide } from "@/components/HeroBannerSlider";
-import HomeStoryRails from "@/components/HomeStoryRails";
 import StoreExclusiveServices from "@/components/stores/StoreExclusiveServices";
 import { getServerLocale, getServerT } from "@/lib/server-i18n";
 import { withLocalePath, type Locale } from "@/lib/i18n";
@@ -143,22 +142,6 @@ export default async function Home() {
             </Link>
           ))}
         </div>
-      </section>
-
-      {/* Брендовый текст под плитками */}
-      <section className="bg-white px-4 pt-12 pb-6 sm:px-6 sm:pt-14 sm:pb-8 lg:px-10 lg:pt-16 lg:pb-10">
-        <div className="max-w-[520px] lg:ml-[7cm]">
-          <h2 className="text-[22px] font-bold uppercase text-stone-950 sm:text-2xl">
-            {t("home.brandStoryTitle")}
-          </h2>
-          <div className="mt-4 space-y-3.5 text-[11px] font-normal leading-[1.55] text-stone-950 sm:text-xs sm:leading-[1.55]">
-            <p>{t("home.brandStory1")}</p>
-            <p>{t("home.brandStory2")}</p>
-            <p>{t("home.brandStory3")}</p>
-          </div>
-        </div>
-
-        <HomeStoryRails className="mt-2" />
       </section>
 
       {/* Подборка с баннером и товарами */}

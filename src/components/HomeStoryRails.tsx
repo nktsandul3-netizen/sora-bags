@@ -2,17 +2,21 @@
 
 import { useCallback, useEffect, useRef, useState } from "react";
 import Image from "next/image";
-import { brand, homeAsOnMeRail, type BrandStorySlide, type HomeStoryRailTile } from "@/lib/config";
+import Link from "next/link";
+import {
+  brand,
+  homeAsOnMeRail,
+  type BrandStorySlide,
+  type HomeStoryRailTile,
+} from "@/lib/config";
+import { formatPrice } from "@/lib/format";
+import { withLocalePath } from "@/lib/i18n";
+import { useLocale, useT } from "@/lib/useI18n";
 
 const IMAGE_DURATION = 5000;
 
-function PlayIcon({ className }: { className?: string }) {
-  return (
-    <svg viewBox="0 0 24 24" className={className} fill="currentColor" aria-hidden="true">
-      <path d="M8 5.5v13a.6.6 0 0 0 .92.5l10.2-6.5a.6.6 0 0 0 0-1l-10.2-6.5A.6.6 0 0 0 8 5.5Z" />
-    </svg>
-  );
-}
+const DEFAULT_STORY_RING_GRADIENT =
+  "conic-gradient(from 140deg, #f59e0b, #f97316, #ef4444, #f97316, #f59e0b)";
 
 function CloseIcon({ className }: { className?: string }) {
   return (
@@ -55,44 +59,70 @@ function StoryRail({
   tiles: readonly HomeStoryRailTile[];
   onOpen: (tile: HomeStoryRailTile, railTitle: string) => void;
 }) {
+  const locale = useLocale();
+  const t = useT();
   const visibleTiles = tiles.slice(0, 6);
 
   return (
     <div>
-      <div className="flex max-w-[660px] gap-2.5 overflow-x-auto [scrollbar-width:none] lg:ml-[calc(50%-330px+3cm)] [&::-webkit-scrollbar]:hidden">
-        {visibleTiles.map((tile) => (
-          <button
-            key={tile.id}
-            type="button"
-            onClick={() => onOpen(tile, title)}
-            className="group relative aspect-[3/4] w-[82px] shrink-0 overflow-hidden bg-stone-100 shadow-[0_8px_18px_-16px_rgba(28,25,23,0.55)] focus:outline-none sm:w-[92px] lg:w-[100px]"
-            aria-label={`${title}: ${tile.label}`}
-          >
-            <Image
-              src={tile.cover}
-              alt={tile.label}
-              fill
-              sizes="100px"
-              className="object-cover object-center transition-transform duration-500 group-hover:scale-[1.03]"
-            />
-            <span className="absolute inset-0 grid place-items-center bg-black/10">
-              <span className="grid h-5 w-5 place-items-center rounded-full bg-white/85 text-stone-900 shadow-sm transition group-hover:scale-105">
-                <PlayIcon className="ml-0.5 h-2 w-2" />
+      <div className="flex gap-5 overflow-x-auto pb-1 [scrollbar-width:none] snap-x snap-mandatory md:justify-end md:gap-6 md:overflow-visible md:pb-0 md:snap-none lg:gap-7 [&::-webkit-scrollbar]:hidden">
+        {visibleTiles.map((tile) => {
+          const priceLabel =
+            tile.priceFrom != null
+              ? t("home.priceFrom").replace("{price}", formatPrice(tile.priceFrom, locale))
+              : null;
+          const ringGradient = tile.ringGradient ?? DEFAULT_STORY_RING_GRADIENT;
+
+          return (
+            <button
+              key={tile.id}
+              type="button"
+              onClick={() => onOpen(tile, title)}
+              className="group flex w-[58%] max-w-[300px] shrink-0 snap-start flex-col items-center bg-transparent text-center focus:outline-none sm:w-[46%] sm:max-w-[320px] md:w-[312px] md:max-w-[312px] xl:w-[336px] xl:max-w-[336px]"
+              aria-label={`${title}: ${tile.label}`}
+            >
+              <span className="relative aspect-square w-full">
+                <span
+                  aria-hidden
+                  style={{ background: ringGradient }}
+                  className="absolute inset-0 rounded-full blur-[1px] saturate-150 animate-[storyPulse_1.65s_ease-out_infinite]"
+                />
+                <span
+                  style={{ background: ringGradient }}
+                  className="relative block h-full w-full rounded-full p-[3px]"
+                >
+                  <span className="block h-full w-full rounded-full bg-white p-[3px]">
+                    <span className="relative block h-full w-full overflow-hidden rounded-full bg-[#f3f0eb]">
+                      <Image
+                        src={tile.cover}
+                        alt={tile.label}
+                        fill
+                        sizes="(min-width: 1440px) 336px, (min-width: 1024px) 312px, (min-width: 768px) 32vw, 58vw"
+                        className="object-cover object-center transition-transform duration-500 group-hover:scale-[1.04]"
+                      />
+                    </span>
+                  </span>
+                </span>
               </span>
-            </span>
-            <span className="pointer-events-none absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/75 via-black/20 to-transparent px-1 pb-1 pt-6 text-left">
-              <span className="block text-[7px] font-medium uppercase leading-tight tracking-[0.06em] text-white">
+              <span className="mt-2.5 block text-[9px] font-medium uppercase leading-tight tracking-[0.12em] text-stone-950 sm:text-[10px]">
                 {tile.label}
               </span>
-            </span>
-          </button>
-        ))}
+              {priceLabel ? (
+                <span className="mt-1 inline-flex bg-white px-1.5 py-0.5 text-[10px] font-medium tracking-[0.02em] text-stone-950 ring-1 ring-stone-200">
+                  {priceLabel}
+                </span>
+              ) : null}
+            </button>
+          );
+        })}
       </div>
     </div>
   );
 }
 
 export default function HomeStoryRails({ className }: { className?: string }) {
+  const locale = useLocale();
+  const t = useT();
   const [activeTile, setActiveTile] = useState<HomeStoryRailTile | null>(null);
   const [railTitle, setRailTitle] = useState("");
   const [slide, setSlide] = useState(0);
@@ -272,8 +302,22 @@ export default function HomeStoryRails({ className }: { className?: string }) {
               </div>
             </div>
 
-            <div className="pointer-events-none absolute inset-x-0 bottom-0 z-20 bg-gradient-to-t from-black/75 via-black/30 to-transparent px-5 pb-6 pt-16">
+            <div className="absolute inset-x-0 bottom-0 z-20 bg-gradient-to-t from-black/80 via-black/35 to-transparent px-5 pb-6 pt-16">
               <p className="text-[12px] font-medium uppercase tracking-[0.14em] text-white">{activeTile.label}</p>
+              {activeTile.priceFrom != null ? (
+                <p className="mt-2 inline-flex bg-white px-2.5 py-1 text-[12px] font-medium text-stone-950">
+                  {t("home.priceFrom").replace("{price}", formatPrice(activeTile.priceFrom, locale))}
+                </p>
+              ) : null}
+              {activeTile.productSlug ? (
+                <Link
+                  href={withLocalePath(`/product/${activeTile.productSlug}`, locale)}
+                  onClick={close}
+                  className="pointer-events-auto mt-4 inline-flex min-h-10 items-center bg-white px-5 text-[10px] font-medium uppercase tracking-[0.2em] text-stone-950 transition hover:bg-stone-100"
+                >
+                  {t("common.openCollection")}
+                </Link>
+              ) : null}
             </div>
           </div>
         </div>

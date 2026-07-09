@@ -78,6 +78,9 @@ const ru = {
     brandStory2:
       "Мы отбираем только натуральную кожу, рафию и шелк. Без логотипов, без трендов на один сезон.",
     brandStory3: "5 форм, которые подходят ко всему гардеробу. Выбери свою.",
+    fiveShapesCta: "Каталог 5 форм",
+    priceFrom: "от {price}",
+    textureAlt: "Фактура кожи SÓRA крупным планом",
   },
   search: {
     placeholder: "Поиск по каталогу…",
@@ -478,6 +481,9 @@ const ro: typeof ru = {
     brandStory2:
       "Selectăm doar piele naturală, rafie și mătase. Fără logo-uri, fără tendințe de un sezon.",
     brandStory3: "5 forme care se potrivesc cu toată garderoba. Alege-o pe a ta.",
+    fiveShapesCta: "Catalog 5 forme",
+    priceFrom: "de la {price}",
+    textureAlt: "Textura pielii SÓRA în prim-plan",
   },
   search: {
     placeholder: "Căutare în catalog...",
@@ -878,6 +884,9 @@ const en: typeof ru = {
     brandStory2:
       "We select only natural leather, raffia and silk. No logos, no one-season trends.",
     brandStory3: "5 shapes that work with every wardrobe. Choose yours.",
+    fiveShapesCta: "5 shapes catalog",
+    priceFrom: "from {price}",
+    textureAlt: "SÓRA leather texture close-up",
   },
   search: {
     placeholder: "Search the catalog...",

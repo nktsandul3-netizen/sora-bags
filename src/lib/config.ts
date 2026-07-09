@@ -126,7 +126,7 @@ export type BrandStoryHighlightOverride = {
 };
 
 export type BrandStoryProductOverride = BrandStoryHighlightOverride & {
-  /** Переопределения по id хайлайта (in-motion, as-seen-on, …) */
+  /** Переопределения по id хайлайта (in-motion, …) */
   highlights?: Partial<Record<string, BrandStoryHighlightOverride>>;
 };
 
@@ -142,22 +142,10 @@ export const brandStories = {
     "womens-pebbled-leather-turn-lock-top-handle-bag",
     "womens-soft-leather-draped-flap-bag",
     "the-essential-shoulder-bag-tan-cognac",
-    "womens-pebbled-leather-accordion-buckle-shoulder-bag",
-    "structured-leather-tote-bag-burgundy",
     "womens-pebbled-leather-crescent-hobo-bag",
-    "womens-pebbled-leather-kiss-lock-pouch-bag-light-blue",
     "womens-pleated-leather-frame-clutch",
-    "womens-pebbled-leather-side-drawstring-shoulder-bag",
-    "womens-pebbled-leather-two-tone-bowling-bag",
-    "womens-pebbled-leather-turn-lock-flap-shoulder-bag-black",
-    "elegant-leather-hobo-bag-taupe",
-    "elegant-leather-hobo-bag-smooth-black",
-    "woven-leather-shopper-tote-black",
     "womens-suede-wing-tote-bag",
-    "womens-pebbled-leather-ring-handle-structured-bag",
     "womens-pebbled-leather-wing-flap-tote-bag",
-    "womens-woven-suede-flap-clutch-bag",
-    "womens-smooth-leather-metal-ring-crescent-hobo-bag",
     "womens-pebbled-leather-heart-shaped-handbag",
   ],
   items: [
@@ -174,12 +162,6 @@ export const brandStories = {
           poster: "/hero-amalfi-4k.jpg",
         },
       ],
-    },
-    {
-      id: "as-seen-on",
-      label: "AS SEEN ON",
-      cover: "/hero-amalfi-terrace-hq.jpg",
-      slides: [],
     },
   ] satisfies BrandStoryHighlight[],
   productOverrides: {
@@ -243,178 +225,6 @@ export const brandStories = {
             },
           ],
         },
-        "as-seen-on": {
-          cover: "/products/the-essential-shoulder-bag/tan-cognac-lifestyle-v3.png",
-          ringGradient:
-            "conic-gradient(from 140deg, #c4b5a0, #8b7355, #6b5344, #8b7355, #c4b5a0)",
-          slides: [
-            {
-              type: "image",
-              src: "/products/the-essential-shoulder-bag/tan-cognac-lifestyle-v2.png",
-            },
-            {
-              type: "image",
-              src: "/products/the-essential-shoulder-bag/tan-cognac-lifestyle-v3.png",
-            },
-          ],
-        },
-      },
-    },
-    "womens-pebbled-leather-accordion-buckle-shoulder-bag": {
-      highlights: {
-        "as-seen-on": {
-          cover: "/products/womens-pebbled-leather-accordion-buckle-shoulder-bag/as-seen-on-yellow-mirror-1.jpg",
-          ringGradient:
-            "conic-gradient(from 140deg, #fde047, #ca8a04, #854d0e, #ca8a04, #fde047)",
-          slides: [
-            {
-              type: "image",
-              src: "/products/womens-pebbled-leather-accordion-buckle-shoulder-bag/as-seen-on-yellow-mirror-1.jpg",
-            },
-            {
-              type: "image",
-              src: "/products/womens-pebbled-leather-accordion-buckle-shoulder-bag/as-seen-on-yellow-mirror-2.jpg",
-            },
-            {
-              type: "image",
-              src: "/products/womens-pebbled-leather-accordion-buckle-shoulder-bag/as-seen-on-yellow-mirror-3.jpg",
-            },
-          ],
-        },
-      },
-    },
-    "structured-leather-tote-bag-burgundy": {
-      highlights: {
-        "as-seen-on": {
-          cover: "/products/structured-leather-tote-bag/as-seen-on-olive-storefront-2.jpg",
-          ringGradient:
-            "conic-gradient(from 140deg, #fca5a5, #9f1239, #4d5d2f, #9f1239, #fca5a5)",
-          slides: [
-            {
-              type: "image",
-              src: "/products/structured-leather-tote-bag/as-seen-on-olive-storefront-1.jpg",
-            },
-            {
-              type: "image",
-              src: "/products/structured-leather-tote-bag/as-seen-on-olive-storefront-2.jpg",
-            },
-            {
-              type: "image",
-              src: "/products/structured-leather-tote-bag/as-seen-on-olive-storefront-3.jpg",
-            },
-            {
-              type: "image",
-              src: "/products/structured-leather-tote-bag/as-seen-on-burgundy-storefront.jpg",
-            },
-          ],
-        },
-      },
-    },
-    "womens-pebbled-leather-kiss-lock-pouch-bag-light-blue": {
-      highlights: {
-        "as-seen-on": {
-          cover: "/products/womens-pebbled-leather-kiss-lock-pouch-bag/as-seen-on-light-blue-mirror-1.jpg",
-          ringGradient:
-            "conic-gradient(from 140deg, #bae6fd, #7dd3fc, #38bdf8, #7dd3fc, #bae6fd)",
-          slides: [
-            {
-              type: "image",
-              src: "/products/womens-pebbled-leather-kiss-lock-pouch-bag/as-seen-on-light-blue-mirror-1.jpg",
-            },
-            {
-              type: "image",
-              src: "/products/womens-pebbled-leather-kiss-lock-pouch-bag/as-seen-on-light-blue-mirror-2.jpg",
-            },
-          ],
-        },
-      },
-    },
-    "womens-pebbled-leather-turn-lock-flap-shoulder-bag-black": {
-      highlights: {
-        "as-seen-on": {
-          cover: "/products/womens-pebbled-leather-turn-lock-flap-shoulder-bag-black/as-seen-on-mirror-2.jpg",
-          ringGradient:
-            "conic-gradient(from 140deg, #d4a574, #8b5a2b, #3a2a20, #8b5a2b, #d4a574)",
-          slides: [
-            {
-              type: "image",
-              src: "/products/womens-pebbled-leather-turn-lock-flap-shoulder-bag-black/as-seen-on-mirror-1.jpg",
-            },
-            {
-              type: "image",
-              src: "/products/womens-pebbled-leather-turn-lock-flap-shoulder-bag-black/as-seen-on-mirror-2.jpg",
-            },
-            {
-              type: "image",
-              src: "/products/womens-pebbled-leather-turn-lock-flap-shoulder-bag-black/as-seen-on-mirror-3.jpg",
-            },
-          ],
-        },
-      },
-    },
-    "elegant-leather-hobo-bag-taupe": {
-      highlights: {
-        "as-seen-on": {
-          cover: "/products/elegant-leather-hobo-bag-classic/as-seen-on-mirror-2.jpg",
-          ringGradient:
-            "conic-gradient(from 140deg, #d4a574, #8b5a2b, #3a2a20, #8b5a2b, #d4a574)",
-          slides: [
-            {
-              type: "image",
-              src: "/products/elegant-leather-hobo-bag-classic/as-seen-on-mirror-1.jpg",
-            },
-            {
-              type: "image",
-              src: "/products/elegant-leather-hobo-bag-classic/as-seen-on-mirror-2.jpg",
-            },
-            {
-              type: "image",
-              src: "/products/elegant-leather-hobo-bag-classic/as-seen-on-mirror-3.jpg",
-            },
-          ],
-        },
-      },
-    },
-    "elegant-leather-hobo-bag-smooth-black": {
-      highlights: {
-        "as-seen-on": {
-          cover: "/products/elegant-leather-hobo-bag-smooth/smooth-white-lifestyle.png",
-          ringGradient:
-            "conic-gradient(from 140deg, #f5f5f0, #e7e5e4, #d6d3d1, #e7e5e4, #f5f5f0)",
-          slides: [
-            {
-              type: "image",
-              src: "/products/elegant-leather-hobo-bag-smooth/smooth-white-lifestyle.png",
-            },
-          ],
-        },
-      },
-    },
-    "woven-leather-shopper-tote-black": {
-      highlights: {
-        "as-seen-on": {
-          cover: "/products/woven-leather-shopper-tote/as-seen-on-mirror-1.jpg",
-          ringGradient:
-            "conic-gradient(from 140deg, #e7e5e4, #78716c, #1c1b1a, #78716c, #e7e5e4)",
-          slides: [
-            {
-              type: "image",
-              src: "/products/woven-leather-shopper-tote/as-seen-on-mirror-1.jpg",
-            },
-            {
-              type: "image",
-              src: "/products/woven-leather-shopper-tote/as-seen-on-mirror-2.jpg",
-            },
-            {
-              type: "image",
-              src: "/products/woven-leather-shopper-tote/as-seen-on-lifestyle-1.jpg",
-            },
-            {
-              type: "image",
-              src: "/products/woven-leather-shopper-tote/as-seen-on-inside-1.jpg",
-            },
-          ],
-        },
       },
     },
     "womens-pebbled-leather-crescent-hobo-bag": {
@@ -441,52 +251,6 @@ export const brandStories = {
         },
       ],
     },
-    "womens-pebbled-leather-side-drawstring-shoulder-bag": {
-      highlights: {
-        "as-seen-on": {
-          cover: "/products/womens-pebbled-leather-side-drawstring-shoulder-bag/as-seen-on-mirror-2.png",
-          ringGradient:
-            "conic-gradient(from 140deg, #9ca3af, #4b5563, #1f2937, #4b5563, #9ca3af)",
-          slides: [
-            {
-              type: "image",
-              src: "/products/womens-pebbled-leather-side-drawstring-shoulder-bag/as-seen-on-mirror-1.png",
-            },
-            {
-              type: "image",
-              src: "/products/womens-pebbled-leather-side-drawstring-shoulder-bag/as-seen-on-mirror-2.png",
-            },
-            {
-              type: "image",
-              src: "/products/womens-pebbled-leather-side-drawstring-shoulder-bag/as-seen-on-mirror-3.png",
-            },
-          ],
-        },
-      },
-    },
-    "womens-pebbled-leather-two-tone-bowling-bag": {
-      highlights: {
-        "as-seen-on": {
-          cover: "/products/womens-pebbled-leather-two-tone-bowling-bag/as-seen-on-mirror-2.png",
-          ringGradient:
-            "conic-gradient(from 140deg, #b5a498, #7b6658, #4b3429, #7b6658, #b5a498)",
-          slides: [
-            {
-              type: "image",
-              src: "/products/womens-pebbled-leather-two-tone-bowling-bag/as-seen-on-mirror-1.png",
-            },
-            {
-              type: "image",
-              src: "/products/womens-pebbled-leather-two-tone-bowling-bag/as-seen-on-mirror-2.png",
-            },
-            {
-              type: "image",
-              src: "/products/womens-pebbled-leather-two-tone-bowling-bag/as-seen-on-mirror-3.png",
-            },
-          ],
-        },
-      },
-    },
     "womens-suede-wing-tote-bag": {
       highlights: {
         "in-motion": {
@@ -498,36 +262,6 @@ export const brandStories = {
               type: "video",
               src: "/videos/sora-story-in-motion-suede-wing-tote-bag.mp4",
               poster: "/products/womens-suede-wing-tote-bag/dark-chocolate-front.png",
-            },
-          ],
-        },
-        "as-seen-on": {
-          cover: "/products/womens-suede-wing-tote-bag/as-seen-on-1.png",
-          ringGradient:
-            "conic-gradient(from 140deg, #d4a574, #8b5a2b, #3a2a20, #8b5a2b, #d4a574)",
-          slides: [
-            {
-              type: "image",
-              src: "/products/womens-suede-wing-tote-bag/as-seen-on-1.png",
-            },
-            {
-              type: "image",
-              src: "/products/womens-suede-wing-tote-bag/as-seen-on-2.png",
-            },
-          ],
-        },
-      },
-    },
-    "womens-pebbled-leather-ring-handle-structured-bag": {
-      highlights: {
-        "as-seen-on": {
-          cover: "/products/womens-pebbled-leather-ring-handle-structured-bag/as-seen-on-1.png",
-          ringGradient:
-            "conic-gradient(from 140deg, #f5f5f0, #e7e5e4, #d6d3d1, #e7e5e4, #f5f5f0)",
-          slides: [
-            {
-              type: "image",
-              src: "/products/womens-pebbled-leather-ring-handle-structured-bag/as-seen-on-1.png",
             },
           ],
         },
@@ -557,44 +291,6 @@ export const brandStories = {
         },
       ],
     },
-    "womens-woven-suede-flap-clutch-bag": {
-      highlights: {
-        "as-seen-on": {
-          cover: "/products/womens-woven-suede-flap-clutch-bag/as-seen-on-1.png",
-          ringGradient:
-            "conic-gradient(from 140deg, #fca5a5, #9f1239, #541f2d, #9f1239, #fca5a5)",
-          slides: [
-            {
-              type: "image",
-              src: "/products/womens-woven-suede-flap-clutch-bag/as-seen-on-1.png",
-            },
-            {
-              type: "image",
-              src: "/products/womens-woven-suede-flap-clutch-bag/as-seen-on-2.png",
-            },
-          ],
-        },
-      },
-    },
-    "womens-smooth-leather-metal-ring-crescent-hobo-bag": {
-      highlights: {
-        "as-seen-on": {
-          cover: "/products/womens-smooth-leather-metal-ring-crescent-hobo-bag/as-seen-on-1.png",
-          ringGradient:
-            "conic-gradient(from 140deg, #d4a574, #8a4b27, #5c3317, #8a4b27, #d4a574)",
-          slides: [
-            {
-              type: "image",
-              src: "/products/womens-smooth-leather-metal-ring-crescent-hobo-bag/as-seen-on-1.png",
-            },
-            {
-              type: "image",
-              src: "/products/womens-smooth-leather-metal-ring-crescent-hobo-bag/as-seen-on-2.png",
-            },
-          ],
-        },
-      },
-    },
   } satisfies Record<string, BrandStoryProductOverride>,
 } as const;
 
@@ -604,96 +300,79 @@ export type HomeStoryRailTile = {
   id: string;
   label: string;
   cover: string;
+  /** Product slug for CTA / pricing on the home rail. */
+  productSlug?: string;
+  /** Starting price in MDL shown under the label. */
+  priceFrom?: number;
+  /** Conic gradient for the story ring — match bag color. */
+  ringGradient?: string;
   slides: BrandStorySlide[];
 };
 
 export const homeAsOnMeRail = {
-  title: "AS ON ME",
+  title: "IN MOTION",
   tiles: [
       {
-        id: "accordion",
-        label: "ACCORDION",
-        cover: "/products/womens-pebbled-leather-accordion-buckle-shoulder-bag/as-seen-on-yellow-mirror-1.jpg",
+        id: "ottilie",
+        label: "OTTILIE",
+        productSlug: "womens-smooth-leather-compact-baguette-bag",
+        priceFrom: 1899,
+        ringGradient:
+          "conic-gradient(from 140deg, #c2410c, #ea580c, #f97316, #fb923c, #ea580c, #c2410c)",
+        cover: "/products/womens-smooth-leather-compact-baguette-bag/red-orange-front.png",
         slides: [
           {
-            type: "image",
-            src: "/products/womens-pebbled-leather-accordion-buckle-shoulder-bag/as-seen-on-yellow-mirror-1.jpg",
-          },
-          {
-            type: "image",
-            src: "/products/womens-pebbled-leather-accordion-buckle-shoulder-bag/as-seen-on-yellow-mirror-2.jpg",
-          },
-          {
-            type: "image",
-            src: "/products/womens-pebbled-leather-accordion-buckle-shoulder-bag/as-seen-on-yellow-mirror-3.jpg",
+            type: "video",
+            src: "/videos/sora-story-in-motion-baguette.mp4",
+            poster: "/products/womens-smooth-leather-compact-baguette-bag/red-orange-front.png",
           },
         ],
       },
       {
-        id: "kiss-lock",
-        label: "KISS LOCK",
-        cover: "/products/womens-pebbled-leather-kiss-lock-pouch-bag/as-seen-on-light-blue-mirror-1.jpg",
+        id: "fiamma",
+        label: "FIAMMA",
+        productSlug: "womens-pleated-leather-frame-clutch",
+        priceFrom: 3199,
+        ringGradient:
+          "conic-gradient(from 140deg, #5c3a21, #8a4b27, #a86b3c, #c4a484, #8a4b27, #5c3a21)",
+        cover: "/products/womens-pleated-leather-frame-clutch/cognac-front-alt.png",
         slides: [
           {
-            type: "image",
-            src: "/products/womens-pebbled-leather-kiss-lock-pouch-bag/as-seen-on-light-blue-mirror-1.jpg",
-          },
-          {
-            type: "image",
-            src: "/products/womens-pebbled-leather-kiss-lock-pouch-bag/as-seen-on-light-blue-mirror-2.jpg",
+            type: "video",
+            src: "/videos/sora-story-in-motion-pleated-frame-clutch.mp4",
+            poster: "/products/womens-pleated-leather-frame-clutch/cognac-front-alt.png",
           },
         ],
       },
       {
-        id: "woven-tote",
-        label: "WOVEN TOTE",
-        cover: "/products/woven-leather-shopper-tote/as-seen-on-mirror-1.jpg",
+        id: "aurea",
+        label: "AUREA",
+        productSlug: "womens-pebbled-leather-rectangular-handbag",
+        priceFrom: 2199,
+        ringGradient:
+          "conic-gradient(from 140deg, #8a7a68, #a89884, #c4b5a0, #d6c8b4, #a89884, #8a7a68)",
+        cover: "/products/womens-pebbled-leather-rectangular-handbag/taupe-front.png",
         slides: [
           {
-            type: "image",
-            src: "/products/woven-leather-shopper-tote/as-seen-on-mirror-1.jpg",
-          },
-          {
-            type: "image",
-            src: "/products/woven-leather-shopper-tote/as-seen-on-mirror-2.jpg",
-          },
-          {
-            type: "image",
-            src: "/products/woven-leather-shopper-tote/as-seen-on-lifestyle-1.jpg",
+            type: "video",
+            src: "/videos/sora-story-in-motion-rectangular-handbag.mp4",
+            poster: "/products/womens-pebbled-leather-rectangular-handbag/taupe-front.png",
           },
         ],
       },
       {
-        id: "suede-wing",
-        label: "SUEDE WING",
-        cover: "/products/womens-suede-wing-tote-bag/as-seen-on-1.png",
+        id: "solange",
+        label: "SOLANGE",
+        productSlug: "womens-pebbled-leather-wing-flap-tote-bag",
+        priceFrom: 2499,
+        ringGradient:
+          "conic-gradient(from 140deg, #6b8a9a, #8aa8b5, #a8c4ce, #c5d8e0, #8aa8b5, #6b8a9a)",
+        cover: "/products/womens-pebbled-leather-wing-flap-tote-bag/light-blue-front-alt.png",
         slides: [
           {
-            type: "image",
-            src: "/products/womens-suede-wing-tote-bag/as-seen-on-1.png",
-          },
-          {
-            type: "image",
-            src: "/products/womens-suede-wing-tote-bag/as-seen-on-2.png",
-          },
-        ],
-      },
-      {
-        id: "bowling",
-        label: "BOWLING",
-        cover: "/products/womens-pebbled-leather-two-tone-bowling-bag/as-seen-on-mirror-2.png",
-        slides: [
-          {
-            type: "image",
-            src: "/products/womens-pebbled-leather-two-tone-bowling-bag/as-seen-on-mirror-1.png",
-          },
-          {
-            type: "image",
-            src: "/products/womens-pebbled-leather-two-tone-bowling-bag/as-seen-on-mirror-2.png",
-          },
-          {
-            type: "image",
-            src: "/products/womens-pebbled-leather-two-tone-bowling-bag/as-seen-on-mirror-3.png",
+            type: "video",
+            src: "/videos/sora-story-in-motion-wing-flap-tote-bag.mp4",
+            poster: "/products/womens-pebbled-leather-wing-flap-tote-bag/light-blue-front-alt.png",
           },
         ],
       },

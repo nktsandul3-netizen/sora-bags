@@ -28,8 +28,8 @@ export default function PreorderStatusBadge({
   return (
     <span
       className={
-        "inline-flex shrink-0 items-center gap-1.5 rounded-full bg-white/70 font-medium text-stone-700 backdrop-blur-[2px] " +
-        (compact ? "px-2 py-0.5 text-[10px]" : "px-3 py-1 text-[12px] sm:text-[13px]") +
+        "inline-flex shrink-0 items-center gap-1.5 font-normal text-stone-500 " +
+        (compact ? "text-[10px]" : "text-[12px] sm:text-[13px]") +
         (pulse && resolvedStatus === "in_stock" ? " overflow-visible" : "") +
         (className ? ` ${className}` : "")
       }
