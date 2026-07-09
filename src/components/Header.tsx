@@ -12,6 +12,7 @@ import ProfileMenu from "./ProfileMenu";
 import { isHeroOverlayPath } from "@/lib/catalog-banner";
 import { locales, switchLocalePath, withLocalePath } from "@/lib/i18n";
 import { useLocale, useT } from "@/lib/useI18n";
+import { persistLocaleCookie } from "@/context/locale";
 import { categoryName } from "@/lib/catalog-i18n";
 
 const overlayTextShadow =
@@ -274,6 +275,7 @@ function LanguageSwitcher({ overlay = false, reversed = false }: { overlay?: boo
   const locale = useLocale();
   const suffix = useCurrentUrlSuffix();
   const languageOptions = reversed ? [...locales].reverse() : locales;
+
   return (
     <div className="inline-flex shrink-0 flex-row items-center gap-1 text-[10px] font-semibold uppercase tracking-[0.1em] sm:gap-1.5 sm:text-[11px]">
       {languageOptions.map((item) => (
@@ -283,7 +285,9 @@ function LanguageSwitcher({ overlay = false, reversed = false }: { overlay?: boo
           onClick={(e) => {
             const live = window.location.search + window.location.hash;
             e.preventDefault();
-            router.push(switchLocalePath(pathname, item) + live);
+            persistLocaleCookie(item);
+            // Browser URL still has /en|/ru|/ro; usePathname() may be the rewritten path without it.
+            router.push(switchLocalePath(window.location.pathname, item) + live);
             router.refresh();
           }}
           className={
@@ -548,7 +552,8 @@ function MobileMenu({ onClose }: { onClose: () => void }) {
                 onClick={(e) => {
                   const live = window.location.search + window.location.hash;
                   e.preventDefault();
-                  router.push(switchLocalePath(pathname, item) + live);
+                  persistLocaleCookie(item);
+                  router.push(switchLocalePath(window.location.pathname, item) + live);
                   router.refresh();
                   onClose();
                 }}

@@ -4,6 +4,7 @@ import "./globals.css";
 import { brand } from "@/lib/config";
 import { CartProvider } from "@/context/cart";
 import { WishlistProvider } from "@/context/wishlist";
+import { LocaleProvider } from "@/context/locale";
 import SessionProviderWrapper from "@/components/SessionProviderWrapper";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
@@ -41,16 +42,18 @@ export default async function RootLayout({
   return (
     <html lang={locale} className={`${inter.variable} ${playfair.variable} h-full antialiased`}>
       <body className="flex min-h-full flex-col bg-background text-stone-900">
-        <SessionProviderWrapper>
-          <CartProvider>
-            <WishlistProvider>
-              <AnalyticsTracker />
-              <StorefrontChrome header={<Header />} footer={<Footer />}>
-                {children}
-              </StorefrontChrome>
-            </WishlistProvider>
-          </CartProvider>
-        </SessionProviderWrapper>
+        <LocaleProvider locale={locale}>
+          <SessionProviderWrapper>
+            <CartProvider>
+              <WishlistProvider>
+                <AnalyticsTracker />
+                <StorefrontChrome header={<Header />} footer={<Footer />}>
+                  {children}
+                </StorefrontChrome>
+              </WishlistProvider>
+            </CartProvider>
+          </SessionProviderWrapper>
+        </LocaleProvider>
       </body>
     </html>
   );

@@ -1,11 +1,11 @@
 "use client";
 
-import { usePathname } from "next/navigation";
-import { localeFromPathname, type Locale } from "@/lib/i18n";
+import { useLocaleContext } from "@/context/locale";
+import type { Locale } from "@/lib/i18n";
 import { translate, type TranslationKey } from "@/lib/messages";
 
 export function useLocale(): Locale {
-  return localeFromPathname(usePathname());
+  return useLocaleContext();
 }
 
 export function useT() {
