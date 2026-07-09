@@ -63,7 +63,6 @@ function ColorSwatch({
 }) {
   const thumb = getColorSwatchImage(color);
   const hasThumb = Boolean(thumb?.src);
-  const sizeClass = hasThumb ? "h-5 w-5 sm:h-[22px] sm:w-[22px]" : "h-3 w-3 sm:h-3.5 sm:w-3.5";
   const swatchImageClass =
     swatchFit === "contain"
       ? "object-contain object-center p-0.5"
@@ -78,8 +77,10 @@ function ColorSwatch({
       onFocus={onPreview}
       onTouchStart={onPreview}
       className={
-        "relative shrink-0 overflow-hidden rounded-full bg-white transition-all duration-200 ease-out " +
-        (highlighted ? "p-[2px] ring-1 ring-black" : "p-0 ring-0")
+        "relative box-border flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-white transition-all duration-200 ease-out " +
+        (highlighted
+          ? "border border-transparent ring-1 ring-[#111] ring-offset-2"
+          : "border border-[#EDE9E5]")
       }
     >
       {hasThumb ? (
@@ -91,11 +92,11 @@ function ColorSwatch({
           sizes="24px"
           unoptimized
           imageClassName={swatchImageClass}
-          className={"block rounded-full bg-stone-50 " + sizeClass}
+          className="block size-full overflow-hidden rounded-full bg-stone-50"
         />
       ) : (
         <span
-          className={"block rounded-full border border-stone-300/70 " + sizeClass}
+          className="block size-full overflow-hidden rounded-full"
           style={{ backgroundColor: color.hex }}
         />
       )}
@@ -129,7 +130,7 @@ export default function ProductColorSwatches({
 
   return (
     <div
-      className={"flex flex-wrap items-center gap-1.5 sm:gap-2 " + className}
+      className={"flex flex-wrap items-center gap-2 " + className}
       onMouseLeave={() => onPreview?.(null)}
     >
       {swatchItems.map((item) =>
@@ -147,7 +148,7 @@ export default function ProductColorSwatches({
           <Link
             key="overflow"
             href={withLocalePath(`/product/${productSlug}`, locale)}
-            className="inline-flex h-3 w-3 shrink-0 items-center justify-center rounded-full bg-stone-100 text-[8px] font-medium leading-none text-stone-700 transition hover:bg-stone-200 sm:h-3.5 sm:w-3.5 sm:text-[9px]"
+            className="inline-flex h-6 w-6 shrink-0 items-center justify-center rounded-full border border-[#EDE9E5] bg-white text-[10px] font-medium leading-none text-[#111]/60 transition hover:border-[#111]"
             aria-label={`${t("common.moreColors")} ${item.count}`}
           >
             +{item.count}

@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState, type ReactNode } from "react";
+import { useEffect, useRef, useState, type ReactNode } from "react";
 import { createPortal } from "react-dom";
 import Link from "next/link";
 import { AnimatePresence, motion } from "framer-motion";
@@ -27,7 +27,7 @@ import PreorderStatusBadge from "./PreorderStatusBadge";
 
 function ArrowIcon({ direction }: { direction: "left" | "right" }) {
   return (
-    <svg viewBox="0 0 24 24" className="h-5 w-5" aria-hidden>
+    <svg viewBox="0 0 24 24" className="h-4 w-4" aria-hidden>
       <path
         d={direction === "left" ? "M15 6l-6 6 6 6" : "M9 6l6 6-6 6"}
         fill="none"
@@ -54,9 +54,13 @@ function AccordionSection({
       <summary className="flex cursor-pointer list-none items-center gap-3 py-4 text-[15px] text-stone-800 transition hover:text-stone-950 [&::-webkit-details-marker]:hidden">
         <span className="text-stone-500">{icon}</span>
         <span className="flex-1">{title}</span>
-        <span className="relative flex h-4 w-4 items-center justify-center text-stone-500" aria-hidden>
-          <span className="absolute h-px w-3.5 bg-current" />
-          <span className="absolute h-3.5 w-px bg-current transition-transform duration-200 group-open:scale-y-0" />
+        <span className="ml-2 flex h-4 w-4 shrink-0 items-center justify-center text-[#9CA3AF]" aria-hidden>
+          <svg viewBox="0 0 16 16" className="h-4 w-4 group-open:hidden" fill="none" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round">
+            <path d="M8 3.25v9.5M3.25 8h9.5" />
+          </svg>
+          <svg viewBox="0 0 16 16" className="hidden h-4 w-4 group-open:block" fill="none" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round">
+            <path d="M3.25 8h9.5" />
+          </svg>
         </span>
       </summary>
       <div className="pb-5 pl-7 text-sm leading-relaxed text-stone-600">{children}</div>
@@ -112,6 +116,7 @@ export default function QuickViewModal({
     imageIdx: 0,
   }));
   const [added, setAdded] = useState(false);
+  const touchStartX = useRef<number | null>(null);
 
   const selectionIsStale =
     selection.open !== open ||
@@ -251,9 +256,9 @@ export default function QuickViewModal({
               type="button"
               onClick={onClose}
               aria-label={t("common.close")}
-              className="absolute right-4 top-4 z-20 flex h-10 w-10 items-center justify-center rounded-full bg-white text-stone-700 shadow-md transition hover:scale-105 hover:text-stone-950"
+              className="absolute right-4 top-4 z-20 flex items-center justify-center text-stone-700 transition hover:text-stone-950 sm:right-5 sm:top-5 sm:h-9 sm:w-9 sm:rounded-full sm:border sm:border-[#EEE] sm:bg-white/90 sm:text-stone-800 sm:backdrop-blur sm:hover:bg-white"
             >
-              <svg viewBox="0 0 24 24" className="h-5 w-5" fill="none" stroke="currentColor" strokeWidth="1.7" aria-hidden>
+              <svg viewBox="0 0 24 24" className="h-5 w-5 sm:h-[18px] sm:w-[18px]" fill="none" stroke="currentColor" strokeWidth="1.6" aria-hidden>
                 <path d="M6 6l12 12M18 6L6 18" strokeLinecap="round" />
               </svg>
             </button>
@@ -261,7 +266,19 @@ export default function QuickViewModal({
             <div className="min-h-0 overflow-y-auto lg:flex lg:w-full lg:overflow-visible">
               {/* Фото */}
               <div className="relative shrink-0 bg-gradient-to-br from-stone-50 via-[#f7f1e9] to-white p-3 lg:w-[46%]">
-                <div className="group relative aspect-[4/5] max-h-[44vh] w-full overflow-hidden rounded-[22px] border border-white/80 bg-white/70 shadow-[0_20px_60px_-42px_rgba(28,25,23,0.8)] ring-1 ring-stone-950/10 sm:max-h-[50vh] lg:h-full lg:max-h-none lg:min-h-[560px]">
+                <div
+                  className="group relative aspect-[4/5] max-h-[44vh] w-full overflow-hidden rounded-[22px] border border-white/80 bg-white/70 shadow-[0_20px_60px_-42px_rgba(28,25,23,0.8)] ring-1 ring-stone-950/10 sm:max-h-[50vh] lg:h-full lg:max-h-none lg:min-h-[560px]"
+                  onTouchStart={(e) => {
+                    touchStartX.current = e.changedTouches[0]?.clientX ?? null;
+                  }}
+                  onTouchEnd={(e) => {
+                    if (touchStartX.current == null || !canNavigateMedia) return;
+                    const dx = (e.changedTouches[0]?.clientX ?? 0) - touchStartX.current;
+                    touchStartX.current = null;
+                    if (Math.abs(dx) < 40) return;
+                    showImage(dx < 0 ? "next" : "prev");
+                  }}
+                >
                   <div aria-hidden className="pointer-events-none absolute inset-0">
                     <div
                       className="absolute -left-16 -top-14 h-44 w-44 rounded-full opacity-25 blur-3xl"
@@ -289,7 +306,7 @@ export default function QuickViewModal({
                         type="button"
                         aria-label={t("common.previousPhoto")}
                         onClick={() => showImage("prev")}
-                        className="absolute left-4 top-1/2 z-20 flex h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full border border-white/70 bg-white/70 text-stone-900 shadow-[0_12px_32px_-18px_rgba(28,25,23,0.75)] backdrop-blur-md transition hover:scale-105 hover:bg-white"
+                        className="absolute left-3 top-1/2 z-20 hidden h-8 w-8 -translate-y-1/2 items-center justify-center rounded-full bg-white/80 text-stone-900 opacity-0 shadow-[0_2px_8px_rgba(0,0,0,0.08)] backdrop-blur transition hover:bg-white group-hover:opacity-100 md:flex"
                       >
                         <ArrowIcon direction="left" />
                       </button>
@@ -297,33 +314,32 @@ export default function QuickViewModal({
                         type="button"
                         aria-label={t("common.nextPhoto")}
                         onClick={() => showImage("next")}
-                        className="absolute right-4 top-1/2 z-20 flex h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full border border-white/70 bg-white/70 text-stone-900 shadow-[0_12px_32px_-18px_rgba(28,25,23,0.75)] backdrop-blur-md transition hover:scale-105 hover:bg-white"
+                        className="absolute right-3 top-1/2 z-20 hidden h-8 w-8 -translate-y-1/2 items-center justify-center rounded-full bg-white/80 text-stone-900 opacity-0 shadow-[0_2px_8px_rgba(0,0,0,0.08)] backdrop-blur transition hover:bg-white group-hover:opacity-100 md:flex"
                       >
                         <ArrowIcon direction="right" />
                       </button>
-                      <div className="absolute right-4 top-4 z-20 rounded-full border border-white/70 bg-white/75 px-2.5 py-1 text-[10px] font-medium tabular-nums tracking-[0.12em] text-stone-700 shadow-sm backdrop-blur-md">
-                        {hasGallery ? `${safeImageIdx + 1}/${galleryImages.length}` : `${colorIdx + 1}/${product.colors.length}`}
-                      </div>
                       {hasGallery ? (
-                      <div className="absolute bottom-5 left-1/2 z-20 flex -translate-x-1/2 items-center rounded-full border border-white/70 bg-white/75 px-1.5 py-1 shadow-[0_10px_28px_-18px_rgba(28,25,23,0.7)] backdrop-blur-md">
-                        {galleryImages.map((image, i) => (
-                          <button
-                            key={`${image.src}-dot-${i}`}
-                            type="button"
-                            aria-label={`${t("common.photo")} ${i + 1}`}
-                            onClick={() => setSelectedImageIdx(i)}
-                            className="flex items-center justify-center p-2"
-                          >
-                            <span
-                              aria-hidden
-                              className={
-                                "block h-1.5 rounded-full transition-all " +
-                                (i === safeImageIdx ? "w-5 bg-stone-950" : "w-1.5 bg-stone-400/70")
-                              }
-                            />
-                          </button>
-                        ))}
-                      </div>
+                        <div className="absolute bottom-5 left-1/2 z-20 flex -translate-x-1/2 items-center gap-1.5">
+                          {galleryImages.map((image, i) => (
+                            <button
+                              key={`${image.src}-dot-${i}`}
+                              type="button"
+                              aria-label={`${t("common.photo")} ${i + 1}`}
+                              onClick={() => setSelectedImageIdx(i)}
+                              className="flex items-center justify-center p-1"
+                            >
+                              <span
+                                aria-hidden
+                                className={
+                                  "block h-1.5 rounded-full transition-all " +
+                                  (i === safeImageIdx
+                                    ? "w-5 bg-stone-950"
+                                    : "w-1.5 bg-stone-400/70")
+                                }
+                              />
+                            </button>
+                          ))}
+                        </div>
                       ) : null}
                     </>
                   )}
@@ -335,23 +351,26 @@ export default function QuickViewModal({
                 <p className="text-xs font-medium uppercase tracking-[0.16em] text-stone-400">
                   {brandName}
                 </p>
-                <div className="mt-1.5 flex flex-wrap items-start justify-between gap-x-6 gap-y-2 pr-10">
-                  <h2 className="font-serif text-2xl leading-snug text-stone-950">
-                    {localizedTitle}
-                  </h2>
-                  <div className="flex flex-col items-end">
-                    <span className="flex items-baseline gap-2">
-                      {onSale && (
-                        <span className="price-strike text-sm font-normal text-stone-400">
-                          {formatPrice(product.oldPrice!, locale)}
-                        </span>
-                      )}
-                      <span className={"font-bold " + (onSale ? "text-2xl text-sale" : "text-xl text-stone-950")}>
-                        {formatPrice(product.price, locale)}
+                <h2 className="mt-1.5 pr-10 font-serif text-2xl leading-snug text-stone-950">
+                  {localizedTitle}
+                </h2>
+                <div className="my-4">
+                  <span className="flex items-baseline gap-2">
+                    {onSale && (
+                      <span className="price-strike text-sm font-normal text-stone-400">
+                        {formatPrice(product.oldPrice!, locale)}
                       </span>
+                    )}
+                    <span
+                      className={
+                        "text-[28px] font-semibold tracking-[-0.02em] " +
+                        (onSale ? "text-sale" : "text-[#1A1A1A]")
+                      }
+                    >
+                      {formatPrice(product.price, locale)}
                     </span>
-                    <PreorderStatusBadge status={product.status} compact className="mt-1.5" />
-                  </div>
+                  </span>
+                  <PreorderStatusBadge status={product.status} className="mt-2" />
                 </div>
 
                 {/* Цвета (фото-миниатюры) */}
@@ -372,29 +391,31 @@ export default function QuickViewModal({
                             aria-label={localizeColorName(c, locale)}
                             title={localizeColorName(c, locale)}
                             className={
-                              "relative h-12 w-12 overflow-hidden rounded-lg border bg-stone-50 transition " +
+                              "relative box-border h-12 w-12 overflow-hidden rounded-[10px] bg-transparent p-0.5 transition " +
                               (selected
-                                ? "border-stone-950 ring-1 ring-stone-950"
-                                : "border-stone-200 hover:border-stone-400")
+                                ? "border-[1.5px] border-[#111]"
+                                : "border border-[#E5E0DC] hover:border-stone-400")
                             }
                           >
-                            {thumb ? (
-                              <ProductImage
-                                hex={c.hex}
-                                section={product.section}
-                                src={thumb.src}
-                                alt={thumb.alt || c.name}
-                                sizes="48px"
-                                unoptimized
-                                imageClassName={swatchImageClass}
-                                className="absolute inset-0 h-full w-full"
-                              />
-                            ) : (
-                              <span
-                                className="absolute inset-2 rounded-lg"
-                                style={{ backgroundColor: c.hex }}
-                              />
-                            )}
+                            <span className="relative block h-full w-full overflow-hidden rounded-[7px]">
+                              {thumb ? (
+                                <ProductImage
+                                  hex={c.hex}
+                                  section={product.section}
+                                  src={thumb.src}
+                                  alt={thumb.alt || c.name}
+                                  sizes="48px"
+                                  unoptimized
+                                  imageClassName={swatchImageClass}
+                                  className="absolute inset-0 h-full w-full"
+                                />
+                              ) : (
+                                <span
+                                  className="absolute inset-0"
+                                  style={{ backgroundColor: c.hex }}
+                                />
+                              )}
+                            </span>
                           </button>
                         );
                       })}
@@ -408,7 +429,7 @@ export default function QuickViewModal({
                     type="button"
                     onClick={handleAdd}
                     disabled={!canBuy}
-                    className="flex-1 rounded-full bg-stone-950 px-6 py-3.5 text-sm font-semibold tracking-wide text-white transition hover:bg-stone-800 disabled:cursor-not-allowed disabled:opacity-50"
+                    className="flex h-12 flex-1 items-center justify-center rounded-full bg-stone-950 px-6 text-sm font-semibold tracking-wide text-white transition hover:bg-stone-800 disabled:cursor-not-allowed disabled:opacity-50"
                   >
                     {canBuy
                       ? showAdded
@@ -418,14 +439,11 @@ export default function QuickViewModal({
                           : t("common.addToCart")
                       : t("common.outOfStock")}
                   </button>
-                  <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full border border-stone-200">
-                    <WishlistButton slug={product.slug} />
-                  </span>
+                  <WishlistButton slug={product.slug} variant="ring" />
                 </div>
 
-                <p className="mt-4 flex items-center justify-center gap-2 text-[13px] text-stone-600">
-                  <span className="h-2 w-2 rounded-full bg-emerald-500" aria-hidden />
-                  {delivery.title} · {delivery.leadTime}
+                <p className="mt-2.5 text-center text-[12px] text-[#6B7280]">
+                  {t("catalog.freeShipReturnTrust")}
                 </p>
 
                 {/* Аккордеоны */}

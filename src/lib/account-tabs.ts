@@ -1,11 +1,11 @@
 export type AccountTab = "console" | "orders" | "wishlist" | "addresses" | "profile";
 
 export const ACCOUNT_TABS: { id: AccountTab; label: string; menuLabel: string }[] = [
-  { id: "console", label: "Консоль", menuLabel: "Консоль" },
-  { id: "orders", label: "Заказы", menuLabel: "Заказы" },
+  { id: "console", label: "Личный кабинет", menuLabel: "Личный кабинет" },
+  { id: "orders", label: "Мои заказы", menuLabel: "Мои заказы" },
   { id: "wishlist", label: "Избранное", menuLabel: "Избранное" },
-  { id: "addresses", label: "Адреса", menuLabel: "Адреса" },
-  { id: "profile", label: "Личные данные", menuLabel: "Личные данные" },
+  { id: "addresses", label: "Мои адреса", menuLabel: "Мои адреса" },
+  { id: "profile", label: "Профиль", menuLabel: "Профиль" },
 ];
 
 export function parseAccountTab(value: string | undefined): AccountTab {

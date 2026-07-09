@@ -3,29 +3,25 @@
 import type { Locale } from "@/lib/i18n";
 import { storeServicesCopy } from "@/lib/stores";
 
-const ICON_COLOR = "#1F1F1F";
+const ICON_COLOR = "#1A1A1A";
 
 function ServiceIcon({ id }: { id: "payment" | "delivery" | "support" }) {
   const props = {
     viewBox: "0 0 24 24",
     fill: "none",
     stroke: ICON_COLOR,
-    strokeWidth: 1.15,
+    strokeWidth: 1.5,
     strokeLinecap: "round" as const,
     strokeLinejoin: "round" as const,
-    className: "h-5 w-5 sm:h-[1.375rem] sm:w-[1.375rem]",
+    className: "h-5 w-5",
     "aria-hidden": true,
   };
 
   if (id === "payment") {
     return (
       <svg {...props}>
-        <path d="M8.25 8.75V7.75a3.75 3.75 0 0 1 7.5 0v1" />
-        <path d="M6.75 8.75h10.5l-.95 10.25H7.7L6.75 8.75Z" />
-        <circle cx="12" cy="12.35" r="1.05" />
-        <path d="M12 13.4v1.35" strokeLinecap="round" />
-        <circle cx="16.85" cy="16.85" r="2" />
-        <path d="M15.95 16.85l.75.75 1.55-1.55" />
+        <rect x="5" y="11" width="14" height="10" rx="1.5" />
+        <path d="M8 11V8a4 4 0 0 1 8 0v3" />
       </svg>
     );
   }
@@ -33,20 +29,16 @@ function ServiceIcon({ id }: { id: "payment" | "delivery" | "support" }) {
   if (id === "delivery") {
     return (
       <svg {...props}>
-        <path d="M4.75 9.25 12 5.5l7.25 3.75V17a.85.85 0 0 1-.85.85H5.6a.85.85 0 0 1-.85-.85V9.25Z" />
-        <path d="M4.75 9.25 12 13.25l7.25-4" />
-        <path d="M12 13.25V17.85" />
-        <path d="M15.1 16.1h2.65" />
-        <path d="M16.75 14.45l-1.65 1.65 1.65 1.65" />
+        <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16Z" />
+        <path d="M3.27 6.96 12 12.01l8.73-5.05" />
+        <path d="M12 22.08V12" />
       </svg>
     );
   }
 
   return (
     <svg {...props}>
-      <path d="M6.25 7.25h11.5a1.75 1.75 0 0 1 1.75 1.75v4.75a1.75 1.75 0 0 1-1.75 1.75H10.5l-2.25 2.1v-2.1H6.25a1.75 1.75 0 0 1-1.75-1.75V9a1.75 1.75 0 0 1 1.75-1.75Z" />
-      <path d="M8.75 11h6.5" />
-      <path d="M8.75 13.25h4.25" />
+      <path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z" />
     </svg>
   );
 }
@@ -61,23 +53,16 @@ function ServiceCard({
   text: string;
 }) {
   return (
-    <article className="group text-center">
+    <article className="text-center">
       <div
-        className={
-          "mx-auto flex h-14 w-14 items-center justify-center rounded-full bg-white shadow-[0_1px_3px_rgba(31,31,31,0.04)] " +
-          "transition-all duration-[250ms] ease-out " +
-          "group-hover:scale-[1.05] group-hover:bg-[#F4F1ED] group-hover:shadow-[0_4px_14px_rgba(31,31,31,0.07)] " +
-          "sm:h-[3.75rem] sm:w-[3.75rem]"
-        }
+        className="mx-auto flex h-14 w-14 items-center justify-center rounded-full border border-[#EDE9E6] bg-white shadow-[0_2px_12px_rgba(0,0,0,0.04)]"
       >
-        <div className="transition-transform duration-[250ms] ease-out group-hover:scale-[1.03]">
-          <ServiceIcon id={id} />
-        </div>
+        <ServiceIcon id={id} />
       </div>
-      <h3 className="mx-auto mt-4 max-w-[15rem] text-[10px] font-bold uppercase leading-snug tracking-[0.05em] text-stone-950 sm:max-w-[16rem] sm:text-[11px]">
+      <h3 className="mb-3 mt-5 text-[12px] font-medium uppercase leading-[1.3] tracking-[0.06em] text-[#1A1A1A]">
         {title}
       </h3>
-      <p className="mx-auto mt-2.5 max-w-[16rem] text-xs leading-[1.65] text-stone-500 sm:max-w-[17rem]">
+      <p className="mx-auto max-w-[280px] text-[13px] leading-[1.7] text-[#6B7280]">
         {text}
       </p>
     </article>
@@ -88,13 +73,13 @@ export default function StoreExclusiveServices({ locale }: { locale: Locale }) {
   const copy = storeServicesCopy[locale];
 
   return (
-    <section className="border-t border-stone-200/80 bg-[#FAF9F6] px-5 py-8 sm:px-8 sm:py-10 lg:px-12 lg:py-11">
-      <div className="mx-auto max-w-4xl">
-        <h2 className="text-[11px] font-bold uppercase tracking-[0.1em] text-stone-950 sm:text-xs">
+    <section className="border-t border-[#EDE9E6] bg-[#FAF8F5] px-5 py-16 sm:px-8">
+      <div className="mx-auto max-w-[1024px]">
+        <h2 className="mb-12 text-center text-[12px] font-medium uppercase tracking-[0.15em] text-[#1A1A1A]">
           {copy.title}
         </h2>
 
-        <div className="mt-7 grid gap-8 sm:gap-9 lg:grid-cols-3 lg:gap-x-8 lg:gap-y-0">
+        <div className="grid gap-10 sm:gap-12 lg:grid-cols-3 lg:gap-16">
           {copy.items.map((item) => (
             <ServiceCard key={item.id} id={item.id} title={item.title} text={item.text} />
           ))}

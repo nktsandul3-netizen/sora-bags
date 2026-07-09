@@ -26,8 +26,10 @@ export default async function AccountPage({
   if (!session?.user?.id) {
     return (
       <div>
-        <div className="mx-auto max-w-md px-4 pt-8 sm:px-6">
-          <Breadcrumbs items={[{ label: accountLabel }]} />
+        <div className="flex h-12 items-center bg-[#FBF8F6]">
+          <div className="mx-auto w-full max-w-md px-4 sm:px-6">
+            <Breadcrumbs items={[{ label: accountLabel }]} />
+          </div>
         </div>
         <AuthPanel />
       </div>
@@ -45,8 +47,10 @@ export default async function AccountPage({
     // Пользователь из сессии не найден в БД (например, после очистки данных).
     return (
       <div>
-        <div className="mx-auto max-w-md px-4 pt-8 sm:px-6">
-          <Breadcrumbs items={[{ label: accountLabel }]} />
+        <div className="flex h-12 items-center bg-[#FBF8F6]">
+          <div className="mx-auto w-full max-w-md px-4 sm:px-6">
+            <Breadcrumbs items={[{ label: accountLabel }]} />
+          </div>
         </div>
         <AuthPanel />
       </div>
@@ -55,8 +59,10 @@ export default async function AccountPage({
 
   return (
     <div>
-      <div className="mx-auto max-w-5xl px-4 pt-8 sm:px-6">
-        <Breadcrumbs items={[{ label: accountLabel }]} />
+      <div className="flex h-12 items-center bg-[#FBF8F6]">
+        <div className="mx-auto w-full max-w-5xl px-4 sm:px-6">
+          <Breadcrumbs items={[{ label: accountLabel }]} />
+        </div>
       </div>
       <Suspense fallback={<div className="mx-auto max-w-5xl px-4 py-16 text-center text-stone-500">{loadingLabel}</div>}>
         <AccountDashboard

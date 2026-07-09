@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Inter, Playfair_Display } from "next/font/google";
+import { Instrument_Serif, Inter, Playfair_Display } from "next/font/google";
 import "./globals.css";
 import { brand } from "@/lib/config";
 import { CartProvider } from "@/context/cart";
@@ -24,6 +24,13 @@ const playfair = Playfair_Display({
   display: "swap",
 });
 
+const instrumentSerif = Instrument_Serif({
+  variable: "--font-instrument",
+  subsets: ["latin"],
+  weight: "400",
+  display: "swap",
+});
+
 export const metadata: Metadata = {
   metadataBase: new URL(`https://${brand.domain}`),
   title: {
@@ -40,7 +47,7 @@ export default async function RootLayout({
 }>) {
   const locale = await getServerLocale();
   return (
-    <html lang={locale} className={`${inter.variable} ${playfair.variable} h-full antialiased`}>
+    <html lang={locale} className={`${inter.variable} ${playfair.variable} ${instrumentSerif.variable} h-full antialiased`}>
       <body className="flex min-h-full flex-col bg-background text-stone-900">
         <LocaleProvider locale={locale}>
           <SessionProviderWrapper>

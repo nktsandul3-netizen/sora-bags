@@ -17,7 +17,7 @@ export function getDeliveryInfo(product: Pick<Product, "status">, locale: Locale
 const deliveryCopy = {
   ru: {
     in_stock: {
-      badge: "✓ В наличии, доставка 1–3 дня",
+      badge: "В наличии, доставка 1–3 дня",
       title: "Можно купить сейчас",
       leadTime: "Срок доставки: 1–3 дня.",
       description: "Товар есть в наличии. После оформления заказа мы подтвердим детали доставки.",
@@ -37,7 +37,7 @@ const deliveryCopy = {
   },
   ro: {
     in_stock: {
-      badge: "✓ În stoc, livrare 1–3 zile",
+      badge: "În stoc, livrare 1–3 zile",
       title: "Disponibil acum",
       leadTime: "Livrare: 1–3 zile.",
       description: "Produsul este în stoc. După plasarea comenzii confirmăm detaliile livrării.",
@@ -57,7 +57,7 @@ const deliveryCopy = {
   },
   en: {
     in_stock: {
-      badge: "✓ In stock, delivery 1–3 days",
+      badge: "In stock, delivery 1–3 days",
       title: "Available now",
       leadTime: "Delivery time: 1–3 days.",
       description: "The item is in stock. After placing the order we will confirm delivery details.",

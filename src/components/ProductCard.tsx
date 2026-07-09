@@ -13,14 +13,11 @@ import { localizeProductTitle } from "@/lib/product-i18n";
 import ProductImage from "./ProductImage";
 import ProductColorSwatches, { getColorImages } from "./ProductColorSwatches";
 import WishlistButton from "./WishlistButton";
-import QuickViewModal from "./QuickViewModal";
 import PreorderStatusBadge from "./PreorderStatusBadge";
 
 export default function ProductCard({ product }: { product: Product }) {
   const [previewIdx, setPreviewIdx] = useState<number | null>(null);
   const [imageHovered, setImageHovered] = useState(false);
-  const [quickViewOpen, setQuickViewOpen] = useState(false);
-  const [quickViewMounted, setQuickViewMounted] = useState(false);
   const isDesktop = useIsDesktop();
   const locale = useLocale();
   const t = useT();
@@ -43,111 +40,100 @@ export default function ProductCard({ product }: { product: Product }) {
     galleryFit === "contain"
       ? "object-contain object-center"
       : "object-cover object-center";
-  const cardFrameClass =
-    "relative aspect-[4/5] w-full overflow-hidden rounded-[22px] border border-white/80 shadow-[0_18px_55px_-42px_rgba(28,25,23,0.65)] ring-1 ring-stone-950/10 transition duration-500 group-hover:-translate-y-1 group-hover:shadow-[0_26px_70px_-44px_rgba(28,25,23,0.85)] " +
-    (galleryFit === "contain" ? "bg-white" : "bg-gradient-to-br from-stone-50 via-[#f7f1e9] to-white");
-
-  function openQuickView() {
-    setQuickViewMounted(true);
-    setQuickViewOpen(true);
-  }
 
   return (
     <div className="group flex flex-col">
-      <div className="relative">
-        <Link href={withLocalePath(`/product/${product.slug}`, locale)} className="block">
-        <div
-          className={cardFrameClass}
-          onMouseEnter={() => setImageHovered(true)}
-          onMouseLeave={() => setImageHovered(false)}
-        >
-        {galleryFit !== "contain" ? (
-          <div aria-hidden className="pointer-events-none absolute inset-0">
-            <div className="absolute inset-x-8 bottom-3 h-16 rounded-full bg-stone-950/10 blur-2xl" />
-            <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_16%,rgba(255,255,255,0.9),transparent_34%),linear-gradient(135deg,rgba(255,255,255,0.36),transparent_56%)]" />
-          </div>
-        ) : null}
-        {primary?.src ? (
-          <>
-            <div
-              className={
-                "absolute inset-0 transition-opacity duration-300 ease-out " +
-                (showSecondary ? "opacity-0" : "opacity-100")
-              }
-            >
-              <Image
-                key={`${displayIdx}-primary-${primary.src}`}
-                src={primary.src}
-                alt={primary.alt || localizedTitle}
-                fill
-                sizes="(min-width: 1024px) 25vw, 50vw"
-                quality={90}
+      <div
+        className="relative aspect-[4/5] h-full w-full"
+        onMouseEnter={() => setImageHovered(true)}
+        onMouseLeave={() => setImageHovered(false)}
+      >
+        <div className="relative h-full w-full overflow-hidden rounded-none border border-[#E8E4DF] bg-white p-0 transition duration-500 group-hover:-translate-y-0.5">
+          <Link
+            href={withLocalePath(`/product/${product.slug}`, locale)}
+            className="absolute inset-0 z-0 block"
+            aria-label={localizedTitle}
+          >
+            {primary?.src ? (
+              <>
+                <div
+                  className={
+                    "absolute inset-[18px] transition-opacity duration-300 ease-out " +
+                    (showSecondary ? "opacity-0" : "opacity-100")
+                  }
+                >
+                  <Image
+                    key={`${displayIdx}-primary-${primary.src}`}
+                    src={primary.src}
+                    alt={primary.alt || localizedTitle}
+                    fill
+                    sizes="(min-width: 1024px) 25vw, 50vw"
+                    quality={90}
+                    className={
+                      cardImageClass +
+                      " transition-transform duration-[700ms] ease-out " +
+                      (imageHovered && previewIdx === null ? "scale-[1.04]" : "scale-100")
+                    }
+                  />
+                </div>
+                {hasSwap && (
+                  <div
+                    className={
+                      "absolute inset-[18px] transition-opacity duration-300 ease-out " +
+                      (showSecondary ? "opacity-100" : "opacity-0")
+                    }
+                  >
+                    <Image
+                      key={`${displayIdx}-secondary-${secondary!.src}`}
+                      src={secondary!.src}
+                      alt={secondary!.alt || localizedTitle}
+                      fill
+                      sizes="(min-width: 1024px) 25vw, 50vw"
+                      quality={90}
+                      className={
+                        cardImageClass +
+                        " transition-transform duration-[700ms] ease-out " +
+                        (showSecondary ? "scale-[1.04]" : "scale-100")
+                      }
+                    />
+                  </div>
+                )}
+              </>
+            ) : (
+              <ProductImage
+                key={`${displayIdx}-placeholder-${activeColor?.hex}`}
+                hex={activeColor?.hex ?? "#d6d3d1"}
+                section={product.section}
                 className={
-                  cardImageClass +
-                  " transition-transform duration-[700ms] ease-out " +
+                  "absolute inset-[18px] h-auto w-auto transition-transform duration-[700ms] ease-out " +
                   (imageHovered && previewIdx === null ? "scale-[1.04]" : "scale-100")
                 }
+                imageClassName="object-contain object-center"
               />
-            </div>
-            {hasSwap && (
-              <div
-                className={
-                  "absolute inset-0 transition-opacity duration-300 ease-out " +
-                  (showSecondary ? "opacity-100" : "opacity-0")
-                }
-              >
-                <Image
-                  key={`${displayIdx}-secondary-${secondary!.src}`}
-                  src={secondary!.src}
-                  alt={secondary!.alt || localizedTitle}
-                  fill
-                  sizes="(min-width: 1024px) 25vw, 50vw"
-                  quality={90}
-                  className={
-                    cardImageClass +
-                    " transition-transform duration-[700ms] ease-out " +
-                    (showSecondary ? "scale-[1.04]" : "scale-100")
-                  }
-                />
-              </div>
             )}
-          </>
-        ) : (
-          <ProductImage
-            key={`${displayIdx}-placeholder-${activeColor?.hex}`}
-            hex={activeColor?.hex ?? "#d6d3d1"}
-            section={product.section}
-            className={
-              "absolute inset-0 h-full w-full transition-transform duration-[700ms] ease-out " +
-              (imageHovered && previewIdx === null ? "scale-[1.04]" : "scale-100")
-            }
-            imageClassName="object-cover object-center"
-          />
-        )}
+          </Link>
 
-        <div className="pointer-events-none absolute left-3 top-3 z-10 hidden flex-col gap-1.5 lg:flex">
-          {onSale && (
-            <span className="rounded-full border border-white/70 bg-white/75 px-2.5 py-1 text-[10px] font-medium uppercase tracking-[0.18em] text-stone-800 shadow-sm backdrop-blur-md">
-              {t("catalog.badgeSale")}
-            </span>
-          )}
-          {product.isNew && (
-            <span className="rounded-full border border-white/70 bg-white/75 px-2.5 py-1 text-[10px] font-medium uppercase tracking-[0.18em] text-stone-800 shadow-sm backdrop-blur-md">
-              {t("catalog.badgeNew")}
-            </span>
-          )}
-        </div>
+          <div className="pointer-events-none absolute left-3 top-3 z-10 hidden flex-col gap-1.5 lg:flex">
+            {onSale && (
+              <span className="rounded-full border border-white/70 bg-white/75 px-2.5 py-1 text-[10px] font-medium uppercase tracking-[0.12em] text-stone-800 shadow-sm backdrop-blur-md">
+                {t("catalog.badgeSale")}
+              </span>
+            )}
+            {product.isNew && (
+              <span className="rounded-full border border-white/70 bg-white/75 px-2.5 py-1 text-[10px] font-medium uppercase tracking-[0.12em] text-stone-800 shadow-sm backdrop-blur-md">
+                {t("catalog.badgeNew")}
+              </span>
+            )}
+          </div>
 
-        <div className="absolute right-3 top-3 z-10 hidden lg:block">
-          <WishlistButton slug={product.slug} />
+          <div className="absolute right-3 top-3 z-20 hidden lg:block">
+            <WishlistButton slug={product.slug} />
+          </div>
         </div>
-
-        </div>
-      </Link>
       </div>
 
-      {/* Свотчи слева + сердечко справа: слот фиксированной высоты, чтобы карточки не прыгали */}
-      <div className="mt-2 flex min-h-[26px] items-center justify-between gap-2 px-0.5 sm:mt-3">
+      {/* Свотчи → бренд 12px; бренд → название 4px; название → цена 14px; цена → статус 6px */}
+      <div className="mt-3.5 flex min-h-6 items-center justify-between gap-2 px-0.5">
         {showSwatches ? (
           <ProductColorSwatches
             productSlug={product.slug}
@@ -165,81 +151,32 @@ export default function ProductCard({ product }: { product: Product }) {
         </span>
       </div>
 
-      <Link href={withLocalePath(`/product/${product.slug}`, locale)} className="mt-1.5 flex flex-1 flex-col px-0.5 sm:mt-2.5">
-        <p className="text-[10px] font-medium uppercase tracking-[0.18em] text-stone-400">
+      <Link href={withLocalePath(`/product/${product.slug}`, locale)} className="mt-3 flex flex-col px-0.5">
+        <p className="text-[11px] font-normal uppercase tracking-[0.08em] text-[#111]/36">
           {getBrandName(product.brandSlug)}
         </p>
-        <h3 className="mt-1.5 line-clamp-2 min-h-[2.75em] text-[10px] font-normal leading-snug tracking-[-0.01em] text-stone-700 transition-colors group-hover:text-stone-950 sm:text-[10.5px]">
+        <h3 className="mt-1 line-clamp-2 min-h-10 text-[14px] font-normal leading-5 text-[#151515] transition-colors group-hover:opacity-80">
           {localizedTitle}
         </h3>
       </Link>
 
-      <div className="relative mt-1.5 px-0.5 sm:mt-2 lg:mt-2.5">
-        {/* Десктоп: цена + статус, по ховеру заменяются кнопкой */}
-        <div className="hidden transition-all duration-300 group-hover:pointer-events-none group-hover:-translate-y-1 group-hover:opacity-0 lg:block">
-          <div className="flex items-baseline gap-2">
-            {onSale && (
-              <span className="price-strike text-[12px] font-normal text-stone-400">
-                {formatPrice(product.oldPrice!, locale)}
-              </span>
-            )}
-            <span
-              className={
-                "tracking-wide " +
-                (onSale ? "text-[14px] font-bold text-sale" : "text-[13px] font-medium text-stone-950")
-              }
-            >
-              {formatPrice(product.price, locale)}
+      <div className="mt-3.5 px-0.5">
+        <div className="flex items-baseline gap-2">
+          {onSale && (
+            <span className="price-strike text-[13px] font-normal text-[#111]/40">
+              {formatPrice(product.oldPrice!, locale)}
             </span>
-          </div>
-          <PreorderStatusBadge status={product.status} compact className="mt-1.5" />
-        </div>
-        {/* Мобильные: цена, статус и кнопка в обычном потоке — без наложений */}
-        <div className="lg:hidden">
-          <div className="flex flex-wrap items-center justify-between gap-x-2 gap-y-1">
-            <span className="flex items-baseline gap-1.5">
-              {onSale && (
-                <span className="price-strike text-[10px] font-normal text-stone-400">
-                  {formatPrice(product.oldPrice!, locale)}
-                </span>
-              )}
-              <span
-                className={
-                  "font-bold uppercase tracking-[0.08em] " +
-                  (onSale ? "text-[12px] text-sale" : "text-[11px] text-stone-950")
-                }
-              >
-                {formatPrice(product.price, locale)}
-              </span>
-            </span>
-            <PreorderStatusBadge status={product.status} compact />
-          </div>
-          <button
-            type="button"
-            onClick={openQuickView}
-            className="mt-2 flex h-8 w-full items-center justify-center rounded-md border border-stone-950 bg-stone-950 px-2 text-[10px] font-semibold uppercase tracking-[0.1em] text-white shadow-sm transition hover:bg-white hover:text-stone-950 sm:h-9"
+          )}
+          <span
+            className={
+              onSale ? "text-[15px] font-medium text-sale" : "text-[15px] font-medium text-[#111]"
+            }
           >
-            {t("common.buy")}
-          </button>
+            {formatPrice(product.price, locale)}
+          </span>
         </div>
-        {/* Десктоп: кнопка появляется по ховеру поверх цены */}
-        <button
-          type="button"
-          onClick={openQuickView}
-          className="absolute inset-x-0 top-0 hidden h-9 translate-y-2 items-center justify-center rounded-md border border-stone-950 bg-stone-950 px-2 text-[11px] font-semibold text-white opacity-0 shadow-sm transition-all duration-300 ease-out hover:bg-white hover:text-stone-950 group-hover:translate-y-0 group-hover:opacity-100 lg:flex"
-        >
-          {t("common.buy")} {formatPrice(product.price, locale)}
-        </button>
+        <PreorderStatusBadge status={product.status} compact className="mt-1.5" />
       </div>
-
-      {quickViewMounted && (
-        <QuickViewModal
-          product={product}
-          open={quickViewOpen}
-          onClose={() => setQuickViewOpen(false)}
-          initialColorIdx={displayIdx}
-        />
-      )}
     </div>
   );
 }

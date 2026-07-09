@@ -64,6 +64,8 @@ type CatalogViewProps = {
     aspectClass?: string;
     copyOverlayClass?: string;
     mediaFilterClass?: string;
+    /** Soft top gradient so white overlay header stays readable on bright heroes */
+    topScrim?: boolean;
   };
 };
 
@@ -253,15 +255,15 @@ function CatalogViewInner({
         {description ? <p className="sr-only">{description}</p> : null}
 
         {navCategories && basePath ? (
-          <nav className="mb-7 overflow-x-auto [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
-            <div className="flex min-w-max items-center justify-center gap-6 text-[11px] font-medium leading-none text-stone-500 sm:gap-7">
+          <nav className="mb-5 w-full overflow-x-auto border-b border-[#EDE9E5] [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+            <div className="flex h-12 min-w-max items-center justify-center gap-7 text-[14px] font-normal leading-none">
               <Link
                 href={withLocalePath(basePath, locale)}
                 className={
-                  "whitespace-nowrap transition hover:text-stone-950 " +
+                  "whitespace-nowrap text-[#111] transition hover:opacity-100 " +
                   (activeSlug === "vse-sumki" || activeSlug === "vse-aksessuary"
-                    ? "font-semibold text-stone-950"
-                    : "text-stone-500")
+                    ? "opacity-100"
+                    : "opacity-[0.42]")
                 }
               >
                 {t("catalog.all")}
@@ -273,10 +275,8 @@ function CatalogViewInner({
                     key={c.slug}
                     href={withLocalePath(href, locale)}
                     className={
-                      "whitespace-nowrap transition hover:text-stone-950 " +
-                      (c.slug === activeSlug
-                        ? "font-semibold text-stone-950"
-                        : "text-stone-500")
+                      "whitespace-nowrap text-[#111] transition hover:opacity-100 " +
+                      (c.slug === activeSlug ? "opacity-100" : "opacity-[0.42]")
                     }
                   >
                     {categoryName(c.slug, c.name, locale)}
@@ -287,69 +287,64 @@ function CatalogViewInner({
           </nav>
         ) : null}
 
-        <div className="relative mb-7 flex flex-wrap items-center justify-between gap-3 border-b border-stone-200 pb-3 text-[10px] font-medium text-stone-950 sm:gap-4">
-          <div className="flex flex-wrap items-center gap-2 sm:gap-2.5">
+        <div className="relative mb-7 flex w-full flex-wrap items-center gap-3 text-[#111] sm:gap-2.5">
+          <button
+            type="button"
+            onClick={() => setShowFilter(true)}
+            className="inline-flex h-9 items-center justify-center gap-1.5 rounded-[18px] border border-[#E9E2DC] bg-white px-4 text-[12.5px] font-normal transition hover:bg-[#FBF8F6]"
+            aria-expanded={showFilter}
+          >
+            <span>{t("catalog.filter")}</span>
+            {activeCount > 0 && (
+              <span className="rounded-full bg-[#111] px-1.5 py-px text-[10px] leading-none text-white">
+                {activeCount}
+              </span>
+            )}
+          </button>
+
+          <div className="relative">
             <button
               type="button"
-              onClick={() => setShowFilter(true)}
-              className="inline-flex h-8 min-w-[64px] items-center justify-center gap-1.5 rounded-sm border border-stone-100 bg-white px-3 text-[9px] shadow-[0_2px_10px_rgba(0,0,0,0.03)] transition hover:border-stone-300 sm:h-7"
-              aria-expanded={showFilter}
+              onClick={() => setOpenMenu((m) => (m === "sort" ? null : "sort"))}
+              className="inline-flex h-9 items-center justify-between gap-2 rounded-[18px] border border-[#E9E2DC] bg-white px-4 text-[12.5px] font-normal transition hover:bg-[#FBF8F6]"
+              aria-expanded={openMenu === "sort"}
             >
-              <span>{t("catalog.filter")}</span>
-              {activeCount > 0 && (
-                <span className="rounded-full bg-stone-900 px-1.5 py-px text-[8px] leading-none text-white">
-                  {activeCount}
-                </span>
-              )}
+              <span>{t("catalog.sortBy")}</span>
+              <Chevron open={openMenu === "sort"} />
             </button>
-
-            <div className="relative">
-              <button
-                type="button"
-                onClick={() => setOpenMenu((m) => (m === "sort" ? null : "sort"))}
-                className="inline-flex h-8 min-w-[108px] items-center justify-between gap-2 rounded-sm border border-stone-100 bg-white px-3 text-[9px] shadow-[0_2px_10px_rgba(0,0,0,0.03)] transition hover:border-stone-300 sm:h-7"
-                aria-expanded={openMenu === "sort"}
-              >
-                <span>{t("catalog.sortBy")}</span>
-                <Chevron open={openMenu === "sort"} />
-              </button>
-              {openMenu === "sort" && (
-                <Menu onClose={() => setOpenMenu(null)} align="left">
-                  {(Object.keys(sortLabels) as CatalogSortKey[]).map((key) => (
-                    <button
-                      key={key}
-                      type="button"
-                      onClick={() => updateSort(key)}
-                      className={
-                        "block w-full px-5 py-2.5 text-left text-[13px] normal-case tracking-normal transition hover:bg-stone-50 " +
-                        (key === sortKey ? "text-stone-400" : "text-stone-800")
-                      }
-                    >
-                      {sortLabels[key]}
-                    </button>
-                  ))}
-                </Menu>
-              )}
-            </div>
-
-            {hasActiveFilters && (
-              <button
-                type="button"
-                onClick={resetFilters}
-                className="inline-flex h-8 items-center rounded-sm px-2 text-[9px] uppercase tracking-[0.12em] text-stone-500 transition hover:text-stone-950 sm:h-7"
-              >
-                {t("catalog.reset")}
-              </button>
+            {openMenu === "sort" && (
+              <Menu onClose={() => setOpenMenu(null)} align="left">
+                {(Object.keys(sortLabels) as CatalogSortKey[]).map((key) => (
+                  <button
+                    key={key}
+                    type="button"
+                    onClick={() => updateSort(key)}
+                    className={
+                      "block w-full px-5 py-2.5 text-left text-[13px] normal-case tracking-normal transition hover:bg-stone-50 " +
+                      (key === sortKey ? "text-stone-400" : "text-stone-800")
+                    }
+                  >
+                    {sortLabels[key]}
+                  </button>
+                ))}
+              </Menu>
             )}
           </div>
 
-          <div className="flex items-center gap-2 whitespace-nowrap text-[11px] text-stone-800">
+          {hasActiveFilters && (
+            <button
+              type="button"
+              onClick={resetFilters}
+              className="inline-flex h-9 items-center rounded-[18px] px-3 text-[12.5px] text-[#111]/42 transition hover:text-[#111]"
+            >
+              {t("catalog.reset")}
+            </button>
+          )}
+
+          <div className="ml-auto flex h-9 items-center gap-2 whitespace-nowrap text-[12px] leading-none text-[#111]/42">
             {isPending && (
-              <span
-                className="inline-flex items-center gap-1.5 text-stone-400"
-                aria-live="polite"
-              >
-                <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-stone-400" />
+              <span className="inline-flex items-center gap-1.5" aria-live="polite">
+                <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-[#111]/40" />
                 {t("catalog.filtering")}
               </span>
             )}
@@ -571,6 +566,15 @@ function HeroBanner({ heroBanner }: { heroBanner: NonNullable<CatalogViewProps["
   const isLightCopy = copyTone === "light";
   const copyOverlayClass = heroBanner.copyOverlayClass ?? "items-center justify-center";
   const heroMediaFilterClass = heroBanner.mediaFilterClass ?? "catalog-hero-media";
+  const topScrim = heroBanner.topScrim ? (
+    <div
+      aria-hidden
+      className="pointer-events-none absolute inset-x-0 top-0 z-[1] h-[120px]"
+      style={{
+        background: "linear-gradient(to bottom, rgba(0,0,0,0.22) 0%, rgba(0,0,0,0) 100%)",
+      }}
+    />
+  ) : null;
 
   const heroCopyBlock = heroBanner.copy ? (
     <div
@@ -625,8 +629,9 @@ function HeroBanner({ heroBanner }: { heroBanner: NonNullable<CatalogViewProps["
               heroMediaFilterClass + " catalog-hero-image block h-auto w-full max-w-none"
             }
           />
+          {topScrim}
           {heroBanner.copy ? (
-            <div className={"absolute inset-0 flex px-6 sm:px-10 " + copyOverlayClass}>
+            <div className={"absolute inset-0 z-[2] flex px-6 sm:px-10 " + copyOverlayClass}>
               {heroCopyBlock}
             </div>
           ) : null}
@@ -660,8 +665,9 @@ function HeroBanner({ heroBanner }: { heroBanner: NonNullable<CatalogViewProps["
                 : { objectPosition: heroBanner.objectPosition ?? "50% 62%" }
             }
           />
+          {topScrim}
           {heroBanner.copy ? (
-            <div className={"absolute inset-0 flex px-6 sm:px-10 " + copyOverlayClass}>
+            <div className={"absolute inset-0 z-[2] flex px-6 sm:px-10 " + copyOverlayClass}>
               {heroCopyBlock}
             </div>
           ) : null}

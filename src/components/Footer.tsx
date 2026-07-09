@@ -142,7 +142,7 @@ const socials = [
 
 function FooterHeading({ children }: { children: ReactNode }) {
   return (
-    <h4 className="mb-4 text-[11px] font-semibold uppercase tracking-[0.16em] text-stone-400">
+    <h4 className="mb-5 text-[11px] font-medium uppercase tracking-[0.12em] text-[#1A1A1A]">
       {children}
     </h4>
   );
@@ -150,10 +150,10 @@ function FooterHeading({ children }: { children: ReactNode }) {
 
 function FooterLinks({ links }: { links: { href: string; label: string }[] }) {
   return (
-    <ul className="space-y-2.5 text-sm leading-snug text-stone-600">
+    <ul className="text-[14px] leading-[2.2] text-[#4B5563]">
       {links.map((link) => (
         <li key={link.href}>
-          <Link href={link.href} className="transition-colors duration-150 hover:text-stone-950">
+          <Link href={link.href} className="transition-colors duration-200 hover:text-[#1A1A1A]">
             {link.label}
           </Link>
         </li>
@@ -215,7 +215,7 @@ export default function Footer() {
             <p className="mt-3 max-w-xs text-sm leading-relaxed text-stone-500">
               {brandText.tagline}.
             </p>
-            <div className="mt-5 flex flex-wrap gap-2">
+            <div className="mt-5 flex flex-wrap gap-2.5">
               {socials.map(({ label, href, Icon }) => (
                 <a
                   key={label}
@@ -223,9 +223,9 @@ export default function Footer() {
                   target="_blank"
                   rel="noreferrer"
                   aria-label={label}
-                  className="inline-flex h-9 w-9 items-center justify-center rounded-full border border-stone-200 bg-white/70 text-stone-500 transition-colors duration-150 hover:border-stone-400 hover:text-stone-900"
+                  className="inline-flex h-9 w-9 items-center justify-center rounded-full border border-[#E5E0DC] bg-transparent text-[#1A1A1A] transition-colors duration-200 hover:bg-[#1A1A1A] hover:text-white"
                 >
-                  <Icon className="h-[17px] w-[17px]" />
+                  <Icon className="h-[15px] w-[15px]" />
                 </a>
               ))}
             </div>

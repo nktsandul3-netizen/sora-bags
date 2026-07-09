@@ -3,7 +3,7 @@ import Image from "next/image";
 import { products } from "@/lib/data";
 import { getInstagramPosts } from "@/lib/instagram";
 import InstagramFeed from "@/components/InstagramFeed";
-import ProductCard from "@/components/ProductCard";
+import CapsuleProductCard from "@/components/CapsuleProductCard";
 import HeroBannerSlider, { type HeroSlide } from "@/components/HeroBannerSlider";
 import StoreExclusiveServices from "@/components/stores/StoreExclusiveServices";
 import { getServerLocale, getServerT } from "@/lib/server-i18n";
@@ -59,8 +59,9 @@ function getHeroSlides(locale: Locale): HeroSlide[] {
   const venezia = veneziaBannerCopy[locale] ?? veneziaBannerCopy.ru;
   return [
     {
-      type: "video",
-      src: "/videos/home-banner-2.mp4",
+      type: "image",
+      src: "/hero-amalfi-beach-clean.jpg",
+      alt: "LUXURIARE AMALFI — плетёные сумки на побережье",
       caption: {
         eyebrow: amalfi.eyebrow,
         title: amalfi.title,
@@ -144,12 +145,12 @@ export default async function Home() {
         </div>
       </section>
 
-      {/* Подборка с баннером и товарами */}
+      {/* Капсула: лайфстайл + 4 товара */}
       <section className="bg-[#f7f5f0] px-4 pt-6 pb-10 sm:px-6 lg:px-10 lg:pt-8 lg:pb-14">
         <div className="grid gap-4 lg:grid-cols-[minmax(0,1.08fr)_minmax(0,1fr)] lg:gap-6">
           <Link
             href={withLocalePath("/product/womens-pebbled-leather-kiss-lock-pouch-bag-light-blue", locale)}
-            className="group relative min-h-[420px] overflow-hidden rounded-[28px] bg-stone-100 sm:min-h-[560px] lg:min-h-[760px]"
+            className="group relative aspect-[4/5] overflow-hidden bg-stone-100 lg:min-h-[760px] lg:aspect-auto"
           >
             <Image
               src="/banners/home-blue-edit-lifestyle-sharp-v2.png"
@@ -158,14 +159,24 @@ export default async function Home() {
               sizes="(min-width: 1024px) 52vw, 100vw"
               quality={100}
               unoptimized
-              className="object-cover object-center"
+              className="object-cover object-[42%_38%] transition-transform duration-700 ease-out group-hover:scale-[1.02]"
             />
           </Link>
 
-          <div className="grid grid-cols-2 gap-x-3 gap-y-8 sm:gap-x-5 sm:gap-y-10">
-            {blueEditProducts.map((product) => (
-              <ProductCard key={product.slug} product={product} />
-            ))}
+          <div className="flex flex-col">
+            <div className="grid grid-cols-2 gap-3 sm:gap-4">
+              {blueEditProducts.map((product) => (
+                <CapsuleProductCard key={product.slug} product={product} />
+              ))}
+            </div>
+            <div className="mt-6 flex justify-center lg:justify-end">
+              <Link
+                href={withLocalePath("/capsule/blue", locale)}
+                className="text-[12px] font-medium tracking-[0.04em] text-[#1A1A1A] underline-offset-4 transition hover:underline"
+              >
+                {t("home.capsuleShopLook")}
+              </Link>
+            </div>
           </div>
         </div>
       </section>

@@ -12,12 +12,6 @@ import { isHeroOverlayPath } from "@/lib/catalog-banner";
 import { locales, switchLocalePath, withLocalePath } from "@/lib/i18n";
 import { useLocale, useT } from "@/lib/useI18n";
 import { persistLocaleCookie } from "@/context/locale";
-const overlayTextShadow =
-  "[text-shadow:0_1px_3px_rgba(0,0,0,0.95),0_3px_16px_rgba(0,0,0,0.75),0_0_1px_rgba(255,255,255,0.65)]";
-const overlayLogoClass =
-  "text-white " + overlayTextShadow + " drop-shadow-[0_3px_18px_rgba(0,0,0,0.75)]";
-const overlayIconClass =
-  "text-white [filter:drop-shadow(0_1px_3px_rgba(0,0,0,0.95))_drop-shadow(0_3px_12px_rgba(0,0,0,0.75))_drop-shadow(0_0_1px_rgba(255,255,255,0.9))]";
 
 function BrandLogoLink({
   overlay,
@@ -29,34 +23,31 @@ function BrandLogoLink({
   const locale = useLocale();
   const nameClass =
     size === "desktop"
-      ? "font-serif text-[2.25rem] font-normal uppercase leading-none tracking-[0.48em] xl:text-[2.6rem] xl:tracking-[0.52em]"
-      : "font-serif text-[1.55rem] font-normal uppercase leading-none tracking-[0.26em] sm:text-[2rem] sm:tracking-[0.38em]";
-
-  const originClass =
-    "mt-1 inline-flex -translate-x-1.5 items-center gap-1.5 whitespace-nowrap text-[7px] font-medium uppercase tracking-[0.28em] sm:mt-1.5 sm:-translate-x-3 sm:gap-2 sm:text-[9px] sm:tracking-[0.36em] xl:mt-2 xl:-translate-x-4 xl:text-[9px] xl:tracking-[0.42em]";
+      ? "font-serif text-[32px] font-normal uppercase leading-none tracking-[0.2em]"
+      : "font-serif text-[1.55rem] font-normal uppercase leading-none tracking-[0.26em] sm:text-[2rem] sm:tracking-[0.2em]";
 
   return (
     <Link
       href={withLocalePath("/", locale)}
       className={
         "group flex flex-col items-center text-center transition-opacity hover:opacity-95 " +
-        (overlay ? overlayLogoClass : "text-stone-950")
+        (overlay ? "text-white" : "text-stone-950")
       }
     >
       <span className={nameClass}>{brand.name}</span>
       <span
         className={
-          originClass +
-          (overlay ? " text-white/90 " + overlayTextShadow : " text-stone-500 group-hover:text-stone-600")
+          "mt-1 inline-flex items-center gap-2 whitespace-nowrap text-[9px] font-medium uppercase tracking-[0.3em] " +
+          (overlay ? "text-white/80" : "text-stone-500 group-hover:text-stone-600")
         }
       >
         <span
-          className={"h-px w-3.5 " + (overlay ? "bg-white/45" : "bg-stone-400/70")}
+          className={"h-px w-4 " + (overlay ? "bg-white/40" : "bg-stone-400/70")}
           aria-hidden
         />
         {brand.madeIn}
         <span
-          className={"h-px w-3.5 " + (overlay ? "bg-white/45" : "bg-stone-400/70")}
+          className={"h-px w-4 " + (overlay ? "bg-white/40" : "bg-stone-400/70")}
           aria-hidden
         />
       </span>
@@ -71,14 +62,14 @@ function StoreLocatorLink({ overlay, compact = false }: { overlay: boolean; comp
     <Link
       href={withLocalePath("/info/nashi-magaziny", locale)}
       className={
-        "inline-flex items-center gap-2 px-1 py-1 text-[12px] font-semibold uppercase tracking-[0.08em] transition " +
+        "inline-flex items-center gap-2 px-1 py-1 text-[11px] font-medium uppercase tracking-[0.14em] transition " +
         (overlay
-          ? "text-white " + overlayTextShadow + " hover:text-white/75"
-          : "text-stone-950 hover:text-stone-500")
+          ? "text-white/85 hover:text-white"
+          : "text-[#111] opacity-85 hover:opacity-100")
       }
       aria-label={t("nav.stores")}
     >
-      <svg viewBox="0 0 24 24" className="h-5 w-5 shrink-0" fill="none" stroke="currentColor" strokeWidth="1.45" aria-hidden>
+      <svg viewBox="0 0 24 24" className="h-4 w-4 shrink-0" fill="none" stroke="currentColor" strokeWidth="1.25" aria-hidden>
         <path d="M12 21s7-5.15 7-11a7 7 0 1 0-14 0c0 5.85 7 11 7 11Z" />
         <circle cx="12" cy="10" r="2.35" />
       </svg>
@@ -92,32 +83,32 @@ export default function Header() {
   const t = useT();
   const { menuOpen, setMenuOpen } = useMenuOpen();
   const isHeroOverlay = isHeroOverlayPath(pathname);
-  const iconHoverClass = isHeroOverlay ? "hover:opacity-75" : "hover:opacity-60";
-  const iconToneClass = isHeroOverlay ? overlayIconClass : "text-stone-800";
+  const iconHoverClass = isHeroOverlay ? "hover:opacity-100" : "hover:opacity-60";
+  const iconToneClass = isHeroOverlay ? "text-white" : "text-stone-800";
 
   return (
     <header
       className={
         isHeroOverlay
-          ? "absolute left-0 right-0 top-0 z-50 bg-gradient-to-b from-black/60 via-black/35 to-black/0 pb-2 text-white"
+          ? "absolute left-0 right-0 top-0 z-50 text-white backdrop-blur-[2px] [background:rgba(255,255,255,0.06)]"
           : "relative z-50 border-b border-stone-200/80 bg-white text-stone-900"
       }
     >
       {/* Mobile */}
-      <div className={`mx-auto flex h-12 max-w-7xl items-center justify-between px-4 sm:h-14 sm:px-6 lg:hidden ${iconToneClass}`}>
+      <div className={`mx-auto flex h-14 max-w-7xl items-center justify-between px-4 sm:px-6 lg:hidden ${iconToneClass}`}>
         <div className="flex items-center gap-2">
           <button
             type="button"
             className={
               "-ml-1 inline-flex items-center gap-2.5 rounded-sm px-2.5 py-1.5 transition sm:px-3 sm:py-2 " +
               (isHeroOverlay
-                ? "text-white hover:opacity-75"
+                ? "text-white/90 hover:text-white"
                 : "text-stone-950 hover:opacity-60")
             }
             onClick={() => setMenuOpen(true)}
             aria-label={t("common.menu")}
           >
-            <svg viewBox="0 0 24 24" className="h-[18px] w-[18px]" fill="none" stroke="currentColor" strokeWidth="1.8">
+            <svg viewBox="0 0 24 24" className="h-5 w-5" fill="none" stroke="currentColor" strokeWidth="1.5">
               <path d="M4 7h16M4 12h16M4 17h16" strokeLinecap="round" />
             </svg>
           </button>
@@ -126,7 +117,7 @@ export default function Header() {
 
         <BrandLogoLink overlay={isHeroOverlay} size="mobile" />
 
-        <div className="flex shrink-0 items-center gap-0.5 sm:gap-1.5">
+        <div className="flex shrink-0 items-center gap-3">
           <ProfileMenu overlay={isHeroOverlay} iconOnly />
           <CartIcon hoverClassName={iconHoverClass} />
           <LanguageSwitcher overlay={isHeroOverlay} reversed />
@@ -134,36 +125,36 @@ export default function Header() {
       </div>
 
       {/* Desktop */}
-      <div className="relative mx-auto hidden max-w-7xl px-6 lg:block">
-        <div className="grid min-h-[92px] grid-cols-3 items-center">
-          <div className={`flex items-center justify-self-start ${iconToneClass}`}>
-            <StoreLocatorLink overlay={isHeroOverlay} />
-          </div>
+      <div className="relative mx-auto hidden h-20 max-w-7xl items-center justify-between px-8 lg:flex">
+        <div className={`flex translate-y-0.5 items-center ${iconToneClass}`}>
+          <StoreLocatorLink overlay={isHeroOverlay} />
+        </div>
 
+        <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2">
           <BrandLogoLink overlay={isHeroOverlay} size="desktop" />
+        </div>
 
-          <div className={`flex items-center gap-4 justify-self-end lg:gap-5 ${iconToneClass}`}>
-            <WishlistIcon hoverClassName={iconHoverClass} />
-            <ProfileMenu overlay={isHeroOverlay} iconOnly />
-            <CartIcon hoverClassName={iconHoverClass} />
-            <button
-              type="button"
-              onClick={() => setMenuOpen(true)}
-              aria-label={t("common.menu")}
-              className={
-                "inline-flex items-center gap-3 px-0 py-1 text-[13px] font-medium uppercase tracking-[0.2em] transition " +
-                (isHeroOverlay
-                  ? "text-white hover:text-white/75"
-                  : "text-stone-950 hover:text-stone-500")
-              }
-            >
-              <svg viewBox="0 0 24 24" className="h-7 w-7" fill="none" stroke="currentColor" strokeWidth="1.7">
-                <path d="M4 7h16M4 12h16M4 17h16" strokeLinecap="round" />
-              </svg>
-              {t("common.menu")}
-            </button>
-            <LanguageSwitcher overlay={isHeroOverlay} reversed />
-          </div>
+        <div className={`flex items-center gap-5 ${isHeroOverlay ? "text-white" : "text-[#111]"}`}>
+          <WishlistIcon hoverClassName={iconHoverClass} />
+          <ProfileMenu overlay={isHeroOverlay} iconOnly />
+          <CartIcon hoverClassName={iconHoverClass} />
+          <button
+            type="button"
+            onClick={() => setMenuOpen(true)}
+            aria-label={t("common.menu")}
+            className={
+              "inline-flex h-5 items-center gap-2 px-0 text-[11px] font-medium uppercase tracking-[0.14em] transition " +
+              (isHeroOverlay
+                ? "text-white/85 hover:text-white"
+                : "text-[#111] opacity-85 hover:opacity-100")
+            }
+          >
+            <svg viewBox="0 0 24 24" className="h-5 w-5" fill="none" stroke="currentColor" strokeWidth="1.25">
+              <path d="M4 7h16M4 12h16M4 17h16" strokeLinecap="round" />
+            </svg>
+            {t("common.menu")}
+          </button>
+          <LanguageSwitcher overlay={isHeroOverlay} reversed />
         </div>
       </div>
 
@@ -174,7 +165,7 @@ export default function Header() {
 
 function HeaderIcon({ children }: { children: React.ReactNode }) {
   return (
-    <svg viewBox="0 0 24 24" className="h-7 w-7 origin-center scale-x-[1.08]" fill="none" stroke="currentColor" strokeWidth="1.35" aria-hidden>
+    <svg viewBox="0 0 24 24" className="h-5 w-5" fill="none" stroke="currentColor" strokeWidth="1.25" aria-hidden>
       {children}
     </svg>
   );
@@ -203,7 +194,7 @@ function HandbagIcon() {
 }
 
 function WishlistIcon({
-  hoverClassName = "hover:bg-stone-100",
+  hoverClassName = "hover:opacity-60",
 }: {
   hoverClassName?: string;
 }) {
@@ -214,11 +205,11 @@ function WishlistIcon({
     <Link
       href={withLocalePath("/wishlist", locale)}
       aria-label={t("common.wishlist")}
-      className={`relative inline-flex h-9 w-9 items-center justify-center transition ${hoverClassName} ${count > 0 ? "text-[#C96A1A]" : ""}`}
+      className={`relative inline-flex h-5 w-5 shrink-0 items-center justify-center text-current transition ${hoverClassName}`}
     >
       <HeartIcon />
       {count > 0 && (
-        <span className="absolute -right-0.5 -top-0.5 flex h-[16px] min-w-[16px] items-center justify-center rounded-full bg-[#C96A1A] px-1 text-[9px] font-semibold leading-none text-white">
+        <span className="pointer-events-none absolute -right-1.5 -top-1.5 flex h-[18px] w-[18px] items-center justify-center rounded-full bg-[#C08A4A] text-[11px] font-medium leading-none text-white">
           {count > 9 ? "9+" : count}
         </span>
       )}
@@ -226,7 +217,7 @@ function WishlistIcon({
   );
 }
 
-function CartIcon({ hoverClassName = "hover:bg-stone-100" }: { hoverClassName?: string }) {
+function CartIcon({ hoverClassName = "hover:opacity-60" }: { hoverClassName?: string }) {
   const { count, openCart } = useCart();
   const t = useT();
   return (
@@ -234,13 +225,11 @@ function CartIcon({ hoverClassName = "hover:bg-stone-100" }: { hoverClassName?: 
       type="button"
       onClick={openCart}
       aria-label={t("common.cart")}
-      className={`relative inline-flex h-9 w-9 items-center justify-center transition ${hoverClassName} ${count > 0 ? "text-[#C96A1A]" : ""}`}
+      className={`relative inline-flex h-5 w-5 shrink-0 items-center justify-center text-current transition ${hoverClassName}`}
     >
       <HandbagIcon />
       {count > 0 && (
-        <span
-          className="absolute -right-0.5 -top-0.5 flex h-[18px] min-w-[18px] items-center justify-center rounded-full bg-[#C96A1A] px-1 text-[10px] font-semibold leading-none text-white"
-        >
+        <span className="pointer-events-none absolute -right-1.5 -top-1.5 flex h-[18px] w-[18px] items-center justify-center rounded-full bg-[#C08A4A] text-[11px] font-medium leading-none text-white">
           {count > 9 ? "9+" : count}
         </span>
       )}
@@ -274,32 +263,45 @@ function LanguageSwitcher({ overlay = false, reversed = false }: { overlay?: boo
   const languageOptions = reversed ? [...locales].reverse() : locales;
 
   return (
-    <div className="inline-flex shrink-0 flex-row items-center gap-1 text-[10px] font-semibold uppercase tracking-[0.1em] sm:gap-1.5 sm:text-[11px]">
-      {languageOptions.map((item) => (
-        <Link
-          key={item}
-          href={switchLocalePath(pathname, item) + suffix}
-          onClick={(e) => {
-            const live = window.location.search + window.location.hash;
-            e.preventDefault();
-            persistLocaleCookie(item);
-            // Browser URL still has /en|/ru|/ro; usePathname() may be the rewritten path without it.
-            router.push(switchLocalePath(window.location.pathname, item) + live);
-            router.refresh();
-          }}
-          className={
-            "rounded-full px-0.5 py-0.5 transition " +
-            (item === locale
-              ? overlay
-                ? "text-white"
-                : "text-stone-950"
-              : overlay
-                ? "text-white/60 hover:text-white/90"
-                : "text-stone-400 hover:text-stone-700")
-          }
-        >
-          {item}
-        </Link>
+    <div
+      className={
+        "inline-flex shrink-0 flex-row items-center text-[11px] uppercase tracking-[0.06em] " +
+        (overlay
+          ? "ml-6 border-l border-white/20 pl-6"
+          : "gap-1.5")
+      }
+    >
+      {languageOptions.map((item, index) => (
+        <span key={item} className="inline-flex items-center">
+          {overlay && index > 0 ? (
+            <span className="mx-1.5 text-white/40" aria-hidden>
+              ·
+            </span>
+          ) : null}
+          <Link
+            href={switchLocalePath(pathname, item) + suffix}
+            onClick={(e) => {
+              const live = window.location.search + window.location.hash;
+              e.preventDefault();
+              persistLocaleCookie(item);
+              // Browser URL still has /en|/ru|/ro; usePathname() may be the rewritten path without it.
+              router.push(switchLocalePath(window.location.pathname, item) + live);
+              router.refresh();
+            }}
+            className={
+              "uppercase transition " +
+              (item === locale
+                ? overlay
+                  ? "font-medium text-white opacity-100"
+                  : "font-medium text-[#111] opacity-100"
+                : overlay
+                  ? "text-white opacity-40 hover:opacity-100"
+                  : "text-[#111] opacity-40 hover:opacity-80")
+            }
+          >
+            {item}
+          </Link>
+        </span>
       ))}
     </div>
   );

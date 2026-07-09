@@ -71,45 +71,35 @@ export default function AccountDashboard({
       transition={{ staggerChildren: 0.08 }}
       className="mx-auto max-w-7xl px-4 py-10 sm:px-6 lg:py-14"
     >
-      <motion.section
-        variants={fadeUp}
-        className="relative overflow-hidden rounded-[24px] border border-[#e8e2dc] px-6 py-8 shadow-[0_24px_70px_rgba(41,31,23,0.06)] sm:px-10 sm:py-11 lg:px-14"
-        style={{
-          background:
-            "linear-gradient(135deg, rgba(249,246,241,0.98), rgba(238,229,218,0.86)), radial-gradient(circle at 88% 18%, rgba(138,98,72,0.14), transparent 32%)",
-        }}
-      >
-        <div
-          aria-hidden="true"
-          className="pointer-events-none absolute inset-0 opacity-[0.05]"
-          style={{
-            backgroundImage:
-              "repeating-linear-gradient(45deg, #5f4636 0 1px, transparent 1px 9px), repeating-linear-gradient(-45deg, #5f4636 0 1px, transparent 1px 11px)",
-          }}
-        />
-        <div className="relative flex flex-col gap-8 lg:flex-row lg:items-center lg:justify-between">
-          <div className="max-w-2xl">
-            <p className="text-[11px] font-semibold uppercase tracking-[0.28em] text-stone-500">
-              {t("account.privateAccount")}
-            </p>
-            <h1 className="mt-5 font-serif text-[2.35rem] leading-[0.98] text-stone-950 sm:text-5xl lg:text-6xl">
-              {t("account.hello")}, {firstName}
-            </h1>
-            <p className="mt-5 max-w-xl text-[15px] leading-7 text-stone-600 sm:text-base">
-              {t("account.welcome")}
-            </p>
+      {activeTab === "console" && (
+        <motion.section
+          variants={fadeUp}
+          className="relative overflow-hidden rounded-[24px] bg-[#F9F3EC] px-6 py-8 sm:px-10 sm:py-11 lg:px-14"
+        >
+          <div className="relative flex flex-col gap-8 lg:flex-row lg:items-center lg:justify-between">
+            <div className="max-w-2xl">
+              <p className="text-[11px] font-semibold uppercase tracking-[0.28em] text-stone-500">
+                {t("account.privateAccount")}
+              </p>
+              <h1 className="mt-5 font-serif text-[2.35rem] leading-[0.98] text-stone-950 sm:text-5xl lg:text-6xl">
+                {t("account.hello")}, {firstName}
+              </h1>
+              <p className="mt-5 max-w-xl text-[15px] leading-7 text-stone-600 sm:text-base">
+                {t("account.welcome")}
+              </p>
+            </div>
+            <Link
+              href={withLocalePath("/bags", locale)}
+              className="group inline-flex w-fit items-center justify-center rounded-full bg-stone-950 px-7 py-3.5 text-[12px] font-semibold uppercase tracking-[0.18em] text-white shadow-[0_8px_20px_rgba(0,0,0,0.12)] transition duration-300 hover:-translate-y-0.5 hover:bg-[#2b221b] focus:outline-none focus-visible:outline-none focus-visible:ring-0"
+            >
+              {t("account.continueShopping")}
+              <span className="ml-3 transition-transform duration-300 group-hover:translate-x-1">→</span>
+            </Link>
           </div>
-          <Link
-            href={withLocalePath("/bags", locale)}
-            className="group inline-flex w-fit items-center justify-center rounded-full bg-stone-950 px-7 py-3.5 text-[12px] font-semibold uppercase tracking-[0.18em] text-white shadow-[0_14px_30px_rgba(28,25,23,0.16)] transition duration-300 hover:-translate-y-0.5 hover:bg-[#2b221b] focus:outline-none focus:ring-2 focus:ring-stone-950 focus:ring-offset-2"
-          >
-            {t("account.continueShopping")}
-            <span className="ml-3 transition-transform duration-300 group-hover:translate-x-1">→</span>
-          </Link>
-        </div>
-      </motion.section>
+        </motion.section>
+      )}
 
-      <div className="mt-8 lg:hidden">
+      <div className={(activeTab === "console" ? "mt-8 " : "") + "lg:hidden"}>
         <details className="group rounded-[22px] border border-[#e8e8e8] bg-white shadow-[0_18px_45px_rgba(41,31,23,0.05)]">
           <summary className="flex cursor-pointer list-none items-center justify-between px-5 py-4 text-sm font-medium text-stone-900">
             <span>{activeTabLabel}</span>
@@ -130,7 +120,7 @@ export default function AccountDashboard({
         >
           <div className="border-b border-stone-100 px-4 py-4">
             <p className="text-[11px] uppercase tracking-[0.24em] text-stone-400">{t("common.profile")}</p>
-            <p className="mt-2 truncate text-sm text-stone-700">{profile.email}</p>
+            <p className="mt-2 text-sm text-stone-600">{t("account.manageAccount")}</p>
           </div>
           <AccountNavigation activeTab={activeTab} onNavigate={selectTab} className="mt-3" />
         </motion.aside>
@@ -174,7 +164,7 @@ function AccountNavigation({
   const t = useT();
   const locale = useLocale();
   return (
-    <nav className={"space-y-1 " + className} aria-label={t("common.profile")}>
+    <nav className={"space-y-4 " + className} aria-label={t("common.profile")}>
       {ACCOUNT_TABS.map((item) => {
         const active = activeTab === item.id;
         return (
@@ -185,7 +175,7 @@ function AccountNavigation({
             className={
               "group flex w-full items-center gap-3 rounded-2xl px-4 py-3 text-left text-sm transition duration-300 focus:outline-none focus:ring-2 focus:ring-[#8A6248]/25 " +
               (active
-                ? "bg-[#f7f1eb] text-stone-950"
+                ? "bg-[#F9F3EC] text-stone-950"
                 : "text-stone-500 hover:bg-stone-50 hover:text-stone-950")
             }
           >
@@ -321,7 +311,7 @@ function RecommendationsSection({ orders }: { orders: OrderView[] }) {
     [orders],
   );
   return (
-    <section className="rounded-[24px] border border-[#e8e8e8] bg-[#fbfaf8] p-5 sm:p-7 lg:p-8">
+    <section className="rounded-[24px] bg-[#FBF8F6] p-5 sm:p-7 lg:p-8">
       <div className="mb-6 flex items-end justify-between gap-4">
         <div>
           <p className="text-[11px] font-semibold uppercase tracking-[0.24em] text-stone-400">{t("account.recommendations")}</p>
@@ -345,36 +335,33 @@ function RecommendationsSection({ orders }: { orders: OrderView[] }) {
 function RecommendationCard({ product }: { product: Product }) {
   const image = getProductImage(product);
   const locale = useLocale();
-  const t = useT();
   const localizedTitle = localizeProductTitle(product, locale);
+  const modelName = localizedTitle.split(/\s*[—–-]\s*/)[0]?.trim() || localizedTitle;
   return (
     <motion.article
       whileHover={{ y: -5 }}
       transition={{ duration: 0.28, ease: "easeOut" }}
-      className="group overflow-hidden rounded-[20px] border border-[#e8e8e8] bg-white shadow-[0_16px_38px_rgba(41,31,23,0.04)]"
+      className="group overflow-hidden rounded-[20px] bg-white"
     >
-      <Link href={withLocalePath(`/product/${product.slug}`, locale)} className="block">
-        <div className="relative aspect-[4/5] overflow-hidden bg-[#f4f0eb]">
+      <Link href={withLocalePath(`/product/${product.slug}`, locale)} className="flex h-full flex-col">
+        <div className="relative aspect-square overflow-hidden bg-white">
           {image ? (
             <Image
               src={image.src}
               alt={image.alt || localizedTitle}
               fill
               sizes="(min-width: 1280px) 220px, (min-width: 640px) 45vw, 90vw"
-              className="object-contain object-center p-5 transition-transform duration-700 ease-out group-hover:scale-[1.055]"
+              className="object-contain object-center transition-transform duration-700 ease-out group-hover:scale-[1.04]"
             />
           ) : (
-            <div className="absolute inset-0 bg-gradient-to-br from-stone-100 to-stone-200" />
+            <div className="absolute inset-0 bg-stone-50" />
           )}
-          <span className="absolute bottom-4 left-1/2 -translate-x-1/2 translate-y-2 rounded-full bg-white/95 px-5 py-2 text-[10px] font-semibold uppercase tracking-[0.18em] text-stone-900 opacity-0 shadow-sm backdrop-blur-sm transition-all duration-300 group-hover:translate-y-0 group-hover:opacity-100">
-            {t("common.view")}
-          </span>
         </div>
-        <div className="p-4">
-          <h3 className="line-clamp-2 text-sm leading-snug text-stone-800 transition-colors group-hover:text-stone-950">
-            {localizedTitle}
+        <div className="flex flex-1 flex-col px-4 pb-4 pt-3">
+          <h3 className="h-5 truncate text-[15px] font-medium leading-5 text-[#111] transition-colors group-hover:text-stone-950">
+            {modelName}
           </h3>
-          <p className="mt-2 text-sm font-medium tracking-wide text-stone-950">
+          <p className="mt-1.5 text-[13px] font-normal leading-5 text-[#111] opacity-50">
             {formatPrice(product.price, locale)}
           </p>
         </div>
@@ -393,14 +380,14 @@ function BrandBenefitsSection() {
   return (
     <section className="rounded-[24px] border border-[#e8e8e8] bg-white p-6 shadow-[0_18px_45px_rgba(41,31,23,0.04)] sm:p-8">
       <h2 className="font-serif text-3xl text-stone-950">{t("account.benefits")}</h2>
-      <div className="mt-6 grid gap-3 sm:grid-cols-2 xl:grid-cols-4">
+      <div className="-mx-1 mt-6 flex flex-nowrap gap-3 overflow-x-auto px-1 pb-1 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
         {benefits.map((benefit) => (
           <motion.div
             key={benefit}
-            whileHover={{ y: -3 }}
-            className="flex items-center gap-3 rounded-2xl border border-stone-100 bg-[#fbfaf8] px-4 py-4 text-sm text-stone-700"
+            whileHover={{ y: -2 }}
+            className="flex shrink-0 items-center gap-2.5 whitespace-nowrap rounded-full border border-stone-100 bg-[#fbfaf8] px-4 py-2.5 text-sm text-stone-700"
           >
-            <span className="inline-flex h-7 w-7 items-center justify-center rounded-full bg-[#f1e8df] text-[#8A6248]">
+            <span className="inline-flex h-6 w-6 items-center justify-center rounded-full bg-[#f1e8df] text-[11px] text-[#8A6248]">
               ✓
             </span>
             <span className="font-medium">{benefit}</span>
@@ -424,7 +411,7 @@ function SectionShell({
     <section className="rounded-[24px] border border-[#e8e8e8] bg-white p-5 shadow-[0_20px_60px_rgba(41,31,23,0.045)] sm:p-8">
       <p className="text-[11px] font-semibold uppercase tracking-[0.24em] text-stone-400">{eyebrow}</p>
       <h2 className="mt-2 font-serif text-3xl text-stone-950 sm:text-4xl">{title}</h2>
-      <div className="mt-7">{children}</div>
+      <div className="mt-8">{children}</div>
     </section>
   );
 }
@@ -460,17 +447,17 @@ function OrdersSection({ orders }: { orders: OrderView[] }) {
   }
 
   return (
-    <div className="space-y-4">
+    <div className="space-y-5">
       {orders.map((order) => (
         <motion.div
           key={order.id}
           whileHover={{ y: -2 }}
-          className="rounded-[20px] border border-[#e8e8e8] bg-[#fdfcfb] p-5 transition-shadow hover:shadow-[0_14px_36px_rgba(41,31,23,0.055)]"
+          className="rounded-[20px] bg-white p-5 shadow-[0_1px_3px_rgba(0,0,0,0.04),0_8px_24px_rgba(0,0,0,0.03)] transition-shadow hover:shadow-[0_2px_6px_rgba(0,0,0,0.05),0_12px_28px_rgba(0,0,0,0.04)]"
         >
-          <div className="flex flex-wrap items-center justify-between gap-2">
-            <div>
-              <p className="text-sm font-semibold text-stone-950">№ {order.number}</p>
-              <p className="text-xs text-stone-400">
+          <div className="flex flex-wrap items-center justify-between gap-x-4 gap-y-2">
+            <div className="flex min-w-0 flex-wrap items-baseline gap-x-3 gap-y-1">
+              <p className="text-[14px] font-medium leading-5 text-[#111]">№ {order.number}</p>
+              <p className="text-[12px] font-normal leading-5 text-[#111] opacity-45">
                 {new Date(order.createdAt).toLocaleDateString(locale === "ru" ? "ru-RU" : locale === "ro" ? "ro-RO" : "en-US", {
                   day: "numeric",
                   month: "long",
@@ -478,31 +465,35 @@ function OrdersSection({ orders }: { orders: OrderView[] }) {
                 })}
               </p>
             </div>
-            <span className="rounded-full bg-stone-100 px-3 py-1 text-xs font-medium text-stone-600">
+            <span className="rounded-full bg-[#F5F3F0] px-3 py-1 text-xs font-medium text-stone-600">
               {customerOrderStatusLabel(order.status, t)}
             </span>
           </div>
 
-          <ul className="mt-4 divide-y divide-stone-100 border-t border-stone-100">
+          <ul className="mt-4 border-t border-black/[0.06] pt-1">
             {order.items.map((it, i) => (
               <li
                 key={`${order.id}-${i}`}
-                className="flex justify-between gap-3 py-2.5 text-sm"
+                className="flex items-baseline py-3"
               >
-                <span className="text-stone-700">
+                <span className="min-w-0 flex-1 pr-6 text-[15px] font-normal leading-5 text-[#111]">
                   {it.title}
-                  <span className="text-stone-400"> · {it.color} · {it.qty} {t("account.units")}</span>
+                  <span className="text-[#111] opacity-45"> · {it.color} · {it.qty} {t("account.units")}</span>
                 </span>
-                <span className="shrink-0 text-stone-900">
+                <span className="w-[110px] shrink-0 text-right text-[15px] font-normal leading-5 text-[#111] tabular-nums">
                   {formatPrice(it.price * it.qty, locale)}
                 </span>
               </li>
             ))}
           </ul>
 
-          <div className="mt-3 flex justify-between border-t border-stone-100 pt-3 text-sm font-semibold">
-            <span className="text-stone-700">{t("account.total")}</span>
-            <span className="text-stone-950">{formatPrice(order.total, locale)}</span>
+          <div className="flex items-baseline border-t border-black/[0.06] pt-4">
+            <span className="min-w-0 flex-1 pr-6 text-[11px] font-medium uppercase tracking-[0.12em] text-[#111] opacity-40">
+              {t("account.total")}
+            </span>
+            <span className="w-[110px] shrink-0 text-right text-[15px] font-medium leading-5 text-[#111] tabular-nums">
+              {formatPrice(order.total, locale)}
+            </span>
           </div>
         </motion.div>
       ))}
@@ -546,35 +537,37 @@ function AddressesSection({ addresses }: { addresses: AddressView[] }) {
     "w-full rounded-2xl border border-[#e8e8e8] bg-white px-4 py-3 text-sm outline-none transition focus:border-[#8A6248] focus:ring-2 focus:ring-[#8A6248]/10";
 
   return (
-    <div className="space-y-5">
+    <div>
       {addresses.length > 0 && (
         <div className="grid gap-4 sm:grid-cols-2">
           {addresses.map((a) => (
             <motion.div
               key={a.id}
               whileHover={{ y: -3 }}
-              className="relative rounded-[20px] border border-[#e8e8e8] bg-[#fdfcfb] p-5"
+              className="relative rounded-[20px] bg-white p-6 shadow-[0_1px_3px_rgba(0,0,0,0.04),0_8px_24px_rgba(0,0,0,0.03)]"
             >
               {a.isDefault && (
-                <span className="absolute right-4 top-4 rounded-full bg-stone-900 px-2.5 py-1 text-[11px] font-medium text-white">
+                <span className="absolute right-4 top-4 inline-flex h-[26px] items-center rounded-full bg-[#F2EDE8] px-3 text-[10px] font-medium uppercase tracking-[0.08em] text-[#8C7A65]">
                   {t("account.defaultAddress")}
                 </span>
               )}
-              <p className="text-sm font-semibold text-stone-950">{getAddressLabelDisplay(a.label, locale)}</p>
-              <p className="mt-2 text-sm text-stone-600">{a.recipient}</p>
-              <p className="text-sm text-stone-600">{a.phone}</p>
-              <p className="text-sm text-stone-600">
-                {a.city}, {a.street}
+              <p className={"text-[16px] font-medium leading-6 text-[#111] " + (a.isDefault ? "pr-24" : "")}>
+                {getAddressLabelDisplay(a.label, locale)}
               </p>
-              {a.comment && (
-                <p className="mt-1 text-xs text-stone-400">{a.comment}</p>
-              )}
-              <div className="mt-4 flex gap-3 text-xs">
+              <div className="mt-3 space-y-0.5 text-[14px] font-normal leading-[22px] text-[#111] opacity-70">
+                <p>{a.recipient}</p>
+                <p>{a.phone}</p>
+                <p>
+                  {a.city}, {a.street}
+                </p>
+                {a.comment ? <p className="opacity-80">{a.comment}</p> : null}
+              </div>
+              <div className="mt-5 flex gap-4">
                 {!a.isDefault && (
                   <button
                     disabled={pending}
                     onClick={() => runAction(() => setDefaultAddress(a.id))}
-                    className="font-medium text-stone-700 underline-offset-2 hover:underline disabled:opacity-50"
+                    className="text-[13px] font-medium text-black/35 transition hover:text-black/65 disabled:opacity-40"
                   >
                     {t("account.makeDefault")}
                   </button>
@@ -582,7 +575,7 @@ function AddressesSection({ addresses }: { addresses: AddressView[] }) {
                 <button
                   disabled={pending}
                   onClick={() => runAction(() => deleteAddress(a.id))}
-                  className="text-stone-400 underline-offset-2 hover:text-red-600 hover:underline disabled:opacity-50"
+                  className="text-[13px] font-normal text-black/35 transition hover:text-black/65 disabled:opacity-30"
                 >
                   {t("common.delete")}
                 </button>
@@ -593,11 +586,11 @@ function AddressesSection({ addresses }: { addresses: AddressView[] }) {
       )}
 
       {error && (
-        <p className="rounded-lg bg-red-50 px-3 py-2 text-xs text-red-700">{error}</p>
+        <p className="mt-5 rounded-lg bg-red-50 px-3 py-2 text-xs text-red-700">{error}</p>
       )}
 
       {showForm ? (
-        <div className="rounded-[20px] border border-[#e8e8e8] bg-[#fdfcfb] p-5">
+        <div className="mt-6 rounded-[20px] border border-[#e8e8e8] bg-[#fdfcfb] p-5">
           <h3 className="mb-4 font-serif text-2xl text-stone-950">{t("account.newAddress")}</h3>
           <div className="grid gap-3 sm:grid-cols-2">
             <label className="space-y-1.5">
@@ -747,7 +740,7 @@ function AddressesSection({ addresses }: { addresses: AddressView[] }) {
       ) : (
         <button
           onClick={() => setShowForm(true)}
-          className="rounded-full border border-[#d8d0c8] px-5 py-3 text-sm font-medium text-stone-700 transition hover:border-stone-900 hover:bg-stone-50"
+          className="mt-6 inline-flex h-11 items-center justify-center rounded-[24px] border border-[#EDE9E5] bg-white px-5 text-[14px] font-medium text-[#111] transition hover:bg-[#FBF7F4]"
         >
           {t("account.addAddress")}
         </button>
@@ -797,7 +790,7 @@ function ProfileSection({ profile }: { profile: ProfileView }) {
   const [saved, setSaved] = useState(false);
 
   const fieldClass =
-    "w-full rounded-2xl border border-[#e8e8e8] bg-white px-4 py-3 text-sm outline-none transition focus:border-[#8A6248] focus:ring-2 focus:ring-[#8A6248]/10";
+    "h-12 w-full rounded-[24px] border border-[#EDE9E5] bg-white px-[18px] text-[15px] text-[#111] outline-none transition focus:border-[#D8CEC6] focus:outline-none focus:ring-0 disabled:bg-[#FBF8F6] disabled:text-[#111]/50";
 
   function save() {
     setError(null);
@@ -814,9 +807,11 @@ function ProfileSection({ profile }: { profile: ProfileView }) {
   }
 
   return (
-    <div className="max-w-lg space-y-5">
+    <div className="max-w-lg">
       <div>
-        <label className="mb-2 block text-xs font-medium uppercase tracking-[0.18em] text-stone-400">{t("account.name")}</label>
+        <label className="mb-2 block text-[10px] font-medium uppercase tracking-[0.12em] text-[#111] opacity-45">
+          {t("account.name")}
+        </label>
         <input
           value={name}
           onChange={(e) => {
@@ -826,18 +821,18 @@ function ProfileSection({ profile }: { profile: ProfileView }) {
           className={fieldClass}
         />
       </div>
-      <div>
-        <label className="mb-2 block text-xs font-medium uppercase tracking-[0.18em] text-stone-400">
+      <div className="mt-5">
+        <label className="mb-2 block text-[10px] font-medium uppercase tracking-[0.12em] text-[#111] opacity-45">
           E-mail
         </label>
-        <input value={profile.email} disabled className={fieldClass + " bg-stone-50 text-stone-400"} />
+        <input value={profile.email} disabled className={fieldClass} />
       </div>
 
       {error && (
-        <p className="rounded-lg bg-red-50 px-3 py-2 text-xs text-red-700">{error}</p>
+        <p className="mt-5 rounded-lg bg-red-50 px-3 py-2 text-xs text-red-700">{error}</p>
       )}
       {saved && (
-        <p className="rounded-lg bg-green-50 px-3 py-2 text-xs text-green-700">
+        <p className="mt-5 rounded-lg bg-green-50 px-3 py-2 text-xs text-green-700">
           {t("account.saved")}
         </p>
       )}
@@ -845,7 +840,7 @@ function ProfileSection({ profile }: { profile: ProfileView }) {
       <button
         disabled={pending || name.trim() === profile.name}
         onClick={save}
-        className="rounded-full bg-stone-950 px-7 py-3 text-sm font-semibold text-white transition hover:bg-[#2b221b] disabled:opacity-60"
+        className="mt-6 inline-flex h-11 items-center justify-center rounded-full bg-[#2A2A2A] px-7 text-[14px] font-medium text-white transition hover:bg-[#1A1A1A] disabled:opacity-60"
       >
         {pending ? t("account.saving") : t("common.save")}
       </button>
@@ -863,11 +858,13 @@ function EmptyState({
   ctaLabel: string;
 }) {
   return (
-    <div className="rounded-[20px] border border-dashed border-[#ddd4cc] bg-[#fbfaf8] px-5 py-16 text-center">
-      <p className="text-stone-500">{text}</p>
+    <div className="rounded-[20px] bg-[#FBF8F6] px-5 py-16 text-center">
+      <p className="mx-auto max-w-md text-[15px] font-normal leading-relaxed text-[#111] opacity-60">
+        {text}
+      </p>
       <Link
         href={ctaHref}
-        className="mt-6 inline-block rounded-full bg-stone-950 px-7 py-3 text-sm font-semibold text-white transition hover:bg-[#2b221b]"
+        className="mt-6 inline-flex h-11 items-center justify-center rounded-full bg-stone-950 px-6 text-[13px] font-medium tracking-[0.04em] text-white transition hover:bg-[#2b221b]"
       >
         {ctaLabel}
       </Link>

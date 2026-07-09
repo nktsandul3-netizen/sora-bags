@@ -30,7 +30,7 @@ function CartLineImage({ slug, colorName, title }: { slug: string; colorName: st
       src={image?.src}
       alt={image?.alt ?? title}
       sizes="80px"
-      className="h-24 w-20 rounded-[1.2rem] bg-[#f7f3ee] shadow-sm"
+      className="h-20 w-20 rounded-xl bg-[#F9F6F3]"
       imageClassName="object-contain object-center"
     />
   );
@@ -43,26 +43,30 @@ function RecommendationCard({ product, locale }: { product: Product; locale: Loc
   return (
     <Link
       href={withLocalePath(`/product/${product.slug}`, locale)}
-      className="group flex gap-3 rounded-2xl border border-white/70 bg-white/80 p-2.5 shadow-sm shadow-stone-200/50 transition duration-300 hover:bg-white"
+      className="group flex gap-3 !bg-transparent p-0 shadow-none ring-0"
       aria-label={localizedTitle}
+      style={{ background: "transparent", boxShadow: "none" }}
     >
-      <div className="relative h-16 w-14 shrink-0 overflow-hidden rounded-xl bg-[#f8f4ee]">
+      <div
+        className="relative h-[72px] w-[72px] shrink-0 overflow-hidden rounded-xl"
+        style={{ backgroundColor: "#FFFFFF" }}
+      >
         {image ? (
           <Image
             src={image.src}
             alt={image.alt || localizedTitle}
             fill
-            sizes="56px"
-            className="object-contain object-center p-1.5 transition-transform duration-500 group-hover:scale-105"
+            sizes="72px"
+            className="object-contain object-center transition-transform duration-500 group-hover:scale-105"
           />
         ) : null}
       </div>
-      <div className="min-w-0 flex-1">
-        <p className="truncate text-[9px] font-semibold uppercase tracking-[0.14em] text-stone-400">
+      <div className="min-w-0 flex-1 self-center bg-transparent">
+        <p className="truncate text-[10px] font-medium uppercase tracking-[0.14em] text-[#1A1A1A] opacity-50">
           {getBrandName(product.brandSlug)}
         </p>
-        <p className="mt-0.5 line-clamp-2 text-xs leading-snug text-stone-900">{localizedTitle}</p>
-        <p className="mt-1 text-[11px] font-semibold text-stone-950">{formatPrice(product.price, locale)}</p>
+        <p className="mt-1 line-clamp-2 text-[13px] leading-snug text-[#1A1A1A]">{localizedTitle}</p>
+        <p className="mt-1.5 text-[13px] font-bold text-[#1A1A1A]">{formatPrice(product.price, locale)}</p>
       </div>
     </Link>
   );
@@ -112,6 +116,12 @@ export default function CartDrawer() {
     () => getCartRecommendations(items.map((item) => item.slug), 3),
     [items],
   );
+  const cartDeliveryNote = useMemo(() => {
+    const first = items[0];
+    if (!first) return null;
+    const product = getProduct(first.slug);
+    return product ? getDeliveryInfo(product, locale).leadTime : null;
+  }, [items, locale]);
 
   useEffect(() => {
     if (!isOpen) return;
@@ -147,14 +157,14 @@ export default function CartDrawer() {
             onClick={(event) => event.stopPropagation()}
             aria-label={t("common.cart")}
           >
-            <div className="hidden w-[34%] shrink-0 flex-col border-r border-stone-200/80 bg-[#f4eee6] p-5 lg:flex">
-              <p className="text-[10px] font-semibold uppercase tracking-[0.22em] text-stone-500">
-                SORA Atelier
+            <div className="hidden w-[34%] shrink-0 flex-col border-r border-[#F0EDEA] bg-[#F9F6F3] p-8 lg:flex">
+              <p className="text-[10px] font-medium uppercase tracking-[0.22em] text-[#1A1A1A] opacity-50">
+                SÓRA Atelier
               </p>
-              <h2 className="mt-2 text-lg font-semibold uppercase leading-tight tracking-[0.08em] text-stone-950">
+              <h2 className="mt-2 text-lg font-semibold uppercase leading-tight tracking-[0.08em] text-[#1A1A1A]">
                 {t("cart.recommendation")}
               </h2>
-              <div className="mt-5 space-y-2.5">
+              <div className="mt-6 flex flex-col gap-5">
                 {recommendations.map((product) => (
                   <RecommendationCard key={product.slug} product={product} locale={locale} />
                 ))}
@@ -181,9 +191,9 @@ export default function CartDrawer() {
                     type="button"
                     onClick={closeCart}
                     aria-label={t("cart.closeCart")}
-                    className="-mr-2 -mt-2 flex h-11 w-11 items-center justify-center rounded-full text-stone-900 transition hover:bg-stone-100"
+                    className="-mr-1 -mt-1 flex h-11 w-11 items-center justify-center text-stone-900 transition hover:opacity-70"
                   >
-                    <svg viewBox="0 0 24 24" className="h-7 w-7" fill="none" stroke="currentColor" strokeWidth="1.4" aria-hidden>
+                    <svg viewBox="0 0 24 24" className="h-5 w-5" fill="none" stroke="currentColor" strokeWidth="1.5" aria-hidden>
                       <path d="M5 5l14 14M19 5 5 19" strokeLinecap="round" />
                     </svg>
                   </button>
@@ -191,12 +201,19 @@ export default function CartDrawer() {
               </header>
 
               {items.length === 0 ? (
-                <div className="flex flex-1 flex-col items-center justify-center px-6 text-center">
-                  <p className="font-serif text-3xl text-stone-950">{t("checkout.emptyCart")}</p>
+                <div className="mt-0 flex flex-1 -translate-y-10 flex-col items-center justify-center gap-6 px-6 text-center">
+                  <div>
+                    <p className="font-instrument text-[36px] text-stone-950 opacity-90">
+                      {t("checkout.emptyCart")}
+                    </p>
+                    <p className="mt-2 text-[14px] text-stone-950 opacity-60">
+                      {t("checkout.emptyCartHint")}
+                    </p>
+                  </div>
                   <Link
                     href={withLocalePath("/bags", locale)}
                     onClick={closeCart}
-                    className="mt-7 rounded-full bg-stone-950 px-8 py-3 text-sm font-semibold text-white transition hover:bg-stone-800"
+                    className="inline-flex h-[52px] items-center justify-center rounded-full bg-black px-8 text-[12px] font-medium uppercase tracking-widest text-white transition hover:bg-[#1A1A1A]"
                   >
                     {t("home.toCatalog")}
                   </Link>
@@ -223,7 +240,6 @@ export default function CartDrawer() {
                           )}
                           {section.items.map((item) => {
                         const product = getProduct(item.slug);
-                        const delivery = product ? getDeliveryInfo(product, locale) : null;
                         const localizedTitle = product
                           ? localizeProductTitle(product, locale)
                           : localizeProductTitle(item.title, locale);
@@ -231,61 +247,61 @@ export default function CartDrawer() {
                         return (
                         <article
                           key={`${item.slug}-${item.color}-${item.purchaseKind}`}
-                          className="grid grid-cols-[80px_1fr] gap-4 rounded-[1.35rem] border border-stone-200/80 bg-white p-3.5 shadow-sm shadow-stone-200/60 sm:grid-cols-[80px_1fr_auto] sm:p-4"
+                          className="relative grid grid-cols-[80px_1fr_auto] gap-x-4 gap-y-3 rounded-2xl border border-[#F0EDEA] bg-white px-4 py-4"
                         >
-                          <Link href={withLocalePath(`/product/${item.slug}`, locale)} onClick={closeCart} className="block">
+                          <Link href={withLocalePath(`/product/${item.slug}`, locale)} onClick={closeCart} className="row-span-2 block self-start">
                             <CartLineImage slug={item.slug} colorName={item.color} title={localizedTitle} />
                           </Link>
 
-                          <div className="min-w-0">
-                            <p className="text-[11px] font-semibold uppercase tracking-[0.14em] text-stone-400">{item.brand}</p>
+                          <div className="min-w-0 pr-8">
                             <Link
                               href={withLocalePath(`/product/${item.slug}`, locale)}
                               onClick={closeCart}
-                              className="mt-1.5 block text-base font-semibold leading-snug text-stone-950 hover:text-stone-700 sm:text-lg"
+                              className="block text-[16px] font-medium leading-snug text-[#1A1A1A] hover:opacity-70"
                             >
                               {localizedTitle}
                             </Link>
-                            <p className="mt-2 inline-flex rounded-full bg-stone-100 px-2.5 py-1 text-xs text-stone-600">
-                              {t("catalog.color")}: {localizeColorName(item.color, locale)}
+                            <p className="mt-1.5 text-[13px] text-[#1A1A1A] opacity-60">
+                              {localizeColorName(item.color, locale)}
                             </p>
-                            {delivery && (
-                              <p className="mt-2 text-xs leading-relaxed text-stone-500">
-                                {delivery.leadTime}
-                              </p>
-                            )}
+                          </div>
 
-                            <div className="mt-4 inline-flex items-center rounded-full border border-stone-200 bg-stone-50">
+                          <button
+                            type="button"
+                            onClick={() => remove(item.slug, item.color, item.purchaseKind)}
+                            className="absolute right-4 top-4 flex h-7 w-7 items-center justify-center rounded-full bg-[#F5F5F5] text-[#1A1A1A] transition hover:bg-[#EBE8E4]"
+                            aria-label={t("cart.removeItem")}
+                          >
+                            <svg viewBox="0 0 12 12" className="h-3 w-3" fill="none" stroke="currentColor" strokeWidth="1.4" aria-hidden>
+                              <path d="M2 2l8 8M10 2 2 10" strokeLinecap="round" />
+                            </svg>
+                          </button>
+
+                          <div className="col-span-2 flex items-center justify-between gap-4 sm:col-span-1 sm:col-start-2 sm:col-end-4">
+                            <div className="inline-flex h-9 w-28 items-center justify-between rounded-full bg-[#F5F3F0] px-1">
                               <button
                                 type="button"
                                 onClick={() => setQty(item.slug, item.color, item.qty - 1, item.purchaseKind)}
-                                className="px-3 py-1.5 text-stone-500 transition hover:text-stone-950"
+                                className="flex h-8 w-8 items-center justify-center text-[#1A1A1A] opacity-60 transition hover:opacity-100"
                                 aria-label={t("cart.decreaseQty")}
                               >
-                                −
+                                <svg viewBox="0 0 16 16" className="h-3.5 w-3.5" fill="none" stroke="currentColor" strokeWidth="1.2" aria-hidden>
+                                  <path d="M3 8h10" strokeLinecap="round" />
+                                </svg>
                               </button>
-                              <span className="w-8 text-center text-sm">{item.qty}</span>
+                              <span className="w-6 text-center text-sm leading-none text-[#1A1A1A]">{item.qty}</span>
                               <button
                                 type="button"
                                 onClick={() => setQty(item.slug, item.color, item.qty + 1, item.purchaseKind)}
-                                className="px-3 py-1.5 text-stone-500 transition hover:text-stone-950"
+                                className="flex h-8 w-8 items-center justify-center text-[#1A1A1A] opacity-60 transition hover:opacity-100"
                                 aria-label={t("cart.increaseQty")}
                               >
-                                +
+                                <svg viewBox="0 0 16 16" className="h-3.5 w-3.5" fill="none" stroke="currentColor" strokeWidth="1.2" aria-hidden>
+                                  <path d="M8 3v10M3 8h10" strokeLinecap="round" />
+                                </svg>
                               </button>
                             </div>
-                          </div>
-
-                          <div className="col-span-2 flex items-center justify-between border-t border-stone-100 pt-3 sm:col-span-1 sm:flex-col sm:items-end sm:border-t-0 sm:pt-0">
-                            <button
-                              type="button"
-                              onClick={() => remove(item.slug, item.color, item.purchaseKind)}
-                              className="flex h-8 w-8 items-center justify-center rounded-full bg-stone-50 text-stone-400 transition hover:bg-stone-100 hover:text-stone-900"
-                              aria-label={t("cart.removeItem")}
-                            >
-                              ×
-                            </button>
-                            <p className="text-base font-semibold text-stone-950 sm:text-lg">
+                            <p className="text-[15px] font-semibold leading-none text-[#1A1A1A]">
                               {formatPrice(item.price * item.qty, locale)}
                             </p>
                           </div>
@@ -296,7 +312,7 @@ export default function CartDrawer() {
                       ))}
                   </div>
 
-                  <footer className="border-t border-stone-200 bg-white/90 px-5 py-5 shadow-[0_-18px_40px_rgba(28,25,23,0.07)] backdrop-blur sm:px-8">
+                  <footer className="border-t border-[#F0EDEA] bg-white px-5 py-5 sm:px-8">
                     <div className="mb-3 flex items-center justify-between gap-4 text-xs uppercase tracking-[0.14em] text-stone-400">
                       <span>{getItemCountLabel(itemCount, locale)}</span>
                       <span>{total >= 15000 ? t("checkout.free") : t("checkout.byTariff")}</span>
@@ -306,10 +322,10 @@ export default function CartDrawer() {
                         <Link
                           href={withLocalePath("/cart", locale)}
                           onClick={closeCart}
-                          className="flex w-full items-center justify-between gap-4 rounded-[1rem] bg-stone-950 px-5 py-4 text-sm font-semibold text-white shadow-lg shadow-stone-950/15 transition hover:-translate-y-0.5 hover:bg-stone-800"
+                          className="flex h-14 w-full items-center justify-between gap-4 rounded-2xl bg-black px-5 text-sm font-semibold tracking-[0.06em] text-white shadow-[0_8px_24px_rgba(0,0,0,0.12)] transition hover:bg-[#1A1A1A]"
                         >
                           <span>{hasMixedCart ? t("cart.goToCheckout") : t("checkout.placeOrder")}</span>
-                          <span aria-hidden className="text-stone-500">→</span>
+                          <span aria-hidden className="text-white/60">→</span>
                           <span>{formatPrice(standardTotal, locale)}</span>
                         </Link>
                       )}
@@ -317,16 +333,21 @@ export default function CartDrawer() {
                         <Link
                           href={withLocalePath("/cart", locale)}
                           onClick={closeCart}
-                          className="flex w-full items-center justify-between gap-4 rounded-[1rem] bg-amber-600 px-5 py-4 text-sm font-semibold text-white shadow-lg shadow-amber-900/10 transition hover:-translate-y-0.5 hover:bg-amber-700"
+                          className="flex h-14 w-full items-center justify-between gap-4 rounded-2xl bg-amber-600 px-5 text-sm font-semibold tracking-[0.06em] text-white shadow-[0_8px_24px_rgba(0,0,0,0.12)] transition hover:bg-amber-700"
                         >
                           <span>{t("cart.goToPreorder")}</span>
-                          <span aria-hidden className="text-amber-200">→</span>
+                          <span aria-hidden className="text-white/60">→</span>
                           <span>{formatPrice(preorderTotal, locale)}</span>
                         </Link>
                       )}
                     </div>
                     <p className="mt-3 text-center text-xs leading-relaxed text-stone-400">
-                      {hasPreorder ? t("checkout.preorderHint") : t("cart.checkoutHint")}
+                      {[
+                        cartDeliveryNote,
+                        hasPreorder ? t("checkout.preorderHint") : t("cart.checkoutHint"),
+                      ]
+                        .filter(Boolean)
+                        .join(" · ")}
                     </p>
                   </footer>
                 </>

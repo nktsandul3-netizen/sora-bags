@@ -7,7 +7,7 @@ export default function WishlistButton({
   variant = "icon",
 }: {
   slug: string;
-  variant?: "icon" | "full" | "compact" | "square";
+  variant?: "icon" | "full" | "compact" | "square" | "ring";
 }) {
   const { has, toggle } = useWishlist();
   const active = has(slug);
@@ -39,10 +39,25 @@ export default function WishlistButton({
         onClick={handle}
         aria-label={active ? "Убрать из избранного" : "В избранное"}
         className={
-          "inline-flex h-11 w-11 shrink-0 items-center justify-center rounded-sm border bg-white transition " +
+          "inline-flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl border bg-white transition " +
           (active
             ? "border-[#C96A1A] text-[#C96A1A]"
-            : "border-stone-200 text-stone-950 hover:border-stone-400")
+            : "border-[#EDE6E0] text-[#111] hover:bg-[#FBF8F6]")
+        }
+      >
+        <HeartIcon filled={active} />
+      </button>
+    );
+  }
+
+  if (variant === "ring") {
+    return (
+      <button
+        onClick={handle}
+        aria-label={active ? "Убрать из избранного" : "В избранное"}
+        className={
+          "inline-flex h-11 w-11 shrink-0 items-center justify-center rounded-full border border-[#E5E0DC] bg-transparent transition " +
+          (active ? "text-[#C96A1A]" : "text-[#1A1A1A] hover:border-[#1A1A1A]")
         }
       >
         <HeartIcon filled={active} />

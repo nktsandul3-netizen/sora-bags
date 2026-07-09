@@ -86,7 +86,7 @@ function PhoneIcon() {
 function MessengerIcon({ name }: { name: "whatsapp" | "telegram" | "viber" }) {
   const common = {
     viewBox: "0 0 24 24",
-    className: "h-5 w-5",
+    className: "h-5 w-5 text-[#111]",
     fill: "currentColor",
     "aria-hidden": true,
   } as const;
@@ -299,21 +299,18 @@ export default function ProductDetailView({
       name: "WhatsApp" as const,
       icon: "whatsapp" as const,
       href: `${brand.social.whatsapp}?text=${encodeURIComponent(reserveMessage)}`,
-      color: "#25D366",
       hint: contactHints[locale]?.whatsapp ?? contactHints.ru.whatsapp,
     },
     {
       name: "Telegram" as const,
       icon: "telegram" as const,
       href: brand.social.telegram,
-      color: "#229ED9",
       hint: contactHints[locale]?.telegram ?? contactHints.ru.telegram,
     },
     {
       name: "Viber" as const,
       icon: "viber" as const,
       href: brand.social.viber,
-      color: "#7360F2",
       hint: contactHints[locale]?.viber ?? contactHints.ru.viber,
     },
   ];
@@ -565,31 +562,31 @@ export default function ProductDetailView({
               : t("common.outOfStock")}
           </button>
           <div className="flex flex-col">
-            <div className="flex gap-2">
-            <button
-              type="button"
-              onClick={() => setContactOpen((v) => !v)}
-              aria-expanded={contactOpen}
-              className="flex min-h-14 flex-1 items-center justify-center gap-2.5 rounded-sm border border-stone-200 bg-white px-5 py-4 text-base font-medium text-stone-950 outline-none transition-[background-color,border-color,box-shadow,transform] duration-200 hover:border-stone-300 hover:bg-[#fafafa] hover:shadow-[0_2px_8px_rgba(0,0,0,0.04)] active:scale-[0.995] active:bg-[#f5f5f5] focus-visible:outline focus-visible:outline-2 focus-visible:outline-[#111] focus-visible:outline-offset-[3px] motion-reduce:transition-none motion-reduce:active:scale-100"
-            >
-              {reserveButton[locale] ?? reserveButton.ru}
-              <svg
-                viewBox="0 0 24 24"
-                className={
-                  "h-5 w-5 shrink-0 transition-transform duration-[225ms] ease-out motion-reduce:transition-none " +
-                  (contactOpen ? "rotate-180" : "rotate-0")
-                }
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="1.8"
-                aria-hidden
+            <div className="flex items-center gap-2">
+              <button
+                type="button"
+                onClick={() => setContactOpen((v) => !v)}
+                aria-expanded={contactOpen}
+                className="flex h-12 flex-1 items-center justify-center gap-2.5 rounded-2xl border border-[#EDE6E0] bg-white px-5 text-[15px] font-medium text-[#111] outline-none transition hover:bg-[#FBF8F6] focus-visible:outline focus-visible:outline-2 focus-visible:outline-[#111] focus-visible:outline-offset-[3px]"
               >
-                <path d="M6 9l6 6 6-6" strokeLinecap="round" strokeLinejoin="round" />
-              </svg>
-            </button>
-            <div className="h-14 w-14">
-              <WishlistButton slug={product.slug} variant="square" />
-            </div>
+                {reserveButton[locale] ?? reserveButton.ru}
+                <svg
+                  viewBox="0 0 24 24"
+                  className={
+                    "h-4 w-4 shrink-0 transition-transform duration-[225ms] ease-out motion-reduce:transition-none " +
+                    (contactOpen ? "rotate-0" : "rotate-180")
+                  }
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="1.8"
+                  aria-hidden
+                >
+                  <path d="M6 9l6 6 6-6" strokeLinecap="round" strokeLinejoin="round" />
+                </svg>
+              </button>
+              <div className="h-12 w-12 shrink-0">
+                <WishlistButton slug={product.slug} variant="square" />
+              </div>
             </div>
 
             <div
@@ -601,66 +598,63 @@ export default function ProductDetailView({
                 <div
                   inert={!contactOpen ? true : undefined}
                   className={
-                    "mt-3 overflow-hidden rounded-xl border border-stone-200 bg-white shadow-[0_12px_40px_-18px_rgba(28,25,23,0.45)] transition-[opacity,transform] duration-[280ms] ease-[cubic-bezier(0.4,0,0.2,1)] motion-reduce:transition-none motion-reduce:transform-none " +
+                    "mt-3 overflow-hidden rounded-2xl border border-[#EDE6E0] bg-white transition-[opacity,transform] duration-[280ms] ease-[cubic-bezier(0.4,0,0.2,1)] motion-reduce:transition-none motion-reduce:transform-none " +
                     (contactOpen
-                      ? "pointer-events-auto opacity-100 translate-y-0"
-                      : "pointer-events-none opacity-0 -translate-y-1.5")
+                      ? "pointer-events-auto translate-y-0 opacity-100"
+                      : "pointer-events-none -translate-y-1.5 opacity-0")
                   }
                 >
-              <div className="border-b border-stone-100 p-2.5 sm:p-3">
-                <a
-                  href={`tel:${primaryStore.phone.replace(/\s/g, "")}`}
-                  className="flex min-h-14 items-center gap-3 rounded-lg border border-[#e1e1e1] bg-white px-3.5 py-3 outline-none transition-[background-color,border-color,transform] duration-150 hover:border-[#bdbdbd] hover:bg-[#fafafa] active:scale-[0.995] active:bg-[#f5f5f5] focus-visible:outline focus-visible:outline-2 focus-visible:outline-[#111] focus-visible:outline-offset-[3px] motion-reduce:transition-none motion-reduce:active:scale-100"
-                >
-                  <span className="flex h-9 w-9 shrink-0 self-center items-center justify-center rounded-full border border-stone-100 bg-white text-stone-900">
-                    <PhoneIcon />
-                  </span>
-                  <span className="min-w-0 flex-1 text-left">
-                    <span className="block text-xs font-medium leading-snug text-stone-600">
-                      {phoneCallCopy[locale]?.title ?? phoneCallCopy.ru.title}
-                    </span>
-                    <span className="mt-0.5 block text-lg font-bold leading-tight tracking-tight text-[#111] sm:text-xl">
-                      {primaryStore.phone}
-                    </span>
-                    <span className="mt-1 block text-[11px] leading-snug text-stone-500">
-                      {phoneCallCopy[locale]?.hint ?? phoneCallCopy.ru.hint}
-                    </span>
-                  </span>
-                </a>
-              </div>
-              <div className="divide-y divide-stone-100">
-                {contactOptions.map((option) => (
-                  <a
-                    key={option.name}
-                    href={option.href}
-                    target="_blank"
-                    rel="noreferrer"
-                    onClick={() => setContactOpen(false)}
-                    className="group flex items-center gap-4 px-5 py-3.5 transition hover:bg-stone-50"
-                  >
-                    <span
-                      className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full text-white transition group-hover:scale-105"
-                      style={{ backgroundColor: option.color }}
+                  <div className="border-b border-[#F1EBE6] p-3">
+                    <a
+                      href={`tel:${primaryStore.phone.replace(/\s/g, "")}`}
+                      className="flex items-center gap-3.5 rounded-2xl border border-[#EDE6E0] bg-white px-[18px] py-4 outline-none transition hover:bg-[#FBF8F6] focus-visible:outline focus-visible:outline-2 focus-visible:outline-[#111] focus-visible:outline-offset-[3px]"
                     >
-                      <MessengerIcon name={option.icon} />
-                    </span>
-                    <span className="min-w-0 flex-1">
-                      <span className="block text-sm font-medium text-stone-950">{option.name}</span>
-                      <span className="block text-xs text-stone-400">{option.hint}</span>
-                    </span>
-                    <svg
-                      viewBox="0 0 24 24"
-                      className="h-4 w-4 shrink-0 text-stone-300 transition group-hover:translate-x-0.5 group-hover:text-stone-500"
-                      fill="none"
-                      stroke="currentColor"
-                      strokeWidth="1.8"
-                      aria-hidden
-                    >
-                      <path d="M9 6l6 6-6 6" strokeLinecap="round" strokeLinejoin="round" />
-                    </svg>
-                  </a>
-                ))}
-              </div>
+                      <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full border border-[#EDE6E0] bg-[#F7F3F0] text-[#111]">
+                        <PhoneIcon />
+                      </span>
+                      <span className="min-w-0 flex-1 text-left">
+                        <span className="block text-[12px] font-normal leading-snug text-[#111]/45">
+                          {phoneCallCopy[locale]?.title ?? phoneCallCopy.ru.title}
+                        </span>
+                        <span className="mt-0.5 block text-[20px] font-semibold leading-tight tracking-[0.01em] text-[#111]">
+                          {primaryStore.phone}
+                        </span>
+                        <span className="mt-1 block text-[12px] font-normal leading-snug text-[#111]/40">
+                          {phoneCallCopy[locale]?.hint ?? phoneCallCopy.ru.hint}
+                        </span>
+                      </span>
+                    </a>
+                  </div>
+                  <div className="divide-y divide-[#F1EBE6]">
+                    {contactOptions.map((option) => (
+                      <a
+                        key={option.name}
+                        href={option.href}
+                        target="_blank"
+                        rel="noreferrer"
+                        onClick={() => setContactOpen(false)}
+                        className="group flex h-16 items-center gap-3.5 px-[18px] transition hover:bg-[#FBF8F6]"
+                      >
+                        <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full border border-[#EDE6E0] bg-[#F7F3F0] text-[#111]">
+                          <MessengerIcon name={option.icon} />
+                        </span>
+                        <span className="min-w-0 flex-1">
+                          <span className="block text-[14px] font-medium text-[#111]">{option.name}</span>
+                          <span className="block text-[12px] text-[#111]/40">{option.hint}</span>
+                        </span>
+                        <svg
+                          viewBox="0 0 24 24"
+                          className="h-3.5 w-3.5 shrink-0 text-[#111] opacity-[0.16]"
+                          fill="none"
+                          stroke="currentColor"
+                          strokeWidth="1.8"
+                          aria-hidden
+                        >
+                          <path d="M9 6l6 6-6 6" strokeLinecap="round" strokeLinejoin="round" />
+                        </svg>
+                      </a>
+                    ))}
+                  </div>
                 </div>
               </div>
             </div>

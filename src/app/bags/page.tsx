@@ -20,12 +20,14 @@ export default async function BagsPage() {
       heroBanner={{
         src: "/banners/bags-all-hero.jpg",
         alt: "All bags SÓRA",
-        width: 1024,
-        height: 576,
-        objectPosition: "50% 43%",
+        width: 963,
+        height: 616,
+        objectPosition: "50% 0%",
         copyTone: "light",
         bgClassName: "bg-[#c4b8a8]",
-        aspectClass: "h-[max(120px,calc(100vw*576/1024-4.5cm))]",
+        aspectClass: "h-[max(120px,calc(100vw*616/963-2cm))]",
+        mediaFilterClass: "catalog-hero-media-bags",
+        topScrim: true,
       }}
     />
   );

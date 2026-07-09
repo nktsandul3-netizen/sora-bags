@@ -62,22 +62,36 @@ export const videoWidget = {
   tiktokVideos: [
     {
       url: "",
-      title: "Сумки SÓRA",
-      mp4Src: "/videos/sora-story-0034.mp4",
-      posterSrc: "/hero-amalfi-4k.jpg",
-      collectionHref: "/bags",
+      title: "Palmira — сумка с поворотным замком",
+      mp4Src: "/videos/sora-story-in-motion-turn-lock-top-handle-bag.mp4",
+      posterSrc: "/products/womens-pebbled-leather-turn-lock-top-handle-bag/black-front.png",
+      collectionHref: "/product/womens-pebbled-leather-turn-lock-top-handle-bag",
     },
     {
       url: "",
-      title: "Сумки SÓRA",
-      mp4Src: "/videos/sora-story-0054.mp4",
-      posterSrc: "/hero-amalfi-4k.jpg",
-      collectionHref: "/bags",
+      title: "Solange — сумка-тоут трапециевидной формы",
+      mp4Src: "/videos/sora-story-in-motion-wing-flap-tote-bag.mp4",
+      posterSrc: "/products/womens-pebbled-leather-wing-flap-tote-bag/light-blue-front-alt.png",
+      collectionHref: "/product/womens-pebbled-leather-wing-flap-tote-bag",
+    },
+    {
+      url: "",
+      title: "Ottilie — гладкий компактный багет",
+      mp4Src: "/videos/sora-story-in-motion-baguette.mp4",
+      posterSrc: "/products/womens-smooth-leather-compact-baguette-bag/red-orange-front.png",
+      collectionHref: "/product/womens-smooth-leather-compact-baguette-bag",
+    },
+    {
+      url: "",
+      title: "Aurea — прямоугольная сумка в руке",
+      mp4Src: "/videos/sora-story-in-motion-rectangular-handbag.mp4",
+      posterSrc: "/products/womens-pebbled-leather-rectangular-handbag/taupe-front.png",
+      collectionHref: "/product/womens-pebbled-leather-rectangular-handbag",
     },
   ] satisfies VideoWidgetTikTokItem[],
 
-  tiktokLabel: "Перейти в TikTok",
-  collectionLabel: "Перейти в TikTok",
+  tiktokLabel: "Смотреть в TikTok",
+  collectionLabel: "Купить образ",
 
   // Режим video (если mode: "video")
   title: "NEW CO — GOLDEN ESCAPE",

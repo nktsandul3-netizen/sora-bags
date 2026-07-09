@@ -172,8 +172,8 @@ function ShowcaseCard({ product }: { product: Product }) {
       </Link>
       </div>
 
-      {/* Свотчи слева + сердечко справа: слот фиксированной высоты, чтобы карточки не прыгали */}
-      <div className="mt-2.5 flex min-h-[26px] items-center justify-between gap-2 px-1 sm:mt-3">
+      {/* Свотчи → бренд 12px; бренд → название 4px; название → цена 14px; цена → статус 6px */}
+      <div className="mt-3.5 flex min-h-6 items-center justify-between gap-2 px-1">
         {showSwatches ? (
           <ProductColorSwatches
             productSlug={product.slug}
@@ -191,26 +191,25 @@ function ShowcaseCard({ product }: { product: Product }) {
         </span>
       </div>
 
-      <Link
-        href={withLocalePath(`/product/${product.slug}`, locale)}
-        className="mt-2 grid grid-cols-[1fr_auto] gap-x-5 gap-y-1.5 px-1 text-[11px] uppercase tracking-[0.08em] sm:mt-2.5"
-      >
-        <p className="font-semibold text-stone-950">{getBrandName(product.brandSlug)}</p>
-        <h3 className="col-span-2 line-clamp-2 min-h-[2.75em] leading-snug text-stone-700">{localizedTitle}</h3>
+      <Link href={withLocalePath(`/product/${product.slug}`, locale)} className="mt-3 flex flex-col px-1">
+        <p className="text-[11px] font-normal uppercase tracking-[0.08em] text-[#111]/36">
+          {getBrandName(product.brandSlug)}
+        </p>
+        <h3 className="mt-1 line-clamp-2 min-h-10 text-[14px] font-normal leading-5 text-[#151515]">
+          {localizedTitle}
+        </h3>
       </Link>
 
-      <div className="relative mt-2 px-1 lg:mt-2.5">
+      <div className="relative mt-3.5 px-1">
         {/* Десктоп: цена + статус, по ховеру заменяются кнопкой */}
         <div className="hidden transition-all duration-300 group-hover:pointer-events-none group-hover:-translate-y-1 group-hover:opacity-0 lg:block">
-          <p className="text-[11px] font-semibold uppercase tracking-[0.08em] text-stone-950">
-            {formatPrice(product.price, locale)}
-          </p>
+          <p className="text-[15px] font-medium text-[#111]">{formatPrice(product.price, locale)}</p>
           <PreorderStatusBadge status={product.status} compact className="mt-1.5" />
         </div>
         {/* Мобильные: цена, статус и кнопка в обычном потоке — без наложений */}
         <div className="lg:hidden">
           <div className="flex flex-wrap items-center justify-between gap-x-2 gap-y-1">
-            <span className="text-[11px] font-bold uppercase tracking-[0.08em] text-stone-950">
+            <span className="text-[15px] font-medium text-[#111]">
               {formatPrice(product.price, locale)}
             </span>
             <PreorderStatusBadge status={product.status} compact />

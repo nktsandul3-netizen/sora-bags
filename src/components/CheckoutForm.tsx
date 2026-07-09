@@ -180,20 +180,28 @@ export default function CheckoutForm({ items, total, mode, onSuccess }: Checkout
   }
 
   const fieldClass =
-    "w-full rounded-lg border border-stone-200 bg-white px-3.5 py-2.5 text-sm text-stone-900 outline-none transition placeholder:text-stone-400 focus:border-stone-400";
+    "h-14 w-full rounded-2xl border border-[#EDE9E5] bg-white px-5 text-[15px] text-[#1A1A1A] outline-none transition placeholder:text-stone-400 focus:border-[#1A1A1A]";
   const optionClass =
-    "flex cursor-pointer items-start gap-3 rounded-lg border border-stone-200 bg-white px-3.5 py-3 text-left transition has-[:checked]:border-stone-900 has-[:checked]:bg-stone-50";
+    "flex cursor-pointer items-start gap-3 rounded-2xl border border-[#EDE9E5] bg-white px-4 py-3 text-left transition has-[:checked]:border-[1.5px] has-[:checked]:border-black has-[:checked]:bg-[#FBF9F7]";
   const compactOptionClass =
-    "flex cursor-pointer items-start gap-3 rounded-lg border border-stone-200 bg-white px-3.5 py-2.5 text-left transition has-[:checked]:border-stone-900 has-[:checked]:bg-stone-50";
+    "flex cursor-pointer items-start gap-3 rounded-2xl border border-[#EDE9E5] bg-white px-[18px] py-4 text-left transition has-[:checked]:border-2 has-[:checked]:border-black has-[:checked]:bg-[#FBF9F7]";
+  const radioClass =
+    "mt-0 h-5 w-5 shrink-0 appearance-none rounded-full border border-[#1A1A1A]/40 bg-white transition checked:border-[#1A1A1A] checked:bg-[radial-gradient(circle,#1A1A1A_0_4px,transparent_4.5px)]";
   const deliveryOptions = getDeliveryOptions(locale);
   const paymentOptions = getPaymentOptions(locale);
   const selectedDeliveryLabel = getDeliveryLabel(deliveryMethod, locale) ?? "—";
   const selectedPaymentLabel = getPaymentLabel(paymentMethod, locale) ?? "—";
+  const phoneLocked = status === "authenticated" && Boolean(phone.trim());
+  const emailLocked = status === "authenticated" && Boolean(email.trim());
+  const displayPhone = maskPhone(phone);
+  const displayEmail = maskEmail(email);
 
   return (
-    <form onSubmit={handleSubmit} className="mt-6 space-y-4">
-      <div className="flex items-center justify-between text-xs uppercase tracking-[0.14em] text-stone-400">
-        <span>{step === "contacts" ? t("checkout.step1") : t("checkout.step2")}</span>
+    <form onSubmit={handleSubmit} className="mt-4 space-y-3">
+      <div className="flex items-center justify-between">
+        <span className="text-xs uppercase tracking-[0.14em] text-stone-400">
+          {step === "contacts" ? t("checkout.step1") : t("checkout.step2")}
+        </span>
         {step === "details" && (
           <button
             type="button"
@@ -201,7 +209,7 @@ export default function CheckoutForm({ items, total, mode, onSuccess }: Checkout
               setError(null);
               setStep("contacts");
             }}
-            className="font-medium text-stone-700 transition hover:text-stone-950"
+            className="text-[14px] font-normal normal-case tracking-normal text-[#1A1A1A] opacity-50 transition hover:opacity-80"
           >
             {t("common.back")}
           </button>
@@ -211,11 +219,11 @@ export default function CheckoutForm({ items, total, mode, onSuccess }: Checkout
       {step === "contacts" ? (
         <div className="space-y-3">
           {savedAddresses.length > 0 && (
-            <fieldset className="space-y-2">
-              <legend className="px-0.5 text-xs font-medium uppercase tracking-[0.14em] text-stone-400">
+            <fieldset className="space-y-3">
+              <legend className="mb-2 px-0.5 text-[11px] font-medium uppercase tracking-[0.12em] text-[#1A1A1A] opacity-50">
                 {t("checkout.savedAddress")}
               </legend>
-              <div className="grid gap-2">
+              <div className="grid gap-3">
                 {savedAddresses.map((savedAddress) => (
                   <label key={savedAddress.id} className={optionClass}>
                     <input
@@ -224,18 +232,18 @@ export default function CheckoutForm({ items, total, mode, onSuccess }: Checkout
                       value={savedAddress.id}
                       checked={selectedAddressId === savedAddress.id}
                       onChange={() => applySavedAddress(savedAddress)}
-                      className="mt-1 h-4 w-4 shrink-0 accent-stone-900"
+                      className={radioClass}
                     />
                     <span>
-                      <span className="flex flex-wrap items-center gap-2 text-sm font-medium text-stone-900">
+                      <span className="flex items-baseline gap-2 text-sm font-medium leading-5 text-[#1A1A1A]">
                         {getAddressLabelDisplay(savedAddress.label, locale)}
-                        {savedAddress.isDefault && (
-                          <span className="rounded-full bg-stone-100 px-2 py-0.5 text-[10px] font-medium uppercase tracking-[0.12em] text-stone-500">
+                        {savedAddress.isDefault ? (
+                          <span className="bg-transparent p-0 text-[10px] font-medium uppercase tracking-[0.08em] text-[#1A1A1A] opacity-40">
                             {t("checkout.defaultAddress")}
                           </span>
-                        )}
+                        ) : null}
                       </span>
-                      <span className="mt-0.5 block text-xs leading-relaxed text-stone-500">
+                      <span className="mt-0.5 block text-[13px] leading-5 text-stone-500">
                         {savedAddress.recipient}, {savedAddress.city}, {savedAddress.street}
                       </span>
                     </span>
@@ -248,15 +256,10 @@ export default function CheckoutForm({ items, total, mode, onSuccess }: Checkout
                     value="manual"
                     checked={selectedAddressId === "manual"}
                     onChange={() => setSelectedAddressId("manual")}
-                    className="mt-1 h-4 w-4 shrink-0 accent-stone-900"
+                    className={radioClass}
                   />
-                  <span>
-                    <span className="block text-sm font-medium text-stone-900">
-                      {t("checkout.otherAddress")}
-                    </span>
-                    <span className="mt-0.5 block text-xs leading-relaxed text-stone-500">
-                      {t("checkout.otherAddressHint")}
-                    </span>
+                  <span className="block text-sm font-medium text-[#1A1A1A]">
+                    {t("checkout.otherAddress")}
                   </span>
                 </label>
               </div>
@@ -274,25 +277,39 @@ export default function CheckoutForm({ items, total, mode, onSuccess }: Checkout
             autoComplete="name"
             className={fieldClass}
           />
-          <input
-            type="tel"
-            value={phone}
-            onChange={(e) => {
-              setSelectedAddressId("manual");
-              setPhone(e.target.value);
-            }}
-            placeholder={t("checkout.phone")}
-            autoComplete="tel"
-            className={fieldClass}
-          />
-          <input
-            type="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            placeholder={t("checkout.email")}
-            autoComplete="email"
-            className={fieldClass}
-          />
+          {phoneLocked ? (
+            <div className={`${fieldClass} flex items-center justify-between gap-3 text-stone-500`}>
+              <span className="truncate">{displayPhone}</span>
+              <LockIcon />
+            </div>
+          ) : (
+            <input
+              type="tel"
+              value={phone}
+              onChange={(e) => {
+                setSelectedAddressId("manual");
+                setPhone(e.target.value);
+              }}
+              placeholder={t("checkout.phone")}
+              autoComplete="tel"
+              className={fieldClass}
+            />
+          )}
+          {emailLocked ? (
+            <div className={`${fieldClass} flex items-center justify-between gap-3 text-stone-500`}>
+              <span className="truncate">{displayEmail}</span>
+              <LockIcon />
+            </div>
+          ) : (
+            <input
+              type="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              placeholder={t("checkout.email")}
+              autoComplete="email"
+              className={fieldClass}
+            />
+          )}
           <input
             type="text"
             value={city}
@@ -320,16 +337,16 @@ export default function CheckoutForm({ items, total, mode, onSuccess }: Checkout
             onChange={(e) => setComment(e.target.value)}
             placeholder={t("checkout.comment")}
             rows={2}
-            className={fieldClass + " resize-none"}
+            className={fieldClass + " h-auto min-h-14 resize-none py-4"}
           />
         </div>
       ) : (
         <div className="space-y-4">
-          <fieldset className="space-y-2">
+          <fieldset className="space-y-2.5">
             <legend className="px-0.5 text-xs font-medium uppercase tracking-[0.14em] text-stone-400">
               {t("checkout.deliveryMethod")}
             </legend>
-            <div className="grid gap-2">
+            <div className="grid gap-2.5">
               {deliveryOptions.map((option) => (
                 <label key={option.value} className={compactOptionClass}>
                   <input
@@ -338,14 +355,14 @@ export default function CheckoutForm({ items, total, mode, onSuccess }: Checkout
                     value={option.value}
                     checked={deliveryMethod === option.value}
                     onChange={() => setDeliveryMethod(option.value)}
-                    className="mt-0.5 h-4 w-4 shrink-0 accent-stone-900"
+                    className={radioClass}
                   />
-                  <span>
-                    <span className="block text-sm font-medium text-stone-900">
+                  <span className="min-w-0 flex-1">
+                    <span className="block text-sm font-medium leading-5 text-[#1A1A1A]">
                       {option.label}
                     </span>
                     {deliveryMethod === option.value && (
-                      <span className="mt-0.5 block text-xs leading-relaxed text-stone-500">
+                      <span className="mt-0.5 block max-w-[90%] whitespace-normal text-[13px] leading-[18px] text-[#1A1A1A] opacity-55">
                         {option.description}
                       </span>
                     )}
@@ -356,11 +373,11 @@ export default function CheckoutForm({ items, total, mode, onSuccess }: Checkout
           </fieldset>
 
           {!isPreorder && (
-            <fieldset className="space-y-2">
+            <fieldset className="space-y-2.5">
               <legend className="px-0.5 text-xs font-medium uppercase tracking-[0.14em] text-stone-400">
                 {t("checkout.paymentMethod")}
               </legend>
-              <div className="grid gap-2">
+              <div className="grid gap-2.5">
                 {paymentOptions.map((option) => (
                   <label key={option.value} className={compactOptionClass}>
                     <input
@@ -369,17 +386,15 @@ export default function CheckoutForm({ items, total, mode, onSuccess }: Checkout
                       value={option.value}
                       checked={paymentMethod === option.value}
                       onChange={() => setPaymentMethod(option.value)}
-                      className="mt-0.5 h-4 w-4 shrink-0 accent-stone-900"
+                      className={radioClass}
                     />
-                    <span>
-                      <span className="block text-sm font-medium text-stone-900">
+                    <span className="min-w-0 flex-1">
+                      <span className="block text-sm font-medium leading-5 text-[#1A1A1A]">
                         {option.label}
                       </span>
-                      {paymentMethod === option.value && (
-                        <span className="mt-0.5 block text-xs leading-relaxed text-stone-500">
-                          {option.description}
-                        </span>
-                      )}
+                      <span className="mt-0.5 block max-w-[90%] whitespace-normal text-[13px] leading-[18px] text-[#1A1A1A] opacity-55">
+                        {option.description}
+                      </span>
                     </span>
                   </label>
                 ))}
@@ -387,32 +402,70 @@ export default function CheckoutForm({ items, total, mode, onSuccess }: Checkout
             </fieldset>
           )}
 
-          <div className="rounded-xl border border-stone-200 bg-stone-50 px-4 py-3">
-            <p className="text-xs font-medium uppercase tracking-[0.14em] text-stone-400">
+          <div className="px-0.5">
+            <p className="text-[11px] font-medium uppercase tracking-[0.08em] text-[#1A1A1A] opacity-40">
               {t("checkout.checkOrder")}
             </p>
-            <dl className="mt-3 space-y-2 text-sm">
+            <dl className="mt-2 space-y-1.5">
               <SummaryRow label={t("checkout.customer")} value={name} />
-              <SummaryRow label={t("checkout.phone").replace(" *", "")} value={phone} />
-              <SummaryRow label={t("checkout.address")} value={[city, address].filter(Boolean).join(", ")} />
+              <SummaryRow
+                label={t("checkout.phone").replace(" *", "")}
+                value={phoneLocked ? displayPhone : phone}
+              />
+              {email ? (
+                <SummaryRow
+                  label={t("checkout.email").replace(" *", "")}
+                  value={emailLocked ? displayEmail : email}
+                />
+              ) : null}
+              <SummaryRow
+                label={t("checkout.address")}
+                value={[city, address].filter(Boolean).join(", ")}
+                wrap
+              />
               <SummaryRow label={t("checkout.delivery")} value={selectedDeliveryLabel} />
-              {!isPreorder && <SummaryRow label={t("checkout.paymentMethod")} value={selectedPaymentLabel} />}
+              {!isPreorder && (
+                <SummaryRow label={t("checkout.paymentMethod")} value={selectedPaymentLabel} />
+              )}
               <SummaryRow label={t("checkout.amount")} value={formatPrice(total, locale)} strong />
             </dl>
           </div>
 
-          <div className="rounded-xl border border-emerald-100 bg-emerald-50/70 px-3.5 py-2.5 text-xs leading-relaxed text-emerald-900">
-            {isPreorder ? t("checkout.preorderAfterSubmit") : t("checkout.afterOrder")}
+          <div className="flex items-start gap-2.5 px-0.5 text-[13px] leading-snug text-[#1A1A1A] opacity-60">
+            <svg viewBox="0 0 16 16" className="mt-0.5 h-4 w-4 shrink-0" fill="none" stroke="currentColor" strokeWidth="1.4" aria-hidden>
+              <circle cx="8" cy="8" r="6.25" />
+              <path d="M5.2 8.1 7.1 10l3.7-4" strokeLinecap="round" strokeLinejoin="round" />
+            </svg>
+            <span>{isPreorder ? t("checkout.preorderAfterSubmit") : t("checkout.afterOrder")}</span>
           </div>
 
-          <label className="flex items-start gap-2.5 text-xs text-stone-500">
-            <input
-              type="checkbox"
-              checked={consent}
-              onChange={(e) => setConsent(e.target.checked)}
-              className="mt-0.5 h-4 w-4 shrink-0 accent-stone-900"
-            />
-            <span>
+          <label className="flex items-start gap-3 text-[12px] leading-[18px] text-stone-500">
+            <span className="relative mt-px inline-flex h-5 w-5 shrink-0">
+              <input
+                type="checkbox"
+                checked={consent}
+                onChange={(e) => setConsent(e.target.checked)}
+                className="absolute -inset-2 z-10 cursor-pointer opacity-0"
+              />
+              <span
+                aria-hidden
+                className={
+                  "pointer-events-none flex h-5 w-5 items-center justify-center rounded-[6px] border-[1.5px] transition " +
+                  (consent ? "border-black bg-black" : "border-[#D9D3CF] bg-white")
+                }
+              >
+                <svg
+                  viewBox="0 0 12 12"
+                  className={"h-3 w-3 text-white transition " + (consent ? "opacity-100" : "opacity-0")}
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="1.6"
+                >
+                  <path d="M2.5 6.2 4.8 8.5 9.5 3.5" strokeLinecap="round" strokeLinejoin="round" />
+                </svg>
+              </span>
+            </span>
+            <span className="min-w-0 leading-[18px]">
               {t("checkout.consentPrefix")}{" "}
               <Link
                 href={withLocalePath("/info/publichnaya-oferta", locale)}
@@ -450,7 +503,7 @@ export default function CheckoutForm({ items, total, mode, onSuccess }: Checkout
       <button
         type="submit"
         disabled={loading}
-        className="w-full rounded-full bg-stone-900 px-6 py-3.5 text-sm font-semibold text-white transition hover:bg-stone-800 disabled:cursor-not-allowed disabled:opacity-60"
+        className="flex h-14 w-full items-center justify-center rounded-full bg-black px-6 text-[14px] font-medium tracking-[0.04em] text-white shadow-[0_12px_24px_rgba(0,0,0,0.12)] outline-none ring-0 transition hover:bg-[#1A1A1A] focus:outline-none focus:ring-0 focus-visible:outline-none focus-visible:ring-0 active:outline-none disabled:cursor-not-allowed disabled:opacity-60"
       >
         {loading
           ? isPreorder
@@ -463,11 +516,11 @@ export default function CheckoutForm({ items, total, mode, onSuccess }: Checkout
               : t("checkout.placeOrder")}
       </button>
       {step === "details" ? (
-        <p className="text-center text-xs text-stone-400">
+        <p className="text-center text-[12px] text-[#1A1A1A] opacity-40">
           {isPreorder ? t("checkout.preorderHint") : t("checkout.dataUse")}
         </p>
       ) : (
-        <p className="text-center text-xs text-stone-400">
+        <p className="text-center text-[12px] text-[#1A1A1A] opacity-40">
           {t("checkout.nextStepHint")}
         </p>
       )}
@@ -479,17 +532,51 @@ function SummaryRow({
   label,
   value,
   strong = false,
+  wrap = false,
 }: {
   label: string;
   value: string;
   strong?: boolean;
+  wrap?: boolean;
 }) {
+  const display = value || "—";
+
   return (
-    <div className="flex justify-between gap-4">
-      <dt className="shrink-0 text-stone-400">{label}</dt>
-      <dd className={"text-right " + (strong ? "font-semibold text-stone-950" : "text-stone-700")}>
-        {value || "—"}
+    <div className="grid grid-cols-[140px_1fr] items-start gap-x-3">
+      <dt className="pt-0.5 text-[11px] font-medium uppercase tracking-[0.08em] text-[#1A1A1A] opacity-40">
+        {label}
+      </dt>
+      <dd
+        className={
+          "min-w-0 text-right text-[14px] font-medium text-[#1A1A1A] " +
+          (strong ? "font-semibold" : "") +
+          (wrap ? " leading-[1.4]" : " leading-5 truncate")
+        }
+      >
+        {display}
       </dd>
     </div>
   );
+}
+
+function LockIcon() {
+  return (
+    <svg viewBox="0 0 16 16" className="h-3.5 w-3.5 shrink-0 opacity-50" fill="none" stroke="currentColor" strokeWidth="1.4" aria-hidden>
+      <rect x="3.5" y="7" width="9" height="6.5" rx="1.2" />
+      <path d="M5.5 7V5.2a2.5 2.5 0 0 1 5 0V7" strokeLinecap="round" />
+    </svg>
+  );
+}
+
+function maskPhone(value: string) {
+  const digits = value.replace(/\D/g, "");
+  if (digits.length < 4) return value;
+  return `•••• ${digits.slice(-4)}`;
+}
+
+function maskEmail(value: string) {
+  const [local, domain] = value.split("@");
+  if (!local || !domain) return value;
+  const visible = local.slice(0, Math.min(2, local.length));
+  return `${visible}•••@${domain}`;
 }
