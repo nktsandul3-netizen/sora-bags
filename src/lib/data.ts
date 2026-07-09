@@ -6383,7 +6383,7 @@ export const products: Product[] = [
       {
         ...C.cognac,
         images: [
-          { src: "/products/womens-full-grain-leather-zip-around-wallet/cognac-front-card.png", alt: "Francesca Коньячный — вид спереди" },
+          { src: "/products/womens-full-grain-leather-zip-around-wallet/cognac-front-card-v2.png", alt: "Francesca Коньячный — вид спереди" },
           { src: "/products/womens-full-grain-leather-zip-around-wallet/cognac-inside-v5.png", alt: "Francesca Коньячный — внутри" },
           { src: "/products/womens-full-grain-leather-zip-around-wallet/cognac-inside-alt.png", alt: "Francesca Коньячный — отделения внутри" },
         ],
