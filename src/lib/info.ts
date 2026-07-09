@@ -15,7 +15,7 @@ export type InfoPage = {
 export const infoPages: InfoPage[] = [
   {
     slug: "o-nas",
-    title: "О нас",
+    title: "Наша история",
     bannerImage: "/about-banner-v2.jpg",
     body: [
       "Добро пожаловать в SÓRA Bags.",
@@ -58,6 +58,11 @@ export const infoPages: InfoPage[] = [
     body: [],
   },
   {
+    slug: "materialy-i-uhod",
+    title: "Материалы и уход",
+    body: [],
+  },
+  {
     slug: "nashi-magaziny",
     title: "Наши магазины",
     body: [
@@ -93,6 +98,7 @@ const hiddenInfoNavSlugs = new Set([
   "rekvizity",
   "politika-konfidentsialnosti",
   "publichnaya-oferta",
+  "podarochnye-sertifikaty",
 ]);
 
 /** Info pages shown in header, footer, and info sidebar navigation. */
@@ -103,10 +109,11 @@ export function getInfoPage(slug: string): InfoPage | undefined {
 }
 
 const localizedInfoTitles: Record<string, { ro: string; en: string }> = {
-  "o-nas": { ro: "Despre noi", en: "About us" },
+  "o-nas": { ro: "Istoria noastră", en: "Our Story" },
   "oplata-i-dostavka": { ro: "Plată și livrare", en: "Payment and delivery" },
   vozvrat: { ro: "Retur", en: "Returns" },
   garantiya: { ro: "Garanția calității", en: "Quality warranty" },
+  "materialy-i-uhod": { ro: "Materiale și îngrijire", en: "Materials and care" },
   "nashi-magaziny": { ro: "Magazinele noastre", en: "Our stores" },
   "podarochnye-sertifikaty": { ro: "Certificate cadou", en: "Gift certificates" },
   rekvizity: { ro: "Date companie", en: "Company details" },

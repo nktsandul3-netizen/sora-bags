@@ -1,6 +1,6 @@
 import type { Locale, LocalizedString } from "@/lib/i18n";
 import { getLocalizedText } from "@/lib/i18n";
-import { accessoryCategories, bagMenuCategories } from "@/lib/data";
+import { shopAccessoryMenuCategories, shopBagMenuCategories } from "@/lib/data";
 
 export type StoreLocation = {
   slug: string;
@@ -16,8 +16,8 @@ export type StoreLocation = {
 
 /** Категории каталога, которые показываем в блоке магазина. */
 export const siteStoreCategorySlugs = [
-  ...bagMenuCategories.map((c) => c.slug),
-  ...accessoryCategories.filter((c) => c.slug !== "vse-aksessuary").map((c) => c.slug),
+  ...shopBagMenuCategories.map((c) => c.slug),
+  ...shopAccessoryMenuCategories.map((c) => c.slug),
 ];
 
 export const stores: StoreLocation[] = [

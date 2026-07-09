@@ -1,8 +1,7 @@
 import Link from "next/link";
 import Image from "next/image";
-import { homeNewArrivals, products } from "@/lib/data";
+import { products } from "@/lib/data";
 import { getInstagramPosts } from "@/lib/instagram";
-import HomeNewArrivals from "@/components/HomeNewArrivals";
 import InstagramFeed from "@/components/InstagramFeed";
 import ProductCard from "@/components/ProductCard";
 import HeroBannerSlider, { type HeroSlide } from "@/components/HeroBannerSlider";
@@ -11,32 +10,74 @@ import StoreExclusiveServices from "@/components/stores/StoreExclusiveServices";
 import { getServerLocale, getServerT } from "@/lib/server-i18n";
 import { withLocalePath, type Locale } from "@/lib/i18n";
 
-const wovenBannerCopy: Record<Locale, { subtitle: string; ctaLabel: string }> = {
+const wovenBannerCopy: Record<
+  Locale,
+  { eyebrow: string; title: string; subtitle: string; ctaLabel: string }
+> = {
   ru: {
-    subtitle: "Плетёные сумки в стиле итальянского побережья",
+    eyebrow: "LUXURIARE AMALFI",
+    title: "Плетёные сумки из рафии и кожи",
+    subtitle: "Ручная работа, Италия.",
     ctaLabel: "Смотреть коллекцию",
   },
   ro: {
-    subtitle: "Genți împletite în stilul coastei italiene",
+    eyebrow: "LUXURIARE AMALFI",
+    title: "Genți împletite din rafie și piele",
+    subtitle: "Lucrate manual, Italia.",
     ctaLabel: "Vezi colecția",
   },
   en: {
-    subtitle: "Woven bags inspired by the Italian coastline",
+    eyebrow: "LUXURIARE AMALFI",
+    title: "Woven bags in raffia and leather",
+    subtitle: "Handmade in Italy.",
+    ctaLabel: "View the collection",
+  },
+};
+
+const veneziaBannerCopy: Record<
+  Locale,
+  { title: string; subtitle: string; ctaLabel: string }
+> = {
+  ru: {
+    title: "VENEZIA INTRECCIO COLLECTION",
+    subtitle: "Плетёная фактура для города и путешествий.",
+    ctaLabel: "Смотреть коллекцию",
+  },
+  ro: {
+    title: "VENEZIA INTRECCIO COLLECTION",
+    subtitle: "Textură împletită pentru oraș și călătorii.",
+    ctaLabel: "Vezi colecția",
+  },
+  en: {
+    title: "VENEZIA INTRECCIO COLLECTION",
+    subtitle: "Woven texture for the city and travel.",
     ctaLabel: "View the collection",
   },
 };
 
 function getHeroSlides(locale: Locale): HeroSlide[] {
-  const copy = wovenBannerCopy[locale] ?? wovenBannerCopy.ru;
+  const amalfi = wovenBannerCopy[locale] ?? wovenBannerCopy.ru;
+  const venezia = veneziaBannerCopy[locale] ?? veneziaBannerCopy.ru;
   return [
     {
       type: "video",
       src: "/videos/home-banner-2.mp4",
       caption: {
-        title: "Luxuriare Amalfi Collection",
-        subtitle: copy.subtitle,
-        ctaLabel: copy.ctaLabel,
+        eyebrow: amalfi.eyebrow,
+        title: amalfi.title,
+        subtitle: amalfi.subtitle,
+        ctaLabel: amalfi.ctaLabel,
         ctaHref: withLocalePath("/collections/amalfi-woven", locale),
+      },
+    },
+    {
+      type: "video",
+      src: "/videos/venezia-intreccio-banner.mp4",
+      caption: {
+        title: venezia.title,
+        subtitle: venezia.subtitle,
+        ctaLabel: venezia.ctaLabel,
+        ctaHref: withLocalePath("/collections/venezia-intreccio", locale),
       },
     },
   ];
@@ -70,11 +111,8 @@ export default async function Home() {
   ]);
   return (
     <div>
-      {/* Hero: чередуются фото и видео каждые 5 секунд */}
-      <HeroBannerSlider slides={getHeroSlides(locale)} />
-
-      {/* Новинки */}
-      <HomeNewArrivals products={homeNewArrivals} />
+      {/* Hero: Amalfi → Venezia Intreccio */}
+      <HeroBannerSlider slides={getHeroSlides(locale)} intervalMs={7000} />
 
       {/* Плитки разделов: Сумки / Аксессуары */}
       <section className="mt-0 w-full">
@@ -99,7 +137,7 @@ export default async function Home() {
                   {t(tile.labelKey)}
                 </span>
                 <span className="border border-white px-8 py-2.5 text-[10px] font-normal uppercase tracking-[0.28em] transition group-hover:bg-white/10 group-focus-visible:bg-white/10">
-                  {t("common.view")}
+                  {t("common.openCollection")}
                 </span>
               </div>
             </Link>
@@ -115,6 +153,7 @@ export default async function Home() {
           </h2>
           <div className="mt-4 space-y-3.5 text-[11px] font-normal leading-[1.55] text-stone-950 sm:text-xs sm:leading-[1.55]">
             <p>{t("home.brandStory1")}</p>
+            <p>{t("home.brandStory2")}</p>
             <p>{t("home.brandStory3")}</p>
           </div>
         </div>

@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import CatalogView from "@/components/CatalogView";
-import { accessoryCategories, productsBySection } from "@/lib/data";
+import { productsBySection, shopAccessoryMenuCategories } from "@/lib/data";
 import { getServerLocale, getServerT } from "@/lib/server-i18n";
 import { categoryName } from "@/lib/catalog-i18n";
 
@@ -13,7 +13,7 @@ export default async function AccessoriesPage() {
       title={t("catalog.allAccessories")}
       description={t("catalog.accessoriesDescription")}
       products={productsBySection("accessories")}
-      categories={accessoryCategories}
+      categories={shopAccessoryMenuCategories}
       basePath="/accessories"
       activeSlug="vse-aksessuary"
       crumbs={[{ label: categoryName("vse-aksessuary", "Все аксессуары", locale) }]}

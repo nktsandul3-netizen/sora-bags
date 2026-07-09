@@ -1,4 +1,10 @@
 import type { BrandDef, CategoryDef, Product } from "./types";
+import {
+  curatedBestsellersOrder,
+  resolveCategorySlugs,
+  virtualAccessoryCategories,
+  virtualBagCategories,
+} from "./shop-menu";
 
 export const bagCategories: CategoryDef[] = [
   { slug: "clutches", name: "Clutches", section: "bags" },
@@ -18,7 +24,18 @@ export const accessoryCategories: CategoryDef[] = [
   { slug: "bag-charms", name: "Брелки", section: "accessories" },
 ];
 
-export const allCategories = [...bagCategories, ...accessoryCategories];
+export const allCategories = [
+  ...bagCategories,
+  ...accessoryCategories,
+  ...virtualBagCategories,
+  ...virtualAccessoryCategories,
+];
+
+export {
+  shopBagMenuCategories,
+  shopAccessoryMenuCategories,
+  resolveCategorySlugs,
+} from "./shop-menu";
 
 export const brands: BrandDef[] = [
   {
@@ -8022,7 +8039,12 @@ export function productsBySection(section: "bags" | "accessories"): Product[] {
 
 export function productsByCategory(slug: string): Product[] {
   if (slug === "vse-aksessuary") return productsBySection("accessories");
-  return products.filter((p) => p.categorySlug === slug);
+  const slugs = new Set(resolveCategorySlugs(slug));
+  return products.filter(
+    (p) =>
+      slugs.has(p.categorySlug) ||
+      p.additionalCategorySlugs?.some((s) => slugs.has(s)),
+  );
 }
 
 export function productsByBrand(slug: string): Product[] {
@@ -8100,10 +8122,26 @@ export const wovenBagProducts = products.filter(
     (hasWovenMaterial(p) || wovenBagIncludedSlugs.has(p.slug)),
 );
 
+/** Venezia Intreccio — curated woven silhouettes shown separately from Amalfi. */
+const veneziaIntreccioOrder = [
+  "womens-woven-crescent-hobo-bag", // Manon
+  "womens-woven-oval-handle-tote-bag", // Oriane
+  "womens-woven-oval-handle-tote-bag-mokko", // Roxane
+  "womens-woven-buckle-handle-tote-bag", // Lisette
+  "womens-woven-zip-crossbody-bag", // Gwenaelle
+  "womens-woven-flap-top-handle-bag", // Noriane
+  "womens-woven-leather-turn-lock-clutch-bag", // Annabel
+  "womens-woven-suede-flap-clutch-bag", // Damiana
+];
+
 export function productHasPhotos(p: Product): boolean {
   if (p.images && p.images.length > 0) return true;
   return p.colors.some((c) => c.images && c.images.length > 0);
 }
+
+export const veneziaIntreccioProducts = veneziaIntreccioOrder
+  .map((slug) => products.find((p) => p.slug === slug))
+  .filter((p): p is Product => Boolean(p && productHasPhotos(p)));
 
 const curatedBagGridOrder = [
   "womens-pebbled-leather-heart-shaped-handbag",
@@ -8411,3 +8449,12 @@ const categorySlugsWithPhotos = new Set(
 export const bagMenuCategories = bagCategories.filter(
   (c) => categorySlugsWithPhotos.has(c.slug),
 );
+
+function buildCuratedBestsellers(): Product[] {
+  const bySlug = new Map(products.map((p) => [p.slug, p]));
+  return curatedBestsellersOrder
+    .map((slug) => bySlug.get(slug))
+    .filter((p): p is Product => Boolean(p && productHasPhotos(p)));
+}
+
+export const bestsellerProducts = buildCuratedBestsellers();

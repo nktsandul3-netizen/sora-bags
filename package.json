@@ -10,7 +10,8 @@
     "create-admin": "node scripts/create-admin.mjs",
     "check-mongo": "node scripts/check-mongo.mjs",
     "check-instagram": "node scripts/check-instagram.mjs",
-    "catalog:pdf": "node scripts/generate-catalog-pdf.mjs"
+    "catalog:pdf": "node scripts/generate-catalog-pdf.mjs",
+    "menu:fix": "node scripts/fix-sora-menu.mjs"
   },
   "dependencies": {
     "bcryptjs": "^3.0.3",

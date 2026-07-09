@@ -4,7 +4,6 @@ import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { brand } from "@/lib/config";
-import { bagMenuCategories, accessoryCategories } from "@/lib/data";
 import { useCart } from "@/context/cart";
 import { useWishlist } from "@/context/wishlist";
 import { useMenuOpen } from "@/context/menu-open";
@@ -13,8 +12,6 @@ import { isHeroOverlayPath } from "@/lib/catalog-banner";
 import { locales, switchLocalePath, withLocalePath } from "@/lib/i18n";
 import { useLocale, useT } from "@/lib/useI18n";
 import { persistLocaleCookie } from "@/context/locale";
-import { categoryName } from "@/lib/catalog-i18n";
-
 const overlayTextShadow =
   "[text-shadow:0_1px_3px_rgba(0,0,0,0.95),0_3px_16px_rgba(0,0,0,0.75),0_0_1px_rgba(255,255,255,0.65)]";
 const overlayLogoClass =
@@ -308,115 +305,16 @@ function LanguageSwitcher({ overlay = false, reversed = false }: { overlay?: boo
   );
 }
 
-function CatIcon({ children }: { children: React.ReactNode }) {
-  return (
-    <svg
-      viewBox="0 0 24 24"
-      className="h-[26px] w-[26px] shrink-0"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="1.25"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      aria-hidden
-    >
-      {children}
-    </svg>
-  );
-}
-
-const bagCategoryIcons: Record<string, React.ReactNode> = {
-  clutches: (
-    <CatIcon>
-      <rect x="3.5" y="8.5" width="17" height="8.4" rx="1.4" />
-      <path d="M3.7 9.3 12 14l8.3-4.7" />
-    </CatIcon>
-  ),
-  vanity: (
-    <CatIcon>
-      <rect x="4.6" y="9" width="14.8" height="9.6" rx="2.2" />
-      <path d="M9 9a3 3 0 0 1 6 0" />
-      <path d="M12 9v2.4" />
-    </CatIcon>
-  ),
-  "bucket-bags-women": (
-    <CatIcon>
-      <path d="M7 9.6h10l-1.15 8.9H8.15z" />
-      <path d="M8 9.6c0-3.4 8-3.4 8 0" />
-    </CatIcon>
-  ),
-  "bowling-bags": (
-    <CatIcon>
-      <path d="M5 13.2c0-3.3 3.1-5.1 7-5.1s7 1.8 7 5.1v4.3a1 1 0 0 1-1 1H6a1 1 0 0 1-1-1z" />
-      <path d="M9.2 8.5c.8-1.7 4.8-1.7 5.6 0" />
-    </CatIcon>
-  ),
-  "handbags-women": (
-    <CatIcon>
-      <path d="M5.6 10.6h12.8v7.4a.7.7 0 0 1-.7.7H6.3a.7.7 0 0 1-.7-.7z" />
-      <path d="M9 10.6a3 3 0 0 1 6 0" />
-      <path d="M11.1 13.6h1.8v1.7h-1.8z" />
-    </CatIcon>
-  ),
-  "rectangular-bags": (
-    <CatIcon>
-      <rect x="7" y="9.6" width="10" height="9.2" rx="0.9" />
-      <path d="M9.5 9.6a2.5 2.5 0 0 1 5 0" />
-    </CatIcon>
-  ),
-  "tote-bags-women": (
-    <CatIcon>
-      <path d="M6.5 9.6h11l-1 9.2h-9z" />
-      <path d="M8.8 9.6c0-2.3 1-3.3 2-3.3s2 1 2 3.3" />
-      <path d="M11.2 9.6c0-2.3 1-3.3 2-3.3s2 1 2 3.3" />
-    </CatIcon>
-  ),
-  "shoulder-bags-women": (
-    <CatIcon>
-      <rect x="7.4" y="11" width="9.2" height="7.8" rx="1.2" />
-      <path d="M9 11C9 6 15 6 15 11" />
-    </CatIcon>
-  ),
-  "crossbody-bags-women": (
-    <CatIcon>
-      <rect x="5.8" y="10.6" width="12.4" height="8.2" rx="1.4" />
-      <path d="M5.8 13.6h12.4" />
-      <path d="M11.1 13.6h1.8v1.6h-1.8z" />
-      <path d="M8 10.6 9.4 8h5.2L16 10.6" />
-    </CatIcon>
-  ),
+type MenuLink = {
+  label: string;
+  href: string;
+  isCollection?: boolean;
 };
 
-const accessoryCategoryIcons: Record<string, React.ReactNode> = {
-  "card-holders-women": (
-    <CatIcon>
-      <rect x="3.2" y="6.3" width="17.6" height="11.2" rx="0.6" />
-      <path d="M4.8 8.6h14.4" />
-      <path d="M5.2 11.3h6.8" />
-    </CatIcon>
-  ),
-  "womens-wallets-women": (
-    <CatIcon>
-      <path d="M4.2 8.2h15.6v8.7a1.2 1.2 0 0 1-1.2 1.2H5.4a1.2 1.2 0 0 1-1.2-1.2z" />
-      <path d="M5 8.7c2.6 2.2 11.4 2.2 14 0" />
-      <path d="M15.7 12.9h3.2" />
-    </CatIcon>
-  ),
-  "womens-scarves-women": (
-    <CatIcon>
-      <path d="M5.5 8.2c3.4 1.9 9.6 1.9 13 0" />
-      <path d="M6.8 8.2 8.2 16.6 12 14.1 15.8 16.6 17.2 8.2" />
-      <path d="M10.1 9.8 9.6 13.2" />
-      <path d="M13.9 9.8 14.4 13.2" />
-    </CatIcon>
-  ),
-  "bag-charms": (
-    <CatIcon>
-      <circle cx="12" cy="7.3" r="2.1" />
-      <path d="M12 9.4v2.8" />
-      <circle cx="12" cy="15.7" r="2.7" />
-    </CatIcon>
-  ),
+type MenuSection = {
+  id: "shop" | "info";
+  label: string;
+  links: MenuLink[];
 };
 
 function MobileMenu({ onClose }: { onClose: () => void }) {
@@ -425,44 +323,33 @@ function MobileMenu({ onClose }: { onClose: () => void }) {
   const pathname = usePathname();
   const router = useRouter();
   const suffix = useCurrentUrlSuffix();
-  const [activeSection, setActiveSection] = useState<"new" | "bags" | "accessories" | "info" | null>(null);
+  const [activeSection, setActiveSection] = useState<"shop" | "info" | null>("shop");
 
-  const sections: {
-    id: "new" | "bags" | "accessories" | "info";
-    label: string;
-    links: { label: string; href: string; icon?: React.ReactNode }[];
-  }[] = [
+  const sections: MenuSection[] = [
     {
-      id: "new",
-      label: t("nav.new"),
+      id: "shop",
+      label: t("nav.shop"),
       links: [
-        { label: t("nav.new"), href: withLocalePath("/new", locale) },
-      ],
-    },
-    {
-      id: "bags",
-      label: t("nav.bags"),
-      links: [
-        { label: t("catalog.allBags"), href: withLocalePath("/bags", locale) },
-        ...bagMenuCategories.map((c) => ({
-          label: categoryName(c.slug, c.name, locale),
-          href: withLocalePath(`/bags/${c.slug}`, locale),
-          icon: bagCategoryIcons[c.slug],
-        })),
-      ],
-    },
-    {
-      id: "accessories",
-      label: t("nav.accessories"),
-      links: [
-        { label: t("catalog.allAccessories"), href: withLocalePath("/accessories", locale) },
-        ...accessoryCategories
-          .filter((c) => c.slug !== "vse-aksessuary")
-          .map((c) => ({
-            label: categoryName(c.slug, c.name, locale),
-            href: withLocalePath(`/accessories/${c.slug}`, locale),
-            icon: accessoryCategoryIcons[c.slug],
-          })),
+        { label: t("catalog.allCatalog"), href: withLocalePath("/bags", locale) },
+        {
+          label: t("nav.amalfiCollection"),
+          href: withLocalePath("/collections/amalfi-woven", locale),
+          isCollection: true,
+        },
+        {
+          label: t("nav.veneziaCollection"),
+          href: withLocalePath("/collections/venezia-intreccio", locale),
+          isCollection: true,
+        },
+        {
+          label: t("nav.foulardSilk"),
+          href: withLocalePath("/accessories/womens-scarves-women", locale),
+        },
+        { label: t("nav.charms"), href: withLocalePath("/accessories/bag-charms", locale) },
+        {
+          label: t("nav.wallets"),
+          href: withLocalePath("/accessories/wallets-cardholders", locale),
+        },
       ],
     },
     {
@@ -472,8 +359,8 @@ function MobileMenu({ onClose }: { onClose: () => void }) {
         { label: t("nav.about"), href: withLocalePath("/info/o-nas", locale) },
         { label: t("nav.stores"), href: withLocalePath("/info/nashi-magaziny", locale) },
         { label: t("nav.warranty"), href: withLocalePath("/info/garantiya", locale) },
+        { label: t("nav.materialsCare"), href: withLocalePath("/info/materialy-i-uhod", locale) },
         { label: t("nav.paymentDelivery"), href: withLocalePath("/info/oplata-i-dostavka", locale) },
-        { label: t("nav.gifts"), href: withLocalePath("/info/podarochnye-sertifikaty", locale) },
       ],
     },
   ];
@@ -485,6 +372,28 @@ function MobileMenu({ onClose }: { onClose: () => void }) {
       document.body.style.overflow = prev;
     };
   }, []);
+
+  const renderLink = (l: MenuLink) => (
+    <li key={l.href}>
+      <Link
+        href={l.href}
+        onClick={onClose}
+        className={
+          "flex items-baseline gap-2.5 py-2 leading-snug transition hover:text-stone-950 sm:text-[1.15rem] lg:py-1.5 lg:text-[0.95rem] " +
+          (l.isCollection
+            ? "text-[1.05rem] font-medium tracking-[0.04em] text-stone-950"
+            : "text-[1.05rem] text-stone-500")
+        }
+      >
+        <span className="menu-hover-underline">{l.label}</span>
+        {l.isCollection ? (
+          <span className="shrink-0 text-[9px] font-semibold uppercase tracking-[0.16em] text-stone-400">
+            {t("nav.collectionBadge")}
+          </span>
+        ) : null}
+      </Link>
+    </li>
+  );
 
   return (
     <div className="fixed inset-0 z-[60]">
@@ -520,22 +429,7 @@ function MobileMenu({ onClose }: { onClose: () => void }) {
                     <span className="menu-hover-underline">{section.label}</span>
                   </button>
                   {open ? (
-                    <ul className="pb-5 lg:pb-4">
-                      {section.links.map((l) => (
-                        <li key={l.href}>
-                          <Link
-                            href={l.href}
-                            onClick={onClose}
-                            className="flex items-center gap-3 py-2 text-[1.05rem] leading-snug text-stone-500 transition hover:text-stone-950 sm:text-[1.15rem] lg:py-1.5 lg:text-[0.95rem]"
-                          >
-                            {l.icon ? (
-                              <span className="text-stone-700">{l.icon}</span>
-                            ) : null}
-                            <span className="menu-hover-underline">{l.label}</span>
-                          </Link>
-                        </li>
-                      ))}
-                    </ul>
+                    <ul className="pb-5 lg:pb-4">{section.links.map(renderLink)}</ul>
                   ) : null}
                 </li>
               );

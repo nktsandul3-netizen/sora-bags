@@ -5,14 +5,22 @@ import {
   accessoryCategories,
   getCategory,
   productsByCategory,
+  shopAccessoryMenuCategories,
 } from "@/lib/data";
 import { getServerLocale } from "@/lib/server-i18n";
 import { categoryName } from "@/lib/catalog-i18n";
 
+const accessoryRouteSlugs = Array.from(
+  new Set([
+    ...accessoryCategories.map((c) => c.slug),
+    ...shopAccessoryMenuCategories.map((c) => c.slug),
+  ]),
+);
+
 export function generateStaticParams() {
-  return accessoryCategories
-    .filter((c) => c.slug !== "vse-aksessuary")
-    .map((c) => ({ type: c.slug }));
+  return accessoryRouteSlugs
+    .filter((slug) => slug !== "vse-aksessuary")
+    .map((type) => ({ type }));
 }
 
 export async function generateMetadata({
@@ -40,7 +48,7 @@ export default async function AccessoryTypePage({
     <CatalogView
       title={label}
       products={productsByCategory(cat.slug)}
-      categories={accessoryCategories}
+      categories={shopAccessoryMenuCategories}
       basePath="/accessories"
       activeSlug={cat.slug}
       crumbs={[

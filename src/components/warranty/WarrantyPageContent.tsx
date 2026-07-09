@@ -115,12 +115,6 @@ export default function WarrantyPageContent({ locale = "ru" }: { locale?: Locale
           notCoveredItems: ["Urme naturale de utilizare", "Zgârieturi fine, rosături și cute ale pielii", "Deteriorări cauzate de utilizare incorectă", "Decolorări cauzate de umezeală", "Uzură naturală în timpul folosirii"],
           invalid: "Garanția nu se aplică în caz de",
           invalidItems: ["Încălcarea regulilor de utilizare și păstrare", "Deteriorări mecanice", "Expunere la substanțe chimice", "Reparații sau modificări independente", "Folosirea produsului în alt scop"],
-          careTitle: "Îngrijire și păstrare",
-          careIntro: "Pentru păstrarea aspectului și durabilității produsului, respectați regulile de îngrijire.",
-          care: "Îngrijire",
-          careItems: ["Evitați expunerea produselor din piele la umezeală excesivă.", "Nu spălați gențile în mașina de spălat și nu le înmuiați în apă.", "Dacă produsul se udă, tamponați-l cu o lavetă moale și lăsați-l să se usuce natural.", "Folosiți produse de curățare potrivite pentru piele și testați-le înainte pe o zonă discretă."],
-          storage: "Păstrare",
-          storageItems: ["Curățați și uscați complet produsul înainte de depozitare.", "Umpleți geanta cu hârtie moale pentru a păstra forma.", "Păstrați produsul într-un săculeț textil.", "Evitați pungile de plastic, soarele direct și umiditatea ridicată."],
           claimTitle: "Solicitare de garanție",
           claimText: "Dacă considerați că situația dvs. intră sub incidența garanției, contactați-ne:",
           include: "În solicitare indicați",
@@ -144,12 +138,6 @@ export default function WarrantyPageContent({ locale = "ru" }: { locale?: Locale
           notCoveredItems: ["Natural signs of use", "Minor scratches, scuffs and leather creases", "Damage caused by improper use", "Color changes caused by moisture", "Natural wear during use"],
           invalid: "Warranty is void in case of",
           invalidItems: ["Violation of use and storage rules", "Mechanical damage", "Chemical exposure", "Independent repair or modification", "Use of the item for another purpose"],
-          careTitle: "Care and storage",
-          careIntro: "To preserve the appearance and durability of the item, follow these care rules.",
-          care: "Care",
-          careItems: ["Avoid excessive moisture on leather products.", "Do not wash bags in a washing machine or soak them in water.", "If the item gets wet, gently blot it with a soft dry cloth and let it dry naturally.", "Use products suitable for leather care and test them first on a hidden area."],
-          storage: "Storage",
-          storageItems: ["Clean and fully dry the item before long-term storage.", "Fill the bag with soft paper to preserve its shape.", "Store the item in a textile dust bag.", "Avoid plastic bags, direct sunlight and high humidity."],
           claimTitle: "Warranty claim",
           claimText: "If you believe your case is covered by warranty, contact us:",
           include: "Include in your request",
@@ -184,13 +172,6 @@ export default function WarrantyPageContent({ locale = "ru" }: { locale?: Locale
                 <EditorialImage src="/warranty-craft-banner.png" alt="SÓRA Bags craft tools" aspect="645/825" />
                 <EditorialImage src="/warranty-artisan-banner.png" alt="SÓRA Bags leather craft" aspect="683/1024" />
               </div>
-              <InfoCard title={c.careTitle} className="sm:col-span-2">
-                <p>{c.careIntro}</p>
-                <div className="grid gap-x-10 gap-y-5 pt-1 md:grid-cols-2">
-                  <div><CardSubheading>{c.care}</CardSubheading><div className="mt-3"><BulletList items={c.careItems} /></div></div>
-                  <div><CardSubheading>{c.storage}</CardSubheading><div className="mt-3"><BulletList items={c.storageItems} /></div></div>
-                </div>
-              </InfoCard>
             </div>
           </section>
           <section className="mb-14 rounded-[20px] bg-stone-950 px-8 py-10 sm:mb-16 sm:px-12 sm:py-12 lg:mb-20">
@@ -328,45 +309,6 @@ export default function WarrantyPageContent({ locale = "ru" }: { locale?: Locale
               />
             </div>
 
-            <InfoCard title="Уход и хранение" className="sm:col-span-2">
-              <p>
-                Для сохранения внешнего вида и долговечности изделия рекомендуем
-                соблюдать следующие правила ухода.
-              </p>
-              <div className="grid gap-x-10 gap-y-5 pt-1 md:grid-cols-2">
-                <div>
-                  <CardSubheading>Уход</CardSubheading>
-                  <div className="mt-3">
-                    <BulletList
-                      items={[
-                        "Изделия из натуральной и экокожи не рекомендуется подвергать воздействию влаги.",
-                        "Не стирайте сумки в стиральной машине и не замачивайте их в воде.",
-                        "При намокании аккуратно промокните изделие мягкой сухой тканью и оставьте сушиться естественным образом вдали от отопительных приборов и прямых солнечных лучей.",
-                        "Для удаления загрязнений используйте мягкую ткань и специальные средства для ухода за кожей.",
-                        "После чистки обязательно протрите изделие насухо.",
-                        "Для дополнительной защиты допускается использование водоотталкивающих средств, предназначенных для кожаных изделий.",
-                        "Перед применением любого средства рекомендуется протестировать его на незаметном участке изделия.",
-                      ]}
-                    />
-                  </div>
-                </div>
-                <div>
-                  <CardSubheading>Хранение</CardSubheading>
-                  <div className="mt-3">
-                    <BulletList
-                      items={[
-                        "Перед длительным хранением очистите и полностью высушите изделие.",
-                        "Для сохранения формы наполните сумку мягкой бумагой или другим наполнителем.",
-                        "Храните изделие в тканевом пыльнике.",
-                        "Не используйте полиэтиленовые пакеты для длительного хранения.",
-                        "Избегайте воздействия прямых солнечных лучей и повышенной влажности.",
-                        "Съёмные ремни рекомендуется хранить внутри сумки.",
-                      ]}
-                    />
-                  </div>
-                </div>
-              </div>
-            </InfoCard>
           </div>
         </section>
 

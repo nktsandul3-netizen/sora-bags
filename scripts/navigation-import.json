@@ -1,0 +1,99 @@
+{
+  "handle": "main-menu",
+  "title": "Main menu",
+  "generatedAt": "2026-07-09T17:50:04.036Z",
+  "shopify": {
+    "note": "Shopify-style collection URLs for manual Online Store → Navigation import",
+    "items": [
+      {
+        "type": "link",
+        "title": "Весь каталог",
+        "url": "/collections/all",
+        "position": 0
+      },
+      {
+        "type": "link",
+        "title": "Новинки",
+        "url": "/collections/new",
+        "position": 1
+      },
+      {
+        "type": "link",
+        "title": "AMALFI",
+        "url": "/collections/amalfi",
+        "position": 2
+      },
+      {
+        "type": "link",
+        "title": "VENEZIA INTRECCIO",
+        "url": "/collections/venezia-intreccio",
+        "position": 3
+      },
+      {
+        "type": "link",
+        "title": "Foulard / Шелк",
+        "url": "/collections/silk-scarves",
+        "position": 4
+      },
+      {
+        "type": "link",
+        "title": "Charms",
+        "url": "/collections/bag-charms",
+        "position": 5
+      },
+      {
+        "type": "link",
+        "title": "Кошельки",
+        "url": "/collections/wallets",
+        "position": 6
+      }
+    ]
+  },
+  "site": {
+    "note": "Actual Next.js routes used on sorabags.md",
+    "items": [
+      {
+        "type": "link",
+        "title": "Весь каталог",
+        "url": "/bags",
+        "position": 0
+      },
+      {
+        "type": "link",
+        "title": "Новинки",
+        "url": "/new",
+        "position": 1
+      },
+      {
+        "type": "link",
+        "title": "AMALFI",
+        "url": "/collections/amalfi-woven",
+        "position": 2
+      },
+      {
+        "type": "link",
+        "title": "VENEZIA INTRECCIO",
+        "url": "/collections/venezia-intreccio",
+        "position": 3
+      },
+      {
+        "type": "link",
+        "title": "Foulard / Шелк",
+        "url": "/accessories/womens-scarves-women",
+        "position": 4
+      },
+      {
+        "type": "link",
+        "title": "Charms",
+        "url": "/accessories/bag-charms",
+        "position": 5
+      },
+      {
+        "type": "link",
+        "title": "Кошельки",
+        "url": "/accessories/wallets-cardholders",
+        "position": 6
+      }
+    ]
+  }
+}

@@ -14,7 +14,8 @@ import Image from "next/image";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import type { CategoryDef, Product } from "@/lib/types";
 import {
-  bagMenuCategories,
+  shopBagMenuCategories,
+  shopAccessoryMenuCategories,
   compareByCuratedBagGrid,
   compareByCategoryThenNewest,
   compareByNewest,
@@ -227,8 +228,10 @@ function CatalogViewInner({
   const hasActiveFilters = activeCount > 0;
   const isBags = categories?.[0]?.section === "bags";
   const navCategories = isBags
-    ? bagMenuCategories
-    : categories?.filter((c) => c.slug !== "vse-aksessuary");
+    ? shopBagMenuCategories
+    : categories?.[0]?.section === "accessories"
+      ? shopAccessoryMenuCategories
+      : categories?.filter((c) => c.slug !== "vse-aksessuary");
   const productCountLabel =
     locale === "ru" ? "товаров" : locale === "ro" ? "produse" : "products";
 
@@ -252,11 +255,19 @@ function CatalogViewInner({
         {navCategories && basePath ? (
           <nav className="mb-7 overflow-x-auto [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
             <div className="flex min-w-max items-center justify-center gap-6 text-[11px] font-medium leading-none text-stone-500 sm:gap-7">
+              <Link
+                href={withLocalePath(basePath, locale)}
+                className={
+                  "whitespace-nowrap transition hover:text-stone-950 " +
+                  (activeSlug === "vse-sumki" || activeSlug === "vse-aksessuary"
+                    ? "font-semibold text-stone-950"
+                    : "text-stone-500")
+                }
+              >
+                {t("catalog.all")}
+              </Link>
               {navCategories.map((c) => {
-                const href =
-                  c.slug === "vse-sumki" || c.slug === "vse-aksessuary"
-                    ? basePath
-                    : `${basePath}/${c.slug}`;
+                const href = `${basePath}/${c.slug}`;
                 return (
                   <Link
                     key={c.slug}

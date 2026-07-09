@@ -1,7 +1,12 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import CatalogView from "@/components/CatalogView";
-import { bagCategories, getCategory, productsByCategory } from "@/lib/data";
+import {
+  bagCategories,
+  getCategory,
+  productsByCategory,
+  shopBagMenuCategories,
+} from "@/lib/data";
 import { getServerLocale } from "@/lib/server-i18n";
 import { categoryName, categoryHeroCopy } from "@/lib/catalog-i18n";
 import type { Locale } from "@/lib/i18n";
@@ -112,6 +117,16 @@ const bagHeroConfigs: Record<
     bgClassName: "bg-[#7a7570]",
     fit: "full-width",
   },
+  "clutch-evening": {
+    src: "/banners/clutches-hero-v2.jpg",
+    alt: "Clutch and evening bags SÓRA",
+    width: 1024,
+    height: 576,
+    objectPosition: "50% 42%",
+    copyTone: "light",
+    bgClassName: "bg-[#c8c0b8]",
+    aspectClass: "h-[max(120px,calc(100vw*576/1024-4cm))]",
+  },
 };
 
 function getBagHeroBanner(slug: string, locale: Locale) {
@@ -123,10 +138,17 @@ function getBagHeroBanner(slug: string, locale: Locale) {
   };
 }
 
+const bagRouteSlugs = Array.from(
+  new Set([
+    ...bagCategories.map((c) => c.slug),
+    ...shopBagMenuCategories.map((c) => c.slug),
+  ]),
+);
+
 export function generateStaticParams() {
-  return bagCategories
-    .filter((c) => c.slug !== "vse-sumki")
-    .map((c) => ({ type: c.slug }));
+  return bagRouteSlugs
+    .filter((slug) => slug !== "vse-sumki")
+    .map((type) => ({ type }));
 }
 
 export async function generateMetadata({
@@ -154,7 +176,7 @@ export default async function BagTypePage({
     <CatalogView
       title={label}
       products={productsByCategory(cat.slug)}
-      categories={bagCategories}
+      categories={shopBagMenuCategories}
       basePath="/bags"
       activeSlug={cat.slug}
       crumbs={[{ label: categoryName("vse-sumki", "Все сумки", locale), href: "/bags" }, { label }]}

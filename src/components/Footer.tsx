@@ -180,8 +180,8 @@ export default function Footer() {
     { href: "/info/o-nas", label: t("nav.about") },
     { href: "/info/nashi-magaziny", label: t("nav.stores") },
     { href: "/info/garantiya", label: t("nav.warranty") },
+    { href: "/info/materialy-i-uhod", label: t("nav.materialsCare") },
     { href: "/info/oplata-i-dostavka", label: t("nav.paymentDelivery") },
-    { href: "/info/podarochnye-sertifikaty", label: t("nav.gifts") },
     { href: "/info/vozvrat", label: t("nav.returns") },
   ];
   const legal = [

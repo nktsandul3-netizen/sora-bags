@@ -1,0 +1,78 @@
+{
+  "sections": {
+    "sora_materials_care": {
+      "type": "sora-materials-care",
+      "settings": {
+        "heading": "Materials and care",
+        "faq_heading": "FAQ",
+        "whatsapp_url": "https://wa.me/37360066665",
+        "whatsapp_label": "Write on WhatsApp"
+      },
+      "blocks": {
+        "raffia": {
+          "type": "content_block",
+          "settings": {
+            "image_filename": "raffia_texture_closeup.webp",
+            "title": "Raffia",
+            "text": "<p>Woven raffia is a light natural material for the city and warmer seasons. Keep it away from heavy moisture.</p><p>If wet, gently blot with a soft dry cloth and let dry naturally away from heaters and direct sun.</p>"
+          }
+        },
+        "leather": {
+          "type": "content_block",
+          "settings": {
+            "image_filename": "white_intrecciato_leather_macro.webp",
+            "title": "Intreccio leather",
+            "text": "<p>Natural leather and intreccio weaving keep their grain, softness and shade. Small variations are a sign of a living material.</p><p>Do not machine-wash or soak bags. Clean with a soft cloth and leather care products.</p>"
+          }
+        },
+        "silk": {
+          "type": "content_block",
+          "settings": {
+            "image_filename": "blue_white_silk_scarf.webp",
+            "title": "Silk / Foulard",
+            "text": "<p>Silk scarves add a light accent to a bag or look. Store them away from direct sun to keep the print vivid.</p><p>Prefer gentle dry cleaning or hand wash in cool water with silk detergent.</p>"
+          }
+        },
+        "care": {
+          "type": "content_block",
+          "settings": {
+            "image_filename": "minimal_flatlay_sandstone.webp",
+            "title": "Care and storage",
+            "text": "<p>Before long-term storage, clean and fully dry the piece. Fill the bag with soft paper and keep it in a fabric dust bag.</p><p>Avoid plastic bags for long storage. Store detachable straps inside the bag.</p>"
+          }
+        },
+        "faq_1": {
+          "type": "faq",
+          "settings": {
+            "question": "Can I get a raffia or leather bag wet?",
+            "answer": "No — leather and raffia pieces should not be exposed to moisture. If wet, blot with a dry cloth and let dry naturally."
+          }
+        },
+        "faq_2": {
+          "type": "faq",
+          "settings": {
+            "question": "How do I clean a leather bag?",
+            "answer": "Use a soft cloth and leather care products. Test on a hidden area first, then wipe dry."
+          }
+        },
+        "faq_3": {
+          "type": "faq",
+          "settings": {
+            "question": "How should I store my bag?",
+            "answer": "In a fabric dust bag, filled with soft paper to keep the shape, away from direct sun, high humidity and plastic bags."
+          }
+        }
+      },
+      "block_order": [
+        "raffia",
+        "leather",
+        "silk",
+        "care",
+        "faq_1",
+        "faq_2",
+        "faq_3"
+      ]
+    }
+  },
+  "order": ["sora_materials_care"]
+}

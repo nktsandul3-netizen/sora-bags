@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import CatalogView from "@/components/CatalogView";
-import { bagCategories, productsBySection } from "@/lib/data";
+import { productsBySection, shopBagMenuCategories } from "@/lib/data";
 import { getServerLocale, getServerT } from "@/lib/server-i18n";
 import { categoryName } from "@/lib/catalog-i18n";
 
@@ -13,7 +13,7 @@ export default async function BagsPage() {
       title={t("catalog.allBags")}
       description={t("catalog.bagsDescription")}
       products={productsBySection("bags")}
-      categories={bagCategories}
+      categories={shopBagMenuCategories}
       basePath="/bags"
       activeSlug="vse-sumki"
       crumbs={[{ label: categoryName("vse-sumki", "Все сумки", locale) }]}

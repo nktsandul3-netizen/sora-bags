@@ -7,6 +7,7 @@ import AboutUsContent from "@/components/about/AboutUsContent";
 import PaymentDeliveryPageContent from "@/components/payment/PaymentDeliveryPageContent";
 import ReturnPageContent from "@/components/return/ReturnPageContent";
 import WarrantyPageContent from "@/components/warranty/WarrantyPageContent";
+import MaterialsCarePageContent from "@/components/materials/MaterialsCarePageContent";
 import GiftCertificatePageContent from "@/components/gift/GiftCertificatePageContent";
 import OfferPageContent from "@/components/offer/OfferPageContent";
 import RekvizityContent from "@/components/RekvizityContent";
@@ -73,6 +74,10 @@ export default async function InfoPageRoute({
 
   if (page.slug === "garantiya") {
     return <WarrantyPageContent locale={locale} />;
+  }
+
+  if (page.slug === "materialy-i-uhod") {
+    return <MaterialsCarePageContent locale={locale} />;
   }
 
   if (page.slug === "podarochnye-sertifikaty") {
