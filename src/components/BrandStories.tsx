@@ -2,7 +2,7 @@
 
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { brand, brandStories, type BrandStoryHighlight, type BrandStoryHighlightOverride, type BrandStoryProductOverride } from "@/lib/config";
-import { useLocale } from "@/lib/useI18n";
+import { useT } from "@/lib/useI18n";
 
 const IMAGE_DURATION = 5000;
 
@@ -52,14 +52,6 @@ function getItemsForProduct(productSlug?: string): BrandStoryHighlight[] {
     })
     .filter((item) => item.slides.length > 0);
 }
-
-type Locale = "ru" | "ro" | "en";
-
-const ctaLabels: Record<NonNullable<"collection" | "more" | "shop">, Record<Locale, string>> = {
-  collection: { ru: "Смотреть коллекцию", ro: "Vezi colecția", en: "Shop the collection" },
-  more: { ru: "Подробнее", ro: "Detalii", en: "Read more" },
-  shop: { ru: "В магазин", ro: "La magazin", en: "Shop now" },
-};
 
 function PlayIcon({ className }: { className?: string }) {
   return (
@@ -155,11 +147,14 @@ function ChevronIcon({ direction, className }: { direction: "left" | "right"; cl
 export default function BrandStories({
   className,
   productSlug,
+  variant = "rail",
 }: {
   className?: string;
   productSlug?: string;
+  /** `gallery-badge` — compact trigger for PDP gallery corner */
+  variant?: "rail" | "gallery-badge";
 }) {
-  const locale = useLocale() as Locale;
+  const t = useT();
   const items = useMemo(() => getItemsForProduct(productSlug), [productSlug]);
 
   const [openIdx, setOpenIdx] = useState<number | null>(null);
@@ -314,10 +309,31 @@ export default function BrandStories({
   }
 
   const ctaHref = highlight?.ctaHref;
-  const ctaLabel = highlight?.cta ? ctaLabels[highlight.cta][locale] ?? ctaLabels[highlight.cta].ru : null;
+  const ctaLabel = highlight?.cta
+    ? highlight.cta === "collection"
+      ? t("home.veneziaCta")
+      : highlight.cta === "more"
+        ? t("common.view")
+        : t("common.shopNow")
+    : null;
+  const inMotionLabel = items[0]?.label ?? t("home.inMotion");
 
   return (
     <>
+      {variant === "gallery-badge" ? (
+        <button
+          type="button"
+          onClick={() => openHighlight(0)}
+          className={
+            "inline-flex items-center gap-1.5 bg-white/90 px-2.5 py-1.5 text-[10px] font-medium uppercase tracking-[0.14em] text-[#111] outline-none backdrop-blur-sm transition hover:bg-white focus:outline-none focus-visible:outline-none " +
+            (className ?? "")
+          }
+          aria-label={inMotionLabel}
+        >
+          <PlayIcon className="h-2.5 w-2.5" />
+          {inMotionLabel}
+        </button>
+      ) : (
       <div className={"flex flex-wrap items-start gap-x-5 gap-y-4 " + (className ?? "")}>
         {items.map((item, i) => {
           const itemRingGradient = getRingGradient(productSlug, item.id);
@@ -364,6 +380,7 @@ export default function BrandStories({
           );
         })}
       </div>
+      )}
 
       {open && highlight && (
         <div
@@ -372,12 +389,12 @@ export default function BrandStories({
           aria-modal="true"
           aria-label={highlight.label}
         >
-          <button type="button" aria-label="Закрыть" onClick={close} className="absolute inset-0 cursor-default" />
+          <button type="button" aria-label={t("common.close")} onClick={close} className="absolute inset-0 cursor-default" />
 
           <div className="relative z-10 flex items-center gap-2 sm:gap-4 md:gap-5">
             <button
               type="button"
-              aria-label="Предыдущее"
+              aria-label={t("a11y.previous")}
               onClick={prev}
               className="hidden h-11 w-11 shrink-0 items-center justify-center rounded-full bg-white/15 text-white backdrop-blur-sm transition hover:bg-white/25 md:flex"
             >
@@ -421,13 +438,13 @@ export default function BrandStories({
             {/* Tap zones for prev/next */}
             <button
               type="button"
-              aria-label="Предыдущее"
+              aria-label={t("a11y.previous")}
               onClick={prev}
               className="absolute bottom-28 left-0 top-14 z-10 w-1/3"
             />
             <button
               type="button"
-              aria-label="Следующее"
+              aria-label={t("a11y.next")}
               onClick={next}
               className="absolute bottom-28 right-0 top-14 z-10 w-1/3"
             />
@@ -448,7 +465,7 @@ export default function BrandStories({
                 <button
                   type="button"
                   onClick={() => setPaused((p) => !p)}
-                  aria-label={paused ? "Продолжить" : "Пауза"}
+                  aria-label={paused ? t("a11y.play") : t("a11y.pause")}
                   className="grid h-9 w-9 place-items-center rounded-full bg-black/40 text-white backdrop-blur-sm transition hover:bg-black/60"
                 >
                   {paused ? <PlayIcon className="ml-0.5 h-4 w-4" /> : <PauseIcon className="h-4 w-4" />}
@@ -457,7 +474,7 @@ export default function BrandStories({
                   <button
                     type="button"
                     onClick={() => setMuted((m) => !m)}
-                    aria-label={muted ? "Включить звук" : "Выключить звук"}
+                    aria-label={muted ? t("a11y.unmute") : t("a11y.mute")}
                     className="grid h-9 w-9 place-items-center rounded-full bg-black/40 text-white backdrop-blur-sm transition hover:bg-black/60"
                   >
                     {muted ? <SoundOffIcon className="h-4 w-4" /> : <SoundOnIcon className="h-4 w-4" />}
@@ -466,7 +483,7 @@ export default function BrandStories({
                 <button
                   type="button"
                   onClick={close}
-                  aria-label="Закрыть"
+                  aria-label={t("common.close")}
                   className="grid h-9 w-9 place-items-center rounded-full bg-black/40 text-white backdrop-blur-sm transition hover:bg-black/60"
                 >
                   <CloseIcon className="h-4 w-4" />
@@ -498,7 +515,7 @@ export default function BrandStories({
 
             <button
               type="button"
-              aria-label="Следующее"
+              aria-label={t("a11y.next")}
               onClick={next}
               className="hidden h-11 w-11 shrink-0 items-center justify-center rounded-full bg-white/15 text-white backdrop-blur-sm transition hover:bg-white/25 md:flex"
             >

@@ -1,5 +1,10 @@
 import type { Locale } from "@/lib/i18n";
 import { COLOR_FAMILY_ORDER, colorFamilyLabel, colorFamilySwatch, getColorFamilies } from "@/lib/color-taxonomy";
+import {
+  MATERIAL_FAMILY_ORDER,
+  getMaterialFamily,
+  materialFamilyLabel,
+} from "@/lib/material-taxonomy";
 import type { Product } from "@/lib/types";
 
 export interface CatalogFilters {
@@ -64,7 +69,7 @@ export function countActiveCatalogFilters(filters: CatalogFilters) {
 
 export function buildCatalogFacets(products: Product[], locale: Locale): CatalogFacets {
   const colorFamilies = new Set<string>();
-  const materials = new Set<string>();
+  const materialFamilies = new Set<string>();
   const seen = new Set<string>();
 
   for (const product of products) {
@@ -74,7 +79,8 @@ export function buildCatalogFacets(products: Product[], locale: Locale): Catalog
     product.colors.forEach((color) =>
       getColorFamilies(color.name).forEach((family) => colorFamilies.add(family)),
     );
-    if (product.material) materials.add(product.material);
+    const materialFamily = product.material ? getMaterialFamily(product.material) : null;
+    if (materialFamily) materialFamilies.add(materialFamily);
   }
 
   return {
@@ -83,9 +89,10 @@ export function buildCatalogFacets(products: Product[], locale: Locale): Catalog
       label: colorFamilyLabel(key, locale),
       swatch: colorFamilySwatch(key),
     })),
-    materials: [...materials]
-      .sort((a, b) => a.localeCompare(b, locale))
-      .map((value) => ({ value, label: value })),
+    materials: MATERIAL_FAMILY_ORDER.filter((key) => materialFamilies.has(key)).map((key) => ({
+      value: key,
+      label: materialFamilyLabel(key, locale),
+    })),
   };
 }
 
@@ -103,10 +110,11 @@ function parsePriceBound(raw: string): number | undefined {
 }
 
 export function buildProductFilterIndex(product: Product): ProductFilterIndex {
+  const materialFamily = product.material ? getMaterialFamily(product.material) : null;
   return {
     product,
     colors: product.colors.flatMap((color) => getColorFamilies(color.name)),
-    materials: product.material ? [product.material] : [],
+    materials: materialFamily ? [materialFamily] : [],
   };
 }
 

@@ -166,7 +166,7 @@ export default function Footer() {
   const locale = useLocale();
   const t = useT();
   const brandText = {
-    tagline: locale === "ru" ? brand.tagline : locale === "ro" ? "Genți și accesorii italiene din piele naturală" : "Italian bags and accessories in genuine leather",
+    tagline: t("brand.tagline"),
   };
   const storeHours = getStoreHours(primaryStore, locale)[0];
   const storeAddress = getStoreAddress(primaryStore, locale);
@@ -285,11 +285,7 @@ export default function Footer() {
         <div className="mx-auto flex max-w-7xl flex-col gap-5 px-4 py-6 sm:px-6 lg:flex-row lg:items-center lg:justify-between lg:gap-8 lg:py-7">
           <p className="text-xs leading-relaxed text-stone-400 lg:max-w-[18rem] lg:shrink-0">
             © {new Date().getFullYear()} {brand.legalName}.{" "}
-            {locale === "ru"
-              ? "Все права защищены."
-              : locale === "ro"
-                ? "Toate drepturile rezervate."
-                : "All rights reserved."}
+            {t("common.allRightsReserved")}
           </p>
           <nav className="flex flex-wrap items-center gap-x-4 gap-y-2 text-xs text-stone-400 lg:flex-1 lg:justify-center">
             {localizeLinks(legal).map((link, index) => (

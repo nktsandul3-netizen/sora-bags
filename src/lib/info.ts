@@ -41,7 +41,7 @@ export const infoPages: InfoPage[] = [
   },
   {
     slug: "garantiya",
-    title: "Гарантия качества",
+    title: "Гарантия и уход",
     bannerImage: "/warranty-banner-v3.png",
     extraBanners: [
       {
@@ -112,7 +112,7 @@ const localizedInfoTitles: Record<string, { ro: string; en: string }> = {
   "o-nas": { ro: "Istoria noastră", en: "Our Story" },
   "oplata-i-dostavka": { ro: "Plată și livrare", en: "Payment and delivery" },
   vozvrat: { ro: "Retur", en: "Returns" },
-  garantiya: { ro: "Garanția calității", en: "Quality warranty" },
+  garantiya: { ro: "Garanție și îngrijire", en: "Warranty and care" },
   "materialy-i-uhod": { ro: "Materiale și îngrijire", en: "Materials and care" },
   "nashi-magaziny": { ro: "Magazinele noastre", en: "Our stores" },
   "podarochnye-sertifikaty": { ro: "Certificate cadou", en: "Gift certificates" },

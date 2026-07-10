@@ -3,7 +3,10 @@ import CatalogView from "@/components/CatalogView";
 import { wovenBagProducts } from "@/lib/data";
 import { getServerT } from "@/lib/server-i18n";
 
-export const metadata: Metadata = { title: "Amalfi Woven Collection" };
+export async function generateMetadata(): Promise<Metadata> {
+  const t = await getServerT();
+  return { title: t("catalog.wovenCollection") };
+}
 
 export default async function AmalfiWovenCollectionPage() {
   const t = await getServerT();

@@ -1,16 +1,19 @@
 "use client";
 
 import { useWishlist } from "@/context/wishlist";
+import { useT } from "@/lib/useI18n";
 
 export default function WishlistButton({
   slug,
   variant = "icon",
 }: {
   slug: string;
-  variant?: "icon" | "full" | "compact" | "square" | "ring";
+  variant?: "icon" | "full" | "compact" | "square" | "ring" | "card" | "pdp";
 }) {
   const { has, toggle } = useWishlist();
+  const t = useT();
   const active = has(slug);
+  const ariaLabel = active ? t("common.removeFromWishlist") : t("common.toWishlist");
 
   function handle(e: React.MouseEvent) {
     e.preventDefault();
@@ -18,11 +21,41 @@ export default function WishlistButton({
     toggle(slug);
   }
 
+  if (variant === "pdp") {
+    return (
+      <button
+        onClick={handle}
+        aria-label={ariaLabel}
+        className={
+          "inline-flex h-12 w-12 shrink-0 items-center justify-center border border-[#E8E2DD] bg-[#FFFBF9] outline-none transition hover:bg-white focus:outline-none focus-visible:outline-none " +
+          (active ? "text-[#C96A1A]" : "text-[#111]")
+        }
+      >
+        <HeartIcon filled={active} size={20} exact />
+      </button>
+    );
+  }
+
+  if (variant === "card") {
+    return (
+      <button
+        onClick={handle}
+        aria-label={ariaLabel}
+        className={
+          "-m-2 inline-flex items-center justify-center p-2 transition " +
+          (active ? "text-[#C96A1A]" : "text-stone-700 hover:text-stone-950")
+        }
+      >
+        <HeartIcon filled={active} exact />
+      </button>
+    );
+  }
+
   if (variant === "compact") {
     return (
       <button
         onClick={handle}
-        aria-label={active ? "Убрать из избранного" : "В избранное"}
+        aria-label={ariaLabel}
         className={
           "inline-flex items-center justify-center transition " +
           (active ? "text-[#C96A1A]" : "text-stone-400 hover:text-stone-700")
@@ -37,7 +70,7 @@ export default function WishlistButton({
     return (
       <button
         onClick={handle}
-        aria-label={active ? "Убрать из избранного" : "В избранное"}
+        aria-label={ariaLabel}
         className={
           "inline-flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl border bg-white transition " +
           (active
@@ -54,7 +87,7 @@ export default function WishlistButton({
     return (
       <button
         onClick={handle}
-        aria-label={active ? "Убрать из избранного" : "В избранное"}
+        aria-label={ariaLabel}
         className={
           "inline-flex h-11 w-11 shrink-0 items-center justify-center rounded-full border border-[#E5E0DC] bg-transparent transition " +
           (active ? "text-[#C96A1A]" : "text-[#1A1A1A] hover:border-[#1A1A1A]")
@@ -69,6 +102,7 @@ export default function WishlistButton({
     return (
       <button
         onClick={handle}
+        aria-label={ariaLabel}
         className={
           "mt-3 inline-flex w-full items-center justify-center gap-2 rounded-full border px-6 py-3.5 text-sm font-semibold transition sm:w-auto " +
           (active
@@ -77,7 +111,7 @@ export default function WishlistButton({
         }
       >
         <HeartIcon filled={active} />
-        {active ? "В избранном" : "В избранное"}
+        {active ? t("common.inWishlist") : t("common.toWishlist")}
       </button>
     );
   }
@@ -85,7 +119,7 @@ export default function WishlistButton({
   return (
     <button
       onClick={handle}
-      aria-label={active ? "Убрать из избранного" : "В избранное"}
+      aria-label={ariaLabel}
       className={
         "inline-flex h-9 w-9 items-center justify-center rounded-full bg-white/85 shadow-sm backdrop-blur transition-all duration-200 hover:scale-110 hover:bg-white active:scale-95 " +
         (active ? "text-[#C96A1A]" : "text-stone-700")
@@ -96,11 +130,20 @@ export default function WishlistButton({
   );
 }
 
-function HeartIcon({ filled }: { filled: boolean }) {
+function HeartIcon({
+  filled,
+  exact = false,
+  size = 18,
+}: {
+  filled: boolean;
+  exact?: boolean;
+  size?: number;
+}) {
   return (
     <svg
       viewBox="0 0 24 24"
-      className="h-[18px] w-[18px] origin-center scale-x-[1.08]"
+      className={exact ? undefined : "origin-center scale-x-[1.08]"}
+      style={{ width: size, height: size }}
       fill={filled ? "currentColor" : "none"}
       stroke="currentColor"
       strokeWidth="1.5"

@@ -111,7 +111,7 @@ export const storeServicesCopy = {
       {
         id: "payment" as const,
         title: "Безопасные платежи",
-        text: "Все покупки на Sóra гарантированы и безопасны.",
+        text: "Все покупки в SÓRA гарантированы и безопасны.",
       },
       {
         id: "delivery" as const,
@@ -133,7 +133,7 @@ export const storeServicesCopy = {
       {
         id: "payment" as const,
         title: "Plăți sigure",
-        text: "Toate achizițiile pe Sóra sunt garantate și sigure.",
+        text: "Toate achizițiile de la SÓRA sunt garantate și sigure.",
       },
       {
         id: "delivery" as const,
@@ -155,7 +155,7 @@ export const storeServicesCopy = {
       {
         id: "payment" as const,
         title: "Secure payments",
-        text: "All purchases on Sóra are guaranteed and secure.",
+        text: "All purchases from SÓRA are guaranteed and secure.",
       },
       {
         id: "delivery" as const,

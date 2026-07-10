@@ -11,8 +11,10 @@ import {
 } from "react";
 import { useSession } from "next-auth/react";
 import { sendAnalyticsEvent } from "@/components/AnalyticsTracker";
+import { canonicalizeProductSlugs } from "@/lib/product-slug-aliases";
 
-const STORAGE_KEY = "luma-wishlist-v1";
+const STORAGE_KEY = "sora-wishlist-v1";
+const LEGACY_STORAGE_KEY = "luma-wishlist-v1";
 
 interface WishlistValue {
   items: string[];
@@ -33,10 +35,13 @@ export function WishlistProvider({ children }: { children: ReactNode }) {
   // Гидрация из localStorage (гостевой режим / первый рендер).
   useEffect(() => {
     try {
-      const raw = localStorage.getItem(STORAGE_KEY);
+      const raw = localStorage.getItem(STORAGE_KEY) ?? localStorage.getItem(LEGACY_STORAGE_KEY);
       // Однократная гидрация из localStorage при монтировании (внешний источник).
       // eslint-disable-next-line react-hooks/set-state-in-effect
-      if (raw) setItems(JSON.parse(raw));
+      if (raw) setItems(canonicalizeProductSlugs(JSON.parse(raw)));
+      if (localStorage.getItem(LEGACY_STORAGE_KEY)) {
+        localStorage.removeItem(LEGACY_STORAGE_KEY);
+      }
     } catch {
       // ignore
     } finally {

@@ -6,13 +6,16 @@ import { products } from "@/lib/data";
 import { getServerLocale, getServerT } from "@/lib/server-i18n";
 import { withLocalePath } from "@/lib/i18n";
 
-export const metadata: Metadata = { title: "Blue capsule" };
+export async function generateMetadata(): Promise<Metadata> {
+  const t = await getServerT();
+  return { title: t("home.blueCapsule") };
+}
 
 const capsuleSlugs = [
-  "womens-pebbled-leather-zip-hobo-bag",
-  "womens-metallic-leather-bifold-cardholder-electric-blue",
-  "womens-blue-multicolor-brushstroke-silk-scarf",
-  "luma-silk-bow-bag-charm",
+  "womens-woven-spiral-panel-shoulder-tote-bag",
+  "womens-woven-leather-zip-around-wallet",
+  "womens-mustard-wave-silk-scarf",
+  "sora-silk-bow-bag-charm",
 ];
 
 export default async function BlueCapsulePage() {
@@ -42,7 +45,7 @@ export default async function BlueCapsulePage() {
               sizes="(min-width: 1024px) 40vw, 100vw"
               quality={100}
               unoptimized
-              className="object-cover object-[42%_38%]"
+              className="object-cover object-[55%_68%]"
             />
           </div>
 

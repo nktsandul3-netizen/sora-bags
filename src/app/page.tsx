@@ -8,75 +8,23 @@ import HeroBannerSlider, { type HeroSlide } from "@/components/HeroBannerSlider"
 import StoreExclusiveServices from "@/components/stores/StoreExclusiveServices";
 import { getServerLocale, getServerT } from "@/lib/server-i18n";
 import { withLocalePath, type Locale } from "@/lib/i18n";
-
-const wovenBannerCopy: Record<
-  Locale,
-  { eyebrow: string; title: string; subtitle: string; ctaLabel: string }
-> = {
-  ru: {
-    eyebrow: "LUXURIARE AMALFI",
-    title: "Плетёные сумки из рафии и кожи",
-    subtitle: "Ручная работа, Италия.",
-    ctaLabel: "Смотреть коллекцию",
-  },
-  ro: {
-    eyebrow: "LUXURIARE AMALFI",
-    title: "Genți împletite din rafie și piele",
-    subtitle: "Lucrate manual, Italia.",
-    ctaLabel: "Vezi colecția",
-  },
-  en: {
-    eyebrow: "LUXURIARE AMALFI",
-    title: "Woven bags in raffia and leather",
-    subtitle: "Handmade in Italy.",
-    ctaLabel: "View the collection",
-  },
-};
-
-const veneziaBannerCopy: Record<
-  Locale,
-  { title: string; subtitle: string; ctaLabel: string }
-> = {
-  ru: {
-    title: "VENEZIA INTRECCIO COLLECTION",
-    subtitle: "Плетёная фактура для города и путешествий.",
-    ctaLabel: "Смотреть коллекцию",
-  },
-  ro: {
-    title: "VENEZIA INTRECCIO COLLECTION",
-    subtitle: "Textură împletită pentru oraș și călătorii.",
-    ctaLabel: "Vezi colecția",
-  },
-  en: {
-    title: "VENEZIA INTRECCIO COLLECTION",
-    subtitle: "Woven texture for the city and travel.",
-    ctaLabel: "View the collection",
-  },
-};
+import { translate } from "@/lib/messages";
 
 function getHeroSlides(locale: Locale): HeroSlide[] {
-  const amalfi = wovenBannerCopy[locale] ?? wovenBannerCopy.ru;
-  const venezia = veneziaBannerCopy[locale] ?? veneziaBannerCopy.ru;
+  const t = (key: string) => translate(locale, key);
   return [
     {
       type: "image",
-      src: "/hero-amalfi-beach-clean.jpg",
-      alt: "LUXURIARE AMALFI — плетёные сумки на побережье",
-      caption: {
-        eyebrow: amalfi.eyebrow,
-        title: amalfi.title,
-        subtitle: amalfi.subtitle,
-        ctaLabel: amalfi.ctaLabel,
-        ctaHref: withLocalePath("/collections/amalfi-woven", locale),
-      },
+      src: "/hero-sora-bamboo-studio.jpg",
+      alt: t("home.heroBambooAlt"),
     },
     {
       type: "video",
       src: "/videos/venezia-intreccio-banner.mp4",
       caption: {
-        title: venezia.title,
-        subtitle: venezia.subtitle,
-        ctaLabel: venezia.ctaLabel,
+        title: t("catalog.veneziaCollection"),
+        subtitle: t("catalog.veneziaCollectionDescription"),
+        ctaLabel: t("home.veneziaCta"),
         ctaHref: withLocalePath("/collections/venezia-intreccio", locale),
       },
     },
@@ -93,10 +41,10 @@ const heroTiles: {
 ];
 
 const blueEditProductSlugs = [
-  "womens-pebbled-leather-zip-hobo-bag",
-  "womens-metallic-leather-bifold-cardholder-electric-blue",
-  "womens-blue-multicolor-brushstroke-silk-scarf",
-  "luma-silk-bow-bag-charm",
+  "womens-woven-spiral-panel-shoulder-tote-bag",
+  "womens-woven-leather-zip-around-wallet",
+  "womens-mustard-wave-silk-scarf",
+  "sora-silk-bow-bag-charm",
 ];
 
 const blueEditProducts = blueEditProductSlugs
@@ -112,7 +60,7 @@ export default async function Home() {
   return (
     <div>
       {/* Hero: Amalfi → Venezia Intreccio */}
-      <HeroBannerSlider slides={getHeroSlides(locale)} intervalMs={7000} />
+      <HeroBannerSlider slides={getHeroSlides(locale)} intervalMs={4000} />
 
       {/* Плитки разделов: Сумки / Аксессуары */}
       <section className="mt-0 w-full">
@@ -146,20 +94,20 @@ export default async function Home() {
       </section>
 
       {/* Капсула: лайфстайл + 4 товара */}
-      <section className="bg-[#f7f5f0] px-4 pt-6 pb-10 sm:px-6 lg:px-10 lg:pt-8 lg:pb-14">
-        <div className="grid gap-4 lg:grid-cols-[minmax(0,1.08fr)_minmax(0,1fr)] lg:gap-6">
+      <section className="bg-[#f7f5f0] px-4 pt-20 pb-10 sm:px-6 lg:px-10 lg:pb-14">
+        <div className="grid gap-20 lg:grid-cols-[minmax(0,1.08fr)_minmax(0,1fr)]">
           <Link
-            href={withLocalePath("/product/womens-pebbled-leather-kiss-lock-pouch-bag-light-blue", locale)}
-            className="group relative aspect-[4/5] overflow-hidden bg-stone-100 lg:min-h-[760px] lg:aspect-auto"
+            href={withLocalePath("/collections/amalfi-woven", locale)}
+            className="group relative aspect-[4/5] overflow-hidden bg-stone-100 lg:min-h-[620px] lg:aspect-auto"
           >
             <Image
               src="/banners/home-blue-edit-lifestyle-sharp-v2.png"
-              alt="Голубой акцент — образ с сумкой и платком"
+              alt={t("home.heroAmalfiAlt")}
               fill
               sizes="(min-width: 1024px) 52vw, 100vw"
               quality={100}
               unoptimized
-              className="object-cover object-[42%_38%] transition-transform duration-700 ease-out group-hover:scale-[1.02]"
+              className="object-cover object-[55%_68%] transition-transform duration-700 ease-out group-hover:scale-[1.02]"
             />
           </Link>
 

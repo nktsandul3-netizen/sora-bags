@@ -43,6 +43,7 @@ export const specLabels: SpecTranslationMap = {
   "Особенности": { ro: "Specificități", en: "Specifics" },
   "Материал и уход": { ro: "Material și îngrijire", en: "Material and care" },
   "Доставка и возврат": { ro: "Livrare și retur", en: "Delivery and returns" },
+  "Шёлк": { ro: "Mătase", en: "Silk" },
 };
 
 /** Spec value translations for Russian source strings in product data. */
@@ -217,7 +218,8 @@ export const specValues: SpecTranslationMap = {
   "Застёжка на магнит": { ro: "Închidere magnetică", en: "Magnetic closure" },
   "Застёжка на молнии": { ro: "Închidere cu fermoar", en: "Zip closure" },
   "Затягивающийся верх": { ro: "Partea de sus cu strângere", en: "Cinched top" },
-  "Зернистая кожа": { ro: "Piele cu granulație", en: "Pebbled leather" },
+  "Зернистая кожа": { ro: "Piele", en: "Leather" },
+  "Кожа": { ro: "Piele", en: "Leather" },
   "Кисточка на карабине": { ro: "Ciucure pe carabină", en: "Tassel on a clip" },
   "Клапан на кнопке": { ro: "Clapă cu capsă", en: "Snap flap" },
   "Клапан сверху с застёжкой": { ro: "Clapă superioară cu închidere", en: "Top flap with closure" },
@@ -269,7 +271,7 @@ export const specValues: SpecTranslationMap = {
   "Мягкий силуэт хобо": { ro: "Siluetă hobo moale", en: "Soft hobo silhouette" },
   "На плечо": { ro: "Pe umăr", en: "Shoulder" },
   "Накладные карманы спереди": { ro: "Buzunare aplicate în față", en: "Front patch pockets" },
-  "Натуральная зернистая кожа": { ro: "Piele naturală cu granulație", en: "Natural pebbled leather" },
+  "Натуральная зернистая кожа": { ro: "Piele naturală", en: "Natural leather" },
   "Натуральная кожа": { ro: "Piele naturală", en: "Natural leather" },
   "Натуральная кожа выраженной фактуры": { ro: "Piele naturală cu textură pronunțată", en: "Natural leather with pronounced texture" },
   "Натуральная кожа с тиснением": { ro: "Piele naturală embosată", en: "Embossed natural leather" },
@@ -408,6 +410,62 @@ export const specValues: SpecTranslationMap = {
   "Съёмный регулируемый ремень": { ro: "Curea reglabilă detașabilă", en: "Detachable adjustable strap" },
   "Удлинённые ручки для ношения на плече": { ro: "Mânere alungite pentru purtare pe umăr", en: "Extended handles for shoulder carry" },
   "Фурнитура премиального качества золотистого цвета": { ro: "Feronerie aurie de calitate premium", en: "Premium quality gold-tone hardware" },
+  "7–14 дней": { ro: "7–14 zile", en: "7–14 days" },
+  "Беречь от влаги и прямого солнца; хранить отдельно от острых предметов": {
+    ro: "Protejați de umezeală și soare direct; depozitați separat de obiecte ascuțite",
+    en: "Keep away from moisture and direct sun; store separately from sharp objects",
+  },
+  "Боулинг-сумка": { ro: "Geantă bowling", en: "Bowling bag" },
+  "Верхние ручки": { ro: "Mânere superioare", en: "Top handles" },
+  "Верхняя ручка": { ro: "Mâner superior", en: "Top handle" },
+  "Встроенный плечевой ремень": { ro: "Curea de umăr integrată", en: "Built-in shoulder strap" },
+  "Два отделения": { ro: "Două compartimente", en: "Two compartments" },
+  "Двойные ручки + съёмный ремень": { ro: "Mânere duble + curea detașabilă", en: "Double handles + detachable strap" },
+  "Замок-вертушка": { ro: "Încuietoare rotativă", en: "Turn lock" },
+  "Замша, кожаные ремни": { ro: "Piele întoarsă, curele din piele", en: "Suede, leather straps" },
+  "Золотая": { ro: "Auriu", en: "Gold" },
+  "Золотистая металлическая фурнитура": { ro: "Feronerie metalică aurie", en: "Gold-tone metal hardware" },
+  "Золотистая фурнитура": { ro: "Feronerie aurie", en: "Gold-tone hardware" },
+  "Золотистая цепочка": { ro: "Lanț auriu", en: "Gold-tone chain" },
+  "Клатч": { ro: "Clutch", en: "Clutch" },
+  "Кнопка на ремешке": { ro: "Capsă pe curea", en: "Snap on strap" },
+  "Кнопки": { ro: "Capse", en: "Snaps" },
+  "Кожа и текстиль": { ro: "Piele și textil", en: "Leather and textile" },
+  "Кольцевая ручка": { ro: "Mâner tip inel", en: "Ring handle" },
+  "Кольцо + карабин": { ro: "Inel + carabină", en: "Ring + clip" },
+  "Красная": { ro: "Roșu", en: "Red" },
+  "Красная кожа": { ro: "Piele roșie", en: "Red leather" },
+  "Магнитные кнопки": { ro: "Capse magnetice", en: "Magnetic snaps" },
+  "Магнитный клапан": { ro: "Clapă magnetică", en: "Magnetic flap" },
+  "Металлическая рамка + съёмный ремень": { ro: "Ramă metalică + curea detașabilă", en: "Metal frame + detachable strap" },
+  "Молния по периметру + кнопка": { ro: "Fermoar pe contur + capsă", en: "Perimeter zip + snap" },
+  "Отделения для карт с обеих сторон": { ro: "Compartimente pentru carduri pe ambele părți", en: "Card slots on both sides" },
+  "Петля": { ro: "Buclă", en: "Loop" },
+  "Платок": { ro: "Foulard", en: "Scarf" },
+  "Плетёная замша": { ro: "Piele întoarsă împletită", en: "Woven suede" },
+  "Плечевые ремни": { ro: "Curele de umăr", en: "Shoulder straps" },
+  "Плечевые ремни из кожи": { ro: "Curele de umăr din piele", en: "Leather shoulder straps" },
+  "Поворотный замок на конвертном клапане": { ro: "Încuietoare rotativă pe clapă tip plic", en: "Turn lock on envelope flap" },
+  "Рафия": { ro: "Rafie", en: "Raffia" },
+  "Серебристая металлическая фурнитура": { ro: "Feronerie metalică argintie", en: "Silver-tone metal hardware" },
+  "Серебристое металлическое кольцо": { ro: "Inel metalic argintiu", en: "Silver-tone metal ring" },
+  "Слоты для карт, отделение на молнии": { ro: "Sloturi pentru carduri, compartiment cu fermoar", en: "Card slots, zip compartment" },
+  "Слоты спереди и внутри": { ro: "Sloturi în față și în interior", en: "Slots on the front and inside" },
+  "Сумка в форме сердца": { ro: "Geantă în formă de inimă", en: "Heart-shaped bag" },
+  "Сумка на плечо": { ro: "Geantă de umăr", en: "Shoulder bag" },
+  "Сумка с рамочным замком": { ro: "Geantă cu închidere tip ramă", en: "Frame-lock bag" },
+  "Тонкий ремешок с узлами": { ro: "Curea subțire cu noduri", en: "Thin knotted strap" },
+  "Центральная перегородка на молнии, внутренний карман на молнии": {
+    ro: "Separator central cu fermoar, buzunar interior cu fermoar",
+    en: "Central zip divider, inner zip pocket",
+  },
+  "Чёрная": { ro: "Negru", en: "Black" },
+  "Шёлк": { ro: "Mătase", en: "Silk" },
+  "10+ отделений": { ro: "10+ compartimente", en: "10+ compartments" },
+  "100% шёлк": { ro: "100% mătase", en: "100% silk" },
+  "4 слота для карт": { ro: "4 sloturi pentru carduri", en: "4 card slots" },
+  "8+ отделений": { ro: "8+ compartimente", en: "8+ compartments" },
+  "9 слотов для карт": { ro: "9 sloturi pentru carduri", en: "9 card slots" },
 };
 
 /** Normalize dimension/measurement strings for non-Russian locales. */
@@ -420,6 +478,12 @@ export function localizeMeasurement(value: string, locale: Locale): string | nul
 
   if (/^≈ \d+ л$/.test(value)) {
     return value.replace(/ л$/, " l");
+  }
+
+  if (/^\d+[–-]\d+\s+дней$/.test(value) || /^\d+[–-]\d+\s+дня$/.test(value) || /^\d+\s+дней$/.test(value) || /^\d+\s+дня$/.test(value)) {
+    return value
+      .replace(/дней$/, locale === "ro" ? "zile" : "days")
+      .replace(/дня$/, locale === "ro" ? "zile" : "days");
   }
 
   if (/^[\d.,]+\s*[×xх][\d.,×xх\s]+$/i.test(value)) {

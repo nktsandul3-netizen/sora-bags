@@ -19,6 +19,7 @@ import {
   normalizeCartItemInput,
   type PurchaseKind,
 } from "@/lib/purchase-kind";
+import { canonicalizeProductSlug } from "@/lib/product-slug-aliases";
 
 export type { PurchaseKind };
 
@@ -42,7 +43,15 @@ type Action =
   | { type: "clearKind"; purchaseKind: PurchaseKind }
   | { type: "hydrate"; items: CartItem[] };
 
-const STORAGE_KEY = "luma-cart-v2";
+const STORAGE_KEY = "sora-cart-v1";
+const LEGACY_STORAGE_KEYS = ["luma-cart-v2", "luma-cart-v1"] as const;
+
+function migrateCartItems(items: CartItem[]): CartItem[] {
+  return items.map((item) => ({
+    ...item,
+    slug: canonicalizeProductSlug(item.slug),
+  }));
+}
 
 function matchesItem(
   item: CartItem,
@@ -130,12 +139,15 @@ export function CartProvider({ children }: { children: ReactNode }) {
     try {
       const raw = localStorage.getItem(STORAGE_KEY);
       if (raw) {
-        dispatch({ type: "hydrate", items: JSON.parse(raw) });
+        dispatch({ type: "hydrate", items: migrateCartItems(JSON.parse(raw)) });
         return;
       }
-      const legacyRaw = localStorage.getItem("luma-cart-v1");
-      if (legacyRaw) {
-        dispatch({ type: "hydrate", items: JSON.parse(legacyRaw) });
+      for (const legacyKey of LEGACY_STORAGE_KEYS) {
+        const legacyRaw = localStorage.getItem(legacyKey);
+        if (!legacyRaw) continue;
+        dispatch({ type: "hydrate", items: migrateCartItems(JSON.parse(legacyRaw)) });
+        localStorage.removeItem(legacyKey);
+        break;
       }
     } catch {
       // ignore

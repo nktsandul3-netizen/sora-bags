@@ -7,7 +7,7 @@
     "items": [
       {
         "type": "link",
-        "title": "Весь каталог",
+        "title": "Все сумки",
         "url": "/collections/all",
         "position": 0
       },
@@ -54,7 +54,7 @@
     "items": [
       {
         "type": "link",
-        "title": "Весь каталог",
+        "title": "Все сумки",
         "url": "/bags",
         "position": 0
       },

@@ -9,7 +9,7 @@ import { getBrandName, getProduct } from "@/lib/data";
 import { formatPrice } from "@/lib/format";
 import { getDeliveryInfo } from "@/lib/delivery";
 import { withLocalePath, type Locale } from "@/lib/i18n";
-import { localizeColorName, localizeProductTitle } from "@/lib/product-i18n";
+import { localizeColorName, localizeProductImageAlt, localizeProductTitle } from "@/lib/product-i18n";
 import { getCartRecommendations } from "@/lib/recommendations";
 import { useLocale, useT } from "@/lib/useI18n";
 import type { Product } from "@/lib/types";
@@ -17,6 +17,7 @@ import ProductImage from "./ProductImage";
 
 function CartLineImage({ slug, colorName, title }: { slug: string; colorName: string; title: string }) {
   const product = getProduct(slug);
+  const locale = useLocale();
   const color = product?.colors.find((item) => item.name === colorName);
   const image =
     color?.images?.[0] ??
@@ -28,7 +29,7 @@ function CartLineImage({ slug, colorName, title }: { slug: string; colorName: st
       hex={color?.hex ?? product?.colors[0]?.hex ?? "#d6d3d1"}
       section={product?.section ?? "bags"}
       src={image?.src}
-      alt={image?.alt ?? title}
+      alt={localizeProductImageAlt(image?.alt, locale) || title}
       sizes="80px"
       className="h-20 w-20 rounded-xl bg-[#F9F6F3]"
       imageClassName="object-contain object-center"
@@ -54,7 +55,7 @@ function RecommendationCard({ product, locale }: { product: Product; locale: Loc
         {image ? (
           <Image
             src={image.src}
-            alt={image.alt || localizedTitle}
+            alt={localizeProductImageAlt(image.alt, locale) || localizedTitle}
             fill
             sizes="72px"
             className="object-contain object-center transition-transform duration-500 group-hover:scale-105"
@@ -72,25 +73,24 @@ function RecommendationCard({ product, locale }: { product: Product; locale: Loc
   );
 }
 
-function getItemCountLabel(count: number, locale: Locale) {
+function getItemCountLabel(count: number, locale: Locale, t: (key: string) => string) {
   if (locale === "ru") {
     const mod10 = count % 10;
     const mod100 = count % 100;
-    const word =
+    const key =
       mod10 === 1 && mod100 !== 11
-        ? "товар"
+        ? "cart.itemCountOne"
         : mod10 >= 2 && mod10 <= 4 && (mod100 < 12 || mod100 > 14)
-          ? "товара"
-          : "товаров";
-
-    return `${count} ${word}`;
+          ? "cart.itemCountFew"
+          : "cart.itemCountMany";
+    return t(key).replace("{count}", String(count));
   }
 
   if (locale === "ro") {
-    return count === 1 ? "1 produs" : `${count} produse`;
+    return t(count === 1 ? "cart.itemCountOne" : "cart.itemCountFew").replace("{count}", String(count));
   }
 
-  return count === 1 ? "1 item" : `${count} items`;
+  return t(count === 1 ? "cart.itemCountOne" : "cart.itemCountMany").replace("{count}", String(count));
 }
 
 export default function CartDrawer() {
@@ -176,7 +176,7 @@ export default function CartDrawer() {
                 <div className="flex items-start justify-between gap-6">
                   <div>
                     <p className="text-[10px] font-semibold uppercase tracking-[0.22em] text-stone-400">
-                      {getItemCountLabel(itemCount, locale)}
+                      {getItemCountLabel(itemCount, locale, t)}
                     </p>
                     <h2 className="mt-2 text-3xl font-semibold uppercase tracking-[0.04em] text-stone-950 sm:text-4xl">
                       {t("common.cart")}
@@ -314,7 +314,7 @@ export default function CartDrawer() {
 
                   <footer className="border-t border-[#F0EDEA] bg-white px-5 py-5 sm:px-8">
                     <div className="mb-3 flex items-center justify-between gap-4 text-xs uppercase tracking-[0.14em] text-stone-400">
-                      <span>{getItemCountLabel(itemCount, locale)}</span>
+                      <span>{getItemCountLabel(itemCount, locale, t)}</span>
                       <span>{total >= 15000 ? t("checkout.free") : t("checkout.byTariff")}</span>
                     </div>
                     <div className="space-y-2">

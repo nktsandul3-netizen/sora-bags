@@ -86,6 +86,16 @@ const copy = {
       "Качество — это не обещание на бирке. Это вес в руке, то, как ремень ложится на плечо, и удовольствие от вещи, созданной надолго.",
     ],
     world: "The World of SÓRA",
+    alts: {
+      hero: "SÓRA Bags — флорентийская редакция",
+      modern: "SÓRA Bags — современная классика",
+      details: "SÓRA Bags — элегантность в деталях",
+      craft: "SÓRA Bags — мастерство и качество",
+      lifestyle: "SÓRA Bags — образ жизни",
+      cafe: "SÓRA Bags — кафе в Париже",
+      street: "SÓRA Bags — улица в Париже",
+      market: "SÓRA Bags — образ жизни на рынке",
+    },
   },
   ro: {
     intro: [
@@ -109,6 +119,16 @@ const copy = {
       "Calitatea înseamnă felul în care se simte produsul în mână, cum cade cureaua pe umăr și bucuria unei piese create să dureze.",
     ],
     world: "Universul SÓRA",
+    alts: {
+      hero: "SÓRA Bags — editorial Florența",
+      modern: "SÓRA Bags — clasic modern",
+      details: "SÓRA Bags — eleganță în detalii",
+      craft: "SÓRA Bags — măiestrie și calitate",
+      lifestyle: "SÓRA Bags — stil de viață",
+      cafe: "SÓRA Bags — cafenea în Paris",
+      street: "SÓRA Bags — stradă în Paris",
+      market: "SÓRA Bags — stil de viață la piață",
+    },
   },
   en: {
     intro: [
@@ -132,6 +152,16 @@ const copy = {
       "Quality is not a promise on a tag. It is the weight in the hand, the way a strap rests on the shoulder and the pleasure of an item made to last.",
     ],
     world: "The World of SÓRA",
+    alts: {
+      hero: "SÓRA Bags — Florence editorial",
+      modern: "SÓRA Bags — modern classic",
+      details: "SÓRA Bags — elegance in details",
+      craft: "SÓRA Bags — craftsmanship and quality",
+      lifestyle: "SÓRA Bags — lifestyle",
+      cafe: "SÓRA Bags — café in Paris",
+      street: "SÓRA Bags — street in Paris",
+      market: "SÓRA Bags — lifestyle at the market",
+    },
   },
 };
 
@@ -144,7 +174,7 @@ export default function AboutUsContent({ locale = "ru" }: { locale?: Locale }) {
         <div className="relative h-[42vw] min-h-[260px] max-h-[560px] w-full overflow-hidden bg-[#F5F1EB]">
           <Image
             src="/about/about-hero-sora-florence.png"
-            alt="SÓRA Bags — Florence editorial"
+            alt={c.alts.hero}
             fill
             priority
             quality={92}
@@ -174,7 +204,7 @@ export default function AboutUsContent({ locale = "ru" }: { locale?: Locale }) {
           <RevealOnScroll className="min-w-0 lg:col-start-1 lg:row-start-1">
             <Image
               src="/about/modern-classic-hero.png"
-              alt="SÓRA Bags — современная классика"
+              alt={c.alts.modern}
               width={768}
               height={1024}
               quality={90}
@@ -212,7 +242,7 @@ export default function AboutUsContent({ locale = "ru" }: { locale?: Locale }) {
           <RevealOnScroll delay={0.16} className="min-w-0 lg:col-start-2 lg:row-start-2">
             <Image
               src="/about/elegance-details-hero.png"
-              alt="SÓRA Bags — элегантность в деталях"
+              alt={c.alts.details}
               width={599}
               height={1024}
               quality={90}
@@ -232,7 +262,7 @@ export default function AboutUsContent({ locale = "ru" }: { locale?: Locale }) {
           <RevealOnScroll className="min-w-0">
             <Image
               src="/about/craftsmanship-hero.png"
-              alt="SÓRA Bags — мастерство и качество"
+              alt={c.alts.craft}
               width={819}
               height={1024}
               quality={90}
@@ -268,7 +298,7 @@ export default function AboutUsContent({ locale = "ru" }: { locale?: Locale }) {
               <RevealOnScroll>
                 <Image
                   src="/about/world-of-sora-hero.png"
-                  alt="SÓRA Bags — образ жизни"
+                  alt={c.alts.lifestyle}
                   width={682}
                   height={1024}
                   quality={90}
@@ -280,7 +310,7 @@ export default function AboutUsContent({ locale = "ru" }: { locale?: Locale }) {
               <RevealOnScroll delay={0.12}>
                 <Image
                   src="/about/editorial-cafe-hero.png"
-                  alt="SÓRA Bags — кафе в Париже"
+                  alt={c.alts.cafe}
                   width={768}
                   height={1024}
                   quality={90}
@@ -295,7 +325,7 @@ export default function AboutUsContent({ locale = "ru" }: { locale?: Locale }) {
               <RevealOnScroll delay={0.08}>
                 <Image
                   src="/about/editorial-paris-street-hero.png"
-                  alt="SÓRA Bags — улица в Париже"
+                  alt={c.alts.street}
                   width={576}
                   height={1024}
                   quality={90}
@@ -307,7 +337,7 @@ export default function AboutUsContent({ locale = "ru" }: { locale?: Locale }) {
               <RevealOnScroll delay={0.14}>
                 <Image
                   src="/about/editorial-market-hero.png"
-                  alt="SÓRA Bags — образ жизни на рынке"
+                  alt={c.alts.market}
                   width={768}
                   height={1024}
                   quality={90}

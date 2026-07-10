@@ -3,7 +3,10 @@ import CatalogView from "@/components/CatalogView";
 import { veneziaIntreccioProducts } from "@/lib/data";
 import { getServerT } from "@/lib/server-i18n";
 
-export const metadata: Metadata = { title: "VENEZIA INTRECCIO" };
+export async function generateMetadata(): Promise<Metadata> {
+  const t = await getServerT();
+  return { title: t("catalog.veneziaCollection") };
+}
 
 export default async function VeneziaIntreccioCollectionPage() {
   const t = await getServerT();

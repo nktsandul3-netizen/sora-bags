@@ -10,7 +10,8 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import StorefrontChrome from "@/components/StorefrontChrome";
 import AnalyticsTracker from "@/components/AnalyticsTracker";
-import { getServerLocale } from "@/lib/server-i18n";
+import { getServerLocale, getServerT } from "@/lib/server-i18n";
+import { locales, withLocalePath } from "@/lib/i18n";
 
 const inter = Inter({
   variable: "--font-inter",
@@ -31,14 +32,29 @@ const instrumentSerif = Instrument_Serif({
   display: "swap",
 });
 
-export const metadata: Metadata = {
-  metadataBase: new URL(`https://${brand.domain}`),
-  title: {
-    default: `${brand.name} — ${brand.tagline}`,
-    template: `%s — ${brand.name}`,
-  },
-  description: brand.description,
-};
+export async function generateMetadata(): Promise<Metadata> {
+  const t = await getServerT();
+  const tagline = t("brand.tagline");
+  const description = t("brand.description");
+  const languages = Object.fromEntries(
+    locales.map((code) => [code, withLocalePath("/", code)]),
+  ) as Record<string, string>;
+
+  return {
+    metadataBase: new URL(`https://${brand.domain}`),
+    title: {
+      default: `${brand.name} — ${tagline}`,
+      template: `%s — ${brand.name}`,
+    },
+    description,
+    alternates: {
+      languages,
+    },
+    other: {
+      google: "notranslate",
+    },
+  };
+}
 
 export default async function RootLayout({
   children,
@@ -47,7 +63,11 @@ export default async function RootLayout({
 }>) {
   const locale = await getServerLocale();
   return (
-    <html lang={locale} className={`${inter.variable} ${playfair.variable} ${instrumentSerif.variable} h-full antialiased`}>
+    <html
+      lang={locale}
+      translate="no"
+      className={`${inter.variable} ${playfair.variable} ${instrumentSerif.variable} notranslate h-full antialiased`}
+    >
       <body className="flex min-h-full flex-col bg-background text-stone-900">
         <LocaleProvider locale={locale}>
           <SessionProviderWrapper>

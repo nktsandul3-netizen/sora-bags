@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import { useEffect, useState } from "react";
+import { useT } from "@/lib/useI18n";
 
 export type HeroSlide = {
   src: string;
@@ -18,6 +19,7 @@ export default function HomeHeroCarousel({
   intervalMs?: number;
 }) {
   const [active, setActive] = useState(0);
+  const t = useT();
 
   useEffect(() => {
     if (slides.length <= 1) return;
@@ -55,7 +57,7 @@ export default function HomeHeroCarousel({
               <button
                 key={slide.src}
                 type="button"
-                aria-label={`Слайд ${i + 1}`}
+                aria-label={t("a11y.slideNumber").replace("{number}", String(i + 1))}
                 aria-current={i === active}
                 onClick={() => setActive(i)}
                 className={

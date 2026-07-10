@@ -1,6 +1,7 @@
 import Image from "next/image";
 import { brand } from "@/lib/config";
 import type { Locale } from "@/lib/i18n";
+import { translate } from "@/lib/messages";
 
 const phone = brand.phones[0];
 const phoneHref = `tel:${phone.replace(/\s/g, "")}`;
@@ -399,7 +400,7 @@ export default function PaymentDeliveryPageContent({ locale = "ru" }: { locale?:
                   <PriceRow
                     term={c.t12}
                     price={
-                      locale === "ru" ? "Бесплатно" : locale === "ro" ? "Gratuit" : "Free"
+                      translate(locale, "checkout.free")
                     }
                   />
                   <PriceRow

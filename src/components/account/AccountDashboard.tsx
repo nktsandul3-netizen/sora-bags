@@ -12,7 +12,7 @@ import { formatPrice } from "@/lib/format";
 import { withLocalePath } from "@/lib/i18n";
 import { useLocale, useT } from "@/lib/useI18n";
 import { useWishlist } from "@/context/wishlist";
-import { localizeProductTitle } from "@/lib/product-i18n";
+import { localizeColorName, localizeProductImageAlt, localizeProductTitle } from "@/lib/product-i18n";
 import { getAccountRecommendations } from "@/lib/recommendations";
 import ProductGrid from "@/components/ProductGrid";
 import type { Product } from "@/lib/types";
@@ -348,7 +348,7 @@ function RecommendationCard({ product }: { product: Product }) {
           {image ? (
             <Image
               src={image.src}
-              alt={image.alt || localizedTitle}
+              alt={localizeProductImageAlt(image.alt, locale) || localizedTitle}
               fill
               sizes="(min-width: 1280px) 220px, (min-width: 640px) 45vw, 90vw"
               className="object-contain object-center transition-transform duration-700 ease-out group-hover:scale-[1.04]"
@@ -376,7 +376,7 @@ function getProductImage(product: Product) {
 
 function BrandBenefitsSection() {
   const t = useT();
-  const benefits = ["Made in Italy", t("account.naturalLeather"), t("account.qualityWarranty"), t("account.fastDelivery")];
+  const benefits = [t("common.madeInItaly"), t("account.naturalLeather"), t("account.qualityWarranty"), t("account.fastDelivery")];
   return (
     <section className="rounded-[24px] border border-[#e8e8e8] bg-white p-6 shadow-[0_18px_45px_rgba(41,31,23,0.04)] sm:p-8">
       <h2 className="font-serif text-3xl text-stone-950">{t("account.benefits")}</h2>
@@ -471,20 +471,30 @@ function OrdersSection({ orders }: { orders: OrderView[] }) {
           </div>
 
           <ul className="mt-4 border-t border-black/[0.06] pt-1">
-            {order.items.map((it, i) => (
-              <li
-                key={`${order.id}-${i}`}
-                className="flex items-baseline py-3"
-              >
-                <span className="min-w-0 flex-1 pr-6 text-[15px] font-normal leading-5 text-[#111]">
-                  {it.title}
-                  <span className="text-[#111] opacity-45"> · {it.color} · {it.qty} {t("account.units")}</span>
-                </span>
-                <span className="w-[110px] shrink-0 text-right text-[15px] font-normal leading-5 text-[#111] tabular-nums">
-                  {formatPrice(it.price * it.qty, locale)}
-                </span>
-              </li>
-            ))}
+            {order.items.map((it, i) => {
+              const product = products.find((candidate) => candidate.slug === it.slug);
+              const title = product ? localizeProductTitle(product, locale) : it.title;
+              const color = product
+                ? localizeColorName(
+                    product.colors.find((candidate) => candidate.name === it.color) ?? it.color,
+                    locale,
+                  )
+                : it.color;
+              return (
+                <li
+                  key={`${order.id}-${i}`}
+                  className="flex items-baseline py-3"
+                >
+                  <span className="min-w-0 flex-1 pr-6 text-[15px] font-normal leading-5 text-[#111]">
+                    {title}
+                    <span className="text-[#111] opacity-45"> · {color} · {it.qty} {t("account.units")}</span>
+                  </span>
+                  <span className="w-[110px] shrink-0 text-right text-[15px] font-normal leading-5 text-[#111] tabular-nums">
+                    {formatPrice(it.price * it.qty, locale)}
+                  </span>
+                </li>
+              );
+            })}
           </ul>
 
           <div className="flex items-baseline border-t border-black/[0.06] pt-4">
@@ -823,7 +833,7 @@ function ProfileSection({ profile }: { profile: ProfileView }) {
       </div>
       <div className="mt-5">
         <label className="mb-2 block text-[10px] font-medium uppercase tracking-[0.12em] text-[#111] opacity-45">
-          E-mail
+          {t("auth.emailPlaceholder")}
         </label>
         <input value={profile.email} disabled className={fieldClass} />
       </div>

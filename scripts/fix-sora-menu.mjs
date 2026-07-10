@@ -15,7 +15,7 @@ import { fileURLToPath } from "node:url";
 const MENU_HANDLE = "main-menu";
 
 const newMenu = [
-  { title: "Весь каталог", url: "/collections/all" },
+  { title: "Все сумки", url: "/collections/all" },
   { title: "AMALFI", url: "/collections/amalfi" },
   { title: "VENEZIA INTRECCIO", url: "/collections/venezia-intreccio" },
   { title: "Foulard / Шелк", url: "/collections/silk-scarves" },
@@ -24,7 +24,7 @@ const newMenu = [
 ];
 
 const siteMenu = [
-  { title: "Весь каталог", url: "/bags" },
+  { title: "Все сумки", url: "/bags" },
   { title: "AMALFI", url: "/collections/amalfi-woven" },
   { title: "VENEZIA INTRECCIO", url: "/collections/venezia-intreccio" },
   { title: "Foulard / Шелк", url: "/accessories/womens-scarves-women" },

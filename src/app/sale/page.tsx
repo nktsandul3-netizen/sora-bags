@@ -3,7 +3,10 @@ import CatalogView from "@/components/CatalogView";
 import { saleProducts } from "@/lib/data";
 import { getServerT } from "@/lib/server-i18n";
 
-export const metadata: Metadata = { title: "Скидки" };
+export async function generateMetadata(): Promise<Metadata> {
+  const t = await getServerT();
+  return { title: t("catalog.sale") };
+}
 
 export default async function SalePage() {
   const t = await getServerT();

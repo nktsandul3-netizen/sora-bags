@@ -50,5 +50,5 @@ export const curatedBestsellersOrder = [
   "womens-metallic-leather-bifold-cardholder-electric-blue",
   "womens-lavender-wave-silk-scarf",
   "la-via-firenze-flower-bag-charm",
-  "luma-pegasus-leather-bag-charm",
+  "sora-pegasus-leather-bag-charm",
 ];

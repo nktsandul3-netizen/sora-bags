@@ -8,7 +8,6 @@ import { useCart } from "@/context/cart";
 import { useWishlist } from "@/context/wishlist";
 import { useMenuOpen } from "@/context/menu-open";
 import ProfileMenu from "./ProfileMenu";
-import { isHeroOverlayPath } from "@/lib/catalog-banner";
 import { locales, switchLocalePath, withLocalePath } from "@/lib/i18n";
 import { useLocale, useT } from "@/lib/useI18n";
 import { persistLocaleCookie } from "@/context/locale";
@@ -21,6 +20,7 @@ function BrandLogoLink({
   size: "mobile" | "desktop";
 }) {
   const locale = useLocale();
+  const t = useT();
   const nameClass =
     size === "desktop"
       ? "font-serif text-[32px] font-normal uppercase leading-none tracking-[0.2em]"
@@ -45,7 +45,7 @@ function BrandLogoLink({
           className={"h-px w-4 " + (overlay ? "bg-white/40" : "bg-stone-400/70")}
           aria-hidden
         />
-        {brand.madeIn}
+        {t("common.madeInItaly")}
         <span
           className={"h-px w-4 " + (overlay ? "bg-white/40" : "bg-stone-400/70")}
           aria-hidden
@@ -73,7 +73,7 @@ function StoreLocatorLink({ overlay, compact = false }: { overlay: boolean; comp
         <path d="M12 21s7-5.15 7-11a7 7 0 1 0-14 0c0 5.85 7 11 7 11Z" />
         <circle cx="12" cy="10" r="2.35" />
       </svg>
-      {compact ? null : <span className="hidden whitespace-nowrap md:inline">OUR STORES</span>}
+      {compact ? null : <span className="hidden whitespace-nowrap md:inline">{t("nav.stores")}</span>}
     </Link>
   );
 }
@@ -82,37 +82,16 @@ export default function Header() {
   const pathname = usePathname();
   const t = useT();
   const { menuOpen, setMenuOpen } = useMenuOpen();
-  const isHeroOverlay = isHeroOverlayPath(pathname);
-  const iconHoverClass = isHeroOverlay ? "hover:opacity-100" : "hover:opacity-60";
-  const iconToneClass = isHeroOverlay ? "text-white" : "text-stone-800";
+  const iconHoverClass = "hover:opacity-60";
 
   return (
-    <header
-      className={
-        isHeroOverlay
-          ? "absolute left-0 right-0 top-0 z-50 text-white"
-          : "relative z-50 border-b border-stone-200/80 bg-white text-stone-900"
-      }
-    >
-      {isHeroOverlay ? (
-        // Blur lives on a separate layer: backdrop-filter on <header> itself
-        // would turn it into the containing block for the fixed menu overlay.
-        <div
-          className="pointer-events-none absolute inset-0 -z-10 backdrop-blur-[2px] [background:rgba(255,255,255,0.06)]"
-          aria-hidden
-        />
-      ) : null}
+    <header className="relative z-50 box-border h-[72px] min-h-[72px] max-h-[72px] border-b border-[#EDE5DF] bg-[#F7F3F0] text-[#111]">
       {/* Mobile */}
-      <div className={`mx-auto flex h-14 max-w-7xl items-center justify-between px-4 sm:px-6 lg:hidden ${iconToneClass}`}>
+      <div className="mx-auto flex h-[72px] max-w-7xl items-center justify-between px-4 text-[#111] sm:px-6 lg:hidden">
         <div className="flex items-center gap-2">
           <button
             type="button"
-            className={
-              "-ml-1 inline-flex items-center gap-2.5 rounded-sm px-2.5 py-1.5 transition sm:px-3 sm:py-2 " +
-              (isHeroOverlay
-                ? "text-white/90 hover:text-white"
-                : "text-stone-950 hover:opacity-60")
-            }
+            className="-ml-1 inline-flex items-center gap-2.5 rounded-sm px-2.5 py-1.5 text-[#111] transition hover:opacity-60 sm:px-3 sm:py-2"
             onClick={() => setMenuOpen(true)}
             aria-label={t("common.menu")}
           >
@@ -120,49 +99,48 @@ export default function Header() {
               <path d="M4 7h16M4 12h16M4 17h16" strokeLinecap="round" />
             </svg>
           </button>
-          <StoreLocatorLink overlay={isHeroOverlay} />
+          <StoreLocatorLink overlay={false} />
         </div>
 
-        <BrandLogoLink overlay={isHeroOverlay} size="mobile" />
+        <BrandLogoLink overlay={false} size="mobile" />
 
         <div className="flex shrink-0 items-center gap-3">
-          <ProfileMenu overlay={isHeroOverlay} iconOnly />
+          <ProfileMenu overlay={false} iconOnly />
           <CartIcon hoverClassName={iconHoverClass} />
-          <LanguageSwitcher overlay={isHeroOverlay} reversed />
+          <LanguageSwitcher overlay={false} reversed />
         </div>
       </div>
 
       {/* Desktop */}
-      <div className="relative mx-auto hidden h-20 max-w-7xl items-center justify-between px-8 lg:flex">
-        <div className={`flex translate-y-0.5 items-center ${iconToneClass}`}>
-          <StoreLocatorLink overlay={isHeroOverlay} />
+      <div className="relative mx-auto hidden h-[72px] max-w-7xl items-center justify-between px-8 lg:flex">
+        <div className="flex translate-y-0.5 items-center text-[#111]">
+          <StoreLocatorLink overlay={false} />
         </div>
 
         <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2">
-          <BrandLogoLink overlay={isHeroOverlay} size="desktop" />
+          <BrandLogoLink overlay={false} size="desktop" />
         </div>
 
-        <div className={`flex items-center gap-5 ${isHeroOverlay ? "text-white" : "text-[#111]"}`}>
-          <WishlistIcon hoverClassName={iconHoverClass} />
-          <ProfileMenu overlay={isHeroOverlay} iconOnly />
-          <CartIcon hoverClassName={iconHoverClass} />
+        <div className="flex h-[72px] items-center text-[#111]">
+          <div className="header-icons flex items-center gap-6">
+            <WishlistIcon hoverClassName={iconHoverClass} />
+            <ProfileMenu overlay={false} iconOnly />
+            <CartIcon hoverClassName={iconHoverClass} />
+          </div>
           <button
             type="button"
             onClick={() => setMenuOpen(true)}
             aria-label={t("common.menu")}
-            className={
-              "inline-flex h-5 items-center gap-2 px-0 text-[11px] font-medium uppercase tracking-[0.14em] transition " +
-              (isHeroOverlay
-                ? "text-white/85 hover:text-white"
-                : "text-[#111] opacity-85 hover:opacity-100")
-            }
+            className="ml-7 inline-flex items-center gap-2 px-0 text-[13px] font-medium uppercase leading-none tracking-[0.12em] text-[#111] opacity-85 transition hover:opacity-100"
           >
-            <svg viewBox="0 0 24 24" className="h-5 w-5" fill="none" stroke="currentColor" strokeWidth="1.25">
-              <path d="M4 7h16M4 12h16M4 17h16" strokeLinecap="round" />
+            <svg width="18" height="12" viewBox="0 0 18 12" fill="none" className="block" aria-hidden>
+              <line x1="1" y1="1.2" x2="17" y2="1.2" stroke="#111" strokeWidth={1.25} strokeLinecap="round" />
+              <line x1="1" y1="6" x2="17" y2="6" stroke="#111" strokeWidth={1.25} strokeLinecap="round" />
+              <line x1="1" y1="10.8" x2="17" y2="10.8" stroke="#111" strokeWidth={1.25} strokeLinecap="round" />
             </svg>
             {t("common.menu")}
           </button>
-          <LanguageSwitcher overlay={isHeroOverlay} reversed />
+          <LanguageSwitcher overlay={false} reversed />
         </div>
       </div>
 
@@ -171,33 +149,41 @@ export default function Header() {
   );
 }
 
-function HeaderIcon({ children }: { children: React.ReactNode }) {
-  return (
-    <svg viewBox="0 0 24 24" className="h-5 w-5" fill="none" stroke="currentColor" strokeWidth="1.25" aria-hidden>
-      {children}
-    </svg>
-  );
-}
-
 function HeartIcon() {
   return (
-    <HeaderIcon>
+    <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden>
       <path
-        d="M12 20.25s-7.25-4.35-9.25-8.9C1.45 8.4 3.15 5.25 6.3 5.25c1.8 0 3.15 1.05 3.95 2.15.8-1.1 2.15-2.15 3.95-2.15 3.15 0 4.85 3.15 3.55 6.1-2 4.55-9.25 8.9-9.25 8.9z"
+        d="M10 17.2 L3.8 11.1 C2.6 9.9 2 8.7 2 7.3 C2 5.4 3.5 4 5.4 4 C6.6 4 7.5 4.5 8.3 5.6 L10 7.8 L11.7 5.6 C12.5 4.5 13.4 4 14.6 4 C16.5 4 18 5.4 18 7.3 C18 8.7 17.4 9.9 16.2 11.1 L10 17.2Z"
+        stroke="#111"
+        strokeWidth={1.1}
         strokeLinecap="round"
         strokeLinejoin="round"
+        fill="none"
       />
-    </HeaderIcon>
+    </svg>
   );
 }
 
 function HandbagIcon() {
   return (
-    <HeaderIcon>
-      <path d="M8.75 9.25V7.75a3.25 3.25 0 0 1 6.5 0v1.5" strokeLinecap="round" />
-      <path d="M6.75 9.25h10.5l1.15 11.5H5.6L6.75 9.25z" strokeLinejoin="round" />
-      <path d="M6.25 13.75h11.5" strokeLinecap="round" />
-    </HeaderIcon>
+    <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden>
+      <path
+        d="M6.2 7.2 L6.2 5.6 C6.2 3.5 7.9 1.8 10 1.8 C12.1 1.8 13.8 3.5 13.8 5.6 L13.8 7.2"
+        stroke="#111"
+        strokeWidth={1.25}
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        fill="none"
+      />
+      <path
+        d="M3.5 7.2 H16.5 L15.6 16.8 H4.4 L3.5 7.2Z"
+        stroke="#111"
+        strokeWidth={1.25}
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        fill="none"
+      />
+    </svg>
   );
 }
 
@@ -213,7 +199,7 @@ function WishlistIcon({
     <Link
       href={withLocalePath("/wishlist", locale)}
       aria-label={t("common.wishlist")}
-      className={`relative inline-flex h-5 w-5 shrink-0 items-center justify-center text-current transition ${hoverClassName}`}
+      className={`relative text-current transition ${hoverClassName}`}
     >
       <HeartIcon />
       {count > 0 && (
@@ -233,7 +219,7 @@ function CartIcon({ hoverClassName = "hover:opacity-60" }: { hoverClassName?: st
       type="button"
       onClick={openCart}
       aria-label={t("common.cart")}
-      className={`relative inline-flex h-5 w-5 shrink-0 items-center justify-center text-current transition ${hoverClassName}`}
+      className={`relative text-current transition ${hoverClassName}`}
     >
       <HandbagIcon />
       {count > 0 && (
@@ -276,7 +262,7 @@ function LanguageSwitcher({ overlay = false, reversed = false }: { overlay?: boo
         "inline-flex shrink-0 flex-row items-center text-[11px] uppercase tracking-[0.06em] " +
         (overlay
           ? "ml-6 border-l border-white/20 pl-6"
-          : "gap-1.5")
+          : "ml-6 gap-3 border-l border-[#EDE5DF] pl-6")
       }
     >
       {languageOptions.map((item, index) => (
@@ -315,14 +301,16 @@ function LanguageSwitcher({ overlay = false, reversed = false }: { overlay?: boo
   );
 }
 
+type MenuLinkKind = "catalog" | "collection" | "category";
+
 type MenuLink = {
   label: string;
   href: string;
-  isCollection?: boolean;
+  kind: MenuLinkKind;
 };
 
 type MenuSection = {
-  id: "shop" | "info";
+  id: "shop" | "collections" | "info";
   label: string;
   links: MenuLink[];
 };
@@ -333,32 +321,40 @@ function MobileMenu({ onClose }: { onClose: () => void }) {
   const pathname = usePathname();
   const router = useRouter();
   const suffix = useCurrentUrlSuffix();
-  const [activeSection, setActiveSection] = useState<"shop" | "info" | null>("shop");
+  const [activeSection, setActiveSection] = useState<"shop" | "collections" | "info" | null>("shop");
 
   const sections: MenuSection[] = [
     {
       id: "shop",
       label: t("nav.shop"),
       links: [
-        { label: t("catalog.allCatalog"), href: withLocalePath("/bags", locale) },
+        { label: t("catalog.allCatalog"), href: withLocalePath("/bags", locale), kind: "catalog" },
+        {
+          label: t("nav.foulardSilk"),
+          href: withLocalePath("/accessories/womens-scarves-women", locale),
+          kind: "category",
+        },
+        { label: t("nav.charms"), href: withLocalePath("/accessories/bag-charms", locale), kind: "category" },
+        {
+          label: t("nav.wallets"),
+          href: withLocalePath("/accessories/wallets-cardholders", locale),
+          kind: "category",
+        },
+      ],
+    },
+    {
+      id: "collections",
+      label: t("nav.collections"),
+      links: [
         {
           label: t("nav.amalfiCollection"),
           href: withLocalePath("/collections/amalfi-woven", locale),
-          isCollection: true,
+          kind: "collection",
         },
         {
           label: t("nav.veneziaCollection"),
           href: withLocalePath("/collections/venezia-intreccio", locale),
-          isCollection: true,
-        },
-        {
-          label: t("nav.foulardSilk"),
-          href: withLocalePath("/accessories/womens-scarves-women", locale),
-        },
-        { label: t("nav.charms"), href: withLocalePath("/accessories/bag-charms", locale) },
-        {
-          label: t("nav.wallets"),
-          href: withLocalePath("/accessories/wallets-cardholders", locale),
+          kind: "collection",
         },
       ],
     },
@@ -366,11 +362,19 @@ function MobileMenu({ onClose }: { onClose: () => void }) {
       id: "info",
       label: t("nav.info"),
       links: [
-        { label: t("nav.about"), href: withLocalePath("/info/o-nas", locale) },
-        { label: t("nav.stores"), href: withLocalePath("/info/nashi-magaziny", locale) },
-        { label: t("nav.warranty"), href: withLocalePath("/info/garantiya", locale) },
-        { label: t("nav.materialsCare"), href: withLocalePath("/info/materialy-i-uhod", locale) },
-        { label: t("nav.paymentDelivery"), href: withLocalePath("/info/oplata-i-dostavka", locale) },
+        { label: t("nav.about"), href: withLocalePath("/info/o-nas", locale), kind: "category" },
+        { label: t("nav.stores"), href: withLocalePath("/info/nashi-magaziny", locale), kind: "category" },
+        { label: t("nav.warranty"), href: withLocalePath("/info/garantiya", locale), kind: "category" },
+        {
+          label: t("nav.materialsCare"),
+          href: withLocalePath("/info/materialy-i-uhod", locale),
+          kind: "category",
+        },
+        {
+          label: t("nav.paymentDelivery"),
+          href: withLocalePath("/info/oplata-i-dostavka", locale),
+          kind: "category",
+        },
       ],
     },
   ];
@@ -383,95 +387,104 @@ function MobileMenu({ onClose }: { onClose: () => void }) {
     };
   }, []);
 
-  const renderLink = (l: MenuLink) => (
-    <li key={l.href}>
-      <Link
-        href={l.href}
-        onClick={onClose}
-        className={
-          "flex items-baseline gap-2.5 py-2 leading-snug transition hover:text-stone-950 sm:text-[1.15rem] lg:py-1.5 lg:text-[0.95rem] " +
-          (l.isCollection
-            ? "text-[1.05rem] font-medium tracking-[0.04em] text-stone-950"
-            : "text-[1.05rem] text-stone-500")
-        }
-      >
-        <span className="menu-hover-underline">{l.label}</span>
-        {l.isCollection ? (
-          <span className="shrink-0 text-[9px] font-semibold uppercase tracking-[0.16em] text-stone-400">
-            {t("nav.collectionBadge")}
-          </span>
-        ) : null}
-      </Link>
-    </li>
-  );
+  const linkSpacing = (_sectionId: MenuSection["id"], links: MenuLink[], index: number) => {
+    if (index === links.length - 1) return "mb-0";
+    return "mb-1";
+  };
+
+  const isLinkActive = (href: string) => {
+    if (!pathname) return false;
+    return pathname === href || pathname.startsWith(`${href}/`);
+  };
+
+  const renderLink = (sectionId: MenuSection["id"], l: MenuLink, index: number, links: MenuLink[]) => {
+    const spacing = linkSpacing(sectionId, links, index);
+    const active = isLinkActive(l.href);
+    const linkClass =
+      "flex h-9 items-center text-[15px] font-normal tracking-[0.02em] outline-none transition-[color,transform] duration-[160ms] ease-out hover:translate-x-[2px] focus:outline-none focus-visible:outline-none " +
+      (active ? "text-[#111]" : "text-[#6B6560] hover:text-[#111]");
+
+    return (
+      <li key={l.href} className={spacing}>
+        <Link href={l.href} onClick={onClose} className={linkClass}>
+          {l.label}
+        </Link>
+      </li>
+    );
+  };
 
   return (
     <div className="fixed inset-0 z-[60]">
       <div className="absolute inset-0 hidden bg-black/35 backdrop-blur-md lg:block" onClick={onClose} />
       <div className="absolute inset-0 bg-white lg:left-auto lg:w-[42%] lg:min-w-[440px] lg:max-w-[560px] lg:rounded-l-[28px] lg:shadow-[-24px_0_80px_rgba(0,0,0,0.18)]">
-      <div className="relative flex h-full flex-col overflow-y-auto">
-        <div className="flex items-center justify-end px-5 pb-2 pt-5 sm:px-8 sm:pt-7 lg:px-10 lg:pt-7">
-          <button
-            type="button"
-            onClick={onClose}
-            aria-label={t("common.close")}
-            className="inline-flex h-10 w-10 items-center justify-center rounded-full bg-black text-white shadow-lg transition hover:bg-stone-800 lg:h-11 lg:w-11"
-          >
-            <svg viewBox="0 0 24 24" className="h-6 w-6" fill="none" stroke="currentColor" strokeWidth="1.5">
-              <path d="M6 6l12 12M18 6 6 18" strokeLinecap="round" />
-            </svg>
-          </button>
-        </div>
+        <div className="relative flex h-full flex-col overflow-y-auto bg-white">
+          <div className="flex items-center justify-end px-5 pb-2 pt-5 sm:px-8 sm:pt-7 lg:px-10 lg:pt-7">
+            <button
+              type="button"
+              onClick={onClose}
+              aria-label={t("common.close")}
+              className="inline-flex h-10 w-10 items-center justify-center rounded-full bg-black text-white shadow-lg transition hover:bg-stone-800 lg:h-11 lg:w-11"
+            >
+              <svg viewBox="0 0 24 24" className="h-6 w-6" fill="none" stroke="currentColor" strokeWidth="1.5">
+                <path d="M6 6l12 12M18 6 6 18" strokeLinecap="round" />
+              </svg>
+            </button>
+          </div>
 
-        <nav className="flex-1 px-8 pb-8 pt-2 sm:px-10 sm:pt-4 lg:px-16 lg:pb-10 lg:pt-4">
-          <ul>
-            {sections.map((section) => {
-              const open = activeSection === section.id;
-              return (
-                <li key={section.id} className="border-b border-stone-100 last:border-b-0">
-                  <button
-                    type="button"
-                    onClick={() => setActiveSection(open ? null : section.id)}
-                    className={
-                      "block w-full py-4 text-left text-[1.65rem] font-normal leading-snug tracking-[0.01em] text-stone-950 transition hover:opacity-60 sm:text-[1.8rem] lg:py-3.5 lg:text-[1.35rem]"
-                    }
-                  >
-                    <span className="menu-hover-underline">{section.label}</span>
-                  </button>
-                  {open ? (
-                    <ul className="pb-5 lg:pb-4">{section.links.map(renderLink)}</ul>
-                  ) : null}
-                </li>
-              );
-            })}
-          </ul>
-        </nav>
+          <nav className="flex-1 px-8 pb-8 pt-2 sm:px-10 sm:pt-4 lg:px-16 lg:pb-10 lg:pt-4">
+            <ul>
+              {sections.map((section) => {
+                const open = activeSection === section.id;
+                return (
+                  <li key={section.id} className="border-b border-[#F1EBE6] last:border-b-0">
+                    <button
+                      type="button"
+                      onClick={() => setActiveSection(open ? null : section.id)}
+                      className={
+                        "block w-full text-left text-[20px] font-semibold leading-snug tracking-[-0.01em] transition-colors duration-[160ms] hover:text-[#111] " +
+                        (open ? "mb-6 pb-0 pt-4 text-[#111]" : "py-4 text-[#6B6560]")
+                      }
+                    >
+                      {section.label}
+                    </button>
+                    {open ? (
+                      <ul className="pb-6">
+                        {section.links.map((link, index) =>
+                          renderLink(section.id, link, index, section.links),
+                        )}
+                      </ul>
+                    ) : null}
+                  </li>
+                );
+              })}
+            </ul>
+          </nav>
 
-        <div className="border-t border-stone-100 px-8 py-6 sm:px-10 lg:px-16">
-          <div className="flex gap-3 text-[11px] font-medium uppercase tracking-[0.18em]">
-            {locales.map((item) => (
-              <Link
-                key={item}
-                href={switchLocalePath(pathname, item) + suffix}
-                onClick={(e) => {
-                  const live = window.location.search + window.location.hash;
-                  e.preventDefault();
-                  persistLocaleCookie(item);
-                  router.push(switchLocalePath(window.location.pathname, item) + live);
-                  router.refresh();
-                  onClose();
-                }}
-                className={
-                  "transition " +
-                  (item === locale ? "text-stone-950" : "text-stone-400 hover:text-stone-700")
-                }
-              >
-                {item}
-              </Link>
-            ))}
+          <div className="border-t border-[#F1EBE6] px-8 py-6 sm:px-10 lg:px-16">
+            <div className="flex gap-3 text-[11px] font-medium uppercase tracking-[0.18em]">
+              {locales.map((item) => (
+                <Link
+                  key={item}
+                  href={switchLocalePath(pathname, item) + suffix}
+                  onClick={(e) => {
+                    const live = window.location.search + window.location.hash;
+                    e.preventDefault();
+                    persistLocaleCookie(item);
+                    router.push(switchLocalePath(window.location.pathname, item) + live);
+                    router.refresh();
+                    onClose();
+                  }}
+                  className={
+                    "transition " +
+                    (item === locale ? "text-stone-950" : "text-stone-400 hover:text-stone-700")
+                  }
+                >
+                  {item}
+                </Link>
+              ))}
+            </div>
           </div>
         </div>
-      </div>
       </div>
     </div>
   );

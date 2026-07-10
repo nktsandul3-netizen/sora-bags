@@ -47,7 +47,7 @@ export async function POST(request: Request) {
   }
 
   try {
-    const result = await requestPasswordReset(parsed.data.email);
+    const result = await requestPasswordReset(parsed.data.email, locale);
 
     if (result.userFound && !result.emailSent) {
       return Response.json(

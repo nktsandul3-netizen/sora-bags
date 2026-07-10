@@ -39,7 +39,7 @@ export {
 
 export const brands: BrandDef[] = [
   {
-    slug: "luma-atelier",
+    slug: "sora-atelier",
     name: "SÓRA Atelier",
     section: "both",
     about:
@@ -158,7 +158,7 @@ export const products: Product[] = [
   {
     slug: "premium-leather-kelly-shoulder-bag-black",
     title: "Premium Leather Kelly Shoulder Bag",
-    brandSlug: "luma-atelier",
+    brandSlug: "sora-atelier",
     section: "bags",
     categorySlug: "shoulder-bags-women",
     price: 1600,
@@ -262,7 +262,7 @@ export const products: Product[] = [
   {
     slug: "woven-leather-shopper-tote-black",
     title: "Ondine — плетёная сумка-шоппер",
-    brandSlug: "luma-atelier",
+    brandSlug: "sora-atelier",
     section: "bags",
     categorySlug: "tote-bags-women",
     price: 3899,
@@ -356,7 +356,7 @@ export const products: Product[] = [
   {
     slug: "premium-woven-beach-tote-bag-natural-black",
     title: "Capri — плетёная пляжная сумка-тоут",
-    brandSlug: "luma-atelier",
+    brandSlug: "sora-atelier",
     section: "bags",
     categorySlug: "tote-bags-women",
     price: 2199,
@@ -397,7 +397,7 @@ export const products: Product[] = [
   {
     slug: "milano-cage-tote-bag-black-red",
     title: "Ortigia — тоут с каркасным силуэтом",
-    brandSlug: "luma-atelier",
+    brandSlug: "sora-atelier",
     section: "bags",
     categorySlug: "tote-bags-women",
     price: 1599,
@@ -502,7 +502,7 @@ export const products: Product[] = [
   {
     slug: "mini-elegance-top-handle-bag-white",
     title: "Micaela — мини-сумка с верхней ручкой",
-    brandSlug: "luma-atelier",
+    brandSlug: "sora-atelier",
     section: "bags",
     categorySlug: "handbags-women",
     price: 1499,
@@ -605,7 +605,7 @@ export const products: Product[] = [
   {
     slug: "classic-leather-tote-bag-black",
     title: "Claudine — классическая кожаная сумка-тоут",
-    brandSlug: "luma-atelier",
+    brandSlug: "sora-atelier",
     section: "bags",
     categorySlug: "tote-bags-women",
     price: 2499,
@@ -682,7 +682,7 @@ export const products: Product[] = [
   {
     slug: "classic-leather-bowling-bag-black",
     title: "Romina — сумка-боулинг",
-    brandSlug: "luma-atelier",
+    brandSlug: "sora-atelier",
     section: "bags",
     categorySlug: "bowling-bags",
     price: 2399,
@@ -757,7 +757,7 @@ export const products: Product[] = [
   {
     slug: "elegant-leather-hobo-bag-pink",
     title: "Amara — сумка-хобо",
-    brandSlug: "luma-atelier",
+    brandSlug: "sora-atelier",
     section: "bags",
     categorySlug: "shoulder-bags-women",
     price: 1299,
@@ -856,7 +856,7 @@ export const products: Product[] = [
   {
     slug: "elegant-leather-hobo-bag-taupe",
     title: "Liora — сумка-хобо",
-    brandSlug: "luma-atelier",
+    brandSlug: "sora-atelier",
     section: "bags",
     categorySlug: "shoulder-bags-women",
     price: 1600,
@@ -980,7 +980,7 @@ export const products: Product[] = [
   {
     slug: "elegant-leather-hobo-bag-smooth-black",
     title: "Serena — сумка-хобо из гладкой кожи",
-    brandSlug: "luma-atelier",
+    brandSlug: "sora-atelier",
     section: "bags",
     categorySlug: "shoulder-bags-women",
     price: 2599,
@@ -1065,7 +1065,7 @@ export const products: Product[] = [
   {
     slug: "structured-leather-top-handle-bag-black",
     title: "Structured Leather Top Handle Bag",
-    brandSlug: "luma-atelier",
+    brandSlug: "sora-atelier",
     section: "bags",
     categorySlug: "handbags-women",
     price: 1599,
@@ -1199,7 +1199,7 @@ export const products: Product[] = [
   {
     slug: "premium-fan-straw-handbag-natural-cognac",
     title: "Premium Fan Straw Handbag",
-    brandSlug: "luma-atelier",
+    brandSlug: "sora-atelier",
     section: "bags",
     categorySlug: "handbags-women",
     price: 1599,
@@ -1240,7 +1240,7 @@ export const products: Product[] = [
   {
     slug: "elegant-leather-crossbody-bag-white",
     title: "Noelia — кожаная сумка кроссбоди",
-    brandSlug: "luma-atelier",
+    brandSlug: "sora-atelier",
     section: "bags",
     categorySlug: "crossbody-bags-women",
     price: 1899,
@@ -1313,7 +1313,7 @@ export const products: Product[] = [
   {
     slug: "elegant-leather-crossbody-bag-beige",
     title: "Elegant Leather Crossbody Bag",
-    brandSlug: "luma-atelier",
+    brandSlug: "sora-atelier",
     section: "bags",
     categorySlug: "crossbody-bags-women",
     price: 1599,
@@ -1405,7 +1405,7 @@ export const products: Product[] = [
   {
     slug: "elegant-leather-moon-bag-cognac",
     title: "Elara — кожаная сумка полумесяцем",
-    brandSlug: "luma-atelier",
+    brandSlug: "sora-atelier",
     section: "bags",
     categorySlug: "shoulder-bags-women",
     price: 1399,
@@ -1491,7 +1491,7 @@ export const products: Product[] = [
   {
     slug: "elegant-leather-tote-bag-black",
     title: "Violaine — кожаная сумка-тоут",
-    brandSlug: "luma-atelier",
+    brandSlug: "sora-atelier",
     section: "bags",
     categorySlug: "tote-bags-women",
     price: 1899,
@@ -1579,7 +1579,7 @@ export const products: Product[] = [
   {
     slug: "pouch-bag-black-onyx",
     title: "Capucine — сумка-пауч",
-    brandSlug: "luma-atelier",
+    brandSlug: "sora-atelier",
     section: "bags",
     categorySlug: "clutches",
     price: 1599,
@@ -1737,7 +1737,7 @@ export const products: Product[] = [
   {
     slug: "structured-leather-tote-bag-burgundy",
     title: "Beatrice — структурированная сумка-тоут",
-    brandSlug: "luma-atelier",
+    brandSlug: "sora-atelier",
     section: "bags",
     categorySlug: "tote-bags-women",
     price: 2699,
@@ -1825,7 +1825,7 @@ export const products: Product[] = [
   {
     slug: "the-essential-shoulder-bag-tan-cognac",
     title: "Adele — базовая сумка на плечо",
-    brandSlug: "luma-atelier",
+    brandSlug: "sora-atelier",
     section: "bags",
     categorySlug: "shoulder-bags-women",
     price: 3399,
@@ -2028,19 +2028,19 @@ export const products: Product[] = [
     ],
   },
   {
-    slug: "luma-tote-sand",
+    slug: "sora-tote-sand",
     title: "Большой шопер SÓRA Atelier из плотной кожи песочного цвета",
-    brandSlug: "luma-atelier",
+    brandSlug: "sora-atelier",
     section: "bags",
     categorySlug: "tote-bags-women",
     price: 21900,
     oldPrice: 27900,
     colors: [C.sand, C.black, C.cognac],
-    material: "Натуральная зернистая кожа",
+    material: "Натуральная кожа",
     description:
       "Вместительный шопер на каждый день: помещается ноутбук, документы и всё для долгого дня. Две удобные ручки и внутренний карман на молнии.",
     highlights: [
-      "Натуральная зернистая кожа",
+      "Натуральная кожа",
       "Отделение для ноутбука до 14″",
       "Внутренний карман на молнии",
       "Две удобные ручки",
@@ -2051,7 +2051,7 @@ export const products: Product[] = [
       { label: "Форма", value: "Сумка-тоут" },
       { label: "Застёжка", value: "Молния" },
       { label: "Ручки", value: "Двойные ручки" },
-      { label: "Материал", value: "Зернистая кожа" },
+      { label: "Материал", value: "Кожа" },
       { label: "Страна производства", value: "Италия" },
       { label: "Уход", value: "Очищать мягкой сухой тканью; избегать влаги, жары и прямого солнца" },
       { label: "Доставка", value: "7–14 дней" },
@@ -2059,9 +2059,9 @@ export const products: Product[] = [
     ],
   },
   {
-    slug: "luma-backpack-black",
+    slug: "sora-backpack-black",
     title: "Женский рюкзак SÓRA Atelier из мягкой кожи чёрного цвета",
-    brandSlug: "luma-atelier",
+    brandSlug: "sora-atelier",
     section: "bags",
     categorySlug: "handbags-women",
     price: 19900,
@@ -2139,7 +2139,7 @@ export const products: Product[] = [
       { label: "Размер", value: "27 × 20 × 9 см" },
       { label: "Форма", value: "Сумка-кроссбоди" },
       { label: "Ремень", value: "Съёмный регулируемый ремень" },
-      { label: "Материал", value: "Зернистая кожа" },
+      { label: "Материал", value: "Кожа" },
       { label: "Страна производства", value: "Италия" },
       { label: "Уход", value: "Очищать мягкой сухой тканью; избегать влаги, жары и прямого солнца" },
       { label: "Доставка", value: "7–14 дней" },
@@ -2206,9 +2206,9 @@ export const products: Product[] = [
     ],
   },
   {
-    slug: "luma-belt-bag-black",
+    slug: "sora-belt-bag-black",
     title: "Поясная сумка SÓRA Atelier из гладкой кожи чёрного цвета",
-    brandSlug: "luma-atelier",
+    brandSlug: "sora-atelier",
     section: "bags",
     categorySlug: "crossbody-bags-women",
     price: 8900,
@@ -2267,11 +2267,11 @@ export const products: Product[] = [
     categorySlug: "tote-bags-women",
     price: 22900,
     colors: [C.grey, C.black, C.sand],
-    material: "Натуральная зернистая кожа",
+    material: "Натуральная кожа",
     description:
       "Просторная сумка для тех, кто носит с собой многое. Держит форму, имеет внутренний органайзер и съёмный длинный ремень.",
     highlights: [
-      "Натуральная зернистая кожа",
+      "Натуральная кожа",
       "Внутренний органайзер",
       "Съёмный длинный ремень",
     ],
@@ -2280,7 +2280,7 @@ export const products: Product[] = [
       { label: "Форма", value: "Сумка-тоут" },
       { label: "Ручки", value: "Двойные ручки" },
       { label: "Ремень", value: "Съёмный и регулируемый плечевой ремень" },
-      { label: "Материал", value: "Зернистая кожа" },
+      { label: "Материал", value: "Кожа" },
       { label: "Страна производства", value: "Италия" },
       { label: "Уход", value: "Очищать мягкой сухой тканью; избегать влаги, жары и прямого солнца" },
       { label: "Доставка", value: "7–14 дней" },
@@ -2318,7 +2318,7 @@ export const products: Product[] = [
   {
     slug: "womens-pebbled-leather-turn-lock-strap-tote-bag",
     title: "Greta — сумка-тоут с замком",
-    brandSlug: "luma-atelier",
+    brandSlug: "sora-atelier",
     section: "bags",
     categorySlug: "tote-bags-women",
     price: 3099,
@@ -2358,7 +2358,7 @@ export const products: Product[] = [
     description:
       "Тоут спокойной, чуть винтажной формы: зернистая кожа, широкое горло и планка с поворотным замком спереди. Ручки достаточно длинные, чтобы носить на плече, а объёма хватает для рабочих дней и коротких поездок.\n\nВнутри — свободное однообъёмное отделение без лишних перегородок, поэтому сумка одинаково удобна и для ноутбука, и для повседневных мелочей.",
     highlights: [
-      "Зернистая кожа",
+      "Кожа",
       "Поворотный замок на клапане спереди",
       "Одно свободное отделение внутри",
       "Двойные ручки для переноски на плече",
@@ -2368,7 +2368,7 @@ export const products: Product[] = [
       { label: "Форма", value: "Сумка-тоут" },
       { label: "Застёжка", value: "Поворотный замок" },
       { label: "Ручки", value: "Две ручки для ношения на плече" },
-      { label: "Материал", value: "Зернистая кожа" },
+      { label: "Материал", value: "Кожа" },
       { label: "Страна производства", value: "Италия" },
       { label: "Уход", value: "Очищать мягкой сухой тканью; избегать влаги, жары и прямого солнца" },
       { label: "Доставка", value: "1–3 дня" },
@@ -2378,7 +2378,7 @@ export const products: Product[] = [
   {
     slug: "womens-compact-woven-panel-metallic-top-handle-bag",
     title: "Nerissa — сумка на короткой ручке",
-    brandSlug: "luma-atelier",
+    brandSlug: "sora-atelier",
     section: "bags",
     categorySlug: "handbags-women",
     price: 1599,
@@ -2428,7 +2428,7 @@ export const products: Product[] = [
   {
     slug: "womens-duo-mini-tote-bag",
     title: "Fabrizia — мини-тоут",
-    brandSlug: "luma-atelier",
+    brandSlug: "sora-atelier",
     section: "bags",
     categorySlug: "tote-bags-women",
     price: 2299,
@@ -2492,7 +2492,7 @@ export const products: Product[] = [
   {
     slug: "womens-hobo-shoulder-bag",
     title: "Lucrezia — сумка хобо на плечо",
-    brandSlug: "luma-atelier",
+    brandSlug: "sora-atelier",
     section: "bags",
     categorySlug: "shoulder-bags-women",
     price: 2199,
@@ -2563,7 +2563,7 @@ export const products: Product[] = [
   {
     slug: "womens-knitted-openwork-panel-tote-bag",
     title: "Ginevra — тоут из вязаного полотна",
-    brandSlug: "luma-atelier",
+    brandSlug: "sora-atelier",
     section: "bags",
     categorySlug: "tote-bags-women",
     price: 1499,
@@ -2603,7 +2603,7 @@ export const products: Product[] = [
   {
     slug: "womens-leather-tote-shoulder-bag",
     title: "Allegra — сумка-тоут на плечо",
-    brandSlug: "luma-atelier",
+    brandSlug: "sora-atelier",
     section: "bags",
     categorySlug: "tote-bags-women",
     price: 2199,
@@ -2686,7 +2686,7 @@ export const products: Product[] = [
   {
     slug: "womens-luna-soft-hobo-bag",
     title: "Luna — мягкая сумка хобо",
-    brandSlug: "luma-atelier",
+    brandSlug: "sora-atelier",
     section: "bags",
     categorySlug: "shoulder-bags-women",
     price: 1999,
@@ -2735,7 +2735,7 @@ export const products: Product[] = [
   {
     slug: "womens-pebbled-leather-accordion-buckle-shoulder-bag",
     title: "Bettina — сумка на плечо с пряжкой",
-    brandSlug: "luma-atelier",
+    brandSlug: "sora-atelier",
     section: "bags",
     categorySlug: "shoulder-bags-women",
     price: 1799,
@@ -2761,11 +2761,11 @@ export const products: Product[] = [
         ],
       },
     ],
-    material: "Зернистая кожа",
+    material: "Кожа",
     description:
       "Сумка на плечо с боковой пряжкой, которая собирает объём по бокам гармошкой — по мере загрузки силуэт слегка расширяется. Зернистая кожа держит форму и не заминается.\n\nОдно основное отделение и ремень регулируемой длины для ношения на плече.",
     highlights: [
-      "Зернистая кожа",
+      "Кожа",
       "Боковая пряжка со сборкой по бокам",
       "Регулируемый ремень на плечо",
       "Одно основное отделение",
@@ -2773,7 +2773,7 @@ export const products: Product[] = [
     specs: [
       { label: "Размер", value: "26 × 26 × 8 см" },
       { label: "Форма", value: "Сумка" },
-      { label: "Материал", value: "Зернистая кожа" },
+      { label: "Материал", value: "Кожа" },
       { label: "Фурнитура", value: "Боковая металлическая фурнитура" },
       { label: "Страна производства", value: "Италия" },
       { label: "Уход", value: "Очищать мягкой сухой тканью; избегать влаги, жары и прямого солнца" },
@@ -2784,7 +2784,7 @@ export const products: Product[] = [
   {
     slug: "womens-pebbled-leather-baguette-bag",
     title: "Perrine — багет на плечо",
-    brandSlug: "luma-atelier",
+    brandSlug: "sora-atelier",
     section: "bags",
     categorySlug: "shoulder-bags-women",
     price: 2599,
@@ -2809,11 +2809,11 @@ export const products: Product[] = [
         ],
       },
     ],
-    material: "Зернистая кожа",
+    material: "Кожа",
     description:
       "Багет вытянутой формы, который носят под мышкой или на коротком ремне через плечо — компактный объём для самого нужного.\n\nЗернистая кожа с ровной, чуть матовой фактурой, минимум фурнитуры на лицевой стороне.",
     highlights: [
-      "Зернистая кожа",
+      "Кожа",
       "Вытянутая форма багета",
       "Короткий ремень на плечо",
       "Компактное однообъёмное отделение",
@@ -2822,7 +2822,7 @@ export const products: Product[] = [
       { label: "Размер", value: "39 × 22 × 13 см" },
       { label: "Форма", value: "Сумка-багет" },
       { label: "Ремень", value: "Короткий плечевой ремень" },
-      { label: "Материал", value: "Зернистая кожа" },
+      { label: "Материал", value: "Кожа" },
       { label: "Страна производства", value: "Италия" },
       { label: "Уход", value: "Очищать мягкой сухой тканью; избегать влаги, жары и прямого солнца" },
       { label: "Доставка", value: "1–3 дня" },
@@ -2832,7 +2832,7 @@ export const products: Product[] = [
   {
     slug: "womens-pebbled-leather-compact-baguette-bag",
     title: "Anaelle — компактный багет",
-    brandSlug: "luma-atelier",
+    brandSlug: "sora-atelier",
     section: "bags",
     categorySlug: "shoulder-bags-women",
     price: 1699,
@@ -2855,11 +2855,11 @@ export const products: Product[] = [
         ],
       },
     ],
-    material: "Зернистая кожа",
+    material: "Кожа",
     description:
       "Уменьшенная версия багета — только самое необходимое: телефон, карты, ключи. Носится под мышкой или на коротком ремне.\n\nЗернистая кожа не боится случайных касаний и держит форму в компактном объёме.",
     highlights: [
-      "Зернистая кожа",
+      "Кожа",
       "Компактный мини-формат",
       "Короткий ремень на плечо",
       "Одно отделение",
@@ -2868,7 +2868,7 @@ export const products: Product[] = [
       { label: "Размер", value: "24 × 16 см" },
       { label: "Форма", value: "Сумка-багет" },
       { label: "Ремень", value: "Короткий плечевой ремень" },
-      { label: "Материал", value: "Зернистая кожа" },
+      { label: "Материал", value: "Кожа" },
       { label: "Страна производства", value: "Италия" },
       { label: "Уход", value: "Очищать мягкой сухой тканью; избегать влаги, жары и прямого солнца" },
       { label: "Доставка", value: "1–3 дня" },
@@ -2878,7 +2878,7 @@ export const products: Product[] = [
   {
     slug: "womens-pebbled-leather-contrast-trim-structured-top-handle-bag",
     title: "Ninette — структурная сумка с контрастной окантовкой",
-    brandSlug: "luma-atelier",
+    brandSlug: "sora-atelier",
     section: "bags",
     categorySlug: "handbags-women",
     price: 2499,
@@ -2906,11 +2906,11 @@ export const products: Product[] = [
         ],
       },
     ],
-    material: "Зернистая кожа",
+    material: "Кожа",
     description:
       "Структурная сумка на короткой ручке с контрастной окантовкой по краю — акцентная деталь, которая держит внимание на силуэте, а не на логотипах.\n\nЖёсткий корпус не теряет форму без вещей внутри, а короткая ручка позволяет носить сумку в руке или на сгибе локтя.",
     highlights: [
-      "Зернистая кожа",
+      "Кожа",
       "Контрастная окантовка по краю",
       "Жёсткий структурный корпус",
       "Короткая ручка",
@@ -2919,7 +2919,7 @@ export const products: Product[] = [
       { label: "Размер", value: "31 × 19 × 13 см" },
       { label: "Форма", value: "Сумка с верхней ручкой" },
       { label: "Ручки", value: "Короткая жёсткая ручка" },
-      { label: "Материал", value: "Зернистая кожа" },
+      { label: "Материал", value: "Кожа" },
       { label: "Страна производства", value: "Италия" },
       { label: "Уход", value: "Очищать мягкой сухой тканью; избегать влаги, жары и прямого солнца" },
       { label: "Доставка", value: "1–3 дня" },
@@ -2929,7 +2929,7 @@ export const products: Product[] = [
   {
     slug: "womens-pebbled-leather-contrast-trim-turn-lock-structured-top-handle-bag",
     title: "Thea — структурная сумка с поворотным замком",
-    brandSlug: "luma-atelier",
+    brandSlug: "sora-atelier",
     section: "bags",
     categorySlug: "handbags-women",
     price: 2199,
@@ -2956,11 +2956,11 @@ export const products: Product[] = [
         ],
       },
     ],
-    material: "Зернистая кожа",
+    material: "Кожа",
     description:
       "Структурная сумка на короткой ручке с поворотным замком спереди и контрастной окантовкой по краю клапана.\n\nКорпус держит форму самостоятельно, поэтому сумка выглядит собранно даже наполовину пустой.",
     highlights: [
-      "Зернистая кожа",
+      "Кожа",
       "Поворотный замок спереди",
       "Контрастная окантовка клапана",
       "Жёсткий структурный корпус",
@@ -2970,7 +2970,7 @@ export const products: Product[] = [
       { label: "Форма", value: "Сумка с верхней ручкой" },
       { label: "Застёжка", value: "Поворотный замок" },
       { label: "Ручки", value: "Короткая верхняя ручка" },
-      { label: "Материал", value: "Зернистая кожа" },
+      { label: "Материал", value: "Кожа" },
       { label: "Страна производства", value: "Италия" },
       { label: "Уход", value: "Очищать мягкой сухой тканью; избегать влаги, жары и прямого солнца" },
       { label: "Доставка", value: "1–3 дня" },
@@ -2980,7 +2980,7 @@ export const products: Product[] = [
   {
     slug: "womens-pebbled-leather-crescent-hobo-bag",
     title: "Colline — сумка хобо полумесяцем",
-    brandSlug: "luma-atelier",
+    brandSlug: "sora-atelier",
     section: "bags",
     categorySlug: "shoulder-bags-women",
     price: 1399,
@@ -3004,11 +3004,11 @@ export const products: Product[] = [
         ],
       },
     ],
-    material: "Зернистая кожа",
+    material: "Кожа",
     description:
       "Хобо в форме полумесяца: вытянутый мягкий силуэт, который красиво ложится на бедро при ношении на плече.\n\nЗернистая кожа со временем становится только мягче, а форма — более естественной.",
     highlights: [
-      "Зернистая кожа",
+      "Кожа",
       "Форма полумесяца",
       "Мягкий силуэт без каркаса",
       "Ремень на плечо",
@@ -3017,7 +3017,7 @@ export const products: Product[] = [
       { label: "Размер", value: "22 × 12 × 7 см" },
       { label: "Форма", value: "Сумка-полумесяц" },
       { label: "Ремень", value: "Плечевой ремень" },
-      { label: "Материал", value: "Зернистая кожа" },
+      { label: "Материал", value: "Кожа" },
       { label: "Страна производства", value: "Италия" },
       { label: "Уход", value: "Очищать мягкой сухой тканью; избегать влаги, жары и прямого солнца" },
       { label: "Доставка", value: "1–3 дня" },
@@ -3027,7 +3027,7 @@ export const products: Product[] = [
   {
     slug: "womens-pebbled-leather-drawstring-tote-bag",
     title: "Maelle — тоут на завязках",
-    brandSlug: "luma-atelier",
+    brandSlug: "sora-atelier",
     section: "bags",
     categorySlug: "tote-bags-women",
     price: 1499,
@@ -3051,11 +3051,11 @@ export const products: Product[] = [
         ],
       },
     ],
-    material: "Зернистая кожа",
+    material: "Кожа",
     description:
       "Тоут с верхом на завязках: горловина стягивается шнуром, поэтому содержимое не открыто полностью, как в классическом тоуте с открытым верхом.\n\nПросторное отделение и плотная зернистая кожа, которая держит форму мешка, не давая ему заваливаться.",
     highlights: [
-      "Зернистая кожа",
+      "Кожа",
       "Верх на завязках-шнурке",
       "Просторное однообъёмное отделение",
       "Держит форму без каркаса",
@@ -3065,7 +3065,7 @@ export const products: Product[] = [
       { label: "Форма", value: "Сумка-тоут" },
       { label: "Застёжка", value: "Завязки-шнурок" },
       { label: "Ручки", value: "Двойные ручки" },
-      { label: "Материал", value: "Зернистая кожа" },
+      { label: "Материал", value: "Кожа" },
       { label: "Страна производства", value: "Италия" },
       { label: "Уход", value: "Очищать мягкой сухой тканью; избегать влаги, жары и прямого солнца" },
       { label: "Доставка", value: "1–3 дня" },
@@ -3075,7 +3075,7 @@ export const products: Product[] = [
   {
     slug: "womens-pebbled-leather-half-moon-shoulder-bag",
     title: "Livia — сумка полумесяц на плечо",
-    brandSlug: "luma-atelier",
+    brandSlug: "sora-atelier",
     section: "bags",
     categorySlug: "shoulder-bags-women",
     price: 1799,
@@ -3101,11 +3101,11 @@ export const products: Product[] = [
         ],
       },
     ],
-    material: "Зернистая кожа",
+    material: "Кожа",
     description:
       "Компактная сумка формы полумесяца на плечевом ремне — округлый силуэт без острых углов и жёсткой геометрии.\n\nОдно отделение, застёгивающееся сверху, вмещает повседневный минимум.",
     highlights: [
-      "Зернистая кожа",
+      "Кожа",
       "Округлая форма полумесяца",
       "Ремень на плечо",
       "Одно отделение",
@@ -3114,7 +3114,7 @@ export const products: Product[] = [
       { label: "Размер", value: "27 × 19 × 10 см" },
       { label: "Форма", value: "Сумка-полумесяц" },
       { label: "Ремень", value: "Плечевой ремень" },
-      { label: "Материал", value: "Зернистая кожа" },
+      { label: "Материал", value: "Кожа" },
       { label: "Страна производства", value: "Италия" },
       { label: "Уход", value: "Очищать мягкой сухой тканью; избегать влаги, жары и прямого солнца" },
       { label: "Доставка", value: "1–3 дня" },
@@ -3124,7 +3124,7 @@ export const products: Product[] = [
   {
     slug: "womens-pebbled-leather-kiss-lock-pouch-bag-ivory",
     title: "Cassia — клатч с рамочным замком",
-    brandSlug: "luma-atelier",
+    brandSlug: "sora-atelier",
     section: "bags",
     categorySlug: "clutches",
     price: 3099,
@@ -3141,11 +3141,11 @@ export const products: Product[] = [
         ],
       },
     ],
-    material: "Зернистая кожа",
+    material: "Кожа",
     description:
       "Компактный клатч с мягкой драпировкой и рамочным поцелуйным замком — застёжка закрывается одним движением.\n\nФормат для вечера и мероприятий: телефон, карты, помада.",
     highlights: [
-      "Зернистая кожа",
+      "Кожа",
       "Рамочный поцелуйный замок",
       "Мягкая драпировка",
       "Компактный вечерний формат",
@@ -3154,7 +3154,7 @@ export const products: Product[] = [
       { label: "Размер", value: "29 × 15 × 10 см" },
       { label: "Форма", value: "Клатч" },
       { label: "Застёжка", value: "Рамочный замок" },
-      { label: "Материал", value: "Зернистая кожа" },
+      { label: "Материал", value: "Кожа" },
       { label: "Страна производства", value: "Италия" },
       { label: "Уход", value: "Очищать мягкой сухой тканью; избегать влаги, жары и прямого солнца" },
       { label: "Доставка", value: "1–3 дня" },
@@ -3164,7 +3164,7 @@ export const products: Product[] = [
   {
     slug: "womens-pleated-leather-frame-clutch",
     title: "Fiamma — клатч с металлической рамкой",
-    brandSlug: "luma-atelier",
+    brandSlug: "sora-atelier",
     section: "bags",
     categorySlug: "clutches",
     price: 3199,
@@ -3221,7 +3221,7 @@ export const products: Product[] = [
   {
     slug: "womens-pebbled-leather-side-drawstring-shoulder-bag",
     title: "Gioia — сумка на плечо с боковыми завязками",
-    brandSlug: "luma-atelier",
+    brandSlug: "sora-atelier",
     section: "bags",
     categorySlug: "shoulder-bags-women",
     price: 2199,
@@ -3250,11 +3250,11 @@ export const products: Product[] = [
         ],
       },
     ],
-    material: "Зернистая кожа",
+    material: "Кожа",
     description:
       "Сумка на плечо из зернистой кожи с тонкими ремнями и декоративными боковыми завязками с золотыми наконечниками. Верх на молнии, внутри — одно просторное отделение.\n\nУдлинённый силуэт для города: телефон, кошелёк, ключи и мелочи.",
     highlights: [
-      "Зернистая кожа",
+      "Кожа",
       "Тонкие плечевые ремни",
       "Боковые завязки с золотой фурнитурой",
       "Застёжка на молнии",
@@ -3264,7 +3264,7 @@ export const products: Product[] = [
       { label: "Форма", value: "Сумка" },
       { label: "Ручки", value: "Плечевые ремни" },
       { label: "Застёжка", value: "Молния" },
-      { label: "Материал", value: "Зернистая кожа" },
+      { label: "Материал", value: "Кожа" },
       { label: "Страна производства", value: "Италия" },
       { label: "Уход", value: "Очищать мягкой сухой тканью; избегать влаги, жары и прямого солнца" },
       { label: "Доставка", value: "7–14 дней" },
@@ -3274,7 +3274,7 @@ export const products: Product[] = [
   {
     slug: "womens-pebbled-leather-two-tone-bowling-bag",
     title: "Giorgia — боулинг-сумка двухцветная",
-    brandSlug: "luma-atelier",
+    brandSlug: "sora-atelier",
     section: "bags",
     categorySlug: "bowling-bags",
     price: 3499,
@@ -3300,11 +3300,11 @@ export const products: Product[] = [
         ],
       },
     ],
-    material: "Зернистая кожа",
+    material: "Кожа",
     description:
       "Структурная боулинг-сумка из зернистой кожи в двухцветном сочетании: таupe корпус и тёмно-коричневые ручки с окантовкой. Верх на молнии, внутри — просторное отделение с карманом.\n\nЗолотая фурнитура и собранный силуэт — для города и повседневных образов.",
     highlights: [
-      "Зернистая кожа",
+      "Кожа",
       "Двухцветный дизайн",
       "Верхние ручки с пряжками",
       "Застёжка на молнии",
@@ -3314,7 +3314,7 @@ export const products: Product[] = [
       { label: "Форма", value: "Боулинг-сумка" },
       { label: "Ручки", value: "Верхние ручки" },
       { label: "Застёжка", value: "Молния" },
-      { label: "Материал", value: "Зернистая кожа" },
+      { label: "Материал", value: "Кожа" },
       { label: "Страна производства", value: "Италия" },
       { label: "Уход", value: "Очищать мягкой сухой тканью; избегать влаги, жары и прямого солнца" },
       { label: "Доставка", value: "7–14 дней" },
@@ -3324,7 +3324,7 @@ export const products: Product[] = [
   {
     slug: "womens-pebbled-leather-kiss-lock-pouch-bag-light-blue",
     title: "Paloma — сумка с фермуаром",
-    brandSlug: "luma-atelier",
+    brandSlug: "sora-atelier",
     section: "bags",
     categorySlug: "clutches",
     price: 3499,
@@ -3341,11 +3341,11 @@ export const products: Product[] = [
         ],
       },
     ],
-    material: "Зернистая кожа",
+    material: "Кожа",
     description:
       "Структурная сумка с рамочным поцелуйным замком — собранный силуэт и щёлкающая застёжка без молний и магнитов.\n\nБольше объёма для города: телефон, кошелёк, ключи и косметика.",
     highlights: [
-      "Зернистая кожа",
+      "Кожа",
       "Рамочный поцелуйный замок",
       "Структурный силуэт",
       "Одно отделение",
@@ -3354,7 +3354,7 @@ export const products: Product[] = [
       { label: "Размер", value: "36 × 19 × 12 см" },
       { label: "Форма", value: "Сумка с рамочным замком" },
       { label: "Застёжка", value: "Рамочный замок" },
-      { label: "Материал", value: "Зернистая кожа" },
+      { label: "Материал", value: "Кожа" },
       { label: "Страна производства", value: "Италия" },
       { label: "Уход", value: "Очищать мягкой сухой тканью; избегать влаги, жары и прямого солнца" },
       { label: "Доставка", value: "1–3 дня" },
@@ -3364,7 +3364,7 @@ export const products: Product[] = [
   {
     slug: "womens-pebbled-leather-rectangular-handbag",
     title: "Aurea — прямоугольная сумка в руке",
-    brandSlug: "luma-atelier",
+    brandSlug: "sora-atelier",
     section: "bags",
     categorySlug: "handbags-women",
     price: 2199,
@@ -3388,11 +3388,11 @@ export const products: Product[] = [
         ],
       },
     ],
-    material: "Зернистая кожа",
+    material: "Кожа",
     description:
       "Прямоугольная сумка строгих пропорций для повседневного использования в руке. Чёткие грани и минимум декора.\n\nОдно отделение внутри вмещает документы, косметичку и небольшой блокнот.",
     highlights: [
-      "Зернистая кожа",
+      "Кожа",
       "Прямоугольный строгий силуэт",
       "Короткая ручка",
       "Одно отделение",
@@ -3401,7 +3401,7 @@ export const products: Product[] = [
       { label: "Размер", value: "29 × 15 × 13 см" },
       { label: "Форма", value: "Прямоугольная структурная сумка" },
       { label: "Ручки", value: "Короткая ручка" },
-      { label: "Материал", value: "Зернистая кожа" },
+      { label: "Материал", value: "Кожа" },
       { label: "Страна производства", value: "Италия" },
       { label: "Уход", value: "Очищать мягкой сухой тканью; избегать влаги, жары и прямого солнца" },
       { label: "Доставка", value: "1–3 дня" },
@@ -3411,7 +3411,7 @@ export const products: Product[] = [
   {
     slug: "womens-pebbled-leather-satchel-bag",
     title: "Halle — сумка-сэтчел",
-    brandSlug: "luma-atelier",
+    brandSlug: "sora-atelier",
     section: "bags",
     categorySlug: "handbags-women",
     price: 2499,
@@ -3437,11 +3437,11 @@ export const products: Product[] = [
         ],
       },
     ],
-    material: "Зернистая кожа",
+    material: "Кожа",
     description:
       "Сэтчел классических пропорций с короткой ручкой сверху и клапаном, закрывающим основное отделение.\n\nЖёсткая посадка корпуса делает сумку опрятной вне зависимости от того, насколько она заполнена.",
     highlights: [
-      "Зернистая кожа",
+      "Кожа",
       "Клапан сверху с застёжкой",
       "Короткая ручка",
       "Структурный жёсткий корпус",
@@ -3450,7 +3450,7 @@ export const products: Product[] = [
       { label: "Размер", value: "32 × 21 × 13 см" },
       { label: "Форма", value: "Сумка" },
       { label: "Ручки", value: "Короткая ручка" },
-      { label: "Материал", value: "Зернистая кожа" },
+      { label: "Материал", value: "Кожа" },
       { label: "Страна производства", value: "Италия" },
       { label: "Уход", value: "Очищать мягкой сухой тканью; избегать влаги, жары и прямого солнца" },
       { label: "Доставка", value: "1–3 дня" },
@@ -3460,7 +3460,7 @@ export const products: Product[] = [
   {
     slug: "womens-pebbled-leather-structured-handbag",
     title: "Romilly — структурная сумка в руке",
-    brandSlug: "luma-atelier",
+    brandSlug: "sora-atelier",
     section: "bags",
     categorySlug: "handbags-women",
     price: 2399,
@@ -3470,8 +3470,8 @@ export const products: Product[] = [
       {
         ...C.black,
         images: [
-          { src: "/products/womens-pebbled-leather-structured-handbag/black-angle.png", alt: "Romilly Чёрный — под углом" },
           { src: "/products/womens-pebbled-leather-structured-handbag/black-front.png", alt: "Romilly Чёрный — вид спереди" },
+          { src: "/products/womens-pebbled-leather-structured-handbag/black-angle.png", alt: "Romilly Чёрный — под углом" },
           { src: "/products/womens-pebbled-leather-structured-handbag/black-detail.png", alt: "Romilly Чёрный — деталь" },
           { src: "/products/womens-pebbled-leather-structured-handbag/black-front-alt.png", alt: "Romilly Чёрный — альтернативный вид" },
           { src: "/products/womens-pebbled-leather-structured-handbag/black-side.png", alt: "Romilly Чёрный — сбоку" },
@@ -3500,11 +3500,11 @@ export const products: Product[] = [
         ],
       },
     ],
-    material: "Зернистая кожа",
+    material: "Кожа",
     description:
       "Структурная сумка на короткой ручке для повседневного ношения в руке — устойчивый корпус, чёткие грани, ничего лишнего на лицевой стороне.\n\nВнутри одно отделение, рассчитанное на документы и повседневные мелочи.",
     highlights: [
-      "Зернистая кожа",
+      "Кожа",
       "Жёсткий структурный корпус",
       "Короткая ручка",
       "Одно отделение",
@@ -3513,7 +3513,7 @@ export const products: Product[] = [
       { label: "Размер", value: "31 × 27 × 14 см" },
       { label: "Форма", value: "Сумка" },
       { label: "Ручки", value: "Короткая ручка" },
-      { label: "Материал", value: "Зернистая кожа" },
+      { label: "Материал", value: "Кожа" },
       { label: "Страна производства", value: "Италия" },
       { label: "Уход", value: "Очищать мягкой сухой тканью; избегать влаги, жары и прямого солнца" },
       { label: "Доставка", value: "1–3 дня" },
@@ -3523,7 +3523,7 @@ export const products: Product[] = [
   {
     slug: "womens-pebbled-leather-structured-shopper-tote",
     title: "Vespera — структурный шоппер-тоут",
-    brandSlug: "luma-atelier",
+    brandSlug: "sora-atelier",
     section: "bags",
     categorySlug: "tote-bags-women",
     price: 2699,
@@ -3547,11 +3547,11 @@ export const products: Product[] = [
         ],
       },
     ],
-    material: "Зернистая кожа",
+    material: "Кожа",
     description:
       "Шоппер-тоут устойчивой прямоугольной формы: широкое дно и невысокие бортики упрощают доступ к содержимому.\n\nПодходит как рабочая сумка — вмещает папки и ноутбук без деформации корпуса.",
     highlights: [
-      "Зернистая кожа",
+      "Кожа",
       "Устойчивая прямоугольная форма",
       "Широкое дно",
       "Просторное однообъёмное отделение",
@@ -3560,7 +3560,7 @@ export const products: Product[] = [
       { label: "Размер", value: "37 × 27 × 14 см" },
       { label: "Форма", value: "Сумка-тоут" },
       { label: "Ручки", value: "Две ручки для ношения на плече" },
-      { label: "Материал", value: "Зернистая кожа" },
+      { label: "Материал", value: "Кожа" },
       { label: "Страна производства", value: "Италия" },
       { label: "Уход", value: "Очищать мягкой сухой тканью; избегать влаги, жары и прямого солнца" },
       { label: "Доставка", value: "1–3 дня" },
@@ -3570,7 +3570,7 @@ export const products: Product[] = [
   {
     slug: "womens-pebbled-leather-structured-tote-bag-with-pouch",
     title: "Marielle — тоут с косметичкой",
-    brandSlug: "luma-atelier",
+    brandSlug: "sora-atelier",
     section: "bags",
     categorySlug: "tote-bags-women",
     price: 1499,
@@ -3598,11 +3598,11 @@ export const products: Product[] = [
         ],
       },
     ],
-    material: "Зернистая кожа",
+    material: "Кожа",
     description:
       "Тоут в комплекте с небольшой косметичкой того же цвета — она держится внутри и не теряется среди других вещей.\n\nСтруктурный корпус и широкий открытый верх делают сумку удобной на каждый день.",
     highlights: [
-      "Зернистая кожа",
+      "Кожа",
       "В комплекте косметичка того же цвета",
       "Структурный корпус",
       "Широкий открытый верх",
@@ -3613,7 +3613,7 @@ export const products: Product[] = [
       { label: "Застёжка", value: "Открытый верх" },
       { label: "Ручки", value: "Двойные ручки" },
       { label: "Комплектация", value: "Сумка и косметичка" },
-      { label: "Материал", value: "Зернистая кожа" },
+      { label: "Материал", value: "Кожа" },
       { label: "Страна производства", value: "Италия" },
       { label: "Уход", value: "Очищать мягкой сухой тканью; избегать влаги, жары и прямого солнца" },
       { label: "Доставка", value: "1–3 дня" },
@@ -3623,7 +3623,7 @@ export const products: Product[] = [
   {
     slug: "womens-pebbled-leather-tote-bag",
     title: "Fiorenza — сумка-тоут",
-    brandSlug: "luma-atelier",
+    brandSlug: "sora-atelier",
     section: "bags",
     categorySlug: "tote-bags-women",
     price: 2699,
@@ -3661,11 +3661,11 @@ export const products: Product[] = [
         ],
       },
     ],
-    material: "Зернистая кожа",
+    material: "Кожа",
     description:
       "Классический тоут без лишней фурнитуры: открытый верх, две ручки, просторное отделение. Форма, которая не выходит из моды.\n\nЗернистая кожа скрывает мелкие потёртости и держит форму даже при полной загрузке.",
     highlights: [
-      "Зернистая кожа",
+      "Кожа",
       "Классический открытый верх",
       "Двойные ручки",
       "Просторное однообъёмное отделение",
@@ -3675,7 +3675,7 @@ export const products: Product[] = [
       { label: "Форма", value: "Сумка-тоут" },
       { label: "Застёжка", value: "Открытый верх" },
       { label: "Ручки", value: "Двойные ручки" },
-      { label: "Материал", value: "Зернистая кожа" },
+      { label: "Материал", value: "Кожа" },
       { label: "Страна производства", value: "Италия" },
       { label: "Уход", value: "Очищать мягкой сухой тканью; избегать влаги, жары и прямого солнца" },
       { label: "Доставка", value: "1–3 дня" },
@@ -3685,7 +3685,7 @@ export const products: Product[] = [
   {
     slug: "womens-pebbled-leather-turn-lock-flap-shoulder-tote-bag",
     title: "Loretta — тоут с клапаном на замке",
-    brandSlug: "luma-atelier",
+    brandSlug: "sora-atelier",
     section: "bags",
     categorySlug: "tote-bags-women",
     price: 3999,
@@ -3702,11 +3702,11 @@ export const products: Product[] = [
         ],
       },
     ],
-    material: "Зернистая кожа",
+    material: "Кожа",
     description:
       "Тоут с широким клапаном, который закрывается поворотным замком спереди, — сумка выглядит собранно и защищает содержимое от посторонних взглядов.\n\nНасыщенный цвет и плотная кожа делают сумку заметным акцентом в образе.",
     highlights: [
-      "Зернистая кожа",
+      "Кожа",
       "Широкий клапан на поворотном замке",
       "Ремень на плечо",
       "Просторное отделение",
@@ -3716,7 +3716,7 @@ export const products: Product[] = [
       { label: "Форма", value: "Сумка-тоут" },
       { label: "Застёжка", value: "Поворотный замок" },
       { label: "Ручки", value: "Двойные ручки" },
-      { label: "Материал", value: "Зернистая кожа" },
+      { label: "Материал", value: "Кожа" },
       { label: "Страна производства", value: "Италия" },
       { label: "Уход", value: "Очищать мягкой сухой тканью; избегать влаги, жары и прямого солнца" },
       { label: "Доставка", value: "1–3 дня" },
@@ -3726,7 +3726,7 @@ export const products: Product[] = [
   {
     slug: "womens-pebbled-leather-wing-flap-tote-bag",
     title: "Solange — сумка-тоут трапециевидной формы",
-    brandSlug: "luma-atelier",
+    brandSlug: "sora-atelier",
     section: "bags",
     categorySlug: "tote-bags-women",
     price: 2499,
@@ -3759,11 +3759,11 @@ export const products: Product[] = [
         ],
       },
     ],
-    material: "Зернистая кожа",
+    material: "Кожа",
     description:
       "Solange — сумка-тоут трапециевидной формы с расклешёнными боками и укороченным клапаном, застёгнутым потайным магнитом. Силуэт выглядит собранно и структурно, при этом остаётся лёгким на плече.\n\nПередний карман на молнии добавляет практичности, а плотная зернистая кожа держит форму бортов даже при полной загрузке. Внутри — просторное отделение для повседневных вещей.",
     highlights: [
-      "Зернистая кожа",
+      "Кожа",
       "Трапециевидный силуэт с расклешёнными боками",
       "Клапан на потайном магните",
       "Передний карман на молнии",
@@ -3774,7 +3774,7 @@ export const products: Product[] = [
       { label: "Форма", value: "Сумка-тоут" },
       { label: "Застёжка", value: "Магнитный клапан" },
       { label: "Ручки", value: "Двойные ручки" },
-      { label: "Материал", value: "Зернистая кожа" },
+      { label: "Материал", value: "Кожа" },
       { label: "Страна производства", value: "Италия" },
       { label: "Уход", value: "Очищать мягкой сухой тканью; избегать влаги, жары и прямого солнца" },
       { label: "Доставка", value: "1–3 дня" },
@@ -3784,7 +3784,7 @@ export const products: Product[] = [
   {
     slug: "womens-pebbled-leather-wing-turn-lock-tote-bag",
     title: "Georgina — тоут с расклешёнными боками и замком",
-    brandSlug: "luma-atelier",
+    brandSlug: "sora-atelier",
     section: "bags",
     categorySlug: "tote-bags-women",
     price: 2499,
@@ -3827,11 +3827,11 @@ export const products: Product[] = [
         ],
       },
     ],
-    material: "Зернистая кожа",
+    material: "Кожа",
     description:
       "Тоут трапециевидной формы с расклешёнными боками: широкий верх и собранный центр держат силуэт архитектурным даже без наполнения. Зернистая кожа и золотистая фурнитура — спокойная, но заметная комбинация.\n\nПланка с поворотным замком фиксирует верх, внутри — отделение с центральной перегородкой на молнии и карман на молнии у стенки. В комплекте съёмный плечевой ремень.",
     highlights: [
-      "Зернистая кожа",
+      "Кожа",
       "Расклешённые боковые панели",
       "Поворотный замок на передней планке",
       "Съёмный плечевой ремень",
@@ -3842,7 +3842,7 @@ export const products: Product[] = [
       { label: "Застёжка", value: "Поворотный замок" },
       { label: "Ручки", value: "Двойные ручки + съёмный ремень" },
       { label: "Карманы и отделения", value: "Центральная перегородка на молнии, внутренний карман на молнии" },
-      { label: "Кожа", value: "Зернистая кожа" },
+      { label: "Кожа", value: "Кожа" },
       { label: "Фурнитура", value: "Золотистая фурнитура" },
       { label: "Страна производства", value: "Италия" },
       { label: "Уход", value: "Очищать мягкой сухой тканью; избегать влаги, жары и прямого солнца" },
@@ -3853,7 +3853,7 @@ export const products: Product[] = [
   {
     slug: "womens-pebbled-leather-turn-lock-placket-tote-with-pouch",
     title: "Cressida — тоут с планкой на замке",
-    brandSlug: "luma-atelier",
+    brandSlug: "sora-atelier",
     section: "bags",
     categorySlug: "tote-bags-women",
     price: 1599,
@@ -3901,11 +3901,11 @@ export const products: Product[] = [
         ],
       },
     ],
-    material: "Зернистая кожа",
+    material: "Кожа",
     description:
       "Тоут с узкой планкой на поворотном замке спереди и косметичкой в комплекте того же цвета.\n\nПросторное основное отделение открывается полностью, а планка с замком держит верх собранным, когда сумка не заполнена до конца.",
     highlights: [
-      "Зернистая кожа",
+      "Кожа",
       "Планка с поворотным замком",
       "В комплекте косметичка того же цвета",
       "Просторное основное отделение",
@@ -3916,7 +3916,7 @@ export const products: Product[] = [
       { label: "Застёжка", value: "Поворотный замок" },
       { label: "Ручки", value: "Двойные ручки" },
       { label: "Комплектация", value: "Сумка и косметичка" },
-      { label: "Материал", value: "Зернистая кожа" },
+      { label: "Материал", value: "Кожа" },
       { label: "Страна производства", value: "Италия" },
       { label: "Уход", value: "Очищать мягкой сухой тканью; избегать влаги, жары и прямого солнца" },
       { label: "Доставка", value: "1–3 дня" },
@@ -3926,7 +3926,7 @@ export const products: Product[] = [
   {
     slug: "womens-pebbled-leather-turn-lock-top-handle-bag",
     title: "Palmira — сумка с поворотным замком",
-    brandSlug: "luma-atelier",
+    brandSlug: "sora-atelier",
     section: "bags",
     categorySlug: "handbags-women",
     price: 2199,
@@ -3976,7 +3976,7 @@ export const products: Product[] = [
   {
     slug: "womens-pebbled-leather-turn-lock-top-handle-bag-white",
     title: "Margot — сумка с поворотным замком",
-    brandSlug: "luma-atelier",
+    brandSlug: "sora-atelier",
     section: "bags",
     categorySlug: "handbags-women",
     price: 2099,
@@ -4002,11 +4002,11 @@ export const products: Product[] = [
         ],
       },
     ],
-    material: "Зернистая кожа",
+    material: "Кожа",
     description:
       "Сумка на короткой ручке с поворотным замком на клапане — щёлкающая застёжка, которая быстро открывается одной рукой.\n\nАккуратные пропорции подходят и для офиса, и для города.",
     highlights: [
-      "Зернистая кожа",
+      "Кожа",
       "Поворотный замок на клапане",
       "Короткая ручка",
       "Одно отделение",
@@ -4016,7 +4016,7 @@ export const products: Product[] = [
       { label: "Форма", value: "Сумка с верхней ручкой" },
       { label: "Застёжка", value: "Поворотный замок" },
       { label: "Ручки", value: "Короткая верхняя ручка" },
-      { label: "Материал", value: "Зернистая кожа" },
+      { label: "Материал", value: "Кожа" },
       { label: "Страна производства", value: "Италия" },
       { label: "Уход", value: "Очищать мягкой сухой тканью; избегать влаги, жары и прямого солнца" },
       { label: "Доставка", value: "1–3 дня" },
@@ -4026,7 +4026,7 @@ export const products: Product[] = [
   {
     slug: "womens-pebbled-leather-turn-lock-flap-shoulder-bag-black",
     title: "Colette — сумка на плечо с клапаном на замке",
-    brandSlug: "luma-atelier",
+    brandSlug: "sora-atelier",
     section: "bags",
     categorySlug: "shoulder-bags-women",
     price: 2599,
@@ -4042,11 +4042,11 @@ export const products: Product[] = [
         ],
       },
     ],
-    material: "Зернистая кожа",
+    material: "Кожа",
     description:
       "Сумка на плечо с конвертным клапаном и поворотным замком — зернистая кожа держит форму, а золотая фурнитура подчёркивает линию клапана.\n\nВместительный объём для города: телефон, кошелёк, ключи и косметика. Внутри — контрастная красная подкладка.",
     highlights: [
-      "Зернистая кожа",
+      "Кожа",
       "Конвертный клапан на поворотном замке",
       "Плечевой ремень",
       "Контрастная красная подкладка",
@@ -4057,7 +4057,7 @@ export const products: Product[] = [
       { label: "Застёжка", value: "Поворотный замок на клапане" },
       { label: "Ремень", value: "Плечевой ремень" },
       { label: "Подкладка", value: "Красная" },
-      { label: "Кожа", value: "Зернистая кожа" },
+      { label: "Кожа", value: "Кожа" },
       { label: "Страна производства", value: "Италия" },
       { label: "Уход", value: "Очищать мягкой сухой тканью; избегать влаги, жары и прямого солнца" },
       { label: "Доставка", value: "1–3 дня" },
@@ -4067,7 +4067,7 @@ export const products: Product[] = [
   {
     slug: "womens-pebbled-leather-zip-hobo-bag",
     title: "Amabel — сумка хобо на молнии",
-    brandSlug: "luma-atelier",
+    brandSlug: "sora-atelier",
     section: "bags",
     categorySlug: "shoulder-bags-women",
     price: 1699,
@@ -4105,11 +4105,11 @@ export const products: Product[] = [
         ],
       },
     ],
-    material: "Зернистая кожа",
+    material: "Кожа",
     description:
       "Хобо на молнии по верху — в отличие от открытых хобо-сумок, эта закрывается полностью, что удобно для города и поездок.\n\nМягкий, но не бесформенный силуэт держится за счёт плотной зернистой кожи.",
     highlights: [
-      "Зернистая кожа",
+      "Кожа",
       "Молния по всему верху",
       "Мягкий силуэт хобо",
       "Ремень на плечо",
@@ -4118,7 +4118,7 @@ export const products: Product[] = [
       { label: "Размер", value: "37 × 18 × 10 см" },
       { label: "Форма", value: "Сумка-хобо" },
       { label: "Застёжка", value: "Молния" },
-      { label: "Материал", value: "Зернистая кожа" },
+      { label: "Материал", value: "Кожа" },
       { label: "Страна производства", value: "Италия" },
       { label: "Уход", value: "Очищать мягкой сухой тканью; избегать влаги, жары и прямого солнца" },
       { label: "Доставка", value: "1–3 дня" },
@@ -4128,7 +4128,7 @@ export const products: Product[] = [
   {
     slug: "womens-smooth-leather-compact-baguette-bag",
     title: "Ottilie — гладкий компактный багет",
-    brandSlug: "luma-atelier",
+    brandSlug: "sora-atelier",
     section: "bags",
     categorySlug: "shoulder-bags-women",
     price: 1899,
@@ -4177,7 +4177,7 @@ export const products: Product[] = [
   {
     slug: "womens-smooth-leather-contrast-trim-flap-shoulder-bag",
     title: "Perlette — сумка на плечо с клапаном",
-    brandSlug: "luma-atelier",
+    brandSlug: "sora-atelier",
     section: "bags",
     categorySlug: "shoulder-bags-women",
     price: 2099,
@@ -4235,7 +4235,7 @@ export const products: Product[] = [
   {
     slug: "womens-smooth-leather-crescent-hobo-bag",
     title: "Rosalind — гладкая хобо полумесяцем",
-    brandSlug: "luma-atelier",
+    brandSlug: "sora-atelier",
     section: "bags",
     categorySlug: "shoulder-bags-women",
     price: 1999,
@@ -4274,7 +4274,7 @@ export const products: Product[] = [
   {
     slug: "womens-suede-wing-tote-bag",
     title: "Severine — сумка-тоут из замши",
-    brandSlug: "luma-atelier",
+    brandSlug: "sora-atelier",
     section: "bags",
     categorySlug: "tote-bags-women",
     price: 3599,
@@ -4323,7 +4323,7 @@ export const products: Product[] = [
   {
     slug: "womens-pebbled-leather-ring-handle-structured-bag",
     title: "Callista — сумка с кольцевой ручкой",
-    brandSlug: "luma-atelier",
+    brandSlug: "sora-atelier",
     section: "bags",
     categorySlug: "handbags-women",
     price: 3199,
@@ -4360,11 +4360,11 @@ export const products: Product[] = [
         ],
       },
     ],
-    material: "Зернистая кожа",
+    material: "Кожа",
     description:
       "Callista — структурная сумка из зернистой кожи с архитектурным силуэтом: широкое основание, расклешённые бока и центральная треугольная панель спереди. Кольцевая ручка — главная деталь модели.\n\nЗастёжка-молния по боковой панели и съёмный плечевой ремень дают выбор между ношением в руке и через плечо. Внутри — одно просторное отделение.",
     highlights: [
-      "Зернистая кожа",
+      "Кожа",
       "Архитектурный силуэт с треугольной панелью",
       "Кольцевая ручка",
       "Боковая застёжка-молния",
@@ -4375,7 +4375,7 @@ export const products: Product[] = [
       { label: "Ручки", value: "Кольцевая ручка" },
       { label: "Ремень", value: "Съёмный плечевой ремень" },
       { label: "Застёжка", value: "Молния" },
-      { label: "Кожа", value: "Зернистая кожа" },
+      { label: "Кожа", value: "Кожа" },
       { label: "Фурнитура", value: "Серебристая металлическая фурнитура" },
       { label: "Страна производства", value: "Италия" },
       { label: "Уход", value: "Очищать мягкой сухой тканью; избегать влаги, жары и прямого солнца" },
@@ -4386,7 +4386,7 @@ export const products: Product[] = [
   {
     slug: "womens-woven-suede-flap-clutch-bag",
     title: "Damiana — плетёный клатч из замши",
-    brandSlug: "luma-atelier",
+    brandSlug: "sora-atelier",
     section: "bags",
     categorySlug: "clutches",
     price: 3599,
@@ -4440,7 +4440,7 @@ export const products: Product[] = [
   {
     slug: "womens-smooth-leather-metal-ring-crescent-hobo-bag",
     title: "Mirabel — сумка-полумесяц с металлическим кольцом",
-    brandSlug: "luma-atelier",
+    brandSlug: "sora-atelier",
     section: "bags",
     categorySlug: "shoulder-bags-women",
     price: 3599,
@@ -4494,7 +4494,7 @@ export const products: Product[] = [
   {
     slug: "womens-woven-leather-turn-lock-clutch-bag",
     title: "Annabel — плетёная сумка с замком-вертушкой",
-    brandSlug: "luma-atelier",
+    brandSlug: "sora-atelier",
     section: "bags",
     categorySlug: "clutches",
     price: 2599,
@@ -4545,7 +4545,7 @@ export const products: Product[] = [
   {
     slug: "womens-soft-leather-draped-flap-bag",
     title: "Solaine — сумка с драпированным клапаном",
-    brandSlug: "luma-atelier",
+    brandSlug: "sora-atelier",
     section: "bags",
     categorySlug: "shoulder-bags-women",
     price: 2399,
@@ -4592,7 +4592,7 @@ export const products: Product[] = [
   {
     slug: "womens-tote-shopper-bag",
     title: "Adalina — сумка-шоппер",
-    brandSlug: "luma-atelier",
+    brandSlug: "sora-atelier",
     section: "bags",
     categorySlug: "tote-bags-women",
     price: 1499,
@@ -4675,7 +4675,7 @@ export const products: Product[] = [
   {
     slug: "womens-woven-base-drawstring-bucket-bag",
     title: "Elowen — сумка-мешок с плетёным основанием",
-    brandSlug: "luma-atelier",
+    brandSlug: "sora-atelier",
     section: "bags",
     categorySlug: "bucket-bags-women",
     price: 1799,
@@ -4716,7 +4716,7 @@ export const products: Product[] = [
   {
     slug: "womens-woven-base-leather-link-handle-hobo-bag",
     title: "Fantine — хобо с плетёным основанием",
-    brandSlug: "luma-atelier",
+    brandSlug: "sora-atelier",
     section: "bags",
     categorySlug: "shoulder-bags-women",
     price: 1999,
@@ -4766,7 +4766,7 @@ export const products: Product[] = [
   {
     slug: "womens-woven-base-open-top-structured-bag-with-pouch",
     title: "Garance — структурная сумка с плетёным основанием",
-    brandSlug: "luma-atelier",
+    brandSlug: "sora-atelier",
     section: "bags",
     categorySlug: "tote-bags-women",
     price: 1999,
@@ -4820,7 +4820,7 @@ export const products: Product[] = [
   {
     slug: "womens-woven-base-round-bucket-bag",
     title: "Herminie — круглая сумка-мешок",
-    brandSlug: "luma-atelier",
+    brandSlug: "sora-atelier",
     section: "bags",
     categorySlug: "bucket-bags-women",
     price: 1799,
@@ -4858,7 +4858,7 @@ export const products: Product[] = [
   {
     slug: "womens-woven-base-turn-lock-top-handle-bag",
     title: "Isolde — сумка с плетёным основанием и замком",
-    brandSlug: "luma-atelier",
+    brandSlug: "sora-atelier",
     section: "bags",
     categorySlug: "handbags-women",
     price: 2099,
@@ -4900,7 +4900,7 @@ export const products: Product[] = [
   {
     slug: "womens-woven-base-zip-top-compact-structured-bag",
     title: "Jacinta — компактная структурная сумка на молнии",
-    brandSlug: "luma-atelier",
+    brandSlug: "sora-atelier",
     section: "bags",
     categorySlug: "handbags-women",
     price: 2099,
@@ -4948,7 +4948,7 @@ export const products: Product[] = [
   {
     slug: "womens-woven-base-zip-top-structured-bag",
     title: "Kalina — структурная сумка на молнии",
-    brandSlug: "luma-atelier",
+    brandSlug: "sora-atelier",
     section: "bags",
     categorySlug: "handbags-women",
     price: 2399,
@@ -4996,7 +4996,7 @@ export const products: Product[] = [
   {
     slug: "womens-woven-buckle-handle-tote-bag",
     title: "Lisette — тоут с пряжкой на ручке",
-    brandSlug: "luma-atelier",
+    brandSlug: "sora-atelier",
     section: "bags",
     categorySlug: "tote-bags-women",
     price: 3900,
@@ -5043,7 +5043,7 @@ export const products: Product[] = [
   {
     slug: "womens-woven-crescent-hobo-bag",
     title: "Manon — плетёная хобо полумесяцем",
-    brandSlug: "luma-atelier",
+    brandSlug: "sora-atelier",
     section: "bags",
     categorySlug: "shoulder-bags-women",
     price: 3899,
@@ -5073,7 +5073,7 @@ export const products: Product[] = [
       { label: "Размер", value: "33 × 18 × 12 см" },
       { label: "Форма", value: "Сумка-полумесяц" },
       { label: "Ремень", value: "Плечевой ремень" },
-      { label: "Материал", value: "Зернистая кожа" },
+      { label: "Материал", value: "Кожа" },
       { label: "Страна производства", value: "Италия" },
       { label: "Уход", value: "Очищать мягкой сухой тканью; избегать влаги, жары и прямого солнца" },
       { label: "Доставка", value: "1–3 дня" },
@@ -5083,7 +5083,7 @@ export const products: Product[] = [
   {
     slug: "womens-woven-flap-top-handle-bag",
     title: "Noriane — плетёная сумка с клапаном",
-    brandSlug: "luma-atelier",
+    brandSlug: "sora-atelier",
     section: "bags",
     categorySlug: "handbags-women",
     price: 2299,
@@ -5094,16 +5094,18 @@ export const products: Product[] = [
       {
         ...C.naturalBeige,
         images: [
-          { src: "/products/womens-woven-flap-top-handle-bag/natural-beige-front-alt-card.png", alt: "Noriane Natural Beige — карточка товара" },
+          { src: "/products/womens-woven-flap-top-handle-bag/natural-beige-front-v3.png", alt: "Noriane Natural Beige — вид спереди" },
           { src: "/products/womens-woven-flap-top-handle-bag/natural-beige-front-v2.png", alt: "Noriane Natural Beige — вид спереди" },
+          { src: "/products/womens-woven-flap-top-handle-bag/natural-beige-front-alt-card.png", alt: "Noriane Natural Beige — карточка товара" },
           { src: "/products/womens-woven-flap-top-handle-bag/natural-beige-inside.png", alt: "Noriane Natural Beige — внутри" },
         ],
       },
       {
         ...C.magenta,
         images: [
-          { src: "/products/womens-woven-flap-top-handle-bag/magenta-front-alt-card.png", alt: "Noriane Magenta — карточка товара" },
+          { src: "/products/womens-woven-flap-top-handle-bag/magenta-front-v3.png", alt: "Noriane Magenta — вид спереди" },
           { src: "/products/womens-woven-flap-top-handle-bag/magenta-front-v2.png", alt: "Noriane Magenta — вид спереди" },
+          { src: "/products/womens-woven-flap-top-handle-bag/magenta-front-alt-card.png", alt: "Noriane Magenta — карточка товара" },
           { src: "/products/womens-woven-flap-top-handle-bag/magenta-inside.png", alt: "Noriane Magenta — внутри" },
         ],
       },
@@ -5132,7 +5134,7 @@ export const products: Product[] = [
   {
     slug: "womens-woven-oval-handle-tote-bag",
     title: "Oriane — тоут с овальными ручками",
-    brandSlug: "luma-atelier",
+    brandSlug: "sora-atelier",
     section: "bags",
     categorySlug: "tote-bags-women",
     price: 3500,
@@ -5171,7 +5173,7 @@ export const products: Product[] = [
       { label: "Форма", value: "Сумка-тоут" },
       { label: "Застёжка", value: "Открытый верх" },
       { label: "Ручки", value: "Овальные ручки" },
-      { label: "Материал", value: "Зернистая кожа" },
+      { label: "Материал", value: "Кожа" },
       { label: "Страна производства", value: "Италия" },
       { label: "Уход", value: "Очищать мягкой сухой тканью; избегать влаги, жары и прямого солнца" },
       { label: "Доставка", value: "1–3 дня" },
@@ -5181,7 +5183,7 @@ export const products: Product[] = [
   {
     slug: "womens-woven-oval-handle-tote-bag-mokko",
     title: "Roxane — тоут с овальными ручками",
-    brandSlug: "luma-atelier",
+    brandSlug: "sora-atelier",
     section: "bags",
     categorySlug: "tote-bags-women",
     price: 4099,
@@ -5212,7 +5214,7 @@ export const products: Product[] = [
       { label: "Форма", value: "Сумка-тоут" },
       { label: "Застёжка", value: "Открытый верх" },
       { label: "Ручки", value: "Овальные ручки" },
-      { label: "Материал", value: "Зернистая кожа" },
+      { label: "Материал", value: "Кожа" },
       { label: "Страна производства", value: "Италия" },
       { label: "Уход", value: "Очищать мягкой сухой тканью; избегать влаги, жары и прямого солнца" },
       { label: "Доставка", value: "1–3 дня" },
@@ -5222,7 +5224,7 @@ export const products: Product[] = [
   {
     slug: "womens-woven-oval-handle-tote-bag-natural-tan",
     title: "Celia — тоут с овальными ручками",
-    brandSlug: "luma-atelier",
+    brandSlug: "sora-atelier",
     section: "bags",
     categorySlug: "tote-bags-women",
     price: 1799,
@@ -5262,7 +5264,7 @@ export const products: Product[] = [
   {
     slug: "womens-woven-panel-crystal-accent-structured-top-handle-bag",
     title: "Pernelle — структурная сумка с декоративной вставкой",
-    brandSlug: "luma-atelier",
+    brandSlug: "sora-atelier",
     section: "bags",
     categorySlug: "handbags-women",
     price: 2099,
@@ -5304,7 +5306,7 @@ export const products: Product[] = [
   {
     slug: "womens-woven-panel-pebbled-leather-top-handle-bag",
     title: "Aveline — сумка с плетёной панелью",
-    brandSlug: "luma-atelier",
+    brandSlug: "sora-atelier",
     section: "bags",
     categorySlug: "handbags-women",
     price: 1899,
@@ -5354,7 +5356,7 @@ export const products: Product[] = [
   {
     slug: "womens-woven-spiral-panel-shoulder-tote-bag",
     title: "Cendrine — тоут со спиральным плетением",
-    brandSlug: "luma-atelier",
+    brandSlug: "sora-atelier",
     section: "bags",
     categorySlug: "tote-bags-women",
     price: 1499,
@@ -5396,7 +5398,7 @@ export const products: Product[] = [
   {
     slug: "womens-woven-triangular-shoulder-bag",
     title: "Dorine — плетёная сумка треугольной формы",
-    brandSlug: "luma-atelier",
+    brandSlug: "sora-atelier",
     section: "bags",
     categorySlug: "shoulder-bags-women",
     price: 1499,
@@ -5434,7 +5436,7 @@ export const products: Product[] = [
   {
     slug: "womens-woven-zip-crossbody-bag",
     title: "Gwenaelle — плетёная сумка кроссбоди",
-    brandSlug: "luma-atelier",
+    brandSlug: "sora-atelier",
     section: "bags",
     categorySlug: "crossbody-bags-women",
     price: 2500,
@@ -5568,9 +5570,9 @@ export const products: Product[] = [
     ],
   },
   {
-    slug: "luma-cosmetic-bag-beige",
+    slug: "sora-cosmetic-bag-beige",
     title: "Косметичка SÓRA Atelier из мягкой кожи бежевого цвета",
-    brandSlug: "luma-atelier",
+    brandSlug: "sora-atelier",
     section: "accessories",
     categorySlug: "womens-wallets-women",
     price: 4200,
@@ -5625,7 +5627,7 @@ export const products: Product[] = [
   {
     slug: "womens-metallic-leather-bifold-cardholder-fuchsia",
     title: "Rosalia — картхолдер",
-    brandSlug: "luma-atelier",
+    brandSlug: "sora-atelier",
     section: "accessories",
     categorySlug: "card-holders-women",
     price: 399,
@@ -5665,7 +5667,7 @@ export const products: Product[] = [
   {
     slug: "womens-metallic-leather-bifold-cardholder-electric-blue",
     title: "Azzurina — картхолдер",
-    brandSlug: "luma-atelier",
+    brandSlug: "sora-atelier",
     section: "accessories",
     categorySlug: "card-holders-women",
     price: 399,
@@ -5705,7 +5707,7 @@ export const products: Product[] = [
   {
     slug: "womens-metallic-leather-bifold-cardholder-teal",
     title: "Turchese — картхолдер",
-    brandSlug: "luma-atelier",
+    brandSlug: "sora-atelier",
     section: "accessories",
     categorySlug: "card-holders-women",
     price: 399,
@@ -5745,7 +5747,7 @@ export const products: Product[] = [
   {
     slug: "womens-pebbled-leather-bifold-cardholder-white",
     title: "Bianca — картхолдер",
-    brandSlug: "luma-atelier",
+    brandSlug: "sora-atelier",
     section: "accessories",
     categorySlug: "card-holders-women",
     price: 399,
@@ -5765,7 +5767,7 @@ export const products: Product[] = [
     description:
       "Компактный картхолдер из белой зернистой кожи: чистый минималистичный силуэт без лишних деталей. Складная конструкция раскрывается на несколько вертикальных слотов для карт с обеих сторон.\n\nТональная строчка по контуру, аккуратная окраска торцов и золотое тиснение «Genuine Leather / Made in Italy» внутри подчёркивают итальянское происхождение. Лаконичный аксессуар для повседневного кармана или сумки.",
     highlights: [
-      "Зернистая кожа",
+      "Кожа",
       "Складная конструкция",
       "Отделения для карт с обеих сторон",
       "Made in Italy",
@@ -5784,7 +5786,7 @@ export const products: Product[] = [
   {
     slug: "womens-pebbled-leather-bifold-cardholder-chartreuse",
     title: "Limona — картхолдер",
-    brandSlug: "luma-atelier",
+    brandSlug: "sora-atelier",
     section: "accessories",
     categorySlug: "card-holders-women",
     price: 399,
@@ -5805,7 +5807,7 @@ export const products: Product[] = [
     description:
       "Компактный картхолдер из зернистой кожи насыщенного лаймово-шартрезового оттенка: яркий акцент без лишнего объёма. Складная конструкция с отделениями для карт с обеих сторон.\n\nТональная строчка по контуру, аккуратная окраска торцов и тиснение «Genuine Leather / Made in Italy» внутри. Смелый цвет для тех, кто любит заметные детали в повседневном образе.",
     highlights: [
-      "Зернистая кожа",
+      "Кожа",
       "Складная конструкция",
       "Отделения для карт с обеих сторон",
       "Made in Italy",
@@ -5824,7 +5826,7 @@ export const products: Product[] = [
   {
     slug: "womens-metallic-leather-bifold-cardholder-emerald",
     title: "Smeralda — картхолдер",
-    brandSlug: "luma-atelier",
+    brandSlug: "sora-atelier",
     section: "accessories",
     categorySlug: "card-holders-women",
     price: 399,
@@ -5864,7 +5866,7 @@ export const products: Product[] = [
   {
     slug: "womens-pebbled-leather-bifold-cardholder-dark-brown",
     title: "Bruna — картхолдер",
-    brandSlug: "luma-atelier",
+    brandSlug: "sora-atelier",
     section: "accessories",
     categorySlug: "card-holders-women",
     price: 399,
@@ -5884,7 +5886,7 @@ export const products: Product[] = [
     description:
       "Компактный картхолдер из зернистой кожи глубокого шоколадно-коричневого оттенка: насыщенный тон и выразительная фактура зерна. Складная конструкция с отделениями для карт с обеих сторон — по три слота на каждой панели.\n\nТональная строчка по контуру, аккуратная окраска торцов и золотое тиснение «Genuine Leather / Made in Italy» внутри. Универсальный тёмный аксессуар на каждый день.",
     highlights: [
-      "Зернистая кожа",
+      "Кожа",
       "Складная конструкция",
       "Отделения для карт с обеих сторон",
       "Made in Italy",
@@ -5903,7 +5905,7 @@ export const products: Product[] = [
   {
     slug: "womens-pebbled-leather-snap-strap-rfid-cardholder-sage",
     title: "Olivetta — картхолдер",
-    brandSlug: "luma-atelier",
+    brandSlug: "sora-atelier",
     section: "accessories",
     categorySlug: "card-holders-women",
     price: 499,
@@ -5920,7 +5922,7 @@ export const products: Product[] = [
     description:
       "Компактный картхолдер из зернистой кожи приглушённого оливково-шалфейного оттенка: вертикальные слоты на лицевой стороне и кожаный ремешок с кнопкой, который фиксирует карты. Внутри — дополнительные отделения и защита RFID.\n\nТональная строчка по контуру, тиснение «Genuine Leather / Vera Pelle» и маркировка RFID на подкладке. Удобный формат, когда нужны 4–6 карт под рукой и не хочется носить полноразмерный кошелёк.",
     highlights: [
-      "Зернистая кожа",
+      "Кожа",
       "Слоты для карт на лицевой стороне",
       "Ремешок с кнопкой",
       "Защита RFID",
@@ -5940,7 +5942,7 @@ export const products: Product[] = [
   {
     slug: "womens-pebbled-leather-snap-strap-rfid-wallet-sage",
     title: "Salvia — кошелёк",
-    brandSlug: "luma-atelier",
+    brandSlug: "sora-atelier",
     section: "accessories",
     categorySlug: "womens-wallets-women",
     price: 599,
@@ -5962,7 +5964,7 @@ export const products: Product[] = [
     description:
       "Компактный кошелёк из зернистой кожи приглушённого оливково-шалфейного оттенка: вертикальный формат, кожаный ремешок с кнопкой и продуманная внутренняя организация. Внутри — отделение на молнии, слоты для карт, прозрачные окна для документов и защита RFID.\n\nТональная строчка по контуру и маркировка RFID на подкладке. Спокойный природный оттенок для повседневного кармана.",
     highlights: [
-      "Зернистая кожа",
+      "Кожа",
       "Ремешок с кнопкой",
       "Отделение на молнии",
       "Защита RFID",
@@ -5982,7 +5984,7 @@ export const products: Product[] = [
   {
     slug: "womens-pebbled-leather-snap-strap-rfid-cardholder-grey",
     title: "Cenere — картхолдер",
-    brandSlug: "luma-atelier",
+    brandSlug: "sora-atelier",
     section: "accessories",
     categorySlug: "card-holders-women",
     price: 499,
@@ -6004,7 +6006,7 @@ export const products: Product[] = [
     description:
       "Компактный картхолдер из зернистой кожи светло-серого оттенка: вертикальные слоты на лицевой стороне и кожаный ремешок с кнопкой, который фиксирует карты. Внутри — шесть слотов для карт с обеих сторон и защита RFID.\n\nТональная строчка по контуру, тиснение «Genuine Leather / Vera Pelle» и маркировка RFID на подкладке. Спокойный нейтральный тон для повседневного кармана.",
     highlights: [
-      "Зернистая кожа",
+      "Кожа",
       "Слоты для карт на лицевой стороне",
       "Ремешок с кнопкой",
       "Защита RFID",
@@ -6024,7 +6026,7 @@ export const products: Product[] = [
   {
     slug: "womens-pebbled-leather-snap-strap-rfid-cardholder-red",
     title: "Rubina — картхолдер",
-    brandSlug: "luma-atelier",
+    brandSlug: "sora-atelier",
     section: "accessories",
     categorySlug: "card-holders-women",
     price: 499,
@@ -6045,7 +6047,7 @@ export const products: Product[] = [
     description:
       "Компактный картхолдер из зернистой кожи насыщенного красного оттенка: вертикальные слоты на лицевой стороне и кожаный ремешок с кнопкой, который фиксирует карты. Внутри — дополнительные отделения и защита RFID.\n\nТональная строчка по контуру, тиснение «Genuine Leather / Vera Pelle» и маркировка RFID на подкладке. Яркий акцентный оттенок для повседневного кармана.",
     highlights: [
-      "Зернистая кожа",
+      "Кожа",
       "Слоты для карт на лицевой стороне",
       "Ремешок с кнопкой",
       "Защита RFID",
@@ -6065,7 +6067,7 @@ export const products: Product[] = [
   {
     slug: "womens-pebbled-leather-snap-strap-rfid-cardholder-cream",
     title: "Avorio — картхолдер",
-    brandSlug: "luma-atelier",
+    brandSlug: "sora-atelier",
     section: "accessories",
     categorySlug: "card-holders-women",
     price: 499,
@@ -6086,7 +6088,7 @@ export const products: Product[] = [
     description:
       "Компактный картхолдер из зернистой кожи нежного кремово-бежевого оттенка: вертикальные слоты на лицевой стороне и кожаный ремешок с кнопкой, который фиксирует карты. Внутри — дополнительные отделения и защита RFID.\n\nТональная строчка по контуру, тиснение «Genuine Leather / Vera Pelle» и маркировка RFID на подкладке. Спокойный нейтральный тон для повседневного кармана.",
     highlights: [
-      "Зернистая кожа",
+      "Кожа",
       "Слоты для карт на лицевой стороне",
       "Ремешок с кнопкой",
       "Защита RFID",
@@ -6106,7 +6108,7 @@ export const products: Product[] = [
   {
     slug: "womens-pebbled-leather-snap-strap-rfid-cardholder-black",
     title: "Notte — картхолдер",
-    brandSlug: "luma-atelier",
+    brandSlug: "sora-atelier",
     section: "accessories",
     categorySlug: "card-holders-women",
     price: 499,
@@ -6127,7 +6129,7 @@ export const products: Product[] = [
     description:
       "Компактный картхолдер из зернистой чёрной кожи: вертикальные слоты на лицевой стороне и кожаный ремешок с кнопкой, который фиксирует карты. Внутри — дополнительные отделения и защита RFID.\n\nТональная строчка по контуру, тиснение «Genuine Leather / Vera Pelle» и маркировка RFID на подкладке. Классический чёрный аксессуар для повседневного кармана.",
     highlights: [
-      "Зернистая кожа",
+      "Кожа",
       "Слоты для карт на лицевой стороне",
       "Ремешок с кнопкой",
       "Защита RFID",
@@ -6147,7 +6149,7 @@ export const products: Product[] = [
   {
     slug: "womens-pebbled-leather-snap-strap-rfid-wallet-red",
     title: "Cremisi — кошелёк",
-    brandSlug: "luma-atelier",
+    brandSlug: "sora-atelier",
     section: "accessories",
     categorySlug: "womens-wallets-women",
     price: 599,
@@ -6169,7 +6171,7 @@ export const products: Product[] = [
     description:
       "Компактный кошелёк из зернистой кожи насыщенного красного оттенка: вертикальный формат, кожаный ремешок с кнопкой и продуманная внутренняя организация. Внутри — отделение на молнии, слоты для карт, прозрачные окна для документов и защита RFID.\n\nТональная строчка по контуру и маркировка RFID на подкладке. Яркий акцентный оттенок для повседневного кармана.",
     highlights: [
-      "Зернистая кожа",
+      "Кожа",
       "Ремешок с кнопкой",
       "Отделение на молнии",
       "Защита RFID",
@@ -6189,7 +6191,7 @@ export const products: Product[] = [
   {
     slug: "womens-pebbled-leather-snap-strap-rfid-cardholder-beige",
     title: "Perla — кошелёк",
-    brandSlug: "luma-atelier",
+    brandSlug: "sora-atelier",
     section: "accessories",
     categorySlug: "womens-wallets-women",
     price: 599,
@@ -6211,7 +6213,7 @@ export const products: Product[] = [
     description:
       "Компактный кошелёк из зернистой кожи нежного бежевого оттенка: вертикальный формат, кожаный ремешок с кнопкой и продуманная внутренняя организация. Внутри — отделение на молнии, слоты для карт и прозрачные окна для документов, а также защита RFID.\n\nТональная строчка по контуру и маркировка RFID на подкладке. Спокойный нейтральный цвет, который легко сочетается с сумками любых оттенков.",
     highlights: [
-      "Зернистая кожа",
+      "Кожа",
       "Ремешок с кнопкой",
       "Отделение на молнии",
       "Защита RFID",
@@ -6231,7 +6233,7 @@ export const products: Product[] = [
   {
     slug: "womens-pebbled-leather-trifold-rfid-cardholder-black",
     title: "Nera — картхолдер",
-    brandSlug: "luma-atelier",
+    brandSlug: "sora-atelier",
     section: "accessories",
     categorySlug: "card-holders-women",
     price: 499,
@@ -6253,7 +6255,7 @@ export const products: Product[] = [
     description:
       "Компактный картхолдер из зернистой чёрной кожи: трёхслойная складная конструкция с клапаном и застёжками на кнопках. Внутри — девять слотов для карт и защита RFID.\n\nТональная строчка по контуру, тиснение «Genuine Leather / Vera Pelle» и маркировка RFID на подкладке. Классический чёрный аксессуар, который подходит к любому образу.",
     highlights: [
-      "Зернистая кожа",
+      "Кожа",
       "Трёхслойная конструкция",
       "Застёжки на кнопках",
       "Защита RFID",
@@ -6271,9 +6273,9 @@ export const products: Product[] = [
     ],
   },
   {
-    slug: "luma-bag-charm-cognac",
+    slug: "sora-bag-charm-cognac",
     title: "Подвеска для сумки SÓRA Atelier из кожи коньячного цвета",
-    brandSlug: "luma-atelier",
+    brandSlug: "sora-atelier",
     section: "accessories",
     categorySlug: "bag-charms",
     price: 1900,
@@ -6298,9 +6300,9 @@ export const products: Product[] = [
     isNew: true,
   },
   {
-    slug: "luma-gift-set-black",
+    slug: "sora-gift-set-black",
     title: "Подарочный набор SÓRA Atelier: кошелёк и картхолдер чёрного цвета",
-    brandSlug: "luma-atelier",
+    brandSlug: "sora-atelier",
     section: "accessories",
     categorySlug: "womens-wallets-women",
     price: 8900,
@@ -6356,7 +6358,7 @@ export const products: Product[] = [
   {
     slug: "womens-full-grain-leather-zip-around-wallet",
     title: "Francesca — кошелёк на молнии",
-    brandSlug: "luma-atelier",
+    brandSlug: "sora-atelier",
     section: "accessories",
     categorySlug: "womens-wallets-women",
     price: 1199,
@@ -6422,7 +6424,7 @@ export const products: Product[] = [
   {
     slug: "womens-flap-leather-trifold-wallet",
     title: "Federica — кошелёк на клапане",
-    brandSlug: "luma-atelier",
+    brandSlug: "sora-atelier",
     section: "accessories",
     categorySlug: "womens-wallets-women",
     price: 1199,
@@ -6491,7 +6493,7 @@ export const products: Product[] = [
   {
     slug: "womens-woven-flap-trifold-wallet",
     title: "Fabiana — плетёный кошелёк на клапане",
-    brandSlug: "luma-atelier",
+    brandSlug: "sora-atelier",
     section: "accessories",
     categorySlug: "womens-wallets-women",
     price: 1599,
@@ -6541,7 +6543,7 @@ export const products: Product[] = [
   {
     slug: "womens-vintage-accordion-zip-wallet",
     title: "Giulietta — кошелёк-гармошка на молнии",
-    brandSlug: "luma-atelier",
+    brandSlug: "sora-atelier",
     section: "accessories",
     categorySlug: "womens-wallets-women",
     price: 1499,
@@ -6599,7 +6601,7 @@ export const products: Product[] = [
   {
     slug: "womens-woven-leather-zip-around-wallet",
     title: "Seraphina — плетёный кошелёк на молнии",
-    brandSlug: "luma-atelier",
+    brandSlug: "sora-atelier",
     section: "accessories",
     categorySlug: "womens-wallets-women",
     price: 1499,
@@ -6607,6 +6609,17 @@ export const products: Product[] = [
     isNew: true,
     galleryFit: "contain",
     colors: [
+      {
+        ...C.cobaltBlue,
+        status: "Доставка 7–14 дней",
+        images: [
+          { src: "/products/womens-woven-leather-zip-around-wallet/cobalt-blue-front-card.png", alt: "Seraphina Cobalt Blue — вид спереди" },
+          { src: "/products/womens-woven-leather-zip-around-wallet/cobalt-blue-front-alt.png", alt: "Seraphina Cobalt Blue — под углом" },
+          { src: "/products/womens-woven-leather-zip-around-wallet/cobalt-blue-open.png", alt: "Seraphina Cobalt Blue — в открытом виде" },
+          { src: "/products/womens-woven-leather-zip-around-wallet/cobalt-blue-inside.png", alt: "Seraphina Cobalt Blue — внутри" },
+          { src: "/products/womens-woven-leather-zip-around-wallet/cobalt-blue-inside-alt.png", alt: "Seraphina Cobalt Blue — отделения внутри" },
+        ],
+      },
       {
         ...C.jetBlack,
         images: [
@@ -6635,17 +6648,6 @@ export const products: Product[] = [
           { src: "/products/womens-woven-leather-zip-around-wallet/red-open.png", alt: "Seraphina Red — в открытом виде" },
           { src: "/products/womens-woven-leather-zip-around-wallet/red-inside.png", alt: "Seraphina Red — внутри" },
           { src: "/products/womens-woven-leather-zip-around-wallet/red-side.png", alt: "Seraphina Red — сбоку" },
-        ],
-      },
-      {
-        ...C.cobaltBlue,
-        status: "Доставка 7–14 дней",
-        images: [
-          { src: "/products/womens-woven-leather-zip-around-wallet/cobalt-blue-front-card.png", alt: "Seraphina Cobalt Blue — вид спереди" },
-          { src: "/products/womens-woven-leather-zip-around-wallet/cobalt-blue-front-alt.png", alt: "Seraphina Cobalt Blue — под углом" },
-          { src: "/products/womens-woven-leather-zip-around-wallet/cobalt-blue-open.png", alt: "Seraphina Cobalt Blue — в открытом виде" },
-          { src: "/products/womens-woven-leather-zip-around-wallet/cobalt-blue-inside.png", alt: "Seraphina Cobalt Blue — внутри" },
-          { src: "/products/womens-woven-leather-zip-around-wallet/cobalt-blue-inside-alt.png", alt: "Seraphina Cobalt Blue — отделения внутри" },
         ],
       },
       {
@@ -6683,7 +6685,7 @@ export const products: Product[] = [
   {
     slug: "womens-woven-leather-zip-snap-wallet",
     title: "Flavia — плетёный кошелёк на молнии с кнопкой",
-    brandSlug: "luma-atelier",
+    brandSlug: "sora-atelier",
     section: "accessories",
     categorySlug: "womens-wallets-women",
     price: 1699,
@@ -6872,9 +6874,9 @@ export const products: Product[] = [
     ],
   },
   {
-    slug: "luma-pegasus-leather-bag-charm",
+    slug: "sora-pegasus-leather-bag-charm",
     title: "Pegaso — кожаный брелок для сумки",
-    brandSlug: "luma-atelier",
+    brandSlug: "sora-atelier",
     section: "accessories",
     categorySlug: "bag-charms",
     price: 499,
@@ -6947,9 +6949,9 @@ export const products: Product[] = [
     ],
   },
   {
-    slug: "luma-dachshund-leather-bag-charm",
+    slug: "sora-dachshund-leather-bag-charm",
     title: "Bassotto — кожаный брелок для сумки",
-    brandSlug: "luma-atelier",
+    brandSlug: "sora-atelier",
     section: "accessories",
     categorySlug: "bag-charms",
     price: 349,
@@ -7003,9 +7005,9 @@ export const products: Product[] = [
     ],
   },
   {
-    slug: "luma-silk-bow-bag-charm",
+    slug: "sora-silk-bow-bag-charm",
     title: "Fiocco — шёлковый брелок-бант",
-    brandSlug: "luma-atelier",
+    brandSlug: "sora-atelier",
     section: "accessories",
     categorySlug: "bag-charms",
     price: 349,
@@ -7062,9 +7064,9 @@ export const products: Product[] = [
     ],
   },
   {
-    slug: "luma-dachshund-mix-bag-charm",
+    slug: "sora-dachshund-mix-bag-charm",
     title: "Mix — брелок-набор для сумки",
-    brandSlug: "luma-atelier",
+    brandSlug: "sora-atelier",
     section: "accessories",
     categorySlug: "bag-charms",
     price: 399,
@@ -7119,7 +7121,7 @@ export const products: Product[] = [
   {
     slug: "womens-pebbled-leather-envelope-turn-lock-chain-bag",
     title: "Marcelle — компактная сумка-конверт на цепочке",
-    brandSlug: "luma-atelier",
+    brandSlug: "sora-atelier",
     section: "bags",
     categorySlug: "shoulder-bags-women",
     price: 1699,
@@ -7161,11 +7163,11 @@ export const products: Product[] = [
         ],
       },
     ],
-    material: "Зернистая кожа",
+    material: "Кожа",
     description:
       "Компактная структурная сумка с конвертным клапаном и поворотным замком: зернистая кожа, золотистая цепочка и собранный прямоугольный силуэт.\n\nВнутри — два отделения с чёрной подкладкой и контрастной строчкой по краю. Подходит для вечера и для городских выходов, когда нужен аккуратный акцент без лишнего объёма.",
     highlights: [
-      "Зернистая кожа",
+      "Кожа",
       "Конвертный клапан на поворотном замке",
       "Золотистая цепочка",
       "Два отделения внутри",
@@ -7177,7 +7179,7 @@ export const products: Product[] = [
       { label: "Ремень", value: "Золотистая цепочка" },
       { label: "Отделение", value: "Два отделения" },
       { label: "Подкладка", value: "Чёрная" },
-      { label: "Кожа", value: "Зернистая кожа" },
+      { label: "Кожа", value: "Кожа" },
       { label: "Страна производства", value: "Италия" },
       { label: "Уход", value: "Очищать мягкой сухой тканью; избегать влаги, жары и прямого солнца" },
       { label: "Доставка", value: "1–3 дня" },
@@ -7188,7 +7190,7 @@ export const products: Product[] = [
   {
     slug: "womens-abstract-geometric-silk-scarf",
     title: "Serenella — шёлковый платок",
-    brandSlug: "luma-atelier",
+    brandSlug: "sora-atelier",
     section: "accessories",
     categorySlug: "womens-scarves-women",
     price: 399,
@@ -7227,7 +7229,7 @@ export const products: Product[] = [
   {
     slug: "womens-lavender-wave-silk-scarf",
     title: "Marcelline — шёлковый платок",
-    brandSlug: "luma-atelier",
+    brandSlug: "sora-atelier",
     section: "accessories",
     categorySlug: "womens-scarves-women",
     price: 399,
@@ -7266,7 +7268,7 @@ export const products: Product[] = [
   {
     slug: "womens-pastel-tie-dye-silk-scarf",
     title: "Celestina — шёлковый платок",
-    brandSlug: "luma-atelier",
+    brandSlug: "sora-atelier",
     section: "accessories",
     categorySlug: "womens-scarves-women",
     price: 399,
@@ -7305,7 +7307,7 @@ export const products: Product[] = [
   {
     slug: "womens-aqua-wave-silk-scarf",
     title: "Marina — шёлковый платок",
-    brandSlug: "luma-atelier",
+    brandSlug: "sora-atelier",
     section: "accessories",
     categorySlug: "womens-scarves-women",
     price: 399,
@@ -7344,7 +7346,7 @@ export const products: Product[] = [
   {
     slug: "womens-slate-geometric-silk-scarf",
     title: "Costanza — шёлковый платок",
-    brandSlug: "luma-atelier",
+    brandSlug: "sora-atelier",
     section: "accessories",
     categorySlug: "womens-scarves-women",
     price: 399,
@@ -7383,7 +7385,7 @@ export const products: Product[] = [
   {
     slug: "womens-mustard-wave-silk-scarf",
     title: "Doriana — шёлковый платок",
-    brandSlug: "luma-atelier",
+    brandSlug: "sora-atelier",
     section: "accessories",
     categorySlug: "womens-scarves-women",
     price: 399,
@@ -7422,7 +7424,7 @@ export const products: Product[] = [
   {
     slug: "womens-rainbow-pastel-silk-scarf",
     title: "Iride — шёлковый платок",
-    brandSlug: "luma-atelier",
+    brandSlug: "sora-atelier",
     section: "accessories",
     categorySlug: "womens-scarves-women",
     price: 399,
@@ -7461,7 +7463,7 @@ export const products: Product[] = [
   {
     slug: "womens-heart-leopard-silk-scarf",
     title: "Amorette — шёлковый платок",
-    brandSlug: "luma-atelier",
+    brandSlug: "sora-atelier",
     section: "accessories",
     categorySlug: "womens-scarves-women",
     price: 399,
@@ -7500,7 +7502,7 @@ export const products: Product[] = [
   {
     slug: "womens-landscape-hills-silk-scarf",
     title: "Colomba — шёлковый платок",
-    brandSlug: "luma-atelier",
+    brandSlug: "sora-atelier",
     section: "accessories",
     categorySlug: "womens-scarves-women",
     price: 399,
@@ -7539,7 +7541,7 @@ export const products: Product[] = [
   {
     slug: "womens-grey-stripe-silk-scarf",
     title: "Nebbia — шёлковый платок",
-    brandSlug: "luma-atelier",
+    brandSlug: "sora-atelier",
     section: "accessories",
     categorySlug: "womens-scarves-women",
     price: 399,
@@ -7578,7 +7580,7 @@ export const products: Product[] = [
   {
     slug: "womens-mint-abstract-silk-scarf",
     title: "Clarissa — шёлковый платок",
-    brandSlug: "luma-atelier",
+    brandSlug: "sora-atelier",
     section: "accessories",
     categorySlug: "womens-scarves-women",
     price: 399,
@@ -7617,7 +7619,7 @@ export const products: Product[] = [
   {
     slug: "womens-dusty-blue-abstract-silk-scarf",
     title: "Azzurra — шёлковый платок",
-    brandSlug: "luma-atelier",
+    brandSlug: "sora-atelier",
     section: "accessories",
     categorySlug: "womens-scarves-women",
     price: 399,
@@ -7656,7 +7658,7 @@ export const products: Product[] = [
   {
     slug: "womens-lavender-ink-silk-scarf",
     title: "Lavinia — шёлковый платок",
-    brandSlug: "luma-atelier",
+    brandSlug: "sora-atelier",
     section: "accessories",
     categorySlug: "womens-scarves-women",
     price: 399,
@@ -7695,7 +7697,7 @@ export const products: Product[] = [
   {
     slug: "womens-colorful-brushstroke-silk-scarf",
     title: "Artemisia — шёлковый платок",
-    brandSlug: "luma-atelier",
+    brandSlug: "sora-atelier",
     section: "accessories",
     categorySlug: "womens-scarves-women",
     price: 399,
@@ -7734,7 +7736,7 @@ export const products: Product[] = [
   {
     slug: "womens-cherry-print-silk-scarf",
     title: "Rosetta — шёлковый платок",
-    brandSlug: "luma-atelier",
+    brandSlug: "sora-atelier",
     section: "accessories",
     categorySlug: "womens-scarves-women",
     price: 399,
@@ -7773,7 +7775,7 @@ export const products: Product[] = [
   {
     slug: "womens-green-geometric-silk-scarf",
     title: "Verdiana — шёлковый платок",
-    brandSlug: "luma-atelier",
+    brandSlug: "sora-atelier",
     section: "accessories",
     categorySlug: "womens-scarves-women",
     price: 399,
@@ -7812,7 +7814,7 @@ export const products: Product[] = [
   {
     slug: "womens-red-floral-silk-scarf",
     title: "Fiorina — шёлковый платок",
-    brandSlug: "luma-atelier",
+    brandSlug: "sora-atelier",
     section: "accessories",
     categorySlug: "womens-scarves-women",
     price: 399,
@@ -7850,7 +7852,7 @@ export const products: Product[] = [
   {
     slug: "womens-watercolor-circles-silk-scarf",
     title: "Cerelia — шёлковый платок",
-    brandSlug: "luma-atelier",
+    brandSlug: "sora-atelier",
     section: "accessories",
     categorySlug: "womens-scarves-women",
     price: 399,
@@ -7888,7 +7890,7 @@ export const products: Product[] = [
   {
     slug: "womens-blue-multicolor-brushstroke-silk-scarf",
     title: "Teodora — шёлковый платок",
-    brandSlug: "luma-atelier",
+    brandSlug: "sora-atelier",
     section: "accessories",
     categorySlug: "womens-scarves-women",
     price: 399,
@@ -7926,7 +7928,7 @@ export const products: Product[] = [
   {
     slug: "womens-whale-print-silk-scarf",
     title: "Delphina — шёлковый платок",
-    brandSlug: "luma-atelier",
+    brandSlug: "sora-atelier",
     section: "accessories",
     categorySlug: "womens-scarves-women",
     price: 399,
@@ -7964,7 +7966,7 @@ export const products: Product[] = [
   {
     slug: "womens-pebbled-leather-heart-shaped-handbag",
     title: "Rosalba — сумка в форме сердца",
-    brandSlug: "luma-atelier",
+    brandSlug: "sora-atelier",
     section: "bags",
     categorySlug: "handbags-women",
     price: 1399,
@@ -7993,7 +7995,7 @@ export const products: Product[] = [
     description:
       "Сумка в форме сердца из зернистой кожи — узнаваемый силуэт, который добавляет характер даже к простому образу.\n\nЗолотая молния идёт по верхней линии сердца, а съёмный ремень позволяет носить модель в руке или через плечо. Внутри — красная подкладка и аккордеонные перегородки.",
     highlights: [
-      "Зернистая кожа",
+      "Кожа",
       "Силуэт в форме сердца",
       "Короткая ручка и съёмный ремень",
       "Застёжка на молнии с золотой фурнитурой",
@@ -8005,7 +8007,7 @@ export const products: Product[] = [
       { label: "Ручки", value: "Короткая верхняя ручка" },
       { label: "Ремень", value: "Съёмный регулируемый ремень" },
       { label: "Подкладка", value: "Красная кожа" },
-      { label: "Кожа", value: "Зернистая кожа" },
+      { label: "Кожа", value: "Кожа" },
       { label: "Фурнитура", value: "Золотая" },
       { label: "Страна производства", value: "Италия" },
       { label: "Уход", value: "Очищать мягкой сухой тканью; избегать влаги, жары и прямого солнца" },
@@ -8061,7 +8063,7 @@ const curatedNewArrivalsOrder = [
   "womens-woven-crescent-hobo-bag",
   "la-via-firenze-flower-bag-charm",
   "womens-pebbled-leather-kiss-lock-pouch-bag-light-blue",
-  "luma-pegasus-leather-bag-charm",
+  "sora-pegasus-leather-bag-charm",
   "womens-woven-zip-crossbody-bag",
   "womens-pebbled-leather-snap-strap-rfid-wallet-sage",
   "womens-woven-base-round-bucket-bag",
@@ -8333,16 +8335,16 @@ const featuredColorByProductSlug: Record<string, string> = {
   "elegant-leather-moon-bag-cognac": "Beige",
   "womens-hobo-shoulder-bag": "Camel",
   "womens-luna-soft-hobo-bag": "White",
-  "womens-pebbled-leather-accordion-buckle-shoulder-bag": "Black",
-  "womens-pebbled-leather-baguette-bag": "Taupe",
+  "womens-pebbled-leather-accordion-buckle-shoulder-bag": "Чёрный",
+  "womens-pebbled-leather-baguette-bag": "Blue",
   "womens-pebbled-leather-compact-baguette-bag": "Silver",
   "womens-pebbled-leather-zip-hobo-bag": "Light Blue",
   "womens-smooth-leather-compact-baguette-bag": "Olive Green",
   "womens-suede-wing-tote-bag": "Dark Chocolate",
-  "womens-pebbled-leather-ring-handle-structured-bag": "Cognac",
+  "womens-pebbled-leather-ring-handle-structured-bag": "Коньячный",
   "womens-woven-suede-flap-clutch-bag": "Burgundy",
-  "womens-smooth-leather-metal-ring-crescent-hobo-bag": "Cognac",
-  "womens-woven-leather-turn-lock-clutch-bag": "Cognac",
+  "womens-smooth-leather-metal-ring-crescent-hobo-bag": "Коньячный",
+  "womens-woven-leather-turn-lock-clutch-bag": "Коньячный",
   "womens-smooth-leather-contrast-trim-flap-shoulder-bag": "White",
   "womens-soft-leather-draped-flap-bag": "Red",
   "womens-woven-base-leather-link-handle-hobo-bag": "Taupe",
@@ -8351,22 +8353,22 @@ const featuredColorByProductSlug: Record<string, string> = {
   "womens-pebbled-leather-contrast-trim-structured-top-handle-bag": "Ivory",
   "womens-pebbled-leather-rectangular-handbag": "Camel",
   "womens-pebbled-leather-satchel-bag": "White",
-  "womens-pebbled-leather-structured-handbag": "Camel",
+  "womens-pebbled-leather-structured-handbag": "White",
   "womens-pebbled-leather-turn-lock-top-handle-bag": "Camel",
   "womens-woven-base-zip-top-compact-structured-bag": "Camel",
-  "womens-woven-flap-top-handle-bag": "Natural Beige",
+  "womens-woven-flap-top-handle-bag": "Magenta",
   "womens-woven-panel-pebbled-leather-top-handle-bag": "Taupe",
   "classic-leather-tote-bag-black": "Black",
   "elegant-leather-tote-bag-black": "Cognac",
   "womens-duo-mini-tote-bag": "Ivory",
-  "womens-leather-tote-shoulder-bag": "Taupe",
+  "womens-leather-tote-shoulder-bag": "White",
   "womens-pebbled-leather-turn-lock-strap-tote-bag": "Ivory",
-  "womens-pebbled-leather-turn-lock-placket-tote-with-pouch": "White",
+  "womens-pebbled-leather-turn-lock-placket-tote-with-pouch": "Light Grey",
   "womens-tote-shopper-bag": "Ivory",
   "womens-woven-buckle-handle-tote-bag": "Blush",
   "womens-woven-oval-handle-tote-bag": "Dusty Turquoise",
   "elegant-leather-crossbody-bag-white": "Off-White",
-  "elegant-leather-crossbody-bag-beige": "Beige",
+  "elegant-leather-crossbody-bag-beige": "Бежевый",
   "classic-leather-bowling-bag-black": "Off-White",
 };
 

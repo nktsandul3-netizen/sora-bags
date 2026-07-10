@@ -16,6 +16,7 @@ import {
   localizeColorName,
   localizeProductDescription,
   localizeProductHighlights,
+  localizeProductImageAlt,
   localizeProductSpec,
   localizeProductTitle,
   getVisibleProductSpecs,
@@ -293,7 +294,7 @@ export default function QuickViewModal({
                       hex={color?.hex ?? "#d6d3d1"}
                       section={product.section}
                       src={activeImage?.src}
-                      alt={activeImage?.alt ?? localizedTitle}
+                      alt={localizeProductImageAlt(activeImage?.alt, locale) || localizedTitle}
                       sizes="(min-width: 1024px) 40vw, 100vw"
                       imageClassName="object-contain object-center"
                       className="absolute inset-0 h-full w-full"
@@ -370,7 +371,10 @@ export default function QuickViewModal({
                       {formatPrice(product.price, locale)}
                     </span>
                   </span>
-                  <PreorderStatusBadge status={product.status} className="mt-2" />
+                  <PreorderStatusBadge
+                    status={isPreorder ? "pre_order" : product.status}
+                    className="mt-2"
+                  />
                 </div>
 
                 {/* Цвета (фото-миниатюры) */}
@@ -403,7 +407,7 @@ export default function QuickViewModal({
                                   hex={c.hex}
                                   section={product.section}
                                   src={thumb.src}
-                                  alt={thumb.alt || c.name}
+                                  alt={localizeProductImageAlt(thumb.alt, locale) || c.name}
                                   sizes="48px"
                                   unoptimized
                                   imageClassName={swatchImageClass}

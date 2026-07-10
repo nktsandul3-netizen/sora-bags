@@ -6,6 +6,8 @@ import { brand, videoWidget, type VideoWidgetTikTokItem } from "@/lib/config";
 import { useMenuOpen } from "@/context/menu-open";
 import { parseTikTokVideoId } from "@/lib/tiktok";
 import VideoLightbox from "@/components/VideoLightbox";
+import { useLocale, useT } from "@/lib/useI18n";
+import { getLocalizedText } from "@/lib/i18n";
 
 const EXPAND_EASE = [0.42, 0, 0.58, 1] as const;
 const DEFAULT_BOTTOM_DESKTOP = 28;
@@ -99,6 +101,8 @@ function useMounted() {
 
 export default function VideoWidget() {
   const { menuOpen } = useMenuOpen();
+  const locale = useLocale();
+  const t = useT();
   const mounted = useMounted();
   const [dismissed, setDismissed] = useState(false);
   const [expanded, setExpanded] = useState(false);
@@ -115,7 +119,7 @@ export default function VideoWidget() {
     blocked: false,
   });
   /** Hide floating stories widget while the hero banner is in view. */
-  const [heroInView, setHeroInView] = useState(true);
+  const [heroInView, setHeroInView] = useState(false);
 
   const tiktokItems = useMemo(
     () => (videoWidget.mode === "tiktok" ? resolveTikTokItems(videoWidget.tiktokVideos) : []),
@@ -125,7 +129,10 @@ export default function VideoWidget() {
   const activeTikTok = isTikTokMode ? tiktokItems[activeIndex % tiktokItems.length] : null;
 
   const useTikTok = isTikTokMode;
-  const cardTitle = useTikTok && activeTikTok ? activeTikTok.title : videoWidget.title;
+  const cardTitle =
+    useTikTok && activeTikTok
+      ? getLocalizedText(activeTikTok.title, locale)
+      : videoWidget.title;
   const videoSrc =
     useTikTok && activeTikTok?.mp4Src ? activeTikTok.mp4Src : videoWidget.videoSrc;
   const posterSrc =
@@ -173,10 +180,7 @@ export default function VideoWidget() {
 
   useEffect(() => {
     const hero = document.getElementById("home-hero");
-    if (!hero) {
-      setHeroInView(false);
-      return;
-    }
+    if (!hero) return;
     const observer = new IntersectionObserver(
       ([entry]) => setHeroInView(Boolean(entry?.isIntersecting)),
       { root: null, threshold: 0.08, rootMargin: "0px" },
@@ -299,7 +303,7 @@ export default function VideoWidget() {
             <button
               type="button"
               onClick={dismissWidget}
-              aria-label="Закрыть виджет"
+              aria-label={t("a11y.closeWidget")}
               className="absolute -right-1.5 -top-1.5 z-30 inline-flex h-6 w-6 items-center justify-center rounded-full bg-stone-900/90 text-white shadow-sm transition hover:bg-stone-950 md:h-7 md:w-7"
             >
               <CloseIcon className="h-4 w-4" />
@@ -309,7 +313,7 @@ export default function VideoWidget() {
               <button
                 type="button"
                 onClick={openLightbox}
-                aria-label={`Открыть ${cardTitle}`}
+                aria-label={t("a11y.openItem").replace("{title}", cardTitle)}
                 className="absolute inset-0 z-10 cursor-pointer"
               />
 
@@ -332,7 +336,7 @@ export default function VideoWidget() {
                     <button
                       key={item.videoId}
                       type="button"
-                      aria-label={`Видео ${i + 1}`}
+                      aria-label={t("a11y.videoNumber").replace("{number}", String(i + 1))}
                       aria-current={i === activeIndex ? "true" : undefined}
                       onClick={(e) => {
                         e.stopPropagation();

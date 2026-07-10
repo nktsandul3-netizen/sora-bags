@@ -16,7 +16,7 @@ export const deliveryOptions: {
   {
     value: "moldova_delivery",
     label: "Доставка по Молдове",
-    description: "После подтверждения с менеджером",
+    description: "После подтверждения менеджером",
   },
   {
     value: "pickup",
@@ -46,7 +46,7 @@ const localizedDelivery: Record<Locale, typeof deliveryOptions> = {
   ru: deliveryOptions,
   ro: [
     { value: "courier_chisinau", label: "Curier în Chișinău", description: "Stabilim ora convenabilă" },
-    { value: "moldova_delivery", label: "Livrare în Moldova", description: "După confirmarea cu managerul" },
+    { value: "moldova_delivery", label: "Livrare în Moldova", description: "După confirmare cu managerul" },
     { value: "pickup", label: "Ridicare cu confirmare", description: "Ridicați după confirmare" },
   ],
   en: [
@@ -59,7 +59,7 @@ const localizedDelivery: Record<Locale, typeof deliveryOptions> = {
 const localizedPayments: Record<Locale, typeof paymentOptions> = {
   ru: paymentOptions,
   ro: [
-    { value: "cash_on_delivery", label: "Plată la primire", description: "Numerar sau după acord" },
+    { value: "cash_on_delivery", label: "Plată la livrare", description: "Numerar sau după acord" },
     { value: "bank_transfer", label: "Transfer bancar", description: "Factură și link de plată" },
   ],
   en: [

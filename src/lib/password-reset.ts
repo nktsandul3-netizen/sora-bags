@@ -1,6 +1,8 @@
 import crypto from "crypto";
 import bcrypt from "bcryptjs";
 import { brand } from "@/lib/config";
+import { defaultLocale, type Locale, withLocalePath } from "@/lib/i18n";
+import { translate } from "@/lib/messages";
 import {
   ObjectId,
   passwordResetTokensCollection,
@@ -33,25 +35,31 @@ function getResetEmailFrom(): string {
   return `${brand.name} <noreply@${brand.domain}>`;
 }
 
-async function sendPasswordResetEmail(email: string, resetUrl: string): Promise<boolean> {
+async function sendPasswordResetEmail(
+  email: string,
+  resetUrl: string,
+  locale: Locale,
+): Promise<boolean> {
   const apiKey = process.env.RESEND_API_KEY;
   const from = getResetEmailFrom();
+  const t = (key: string) => translate(locale, key);
   if (!apiKey) {
     console.warn("[password-reset] RESEND_API_KEY не задан, письмо не отправлено");
     return false;
   }
 
   const safeUrl = escapeHtml(resetUrl);
+  const intro = t("resetEmail.intro").replace("{brand}", escapeHtml(brand.name));
   const html = `
   <div style="font-family:Arial,Helvetica,sans-serif;color:#1c1917;max-width:560px;line-height:1.6;">
-    <h2 style="margin:0 0 12px;font-family:Georgia,serif;font-weight:500;">Восстановление пароля</h2>
-    <p style="margin:0 0 16px;">Вы запросили сброс пароля для аккаунта ${escapeHtml(brand.name)}.</p>
+    <h2 style="margin:0 0 12px;font-family:Georgia,serif;font-weight:500;">${t("resetEmail.title")}</h2>
+    <p style="margin:0 0 16px;">${intro}</p>
     <p style="margin:0 0 24px;">
       <a href="${safeUrl}" style="display:inline-block;background:#1c1917;color:#fff;text-decoration:none;padding:12px 24px;border-radius:999px;font-size:14px;font-weight:600;">
-        Задать новый пароль
+        ${t("resetEmail.button")}
       </a>
     </p>
-    <p style="margin:0 0 8px;font-size:13px;color:#78716c;">Ссылка действует 1 час. Если вы не запрашивали сброс, просто проигнорируйте это письмо.</p>
+    <p style="margin:0 0 8px;font-size:13px;color:#78716c;">${t("resetEmail.expiry")}</p>
     <p style="margin:0;font-size:12px;color:#a8a29e;word-break:break-all;">${safeUrl}</p>
   </div>`;
 
@@ -65,7 +73,7 @@ async function sendPasswordResetEmail(email: string, resetUrl: string): Promise<
       body: JSON.stringify({
         from,
         to: [email],
-        subject: `Восстановление пароля — ${brand.name}`,
+        subject: `${t("resetEmail.subject")} — ${brand.name}`,
         html,
       }),
     });
@@ -82,6 +90,7 @@ async function sendPasswordResetEmail(email: string, resetUrl: string): Promise<
 
 export async function requestPasswordReset(
   emailRaw: string,
+  locale: Locale = defaultLocale,
 ): Promise<{ userFound: boolean; emailSent: boolean }> {
   const email = emailRaw.trim().toLowerCase();
   const users = await usersCollection();
@@ -105,8 +114,8 @@ export async function requestPasswordReset(
     createdAt: now,
   });
 
-  const resetUrl = `${getSiteUrl()}/account/reset-password?token=${token}`;
-  const emailSent = await sendPasswordResetEmail(email, resetUrl);
+  const resetUrl = `${getSiteUrl()}${withLocalePath("/account/reset-password", locale)}?token=${token}`;
+  const emailSent = await sendPasswordResetEmail(email, resetUrl, locale);
 
   if (!emailSent) {
     console.error("[password-reset] token saved but email not sent for:", email);

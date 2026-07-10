@@ -1,5 +1,5 @@
 {
-  "name": "luma-store",
+  "name": "sora-bags",
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -11,7 +11,8 @@
     "check-mongo": "node scripts/check-mongo.mjs",
     "check-instagram": "node scripts/check-instagram.mjs",
     "catalog:pdf": "node scripts/generate-catalog-pdf.mjs",
-    "menu:fix": "node scripts/fix-sora-menu.mjs"
+    "menu:fix": "node scripts/fix-sora-menu.mjs",
+    "i18n:audit": "node scripts/audit-localization.mjs"
   },
   "dependencies": {
     "bcryptjs": "^3.0.3",

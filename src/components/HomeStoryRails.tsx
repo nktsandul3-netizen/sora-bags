@@ -234,7 +234,7 @@ export default function HomeStoryRails({ className }: { className?: string }) {
           aria-modal="true"
           aria-label={`${railTitle}: ${activeTile.label}`}
         >
-          <button type="button" aria-label="Закрыть" onClick={close} className="absolute inset-0 cursor-default" />
+          <button type="button" aria-label={t("common.close")} onClick={close} className="absolute inset-0 cursor-default" />
 
           <div className="relative z-10 aspect-[9/16] max-h-[82vh] w-full max-w-[92vw] overflow-hidden rounded-[20px] bg-black shadow-[0_20px_60px_-15px_rgba(0,0,0,0.6)] sm:max-w-[420px]">
             {isVideo ? (
@@ -266,8 +266,8 @@ export default function HomeStoryRails({ className }: { className?: string }) {
               />
             )}
 
-            <button type="button" aria-label="Предыдущее" onClick={prev} className="absolute bottom-24 left-0 top-14 z-10 w-1/3" />
-            <button type="button" aria-label="Следующее" onClick={next} className="absolute bottom-24 right-0 top-14 z-10 w-1/3" />
+            <button type="button" aria-label={t("a11y.previous")} onClick={prev} className="absolute bottom-24 left-0 top-14 z-10 w-1/3" />
+            <button type="button" aria-label={t("a11y.next")} onClick={next} className="absolute bottom-24 right-0 top-14 z-10 w-1/3" />
 
             <StoryProgressBars count={slides.length} activeIndex={slide} progress={progress} />
 
@@ -285,16 +285,16 @@ export default function HomeStoryRails({ className }: { className?: string }) {
                   <button
                     type="button"
                     onClick={() => setMuted((value) => !value)}
-                    aria-label={muted ? "Включить звук" : "Выключить звук"}
+                    aria-label={muted ? t("a11y.unmute") : t("a11y.mute")}
                     className="rounded-full bg-black/40 px-3 py-1.5 text-[10px] uppercase tracking-[0.12em] text-white backdrop-blur-sm transition hover:bg-black/60"
                   >
-                    {muted ? "Sound off" : "Sound on"}
+                    {muted ? t("home.soundOff") : t("home.soundOn")}
                   </button>
                 )}
                 <button
                   type="button"
                   onClick={close}
-                  aria-label="Закрыть"
+                  aria-label={t("common.close")}
                   className="grid h-9 w-9 place-items-center rounded-full bg-black/40 text-white backdrop-blur-sm transition hover:bg-black/60"
                 >
                   <CloseIcon className="h-4 w-4" />

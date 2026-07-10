@@ -9,7 +9,7 @@ import { getBrandName, getFeaturedColorIndex } from "@/lib/data";
 import { withLocalePath } from "@/lib/i18n";
 import { useIsDesktop } from "@/lib/useIsDesktop";
 import { useLocale, useT } from "@/lib/useI18n";
-import { localizeProductTitle } from "@/lib/product-i18n";
+import { localizeProductImageAlt, localizeProductTitle } from "@/lib/product-i18n";
 import ProductImage from "./ProductImage";
 import ProductColorSwatches, { getColorImages } from "./ProductColorSwatches";
 import WishlistButton from "./WishlistButton";
@@ -108,7 +108,7 @@ function ShowcaseCard({ product }: { product: Product }) {
               <Image
                 key={`${displayIdx}-primary-${primary.src}`}
                 src={primary.src}
-                alt={primary.alt || localizedTitle}
+                alt={localizeProductImageAlt(primary.alt, locale) || localizedTitle}
                 fill
                 sizes="(min-width: 1024px) 25vw, 82vw"
                 quality={90}
@@ -125,7 +125,7 @@ function ShowcaseCard({ product }: { product: Product }) {
                 <Image
                   key={`${displayIdx}-secondary-${secondary!.src}`}
                   src={secondary!.src}
-                  alt={secondary!.alt || localizedTitle}
+                  alt={localizeProductImageAlt(secondary!.alt, locale) || localizedTitle}
                   fill
                   sizes="(min-width: 1024px) 25vw, 82vw"
                   quality={90}
@@ -279,7 +279,7 @@ export default function HomeNewArrivals({
       <div className="relative">
         <button
           type="button"
-          aria-label="Предыдущие товары"
+          aria-label={t("a11y.previousProducts")}
           onClick={() => scroll("left")}
           className="absolute left-2 top-[40%] z-10 hidden h-9 w-9 -translate-y-1/2 items-center justify-center rounded-full border border-stone-200 bg-white/80 text-stone-700 backdrop-blur transition hover:bg-white hover:text-stone-950 lg:flex"
         >
@@ -299,7 +299,7 @@ export default function HomeNewArrivals({
 
         <button
           type="button"
-          aria-label="Следующие товары"
+          aria-label={t("a11y.nextProducts")}
           onClick={() => scroll("right")}
           className="absolute right-2 top-[40%] z-10 hidden h-9 w-9 -translate-y-1/2 items-center justify-center rounded-full border border-stone-200 bg-white/80 text-stone-700 backdrop-blur transition hover:bg-white hover:text-stone-950 lg:flex"
         >

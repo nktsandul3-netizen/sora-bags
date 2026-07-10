@@ -9,7 +9,7 @@ import { formatPrice } from "@/lib/format";
 import { withLocalePath } from "@/lib/i18n";
 import { useIsDesktop } from "@/lib/useIsDesktop";
 import { useLocale, useT } from "@/lib/useI18n";
-import { localizeProductTitle } from "@/lib/product-i18n";
+import { localizeProductImageAlt, localizeProductTitle } from "@/lib/product-i18n";
 import ProductImage from "./ProductImage";
 import ProductColorSwatches, { getColorImages } from "./ProductColorSwatches";
 import WishlistButton from "./WishlistButton";
@@ -65,7 +65,7 @@ export default function ProductCard({ product }: { product: Product }) {
                   <Image
                     key={`${displayIdx}-primary-${primary.src}`}
                     src={primary.src}
-                    alt={primary.alt || localizedTitle}
+                    alt={localizeProductImageAlt(primary.alt, locale) || localizedTitle}
                     fill
                     sizes="(min-width: 1024px) 25vw, 50vw"
                     quality={90}
@@ -86,7 +86,7 @@ export default function ProductCard({ product }: { product: Product }) {
                     <Image
                       key={`${displayIdx}-secondary-${secondary!.src}`}
                       src={secondary!.src}
-                      alt={secondary!.alt || localizedTitle}
+                      alt={localizeProductImageAlt(secondary!.alt, locale) || localizedTitle}
                       fill
                       sizes="(min-width: 1024px) 25vw, 50vw"
                       quality={90}

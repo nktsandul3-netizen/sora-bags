@@ -13,6 +13,7 @@ import {
 import type { OrderPaymentStatus, OrderStatus } from "@/lib/mongodb";
 import type { OrderKind } from "@/lib/mongodb";
 import { trackAnalyticsEvent } from "@/lib/analytics";
+import { canonicalizeProductSlugs } from "@/lib/product-slug-aliases";
 
 const PRIVACY_POLICY_URL = "/info/politika-konfidentsialnosti";
 
@@ -97,7 +98,15 @@ export async function getOrders(userId: string): Promise<OrderView[]> {
 export async function getWishlistSlugs(userId: string): Promise<string[]> {
   const wishlists = await wishlistsCollection();
   const doc = await wishlists.findOne({ userId: new ObjectId(userId) });
-  return doc?.slugs ?? [];
+  const slugs = canonicalizeProductSlugs(doc?.slugs ?? []);
+  // Persist migration so old luma-* entries don't linger in Mongo.
+  if (doc?.slugs && slugs.join("\0") !== doc.slugs.join("\0")) {
+    await wishlists.updateOne(
+      { userId: new ObjectId(userId) },
+      { $set: { slugs, updatedAt: new Date() } },
+    );
+  }
+  return slugs;
 }
 
 export async function setWishlistSlugs(
@@ -105,7 +114,7 @@ export async function setWishlistSlugs(
   slugs: string[],
 ): Promise<string[]> {
   const wishlists = await wishlistsCollection();
-  const unique = Array.from(new Set(slugs));
+  const unique = canonicalizeProductSlugs(slugs);
   await wishlists.updateOne(
     { userId: new ObjectId(userId) },
     { $set: { slugs: unique, updatedAt: new Date() } },

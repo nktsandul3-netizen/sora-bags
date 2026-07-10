@@ -27,9 +27,9 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { slug } = await params;
   const p = getProduct(slug);
-  const locale = await getServerLocale();
+  const [locale, t] = await Promise.all([getServerLocale(), getServerT()]);
   return {
-    title: p ? localizeProductTitle(p, locale) : "Товар",
+    title: p ? localizeProductTitle(p, locale) : t("catalog.allCatalog"),
     description: p ? localizeProductDescription(p, locale) : undefined,
   };
 }

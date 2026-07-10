@@ -3,8 +3,13 @@ import { brand } from "@/lib/config";
 import { withLocalePath, type Locale } from "@/lib/i18n";
 
 const legalIdno = "1026023036917";
-const legalAddress = "Strada Mihai Sadoveanu 42/6, Chișinău, MD-2075, Республика Молдова";
 const phone = brand.phones[0];
+
+function legalAddressFor(locale: Locale) {
+  const country =
+    locale === "ru" ? "Республика Молдова" : locale === "ro" ? "Republica Moldova" : "Republic of Moldova";
+  return `Strada Mihai Sadoveanu 42/6, Chișinău, MD-2075, ${country}`;
+}
 
 function Section({ title, children }: { title: string; children: React.ReactNode }) {
   return (
@@ -25,7 +30,7 @@ function ContactBlock({ locale }: { locale: Locale }) {
         {locale === "ru" ? "IDNO" : locale === "ro" ? "IDNO" : "IDNO"}: {legalIdno}
       </p>
       <p>
-        {addressLabel}: {legalAddress}
+        {addressLabel}: {legalAddressFor(locale)}
       </p>
       <p>
         E-mail:{" "}

@@ -4,7 +4,6 @@ import { usePathname } from "next/navigation";
 import type { ReactNode } from "react";
 import CartDrawer from "@/components/CartDrawer";
 import VideoWidget from "@/components/VideoWidget";
-import { isHeroOverlayPath } from "@/lib/catalog-banner";
 import { stripLocaleFromPathname } from "@/lib/i18n";
 import { MenuOpenProvider } from "@/context/menu-open";
 
@@ -27,7 +26,6 @@ export default function StorefrontChrome({
   const isAdmin = path.startsWith("/admin");
   const isPrintCatalog = path === "/catalog/print";
   const isHome = path === "/";
-  const isHeroOverlay = isHeroOverlayPath(pathname);
 
   if (isAdmin || isPrintCatalog) {
     return <main className="flex-1">{children}</main>;
@@ -36,7 +34,7 @@ export default function StorefrontChrome({
   return (
     <MenuOpenProvider>
       {header}
-      <main className={"flex-1 " + (isHeroOverlay ? "relative" : "")}>{children}</main>
+      <main className="flex-1">{children}</main>
       {footer}
       <CartDrawer />
       {isHome ? <VideoWidget /> : null}

@@ -129,6 +129,15 @@ body {
   }
 }
 
+@keyframes productDetailBadgeFadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 0.6;
+  }
+}
+
 @keyframes productDetailFadeUp {
   from {
     opacity: 0;
@@ -136,6 +145,17 @@ body {
   }
   to {
     opacity: 1;
+    translate: 0 0;
+  }
+}
+
+@keyframes productDetailBadgeFadeUp {
+  from {
+    opacity: 0;
+    translate: 0 9px;
+  }
+  to {
+    opacity: 0.6;
     translate: 0 0;
   }
 }
@@ -157,7 +177,7 @@ body {
 
 .product-detail-brand-reveal {
   opacity: 0;
-  animation: productDetailFadeIn 520ms ease-out 80ms forwards;
+  animation: productDetailBadgeFadeIn 520ms ease-out 80ms forwards;
 }
 
 .product-detail-badge,
@@ -170,9 +190,8 @@ body {
 }
 
 .product-detail-badge {
-  transition:
-    transform 200ms ease,
-    box-shadow 200ms ease;
+  animation-name: productDetailBadgeFadeUp;
+  transition: transform 200ms ease;
   will-change: transform;
 }
 
@@ -201,8 +220,7 @@ body {
 }
 
 .product-detail-badge:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 6px 18px rgba(28, 25, 23, 0.1);
+  transform: translateY(-1px);
 }
 
 .product-status-dot-pulse {
@@ -233,6 +251,11 @@ body {
     translate: none;
     animation: none;
     transition: none;
+  }
+
+  .product-detail-brand-reveal,
+  .product-detail-badge {
+    opacity: 0.6;
   }
 
   .product-detail-badge:hover {
@@ -313,6 +336,43 @@ body {
 .menu-hover-underline:hover::after,
 .group:hover .menu-hover-underline::after {
   transform: scaleX(1);
+}
+
+.header-icons svg {
+  display: block;
+  width: 20px;
+  height: 20px;
+  fill: none;
+  stroke: #111;
+  stroke-width: 1.25;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.header-icons svg * {
+  stroke-width: 1.25;
+}
+
+/* Closed heart path reads heavier at the same stroke — optical match to 1.25 peers */
+.header-icons > *:nth-child(1) svg,
+.header-icons > *:nth-child(1) svg * {
+  stroke-width: 1.1;
+}
+
+.header-icons > a,
+.header-icons > button,
+.header-icons > div > button {
+  display: flex;
+  align-items: center;
+  transform: translateY(0);
+}
+
+.header-icons > *:nth-child(1) svg {
+  transform: translateY(1px); /* сердце */
+}
+
+.header-icons > *:nth-child(3) svg {
+  transform: translateY(0.5px); /* сумка */
 }
 
 @media print {

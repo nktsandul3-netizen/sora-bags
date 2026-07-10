@@ -75,18 +75,24 @@ export default function ProfileMenu({
       <Link
         href={withLocalePath("/account", locale)}
         aria-label={t("common.profile")}
-        className={`inline-flex h-9 w-9 items-center justify-center transition ${overlay ? "hover:opacity-75" : "hover:opacity-60"}`}
+        className={`text-current transition ${overlay ? "hover:opacity-75" : "hover:opacity-60"}`}
       >
-        <svg viewBox="0 0 24 24" className="h-5 w-5" fill="none" stroke="currentColor" strokeWidth="1.25" aria-hidden>
-          <circle cx="12" cy="8.25" r="3.25" />
-          <path d="M5.5 20.25c0-3.75 2.9-6 6.5-6s6.5 2.25 6.5 6" strokeLinecap="round" />
+        <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden>
+          <circle cx="10" cy="6.2" r="2.8" stroke="#111" strokeWidth={1.25} strokeLinecap="round" fill="none" />
+          <path
+            d="M4.2 16.2 C4.2 13.2 6.6 11 10 11 C13.4 11 15.8 13.2 15.8 16.2"
+            stroke="#111"
+            strokeWidth={1.25}
+            strokeLinecap="round"
+            fill="none"
+          />
         </svg>
       </Link>
     );
   }
 
   const triggerClass = iconOnly
-    ? `inline-flex h-5 w-5 shrink-0 items-center justify-center transition ${overlay ? "hover:opacity-100" : "hover:opacity-60"}`
+    ? `transition ${overlay ? "hover:opacity-100" : "hover:opacity-60"}`
     : `border-b-2 pb-0.5 ${overlay ? "text-sm font-medium text-white transition hover:text-white" : "text-sm font-medium text-stone-800 transition hover:text-stone-950"}`;
 
   return (
@@ -100,9 +106,15 @@ export default function ProfileMenu({
         aria-haspopup="menu"
       >
         {iconOnly ? (
-          <svg viewBox="0 0 24 24" className="h-5 w-5" fill="none" stroke="currentColor" strokeWidth="1.25" aria-hidden>
-            <circle cx="12" cy="8.25" r="3.25" />
-            <path d="M5.5 20.25c0-3.75 2.9-6 6.5-6s6.5 2.25 6.5 6" strokeLinecap="round" />
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden>
+            <circle cx="10" cy="6.2" r="2.8" stroke="#111" strokeWidth={1.25} strokeLinecap="round" fill="none" />
+            <path
+              d="M4.2 16.2 C4.2 13.2 6.6 11 10 11 C13.4 11 15.8 13.2 15.8 16.2"
+              stroke="#111"
+              strokeWidth={1.25}
+              strokeLinecap="round"
+              fill="none"
+            />
           </svg>
         ) : (
           t("account.profile")

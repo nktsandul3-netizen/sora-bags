@@ -11,18 +11,19 @@ export async function generateMetadata(): Promise<Metadata> {
 export default async function ContactsPage() {
   const [locale, t] = await Promise.all([getServerLocale(), getServerT()]);
   const copy = {
-    phones: locale === "ru" ? "Телефоны" : locale === "ro" ? "Telefoane" : "Phones",
-    addressHours: locale === "ru" ? "Адрес и часы работы" : locale === "ro" ? "Adresă și program" : "Address and working hours",
-    messengers: locale === "ru" ? "Мессенджеры и соцсети" : locale === "ro" ? "Messenger și rețele sociale" : "Messengers and social media",
-    address: locale === "ru" ? brand.address : locale === "ro" ? "Chișinău, Republica Moldova" : "Chișinău, Republic of Moldova",
-    hours: locale === "ru" ? brand.workingHours : locale === "ro" ? "Lun-Dum: 10:00 - 21:00" : "Mon-Sun: 10:00 - 21:00",
-    write: locale === "ru" ? "Напишите нам" : locale === "ro" ? "Scrieți-ne" : "Write to us",
-    formText: locale === "ru" ? "Ответим в рабочее время. Поможем с выбором и оформлением заказа." : locale === "ro" ? "Răspundem în timpul programului. Vă ajutăm cu alegerea și plasarea comenzii." : "We reply during working hours and help with product choice and ordering.",
-    name: locale === "ru" ? "Имя" : locale === "ro" ? "Nume" : "Name",
-    contact: locale === "ru" ? "Телефон или e-mail" : locale === "ro" ? "Telefon sau e-mail" : "Phone or email",
-    message: locale === "ru" ? "Сообщение" : locale === "ro" ? "Mesaj" : "Message",
-    send: locale === "ru" ? "Отправить" : locale === "ro" ? "Trimite" : "Send",
-    demo: locale === "ru" ? "Форма демонстрационная — подключите обработчик отправки." : locale === "ro" ? "Formular demonstrativ - conectați procesarea trimiterii." : "Demo form - connect a submit handler.",
+    phones: t("contacts.phones"),
+    addressHours: t("contacts.addressHours"),
+    messengers: t("contacts.messengers"),
+    address: t("brand.address"),
+    hours: t("brand.workingHours"),
+    write: t("contacts.write"),
+    formText: t("contacts.formText"),
+    name: t("contacts.name"),
+    contact: t("contacts.contact"),
+    message: t("contacts.message"),
+    send: t("contacts.send"),
+    demo: t("contacts.demo"),
+    email: t("contacts.email"),
   };
   return (
     <div className="mx-auto max-w-5xl px-4 py-8 sm:px-6">
@@ -52,7 +53,7 @@ export default async function ContactsPage() {
 
           <div>
             <h2 className="text-[11px] font-semibold uppercase tracking-[0.14em] text-stone-400">
-              E-mail
+              {copy.email}
             </h2>
             <a
               href={`mailto:${brand.email}`}
@@ -79,7 +80,6 @@ export default async function ContactsPage() {
                 { label: "Telegram", href: brand.social.telegram },
                 { label: "WhatsApp", href: brand.social.whatsapp },
                 { label: "Instagram", href: brand.social.instagram },
-                { label: "VK", href: brand.social.vk },
               ].map((s) => (
                 <a
                   key={s.label}

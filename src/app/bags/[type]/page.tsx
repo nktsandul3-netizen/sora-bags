@@ -7,7 +7,7 @@ import {
   productsByCategory,
   shopBagMenuCategories,
 } from "@/lib/data";
-import { getServerLocale } from "@/lib/server-i18n";
+import { getServerLocale, getServerT } from "@/lib/server-i18n";
 import { categoryName, categoryHeroCopy } from "@/lib/catalog-i18n";
 import type { Locale } from "@/lib/i18n";
 
@@ -157,8 +157,11 @@ export async function generateMetadata({
   params: Promise<{ type: string }>;
 }): Promise<Metadata> {
   const { type } = await params;
+  const [locale, t] = await Promise.all([getServerLocale(), getServerT()]);
   const cat = getCategory(type);
-  return { title: cat?.name ?? "Сумки" };
+  return {
+    title: cat ? categoryName(cat.slug, cat.name, locale) : t("nav.bags"),
+  };
 }
 
 export default async function BagTypePage({

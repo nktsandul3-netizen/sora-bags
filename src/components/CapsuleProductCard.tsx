@@ -8,7 +8,7 @@ import { getBrandName, getFeaturedColorIndex } from "@/lib/data";
 import { formatPrice } from "@/lib/format";
 import { withLocalePath } from "@/lib/i18n";
 import { useLocale, useT } from "@/lib/useI18n";
-import { localizeProductTitle } from "@/lib/product-i18n";
+import { localizeProductImageAlt, localizeProductTitle } from "@/lib/product-i18n";
 import ProductColorSwatches, { getColorImages } from "./ProductColorSwatches";
 import WishlistButton from "./WishlistButton";
 import QuickViewModal from "./QuickViewModal";
@@ -35,7 +35,7 @@ export default function CapsuleProductCard({ product }: { product: Product }) {
 
   return (
     <div
-      className="group flex min-h-[420px] flex-col bg-white"
+      className="group flex min-h-[420px] flex-col bg-[#FFFFFF]"
       style={{
         border: "1px solid #F0EDE9",
         boxShadow: "0 1px 3px rgba(0,0,0,0.04)",
@@ -43,16 +43,11 @@ export default function CapsuleProductCard({ product }: { product: Product }) {
     >
       <div className="relative">
         <Link href={withLocalePath(`/product/${product.slug}`, locale)} className="block">
-          <div
-            className={
-              "relative aspect-[4/5] w-full overflow-hidden " +
-              (galleryFit === "contain" ? "bg-white" : "bg-[#f7f5f0]")
-            }
-          >
+          <div className="relative aspect-[4/5] w-full overflow-hidden bg-[#FFFFFF]">
             {primary?.src ? (
               <Image
                 src={primary.src}
-                alt={primary.alt || localizedTitle}
+                alt={localizeProductImageAlt(primary.alt, locale) || localizedTitle}
                 fill
                 sizes="(min-width: 1024px) 20vw, 45vw"
                 quality={90}
@@ -64,21 +59,21 @@ export default function CapsuleProductCard({ product }: { product: Product }) {
               />
             ) : null}
 
-            <div className="pointer-events-none absolute left-3 top-3 z-10 flex flex-col gap-1.5">
+            <div className="pointer-events-none absolute left-[12px] top-[12px] z-10 flex flex-col gap-1.5">
               {onSale ? (
-                <span className="bg-white/90 px-2 py-1 text-[10px] font-medium uppercase tracking-[0.14em] text-[#1A1A1A]">
+                <span className="bg-white/90 px-2 py-1 text-[10px] font-medium uppercase leading-none tracking-[0.14em] text-[#1A1A1A]">
                   {t("catalog.badgeSale")}
                 </span>
               ) : null}
               {product.isNew ? (
-                <span className="bg-white/90 px-2 py-1 text-[10px] font-medium uppercase tracking-[0.14em] text-[#1A1A1A]">
+                <span className="bg-white/90 px-2 py-1 text-[10px] font-medium uppercase leading-none tracking-[0.14em] text-[#1A1A1A]">
                   {t("catalog.badgeNew")}
                 </span>
               ) : null}
             </div>
 
-            <div className="absolute right-3 top-3 z-10">
-              <WishlistButton slug={product.slug} />
+            <div className="absolute right-[12px] top-[12px] z-10">
+              <WishlistButton slug={product.slug} variant="card" />
             </div>
           </div>
         </Link>
@@ -127,7 +122,7 @@ export default function CapsuleProductCard({ product }: { product: Product }) {
             setQuickViewMounted(true);
             setQuickViewOpen(true);
           }}
-          className="mt-3 flex h-9 w-full items-center justify-center bg-[#1A1A1A] text-[10px] font-semibold uppercase tracking-[0.12em] text-white transition hover:bg-black"
+          className="mt-3 flex h-11 w-full items-center justify-center border border-[#111] bg-transparent text-[10px] font-semibold uppercase tracking-[0.16em] text-[#111] transition-colors duration-200 hover:bg-[#111] hover:text-white"
         >
           {t("common.buy")}
         </button>

@@ -1,3 +1,5 @@
+import type { LocalizedString } from "@/lib/i18n";
+
 // Единая конфигурация бренда. Поменяйте значения здесь — и они обновятся по всему сайту.
 
 export const brand = {
@@ -17,8 +19,8 @@ export const brand = {
     telegram: "https://t.me/+37360066665",
     whatsapp: "https://wa.me/37360066665",
     viber: "viber://chat?number=%2B37360066665",
-    vk: "https://vk.com/luma",
-    facebook: "https://facebook.com/luma",
+    vk: "",
+    facebook: "",
     tiktok: "https://www.tiktok.com/@soraitaly",
   },
 } as const;
@@ -41,7 +43,7 @@ export type VideoWidgetTikTokItem = {
   url: string;
   /** Короткая ссылка для кнопки «Смотреть коллекцию» (vt.tiktok.com) */
   shareUrl?: string;
-  title: string;
+  title: LocalizedString;
   /** Локальный MP4 для мгновенного автоплея в карточке (экспорт из TikTok) */
   mp4Src?: string;
   /** Постер, пока грузится видео */
@@ -62,28 +64,44 @@ export const videoWidget = {
   tiktokVideos: [
     {
       url: "",
-      title: "Palmira — сумка с поворотным замком",
+      title: {
+        ru: "Palmira — сумка с поворотным замком",
+        ro: "Palmira — geantă cu închidere rotativă",
+        en: "Palmira — turn-lock bag",
+      },
       mp4Src: "/videos/sora-story-in-motion-turn-lock-top-handle-bag.mp4",
       posterSrc: "/products/womens-pebbled-leather-turn-lock-top-handle-bag/black-front.png",
       collectionHref: "/product/womens-pebbled-leather-turn-lock-top-handle-bag",
     },
     {
       url: "",
-      title: "Solange — сумка-тоут трапециевидной формы",
+      title: {
+        ru: "Solange — сумка-тоут трапециевидной формы",
+        ro: "Solange — geantă tote trapezoidală",
+        en: "Solange — trapezoid tote bag",
+      },
       mp4Src: "/videos/sora-story-in-motion-wing-flap-tote-bag.mp4",
       posterSrc: "/products/womens-pebbled-leather-wing-flap-tote-bag/light-blue-front-alt.png",
       collectionHref: "/product/womens-pebbled-leather-wing-flap-tote-bag",
     },
     {
       url: "",
-      title: "Ottilie — гладкий компактный багет",
+      title: {
+        ru: "Ottilie — гладкая компактная сумка-багет",
+        ro: "Ottilie — geantă baguette compactă din piele netedă",
+        en: "Ottilie — compact smooth-leather baguette bag",
+      },
       mp4Src: "/videos/sora-story-in-motion-baguette.mp4",
       posterSrc: "/products/womens-smooth-leather-compact-baguette-bag/red-orange-front.png",
       collectionHref: "/product/womens-smooth-leather-compact-baguette-bag",
     },
     {
       url: "",
-      title: "Aurea — прямоугольная сумка в руке",
+      title: {
+        ru: "Aurea — прямоугольная сумка с короткой ручкой",
+        ro: "Aurea — geantă dreptunghiulară cu mâner scurt",
+        en: "Aurea — rectangular top-handle bag",
+      },
       mp4Src: "/videos/sora-story-in-motion-rectangular-handbag.mp4",
       posterSrc: "/products/womens-pebbled-leather-rectangular-handbag/taupe-front.png",
       collectionHref: "/product/womens-pebbled-leather-rectangular-handbag",

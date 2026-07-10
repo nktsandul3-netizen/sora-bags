@@ -3,7 +3,7 @@
 import { useEffect, useRef } from "react";
 import Link from "next/link";
 import { withLocalePath } from "@/lib/i18n";
-import { useLocale } from "@/lib/useI18n";
+import { useLocale, useT } from "@/lib/useI18n";
 
 export type VideoLightboxProduct = {
   slug: string;
@@ -122,6 +122,7 @@ export default function VideoLightbox({
   onSelect,
 }: VideoLightboxProps) {
   const locale = useLocale();
+  const t = useT();
   const videoRef = useRef<HTMLVideoElement | null>(null);
   const primaryProduct = products[0];
   const hasCarousel = videoCount > 1;
@@ -182,12 +183,12 @@ export default function VideoLightbox({
       aria-modal="true"
       aria-label={title}
     >
-      <button type="button" aria-label="Закрыть" className="absolute inset-0 cursor-default" onClick={onClose} />
+      <button type="button" aria-label={t("common.close")} className="absolute inset-0 cursor-default" onClick={onClose} />
 
       <button
         type="button"
         onClick={onClose}
-        aria-label="Закрыть"
+        aria-label={t("common.close")}
         className="absolute right-6 top-6 z-30 text-white transition hover:opacity-70"
       >
         <CloseIcon className="h-6 w-6" />
@@ -196,7 +197,7 @@ export default function VideoLightbox({
       <button
         type="button"
         onClick={() => onMutedChange(!muted)}
-        aria-label={muted ? "Включить звук" : "Выключить звук"}
+        aria-label={muted ? t("a11y.unmute") : t("a11y.mute")}
         className="absolute right-5 top-[4.25rem] z-30 grid h-10 w-10 place-items-center rounded-full bg-white/10 text-white backdrop-blur-md transition hover:bg-white/20"
       >
         {muted ? <SoundOffIcon className="h-4 w-4" /> : <SoundOnIcon className="h-4 w-4" />}
@@ -230,7 +231,7 @@ export default function VideoLightbox({
             <>
               <button
                 type="button"
-                aria-label="Предыдущее видео"
+                aria-label={t("a11y.previousVideo")}
                 onClick={(e) => {
                   e.stopPropagation();
                   onPrev?.();
@@ -241,7 +242,7 @@ export default function VideoLightbox({
               </button>
               <button
                 type="button"
-                aria-label="Следующее видео"
+                aria-label={t("a11y.nextVideo")}
                 onClick={(e) => {
                   e.stopPropagation();
                   onNext?.();
@@ -267,7 +268,7 @@ export default function VideoLightbox({
                     <button
                       key={i}
                       type="button"
-                      aria-label={`Видео ${i + 1}`}
+                      aria-label={t("a11y.videoNumber").replace("{number}", String(i + 1))}
                       aria-current={i === activeIndex ? "true" : undefined}
                       onClick={() => onSelect?.(i)}
                       className={
@@ -312,7 +313,7 @@ export default function VideoLightbox({
               onClick={onClose}
               className="flex h-12 w-full items-center justify-center bg-white text-[13px] font-medium tracking-[0.04em] text-[#1A1A1A] transition hover:bg-stone-100"
             >
-              Купить образ
+              {t("common.buyLook")}
             </Link>
 
             <button
@@ -321,7 +322,7 @@ export default function VideoLightbox({
               className="flex h-11 w-full items-center justify-center gap-2 border border-white/20 bg-transparent text-[14px] font-normal text-white/70 transition hover:border-white/40 hover:text-white"
             >
               <TikTokIcon className="h-4 w-4" />
-              Смотреть в TikTok
+              {t("common.viewTikTok")}
             </button>
           </div>
         </aside>

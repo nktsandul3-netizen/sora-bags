@@ -234,8 +234,7 @@ function CatalogViewInner({
     : categories?.[0]?.section === "accessories"
       ? shopAccessoryMenuCategories
       : categories?.filter((c) => c.slug !== "vse-aksessuary");
-  const productCountLabel =
-    locale === "ru" ? "товаров" : locale === "ro" ? "produse" : "products";
+  const productCountLabel = t("catalog.productsLabel");
 
   // Lock body scroll while the mobile filter drawer is open.
   useEffect(() => {
