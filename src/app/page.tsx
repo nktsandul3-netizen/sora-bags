@@ -21,7 +21,10 @@ function getHeroSlides(locale: Locale): HeroSlide[] {
     },
     {
       type: "video",
-      src: "/videos/venezia-intreccio-banner.mp4",
+      src: "/videos/venezia-intreccio-banner-opt.mp4",
+      mobileSrc: "/videos/venezia-intreccio-banner-mobile.mp4",
+      poster: "/hero-venezia-banner-poster.jpg",
+      mobilePoster: "/hero-venezia-banner-poster-mobile.jpg",
       caption: {
         title: t("catalog.veneziaCollection"),
         subtitle: t("catalog.veneziaCollectionDescription"),

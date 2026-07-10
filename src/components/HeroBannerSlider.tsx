@@ -15,16 +15,42 @@ export interface HeroSlideCaption {
 
 export type HeroSlide =
   | { type: "image"; src: string; mobileSrc?: string; alt: string; caption?: HeroSlideCaption }
-  | { type: "video"; src: string; caption?: HeroSlideCaption };
+  | {
+      type: "video";
+      src: string;
+      mobileSrc?: string;
+      poster?: string;
+      mobilePoster?: string;
+      caption?: HeroSlideCaption;
+    };
+
+function useIsMobile(breakpointPx = 768) {
+  const [isMobile, setIsMobile] = useState<boolean | null>(null);
+
+  useEffect(() => {
+    const mq = window.matchMedia(`(max-width: ${breakpointPx - 1}px)`);
+    const update = () => setIsMobile(mq.matches);
+    update();
+    mq.addEventListener("change", update);
+    return () => mq.removeEventListener("change", update);
+  }, [breakpointPx]);
+
+  return isMobile;
+}
 
 function HeroSlideVideo({
   src,
+  poster,
   active,
+  warm,
   onEnded,
   className,
 }: {
   src: string;
+  poster?: string;
   active: boolean;
+  /** Start buffering before the slide becomes active (e.g. during first banner). */
+  warm: boolean;
   onEnded: () => void;
   className?: string;
 }) {
@@ -32,24 +58,39 @@ function HeroSlideVideo({
   const [ready, setReady] = useState(false);
 
   useEffect(() => {
+    setReady(false);
+  }, [src]);
+
+  useEffect(() => {
     const v = videoRef.current;
     if (!v) return;
     v.muted = true;
     v.defaultMuted = true;
 
+    const markReady = () => setReady(true);
     const tryPlay = () => {
       const p = v.play();
       if (p && typeof p.catch === "function") p.catch(() => {});
     };
 
     const onCanPlay = () => {
-      setReady(true);
+      markReady();
       if (active) tryPlay();
     };
 
     v.addEventListener("canplay", onCanPlay);
-    return () => v.removeEventListener("canplay", onCanPlay);
-  }, [src, active]);
+    v.addEventListener("loadeddata", markReady);
+
+    if (warm || active) {
+      // Kick off network fetch early on mobile so slide 2 is ready when timer fires.
+      v.load();
+    }
+
+    return () => {
+      v.removeEventListener("canplay", onCanPlay);
+      v.removeEventListener("loadeddata", markReady);
+    };
+  }, [src, active, warm]);
 
   useEffect(() => {
     const v = videoRef.current;
@@ -64,17 +105,37 @@ function HeroSlideVideo({
   }, [active, src]);
 
   return (
-    <video
-      ref={videoRef}
-      muted
-      playsInline
-      preload="auto"
-      src={src}
-      loop={false}
-      onEnded={onEnded}
-      data-ready={ready ? "true" : "false"}
-      className={className}
-    />
+    <>
+      {poster ? (
+        // eslint-disable-next-line @next/next/no-img-element
+        <img
+          src={poster}
+          alt=""
+          aria-hidden
+          decoding="async"
+          className={
+            "absolute inset-0 h-full w-full object-cover object-[50%_66%] transition-opacity duration-300 " +
+            (ready && active ? "opacity-0" : "opacity-100")
+          }
+        />
+      ) : null}
+      <video
+        ref={videoRef}
+        muted
+        playsInline
+        preload={warm || active ? "auto" : "none"}
+        poster={poster}
+        src={warm || active ? src : undefined}
+        loop={false}
+        onEnded={onEnded}
+        data-ready={ready ? "true" : "false"}
+        className={
+          (className ?? "") +
+          " transition-opacity duration-300 " +
+          (ready ? "opacity-100" : "opacity-0")
+        }
+      />
+    </>
   );
 }
 
@@ -87,6 +148,7 @@ export default function HeroBannerSlider({
 }) {
   const [index, setIndex] = useState(0);
   const t = useT();
+  const isMobile = useIsMobile();
 
   const safeIndex = slides.length > 0 ? Math.min(index, slides.length - 1) : 0;
   const activeSlide = slides[safeIndex];
@@ -105,6 +167,18 @@ export default function HeroBannerSlider({
     return () => window.clearTimeout(timer);
   }, [slides.length, intervalMs, safeIndex, activeSlide]);
 
+  // Prefetch mobile Venezia poster as soon as we know we're on a phone.
+  useEffect(() => {
+    if (isMobile !== true) return;
+    for (const slide of slides) {
+      if (slide.type !== "video") continue;
+      const poster = slide.mobilePoster ?? slide.poster;
+      if (!poster) continue;
+      const img = new window.Image();
+      img.src = poster;
+    }
+  }, [isMobile, slides]);
+
   if (!activeSlide) return null;
 
   return (
@@ -118,9 +192,16 @@ export default function HeroBannerSlider({
       <div className="relative aspect-[16/10] w-full md:aspect-auto md:h-[calc(100vh-72px)] md:min-h-[748px]">
         {slides.map((slide, i) => {
           const active = i === safeIndex;
+          // Warm the next video while the first image slide is showing.
+          const warmVideo = slide.type === "video" && !active && safeIndex === 0;
+
           return (
             <div
-              key={slide.type === "image" ? slide.src : `video-${slide.src}`}
+              key={
+                slide.type === "image"
+                  ? slide.src
+                  : `video-${slide.mobileSrc ?? slide.src}`
+              }
               className={
                 "pointer-events-none absolute inset-0 transition-opacity duration-500 ease-out " +
                 (active ? "z-[1] opacity-100" : "z-0 opacity-0")
@@ -129,35 +210,61 @@ export default function HeroBannerSlider({
             >
               {slide.type === "image" ? (
                 <>
-                  {slide.mobileSrc ? (
+                  {/* Phones: only mobile hero — never pull the desktop JPG on cellular. */}
+                  {slide.mobileSrc && isMobile !== false ? (
                     <Image
                       src={slide.mobileSrc}
                       alt={slide.alt}
                       fill
                       priority={i === 0}
-                      quality={92}
+                      quality={85}
                       sizes="100vw"
                       className="object-cover object-center md:hidden"
                     />
                   ) : null}
-                  <Image
-                    src={slide.src}
-                    alt={slide.alt}
-                    fill
-                    priority={i === 0}
-                    quality={100}
-                    sizes="100vw"
-                    className={
-                      slide.mobileSrc
-                        ? "hidden object-cover object-[42%_28%] md:block"
-                        : "object-cover object-[42%_28%]"
-                    }
-                  />
+                  {/* Desktop only after matchMedia confirms (or when there is no mobile asset). */}
+                  {isMobile === false || (!slide.mobileSrc && isMobile !== true) ? (
+                    <Image
+                      src={slide.src}
+                      alt={slide.alt}
+                      fill
+                      priority={i === 0 && isMobile === false}
+                      quality={88}
+                      sizes="100vw"
+                      className={
+                        slide.mobileSrc
+                          ? "hidden object-cover object-[42%_28%] md:block"
+                          : "object-cover object-[42%_28%]"
+                      }
+                    />
+                  ) : null}
                 </>
+              ) : isMobile === null ? (
+                // Wait for viewport — avoid starting the 1MB desktop MP4 on phones.
+                slide.mobilePoster || slide.poster ? (
+                  // eslint-disable-next-line @next/next/no-img-element
+                  <img
+                    src={slide.mobilePoster ?? slide.poster}
+                    alt=""
+                    aria-hidden
+                    decoding="async"
+                    className="absolute inset-0 h-full w-full object-cover object-[50%_66%]"
+                  />
+                ) : null
               ) : (
                 <HeroSlideVideo
-                  src={slide.src}
+                  src={
+                    isMobile
+                      ? (slide.mobileSrc ?? slide.src)
+                      : slide.src
+                  }
+                  poster={
+                    isMobile
+                      ? (slide.mobilePoster ?? slide.poster)
+                      : slide.poster
+                  }
                   active={active}
+                  warm={warmVideo || active}
                   onEnded={() => {
                     if (i === safeIndex) goNext();
                   }}
