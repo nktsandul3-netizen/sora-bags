@@ -80,7 +80,7 @@ export default function ProductCard({
         onMouseEnter={() => setImageHovered(true)}
         onMouseLeave={() => setImageHovered(false)}
       >
-        <div className="relative h-full w-full overflow-hidden rounded-none border border-[#E8E4DF] bg-white p-0 transition duration-500 max-md:border-transparent max-md:bg-[#F6F1EB] max-md:shadow-none md:group-hover:-translate-y-0.5">
+        <div className="relative h-full w-full overflow-hidden rounded-none border border-[#E8E4DF] bg-white p-0 transition duration-500 max-md:border-transparent max-md:shadow-none md:group-hover:-translate-y-0.5">
           <Link
             href={productHref}
             className="absolute inset-0 z-0 block touch-manipulation"
