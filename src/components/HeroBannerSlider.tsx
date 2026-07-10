@@ -122,8 +122,8 @@ export default function HeroBannerSlider({
             <div
               key={slide.type === "image" ? slide.src : `video-${slide.src}`}
               className={
-                "absolute inset-0 transition-opacity duration-500 ease-out " +
-                (active ? "z-[1] opacity-100" : "pointer-events-none z-0 opacity-0")
+                "pointer-events-none absolute inset-0 transition-opacity duration-500 ease-out " +
+                (active ? "z-[1] opacity-100" : "z-0 opacity-0")
               }
               aria-hidden={!active}
             >
@@ -177,31 +177,31 @@ export default function HeroBannerSlider({
         />
 
         {activeSlide.caption ? (
-          <div className="pointer-events-none absolute inset-x-0 top-[36%] z-[3] flex flex-col items-center px-4 text-center text-white">
-            <div className="pointer-events-auto flex max-w-3xl flex-col items-center">
+          <div className="pointer-events-none absolute inset-x-0 bottom-12 z-20 flex flex-col items-center px-4 text-center text-white md:bottom-auto md:top-[36%]">
+            <div className="pointer-events-auto relative z-20 flex max-w-3xl flex-col items-center">
               {activeSlide.caption.eyebrow ? (
-                <p className="mb-3.5 text-[12px] font-medium uppercase tracking-[0.2em] text-white sm:text-[13px]">
+                <p className="mb-2 text-[10px] font-medium uppercase tracking-[0.2em] text-white sm:mb-3.5 sm:text-[12px] md:text-[13px]">
                   {activeSlide.caption.eyebrow}
                 </p>
               ) : null}
               {activeSlide.caption.title ? (
-                <h1 className="-mt-3.5 font-serif text-[28px] font-normal uppercase leading-[1.15] tracking-[0.04em] text-white md:-mt-4 md:text-[40px]">
+                <h1 className="font-serif text-[20px] font-normal uppercase leading-[1.15] tracking-[0.04em] text-white md:-mt-4 md:text-[40px]">
                   {activeSlide.caption.title}
                 </h1>
               ) : null}
               {activeSlide.caption.subtitle ? (
-                <p className="mt-3.5 mb-2 max-w-xl text-[16px] leading-snug text-white opacity-[0.92]">
+                <p className="mt-1.5 mb-2 max-w-xl text-[12px] leading-snug text-white opacity-[0.92] md:mt-3.5 md:text-[16px]">
                   {activeSlide.caption.subtitle}
                 </p>
               ) : null}
               <Link
                 href={activeSlide.caption.ctaHref}
-                className="inline-flex h-12 items-center rounded-[24px] bg-[#fff] px-7 text-[13px] font-medium uppercase tracking-[0.08em] text-[#111] transition hover:bg-[#F5F3F0]"
+                className="relative z-30 mt-1 inline-flex h-9 items-center rounded-full bg-white px-4 text-[11px] font-medium uppercase tracking-[0.08em] text-[#111] transition hover:bg-[#F5F3F0] md:mt-0 md:h-11 md:px-6 md:text-[12px]"
               >
                 {activeSlide.caption.ctaLabel}
                 <svg
                   viewBox="0 0 16 16"
-                  className="ml-2.5 h-3.5 w-3.5 shrink-0 opacity-60"
+                  className="ml-1.5 h-3 w-3 shrink-0 opacity-60 md:ml-2 md:h-3.5 md:w-3.5"
                   fill="none"
                   stroke="currentColor"
                   strokeWidth="1.6"
@@ -215,7 +215,7 @@ export default function HeroBannerSlider({
         ) : null}
 
         {slides.length > 1 && (
-          <div className="absolute inset-x-0 bottom-0 z-10 flex justify-center pb-12">
+          <div className="pointer-events-none absolute inset-x-0 bottom-0 z-10 flex justify-center pb-3 md:pb-12">
             {slides.map((_, i) => (
               <button
                 key={i}
@@ -223,13 +223,13 @@ export default function HeroBannerSlider({
                 aria-label={t("a11y.bannerNumber").replace("{number}", String(i + 1))}
                 aria-current={i === safeIndex}
                 onClick={() => setIndex(i)}
-                className="flex items-center justify-center p-2.5 outline-none focus:outline-none focus-visible:outline-none"
+                className="pointer-events-auto flex items-center justify-center p-2 outline-none focus:outline-none focus-visible:outline-none md:p-2.5"
               >
                 <span
                   aria-hidden
                   className={
-                    "block h-2 rounded-full bg-white transition-all " +
-                    (i === safeIndex ? "w-5 opacity-100" : "w-2 opacity-[0.36] hover:opacity-70")
+                    "block h-1.5 rounded-full bg-white transition-all md:h-2 " +
+                    (i === safeIndex ? "w-4 opacity-100 md:w-5" : "w-1.5 opacity-[0.36] hover:opacity-70 md:w-2")
                   }
                 />
               </button>
