@@ -14,7 +14,7 @@ export interface HeroSlideCaption {
 }
 
 export type HeroSlide =
-  | { type: "image"; src: string; alt: string; caption?: HeroSlideCaption }
+  | { type: "image"; src: string; mobileSrc?: string; alt: string; caption?: HeroSlideCaption }
   | { type: "video"; src: string; caption?: HeroSlideCaption };
 
 function HeroSlideVideo({
@@ -115,7 +115,7 @@ export default function HeroBannerSlider({
         (activeSlide.type === "video" ? "bg-[#1f3d36]" : "bg-[#F7F3F0]")
       }
     >
-      <div className="relative h-[calc(100dvh-72px)] min-h-[min(420px,calc(100dvh-72px))] w-full md:h-[calc(100vh-72px)] md:min-h-[748px]">
+      <div className="relative aspect-[16/10] w-full md:aspect-auto md:h-[calc(100vh-72px)] md:min-h-[748px]">
         {slides.map((slide, i) => {
           const active = i === safeIndex;
           return (
@@ -128,15 +128,32 @@ export default function HeroBannerSlider({
               aria-hidden={!active}
             >
               {slide.type === "image" ? (
-                <Image
-                  src={slide.src}
-                  alt={slide.alt}
-                  fill
-                  priority={i === 0}
-                  quality={100}
-                  sizes="100vw"
-                  className="object-cover object-[42%_28%]"
-                />
+                <>
+                  {slide.mobileSrc ? (
+                    <Image
+                      src={slide.mobileSrc}
+                      alt={slide.alt}
+                      fill
+                      priority={i === 0}
+                      quality={92}
+                      sizes="100vw"
+                      className="object-cover object-center md:hidden"
+                    />
+                  ) : null}
+                  <Image
+                    src={slide.src}
+                    alt={slide.alt}
+                    fill
+                    priority={i === 0}
+                    quality={100}
+                    sizes="100vw"
+                    className={
+                      slide.mobileSrc
+                        ? "hidden object-cover object-[42%_28%] md:block"
+                        : "object-cover object-[42%_28%]"
+                    }
+                  />
+                </>
               ) : (
                 <HeroSlideVideo
                   src={slide.src}
