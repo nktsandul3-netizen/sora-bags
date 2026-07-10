@@ -104,10 +104,10 @@ export default function Header() {
 
         <BrandLogoLink overlay={false} size="mobile" />
 
-        <div className="flex shrink-0 items-center gap-3">
+        <div className="flex shrink-0 items-center gap-2 sm:gap-3">
           <ProfileMenu overlay={false} iconOnly />
           <CartIcon hoverClassName={iconHoverClass} />
-          <LanguageSwitcher overlay={false} reversed />
+          <LanguageSwitcher overlay={false} reversed compact />
         </div>
       </div>
 
@@ -249,7 +249,15 @@ function useCurrentUrlSuffix() {
   return suffix;
 }
 
-function LanguageSwitcher({ overlay = false, reversed = false }: { overlay?: boolean; reversed?: boolean }) {
+function LanguageSwitcher({
+  overlay = false,
+  reversed = false,
+  compact = false,
+}: {
+  overlay?: boolean;
+  reversed?: boolean;
+  compact?: boolean;
+}) {
   const pathname = usePathname();
   const router = useRouter();
   const locale = useLocale();
@@ -262,7 +270,9 @@ function LanguageSwitcher({ overlay = false, reversed = false }: { overlay?: boo
         "inline-flex shrink-0 flex-row items-center text-[11px] uppercase tracking-[0.06em] " +
         (overlay
           ? "ml-6 border-l border-white/20 pl-6"
-          : "ml-6 gap-3 border-l border-[#EDE5DF] pl-6")
+          : compact
+            ? "ml-2 gap-1.5 border-l border-[#EDE5DF] pl-2 sm:ml-3 sm:gap-2 sm:pl-3"
+            : "ml-6 gap-3 border-l border-[#EDE5DF] pl-6")
       }
     >
       {languageOptions.map((item, index) => (

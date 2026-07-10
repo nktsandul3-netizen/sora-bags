@@ -35,7 +35,7 @@ const bagHeroConfigs: Record<
     objectPosition: "50% 42%",
     copyTone: "light",
     bgClassName: "bg-[#c8c0b8]",
-    aspectClass: "h-[max(120px,calc(100vw*576/1024-4cm))]",
+    aspectClass: "max-md:aspect-[5/3] max-md:h-auto md:h-[max(180px,calc(100vw*576/1024-4cm))]",
   },
   vanity: {
     src: "/banners/vanity-hero-v2.jpg",
@@ -65,7 +65,7 @@ const bagHeroConfigs: Record<
     objectPosition: "50% 42%",
     copyTone: "light",
     bgClassName: "bg-[#c8b8a8]",
-    aspectClass: "h-[max(120px,calc(100vw*576/1024-4cm))]",
+    aspectClass: "max-md:aspect-[5/3] max-md:h-auto md:h-[max(180px,calc(100vw*576/1024-4cm))]",
   },
   "handbags-women": {
     src: "/banners/handbags-women-hero.jpg",
@@ -75,7 +75,7 @@ const bagHeroConfigs: Record<
     objectPosition: "50% 42%",
     copyTone: "light",
     bgClassName: "bg-[#8a9580]",
-    aspectClass: "h-[max(120px,calc(100vw*576/1024-4cm))]",
+    aspectClass: "max-md:aspect-[5/3] max-md:h-auto md:h-[max(180px,calc(100vw*576/1024-4cm))]",
   },
   "rectangular-bags": {
     src: "/banners/rectangular-bags-hero.jpg",
@@ -95,7 +95,7 @@ const bagHeroConfigs: Record<
     objectPosition: "50% 46%",
     copyTone: "light",
     bgClassName: "bg-[#6a7568]",
-    aspectClass: "h-[max(120px,calc(100vw*576/1024-2cm))]",
+    aspectClass: "max-md:aspect-[5/3] max-md:h-auto md:h-[max(180px,calc(100vw*576/1024-2cm))]",
   },
   "shoulder-bags-women": {
     src: "/banners/shoulder-bags-women-hero-v3.jpg",
@@ -105,7 +105,7 @@ const bagHeroConfigs: Record<
     objectPosition: "50% 58%",
     copyTone: "light",
     bgClassName: "bg-[#a8a4a0]",
-    aspectClass: "h-[max(120px,calc(100vw*576/1024-2cm))]",
+    aspectClass: "max-md:aspect-[5/3] max-md:h-auto md:h-[max(180px,calc(100vw*576/1024-2cm))]",
   },
   "crossbody-bags-women": {
     src: "/banners/crossbody-bags-women-hero-v2.jpg",
@@ -125,7 +125,7 @@ const bagHeroConfigs: Record<
     objectPosition: "50% 42%",
     copyTone: "light",
     bgClassName: "bg-[#c8c0b8]",
-    aspectClass: "h-[max(120px,calc(100vw*576/1024-4cm))]",
+    aspectClass: "max-md:aspect-[5/3] max-md:h-auto md:h-[max(180px,calc(100vw*576/1024-4cm))]",
   },
 };
 

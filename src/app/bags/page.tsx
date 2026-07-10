@@ -28,7 +28,7 @@ export default async function BagsPage() {
         objectPosition: "50% 0%",
         copyTone: "light",
         bgClassName: "bg-[#c4b8a8]",
-        aspectClass: "h-[max(120px,calc(100vw*616/963-6cm))]",
+        aspectClass: "max-md:aspect-[5/3] max-md:h-auto md:h-[max(180px,calc(100vw*616/963-6cm))]",
         mediaFilterClass: "catalog-hero-media-bags",
         topScrim: true,
       }}

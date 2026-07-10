@@ -115,7 +115,7 @@ export default function HeroBannerSlider({
         (activeSlide.type === "video" ? "bg-[#1f3d36]" : "bg-[#F7F3F0]")
       }
     >
-      <div className="relative h-[calc(100vh-72px)] min-h-[568px] w-full md:min-h-[748px]">
+      <div className="relative h-[calc(100dvh-72px)] min-h-[min(420px,calc(100dvh-72px))] w-full md:h-[calc(100vh-72px)] md:min-h-[748px]">
         {slides.map((slide, i) => {
           const active = i === safeIndex;
           return (
@@ -168,7 +168,7 @@ export default function HeroBannerSlider({
                 </p>
               ) : null}
               {activeSlide.caption.title ? (
-                <h1 className="-mt-3.5 font-serif text-[40px] font-normal uppercase leading-[1.15] tracking-[0.04em] text-white md:-mt-4">
+                <h1 className="-mt-3.5 font-serif text-[28px] font-normal uppercase leading-[1.15] tracking-[0.04em] text-white md:-mt-4 md:text-[40px]">
                   {activeSlide.caption.title}
                 </h1>
               ) : null}

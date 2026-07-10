@@ -562,7 +562,7 @@ export default function ProductDetailView({
           </div>
         </div>
 
-        <BrandStories productSlug={product.slug} className="mt-8 scale-110 origin-top-left justify-start" />
+        <BrandStories productSlug={product.slug} className="mt-8 max-lg:origin-top max-lg:scale-100 lg:origin-top-left lg:scale-110 justify-start" />
           </div>
         </div>
       </div>
