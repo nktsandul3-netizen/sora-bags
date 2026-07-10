@@ -25,6 +25,53 @@ import { getColorImages, getColorSwatchImage } from "./ProductColorSwatches";
 import ProductImage from "./ProductImage";
 import WishlistButton from "./WishlistButton";
 import PreorderStatusBadge from "./PreorderStatusBadge";
+import { brand } from "@/lib/config";
+import { primaryStore } from "@/lib/stores";
+
+function PhoneIcon() {
+  return (
+    <svg
+      viewBox="0 0 24 24"
+      className="h-5 w-5"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1.5"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      aria-hidden
+    >
+      <path d="M8.5 4.5h2l1.2 4.8a1 1 0 0 1-.46 1.08l-1.52 1.01a11 11 0 0 0 5.6 5.6l1.01-1.52a1 1 0 0 1 1.08-.46l4.8 1.2v2a1 1 0 0 1-1 1A14.5 14.5 0 0 1 7.5 5.5a1 1 0 0 1 1-1Z" />
+    </svg>
+  );
+}
+
+function MessengerIcon({ name }: { name: "whatsapp" | "telegram" | "viber" }) {
+  const common = {
+    viewBox: "0 0 24 24",
+    className: "h-5 w-5 text-[#111]",
+    fill: "currentColor",
+    "aria-hidden": true,
+  } as const;
+  if (name === "whatsapp") {
+    return (
+      <svg {...common}>
+        <path d="M12.04 2c-5.5 0-9.96 4.46-9.96 9.96 0 1.76.46 3.45 1.34 4.95L2 22l5.25-1.38a9.9 9.9 0 0 0 4.79 1.22h.01c5.5 0 9.96-4.46 9.96-9.96 0-2.66-1.04-5.16-2.92-7.04A9.9 9.9 0 0 0 12.04 2Zm0 18.02h-.01a8.2 8.2 0 0 1-4.18-1.15l-.3-.18-3.11.82.83-3.04-.2-.31a8.25 8.25 0 0 1-1.26-4.4c0-4.55 3.7-8.25 8.25-8.25 2.2 0 4.27.86 5.83 2.42a8.2 8.2 0 0 1 2.42 5.84c0 4.55-3.71 8.25-8.25 8.25Zm4.52-6.18c-.25-.12-1.47-.72-1.69-.81-.23-.08-.39-.12-.56.13-.16.25-.64.8-.79.97-.14.17-.29.19-.54.06-.25-.12-1.05-.39-1.99-1.23-.74-.66-1.23-1.47-1.38-1.72-.14-.25-.01-.38.11-.51.11-.11.25-.29.37-.43.13-.14.17-.25.25-.41.08-.17.04-.31-.02-.43-.06-.12-.56-1.35-.77-1.85-.2-.48-.41-.42-.56-.42l-.48-.01c-.17 0-.43.06-.66.31-.23.25-.86.85-.86 2.07 0 1.22.89 2.4 1.01 2.57.12.17 1.75 2.67 4.23 3.74.59.26 1.05.41 1.41.52.59.19 1.13.16 1.56.1.48-.07 1.47-.6 1.68-1.18.21-.58.21-1.07.14-1.18-.06-.11-.22-.17-.47-.29Z" />
+      </svg>
+    );
+  }
+  if (name === "telegram") {
+    return (
+      <svg {...common}>
+        <path d="M21.94 4.64 18.9 19a1.2 1.2 0 0 1-1.79.72l-4.36-3.22-2.1 2.02c-.23.23-.43.43-.88.43l.31-4.46 8.11-7.33c.35-.31-.08-.49-.55-.18L7.7 13.13l-4.32-1.35c-.94-.29-.96-.94.2-1.39l16.9-6.52c.78-.29 1.47.18 1.46 1.07Z" />
+      </svg>
+    );
+  }
+  return (
+    <svg {...common}>
+      <path d="M12.5 2C8 2 3.6 2.3 3.6 8.1v6.2c0 2 1.3 3.6 2.8 4.2v3a.6.6 0 0 0 1 .43l2.5-2.4c.86.05 1.74.05 2.6 0 4.5 0 8.9-.3 8.9-6.1V8.1C21.4 2.3 17 2 12.5 2Zm4.9 12.1c-.4.85-1.5 1.4-2.3 1.55-.25.05-.55.1-.95-.05-.95-.35-2.3-.85-3.95-2.3a10.7 10.7 0 0 1-2.6-3.55c-.2-.55-.3-1-.3-1.45 0-.6.3-1 .6-1.25.2-.2.45-.3.7-.3h.5c.2 0 .35.05.55.45.2.45.65 1.55.7 1.65.05.1.1.25 0 .4-.1.2-.2.3-.35.45-.1.1-.25.25-.1.5.15.25.65 1.05 1.4 1.7.95.85 1.7 1.1 1.95 1.25.2.1.35.05.5-.1.15-.2.6-.7.75-.95.15-.25.3-.2.5-.1.2.05 1.25.6 1.45.7.2.1.35.15.4.25.05.1.05.5-.15.95Z" />
+    </svg>
+  );
+}
 
 function ArrowIcon({ direction }: { direction: "left" | "right" }) {
   return (
@@ -117,6 +164,7 @@ export default function QuickViewModal({
     imageIdx: 0,
   }));
   const [added, setAdded] = useState(false);
+  const [contactOpen, setContactOpen] = useState(false);
   const touchStartX = useRef<number | null>(null);
 
   const selectionIsStale =
@@ -200,6 +248,33 @@ export default function QuickViewModal({
   const localizedColor = localizeColorName(color, locale);
   const localizedDescription = localizeProductDescription(product, locale);
   const localizedTitle = localizeProductTitle(product, locale);
+  const reserveMessage = `${t("pdp.reserveMessage")}: ${localizedTitle}, ${t(
+    "catalog.color",
+  ).toLowerCase()}: ${localizedColor}`;
+  const contactOptions = [
+    {
+      name: "WhatsApp" as const,
+      icon: "whatsapp" as const,
+      href: `${brand.social.whatsapp}?text=${encodeURIComponent(reserveMessage)}`,
+      hint: t("pdp.messageReady"),
+    },
+    {
+      name: "Telegram" as const,
+      icon: "telegram" as const,
+      href: brand.social.telegram,
+      hint: t("pdp.openChat"),
+    },
+    {
+      name: "Viber" as const,
+      icon: "viber" as const,
+      href: brand.social.viber,
+      hint: t("pdp.openChat"),
+    },
+  ];
+
+  useEffect(() => {
+    if (!open) setContactOpen(false);
+  }, [open]);
 
   function handleAdd() {
     if (!canBuy || !color) return;
@@ -428,22 +503,103 @@ export default function QuickViewModal({
                 </div>
 
                 {/* Кнопки */}
-                <div className="mt-6 flex items-center gap-2.5">
+                <div className="mt-6 flex flex-col gap-2.5">
+                  <div className="flex items-center gap-2.5">
+                    <button
+                      type="button"
+                      onClick={handleAdd}
+                      disabled={!canBuy}
+                      className="flex h-12 min-h-[46px] flex-1 items-center justify-center rounded-full bg-stone-950 px-6 text-sm font-semibold tracking-wide text-white transition hover:bg-stone-800 disabled:cursor-not-allowed disabled:opacity-50"
+                    >
+                      {canBuy
+                        ? showAdded
+                          ? `${isPreorder ? t("common.addedToPreorder") : t("common.addedToCart")} ✓`
+                          : isPreorder
+                            ? t("common.placePreorder")
+                            : t("common.addToCart")
+                        : t("common.outOfStock")}
+                    </button>
+                    <WishlistButton slug={product.slug} variant="ring" />
+                  </div>
+
                   <button
                     type="button"
-                    onClick={handleAdd}
-                    disabled={!canBuy}
-                    className="flex h-12 min-h-[46px] flex-1 items-center justify-center rounded-full bg-stone-950 px-6 text-sm font-semibold tracking-wide text-white transition hover:bg-stone-800 disabled:cursor-not-allowed disabled:opacity-50"
+                    onClick={() => setContactOpen((v) => !v)}
+                    aria-expanded={contactOpen}
+                    className="flex h-12 min-h-[46px] w-full items-center justify-center border border-[#E8E2DD] bg-[#FFFBF9] px-5 text-[14px] font-medium text-[#111] outline-none transition hover:bg-white focus:outline-none focus-visible:outline focus-visible:outline-2 focus-visible:outline-[#111] focus-visible:outline-offset-[3px]"
                   >
-                    {canBuy
-                      ? showAdded
-                        ? `${isPreorder ? t("common.addedToPreorder") : t("common.addedToCart")} ✓`
-                        : isPreorder
-                          ? t("common.placePreorder")
-                          : t("common.addToCart")
-                      : t("common.outOfStock")}
+                    {t("pdp.reserveButton")}
                   </button>
-                  <WishlistButton slug={product.slug} variant="ring" />
+
+                  <div
+                    className="grid transition-[grid-template-rows] duration-300 ease-[cubic-bezier(0.4,0,0.2,1)] motion-reduce:transition-none"
+                    style={{ gridTemplateRows: contactOpen ? "1fr" : "0fr" }}
+                    aria-hidden={!contactOpen}
+                  >
+                    <div className="min-h-0 overflow-hidden">
+                      <div
+                        inert={!contactOpen ? true : undefined}
+                        className={
+                          "mt-1 overflow-hidden rounded-2xl border border-[#EDE6E0] bg-white transition-[opacity,transform] duration-[280ms] ease-[cubic-bezier(0.4,0,0.2,1)] motion-reduce:transition-none motion-reduce:transform-none " +
+                          (contactOpen
+                            ? "pointer-events-auto translate-y-0 opacity-100"
+                            : "pointer-events-none -translate-y-1.5 opacity-0")
+                        }
+                      >
+                        <div className="border-b border-[#F1EBE6] p-3">
+                          <a
+                            href={`tel:${primaryStore.phone.replace(/\s/g, "")}`}
+                            className="flex items-center gap-3.5 rounded-2xl border border-[#EDE6E0] bg-white px-[18px] py-4 outline-none transition hover:bg-[#FBF8F6] focus-visible:outline focus-visible:outline-2 focus-visible:outline-[#111] focus-visible:outline-offset-[3px]"
+                          >
+                            <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full border border-[#EDE6E0] bg-[#F7F3F0] text-[#111]">
+                              <PhoneIcon />
+                            </span>
+                            <span className="min-w-0 flex-1 text-left">
+                              <span className="block text-[12px] font-normal leading-snug text-[#111]/45">
+                                {t("pdp.directCall")}
+                              </span>
+                              <span className="mt-0.5 block text-[20px] font-semibold leading-tight tracking-[0.01em] text-[#111]">
+                                {primaryStore.phone}
+                              </span>
+                              <span className="mt-1 block text-[12px] font-normal leading-snug text-[#111]/40">
+                                {t("pdp.tapToCall")}
+                              </span>
+                            </span>
+                          </a>
+                        </div>
+                        <div className="divide-y divide-[#F1EBE6]">
+                          {contactOptions.map((option) => (
+                            <a
+                              key={option.name}
+                              href={option.href}
+                              target="_blank"
+                              rel="noreferrer"
+                              onClick={() => setContactOpen(false)}
+                              className="group flex h-16 items-center gap-3.5 px-[18px] transition hover:bg-[#FBF8F6]"
+                            >
+                              <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full border border-[#EDE6E0] bg-[#F7F3F0] text-[#111]">
+                                <MessengerIcon name={option.icon} />
+                              </span>
+                              <span className="min-w-0 flex-1">
+                                <span className="block text-[14px] font-medium text-[#111]">{option.name}</span>
+                                <span className="block text-[12px] text-[#111]/40">{option.hint}</span>
+                              </span>
+                              <svg
+                                viewBox="0 0 24 24"
+                                className="h-3.5 w-3.5 shrink-0 text-[#111] opacity-[0.16]"
+                                fill="none"
+                                stroke="currentColor"
+                                strokeWidth="1.8"
+                                aria-hidden
+                              >
+                                <path d="M9 6l6 6-6 6" strokeLinecap="round" strokeLinejoin="round" />
+                              </svg>
+                            </a>
+                          ))}
+                        </div>
+                      </div>
+                    </div>
+                  </div>
                 </div>
 
                 <p className="mt-2.5 text-center text-[12px] text-[#6B7280]">
