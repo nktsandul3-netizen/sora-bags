@@ -66,8 +66,8 @@ export default async function Home() {
       <HeroBannerSlider slides={getHeroSlides(locale)} intervalMs={4000} />
 
       {/* Плитки разделов: Сумки / Аксессуары */}
-      <section className="mt-1 w-full max-md:mt-0.5">
-        <div className="grid grid-cols-2 gap-1 max-md:gap-0.5 md:gap-1.5">
+      <section className="mt-0.5 w-full">
+        <div className="grid grid-cols-2 gap-0.5 md:gap-1">
           {heroTiles.map((tile) => (
             <Link
               key={tile.href}

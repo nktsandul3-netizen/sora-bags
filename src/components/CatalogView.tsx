@@ -117,7 +117,7 @@ function CatalogViewFallback({
   return (
     <>
       {heroBanner ? <HeroBanner heroBanner={heroBanner} /> : null}
-      <div className="mx-auto max-w-7xl px-4 py-6 sm:px-6 sm:py-7">
+      <div className="mx-auto max-w-7xl px-4 py-6 sm:px-6 sm:py-7 max-md:px-2 max-md:py-4">
         <h1 className="sr-only">{title}</h1>
         <div className="flex items-center justify-center py-20 text-sm text-stone-500">
           …
@@ -249,7 +249,7 @@ function CatalogViewInner({
   return (
     <>
       {heroBanner ? <HeroBanner heroBanner={heroBanner} /> : null}
-      <div className="mx-auto max-w-7xl px-4 py-6 sm:px-6 sm:py-7">
+      <div className="mx-auto max-w-7xl px-4 py-6 sm:px-6 sm:py-7 max-md:px-2 max-md:py-4">
         <h1 className="sr-only">{title}</h1>
         {description ? <p className="sr-only">{description}</p> : null}
 

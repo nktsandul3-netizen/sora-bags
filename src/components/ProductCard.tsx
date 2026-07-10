@@ -61,11 +61,11 @@ export default function ProductCard({
   const showSecondary = imageHovered && previewIdx === null && hasSwap;
   const showSwatches = colors.length > 1;
   const galleryFit = product.galleryFit ?? "cover";
-  // Mobile: fill the card. Desktop: keep studio framing with inset + contain.
+  // Mobile: show the full studio shot (no crop). Desktop: keep inset framing.
   const cardImageClass =
     galleryFit === "contain"
-      ? "object-cover object-center md:object-contain md:object-center"
-      : "object-cover object-center";
+      ? "object-contain object-center"
+      : "object-cover object-center max-md:object-contain";
   const productHref = withLocalePath(
     activeColor
       ? getProductColorHref(product.slug, activeColor.name)
@@ -80,7 +80,7 @@ export default function ProductCard({
         onMouseEnter={() => setImageHovered(true)}
         onMouseLeave={() => setImageHovered(false)}
       >
-        <div className="relative h-full w-full overflow-hidden rounded-none border border-[#E8E4DF] bg-white p-0 transition duration-500 max-md:border-transparent max-md:shadow-none md:group-hover:-translate-y-0.5">
+        <div className="relative h-full w-full overflow-hidden rounded-none border border-[#E8E4DF] bg-white p-0 transition duration-500 max-md:border-transparent max-md:bg-[#F6F1EB] max-md:shadow-none md:group-hover:-translate-y-0.5">
           <Link
             href={productHref}
             className="absolute inset-0 z-0 block touch-manipulation"
@@ -90,7 +90,7 @@ export default function ProductCard({
               <>
                 <div
                   className={
-                    "absolute inset-0 transition-opacity duration-300 ease-out md:inset-[18px] " +
+                    "absolute inset-2.5 transition-opacity duration-300 ease-out md:inset-[18px] " +
                     (showSecondary ? "opacity-0" : "opacity-100")
                   }
                 >
@@ -111,7 +111,7 @@ export default function ProductCard({
                 {hasSwap && (
                   <div
                     className={
-                      "absolute inset-0 transition-opacity duration-300 ease-out md:inset-[18px] " +
+                      "absolute inset-2.5 transition-opacity duration-300 ease-out md:inset-[18px] " +
                       (showSecondary ? "opacity-100" : "opacity-0")
                     }
                   >
@@ -137,10 +137,10 @@ export default function ProductCard({
                 hex={activeColor?.hex ?? "#d6d3d1"}
                 section={product.section}
                 className={
-                  "absolute inset-0 h-auto w-auto transition-transform duration-[700ms] ease-out md:inset-[18px] " +
+                  "absolute inset-2.5 h-auto w-auto transition-transform duration-[700ms] ease-out md:inset-[18px] " +
                   (imageHovered && previewIdx === null ? "scale-[1.04]" : "scale-100")
                 }
-                imageClassName="object-cover object-center md:object-contain md:object-center"
+                imageClassName="object-contain object-center"
               />
             )}
           </Link>

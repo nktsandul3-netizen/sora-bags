@@ -35,11 +35,11 @@ export default function CapsuleProductCard({ product }: { product: Product }) {
 
   return (
     <div
-      className="group flex min-h-[420px] flex-col border border-[#F0EDE9] bg-[#FFFFFF] max-md:min-h-0 max-md:border-transparent max-md:shadow-none md:shadow-[0_1px_3px_rgba(0,0,0,0.04)]"
+      className="group flex min-h-[420px] flex-col border border-[#F0EDE9] bg-[#FFFFFF] max-md:min-h-0 max-md:border-transparent max-md:bg-[#F6F1EB] max-md:shadow-none md:shadow-[0_1px_3px_rgba(0,0,0,0.04)]"
     >
       <div className="relative">
         <Link href={withLocalePath(`/product/${product.slug}`, locale)} className="block touch-manipulation">
-          <div className="relative aspect-[4/5] w-full overflow-hidden bg-[#FFFFFF]">
+          <div className="relative aspect-[4/5] w-full overflow-hidden bg-[#FFFFFF] max-md:bg-[#F6F1EB]">
             {primary?.src ? (
               <Image
                 src={primary.src}
@@ -49,8 +49,8 @@ export default function CapsuleProductCard({ product }: { product: Product }) {
                 quality={82}
                 className={
                   galleryFit === "contain"
-                    ? "object-cover object-center md:object-contain md:object-center"
-                    : "object-cover object-center"
+                    ? "object-contain object-center max-md:p-2.5 md:p-0"
+                    : "object-cover object-center max-md:object-contain max-md:p-2.5"
                 }
               />
             ) : null}
