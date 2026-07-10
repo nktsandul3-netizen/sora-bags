@@ -61,9 +61,10 @@ export default function ProductCard({
   const showSecondary = imageHovered && previewIdx === null && hasSwap;
   const showSwatches = colors.length > 1;
   const galleryFit = product.galleryFit ?? "cover";
+  // Mobile: always fill the card edge-to-edge. Desktop keeps studio "contain" framing.
   const cardImageClass =
     galleryFit === "contain"
-      ? "object-contain object-center"
+      ? "object-cover object-center md:object-contain md:object-center"
       : "object-cover object-center";
   const productHref = withLocalePath(
     activeColor
@@ -79,7 +80,7 @@ export default function ProductCard({
         onMouseEnter={() => setImageHovered(true)}
         onMouseLeave={() => setImageHovered(false)}
       >
-        <div className="relative h-full w-full overflow-hidden rounded-none border border-[#E8E4DF] bg-[#F7F3F0] p-0 transition duration-500 max-md:border-transparent max-md:shadow-none md:group-hover:-translate-y-0.5">
+        <div className="relative h-full w-full overflow-hidden rounded-none border border-[#E8E4DF] bg-white p-0 transition duration-500 max-md:border-transparent max-md:shadow-none md:group-hover:-translate-y-0.5">
           <Link
             href={productHref}
             className="absolute inset-0 z-0 block touch-manipulation"
@@ -90,7 +91,6 @@ export default function ProductCard({
                 <div
                   className={
                     "absolute inset-0 transition-opacity duration-300 ease-out md:inset-[18px] " +
-                    (galleryFit === "contain" ? "max-md:inset-3 " : "") +
                     (showSecondary ? "opacity-0" : "opacity-100")
                   }
                 >
@@ -112,7 +112,6 @@ export default function ProductCard({
                   <div
                     className={
                       "absolute inset-0 transition-opacity duration-300 ease-out md:inset-[18px] " +
-                      (galleryFit === "contain" ? "max-md:inset-3 " : "") +
                       (showSecondary ? "opacity-100" : "opacity-0")
                     }
                   >
@@ -141,7 +140,7 @@ export default function ProductCard({
                   "absolute inset-0 h-auto w-auto transition-transform duration-[700ms] ease-out md:inset-[18px] " +
                   (imageHovered && previewIdx === null ? "scale-[1.04]" : "scale-100")
                 }
-                imageClassName="object-contain object-center"
+                imageClassName="object-cover object-center md:object-contain md:object-center"
               />
             )}
           </Link>

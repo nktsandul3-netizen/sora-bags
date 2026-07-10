@@ -49,7 +49,7 @@ export default function CapsuleProductCard({ product }: { product: Product }) {
                 quality={82}
                 className={
                   galleryFit === "contain"
-                    ? "object-contain object-center max-md:p-3"
+                    ? "object-cover object-center md:object-contain md:object-center"
                     : "object-cover object-center"
                 }
               />
