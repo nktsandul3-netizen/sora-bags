@@ -70,7 +70,7 @@ export const videoWidget = {
         en: "Palmira — turn-lock bag",
       },
       mp4Src: "/videos/sora-story-in-motion-turn-lock-top-handle-bag.mp4",
-      posterSrc: "/products/womens-pebbled-leather-turn-lock-top-handle-bag/black-front.png",
+      posterSrc: "/products/womens-pebbled-leather-turn-lock-top-handle-bag/black-front.webp",
       collectionHref: "/product/womens-pebbled-leather-turn-lock-top-handle-bag",
     },
     {
@@ -81,7 +81,7 @@ export const videoWidget = {
         en: "Solange — trapezoid tote bag",
       },
       mp4Src: "/videos/sora-story-in-motion-wing-flap-tote-bag.mp4",
-      posterSrc: "/products/womens-pebbled-leather-wing-flap-tote-bag/light-blue-front-alt.png",
+      posterSrc: "/products/womens-pebbled-leather-wing-flap-tote-bag/light-blue-front-alt.webp",
       collectionHref: "/product/womens-pebbled-leather-wing-flap-tote-bag",
     },
     {
@@ -92,7 +92,7 @@ export const videoWidget = {
         en: "Ottilie — compact smooth-leather baguette bag",
       },
       mp4Src: "/videos/sora-story-in-motion-baguette.mp4",
-      posterSrc: "/products/womens-smooth-leather-compact-baguette-bag/red-orange-front.png",
+      posterSrc: "/products/womens-smooth-leather-compact-baguette-bag/red-orange-front.webp",
       collectionHref: "/product/womens-smooth-leather-compact-baguette-bag",
     },
     {
@@ -103,7 +103,7 @@ export const videoWidget = {
         en: "Aurea — rectangular top-handle bag",
       },
       mp4Src: "/videos/sora-story-in-motion-rectangular-handbag.mp4",
-      posterSrc: "/products/womens-pebbled-leather-rectangular-handbag/taupe-front.png",
+      posterSrc: "/products/womens-pebbled-leather-rectangular-handbag/taupe-front.webp",
       collectionHref: "/product/womens-pebbled-leather-rectangular-handbag",
     },
   ] satisfies VideoWidgetTikTokItem[],
@@ -198,128 +198,128 @@ export const brandStories = {
   ] satisfies BrandStoryHighlight[],
   productOverrides: {
     "womens-smooth-leather-compact-baguette-bag": {
-      cover: "/products/womens-smooth-leather-compact-baguette-bag/red-orange-front.png",
+      cover: "/products/womens-smooth-leather-compact-baguette-bag/red-orange-front.webp",
       slides: [
         {
           type: "video",
           src: "/videos/sora-story-in-motion-baguette.mp4",
-          poster: "/products/womens-smooth-leather-compact-baguette-bag/red-orange-front.png",
+          poster: "/products/womens-smooth-leather-compact-baguette-bag/red-orange-front.webp",
         },
       ],
     },
     "womens-pebbled-leather-rectangular-handbag": {
-      cover: "/products/womens-pebbled-leather-rectangular-handbag/taupe-front.png",
+      cover: "/products/womens-pebbled-leather-rectangular-handbag/taupe-front.webp",
       ringGradient:
         "conic-gradient(from 140deg, #b5a498, #7b6658, #5e4d42, #7b6658, #b5a498)",
       slides: [
         {
           type: "video",
           src: "/videos/sora-story-in-motion-rectangular-handbag.mp4",
-          poster: "/products/womens-pebbled-leather-rectangular-handbag/taupe-front.png",
+          poster: "/products/womens-pebbled-leather-rectangular-handbag/taupe-front.webp",
         },
       ],
     },
     "womens-pebbled-leather-turn-lock-top-handle-bag": {
-      cover: "/products/womens-pebbled-leather-turn-lock-top-handle-bag/black-front.png",
+      cover: "/products/womens-pebbled-leather-turn-lock-top-handle-bag/black-front.webp",
       ringGradient:
         "conic-gradient(from 140deg, #9ca3af, #4b5563, #1f2937, #4b5563, #9ca3af)",
       slides: [
         {
           type: "video",
           src: "/videos/sora-story-in-motion-turn-lock-top-handle-bag.mp4",
-          poster: "/products/womens-pebbled-leather-turn-lock-top-handle-bag/black-front.png",
+          poster: "/products/womens-pebbled-leather-turn-lock-top-handle-bag/black-front.webp",
         },
       ],
     },
     "womens-soft-leather-draped-flap-bag": {
-      cover: "/products/womens-soft-leather-draped-flap-bag/red-front.png",
+      cover: "/products/womens-soft-leather-draped-flap-bag/red-front.webp",
       ringGradient:
         "conic-gradient(from 140deg, #fca5a5, #c41e3a, #991b1b, #c41e3a, #fca5a5)",
       slides: [
         {
           type: "video",
           src: "/videos/sora-story-in-motion-draped-flap-bag.mp4",
-          poster: "/products/womens-soft-leather-draped-flap-bag/red-front.png",
+          poster: "/products/womens-soft-leather-draped-flap-bag/red-front.webp",
         },
       ],
     },
     "the-essential-shoulder-bag-tan-cognac": {
       highlights: {
         "in-motion": {
-          cover: "/products/the-essential-shoulder-bag/tan-cognac-lifestyle-v2.png",
+          cover: "/products/the-essential-shoulder-bag/tan-cognac-lifestyle-v2.webp",
           ringGradient:
             "conic-gradient(from 140deg, #d4a574, #a0643f, #7c4a2d, #a0643f, #d4a574)",
           slides: [
             {
               type: "video",
               src: "/videos/sora-story-in-motion-essential-shoulder-bag.mp4",
-              poster: "/products/the-essential-shoulder-bag/tan-cognac-front.png",
+              poster: "/products/the-essential-shoulder-bag/tan-cognac-front.webp",
             },
           ],
         },
       },
     },
     "womens-pebbled-leather-crescent-hobo-bag": {
-      cover: "/products/womens-pebbled-leather-crescent-hobo-bag/white-front.png",
+      cover: "/products/womens-pebbled-leather-crescent-hobo-bag/white-front.webp",
       ringGradient:
         "conic-gradient(from 140deg, #e7e5e4, #a8a29e, #78716c, #a8a29e, #e7e5e4)",
       slides: [
         {
           type: "video",
           src: "/videos/sora-story-in-motion-crescent-hobo-bag.mp4",
-          poster: "/products/womens-pebbled-leather-crescent-hobo-bag/white-front.png",
+          poster: "/products/womens-pebbled-leather-crescent-hobo-bag/white-front.webp",
         },
       ],
     },
     "womens-pleated-leather-frame-clutch": {
-      cover: "/products/womens-pleated-leather-frame-clutch/cognac-front-alt.png",
+      cover: "/products/womens-pleated-leather-frame-clutch/cognac-front-alt.webp",
       ringGradient:
         "conic-gradient(from 140deg, #d4a574, #a0643f, #7c4a2d, #a0643f, #d4a574)",
       slides: [
         {
           type: "video",
           src: "/videos/sora-story-in-motion-pleated-frame-clutch.mp4",
-          poster: "/products/womens-pleated-leather-frame-clutch/cognac-front-alt.png",
+          poster: "/products/womens-pleated-leather-frame-clutch/cognac-front-alt.webp",
         },
       ],
     },
     "womens-suede-wing-tote-bag": {
       highlights: {
         "in-motion": {
-          cover: "/products/womens-suede-wing-tote-bag/dark-chocolate-front.png",
+          cover: "/products/womens-suede-wing-tote-bag/dark-chocolate-front.webp",
           ringGradient:
             "conic-gradient(from 140deg, #d4a574, #8b5a2b, #3a2a20, #8b5a2b, #d4a574)",
           slides: [
             {
               type: "video",
               src: "/videos/sora-story-in-motion-suede-wing-tote-bag.mp4",
-              poster: "/products/womens-suede-wing-tote-bag/dark-chocolate-front.png",
+              poster: "/products/womens-suede-wing-tote-bag/dark-chocolate-front.webp",
             },
           ],
         },
       },
     },
     "womens-pebbled-leather-wing-flap-tote-bag": {
-      cover: "/products/womens-pebbled-leather-wing-flap-tote-bag/light-blue-front-alt.png",
+      cover: "/products/womens-pebbled-leather-wing-flap-tote-bag/light-blue-front-alt.webp",
       ringGradient:
         "conic-gradient(from 140deg, #bae6fd, #7dd3fc, #38bdf8, #7dd3fc, #bae6fd)",
       slides: [
         {
           type: "video",
           src: "/videos/sora-story-in-motion-wing-flap-tote-bag.mp4",
-          poster: "/products/womens-pebbled-leather-wing-flap-tote-bag/light-blue-front-alt.png",
+          poster: "/products/womens-pebbled-leather-wing-flap-tote-bag/light-blue-front-alt.webp",
         },
       ],
     },
     "womens-pebbled-leather-heart-shaped-handbag": {
-      cover: "/products/womens-pebbled-leather-heart-shaped-handbag/yellow-front-set.png",
+      cover: "/products/womens-pebbled-leather-heart-shaped-handbag/yellow-front-set.webp",
       ringGradient:
         "conic-gradient(from 140deg, #fde68a, #e5b318, #c9287a, #e5b318, #fde68a)",
       slides: [
         {
           type: "video",
           src: "/videos/sora-story-in-motion-heart-shaped-handbag.mp4",
-          poster: "/products/womens-pebbled-leather-heart-shaped-handbag/yellow-front-set.png",
+          poster: "/products/womens-pebbled-leather-heart-shaped-handbag/yellow-front-set.webp",
         },
       ],
     },
@@ -351,12 +351,12 @@ export const homeAsOnMeRail = {
         priceFrom: 1899,
         ringGradient:
           "conic-gradient(from 140deg, #c2410c, #ea580c, #f97316, #fb923c, #ea580c, #c2410c)",
-        cover: "/products/womens-smooth-leather-compact-baguette-bag/red-orange-front.png",
+        cover: "/products/womens-smooth-leather-compact-baguette-bag/red-orange-front.webp",
         slides: [
           {
             type: "video",
             src: "/videos/sora-story-in-motion-baguette.mp4",
-            poster: "/products/womens-smooth-leather-compact-baguette-bag/red-orange-front.png",
+            poster: "/products/womens-smooth-leather-compact-baguette-bag/red-orange-front.webp",
           },
         ],
       },
@@ -367,12 +367,12 @@ export const homeAsOnMeRail = {
         priceFrom: 3199,
         ringGradient:
           "conic-gradient(from 140deg, #5c3a21, #8a4b27, #a86b3c, #c4a484, #8a4b27, #5c3a21)",
-        cover: "/products/womens-pleated-leather-frame-clutch/cognac-front-alt.png",
+        cover: "/products/womens-pleated-leather-frame-clutch/cognac-front-alt.webp",
         slides: [
           {
             type: "video",
             src: "/videos/sora-story-in-motion-pleated-frame-clutch.mp4",
-            poster: "/products/womens-pleated-leather-frame-clutch/cognac-front-alt.png",
+            poster: "/products/womens-pleated-leather-frame-clutch/cognac-front-alt.webp",
           },
         ],
       },
@@ -383,12 +383,12 @@ export const homeAsOnMeRail = {
         priceFrom: 2199,
         ringGradient:
           "conic-gradient(from 140deg, #8a7a68, #a89884, #c4b5a0, #d6c8b4, #a89884, #8a7a68)",
-        cover: "/products/womens-pebbled-leather-rectangular-handbag/taupe-front.png",
+        cover: "/products/womens-pebbled-leather-rectangular-handbag/taupe-front.webp",
         slides: [
           {
             type: "video",
             src: "/videos/sora-story-in-motion-rectangular-handbag.mp4",
-            poster: "/products/womens-pebbled-leather-rectangular-handbag/taupe-front.png",
+            poster: "/products/womens-pebbled-leather-rectangular-handbag/taupe-front.webp",
           },
         ],
       },
@@ -399,12 +399,12 @@ export const homeAsOnMeRail = {
         priceFrom: 2499,
         ringGradient:
           "conic-gradient(from 140deg, #6b8a9a, #8aa8b5, #a8c4ce, #c5d8e0, #8aa8b5, #6b8a9a)",
-        cover: "/products/womens-pebbled-leather-wing-flap-tote-bag/light-blue-front-alt.png",
+        cover: "/products/womens-pebbled-leather-wing-flap-tote-bag/light-blue-front-alt.webp",
         slides: [
           {
             type: "video",
             src: "/videos/sora-story-in-motion-wing-flap-tote-bag.mp4",
-            poster: "/products/womens-pebbled-leather-wing-flap-tote-bag/light-blue-front-alt.png",
+            poster: "/products/womens-pebbled-leather-wing-flap-tote-bag/light-blue-front-alt.webp",
           },
         ],
       },

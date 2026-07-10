@@ -20,7 +20,11 @@ const nextConfig: NextConfig = {
     "/*": ["./public/**/*"],
   },
   images: {
-    qualities: [75, 86, 90, 100],
+    formats: ["image/avif", "image/webp"],
+    qualities: [75, 78, 80, 82, 85, 86, 88, 90, 92, 100],
+    minimumCacheTTL: 60 * 60 * 24 * 30, // 30 days
+    deviceSizes: [640, 750, 828, 1080, 1200, 1920],
+    imageSizes: [64, 96, 128, 256, 384],
     remotePatterns: [
       {
         protocol: "https",
@@ -31,6 +35,46 @@ const nextConfig: NextConfig = {
         hostname: "**.fbcdn.net",
       },
     ],
+  },
+  async headers() {
+    return [
+      {
+        source: "/products/:path*",
+        headers: [
+          { key: "Cache-Control", value: "public, max-age=31536000, immutable" },
+        ],
+      },
+      {
+        source: "/videos/:path*",
+        headers: [
+          { key: "Cache-Control", value: "public, max-age=31536000, immutable" },
+        ],
+      },
+      {
+        source: "/banners/:path*",
+        headers: [
+          { key: "Cache-Control", value: "public, max-age=31536000, immutable" },
+        ],
+      },
+      {
+        source: "/og-image.jpg",
+        headers: [
+          { key: "Cache-Control", value: "public, max-age=31536000, immutable" },
+        ],
+      },
+      {
+        source: "/favicon.png",
+        headers: [
+          { key: "Cache-Control", value: "public, max-age=31536000, immutable" },
+        ],
+      },
+      {
+        source: "/apple-touch-icon.png",
+        headers: [
+          { key: "Cache-Control", value: "public, max-age=31536000, immutable" },
+        ],
+      },
+    ];
   },
   async redirects() {
     const productRedirects = lumaProductSlugRedirects.flatMap((slug) => [

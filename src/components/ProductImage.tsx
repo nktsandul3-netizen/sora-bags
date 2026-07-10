@@ -64,6 +64,8 @@ export default function ProductImage({
   sizes = "(min-width: 1024px) 25vw, 50vw",
   imageClassName = "object-cover object-center",
   unoptimized = false,
+  quality = 75,
+  priority = false,
 }: {
   hex: string;
   section: Section;
@@ -73,17 +75,20 @@ export default function ProductImage({
   sizes?: string;
   imageClassName?: string;
   unoptimized?: boolean;
+  quality?: number;
+  priority?: boolean;
 }) {
   if (src) {
     return (
-      <div className={`relative overflow-hidden bg-stone-50 ${className}`}>
+      <div className={`relative overflow-hidden bg-stone-100 ${className}`}>
         <Image
           key={src}
           src={src}
           alt={alt}
           fill
           sizes={sizes}
-          quality={90}
+          quality={quality}
+          priority={priority}
           unoptimized={unoptimized}
           className={imageClassName}
         />

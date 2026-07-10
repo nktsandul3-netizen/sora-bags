@@ -147,14 +147,20 @@ export default function HeroBannerSlider({
   intervalMs?: number;
 }) {
   const [index, setIndex] = useState(0);
+  const touchStartX = useRef<number | null>(null);
   const t = useT();
   const isMobile = useIsMobile();
 
   const safeIndex = slides.length > 0 ? Math.min(index, slides.length - 1) : 0;
   const activeSlide = slides[safeIndex];
+  const canSwipe = slides.length > 1;
 
   const goNext = () => {
     setIndex((current) => (current + 1) % slides.length);
+  };
+
+  const goPrev = () => {
+    setIndex((current) => (current - 1 + slides.length) % slides.length);
   };
 
   // Image slides advance on a timer; video slides wait for onEnded.
@@ -189,8 +195,21 @@ export default function HeroBannerSlider({
         (activeSlide.type === "video" ? "bg-[#1f3d36]" : "bg-[#F7F3F0]")
       }
     >
-      <div className="relative aspect-[16/10] w-full md:aspect-auto md:h-[calc(100vh-72px)] md:min-h-[748px]">
-        {slides.map((slide, i) => {
+      <div
+        className="relative aspect-[16/10] w-full touch-pan-y md:aspect-auto md:h-[calc(100vh-72px)] md:min-h-[748px]"
+        onTouchStart={(e) => {
+          if (!canSwipe || isMobile === false) return;
+          touchStartX.current = e.changedTouches[0]?.clientX ?? null;
+        }}
+        onTouchEnd={(e) => {
+          if (!canSwipe || isMobile === false || touchStartX.current == null) return;
+          const dx = (e.changedTouches[0]?.clientX ?? 0) - touchStartX.current;
+          touchStartX.current = null;
+          if (Math.abs(dx) < 40) return;
+          if (dx < 0) goNext();
+          else goPrev();
+        }}
+      >        {slides.map((slide, i) => {
           const active = i === safeIndex;
           // Warm the next video while the first image slide is showing.
           const warmVideo = slide.type === "video" && !active && safeIndex === 0;
@@ -303,7 +322,7 @@ export default function HeroBannerSlider({
               ) : null}
               <Link
                 href={activeSlide.caption.ctaHref}
-                className="relative z-30 mt-1 inline-flex h-9 items-center rounded-full bg-white px-4 text-[11px] font-medium uppercase tracking-[0.08em] text-[#111] transition hover:bg-[#F5F3F0] md:mt-0 md:h-11 md:px-6 md:text-[12px]"
+                className="relative z-30 mt-1 inline-flex h-9 min-h-[44px] items-center rounded-full bg-white px-4 text-[11px] font-medium uppercase tracking-[0.08em] text-[#111] touch-manipulation transition hover:bg-[#F5F3F0] md:mt-0 md:h-11 md:min-h-0 md:px-6 md:text-[12px]"
               >
                 {activeSlide.caption.ctaLabel}
                 <svg

@@ -39,12 +39,11 @@ export default async function BlueCapsulePage() {
         <div className="mt-10 grid gap-6 lg:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)] lg:gap-8">
           <div className="relative aspect-[4/5] overflow-hidden bg-stone-100">
             <Image
-              src="/banners/home-blue-edit-lifestyle-sharp-v2.png"
+              src="/banners/home-blue-edit-lifestyle-sharp-v2.jpg"
               alt="Blue capsule look"
               fill
               sizes="(min-width: 1024px) 40vw, 100vw"
-              quality={100}
-              unoptimized
+              quality={82}
               className="object-cover object-[55%_68%]"
             />
           </div>

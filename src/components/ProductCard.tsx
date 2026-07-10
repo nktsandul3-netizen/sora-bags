@@ -26,6 +26,7 @@ export default function ProductCard({
 }) {
   const [previewIdx, setPreviewIdx] = useState<number | null>(null);
   const [imageHovered, setImageHovered] = useState(false);
+  const [imageReady, setImageReady] = useState(false);
   const isDesktop = useIsDesktop();
   const locale = useLocale();
   const t = useT();
@@ -54,6 +55,11 @@ export default function ProductCard({
   const colorImages = activeColor ? getColorImages(activeColor) : [];
   const primary = colorImages[0];
   const secondary = colorImages[1];
+
+  useEffect(() => {
+    setImageReady(false);
+  }, [displayIdx, primary?.src]);
+
   // Вторую картинку (свап по наведению) грузим только на десктопе — на телефоне
   // ховера нет, поэтому это лишняя загрузка, которая тормозит каталог.
   const hasSwap = Boolean(isDesktop && secondary && secondary.src !== primary?.src);
@@ -81,11 +87,18 @@ export default function ProductCard({
         <div className="relative h-full w-full overflow-hidden rounded-none border border-[#E8E4DF] bg-white p-0 transition duration-500 max-md:border-transparent max-md:shadow-none md:group-hover:-translate-y-0.5">
           <Link
             href={productHref}
-            className="absolute inset-0 z-0 block"
+            className="absolute inset-0 z-0 block touch-manipulation"
             aria-label={localizedTitle}
           >
             {primary?.src ? (
               <>
+                <div
+                  aria-hidden
+                  className={
+                    "pointer-events-none absolute inset-0 bg-[#F3F0EB] transition-opacity duration-300 " +
+                    (imageReady ? "opacity-0" : "animate-pulse opacity-100")
+                  }
+                />
                 <div
                   className={
                     "absolute inset-0 transition-opacity duration-300 ease-out md:inset-[18px] " +
@@ -99,10 +112,12 @@ export default function ProductCard({
                     alt={localizeProductImageAlt(primary.alt, locale) || localizedTitle}
                     fill
                     sizes="(min-width: 1024px) 25vw, 50vw"
-                    quality={90}
+                    quality={75}
+                    onLoad={() => setImageReady(true)}
                     className={
                       cardImageClass +
-                      " transition-transform duration-[700ms] ease-out " +
+                      " transition-[transform,opacity] duration-[700ms] ease-out " +
+                      (imageReady ? "opacity-100 " : "opacity-0 ") +
                       (imageHovered && previewIdx === null ? "scale-[1.04]" : "scale-100")
                     }
                   />
@@ -121,7 +136,7 @@ export default function ProductCard({
                       alt={localizeProductImageAlt(secondary!.alt, locale) || localizedTitle}
                       fill
                       sizes="(min-width: 1024px) 25vw, 50vw"
-                      quality={90}
+                      quality={75}
                       className={
                         cardImageClass +
                         " transition-transform duration-[700ms] ease-out " +

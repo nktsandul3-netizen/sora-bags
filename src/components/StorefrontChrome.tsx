@@ -1,11 +1,18 @@
 "use client";
 
 import { usePathname } from "next/navigation";
+import dynamic from "next/dynamic";
 import type { ReactNode } from "react";
-import CartDrawer from "@/components/CartDrawer";
-import VideoWidget from "@/components/VideoWidget";
 import { stripLocaleFromPathname } from "@/lib/i18n";
 import { MenuOpenProvider } from "@/context/menu-open";
+
+const CartDrawer = dynamic(() => import("@/components/CartDrawer"), {
+  ssr: false,
+});
+
+const VideoWidget = dynamic(() => import("@/components/VideoWidget"), {
+  ssr: false,
+});
 
 /**
  * Прячет витринный «обвес» (шапку, подвал) в разделе /admin,

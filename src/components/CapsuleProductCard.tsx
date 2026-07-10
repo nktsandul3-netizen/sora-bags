@@ -38,7 +38,7 @@ export default function CapsuleProductCard({ product }: { product: Product }) {
       className="group flex min-h-[420px] flex-col border border-[#F0EDE9] bg-white max-md:min-h-0 max-md:border-transparent max-md:shadow-none md:shadow-[0_1px_3px_rgba(0,0,0,0.04)]"
     >
       <div className="relative">
-        <Link href={withLocalePath(`/product/${product.slug}`, locale)} className="block">
+        <Link href={withLocalePath(`/product/${product.slug}`, locale)} className="block touch-manipulation">
           <div className="relative aspect-[4/5] w-full overflow-hidden bg-white">
             {primary?.src ? (
               <Image
@@ -46,7 +46,7 @@ export default function CapsuleProductCard({ product }: { product: Product }) {
                 alt={localizeProductImageAlt(primary.alt, locale) || localizedTitle}
                 fill
                 sizes="(min-width: 1024px) 20vw, 45vw"
-                quality={90}
+                quality={82}
                 className={
                   galleryFit === "contain"
                     ? "object-contain object-center max-md:p-3"

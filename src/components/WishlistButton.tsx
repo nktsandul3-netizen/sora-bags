@@ -42,7 +42,7 @@ export default function WishlistButton({
         onClick={handle}
         aria-label={ariaLabel}
         className={
-          "inline-flex h-11 w-11 min-h-[44px] min-w-[44px] items-center justify-center transition " +
+          "inline-flex h-11 w-11 min-h-[44px] min-w-[44px] touch-manipulation items-center justify-center transition " +
           (active ? "text-[#C96A1A]" : "text-stone-700 hover:text-stone-950")
         }
       >

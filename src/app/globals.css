@@ -44,6 +44,17 @@ body {
   select {
     font-size: 16px;
   }
+
+  /* Instant tap response on phones — skip 300ms hover heuristics */
+  a,
+  button,
+  [role="button"],
+  summary,
+  label,
+  .touch-fast {
+    touch-action: manipulation;
+    -webkit-tap-highlight-color: transparent;
+  }
 }
 
 .info-banner-media {

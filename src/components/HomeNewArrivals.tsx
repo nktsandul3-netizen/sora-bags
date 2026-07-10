@@ -111,7 +111,7 @@ function ShowcaseCard({ product }: { product: Product }) {
                 alt={localizeProductImageAlt(primary.alt, locale) || localizedTitle}
                 fill
                 sizes="(min-width: 1024px) 25vw, 82vw"
-                quality={90}
+                quality={75}
                 className={cardImageClassName(primary.src, imageHovered && previewIdx === null, galleryFit)}
               />
             </div>
@@ -128,7 +128,7 @@ function ShowcaseCard({ product }: { product: Product }) {
                   alt={localizeProductImageAlt(secondary!.alt, locale) || localizedTitle}
                   fill
                   sizes="(min-width: 1024px) 25vw, 82vw"
-                  quality={90}
+                  quality={75}
                   className={cardImageClassName(secondary!.src, showSecondary, galleryFit)}
                 />
               </div>

@@ -2,10 +2,9 @@ import Link from "next/link";
 import Image from "next/image";
 import { products } from "@/lib/data";
 import { getInstagramPosts } from "@/lib/instagram";
-import InstagramFeed from "@/components/InstagramFeed";
 import CapsuleProductCard from "@/components/CapsuleProductCard";
 import HeroBannerSlider, { type HeroSlide } from "@/components/HeroBannerSlider";
-import StoreExclusiveServices from "@/components/stores/StoreExclusiveServices";
+import HomeBelowFold from "@/components/HomeBelowFold";
 import { getServerLocale, getServerT } from "@/lib/server-i18n";
 import { withLocalePath, type Locale } from "@/lib/i18n";
 import { translate } from "@/lib/messages";
@@ -40,8 +39,8 @@ const heroTiles: {
   href: string;
   img: string;
 }[] = [
-  { labelKey: "nav.bags", href: "/bags", img: "/tile-sale.jpg" },
-  { labelKey: "nav.accessories", href: "/accessories", img: "/tile-bags.jpg" },
+  { labelKey: "nav.bags", href: "/bags", img: "/tile-sale-mobile.jpg" },
+  { labelKey: "nav.accessories", href: "/accessories", img: "/tile-bags-mobile.jpg" },
 ];
 
 const blueEditProductSlugs = [
@@ -73,14 +72,14 @@ export default async function Home() {
             <Link
               key={tile.href}
               href={withLocalePath(tile.href, locale)}
-              className="group relative block aspect-square w-full overflow-hidden bg-[#f3f0eb]"
+              className="group relative block aspect-square w-full touch-manipulation overflow-hidden bg-[#f3f0eb]"
             >
               <Image
                 src={tile.img}
                 alt={t(tile.labelKey)}
                 fill
                 sizes="(min-width: 768px) 50vw, 100vw"
-                quality={86}
+                quality={80}
                 className="object-cover object-center transition-transform duration-[900ms] ease-out group-hover:scale-[1.02]"
               />
               <div className="absolute inset-0 bg-black/10 transition-colors duration-300 group-hover:bg-black/30 group-focus-visible:bg-black/30" />
@@ -102,15 +101,14 @@ export default async function Home() {
         <div className="grid gap-20 lg:grid-cols-[minmax(0,1.08fr)_minmax(0,1fr)]">
           <Link
             href={withLocalePath("/collections/amalfi-woven", locale)}
-            className="group relative aspect-[4/5] overflow-hidden bg-stone-100 lg:min-h-[620px] lg:aspect-auto"
+            className="group relative aspect-[4/5] touch-manipulation overflow-hidden bg-stone-100 lg:min-h-[620px] lg:aspect-auto"
           >
             <Image
-              src="/banners/home-blue-edit-lifestyle-sharp-v2.png"
+              src="/banners/home-blue-edit-lifestyle-sharp-v2.jpg"
               alt={t("home.heroAmalfiAlt")}
               fill
               sizes="(min-width: 1024px) 52vw, 100vw"
-              quality={100}
-              unoptimized
+              quality={82}
               className="object-cover object-[55%_68%] transition-transform duration-700 ease-out group-hover:scale-[1.02]"
             />
           </Link>
@@ -133,13 +131,12 @@ export default async function Home() {
         </div>
       </section>
 
-      <InstagramFeed
+      <HomeBelowFold
         posts={instagramPosts}
-        title={t("home.instagramFeed")}
-        hint={t("home.instagramFeedHint")}
+        locale={locale}
+        instagramTitle={t("home.instagramFeed")}
+        instagramHint={t("home.instagramFeedHint")}
       />
-
-      <StoreExclusiveServices locale={locale} />
 
     </div>
   );
