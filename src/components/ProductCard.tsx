@@ -1,21 +1,29 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import type { Product } from "@/lib/types";
 import { getBrandName, getFeaturedColorIndex } from "@/lib/data";
 import { formatPrice } from "@/lib/format";
 import { withLocalePath } from "@/lib/i18n";
+import { findColorIndexForFilterFamilies } from "@/lib/color-taxonomy";
 import { useIsDesktop } from "@/lib/useIsDesktop";
 import { useLocale, useT } from "@/lib/useI18n";
 import { localizeProductImageAlt, localizeProductTitle } from "@/lib/product-i18n";
 import ProductImage from "./ProductImage";
-import ProductColorSwatches, { getColorImages } from "./ProductColorSwatches";
+import ProductColorSwatches, { getColorImages, getProductColorHref } from "./ProductColorSwatches";
 import WishlistButton from "./WishlistButton";
 import PreorderStatusBadge from "./PreorderStatusBadge";
 
-export default function ProductCard({ product }: { product: Product }) {
+export default function ProductCard({
+  product,
+  activeFilterColors = [],
+}: {
+  product: Product;
+  /** Color family keys from catalog URL `?color=` (e.g. `blue`). */
+  activeFilterColors?: string[];
+}) {
   const [previewIdx, setPreviewIdx] = useState<number | null>(null);
   const [imageHovered, setImageHovered] = useState(false);
   const isDesktop = useIsDesktop();
@@ -25,7 +33,23 @@ export default function ProductCard({ product }: { product: Product }) {
   const localizedTitle = localizeProductTitle(product, locale);
   const colors = product.colors;
   const defaultColorIdx = getFeaturedColorIndex(product);
-  const displayIdx = previewIdx ?? defaultColorIdx;
+  const filterKey = activeFilterColors.join(",");
+
+  const filterColorIdx = useMemo(
+    () =>
+      findColorIndexForFilterFamilies(
+        colors.map((color) => color.name),
+        activeFilterColors,
+      ),
+    [colors, activeFilterColors],
+  );
+
+  // When the catalog color filter changes, drop manual/hover preview so the card follows the filter.
+  useEffect(() => {
+    setPreviewIdx(null);
+  }, [filterKey, product.slug]);
+
+  const displayIdx = previewIdx ?? filterColorIdx ?? defaultColorIdx;
   const activeColor = colors[displayIdx] ?? colors[0];
   const colorImages = activeColor ? getColorImages(activeColor) : [];
   const primary = colorImages[0];
@@ -40,6 +64,12 @@ export default function ProductCard({ product }: { product: Product }) {
     galleryFit === "contain"
       ? "object-contain object-center"
       : "object-cover object-center";
+  const productHref = withLocalePath(
+    activeColor
+      ? getProductColorHref(product.slug, activeColor.name)
+      : `/product/${product.slug}`,
+    locale,
+  );
 
   return (
     <div className="group flex flex-col">
@@ -50,7 +80,7 @@ export default function ProductCard({ product }: { product: Product }) {
       >
         <div className="relative h-full w-full overflow-hidden rounded-none border border-[#E8E4DF] bg-white p-0 transition duration-500 max-md:border-transparent max-md:bg-[#F6F1EB] max-md:shadow-none md:group-hover:-translate-y-0.5">
           <Link
-            href={withLocalePath(`/product/${product.slug}`, locale)}
+            href={productHref}
             className="absolute inset-0 z-0 block"
             aria-label={localizedTitle}
           >
@@ -139,7 +169,7 @@ export default function ProductCard({ product }: { product: Product }) {
             productSlug={product.slug}
             colors={colors}
             previewIndex={previewIdx}
-            defaultIndex={defaultColorIdx}
+            defaultIndex={filterColorIdx ?? defaultColorIdx}
             onPreview={setPreviewIdx}
             swatchFit={galleryFit}
           />
@@ -151,7 +181,7 @@ export default function ProductCard({ product }: { product: Product }) {
         </span>
       </div>
 
-      <Link href={withLocalePath(`/product/${product.slug}`, locale)} className="mt-3 flex flex-col px-0.5">
+      <Link href={productHref} className="mt-3 flex flex-col px-0.5">
         <p className="text-[11px] font-normal uppercase tracking-[0.08em] text-[#111]/36">
           {getBrandName(product.brandSlug)}
         </p>

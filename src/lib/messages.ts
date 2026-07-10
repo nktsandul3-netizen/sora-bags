@@ -348,7 +348,7 @@ const ru = {
     email: "E-mail",
   },
   pdp: {
-    reserveButton: "Забронировать в магазине",
+    reserveButton: "Заказать по номеру телефона",
     reserveMessage: "Здравствуйте! Хочу забронировать в магазине",
     directCall: "Позвонить напрямую",
     tapToCall: "Нажмите, чтобы позвонить",
@@ -794,7 +794,7 @@ const ro: typeof ru = {
     email: "E-mail",
   },
   pdp: {
-    reserveButton: "Rezervă în magazin",
+    reserveButton: "Comandă pe telefon",
     reserveMessage: "Bună ziua! Doresc să rezerv produsul în magazin",
     directCall: "Apelați direct",
     tapToCall: "Apăsați pentru a suna",
@@ -1240,7 +1240,7 @@ const en: typeof ru = {
     email: "Email",
   },
   pdp: {
-    reserveButton: "Reserve in store",
+    reserveButton: "Order by phone",
     reserveMessage: "Hello! I would like to reserve this item in store",
     directCall: "Call us",
     tapToCall: "Tap to call",

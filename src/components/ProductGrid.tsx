@@ -5,7 +5,13 @@ import { productHasPhotos } from "@/lib/data";
 import { useT } from "@/lib/useI18n";
 import ProductCard from "./ProductCard";
 
-export default function ProductGrid({ products }: { products: Product[] }) {
+export default function ProductGrid({
+  products,
+  activeFilterColors = [],
+}: {
+  products: Product[];
+  activeFilterColors?: string[];
+}) {
   const t = useT();
   const visibleProducts = products.filter(productHasPhotos);
 
@@ -19,7 +25,7 @@ export default function ProductGrid({ products }: { products: Product[] }) {
   return (
     <div className="grid grid-cols-2 gap-x-3 gap-y-6 sm:gap-x-4 sm:gap-y-10 lg:grid-cols-4 lg:gap-x-5">
       {visibleProducts.map((p) => (
-        <ProductCard key={p.slug} product={p} />
+        <ProductCard key={p.slug} product={p} activeFilterColors={activeFilterColors} />
       ))}
     </div>
   );

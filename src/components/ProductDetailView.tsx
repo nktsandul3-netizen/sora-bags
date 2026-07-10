@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { useSearchParams } from "next/navigation";
 import type { Product, ProductImageAsset } from "@/lib/types";
 import { getFeaturedColorIndex } from "@/lib/data";
@@ -200,6 +200,7 @@ export default function ProductDetailView({
   const [imageIdx, setImageIdx] = useState(0);
   const [added, setAdded] = useState(false);
   const [contactOpen, setContactOpen] = useState(false);
+  const touchStartX = useRef<number | null>(null);
 
   useEffect(() => {
     fetch(`/api/products/${product.slug}/view`, { method: "POST" }).catch(() => {});
@@ -306,7 +307,19 @@ export default function ProductDetailView({
     <div className="mt-6">
       <div className="grid gap-10 lg:grid-cols-[minmax(0,0.82fr)_minmax(0,1.18fr)]">
       <div>
-        <div className="group relative aspect-[4/5] overflow-hidden rounded-2xl bg-[#FFFFFF]">
+        <div
+          className="group relative aspect-[4/5] touch-pan-y overflow-hidden rounded-2xl bg-[#FFFFFF]"
+          onTouchStart={(e) => {
+            touchStartX.current = e.changedTouches[0]?.clientX ?? null;
+          }}
+          onTouchEnd={(e) => {
+            if (touchStartX.current == null || !canNavigateMedia) return;
+            const dx = (e.changedTouches[0]?.clientX ?? 0) - touchStartX.current;
+            touchStartX.current = null;
+            if (Math.abs(dx) < 40) return;
+            showImage(dx < 0 ? "next" : "prev");
+          }}
+        >
             {activeImage?.src ? (
               /* eslint-disable-next-line @next/next/no-img-element */
               <img

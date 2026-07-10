@@ -6,7 +6,8 @@ import { brand } from "@/lib/config";
 const phone = brand.phones[0];
 const phoneHref = `tel:${phone.replace(/\s/g, "")}`;
 const email = "info@sorabags.md";
-const heroImage = "/warranty-banner-v3.png";
+const heroImage = "/warranty-banner-v4.png";
+const heroImageMobile = "/warranty-banner-mobile.png";
 
 function InfoCard({
   title,
@@ -95,6 +96,35 @@ function EditorialImage({
   );
 }
 
+function WarrantyHero({ alt }: { alt: string }) {
+  return (
+    <section className="relative aspect-[16/9] w-full overflow-hidden bg-[#1a1a1a] md:aspect-auto md:h-[clamp(280px,44vw,580px)] md:bg-stone-100">
+      <Image
+        src={heroImageMobile}
+        alt={alt}
+        fill
+        priority
+        quality={90}
+        sizes="100vw"
+        className="object-cover object-center md:hidden"
+      />
+      <Image
+        src={heroImage}
+        alt={alt}
+        fill
+        priority
+        quality={90}
+        sizes="100vw"
+        className="hidden object-cover object-center md:block"
+      />
+      <div
+        className="pointer-events-none absolute inset-0 bg-gradient-to-b from-black/30 via-transparent to-transparent"
+        aria-hidden
+      />
+    </section>
+  );
+}
+
 export default function WarrantyPageContent({ locale = "ru" }: { locale?: Locale }) {
   if (locale !== "ru") {
     const c = locale === "ro"
@@ -179,10 +209,7 @@ export default function WarrantyPageContent({ locale = "ru" }: { locale?: Locale
 
     return (
       <>
-        <section className="relative h-[clamp(250px,44vw,580px)] w-full overflow-hidden bg-stone-100">
-          <Image src={heroImage} alt={c.alt} fill priority quality={90} sizes="100vw" className="object-cover object-center" />
-          <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-black/30 via-transparent to-transparent" aria-hidden />
-        </section>
+        <WarrantyHero alt={c.alt} />
         <div className="mx-auto max-w-7xl overflow-x-clip px-4 sm:px-6">
           <h1 className="sr-only">{c.title}</h1>
           <section className="pb-14 pt-8 sm:pb-16 sm:pt-10 lg:pb-20 lg:pt-12">
@@ -234,21 +261,7 @@ export default function WarrantyPageContent({ locale = "ru" }: { locale?: Locale
   }
   return (
     <>
-      <section className="relative h-[clamp(250px,44vw,580px)] w-full overflow-hidden bg-stone-100">
-        <Image
-          src={heroImage}
-          alt="Гарантия и уход — SÓRA Bags"
-          fill
-          priority
-          quality={90}
-          sizes="100vw"
-          className="object-cover object-center"
-        />
-        <div
-          className="pointer-events-none absolute inset-0 bg-gradient-to-b from-black/30 via-transparent to-transparent"
-          aria-hidden
-        />
-      </section>
+      <WarrantyHero alt="Гарантия и уход — SÓRA Bags" />
 
       <div className="mx-auto max-w-7xl overflow-x-clip px-4 sm:px-6">
         <h1 className="sr-only">Гарантия и уход</h1>

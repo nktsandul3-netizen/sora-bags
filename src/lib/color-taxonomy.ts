@@ -216,6 +216,19 @@ export function getColorFamilies(rawName: string): ColorFamilyKey[] {
   return rawColorFamilies[rawName] ?? ["multi"];
 }
 
+/** Index of the first product color that matches any selected filter family. */
+export function findColorIndexForFilterFamilies(
+  colorNames: string[],
+  filterFamilies: string[],
+): number | null {
+  if (!filterFamilies.length || colorNames.length < 2) return null;
+  const selected = new Set(filterFamilies);
+  const idx = colorNames.findIndex((name) =>
+    getColorFamilies(name).some((family) => selected.has(family)),
+  );
+  return idx >= 0 ? idx : null;
+}
+
 export function colorFamilyLabel(key: ColorFamilyKey, locale: Locale): string {
   return colorFamilyMeta[key]?.label[locale] ?? key;
 }

@@ -42,7 +42,7 @@ export const infoPages: InfoPage[] = [
   {
     slug: "garantiya",
     title: "Гарантия и уход",
-    bannerImage: "/warranty-banner-v3.png",
+    bannerImage: "/warranty-banner-v4.png",
     extraBanners: [
       {
         image: "/warranty-craft-banner.png",

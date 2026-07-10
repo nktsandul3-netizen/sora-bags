@@ -366,7 +366,7 @@ function CatalogViewInner({
             />
           ) : (
             <>
-              <ProductGrid products={shown} />
+              <ProductGrid products={shown} activeFilterColors={filters.colors} />
               {filtered.length > visible && (
                 <div className="mt-10 flex justify-center">
                   <button
