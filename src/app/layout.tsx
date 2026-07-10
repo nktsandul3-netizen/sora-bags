@@ -50,6 +50,31 @@ export async function generateMetadata(): Promise<Metadata> {
     alternates: {
       languages,
     },
+    icons: {
+      icon: [{ url: "/favicon.png", sizes: "800x800", type: "image/png" }],
+      apple: [{ url: "/apple-touch-icon.png", sizes: "800x800", type: "image/png" }],
+    },
+    openGraph: {
+      type: "website",
+      siteName: brand.name,
+      title: `${brand.name} — ${tagline}`,
+      description,
+      url: `https://${brand.domain}`,
+      images: [
+        {
+          url: "/og-image.jpg",
+          width: 1200,
+          height: 630,
+          alt: `${brand.name} Italy`,
+        },
+      ],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: `${brand.name} — ${tagline}`,
+      description,
+      images: ["/og-image.jpg"],
+    },
     other: {
       google: "notranslate",
     },
