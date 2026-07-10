@@ -72,7 +72,7 @@ const ru = {
   home: {
     instagramFeed: "Мы в Instagram",
     instagramFeedHint: "Новые образы и поступления",
-    instagramTitle: "Нас носят в жизни",
+    instagramTitle: "С нами живут",
     instagramFollow: "Подписаться",
     instagramSeeMore: "Смотреть больше в Instagram →",
     capsuleShopLook: "Собрать полный образ →",
@@ -518,7 +518,7 @@ const ro: typeof ru = {
   home: {
     instagramFeed: "Pe Instagram",
     instagramFeedHint: "Ținute noi și noutăți",
-    instagramTitle: "Ne poartă în viață",
+    instagramTitle: "Trăiesc cu noi",
     instagramFollow: "Urmărește",
     instagramSeeMore: "Vezi mai mult pe Instagram →",
     capsuleShopLook: "Completează look-ul →",
@@ -964,7 +964,7 @@ const en: typeof ru = {
   home: {
     instagramFeed: "On Instagram",
     instagramFeedHint: "New looks and arrivals",
-    instagramTitle: "Worn in real life",
+    instagramTitle: "They live with us",
     instagramFollow: "Follow",
     instagramSeeMore: "See more on Instagram →",
     capsuleShopLook: "Shop the full look →",

@@ -135,7 +135,7 @@ export default function HeroBannerSlider({
                   priority={i === 0}
                   quality={100}
                   sizes="100vw"
-                  className="object-cover object-[50%_22%]"
+                  className="object-cover object-[42%_28%]"
                 />
               ) : (
                 <HeroSlideVideo

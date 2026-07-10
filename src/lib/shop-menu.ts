@@ -12,10 +12,13 @@ export function resolveCategorySlugs(slug: string): string[] {
 
 /** Bag categories shown in shop menu + catalog subnav (order matters). */
 export const shopBagMenuCategories: CategoryDef[] = [
-  { slug: "tote-bags-women", name: "Tote", section: "bags" },
-  { slug: "shoulder-bags-women", name: "Shoulder bags", section: "bags" },
-  { slug: "bucket-bags-women", name: "Secchiello", section: "bags" },
-  { slug: "clutch-evening", name: "Evening bags", section: "bags" },
+  { slug: "clutches", name: "Clutches", section: "bags" },
+  { slug: "bucket-bags-women", name: "Bucket Bags Women", section: "bags" },
+  { slug: "bowling-bags", name: "Bowling Bags", section: "bags" },
+  { slug: "handbags-women", name: "Handbags Women", section: "bags" },
+  { slug: "tote-bags-women", name: "Tote Bags Women", section: "bags" },
+  { slug: "shoulder-bags-women", name: "Shoulder Bags Women", section: "bags" },
+  { slug: "crossbody-bags-women", name: "Crossbody Bags Women", section: "bags" },
 ];
 
 /** Accessory categories shown in shop menu + catalog subnav (order matters). */

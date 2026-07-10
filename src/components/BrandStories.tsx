@@ -349,7 +349,7 @@ export default function BrandStories({
               <span
                 aria-hidden
                 style={{ background: itemRingGradient }}
-                className="absolute inset-0 rounded-full blur-[1px] saturate-150 animate-[storyPulse_1.65s_ease-out_infinite]"
+                className="absolute inset-0 rounded-full blur-[1px] saturate-110 animate-[storyPulse_2.8s_ease-in-out_infinite]"
               />
               <span
                 style={{ background: itemRingGradient }}

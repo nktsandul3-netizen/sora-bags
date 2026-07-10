@@ -15,7 +15,7 @@ function getHeroSlides(locale: Locale): HeroSlide[] {
   return [
     {
       type: "image",
-      src: "/hero-sora-bamboo-studio.jpg",
+      src: "/hero-sora-bamboo-studio-v2.jpg",
       alt: t("home.heroBambooAlt"),
     },
     {

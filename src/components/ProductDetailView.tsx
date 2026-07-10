@@ -3,6 +3,7 @@
 import { useEffect, useMemo, useState } from "react";
 import { useSearchParams } from "next/navigation";
 import type { Product, ProductImageAsset } from "@/lib/types";
+import { getFeaturedColorIndex } from "@/lib/data";
 import { useCart } from "@/context/cart";
 import { brand } from "@/lib/config";
 import { primaryStore } from "@/lib/stores";
@@ -172,10 +173,12 @@ function hasPureLeatherMaterial(product: Product) {
 }
 
 function getInitialColorIdx(product: Product, colorParam: string | null) {
-  if (!colorParam) return 0;
-  const normalized = colorParam.trim().toLowerCase();
-  const idx = product.colors.findIndex((c) => c.name.trim().toLowerCase() === normalized);
-  return idx >= 0 ? idx : 0;
+  if (colorParam) {
+    const normalized = colorParam.trim().toLowerCase();
+    const idx = product.colors.findIndex((c) => c.name.trim().toLowerCase() === normalized);
+    if (idx >= 0) return idx;
+  }
+  return getFeaturedColorIndex(product);
 }
 
 export default function ProductDetailView({
@@ -227,8 +230,10 @@ export default function ProductDetailView({
       : "object-cover object-center";
   const galleryImageClass =
     activeImageFit === "contain"
-      ? "object-contain object-center p-3 sm:p-4"
+      ? "object-contain object-center p-6 sm:p-8"
       : "object-cover object-center";
+  const galleryHoverClass =
+    activeImageFit === "contain" ? "" : "transition-transform duration-700 group-hover:scale-[1.018]";
   const localizedColor = localizeColorName(color, locale);
   const localizedDescription = localizeProductDescription(product, locale);
   const localizedTitle = localizeProductTitle(product, locale);
@@ -309,7 +314,7 @@ export default function ProductDetailView({
                 src={activeImage.src}
                 alt={localizeProductImageAlt(activeImage.alt, locale) || localizedTitle}
                 loading="eager"
-                className={`relative z-10 h-full w-full transition-transform duration-700 group-hover:scale-[1.018] ${galleryImageClass}`}
+                className={`absolute inset-0 z-10 h-full w-full ${galleryHoverClass} ${galleryImageClass}`}
               />
             ) : (
               <ProductImage

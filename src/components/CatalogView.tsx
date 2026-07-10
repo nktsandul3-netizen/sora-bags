@@ -255,7 +255,7 @@ function CatalogViewInner({
 
         {navCategories && basePath ? (
           <nav className="mb-5 w-full overflow-x-auto border-b border-[#EDE9E5] [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
-            <div className="flex h-12 min-w-max items-center justify-center gap-7 text-[14px] font-normal leading-none">
+            <div className="flex h-11 min-w-max items-center justify-center gap-6 text-[12px] font-normal leading-none tracking-[0.01em]">
               <Link
                 href={withLocalePath(basePath, locale)}
                 className={

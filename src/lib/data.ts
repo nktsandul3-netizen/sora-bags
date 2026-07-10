@@ -261,7 +261,7 @@ export const products: Product[] = [
   },
   {
     slug: "woven-leather-shopper-tote-black",
-    title: "Ondine — плетёная сумка-шоппер",
+    title: "Ondine",
     brandSlug: "sora-atelier",
     section: "bags",
     categorySlug: "tote-bags-women",
@@ -355,7 +355,7 @@ export const products: Product[] = [
   },
   {
     slug: "premium-woven-beach-tote-bag-natural-black",
-    title: "Capri — плетёная пляжная сумка-тоут",
+    title: "Capri",
     brandSlug: "sora-atelier",
     section: "bags",
     categorySlug: "tote-bags-women",
@@ -396,7 +396,7 @@ export const products: Product[] = [
   },
   {
     slug: "milano-cage-tote-bag-black-red",
-    title: "Ortigia — тоут с каркасным силуэтом",
+    title: "Ortigia",
     brandSlug: "sora-atelier",
     section: "bags",
     categorySlug: "tote-bags-women",
@@ -501,7 +501,7 @@ export const products: Product[] = [
   },
   {
     slug: "mini-elegance-top-handle-bag-white",
-    title: "Micaela — мини-сумка с верхней ручкой",
+    title: "Micaela",
     brandSlug: "sora-atelier",
     section: "bags",
     categorySlug: "handbags-women",
@@ -604,7 +604,7 @@ export const products: Product[] = [
   },
   {
     slug: "classic-leather-tote-bag-black",
-    title: "Claudine — классическая кожаная сумка-тоут",
+    title: "Claudine",
     brandSlug: "sora-atelier",
     section: "bags",
     categorySlug: "tote-bags-women",
@@ -681,7 +681,7 @@ export const products: Product[] = [
   },
   {
     slug: "classic-leather-bowling-bag-black",
-    title: "Romina — сумка-боулинг",
+    title: "Romina",
     brandSlug: "sora-atelier",
     section: "bags",
     categorySlug: "bowling-bags",
@@ -756,7 +756,7 @@ export const products: Product[] = [
   },
   {
     slug: "elegant-leather-hobo-bag-pink",
-    title: "Amara — сумка-хобо",
+    title: "Amara",
     brandSlug: "sora-atelier",
     section: "bags",
     categorySlug: "shoulder-bags-women",
@@ -855,7 +855,7 @@ export const products: Product[] = [
   },
   {
     slug: "elegant-leather-hobo-bag-taupe",
-    title: "Liora — сумка-хобо",
+    title: "Liora",
     brandSlug: "sora-atelier",
     section: "bags",
     categorySlug: "shoulder-bags-women",
@@ -979,7 +979,7 @@ export const products: Product[] = [
   },
   {
     slug: "elegant-leather-hobo-bag-smooth-black",
-    title: "Serena — сумка-хобо из гладкой кожи",
+    title: "Serena",
     brandSlug: "sora-atelier",
     section: "bags",
     categorySlug: "shoulder-bags-women",
@@ -1239,7 +1239,7 @@ export const products: Product[] = [
   },
   {
     slug: "elegant-leather-crossbody-bag-white",
-    title: "Noelia — кожаная сумка кроссбоди",
+    title: "Noelia",
     brandSlug: "sora-atelier",
     section: "bags",
     categorySlug: "crossbody-bags-women",
@@ -1404,7 +1404,7 @@ export const products: Product[] = [
   },
   {
     slug: "elegant-leather-moon-bag-cognac",
-    title: "Elara — кожаная сумка полумесяцем",
+    title: "Elara",
     brandSlug: "sora-atelier",
     section: "bags",
     categorySlug: "shoulder-bags-women",
@@ -1490,7 +1490,7 @@ export const products: Product[] = [
   },
   {
     slug: "elegant-leather-tote-bag-black",
-    title: "Violaine — кожаная сумка-тоут",
+    title: "Violaine",
     brandSlug: "sora-atelier",
     section: "bags",
     categorySlug: "tote-bags-women",
@@ -1578,7 +1578,7 @@ export const products: Product[] = [
   },
   {
     slug: "pouch-bag-black-onyx",
-    title: "Capucine — сумка-пауч",
+    title: "Capucine",
     brandSlug: "sora-atelier",
     section: "bags",
     categorySlug: "clutches",
@@ -1736,7 +1736,7 @@ export const products: Product[] = [
   },
   {
     slug: "structured-leather-tote-bag-burgundy",
-    title: "Beatrice — структурированная сумка-тоут",
+    title: "Beatrice",
     brandSlug: "sora-atelier",
     section: "bags",
     categorySlug: "tote-bags-women",
@@ -1824,7 +1824,7 @@ export const products: Product[] = [
   },
   {
     slug: "the-essential-shoulder-bag-tan-cognac",
-    title: "Adele — базовая сумка на плечо",
+    title: "Adele",
     brandSlug: "sora-atelier",
     section: "bags",
     categorySlug: "shoulder-bags-women",
@@ -2317,7 +2317,7 @@ export const products: Product[] = [
   },
   {
     slug: "womens-pebbled-leather-turn-lock-strap-tote-bag",
-    title: "Greta — сумка-тоут с замком",
+    title: "Greta",
     brandSlug: "sora-atelier",
     section: "bags",
     categorySlug: "tote-bags-women",
@@ -2377,7 +2377,7 @@ export const products: Product[] = [
   },
   {
     slug: "womens-compact-woven-panel-metallic-top-handle-bag",
-    title: "Nerissa — сумка на короткой ручке",
+    title: "Nerissa",
     brandSlug: "sora-atelier",
     section: "bags",
     categorySlug: "handbags-women",
@@ -2427,7 +2427,7 @@ export const products: Product[] = [
   },
   {
     slug: "womens-duo-mini-tote-bag",
-    title: "Fabrizia — мини-тоут",
+    title: "Fabrizia",
     brandSlug: "sora-atelier",
     section: "bags",
     categorySlug: "tote-bags-women",
@@ -2491,7 +2491,7 @@ export const products: Product[] = [
   },
   {
     slug: "womens-hobo-shoulder-bag",
-    title: "Lucrezia — сумка хобо на плечо",
+    title: "Lucrezia",
     brandSlug: "sora-atelier",
     section: "bags",
     categorySlug: "shoulder-bags-women",
@@ -2562,7 +2562,7 @@ export const products: Product[] = [
   },
   {
     slug: "womens-knitted-openwork-panel-tote-bag",
-    title: "Ginevra — тоут из вязаного полотна",
+    title: "Ginevra",
     brandSlug: "sora-atelier",
     section: "bags",
     categorySlug: "tote-bags-women",
@@ -2602,7 +2602,7 @@ export const products: Product[] = [
   },
   {
     slug: "womens-leather-tote-shoulder-bag",
-    title: "Allegra — сумка-тоут на плечо",
+    title: "Allegra",
     brandSlug: "sora-atelier",
     section: "bags",
     categorySlug: "tote-bags-women",
@@ -2685,18 +2685,19 @@ export const products: Product[] = [
   },
   {
     slug: "womens-luna-soft-hobo-bag",
-    title: "Luna — мягкая сумка хобо",
+    title: "Luna",
     brandSlug: "sora-atelier",
     section: "bags",
     categorySlug: "shoulder-bags-women",
     price: 1999,
     status: "in_stock",
     isNew: true,
+    galleryFit: "contain",
     colors: [
       {
         ...C.lightBlue,
         images: [
-          { src: "/products/womens-luna-soft-hobo-bag/light-blue-1.png", alt: "Luna Light Blue — вид спереди" },
+          { src: "/products/womens-luna-soft-hobo-bag/light-blue-1-v4.png", alt: "Luna Light Blue — вид спереди" },
           { src: "/products/womens-luna-soft-hobo-bag/light-blue-2.png", alt: "Luna Light Blue — под углом" },
           { src: "/products/womens-luna-soft-hobo-bag/light-blue-3.png", alt: "Luna Light Blue — сбоку" },
           { src: "/products/womens-luna-soft-hobo-bag/light-blue-4.png", alt: "Luna Light Blue — внутри" },
@@ -2734,7 +2735,7 @@ export const products: Product[] = [
   },
   {
     slug: "womens-pebbled-leather-accordion-buckle-shoulder-bag",
-    title: "Bettina — сумка на плечо с пряжкой",
+    title: "Bettina",
     brandSlug: "sora-atelier",
     section: "bags",
     categorySlug: "shoulder-bags-women",
@@ -2783,7 +2784,7 @@ export const products: Product[] = [
   },
   {
     slug: "womens-pebbled-leather-baguette-bag",
-    title: "Perrine — багет на плечо",
+    title: "Perrine",
     brandSlug: "sora-atelier",
     section: "bags",
     categorySlug: "shoulder-bags-women",
@@ -2831,7 +2832,7 @@ export const products: Product[] = [
   },
   {
     slug: "womens-pebbled-leather-compact-baguette-bag",
-    title: "Anaelle — компактный багет",
+    title: "Anaelle",
     brandSlug: "sora-atelier",
     section: "bags",
     categorySlug: "shoulder-bags-women",
@@ -2877,7 +2878,7 @@ export const products: Product[] = [
   },
   {
     slug: "womens-pebbled-leather-contrast-trim-structured-top-handle-bag",
-    title: "Ninette — структурная сумка с контрастной окантовкой",
+    title: "Ninette",
     brandSlug: "sora-atelier",
     section: "bags",
     categorySlug: "handbags-women",
@@ -2928,7 +2929,7 @@ export const products: Product[] = [
   },
   {
     slug: "womens-pebbled-leather-contrast-trim-turn-lock-structured-top-handle-bag",
-    title: "Thea — структурная сумка с поворотным замком",
+    title: "Thea",
     brandSlug: "sora-atelier",
     section: "bags",
     categorySlug: "handbags-women",
@@ -2979,7 +2980,7 @@ export const products: Product[] = [
   },
   {
     slug: "womens-pebbled-leather-crescent-hobo-bag",
-    title: "Colline — сумка хобо полумесяцем",
+    title: "Colline",
     brandSlug: "sora-atelier",
     section: "bags",
     categorySlug: "shoulder-bags-women",
@@ -3026,7 +3027,7 @@ export const products: Product[] = [
   },
   {
     slug: "womens-pebbled-leather-drawstring-tote-bag",
-    title: "Maelle — тоут на завязках",
+    title: "Maelle",
     brandSlug: "sora-atelier",
     section: "bags",
     categorySlug: "tote-bags-women",
@@ -3074,7 +3075,7 @@ export const products: Product[] = [
   },
   {
     slug: "womens-pebbled-leather-half-moon-shoulder-bag",
-    title: "Livia — сумка полумесяц на плечо",
+    title: "Livia",
     brandSlug: "sora-atelier",
     section: "bags",
     categorySlug: "shoulder-bags-women",
@@ -3123,7 +3124,7 @@ export const products: Product[] = [
   },
   {
     slug: "womens-pebbled-leather-kiss-lock-pouch-bag-ivory",
-    title: "Cassia — клатч с рамочным замком",
+    title: "Cassia",
     brandSlug: "sora-atelier",
     section: "bags",
     categorySlug: "clutches",
@@ -3163,7 +3164,7 @@ export const products: Product[] = [
   },
   {
     slug: "womens-pleated-leather-frame-clutch",
-    title: "Fiamma — клатч с металлической рамкой",
+    title: "Fiamma",
     brandSlug: "sora-atelier",
     section: "bags",
     categorySlug: "clutches",
@@ -3220,7 +3221,7 @@ export const products: Product[] = [
   },
   {
     slug: "womens-pebbled-leather-side-drawstring-shoulder-bag",
-    title: "Gioia — сумка на плечо с боковыми завязками",
+    title: "Gioia",
     brandSlug: "sora-atelier",
     section: "bags",
     categorySlug: "shoulder-bags-women",
@@ -3273,7 +3274,7 @@ export const products: Product[] = [
   },
   {
     slug: "womens-pebbled-leather-two-tone-bowling-bag",
-    title: "Giorgia — боулинг-сумка двухцветная",
+    title: "Giorgia",
     brandSlug: "sora-atelier",
     section: "bags",
     categorySlug: "bowling-bags",
@@ -3323,7 +3324,7 @@ export const products: Product[] = [
   },
   {
     slug: "womens-pebbled-leather-kiss-lock-pouch-bag-light-blue",
-    title: "Paloma — сумка с фермуаром",
+    title: "Paloma",
     brandSlug: "sora-atelier",
     section: "bags",
     categorySlug: "clutches",
@@ -3363,7 +3364,7 @@ export const products: Product[] = [
   },
   {
     slug: "womens-pebbled-leather-rectangular-handbag",
-    title: "Aurea — прямоугольная сумка в руке",
+    title: "Aurea",
     brandSlug: "sora-atelier",
     section: "bags",
     categorySlug: "handbags-women",
@@ -3410,7 +3411,7 @@ export const products: Product[] = [
   },
   {
     slug: "womens-pebbled-leather-satchel-bag",
-    title: "Halle — сумка-сэтчел",
+    title: "Halle",
     brandSlug: "sora-atelier",
     section: "bags",
     categorySlug: "handbags-women",
@@ -3459,7 +3460,7 @@ export const products: Product[] = [
   },
   {
     slug: "womens-pebbled-leather-structured-handbag",
-    title: "Romilly — структурная сумка в руке",
+    title: "Romilly",
     brandSlug: "sora-atelier",
     section: "bags",
     categorySlug: "handbags-women",
@@ -3522,7 +3523,7 @@ export const products: Product[] = [
   },
   {
     slug: "womens-pebbled-leather-structured-shopper-tote",
-    title: "Vespera — структурный шоппер-тоут",
+    title: "Vespera",
     brandSlug: "sora-atelier",
     section: "bags",
     categorySlug: "tote-bags-women",
@@ -3569,7 +3570,7 @@ export const products: Product[] = [
   },
   {
     slug: "womens-pebbled-leather-structured-tote-bag-with-pouch",
-    title: "Marielle — тоут с косметичкой",
+    title: "Marielle",
     brandSlug: "sora-atelier",
     section: "bags",
     categorySlug: "tote-bags-women",
@@ -3622,7 +3623,7 @@ export const products: Product[] = [
   },
   {
     slug: "womens-pebbled-leather-tote-bag",
-    title: "Fiorenza — сумка-тоут",
+    title: "Fiorenza",
     brandSlug: "sora-atelier",
     section: "bags",
     categorySlug: "tote-bags-women",
@@ -3684,7 +3685,7 @@ export const products: Product[] = [
   },
   {
     slug: "womens-pebbled-leather-turn-lock-flap-shoulder-tote-bag",
-    title: "Loretta — тоут с клапаном на замке",
+    title: "Loretta",
     brandSlug: "sora-atelier",
     section: "bags",
     categorySlug: "tote-bags-women",
@@ -3725,7 +3726,7 @@ export const products: Product[] = [
   },
   {
     slug: "womens-pebbled-leather-wing-flap-tote-bag",
-    title: "Solange — сумка-тоут трапециевидной формы",
+    title: "Solange",
     brandSlug: "sora-atelier",
     section: "bags",
     categorySlug: "tote-bags-women",
@@ -3783,7 +3784,7 @@ export const products: Product[] = [
   },
   {
     slug: "womens-pebbled-leather-wing-turn-lock-tote-bag",
-    title: "Georgina — тоут с расклешёнными боками и замком",
+    title: "Georgina",
     brandSlug: "sora-atelier",
     section: "bags",
     categorySlug: "tote-bags-women",
@@ -3852,7 +3853,7 @@ export const products: Product[] = [
   },
   {
     slug: "womens-pebbled-leather-turn-lock-placket-tote-with-pouch",
-    title: "Cressida — тоут с планкой на замке",
+    title: "Cressida",
     brandSlug: "sora-atelier",
     section: "bags",
     categorySlug: "tote-bags-women",
@@ -3925,7 +3926,7 @@ export const products: Product[] = [
   },
   {
     slug: "womens-pebbled-leather-turn-lock-top-handle-bag",
-    title: "Palmira — сумка с поворотным замком",
+    title: "Palmira",
     brandSlug: "sora-atelier",
     section: "bags",
     categorySlug: "handbags-women",
@@ -3975,7 +3976,7 @@ export const products: Product[] = [
   },
   {
     slug: "womens-pebbled-leather-turn-lock-top-handle-bag-white",
-    title: "Margot — сумка с поворотным замком",
+    title: "Margot",
     brandSlug: "sora-atelier",
     section: "bags",
     categorySlug: "handbags-women",
@@ -4025,7 +4026,7 @@ export const products: Product[] = [
   },
   {
     slug: "womens-pebbled-leather-turn-lock-flap-shoulder-bag-black",
-    title: "Colette — сумка на плечо с клапаном на замке",
+    title: "Colette",
     brandSlug: "sora-atelier",
     section: "bags",
     categorySlug: "shoulder-bags-women",
@@ -4066,7 +4067,7 @@ export const products: Product[] = [
   },
   {
     slug: "womens-pebbled-leather-zip-hobo-bag",
-    title: "Amabel — сумка хобо на молнии",
+    title: "Amabel",
     brandSlug: "sora-atelier",
     section: "bags",
     categorySlug: "shoulder-bags-women",
@@ -4127,7 +4128,7 @@ export const products: Product[] = [
   },
   {
     slug: "womens-smooth-leather-compact-baguette-bag",
-    title: "Ottilie — гладкий компактный багет",
+    title: "Ottilie",
     brandSlug: "sora-atelier",
     section: "bags",
     categorySlug: "shoulder-bags-women",
@@ -4176,7 +4177,7 @@ export const products: Product[] = [
   },
   {
     slug: "womens-smooth-leather-contrast-trim-flap-shoulder-bag",
-    title: "Perlette — сумка на плечо с клапаном",
+    title: "Perlette",
     brandSlug: "sora-atelier",
     section: "bags",
     categorySlug: "shoulder-bags-women",
@@ -4234,7 +4235,7 @@ export const products: Product[] = [
   },
   {
     slug: "womens-smooth-leather-crescent-hobo-bag",
-    title: "Rosalind — гладкая хобо полумесяцем",
+    title: "Rosalind",
     brandSlug: "sora-atelier",
     section: "bags",
     categorySlug: "shoulder-bags-women",
@@ -4273,7 +4274,7 @@ export const products: Product[] = [
   },
   {
     slug: "womens-suede-wing-tote-bag",
-    title: "Severine — сумка-тоут из замши",
+    title: "Severine",
     brandSlug: "sora-atelier",
     section: "bags",
     categorySlug: "tote-bags-women",
@@ -4322,7 +4323,7 @@ export const products: Product[] = [
   },
   {
     slug: "womens-pebbled-leather-ring-handle-structured-bag",
-    title: "Callista — сумка с кольцевой ручкой",
+    title: "Callista",
     brandSlug: "sora-atelier",
     section: "bags",
     categorySlug: "handbags-women",
@@ -4385,7 +4386,7 @@ export const products: Product[] = [
   },
   {
     slug: "womens-woven-suede-flap-clutch-bag",
-    title: "Damiana — плетёный клатч из замши",
+    title: "Damiana",
     brandSlug: "sora-atelier",
     section: "bags",
     categorySlug: "clutches",
@@ -4439,7 +4440,7 @@ export const products: Product[] = [
   },
   {
     slug: "womens-smooth-leather-metal-ring-crescent-hobo-bag",
-    title: "Mirabel — сумка-полумесяц с металлическим кольцом",
+    title: "Mirabel",
     brandSlug: "sora-atelier",
     section: "bags",
     categorySlug: "shoulder-bags-women",
@@ -4493,7 +4494,7 @@ export const products: Product[] = [
   },
   {
     slug: "womens-woven-leather-turn-lock-clutch-bag",
-    title: "Annabel — плетёная сумка с замком-вертушкой",
+    title: "Annabel",
     brandSlug: "sora-atelier",
     section: "bags",
     categorySlug: "clutches",
@@ -4544,7 +4545,7 @@ export const products: Product[] = [
   },
   {
     slug: "womens-soft-leather-draped-flap-bag",
-    title: "Solaine — сумка с драпированным клапаном",
+    title: "Solaine",
     brandSlug: "sora-atelier",
     section: "bags",
     categorySlug: "shoulder-bags-women",
@@ -4591,7 +4592,7 @@ export const products: Product[] = [
   },
   {
     slug: "womens-tote-shopper-bag",
-    title: "Adalina — сумка-шоппер",
+    title: "Adalina",
     brandSlug: "sora-atelier",
     section: "bags",
     categorySlug: "tote-bags-women",
@@ -4674,7 +4675,7 @@ export const products: Product[] = [
   },
   {
     slug: "womens-woven-base-drawstring-bucket-bag",
-    title: "Elowen — сумка-мешок с плетёным основанием",
+    title: "Elowen",
     brandSlug: "sora-atelier",
     section: "bags",
     categorySlug: "bucket-bags-women",
@@ -4715,7 +4716,7 @@ export const products: Product[] = [
   },
   {
     slug: "womens-woven-base-leather-link-handle-hobo-bag",
-    title: "Fantine — хобо с плетёным основанием",
+    title: "Fantine",
     brandSlug: "sora-atelier",
     section: "bags",
     categorySlug: "shoulder-bags-women",
@@ -4765,7 +4766,7 @@ export const products: Product[] = [
   },
   {
     slug: "womens-woven-base-open-top-structured-bag-with-pouch",
-    title: "Garance — структурная сумка с плетёным основанием",
+    title: "Garance",
     brandSlug: "sora-atelier",
     section: "bags",
     categorySlug: "tote-bags-women",
@@ -4819,7 +4820,7 @@ export const products: Product[] = [
   },
   {
     slug: "womens-woven-base-round-bucket-bag",
-    title: "Herminie — круглая сумка-мешок",
+    title: "Herminie",
     brandSlug: "sora-atelier",
     section: "bags",
     categorySlug: "bucket-bags-women",
@@ -4857,7 +4858,7 @@ export const products: Product[] = [
   },
   {
     slug: "womens-woven-base-turn-lock-top-handle-bag",
-    title: "Isolde — сумка с плетёным основанием и замком",
+    title: "Isolde",
     brandSlug: "sora-atelier",
     section: "bags",
     categorySlug: "handbags-women",
@@ -4899,7 +4900,7 @@ export const products: Product[] = [
   },
   {
     slug: "womens-woven-base-zip-top-compact-structured-bag",
-    title: "Jacinta — компактная структурная сумка на молнии",
+    title: "Jacinta",
     brandSlug: "sora-atelier",
     section: "bags",
     categorySlug: "handbags-women",
@@ -4947,7 +4948,7 @@ export const products: Product[] = [
   },
   {
     slug: "womens-woven-base-zip-top-structured-bag",
-    title: "Kalina — структурная сумка на молнии",
+    title: "Kalina",
     brandSlug: "sora-atelier",
     section: "bags",
     categorySlug: "handbags-women",
@@ -4995,7 +4996,7 @@ export const products: Product[] = [
   },
   {
     slug: "womens-woven-buckle-handle-tote-bag",
-    title: "Lisette — тоут с пряжкой на ручке",
+    title: "Lisette",
     brandSlug: "sora-atelier",
     section: "bags",
     categorySlug: "tote-bags-women",
@@ -5042,7 +5043,7 @@ export const products: Product[] = [
   },
   {
     slug: "womens-woven-crescent-hobo-bag",
-    title: "Manon — плетёная хобо полумесяцем",
+    title: "Manon",
     brandSlug: "sora-atelier",
     section: "bags",
     categorySlug: "shoulder-bags-women",
@@ -5082,7 +5083,7 @@ export const products: Product[] = [
   },
   {
     slug: "womens-woven-flap-top-handle-bag",
-    title: "Noriane — плетёная сумка с клапаном",
+    title: "Noriane",
     brandSlug: "sora-atelier",
     section: "bags",
     categorySlug: "handbags-women",
@@ -5133,7 +5134,7 @@ export const products: Product[] = [
   },
   {
     slug: "womens-woven-oval-handle-tote-bag",
-    title: "Oriane — тоут с овальными ручками",
+    title: "Oriane",
     brandSlug: "sora-atelier",
     section: "bags",
     categorySlug: "tote-bags-women",
@@ -5182,7 +5183,7 @@ export const products: Product[] = [
   },
   {
     slug: "womens-woven-oval-handle-tote-bag-mokko",
-    title: "Roxane — тоут с овальными ручками",
+    title: "Roxane",
     brandSlug: "sora-atelier",
     section: "bags",
     categorySlug: "tote-bags-women",
@@ -5223,7 +5224,7 @@ export const products: Product[] = [
   },
   {
     slug: "womens-woven-oval-handle-tote-bag-natural-tan",
-    title: "Celia — тоут с овальными ручками",
+    title: "Celia",
     brandSlug: "sora-atelier",
     section: "bags",
     categorySlug: "tote-bags-women",
@@ -5263,7 +5264,7 @@ export const products: Product[] = [
   },
   {
     slug: "womens-woven-panel-crystal-accent-structured-top-handle-bag",
-    title: "Pernelle — структурная сумка с декоративной вставкой",
+    title: "Pernelle",
     brandSlug: "sora-atelier",
     section: "bags",
     categorySlug: "handbags-women",
@@ -5305,7 +5306,7 @@ export const products: Product[] = [
   },
   {
     slug: "womens-woven-panel-pebbled-leather-top-handle-bag",
-    title: "Aveline — сумка с плетёной панелью",
+    title: "Aveline",
     brandSlug: "sora-atelier",
     section: "bags",
     categorySlug: "handbags-women",
@@ -5355,7 +5356,7 @@ export const products: Product[] = [
   },
   {
     slug: "womens-woven-spiral-panel-shoulder-tote-bag",
-    title: "Cendrine — тоут со спиральным плетением",
+    title: "Cendrine",
     brandSlug: "sora-atelier",
     section: "bags",
     categorySlug: "tote-bags-women",
@@ -5397,7 +5398,7 @@ export const products: Product[] = [
   },
   {
     slug: "womens-woven-triangular-shoulder-bag",
-    title: "Dorine — плетёная сумка треугольной формы",
+    title: "Dorine",
     brandSlug: "sora-atelier",
     section: "bags",
     categorySlug: "shoulder-bags-women",
@@ -5435,7 +5436,7 @@ export const products: Product[] = [
   },
   {
     slug: "womens-woven-zip-crossbody-bag",
-    title: "Gwenaelle — плетёная сумка кроссбоди",
+    title: "Gwenaelle",
     brandSlug: "sora-atelier",
     section: "bags",
     categorySlug: "crossbody-bags-women",
@@ -5626,7 +5627,7 @@ export const products: Product[] = [
   },
   {
     slug: "womens-metallic-leather-bifold-cardholder-fuchsia",
-    title: "Rosalia — картхолдер",
+    title: "Rosalia",
     brandSlug: "sora-atelier",
     section: "accessories",
     categorySlug: "card-holders-women",
@@ -5666,7 +5667,7 @@ export const products: Product[] = [
   },
   {
     slug: "womens-metallic-leather-bifold-cardholder-electric-blue",
-    title: "Azzurina — картхолдер",
+    title: "Azzurina",
     brandSlug: "sora-atelier",
     section: "accessories",
     categorySlug: "card-holders-women",
@@ -5706,7 +5707,7 @@ export const products: Product[] = [
   },
   {
     slug: "womens-metallic-leather-bifold-cardholder-teal",
-    title: "Turchese — картхолдер",
+    title: "Turchese",
     brandSlug: "sora-atelier",
     section: "accessories",
     categorySlug: "card-holders-women",
@@ -5746,7 +5747,7 @@ export const products: Product[] = [
   },
   {
     slug: "womens-pebbled-leather-bifold-cardholder-white",
-    title: "Bianca — картхолдер",
+    title: "Bianca",
     brandSlug: "sora-atelier",
     section: "accessories",
     categorySlug: "card-holders-women",
@@ -5785,7 +5786,7 @@ export const products: Product[] = [
   },
   {
     slug: "womens-pebbled-leather-bifold-cardholder-chartreuse",
-    title: "Limona — картхолдер",
+    title: "Limona",
     brandSlug: "sora-atelier",
     section: "accessories",
     categorySlug: "card-holders-women",
@@ -5825,7 +5826,7 @@ export const products: Product[] = [
   },
   {
     slug: "womens-metallic-leather-bifold-cardholder-emerald",
-    title: "Smeralda — картхолдер",
+    title: "Smeralda",
     brandSlug: "sora-atelier",
     section: "accessories",
     categorySlug: "card-holders-women",
@@ -5865,7 +5866,7 @@ export const products: Product[] = [
   },
   {
     slug: "womens-pebbled-leather-bifold-cardholder-dark-brown",
-    title: "Bruna — картхолдер",
+    title: "Bruna",
     brandSlug: "sora-atelier",
     section: "accessories",
     categorySlug: "card-holders-women",
@@ -5904,7 +5905,7 @@ export const products: Product[] = [
   },
   {
     slug: "womens-pebbled-leather-snap-strap-rfid-cardholder-sage",
-    title: "Olivetta — картхолдер",
+    title: "Olivetta",
     brandSlug: "sora-atelier",
     section: "accessories",
     categorySlug: "card-holders-women",
@@ -5941,7 +5942,7 @@ export const products: Product[] = [
   },
   {
     slug: "womens-pebbled-leather-snap-strap-rfid-wallet-sage",
-    title: "Salvia — кошелёк",
+    title: "Salvia",
     brandSlug: "sora-atelier",
     section: "accessories",
     categorySlug: "womens-wallets-women",
@@ -5983,7 +5984,7 @@ export const products: Product[] = [
   },
   {
     slug: "womens-pebbled-leather-snap-strap-rfid-cardholder-grey",
-    title: "Cenere — картхолдер",
+    title: "Cenere",
     brandSlug: "sora-atelier",
     section: "accessories",
     categorySlug: "card-holders-women",
@@ -6025,7 +6026,7 @@ export const products: Product[] = [
   },
   {
     slug: "womens-pebbled-leather-snap-strap-rfid-cardholder-red",
-    title: "Rubina — картхолдер",
+    title: "Rubina",
     brandSlug: "sora-atelier",
     section: "accessories",
     categorySlug: "card-holders-women",
@@ -6066,7 +6067,7 @@ export const products: Product[] = [
   },
   {
     slug: "womens-pebbled-leather-snap-strap-rfid-cardholder-cream",
-    title: "Avorio — картхолдер",
+    title: "Avorio",
     brandSlug: "sora-atelier",
     section: "accessories",
     categorySlug: "card-holders-women",
@@ -6107,7 +6108,7 @@ export const products: Product[] = [
   },
   {
     slug: "womens-pebbled-leather-snap-strap-rfid-cardholder-black",
-    title: "Notte — картхолдер",
+    title: "Notte",
     brandSlug: "sora-atelier",
     section: "accessories",
     categorySlug: "card-holders-women",
@@ -6148,7 +6149,7 @@ export const products: Product[] = [
   },
   {
     slug: "womens-pebbled-leather-snap-strap-rfid-wallet-red",
-    title: "Cremisi — кошелёк",
+    title: "Cremisi",
     brandSlug: "sora-atelier",
     section: "accessories",
     categorySlug: "womens-wallets-women",
@@ -6190,7 +6191,7 @@ export const products: Product[] = [
   },
   {
     slug: "womens-pebbled-leather-snap-strap-rfid-cardholder-beige",
-    title: "Perla — кошелёк",
+    title: "Perla",
     brandSlug: "sora-atelier",
     section: "accessories",
     categorySlug: "womens-wallets-women",
@@ -6232,7 +6233,7 @@ export const products: Product[] = [
   },
   {
     slug: "womens-pebbled-leather-trifold-rfid-cardholder-black",
-    title: "Nera — картхолдер",
+    title: "Nera",
     brandSlug: "sora-atelier",
     section: "accessories",
     categorySlug: "card-holders-women",
@@ -6357,7 +6358,7 @@ export const products: Product[] = [
   },
   {
     slug: "womens-full-grain-leather-zip-around-wallet",
-    title: "Francesca — кошелёк на молнии",
+    title: "Francesca",
     brandSlug: "sora-atelier",
     section: "accessories",
     categorySlug: "womens-wallets-women",
@@ -6423,7 +6424,7 @@ export const products: Product[] = [
   },
   {
     slug: "womens-flap-leather-trifold-wallet",
-    title: "Federica — кошелёк на клапане",
+    title: "Federica",
     brandSlug: "sora-atelier",
     section: "accessories",
     categorySlug: "womens-wallets-women",
@@ -6492,7 +6493,7 @@ export const products: Product[] = [
   },
   {
     slug: "womens-woven-flap-trifold-wallet",
-    title: "Fabiana — плетёный кошелёк на клапане",
+    title: "Fabiana",
     brandSlug: "sora-atelier",
     section: "accessories",
     categorySlug: "womens-wallets-women",
@@ -6542,7 +6543,7 @@ export const products: Product[] = [
   },
   {
     slug: "womens-vintage-accordion-zip-wallet",
-    title: "Giulietta — кошелёк-гармошка на молнии",
+    title: "Giulietta",
     brandSlug: "sora-atelier",
     section: "accessories",
     categorySlug: "womens-wallets-women",
@@ -6600,7 +6601,7 @@ export const products: Product[] = [
   },
   {
     slug: "womens-woven-leather-zip-around-wallet",
-    title: "Seraphina — плетёный кошелёк на молнии",
+    title: "Seraphina",
     brandSlug: "sora-atelier",
     section: "accessories",
     categorySlug: "womens-wallets-women",
@@ -6684,7 +6685,7 @@ export const products: Product[] = [
   },
   {
     slug: "womens-woven-leather-zip-snap-wallet",
-    title: "Flavia — плетёный кошелёк на молнии с кнопкой",
+    title: "Flavia",
     brandSlug: "sora-atelier",
     section: "accessories",
     categorySlug: "womens-wallets-women",
@@ -6727,7 +6728,7 @@ export const products: Product[] = [
   },
   {
     slug: "la-via-firenze-bat-bag-charm",
-    title: "Bat — брелок для сумки La Via Firenze",
+    title: "Bat",
     brandSlug: "la-via-firenze",
     section: "accessories",
     categorySlug: "bag-charms",
@@ -6764,7 +6765,7 @@ export const products: Product[] = [
   },
   {
     slug: "la-via-firenze-flower-bag-charm",
-    title: "Flower — брелок для сумки La Via Firenze",
+    title: "Flower",
     brandSlug: "la-via-firenze",
     section: "accessories",
     categorySlug: "bag-charms",
@@ -6801,7 +6802,7 @@ export const products: Product[] = [
   },
   {
     slug: "la-via-firenze-cat-bag-charm",
-    title: "Cat — брелок для сумки La Via Firenze",
+    title: "Cat",
     brandSlug: "la-via-firenze",
     section: "accessories",
     categorySlug: "bag-charms",
@@ -6838,7 +6839,7 @@ export const products: Product[] = [
   },
   {
     slug: "la-via-firenze-bear-bag-charm",
-    title: "Bear — брелок для сумки La Via Firenze",
+    title: "Bear",
     brandSlug: "la-via-firenze",
     section: "accessories",
     categorySlug: "bag-charms",
@@ -6875,7 +6876,7 @@ export const products: Product[] = [
   },
   {
     slug: "sora-pegasus-leather-bag-charm",
-    title: "Pegaso — кожаный брелок для сумки",
+    title: "Pegaso",
     brandSlug: "sora-atelier",
     section: "accessories",
     categorySlug: "bag-charms",
@@ -6950,7 +6951,7 @@ export const products: Product[] = [
   },
   {
     slug: "sora-dachshund-leather-bag-charm",
-    title: "Bassotto — кожаный брелок для сумки",
+    title: "Bassotto",
     brandSlug: "sora-atelier",
     section: "accessories",
     categorySlug: "bag-charms",
@@ -7006,7 +7007,7 @@ export const products: Product[] = [
   },
   {
     slug: "sora-silk-bow-bag-charm",
-    title: "Fiocco — шёлковый брелок-бант",
+    title: "Fiocco",
     brandSlug: "sora-atelier",
     section: "accessories",
     categorySlug: "bag-charms",
@@ -7065,7 +7066,7 @@ export const products: Product[] = [
   },
   {
     slug: "sora-dachshund-mix-bag-charm",
-    title: "Mix — брелок-набор для сумки",
+    title: "Mix",
     brandSlug: "sora-atelier",
     section: "accessories",
     categorySlug: "bag-charms",
@@ -7120,7 +7121,7 @@ export const products: Product[] = [
   },
   {
     slug: "womens-pebbled-leather-envelope-turn-lock-chain-bag",
-    title: "Marcelle — компактная сумка-конверт на цепочке",
+    title: "Marcelle",
     brandSlug: "sora-atelier",
     section: "bags",
     categorySlug: "shoulder-bags-women",
@@ -7189,7 +7190,7 @@ export const products: Product[] = [
   // Платки: каждый принт — отдельная карточка в каталоге (отдельный slug).
   {
     slug: "womens-abstract-geometric-silk-scarf",
-    title: "Serenella — шёлковый платок",
+    title: "Serenella",
     brandSlug: "sora-atelier",
     section: "accessories",
     categorySlug: "womens-scarves-women",
@@ -7228,7 +7229,7 @@ export const products: Product[] = [
   },
   {
     slug: "womens-lavender-wave-silk-scarf",
-    title: "Marcelline — шёлковый платок",
+    title: "Marcelline",
     brandSlug: "sora-atelier",
     section: "accessories",
     categorySlug: "womens-scarves-women",
@@ -7267,7 +7268,7 @@ export const products: Product[] = [
   },
   {
     slug: "womens-pastel-tie-dye-silk-scarf",
-    title: "Celestina — шёлковый платок",
+    title: "Celestina",
     brandSlug: "sora-atelier",
     section: "accessories",
     categorySlug: "womens-scarves-women",
@@ -7306,7 +7307,7 @@ export const products: Product[] = [
   },
   {
     slug: "womens-aqua-wave-silk-scarf",
-    title: "Marina — шёлковый платок",
+    title: "Marina",
     brandSlug: "sora-atelier",
     section: "accessories",
     categorySlug: "womens-scarves-women",
@@ -7345,7 +7346,7 @@ export const products: Product[] = [
   },
   {
     slug: "womens-slate-geometric-silk-scarf",
-    title: "Costanza — шёлковый платок",
+    title: "Costanza",
     brandSlug: "sora-atelier",
     section: "accessories",
     categorySlug: "womens-scarves-women",
@@ -7384,7 +7385,7 @@ export const products: Product[] = [
   },
   {
     slug: "womens-mustard-wave-silk-scarf",
-    title: "Doriana — шёлковый платок",
+    title: "Doriana",
     brandSlug: "sora-atelier",
     section: "accessories",
     categorySlug: "womens-scarves-women",
@@ -7423,7 +7424,7 @@ export const products: Product[] = [
   },
   {
     slug: "womens-rainbow-pastel-silk-scarf",
-    title: "Iride — шёлковый платок",
+    title: "Iride",
     brandSlug: "sora-atelier",
     section: "accessories",
     categorySlug: "womens-scarves-women",
@@ -7462,7 +7463,7 @@ export const products: Product[] = [
   },
   {
     slug: "womens-heart-leopard-silk-scarf",
-    title: "Amorette — шёлковый платок",
+    title: "Amorette",
     brandSlug: "sora-atelier",
     section: "accessories",
     categorySlug: "womens-scarves-women",
@@ -7501,7 +7502,7 @@ export const products: Product[] = [
   },
   {
     slug: "womens-landscape-hills-silk-scarf",
-    title: "Colomba — шёлковый платок",
+    title: "Colomba",
     brandSlug: "sora-atelier",
     section: "accessories",
     categorySlug: "womens-scarves-women",
@@ -7540,7 +7541,7 @@ export const products: Product[] = [
   },
   {
     slug: "womens-grey-stripe-silk-scarf",
-    title: "Nebbia — шёлковый платок",
+    title: "Nebbia",
     brandSlug: "sora-atelier",
     section: "accessories",
     categorySlug: "womens-scarves-women",
@@ -7579,7 +7580,7 @@ export const products: Product[] = [
   },
   {
     slug: "womens-mint-abstract-silk-scarf",
-    title: "Clarissa — шёлковый платок",
+    title: "Clarissa",
     brandSlug: "sora-atelier",
     section: "accessories",
     categorySlug: "womens-scarves-women",
@@ -7618,7 +7619,7 @@ export const products: Product[] = [
   },
   {
     slug: "womens-dusty-blue-abstract-silk-scarf",
-    title: "Azzurra — шёлковый платок",
+    title: "Azzurra",
     brandSlug: "sora-atelier",
     section: "accessories",
     categorySlug: "womens-scarves-women",
@@ -7657,7 +7658,7 @@ export const products: Product[] = [
   },
   {
     slug: "womens-lavender-ink-silk-scarf",
-    title: "Lavinia — шёлковый платок",
+    title: "Lavinia",
     brandSlug: "sora-atelier",
     section: "accessories",
     categorySlug: "womens-scarves-women",
@@ -7696,7 +7697,7 @@ export const products: Product[] = [
   },
   {
     slug: "womens-colorful-brushstroke-silk-scarf",
-    title: "Artemisia — шёлковый платок",
+    title: "Artemisia",
     brandSlug: "sora-atelier",
     section: "accessories",
     categorySlug: "womens-scarves-women",
@@ -7735,7 +7736,7 @@ export const products: Product[] = [
   },
   {
     slug: "womens-cherry-print-silk-scarf",
-    title: "Rosetta — шёлковый платок",
+    title: "Rosetta",
     brandSlug: "sora-atelier",
     section: "accessories",
     categorySlug: "womens-scarves-women",
@@ -7774,7 +7775,7 @@ export const products: Product[] = [
   },
   {
     slug: "womens-green-geometric-silk-scarf",
-    title: "Verdiana — шёлковый платок",
+    title: "Verdiana",
     brandSlug: "sora-atelier",
     section: "accessories",
     categorySlug: "womens-scarves-women",
@@ -7813,7 +7814,7 @@ export const products: Product[] = [
   },
   {
     slug: "womens-red-floral-silk-scarf",
-    title: "Fiorina — шёлковый платок",
+    title: "Fiorina",
     brandSlug: "sora-atelier",
     section: "accessories",
     categorySlug: "womens-scarves-women",
@@ -7851,7 +7852,7 @@ export const products: Product[] = [
   },
   {
     slug: "womens-watercolor-circles-silk-scarf",
-    title: "Cerelia — шёлковый платок",
+    title: "Cerelia",
     brandSlug: "sora-atelier",
     section: "accessories",
     categorySlug: "womens-scarves-women",
@@ -7889,7 +7890,7 @@ export const products: Product[] = [
   },
   {
     slug: "womens-blue-multicolor-brushstroke-silk-scarf",
-    title: "Teodora — шёлковый платок",
+    title: "Teodora",
     brandSlug: "sora-atelier",
     section: "accessories",
     categorySlug: "womens-scarves-women",
@@ -7927,7 +7928,7 @@ export const products: Product[] = [
   },
   {
     slug: "womens-whale-print-silk-scarf",
-    title: "Delphina — шёлковый платок",
+    title: "Delphina",
     brandSlug: "sora-atelier",
     section: "accessories",
     categorySlug: "womens-scarves-women",
@@ -7965,7 +7966,7 @@ export const products: Product[] = [
   },
   {
     slug: "womens-pebbled-leather-heart-shaped-handbag",
-    title: "Rosalba — сумка в форме сердца",
+    title: "Rosalba",
     brandSlug: "sora-atelier",
     section: "bags",
     categorySlug: "handbags-women",
@@ -8364,6 +8365,7 @@ const featuredColorByProductSlug: Record<string, string> = {
   "womens-leather-tote-shoulder-bag": "White",
   "womens-pebbled-leather-turn-lock-strap-tote-bag": "Ivory",
   "womens-pebbled-leather-turn-lock-placket-tote-with-pouch": "Light Grey",
+  "womens-pebbled-leather-wing-flap-tote-bag": "Light Blue",
   "womens-tote-shopper-bag": "Ivory",
   "womens-woven-buckle-handle-tote-bag": "Blush",
   "womens-woven-oval-handle-tote-bag": "Dusty Turquoise",

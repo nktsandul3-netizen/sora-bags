@@ -344,223 +344,220 @@ const colors: Record<string, Record<Locale, string>> = {
 };
 
 /**
- * Product titles follow the "Имя — тип/форма сумки" format (e.g. "Amelie — компактная сумка-багет").
- * The invented name stays the same across locales; only the descriptive part is translated.
+ * Product display titles are the invented name only (e.g. "Amelie").
+ * Descriptive type/shape text lives in descriptions, not in title.
  */
 const productTitles: Record<string, Partial<Record<Locale, string>>> = {
-  "Mirelle — сумка на плечо из замши": { ro: "Mirelle — geantă de umăr din piele întoarsă", en: "Mirelle — suede shoulder bag" },
-  "Adriana — сумка на плечо из гладкой кожи": { ro: "Adriana — geantă de umăr din piele netedă", en: "Adriana — smooth leather shoulder bag" },
-  "Fiorella — плетёная сумка-тоут": { ro: "Fiorella — geantă tote împletită", en: "Fiorella — woven tote bag" },
-  "Ondine — плетёная сумка-шоппер": { ro: "Ondine — shopper împletit", en: "Ondine — woven shopper bag" },
-  "Marbella — сумка-шоппер из замши": { ro: "Marbella — shopper din piele întoarsă", en: "Marbella — suede shopper bag" },
-  "Positano — летняя сумка-тоут с плетением": { ro: "Positano — geantă tote de vară cu împletitură", en: "Positano — summer tote bag with woven detail" },
-  "Capri — плетёная пляжная сумка-тоут": { ro: "Capri — geantă tote de plajă împletită", en: "Capri — woven beach tote bag" },
-  "Ortigia — тоут с каркасным силуэтом": { ro: "Ortigia — geantă tote cu siluetă tip cage", en: "Ortigia — cage-frame tote bag" },
-  "Perla — мини-сумка с верхней ручкой": { ro: "Perla — mini geantă cu mâner superior", en: "Perla — mini top-handle bag" },
-  "Talia — классическая сумка на плечо": { ro: "Talia — geantă de umăr clasică", en: "Talia — classic shoulder bag" },
-  "Vittoria — классическая сумка-тоут": { ro: "Vittoria — geantă tote clasică", en: "Vittoria — classic tote bag" },
-  "Romina — сумка-боулинг": { ro: "Romina — geantă bowling", en: "Romina — bowling bag" },
-  "Amara — сумка-хобо": { ro: "Amara — geantă hobo", en: "Amara — hobo bag" },
-  "Liora — сумка-хобо": { ro: "Liora — geantă hobo", en: "Liora — hobo bag" },
-  "Serena — сумка-хобо из гладкой кожи": { ro: "Serena — geantă hobo din piele netedă", en: "Serena — smooth leather hobo bag" },
-  "Camelia — компактная сумка с верхней ручкой": { ro: "Camelia — geantă compactă cu mâner superior", en: "Camelia — compact top-handle bag" },
-  "Selene — сумка-полумесяц на плечо": { ro: "Selene — geantă semilună de umăr", en: "Selene — crescent shoulder bag" },
-  "Faustine — дорожная сумка-тоут": { ro: "Faustine — geantă tote de călătorie", en: "Faustine — travel tote bag" },
-  "Marisol — плетёная сумка-хобо": { ro: "Marisol — geantă hobo împletită", en: "Marisol — woven hobo bag" },
-  "Provence — плетёная сумка-тоут в винтажном стиле": { ro: "Provence — geantă tote împletită în stil vintage", en: "Provence — vintage-style woven tote bag" },
-  "Taormina — плетёная сумка веерообразной формы": { ro: "Taormina — geantă împletită în formă de evantai", en: "Taormina — fan-shaped woven bag" },
-  "Cuore — плетёная сумка с ручками в форме сердца": { ro: "Cuore — geantă împletită cu mânere în formă de inimă", en: "Cuore — woven bag with heart-shaped handles" },
-  "Ravello — плетёная сумка-мешок": { ro: "Ravello — geantă sac împletită", en: "Ravello — woven bucket bag" },
-  "Elodie — сумка через плечо": { ro: "Elodie — geantă crossbody", en: "Elodie — crossbody bag" },
-  "Corinne — фактурная сумка через плечо": { ro: "Corinne — geantă crossbody texturată", en: "Corinne — textured crossbody bag" },
-  "Luna — сумка-полумесяц": { ro: "Luna — geantă semilună", en: "Luna — crescent bag" },
-  "Valentina — архитектурная сумка-тоут": { ro: "Valentina — geantă tote arhitecturală", en: "Valentina — architectural tote bag" },
-  "Coralie — сумка-мешок с драпировкой": { ro: "Coralie — geantă sac cu drapaj", en: "Coralie — draped pouch bag" },
-  "Beatrice — структурированная сумка-тоут": { ro: "Beatrice — geantă tote structurată", en: "Beatrice — structured tote bag" },
-  "Milena — плетёная сумка-хобо": { ro: "Milena — geantă hobo împletită", en: "Milena — woven hobo bag" },
-  "Adele — базовая сумка на плечо": { ro: "Adele — geantă de umăr esențială", en: "Adele — essential shoulder bag" },
-  "Genevieve — сумка-тоут из телячьей кожи": { ro: "Genevieve — geantă tote din piele de vițel", en: "Genevieve — calf leather tote bag" },
-  "Capucine — сумка-пауч": { ro: "Capucine — geantă pouch", en: "Capucine — pouch bag" },
-  "Violaine — кожаная сумка-тоут": { ro: "Violaine — geantă tote din piele", en: "Violaine — leather tote bag" },
-  "Claudine — классическая кожаная сумка-тоут": { ro: "Claudine — geantă tote clasică din piele", en: "Claudine — classic leather tote bag" },
-  "Fabienne — винтажная соломенная сумка-тоут": { ro: "Fabienne — geantă tote vintage din paie", en: "Fabienne — vintage straw tote bag" },
-  "Nerina — мягкая сумка-мешок": { ro: "Nerina — geantă sac moale", en: "Nerina — soft pouch bag" },
-  "Solenne — сумка-багет": { ro: "Solenne — geantă baghetă", en: "Solenne — baguette bag" },
-  "Ottavia — структурная сумка с пряжкой": { ro: "Ottavia — geantă structurată cu cataramă", en: "Ottavia — structured bag with buckle" },
-  "Anouk — мини-сумка через плечо на цепочке": { ro: "Anouk — mini geantă crossbody cu lănțișor", en: "Anouk — mini chain crossbody bag" },
-  "Sabina — большой шопер": { ro: "Sabina — shopper mare", en: "Sabina — large shopper bag" },
-  "Iris — женский рюкзак": { ro: "Iris — rucsac damă", en: "Iris — women's backpack" },
-  "Cosima — деловой портфель": { ro: "Cosima — servietă de birou", en: "Cosima — business briefcase" },
-  "Delphine — сумка через плечо с карманами": { ro: "Delphine — geantă crossbody cu buzunare", en: "Delphine — crossbody bag with pockets" },
-  "Estelle — клатч на цепочке": { ro: "Estelle — clutch cu lănțișor", en: "Estelle — chain clutch" },
-  "Renata — дорожная сумка": { ro: "Renata — geantă de călătorie", en: "Renata — travel bag" },
-  "Flora — поясная сумка": { ro: "Flora — geantă de talie", en: "Flora — belt bag" },
-  "Verona — сумка-мешок на затяжке": { ro: "Verona — geantă sac cu șnur", en: "Verona — drawstring pouch bag" },
-  "Alba — большая сумка-шоппер": { ro: "Alba — shopper mare", en: "Alba — large shopper bag" },
-  "Tosca — компактная сумка через плечо": { ro: "Tosca — geantă crossbody compactă", en: "Tosca — compact crossbody bag" },
-  "Bianca — сумка-хобо на плечо": { ro: "Bianca — geantă hobo de umăr", en: "Bianca — hobo shoulder bag" },
-  "Camille — сумка-хобо на молнии": { ro: "Camille — geantă hobo cu fermoar", en: "Camille — zip hobo bag" },
-  "Marcella — фактурная сумка-тоут": { ro: "Marcella — geantă tote texturată", en: "Marcella — textured tote bag" },
-  "Isadora — сумка-сэтчел": { ro: "Isadora — geantă satchel", en: "Isadora — satchel bag" },
-  "Chiara — структурированная сумка": { ro: "Chiara — geantă structurată", en: "Chiara — structured bag" },
-  "Alessia — сумка-шоппер": { ro: "Alessia — geantă shopper", en: "Alessia — shopper bag" },
-  "Martina — сумка-тоут на плечо": { ro: "Martina — geantă tote de umăr", en: "Martina — shoulder tote bag" },
-  "Simona — мягкая сумка-хобо": { ro: "Simona — geantă hobo moale", en: "Simona — soft hobo bag" },
-  "Elise — мини-сумка-тоут 2-в-1": { ro: "Elise — mini geantă tote 2-în-1", en: "Elise — mini 2-in-1 tote bag" },
-  "Noemi — структурированная сумка-шоппер": { ro: "Noemi — shopper structurat", en: "Noemi — structured shopper bag" },
-  "Ilaria — сумка-багет": { ro: "Ilaria — geantă baghetă", en: "Ilaria — baguette bag" },
-  "Silvana — сумка с драпировкой и клапаном": { ro: "Silvana — geantă cu drapaj și clapetă", en: "Silvana — draped flap bag" },
-  "Antonella — прямоугольная сумка": { ro: "Antonella — geantă rectangulară", en: "Antonella — rectangular bag" },
-  "Graziella — сумка-тоут на утяжках": { ro: "Graziella — geantă tote cu șnururi laterale", en: "Graziella — drawstring tote bag" },
-  "Marguerite — сумка-полумесяц с клапаном": { ro: "Marguerite — geantă semilună cu clapetă", en: "Marguerite — crescent flap bag" },
-  "Emmeline — структурированная сумка с замком": { ro: "Emmeline — geantă structurată cu încuietoare", en: "Emmeline — structured bag with turn-lock" },
-  "Josephine — сумка на плечо с пряжкой": { ro: "Josephine — geantă de umăr cu cataramă", en: "Josephine — shoulder bag with buckle" },
-  "Seraphine — сумка-тоут с косметичкой": { ro: "Seraphine — geantă tote cu trusă cosmetică", en: "Seraphine — tote bag with pouch" },
-  "Cortina — плетёная сумка на молнии": { ro: "Cortina — geantă împletită cu fermoar", en: "Cortina — woven zip bag" },
-  "Volterra — компактная плетёная сумка": { ro: "Volterra — geantă împletită compactă", en: "Volterra — compact woven bag" },
-  "Ischia — плетёная сумка с замком-защёлкой": { ro: "Ischia — geantă împletită cu clichet", en: "Ischia — woven turn-lock bag" },
-  "Procida — плетёная сумка-ведро на шнурке": { ro: "Procida — geantă bucket împletită cu șnur", en: "Procida — woven drawstring bucket bag" },
-  "Sperlonga — круглая плетёная сумка-ведро": { ro: "Sperlonga — geantă bucket rotundă împletită", en: "Sperlonga — round woven bucket bag" },
-  "Violette — плетёная сумка-хобо": { ro: "Violette — geantă hobo împletită", en: "Violette — woven hobo bag" },
-  "Avignon — плетёная сумка с чехлом": { ro: "Avignon — geantă împletită cu husă", en: "Avignon — woven bag with pouch" },
-  "Honfleur — плетёная сумка-хобо с кожаными звеньями": { ro: "Honfleur — geantă hobo împletită cu inele din piele", en: "Honfleur — woven hobo bag with leather links" },
-  "Deauville — компактная сумка с металлизированной отделкой": { ro: "Deauville — geantă compactă cu finisaj metalizat", en: "Deauville — compact bag with metallic trim" },
-  "Annecy — плетёная сумка с фактурной кожей": { ro: "Annecy — geantă împletită cu piele texturată", en: "Annecy — woven bag with textured leather" },
-  "Giverny — структурированная сумка с контрастной окантовкой": { ro: "Giverny — geantă structurată cu contur contrastant", en: "Giverny — structured bag with contrast trim" },
-  "Biarritz — трапециевидная сумка с контрастной окантовкой": { ro: "Biarritz — geantă trapezoidală cu contur contrastant", en: "Biarritz — trapeze bag with contrast trim" },
-  "Trieste — сумка-хобо полумесяцем": { ro: "Trieste — geantă hobo semilună", en: "Trieste — crescent hobo bag" },
-  "Sienna — сумка-хобо полумесяцем из гладкой кожи": { ro: "Sienna — geantă hobo semilună din piele netedă", en: "Sienna — smooth leather crescent hobo bag" },
-  "Colette — сумка на плечо с клапаном на замке": { ro: "Colette — geantă de umăr cu clapetă și încuietoare", en: "Colette — turn-lock flap shoulder bag" },
-  "Lucerne — сумка-тоут с косметичкой и замком": { ro: "Lucerne — geantă tote cu trusă și încuietoare", en: "Lucerne — tote bag with pouch and turn-lock" },
-  "Amelie — компактная сумка-багет": { ro: "Amelie — geantă baghetă compactă", en: "Amelie — compact baguette bag" },
-  "Claire — компактная сумка-багет": { ro: "Claire — geantă baghetă compactă", en: "Claire — compact baguette bag" },
-  "Paloma — сумка с фермуаром": { ro: "Paloma — geantă cu fermuar", en: "Paloma — kiss-lock bag" },
-  "Leonie — вязаная сумка-тоут": { ro: "Leonie — geantă tote tricotată", en: "Leonie — knitted tote bag" },
-  "Giuliana — плетёная сумка-тоут": { ro: "Giuliana — geantă tote împletită", en: "Giuliana — woven tote bag" },
-  "Giada — плетёная сумка-тоут": { ro: "Giada — geantă tote împletită", en: "Giada — woven tote bag" },
-  "Filippa — плетёная сумка-тоут": { ro: "Filippa — geantă tote împletită", en: "Filippa — woven tote bag" },
-  "Luciana — плетёная сумка через плечо": { ro: "Luciana — geantă crossbody împletită", en: "Luciana — woven crossbody bag" },
-  "Ines — плетёная сумка-хобо": { ro: "Ines — geantă hobo împletită", en: "Ines — woven hobo bag" },
-  "Paola — плетёная сумка с клапаном": { ro: "Paola — geantă împletită cu clapă", en: "Paola — woven flap bag" },
-  "Greta — сумка-тоут с замком": { ro: "Greta — geantă tote cu încuietoare", en: "Greta — turn-lock tote bag" },
-  "Georgina — тоут с расклешёнными боками и замком": { ro: "Georgina — tote cu aripi și încuietoare", en: "Georgina — winged turn-lock tote" },
-  "Francesca — кошелёк на молнии": { ro: "Francesca — portofel cu fermoar", en: "Francesca — zip-around wallet" },
-  "Federica — кошелёк на клапане": { ro: "Federica — portofel cu clapă", en: "Federica — flap wallet" },
-  "Fabiana — плетёный кошелёк на клапане": { ro: "Fabiana — portofel împletit cu clapă", en: "Fabiana — woven flap wallet" },
-  "Giulietta — кошелёк-гармошка на молнии": { ro: "Giulietta — portofel acordeon cu fermoar", en: "Giulietta — accordion zip wallet" },
-  "Seraphina — плетёный кошелёк на молнии": { ro: "Seraphina — portofel împletit cu fermoar", en: "Seraphina — woven zip-around wallet" },
-  "Flavia — плетёный кошелёк на молнии с кнопкой": { ro: "Flavia — portofel împletit cu fermoar și capsă", en: "Flavia — woven zip snap wallet" },
-  "Nerissa — сумка на короткой ручке": { ro: "Nerissa — geantă cu mâner scurt", en: "Nerissa — top handle bag" },
-  "Fabrizia — мини-тоут": { ro: "Fabrizia — mini tote", en: "Fabrizia — mini tote bag" },
-  "Lucrezia — сумка хобо на плечо": { ro: "Lucrezia — geantă hobo de umăr", en: "Lucrezia — hobo shoulder bag" },
-  "Ginevra — тоут из вязаного полотна": { ro: "Ginevra — geantă tote tricotată", en: "Ginevra — knitted tote bag" },
-  "Allegra — сумка-тоут на плечо": { ro: "Allegra — geantă tote de umăr", en: "Allegra — tote shoulder bag" },
-  "Luna — мягкая сумка хобо": { ro: "Luna — geantă hobo moale", en: "Luna — soft hobo bag" },
-  "Bettina — сумка на плечо с пряжкой": { ro: "Bettina — geantă de umăr cu cataramă", en: "Bettina — buckle shoulder bag" },
-  "Perrine — багет на плечо": { ro: "Perrine — geantă baghetă de umăr", en: "Perrine — shoulder baguette bag" },
-  "Anaelle — компактный багет": { ro: "Anaelle — geantă baghetă compactă", en: "Anaelle — compact baguette bag" },
-  "Marcelle — компактная сумка-конверт на цепочке": { ro: "Marcelle — geantă plic compactă cu lanț", en: "Marcelle — compact envelope chain bag" },
-  "Ninette — структурная сумка с контрастной окантовкой": { ro: "Ninette — geantă structurată cu bordură contrastantă", en: "Ninette — structured bag with contrast trim" },
-  "Thea — структурная сумка с поворотным замком": { ro: "Thea — geantă structurată cu încuietoare rotativă", en: "Thea — structured turn-lock bag" },
-  "Colline — сумка хобо полумесяцем": { ro: "Colline — geantă hobo semilună", en: "Colline — crescent hobo bag" },
-  "Elara — кожаная сумка полумесяцем": { ro: "Elara — geantă semilună din piele", en: "Elara — leather crescent bag" },
-  "Maelle — тоут на завязках": { ro: "Maelle — geantă tote cu șnur", en: "Maelle — drawstring tote bag" },
-  "Livia — сумка полумесяц на плечо": { ro: "Livia — geantă semilună de umăr", en: "Livia — half-moon shoulder bag" },
-  "Cassia — клатч с рамочным замком": { ro: "Cassia — clutch cu încuietoare tip cadru", en: "Cassia — kiss-lock clutch" },
-  "Fiamma — клатч с металлической рамкой": { ro: "Fiamma — clutch cu cadru metalic", en: "Fiamma — metal-frame clutch" },
-  "Gioia — сумка на плечо с боковыми завязками": { ro: "Gioia — geantă de umăr cu șnururi laterale", en: "Gioia — side-drawstring shoulder bag" },
-  "Giorgia — боулинг-сумка двухцветная": { ro: "Giorgia — geantă bowling bicoloră", en: "Giorgia — two-tone bowling bag" },
-  "Aurea — прямоугольная сумка в руке": { ro: "Aurea — geantă dreptunghiulară de mână", en: "Aurea — rectangular handbag" },
-  "Halle — сумка-сэтчел": { ro: "Halle — geantă satchel", en: "Halle — satchel bag" },
-  "Romilly — структурная сумка в руке": { ro: "Romilly — geantă structurată de mână", en: "Romilly — structured handbag" },
-  "Vespera — структурный шоппер-тоут": { ro: "Vespera — geantă shopper structurată", en: "Vespera — structured shopper tote" },
-  "Marielle — тоут с косметичкой": { ro: "Marielle — geantă tote cu trusă cosmetică", en: "Marielle — tote bag with pouch" },
-  "Fiorenza — сумка-тоут": { ro: "Fiorenza — geantă tote", en: "Fiorenza — tote bag" },
-  "Loretta — тоут с клапаном на замке": { ro: "Loretta — geantă tote cu clapă și încuietoare", en: "Loretta — turn-lock flap tote bag" },
-  "Cressida — тоут с планкой на замке": { ro: "Cressida — geantă tote cu clapetă și încuietoare", en: "Cressida — turn-lock placket tote bag" },
-  "Palmira — сумка с поворотным замком": { ro: "Palmira — geantă cu încuietoare rotativă", en: "Palmira — turn-lock top handle bag" },
-  "Rosalba — сумка в форме сердца": { ro: "Rosalba — geantă în formă de inimă", en: "Rosalba — heart-shaped handbag" },
-  "Margot — сумка с поворотным замком": { ro: "Margot — geantă cu încuietoare rotativă", en: "Margot — turn-lock top handle bag" },
-  "Amabel — сумка хобо на молнии": { ro: "Amabel — geantă hobo cu fermoar", en: "Amabel — zip hobo bag" },
-  "Ottilie — гладкий компактный багет": { ro: "Ottilie — geantă baghetă compactă netedă", en: "Ottilie — smooth compact baguette bag" },
-  "Perlette — сумка на плечо с клапаном": { ro: "Perlette — geantă de umăr cu clapă", en: "Perlette — flap shoulder bag" },
-  "Rosalind — гладкая хобо полумесяцем": { ro: "Rosalind — geantă hobo semilună netedă", en: "Rosalind — smooth crescent hobo bag" },
-  "Odile — хобо полумесяц с цепочкой": { ro: "Odile — geantă hobo semilună cu lanț", en: "Odile — chain-strap crescent hobo bag" },
-  "Solaine — сумка с драпированным клапаном": { ro: "Solaine — geantă cu clapă drapată", en: "Solaine — draped flap bag" },
-  "Adalina — сумка-шоппер": { ro: "Adalina — geantă shopper", en: "Adalina — shopper bag" },
-  "Elowen — сумка-мешок с плетёным основанием": { ro: "Elowen — geantă sac cu bază împletită", en: "Elowen — drawstring bucket bag" },
-  "Fantine — хобо с плетёным основанием": { ro: "Fantine — geantă hobo cu bază împletită", en: "Fantine — woven-base hobo bag" },
-  "Garance — структурная сумка с плетёным основанием": { ro: "Garance — geantă structurată cu bază împletită", en: "Garance — structured bag with woven base" },
-  "Herminie — круглая сумка-мешок": { ro: "Herminie — geantă sac rotundă", en: "Herminie — round bucket bag" },
-  "Isolde — сумка с плетёным основанием и замком": { ro: "Isolde — geantă cu bază împletită și încuietoare", en: "Isolde — woven-base turn-lock bag" },
-  "Jacinta — компактная структурная сумка на молнии": { ro: "Jacinta — geantă structurată compactă cu fermoar", en: "Jacinta — compact structured zip bag" },
-  "Kalina — структурная сумка на молнии": { ro: "Kalina — geantă structurată cu fermoar", en: "Kalina — structured zip bag" },
-  "Lisette — тоут с пряжкой на ручке": { ro: "Lisette — geantă tote cu cataramă pe mâner", en: "Lisette — buckle handle tote bag" },
-  "Manon — плетёная хобо полумесяцем": { ro: "Manon — geantă hobo semilună împletită", en: "Manon — woven crescent hobo bag" },
-  "Noriane — плетёная сумка с клапаном": { ro: "Noriane — geantă împletită cu clapă", en: "Noriane — woven flap top handle bag" },
-  "Oriane — тоут с овальными ручками": { ro: "Oriane — geantă tote cu mânere ovale", en: "Oriane — oval handle tote bag" },
-  "Celia — тоут с овальными ручками": { ro: "Celia — geantă tote cu mânere ovale", en: "Celia — oval handle tote bag" },
-  "Pernelle — структурная сумка с декоративной вставкой": { ro: "Pernelle — geantă structurată cu detaliu decorativ", en: "Pernelle — structured bag with crystal accent" },
-  "Aveline — сумка с плетёной панелью": { ro: "Aveline — geantă cu panou împletit", en: "Aveline — woven panel top handle bag" },
-  "Cendrine — тоут со спиральным плетением": { ro: "Cendrine — geantă tote cu împletitură spirală", en: "Cendrine — spiral-weave tote bag" },
-  "Dorine — плетёная сумка треугольной формы": { ro: "Dorine — geantă triunghiulară împletită", en: "Dorine — triangular woven bag" },
-  "Gwenaelle — плетёная сумка кроссбоди": { ro: "Gwenaelle — geantă crossbody împletită", en: "Gwenaelle — woven crossbody bag" },
-  "Helena — плетёная сумка на плечо": { ro: "Helena — geantă de umăr împletită", en: "Helena — woven shoulder bag" },
-  "Celeste — плетёная сумка-тоут": { ro: "Celeste — geantă tote împletită", en: "Celeste — woven tote bag" },
-  "Vivienne — сумка-тоут": { ro: "Vivienne — geantă tote", en: "Vivienne — tote bag" },
-  "Nadine — кошелёк на молнии": { ro: "Nadine — portofel cu fermoar", en: "Nadine — zip wallet" },
-  "Suzette — картхолдер": { ro: "Suzette — portcard", en: "Suzette — card holder" },
-  "Rosalia — картхолдер": { ro: "Rosalia — portcard", en: "Rosalia — card holder" },
-  "Azzurina — картхолдер": { ro: "Azzurina — portcard", en: "Azzurina — card holder" },
-  "Turchese — картхолдер": { ro: "Turchese — portcard", en: "Turchese — card holder" },
-  "Bianca — картхолдер": { ro: "Bianca — portcard", en: "Bianca — card holder" },
-  "Limona — картхолдер": { ro: "Limona — portcard", en: "Limona — card holder" },
-  "Smeralda — картхолдер": { ro: "Smeralda — portcard", en: "Smeralda — card holder" },
-  "Bruna — картхолдер": { ro: "Bruna — portcard", en: "Bruna — card holder" },
-  "Olivetta — картхолдер": { ro: "Olivetta — portcard", en: "Olivetta — card holder" },
-  "Salvia — кошелёк": { ro: "Salvia — portofel", en: "Salvia — wallet" },
-  "Cenere — картхолдер": { ro: "Cenere — portcard", en: "Cenere — card holder" },
-  "Rubina — картхолдер": { ro: "Rubina — portcard", en: "Rubina — card holder" },
-  "Avorio — картхолдер": { ro: "Avorio — portcard", en: "Avorio — card holder" },
-  "Notte — картхолдер": { ro: "Notte — portcard", en: "Notte — card holder" },
-  "Cremisi — кошелёк": { ro: "Cremisi — portofel", en: "Cremisi — wallet" },
-  "Perla — кошелёк": { ro: "Perla — portofel", en: "Perla — wallet" },
-  "Nera — картхолдер": { ro: "Nera — portcard", en: "Nera — card holder" },
-  "Brielle — ключница": { ro: "Brielle — port-chei", en: "Brielle — key holder" },
-  "Camea — косметичка": { ro: "Camea — trusă cosmetică", en: "Camea — cosmetic pouch" },
-  "Noelle — обложка для паспорта": { ro: "Noelle — copertă pentru pașaport", en: "Noelle — passport cover" },
-  "Amalia — ремень": { ro: "Amalia — curea", en: "Amalia — belt" },
-  "Zelie — подвеска для сумки": { ro: "Zelie — breloc pentru geantă", en: "Zelie — bag charm" },
-  "Bat — брелок для сумки La Via Firenze": { ro: "Bat — breloc La Via Firenze", en: "Bat — La Via Firenze bag charm" },
-  "Flower — брелок для сумки La Via Firenze": { ro: "Flower — breloc La Via Firenze", en: "Flower — La Via Firenze bag charm" },
-  "Cat — брелок для сумки La Via Firenze": { ro: "Cat — breloc La Via Firenze", en: "Cat — La Via Firenze bag charm" },
-  "Bear — брелок для сумки La Via Firenze": { ro: "Bear — breloc La Via Firenze", en: "Bear — La Via Firenze bag charm" },
-  "Pegaso — кожаный брелок для сумки": { ro: "Pegaso — breloc din piele", en: "Pegaso — leather bag charm" },
-  "Bassotto — кожаный брелок для сумки": { ro: "Bassotto — breloc din piele", en: "Bassotto — leather bag charm" },
-  "Fiocco — шёлковый брелок-бант": { ro: "Fiocco — breloc fundă din mătase", en: "Fiocco — silk bow bag charm" },
-  "Mix — брелок-набор для сумки": { ro: "Mix — set breloc pentru geantă", en: "Mix — bag charm set" },
-  "Serenella — шёлковый платок": { ro: "Serenella — eșarfă din mătase", en: "Serenella — silk scarf" },
-  "Marcelline — шёлковый платок": { ro: "Marcelline — eșarfă din mătase", en: "Marcelline — silk scarf" },
-  "Celestina — шёлковый платок": { ro: "Celestina — eșarfă din mătase", en: "Celestina — silk scarf" },
-  "Marina — шёлковый платок": { ro: "Marina — eșarfă din mătase", en: "Marina — silk scarf" },
-  "Costanza — шёлковый платок": { ro: "Costanza — eșarfă din mătase", en: "Costanza — silk scarf" },
-  "Doriana — шёлковый платок": { ro: "Doriana — eșarfă din mătase", en: "Doriana — silk scarf" },
-  "Iride — шёлковый платок": { ro: "Iride — eșarfă din mătase", en: "Iride — silk scarf" },
-  "Amorette — шёлковый платок": { ro: "Amorette — eșarfă din mătase", en: "Amorette — silk scarf" },
-  "Colomba — шёлковый платок": { ro: "Colomba — eșarfă din mătase", en: "Colomba — silk scarf" },
-  "Nebbia — шёлковый платок": { ro: "Nebbia — eșarfă din mătase", en: "Nebbia — silk scarf" },
-  "Clarissa — шёлковый платок": { ro: "Clarissa — eșarfă din mătase", en: "Clarissa — silk scarf" },
-  "Azzurra — шёлковый платок": { ro: "Azzurra — eșarfă din mătase", en: "Azzurra — silk scarf" },
-  "Lavinia — шёлковый платок": { ro: "Lavinia — eșarfă din mătase", en: "Lavinia — silk scarf" },
-  "Artemisia — шёлковый платок": { ro: "Artemisia — eșarfă din mătase", en: "Artemisia — silk scarf" },
-  "Rosetta — шёлковый платок": { ro: "Rosetta — eșarfă din mătase", en: "Rosetta — silk scarf" },
-  "Verdiana — шёлковый платок": { ro: "Verdiana — eșarfă din mătase", en: "Verdiana — silk scarf" },
-  "Fiorina — шёлковый платок": { ro: "Fiorina — eșarfă din mătase", en: "Fiorina — silk scarf" },
-  "Cerelia — шёлковый платок": { ro: "Cerelia — eșarfă din mătase", en: "Cerelia — silk scarf" },
-  "Teodora — шёлковый платок": { ro: "Teodora — eșarfă din mătase", en: "Teodora — silk scarf" },
-  "Delphina — шёлковый платок": { ro: "Delphina — eșarfă din mătase", en: "Delphina — silk scarf" },
-  "Aimee — подарочный набор: кошелёк и картхолдер": { ro: "Aimee — set cadou: portofel și portcard", en: "Aimee — gift set: wallet and card holder" },
-  "Rosalie — кошелёк на кнопке": { ro: "Rosalie — portofel cu capsă", en: "Rosalie — snap wallet" },
+  "Mirelle": { ro: "Mirelle", en: "Mirelle" },
+  "Adriana": { ro: "Adriana", en: "Adriana" },
+  "Fiorella": { ro: "Fiorella", en: "Fiorella" },
+  "Ondine": { ro: "Ondine", en: "Ondine" },
+  "Marbella": { ro: "Marbella", en: "Marbella" },
+  "Positano": { ro: "Positano", en: "Positano" },
+  "Capri": { ro: "Capri", en: "Capri" },
+  "Ortigia": { ro: "Ortigia", en: "Ortigia" },
+  "Perla": { ro: "Perla", en: "Perla" },
+  "Talia": { ro: "Talia", en: "Talia" },
+  "Vittoria": { ro: "Vittoria", en: "Vittoria" },
+  "Romina": { ro: "Romina", en: "Romina" },
+  "Amara": { ro: "Amara", en: "Amara" },
+  "Liora": { ro: "Liora", en: "Liora" },
+  "Serena": { ro: "Serena", en: "Serena" },
+  "Camelia": { ro: "Camelia", en: "Camelia" },
+  "Selene": { ro: "Selene", en: "Selene" },
+  "Faustine": { ro: "Faustine", en: "Faustine" },
+  "Marisol": { ro: "Marisol", en: "Marisol" },
+  "Provence": { ro: "Provence", en: "Provence" },
+  "Taormina": { ro: "Taormina", en: "Taormina" },
+  "Cuore": { ro: "Cuore", en: "Cuore" },
+  "Ravello": { ro: "Ravello", en: "Ravello" },
+  "Elodie": { ro: "Elodie", en: "Elodie" },
+  "Corinne": { ro: "Corinne", en: "Corinne" },
+  "Luna": { ro: "Luna", en: "Luna" },
+  "Valentina": { ro: "Valentina", en: "Valentina" },
+  "Coralie": { ro: "Coralie", en: "Coralie" },
+  "Beatrice": { ro: "Beatrice", en: "Beatrice" },
+  "Milena": { ro: "Milena", en: "Milena" },
+  "Adele": { ro: "Adele", en: "Adele" },
+  "Genevieve": { ro: "Genevieve", en: "Genevieve" },
+  "Capucine": { ro: "Capucine", en: "Capucine" },
+  "Violaine": { ro: "Violaine", en: "Violaine" },
+  "Claudine": { ro: "Claudine", en: "Claudine" },
+  "Fabienne": { ro: "Fabienne", en: "Fabienne" },
+  "Nerina": { ro: "Nerina", en: "Nerina" },
+  "Solenne": { ro: "Solenne", en: "Solenne" },
+  "Ottavia": { ro: "Ottavia", en: "Ottavia" },
+  "Anouk": { ro: "Anouk", en: "Anouk" },
+  "Sabina": { ro: "Sabina", en: "Sabina" },
+  "Iris": { ro: "Iris", en: "Iris" },
+  "Cosima": { ro: "Cosima", en: "Cosima" },
+  "Delphine": { ro: "Delphine", en: "Delphine" },
+  "Estelle": { ro: "Estelle", en: "Estelle" },
+  "Renata": { ro: "Renata", en: "Renata" },
+  "Flora": { ro: "Flora", en: "Flora" },
+  "Verona": { ro: "Verona", en: "Verona" },
+  "Alba": { ro: "Alba", en: "Alba" },
+  "Tosca": { ro: "Tosca", en: "Tosca" },
+  "Bianca": { ro: "Bianca", en: "Bianca" },
+  "Camille": { ro: "Camille", en: "Camille" },
+  "Marcella": { ro: "Marcella", en: "Marcella" },
+  "Isadora": { ro: "Isadora", en: "Isadora" },
+  "Chiara": { ro: "Chiara", en: "Chiara" },
+  "Alessia": { ro: "Alessia", en: "Alessia" },
+  "Martina": { ro: "Martina", en: "Martina" },
+  "Simona": { ro: "Simona", en: "Simona" },
+  "Elise": { ro: "Elise", en: "Elise" },
+  "Noemi": { ro: "Noemi", en: "Noemi" },
+  "Ilaria": { ro: "Ilaria", en: "Ilaria" },
+  "Silvana": { ro: "Silvana", en: "Silvana" },
+  "Antonella": { ro: "Antonella", en: "Antonella" },
+  "Graziella": { ro: "Graziella", en: "Graziella" },
+  "Marguerite": { ro: "Marguerite", en: "Marguerite" },
+  "Emmeline": { ro: "Emmeline", en: "Emmeline" },
+  "Josephine": { ro: "Josephine", en: "Josephine" },
+  "Seraphine": { ro: "Seraphine", en: "Seraphine" },
+  "Cortina": { ro: "Cortina", en: "Cortina" },
+  "Volterra": { ro: "Volterra", en: "Volterra" },
+  "Ischia": { ro: "Ischia", en: "Ischia" },
+  "Procida": { ro: "Procida", en: "Procida" },
+  "Sperlonga": { ro: "Sperlonga", en: "Sperlonga" },
+  "Violette": { ro: "Violette", en: "Violette" },
+  "Avignon": { ro: "Avignon", en: "Avignon" },
+  "Honfleur": { ro: "Honfleur", en: "Honfleur" },
+  "Deauville": { ro: "Deauville", en: "Deauville" },
+  "Annecy": { ro: "Annecy", en: "Annecy" },
+  "Giverny": { ro: "Giverny", en: "Giverny" },
+  "Biarritz": { ro: "Biarritz", en: "Biarritz" },
+  "Trieste": { ro: "Trieste", en: "Trieste" },
+  "Sienna": { ro: "Sienna", en: "Sienna" },
+  "Colette": { ro: "Colette", en: "Colette" },
+  "Lucerne": { ro: "Lucerne", en: "Lucerne" },
+  "Amelie": { ro: "Amelie", en: "Amelie" },
+  "Claire": { ro: "Claire", en: "Claire" },
+  "Paloma": { ro: "Paloma", en: "Paloma" },
+  "Leonie": { ro: "Leonie", en: "Leonie" },
+  "Giuliana": { ro: "Giuliana", en: "Giuliana" },
+  "Giada": { ro: "Giada", en: "Giada" },
+  "Filippa": { ro: "Filippa", en: "Filippa" },
+  "Luciana": { ro: "Luciana", en: "Luciana" },
+  "Ines": { ro: "Ines", en: "Ines" },
+  "Paola": { ro: "Paola", en: "Paola" },
+  "Greta": { ro: "Greta", en: "Greta" },
+  "Georgina": { ro: "Georgina", en: "Georgina" },
+  "Francesca": { ro: "Francesca", en: "Francesca" },
+  "Federica": { ro: "Federica", en: "Federica" },
+  "Fabiana": { ro: "Fabiana", en: "Fabiana" },
+  "Giulietta": { ro: "Giulietta", en: "Giulietta" },
+  "Seraphina": { ro: "Seraphina", en: "Seraphina" },
+  "Flavia": { ro: "Flavia", en: "Flavia" },
+  "Nerissa": { ro: "Nerissa", en: "Nerissa" },
+  "Fabrizia": { ro: "Fabrizia", en: "Fabrizia" },
+  "Lucrezia": { ro: "Lucrezia", en: "Lucrezia" },
+  "Ginevra": { ro: "Ginevra", en: "Ginevra" },
+  "Allegra": { ro: "Allegra", en: "Allegra" },
+  "Bettina": { ro: "Bettina", en: "Bettina" },
+  "Perrine": { ro: "Perrine", en: "Perrine" },
+  "Anaelle": { ro: "Anaelle", en: "Anaelle" },
+  "Marcelle": { ro: "Marcelle", en: "Marcelle" },
+  "Ninette": { ro: "Ninette", en: "Ninette" },
+  "Thea": { ro: "Thea", en: "Thea" },
+  "Colline": { ro: "Colline", en: "Colline" },
+  "Elara": { ro: "Elara", en: "Elara" },
+  "Maelle": { ro: "Maelle", en: "Maelle" },
+  "Livia": { ro: "Livia", en: "Livia" },
+  "Cassia": { ro: "Cassia", en: "Cassia" },
+  "Fiamma": { ro: "Fiamma", en: "Fiamma" },
+  "Gioia": { ro: "Gioia", en: "Gioia" },
+  "Giorgia": { ro: "Giorgia", en: "Giorgia" },
+  "Aurea": { ro: "Aurea", en: "Aurea" },
+  "Halle": { ro: "Halle", en: "Halle" },
+  "Romilly": { ro: "Romilly", en: "Romilly" },
+  "Vespera": { ro: "Vespera", en: "Vespera" },
+  "Marielle": { ro: "Marielle", en: "Marielle" },
+  "Fiorenza": { ro: "Fiorenza", en: "Fiorenza" },
+  "Loretta": { ro: "Loretta", en: "Loretta" },
+  "Cressida": { ro: "Cressida", en: "Cressida" },
+  "Palmira": { ro: "Palmira", en: "Palmira" },
+  "Rosalba": { ro: "Rosalba", en: "Rosalba" },
+  "Margot": { ro: "Margot", en: "Margot" },
+  "Amabel": { ro: "Amabel", en: "Amabel" },
+  "Ottilie": { ro: "Ottilie", en: "Ottilie" },
+  "Perlette": { ro: "Perlette", en: "Perlette" },
+  "Rosalind": { ro: "Rosalind", en: "Rosalind" },
+  "Odile": { ro: "Odile", en: "Odile" },
+  "Solaine": { ro: "Solaine", en: "Solaine" },
+  "Adalina": { ro: "Adalina", en: "Adalina" },
+  "Elowen": { ro: "Elowen", en: "Elowen" },
+  "Fantine": { ro: "Fantine", en: "Fantine" },
+  "Garance": { ro: "Garance", en: "Garance" },
+  "Herminie": { ro: "Herminie", en: "Herminie" },
+  "Isolde": { ro: "Isolde", en: "Isolde" },
+  "Jacinta": { ro: "Jacinta", en: "Jacinta" },
+  "Kalina": { ro: "Kalina", en: "Kalina" },
+  "Lisette": { ro: "Lisette", en: "Lisette" },
+  "Manon": { ro: "Manon", en: "Manon" },
+  "Noriane": { ro: "Noriane", en: "Noriane" },
+  "Oriane": { ro: "Oriane", en: "Oriane" },
+  "Celia": { ro: "Celia", en: "Celia" },
+  "Pernelle": { ro: "Pernelle", en: "Pernelle" },
+  "Aveline": { ro: "Aveline", en: "Aveline" },
+  "Cendrine": { ro: "Cendrine", en: "Cendrine" },
+  "Dorine": { ro: "Dorine", en: "Dorine" },
+  "Gwenaelle": { ro: "Gwenaelle", en: "Gwenaelle" },
+  "Helena": { ro: "Helena", en: "Helena" },
+  "Celeste": { ro: "Celeste", en: "Celeste" },
+  "Vivienne": { ro: "Vivienne", en: "Vivienne" },
+  "Nadine": { ro: "Nadine", en: "Nadine" },
+  "Suzette": { ro: "Suzette", en: "Suzette" },
+  "Rosalia": { ro: "Rosalia", en: "Rosalia" },
+  "Azzurina": { ro: "Azzurina", en: "Azzurina" },
+  "Turchese": { ro: "Turchese", en: "Turchese" },
+  "Limona": { ro: "Limona", en: "Limona" },
+  "Smeralda": { ro: "Smeralda", en: "Smeralda" },
+  "Bruna": { ro: "Bruna", en: "Bruna" },
+  "Olivetta": { ro: "Olivetta", en: "Olivetta" },
+  "Salvia": { ro: "Salvia", en: "Salvia" },
+  "Cenere": { ro: "Cenere", en: "Cenere" },
+  "Rubina": { ro: "Rubina", en: "Rubina" },
+  "Avorio": { ro: "Avorio", en: "Avorio" },
+  "Notte": { ro: "Notte", en: "Notte" },
+  "Cremisi": { ro: "Cremisi", en: "Cremisi" },
+  "Nera": { ro: "Nera", en: "Nera" },
+  "Brielle": { ro: "Brielle", en: "Brielle" },
+  "Camea": { ro: "Camea", en: "Camea" },
+  "Noelle": { ro: "Noelle", en: "Noelle" },
+  "Amalia": { ro: "Amalia", en: "Amalia" },
+  "Zelie": { ro: "Zelie", en: "Zelie" },
+  "Bat": { ro: "Bat", en: "Bat" },
+  "Flower": { ro: "Flower", en: "Flower" },
+  "Cat": { ro: "Cat", en: "Cat" },
+  "Bear": { ro: "Bear", en: "Bear" },
+  "Pegaso": { ro: "Pegaso", en: "Pegaso" },
+  "Bassotto": { ro: "Bassotto", en: "Bassotto" },
+  "Fiocco": { ro: "Fiocco", en: "Fiocco" },
+  "Mix": { ro: "Mix", en: "Mix" },
+  "Serenella": { ro: "Serenella", en: "Serenella" },
+  "Marcelline": { ro: "Marcelline", en: "Marcelline" },
+  "Celestina": { ro: "Celestina", en: "Celestina" },
+  "Marina": { ro: "Marina", en: "Marina" },
+  "Costanza": { ro: "Costanza", en: "Costanza" },
+  "Doriana": { ro: "Doriana", en: "Doriana" },
+  "Iride": { ro: "Iride", en: "Iride" },
+  "Amorette": { ro: "Amorette", en: "Amorette" },
+  "Colomba": { ro: "Colomba", en: "Colomba" },
+  "Nebbia": { ro: "Nebbia", en: "Nebbia" },
+  "Clarissa": { ro: "Clarissa", en: "Clarissa" },
+  "Azzurra": { ro: "Azzurra", en: "Azzurra" },
+  "Lavinia": { ro: "Lavinia", en: "Lavinia" },
+  "Artemisia": { ro: "Artemisia", en: "Artemisia" },
+  "Rosetta": { ro: "Rosetta", en: "Rosetta" },
+  "Verdiana": { ro: "Verdiana", en: "Verdiana" },
+  "Fiorina": { ro: "Fiorina", en: "Fiorina" },
+  "Cerelia": { ro: "Cerelia", en: "Cerelia" },
+  "Teodora": { ro: "Teodora", en: "Teodora" },
+  "Delphina": { ro: "Delphina", en: "Delphina" },
+  "Aimee": { ro: "Aimee", en: "Aimee" },
+  "Rosalie": { ro: "Rosalie", en: "Rosalie" },
 };
 
 type ProductLocalizedCopy = {
@@ -584,9 +581,9 @@ const productCopyBySlug: Record<string, ProductLocalizedCopy> = {
   },
   "woven-leather-shopper-tote-black": {
     "title": {
-      "ru": "Ondine — плетёная сумка-шоппер",
-      "ro": "Ondine — shopper împletit",
-      "en": "Ondine — woven shopper bag"
+      "ru": "Ondine",
+      "ro": "Ondine",
+      "en": "Ondine"
     },
     "description": {
       "ru": "Ondine — плетёная сумка-шоппер из плетёной кожи — для работы, поездок по городу и дней, когда нужно взять с собой больше обычного. Силуэт остаётся собранным и лёгким в повседневной носке.\n\nЗакрытие на кожаном шнурке. Внутри — место для телефона, кошелька, ключей и косметики. Доступна под заказ: доставка 7–14 дней.",
@@ -596,9 +593,9 @@ const productCopyBySlug: Record<string, ProductLocalizedCopy> = {
   },
   "premium-woven-beach-tote-bag-natural-black": {
     "title": {
-      "ru": "Capri — плетёная пляжная сумка-тоут",
-      "ro": "Capri — geantă tote de plajă împletită",
-      "en": "Capri — woven beach tote bag"
+      "ru": "Capri",
+      "ro": "Capri",
+      "en": "Capri"
     },
     "description": {
       "ru": "Capri — плетёная пляжная сумка-тоут с кожаными ручками, золотой фурнитурой и полукруглым силуэтом — для курорта, города и путешествий.\n\nПросторное отделение с внутренним карманом на молнии вмещает телефон, кошелёк, косметику и документы. Модель доступна под заказ: доставка 7–14 дней.",
@@ -608,9 +605,9 @@ const productCopyBySlug: Record<string, ProductLocalizedCopy> = {
   },
   "milano-cage-tote-bag-black-red": {
     "title": {
-      "ru": "Ortigia — тоут с каркасным силуэтом",
-      "ro": "Ortigia — geantă tote cu siluetă tip cage",
-      "en": "Ortigia — cage-frame tote bag"
+      "ru": "Ortigia",
+      "ro": "Ortigia",
+      "en": "Ortigia"
     },
     "description": {
       "ru": "Ortigia — тоут с каркасным силуэтом из натуральной кожи — для повседневного гардероба, офиса и спокойных вечерних выходов. Силуэт остаётся собранным и лёгким в повседневной носке.\n\nУниверсальный городской силуэт. Внутри — место для телефона, кошелька, ключей и небольшой косметики. Доступна под заказ: доставка 7–14 дней.",
@@ -620,9 +617,9 @@ const productCopyBySlug: Record<string, ProductLocalizedCopy> = {
   },
   "mini-elegance-top-handle-bag-white": {
     "title": {
-      "ru": "Micaela — мини-сумка с верхней ручкой",
-      "ro": "Micaela — geantă mini cu mâner superior",
-      "en": "Micaela — mini top handle bag"
+      "ru": "Micaela",
+      "ro": "Micaela",
+      "en": "Micaela"
     },
     "description": {
       "ru": "Мини-сумка с верхней ручкой из натуральной кожи — для повседневного гардероба, офиса и спокойных вечерних выходов. Силуэт остаётся собранным и лёгким в повседневной носке.\n\nНадёжная застёжка на молнии. Внутри — место для телефона, кошелька, ключей и небольшой косметики. Доступна под заказ: доставка 7–14 дней.",
@@ -632,9 +629,9 @@ const productCopyBySlug: Record<string, ProductLocalizedCopy> = {
   },
   "classic-leather-tote-bag-black": {
     "title": {
-      "ru": "Claudine — классическая кожаная сумка-тоут",
-      "ro": "Claudine — geantă tote clasică din piele",
-      "en": "Claudine — classic leather tote bag"
+      "ru": "Claudine",
+      "ro": "Claudine",
+      "en": "Claudine"
     },
     "description": {
       "ru": "Claudine — классическая кожаная сумка-тоут с поворотным замком, двойными ручками и строгим силуэтом — для работы, деловых встреч и повседневной носки.\n\nПросторное отделение вмещает документы, планшет, кошелёк и повседневные мелочи. Модель доступна под заказ: доставка 7–14 дней.",
@@ -644,9 +641,9 @@ const productCopyBySlug: Record<string, ProductLocalizedCopy> = {
   },
   "classic-leather-bowling-bag-black": {
     "title": {
-      "ru": "Romina — сумка-боулинг",
-      "ro": "Romina — geantă bowling",
-      "en": "Romina — bowling bag"
+      "ru": "Romina",
+      "ro": "Romina",
+      "en": "Romina"
     },
     "description": {
       "ru": "Romina — сумка-боулинг из натуральной кожи — для повседневного гардероба, офиса и спокойных вечерних выходов. Силуэт остаётся собранным и лёгким в повседневной носке.\n\nНадёжная застёжка на молнии. Внутри — место для телефона, кошелька, ключей и небольшой косметики. Доступна под заказ: доставка 7–14 дней.",
@@ -656,9 +653,9 @@ const productCopyBySlug: Record<string, ProductLocalizedCopy> = {
   },
   "elegant-leather-hobo-bag-pink": {
     "title": {
-      "ru": "Amara — сумка-хобо",
-      "ro": "Amara — geantă hobo",
-      "en": "Amara — hobo bag"
+      "ru": "Amara",
+      "ro": "Amara",
+      "en": "Amara"
     },
     "description": {
       "ru": "Amara — сумка-хобо из натуральной кожи — для повседневного гардероба, офиса и спокойных вечерних выходов. Силуэт остаётся собранным и лёгким в повседневной носке.\n\nУниверсальный городской силуэт. Внутри — место для телефона, кошелька, ключей и небольшой косметики. Доступна под заказ: доставка 7–14 дней.",
@@ -668,9 +665,9 @@ const productCopyBySlug: Record<string, ProductLocalizedCopy> = {
   },
   "elegant-leather-hobo-bag-taupe": {
     "title": {
-      "ru": "Liora — сумка-хобо",
-      "ro": "Liora — geantă hobo",
-      "en": "Liora — hobo bag"
+      "ru": "Liora",
+      "ro": "Liora",
+      "en": "Liora"
     },
     "description": {
       "ru": "Liora — сумка-хобо из фактурной кожи — для повседневного гардероба, офиса и спокойных вечерних выходов. Силуэт остаётся собранным и лёгким в повседневной носке.\n\nВнутри — место для телефона, кошелька, ключей и небольшой косметики. Доступна под заказ: доставка 7–14 дней.",
@@ -680,9 +677,9 @@ const productCopyBySlug: Record<string, ProductLocalizedCopy> = {
   },
   "elegant-leather-hobo-bag-smooth-black": {
     "title": {
-      "ru": "Serena — сумка-хобо из гладкой кожи",
-      "ro": "Serena — geantă hobo din piele netedă",
-      "en": "Serena — smooth leather hobo bag"
+      "ru": "Serena",
+      "ro": "Serena",
+      "en": "Serena"
     },
     "description": {
       "ru": "Serena — сумка-хобо из гладкой кожи. Модель создана для повседневного гардероба, офиса и спокойных вечерних выходов. Плавные линии и лаконичный силуэт легко вписываются в базовый гардероб.\n\nНадёжная застёжка на молнии. Внутреннее пространство рассчитано на телефон, кошелёк, ключи и косметику. Модель доступна под заказ: срок доставки 7–14 дней.",
@@ -716,9 +713,9 @@ const productCopyBySlug: Record<string, ProductLocalizedCopy> = {
   },
   "elegant-leather-crossbody-bag-white": {
     "title": {
-      "ru": "Noelia — кожаная сумка кроссбоди",
-      "ro": "Noelia — geantă crossbody din piele",
-      "en": "Noelia — leather crossbody bag"
+      "ru": "Noelia",
+      "ro": "Noelia",
+      "en": "Noelia"
     },
     "description": {
       "ru": "Noelia — кожаная сумка кроссбоди из натуральной кожи — для повседневного гардероба, офиса и спокойных вечерних выходов. Силуэт остаётся собранным и лёгким в повседневной носке.\n\nВнутри — место для телефона, кошелька, ключей и небольшой косметики. Доступна под заказ: доставка 7–14 дней.",
@@ -740,9 +737,9 @@ const productCopyBySlug: Record<string, ProductLocalizedCopy> = {
   },
   "elegant-leather-moon-bag-cognac": {
     "title": {
-      "ru": "Elara — кожаная сумка полумесяцем",
-      "ro": "Elara — geantă semilună din piele",
-      "en": "Elara — leather crescent bag"
+      "ru": "Elara",
+      "ro": "Elara",
+      "en": "Elara"
     },
     "description": {
       "ru": "Elara — кожаная сумка полумесяцем из фактурной кожи с дугообразным силуэтом и золотистой фурнитурой — для повседневных и вечерних образов.\n\nКороткая ручка и съёмный регулируемый ремень, застёжка на молнии. Внутри — телефон, кошелёк, ключи и косметика. Модель доступна под заказ: доставка 7–14 дней.",
@@ -752,9 +749,9 @@ const productCopyBySlug: Record<string, ProductLocalizedCopy> = {
   },
   "elegant-leather-tote-bag-black": {
     "title": {
-      "ru": "Violaine — кожаная сумка-тоут",
-      "ro": "Violaine — geantă tote din piele",
-      "en": "Violaine — leather tote bag"
+      "ru": "Violaine",
+      "ro": "Violaine",
+      "en": "Violaine"
     },
     "description": {
       "ru": "Violaine — кожаная сумка-тоут из кожи и замши с архитектурным силуэтом, двойными ручками и съёмным ремнём — для работы, города и поездок.\n\nПросторное отделение вмещает документы, кошелёк, косметику и повседневные мелочи. Модель доступна под заказ: доставка 7–14 дней.",
@@ -764,9 +761,9 @@ const productCopyBySlug: Record<string, ProductLocalizedCopy> = {
   },
   "pouch-bag-black-onyx": {
     "title": {
-      "ru": "Capucine — сумка-пауч",
-      "ro": "Capucine — geantă pouch",
-      "en": "Capucine — pouch bag"
+      "ru": "Capucine",
+      "ro": "Capucine",
+      "en": "Capucine"
     },
     "description": {
       "ru": "Capucine — сумка-пауч из телячьей кожи с мягкими драпированными линиями и золотистой фурнитурой на ручке — для повседневных и вечерних образов.\n\nЗастёжка на молнии, вместительное отделение внутри. Модель доступна под заказ: доставка 7–14 дней.",
@@ -776,9 +773,9 @@ const productCopyBySlug: Record<string, ProductLocalizedCopy> = {
   },
   "structured-leather-tote-bag-burgundy": {
     "title": {
-      "ru": "Beatrice — структурированная сумка-тоут",
-      "ro": "Beatrice — geantă tote structurată",
-      "en": "Beatrice — structured tote bag"
+      "ru": "Beatrice",
+      "ro": "Beatrice",
+      "en": "Beatrice"
     },
     "description": {
       "ru": "Beatrice — структурированная сумка-тоут из натуральной кожи — для работы, поездок по городу и дней, когда нужно взять с собой больше обычного. Силуэт остаётся собранным и лёгким в повседневной носке.\n\nНадёжная застёжка на молнии. Внутри — место для телефона, кошелька, ключей и небольшой косметики. В наличии: доставка 1–3 дня.",
@@ -788,9 +785,9 @@ const productCopyBySlug: Record<string, ProductLocalizedCopy> = {
   },
   "the-essential-shoulder-bag-tan-cognac": {
     "title": {
-      "ru": "Adele — базовая сумка на плечо",
-      "ro": "Adele — geantă de umăr esențială",
-      "en": "Adele — essential shoulder bag"
+      "ru": "Adele",
+      "ro": "Adele",
+      "en": "Adele"
     },
     "description": {
       "ru": "Adele — базовая сумка на плечо из натуральной кожи — для работы, поездок по городу и дней, когда нужно взять с собой больше обычного. Силуэт остаётся собранным и лёгким в повседневной носке.\n\nНадёжная застёжка на молнии. Внутри — место для телефона, кошелька, ключей и небольшой косметики. Доступна под заказ: доставка 7–14 дней.",
@@ -801,8 +798,8 @@ const productCopyBySlug: Record<string, ProductLocalizedCopy> = {
   "aurelia-soft-hobo-cognac": {
     "title": {
       "ru": "Мягкая сумка-хобо Aurelia из зернистой кожи коньячного цвета",
-      "ro": "Aurelia — geantă hobo moale din piele granulată cognac",
-      "en": "Aurelia — soft cognac pebbled-leather hobo"
+      "ro": "Aurelia",
+      "en": "Aurelia"
     },
     "description": {
       "ru": "Мягкая сумка-хобо Aurelia из зернистой кожи коньячного цвета из натуральной кожи — для повседневного гардероба, офиса и спокойных вечерних выходов. Силуэт остаётся собранным и лёгким в повседневной носке.\n\nВнутри — место для телефона, кошелька, ключей и небольшой косметики. Доступна под заказ: доставка 7–14 дней.",
@@ -813,8 +810,8 @@ const productCopyBySlug: Record<string, ProductLocalizedCopy> = {
   "aurelia-baguette-black": {
     "title": {
       "ru": "Сумка-багет Aurelia на короткой ручке из гладкой кожи чёрного цвета",
-      "ro": "Aurelia — baghetă neagră din piele netedă",
-      "en": "Aurelia — black smooth-leather baguette"
+      "ro": "Aurelia",
+      "en": "Aurelia"
     },
     "description": {
       "ru": "Сумка-багет Aurelia на короткой ручке из гладкой кожи чёрного цвета из натуральной кожи — для повседневного гардероба, офиса и спокойных вечерних выходов. Силуэт остаётся собранным и лёгким в повседневной носке.\n\nАккуратный поворотный замок. Внутри — место для телефона, кошелька, ключей и небольшой косметики. Доступна под заказ: доставка 7–14 дней.",
@@ -825,8 +822,8 @@ const productCopyBySlug: Record<string, ProductLocalizedCopy> = {
   "vionetta-structured-bag-beige": {
     "title": {
       "ru": "Структурная сумка Vionetta с крупной пряжкой из кожи бежевого цвета",
-      "ro": "Vionetta — geantă structurată bej cu cataramă expresivă",
-      "en": "Vionetta — structured beige leather bag with statement buckle"
+      "ro": "Vionetta",
+      "en": "Vionetta"
     },
     "description": {
       "ru": "Структурная сумка Vionetta с крупной пряжкой из кожи бежевого цвета из натуральной кожи — для повседневного гардероба, офиса и спокойных вечерних выходов. Силуэт остаётся собранным и лёгким в повседневной носке.\n\nНадёжная застёжка на молнии. Внутри — место для телефона, кошелька, ключей и небольшой косметики. Доступна под заказ: доставка 7–14 дней.",
@@ -837,8 +834,8 @@ const productCopyBySlug: Record<string, ProductLocalizedCopy> = {
   "vionetta-mini-crossbody-rose": {
     "title": {
       "ru": "Мини-сумка Vionetta через плечо на цепочке пудрового цвета",
-      "ro": "Vionetta — mini crossbody pudrată pe lanț",
-      "en": "Vionetta — mini powder-rose chain crossbody"
+      "ro": "Vionetta",
+      "en": "Vionetta"
     },
     "description": {
       "ru": "Мини-сумка Vionetta через плечо на цепочке пудрового цвета из натуральной кожи — для повседневного гардероба, офиса и спокойных вечерних выходов. Силуэт остаётся собранным и лёгким в повседневной носке.\n\nУниверсальный городской силуэт. Внутри — место для телефона, кошелька, ключей и небольшой косметики. Доступна под заказ: доставка 7–14 дней.",
@@ -849,8 +846,8 @@ const productCopyBySlug: Record<string, ProductLocalizedCopy> = {
   "sora-tote-sand": {
     "title": {
       "ru": "Большой шопер SÓRA Atelier из плотной кожи песочного цвета",
-      "ro": "SÓRA Atelier — tote mare din piele densă nisipie",
-      "en": "SÓRA Atelier — large sand leather tote"
+      "ro": "SÓRA Atelier",
+      "en": "SÓRA Atelier"
     },
     "description": {
       "ru": "Большой шопер SÓRA Atelier из плотной кожи песочного цвета из фактурной кожи — для работы, поездок по городу и дней, когда нужно взять с собой больше обычного. Силуэт остаётся собранным и лёгким в повседневной носке.\n\nНадёжная застёжка на молнии. Внутри — место для телефона, кошелька, ключей и небольшой косметики. Доступна под заказ: доставка 7–14 дней.",
@@ -861,8 +858,8 @@ const productCopyBySlug: Record<string, ProductLocalizedCopy> = {
   "sora-backpack-black": {
     "title": {
       "ru": "Женский рюкзак SÓRA Atelier из мягкой кожи чёрного цвета",
-      "ro": "SÓRA Atelier — rucsac negru din piele moale",
-      "en": "SÓRA Atelier — soft black leather backpack"
+      "ro": "SÓRA Atelier",
+      "en": "SÓRA Atelier"
     },
     "description": {
       "ru": "Женский рюкзак SÓRA Atelier из мягкой кожи чёрного цвета из натуральной кожи — для повседневного гардероба, офиса и спокойных вечерних выходов. Силуэт остаётся собранным и лёгким в повседневной носке.\n\nНадёжная застёжка на молнии. Внутри — место для телефона, кошелька, ключей и небольшой косметики. Доступна под заказ: доставка 7–14 дней.",
@@ -945,8 +942,8 @@ const productCopyBySlug: Record<string, ProductLocalizedCopy> = {
   "aurelia-big-shopper-grey": {
     "title": {
       "ru": "Большая сумка Aurelia с двумя ручками серого цвета",
-      "ro": "Aurelia — tote mare gri cu două mânere",
-      "en": "Aurelia — large grey double-handle tote"
+      "ro": "Aurelia",
+      "en": "Aurelia"
     },
     "description": {
       "ru": "Большая сумка Aurelia с двумя ручками серого цвета из фактурной кожи — для работы, поездок по городу и дней, когда нужно взять с собой больше обычного. Силуэт остаётся собранным и лёгким в повседневной носке.\n\nВместительный формат на каждый день. Внутри — место для телефона, кошелька, ключей и небольшой косметики. Доступна под заказ: доставка 7–14 дней.",
@@ -968,9 +965,9 @@ const productCopyBySlug: Record<string, ProductLocalizedCopy> = {
   },
   "womens-pebbled-leather-turn-lock-strap-tote-bag": {
     "title": {
-      "ru": "Greta — сумка-тоут с замком",
-      "ro": "Greta — geantă tote",
-      "en": "Greta — tote bag"
+      "ru": "Greta",
+      "ro": "Greta",
+      "en": "Greta"
     },
     "description": {
       "ru": "Greta — сумка-тоут с замком из натуральной кожи — для работы, поездок по городу и дней, когда нужно взять с собой больше обычного. Силуэт остаётся собранным и лёгким в повседневной носке.\n\nАккуратный поворотный замок. Внутри — место для телефона, кошелька, ключей и небольшой косметики. В наличии: доставка 1–3 дня.",
@@ -980,9 +977,9 @@ const productCopyBySlug: Record<string, ProductLocalizedCopy> = {
   },
   "womens-compact-woven-panel-metallic-top-handle-bag": {
     "title": {
-      "ru": "Nerissa — сумка на короткой ручке",
-      "ro": "Nerissa — geantă",
-      "en": "Nerissa — handbag"
+      "ru": "Nerissa",
+      "ro": "Nerissa",
+      "en": "Nerissa"
     },
     "description": {
       "ru": "Nerissa — сумка на короткой ручке из плетёной фактуры с кожаными деталями — для повседневного гардероба, офиса и спокойных вечерних выходов. Силуэт остаётся собранным и лёгким в повседневной носке.\n\nУниверсальный городской силуэт. Внутри — место для телефона, кошелька, ключей и небольшой косметики. В наличии: доставка 1–3 дня.",
@@ -992,9 +989,9 @@ const productCopyBySlug: Record<string, ProductLocalizedCopy> = {
   },
   "womens-duo-mini-tote-bag": {
     "title": {
-      "ru": "Fabrizia — мини-тоут",
-      "ro": "Fabrizia — geantă",
-      "en": "Fabrizia — handbag"
+      "ru": "Fabrizia",
+      "ro": "Fabrizia",
+      "en": "Fabrizia"
     },
     "description": {
       "ru": "Fabrizia — мини-тоут из натуральной кожи — для повседневного гардероба, офиса и спокойных вечерних выходов. Силуэт остаётся собранным и лёгким в повседневной носке.\n\nУниверсальный городской силуэт. Внутри — место для телефона, кошелька, ключей и небольшой косметики. В наличии: доставка 1–3 дня.",
@@ -1004,9 +1001,9 @@ const productCopyBySlug: Record<string, ProductLocalizedCopy> = {
   },
   "womens-hobo-shoulder-bag": {
     "title": {
-      "ru": "Lucrezia — сумка хобо на плечо",
-      "ro": "Lucrezia — geantă",
-      "en": "Lucrezia — handbag"
+      "ru": "Lucrezia",
+      "ro": "Lucrezia",
+      "en": "Lucrezia"
     },
     "description": {
       "ru": "Lucrezia — сумка хобо на плечо из натуральной кожи — для повседневного гардероба, офиса и спокойных вечерних выходов. Силуэт остаётся собранным и лёгким в повседневной носке.\n\nУниверсальный городской силуэт. Внутри — место для телефона, кошелька, ключей и небольшой косметики. В наличии: доставка 1–3 дня.",
@@ -1016,9 +1013,9 @@ const productCopyBySlug: Record<string, ProductLocalizedCopy> = {
   },
   "womens-knitted-openwork-panel-tote-bag": {
     "title": {
-      "ru": "Ginevra — тоут из вязаного полотна",
-      "ro": "Ginevra — geantă tote",
-      "en": "Ginevra — tote bag"
+      "ru": "Ginevra",
+      "ro": "Ginevra",
+      "en": "Ginevra"
     },
     "description": {
       "ru": "Ginevra — тоут из вязаного полотна из натуральной кожи — для работы, поездок по городу и дней, когда нужно взять с собой больше обычного. Силуэт остаётся собранным и лёгким в повседневной носке.\n\nВместительный формат на каждый день. Внутри — место для телефона, кошелька, ключей и небольшой косметики. В наличии: доставка 1–3 дня.",
@@ -1028,9 +1025,9 @@ const productCopyBySlug: Record<string, ProductLocalizedCopy> = {
   },
   "womens-leather-tote-shoulder-bag": {
     "title": {
-      "ru": "Allegra — сумка-тоут на плечо",
-      "ro": "Allegra — geantă tote",
-      "en": "Allegra — tote bag"
+      "ru": "Allegra",
+      "ro": "Allegra",
+      "en": "Allegra"
     },
     "description": {
       "ru": "Allegra — сумка-тоут на плечо из натуральной кожи — для работы, поездок по городу и дней, когда нужно взять с собой больше обычного. Силуэт остаётся собранным и лёгким в повседневной носке.\n\nВместительный формат на каждый день. Внутри — место для телефона, кошелька, ключей и небольшой косметики. В наличии: доставка 1–3 дня.",
@@ -1040,9 +1037,9 @@ const productCopyBySlug: Record<string, ProductLocalizedCopy> = {
   },
   "womens-luna-soft-hobo-bag": {
     "title": {
-      "ru": "Luna — мягкая сумка хобо",
-      "ro": "Luna — geantă",
-      "en": "Luna — handbag"
+      "ru": "Luna",
+      "ro": "Luna",
+      "en": "Luna"
     },
     "description": {
       "ru": "Luna — мягкая сумка хобо из натуральной кожи — для повседневного гардероба, офиса и спокойных вечерних выходов. Силуэт остаётся собранным и лёгким в повседневной носке.\n\nУниверсальный городской силуэт. Внутри — место для телефона, кошелька, ключей и небольшой косметики. В наличии: доставка 1–3 дня.",
@@ -1052,9 +1049,9 @@ const productCopyBySlug: Record<string, ProductLocalizedCopy> = {
   },
   "womens-pebbled-leather-accordion-buckle-shoulder-bag": {
     "title": {
-      "ru": "Bettina — сумка на плечо с пряжкой",
-      "ro": "Bettina — geantă de umăr cu cataramă",
-      "en": "Bettina — buckle shoulder bag"
+      "ru": "Bettina",
+      "ro": "Bettina",
+      "en": "Bettina"
     },
     "description": {
       "ru": "Bettina — сумка на плечо с пряжкой из фактурной кожи — для городского дня, встреч и образов, где важны свобода движения и аккуратный силуэт. Силуэт остаётся собранным и лёгким в повседневной носке.\n\nУдобно носить на плече. Внутри — место для телефона, кошелька, ключей и небольшой косметики. В наличии: доставка 1–3 дня.",
@@ -1064,9 +1061,9 @@ const productCopyBySlug: Record<string, ProductLocalizedCopy> = {
   },
   "womens-pebbled-leather-baguette-bag": {
     "title": {
-      "ru": "Perrine — багет на плечо",
-      "ro": "Perrine — geantă",
-      "en": "Perrine — handbag"
+      "ru": "Perrine",
+      "ro": "Perrine",
+      "en": "Perrine"
     },
     "description": {
       "ru": "Perrine — багет на плечо из фактурной кожи — для повседневного гардероба, офиса и спокойных вечерних выходов. Силуэт остаётся собранным и лёгким в повседневной носке.\n\nУниверсальный городской силуэт. Внутри — место для телефона, кошелька, ключей и небольшой косметики. В наличии: доставка 1–3 дня.",
@@ -1076,9 +1073,9 @@ const productCopyBySlug: Record<string, ProductLocalizedCopy> = {
   },
   "womens-pebbled-leather-compact-baguette-bag": {
     "title": {
-      "ru": "Anaelle — компактный багет",
-      "ro": "Anaelle — geantă",
-      "en": "Anaelle — handbag"
+      "ru": "Anaelle",
+      "ro": "Anaelle",
+      "en": "Anaelle"
     },
     "description": {
       "ru": "Anaelle — компактный багет из фактурной кожи — для повседневного гардероба, офиса и спокойных вечерних выходов. Силуэт остаётся собранным и лёгким в повседневной носке.\n\nУниверсальный городской силуэт. Внутри — место для телефона, кошелька, ключей и небольшой косметики. В наличии: доставка 1–3 дня.",
@@ -1088,9 +1085,9 @@ const productCopyBySlug: Record<string, ProductLocalizedCopy> = {
   },
   "womens-pebbled-leather-contrast-trim-structured-top-handle-bag": {
     "title": {
-      "ru": "Ninette — структурная сумка с контрастной окантовкой",
-      "ro": "Ninette — geantă",
-      "en": "Ninette — handbag"
+      "ru": "Ninette",
+      "ro": "Ninette",
+      "en": "Ninette"
     },
     "description": {
       "ru": "Ninette — структурная сумка с контрастной окантовкой из фактурной кожи — для повседневного гардероба, офиса и спокойных вечерних выходов. Силуэт остаётся собранным и лёгким в повседневной носке.\n\nУниверсальный городской силуэт. Внутри — место для телефона, кошелька, ключей и небольшой косметики. В наличии: доставка 1–3 дня.",
@@ -1100,9 +1097,9 @@ const productCopyBySlug: Record<string, ProductLocalizedCopy> = {
   },
   "womens-pebbled-leather-contrast-trim-turn-lock-structured-top-handle-bag": {
     "title": {
-      "ru": "Thea — структурная сумка с поворотным замком",
-      "ro": "Thea — geantă",
-      "en": "Thea — handbag"
+      "ru": "Thea",
+      "ro": "Thea",
+      "en": "Thea"
     },
     "description": {
       "ru": "Thea — структурная сумка с поворотным замком из фактурной кожи — для повседневного гардероба, офиса и спокойных вечерних выходов. Силуэт остаётся собранным и лёгким в повседневной носке.\n\nАккуратный поворотный замок. Внутри — место для телефона, кошелька, ключей и небольшой косметики. В наличии: доставка 1–3 дня.",
@@ -1112,9 +1109,9 @@ const productCopyBySlug: Record<string, ProductLocalizedCopy> = {
   },
   "womens-pebbled-leather-crescent-hobo-bag": {
     "title": {
-      "ru": "Colline — сумка хобо полумесяцем",
-      "ro": "Colline — geantă",
-      "en": "Colline — handbag"
+      "ru": "Colline",
+      "ro": "Colline",
+      "en": "Colline"
     },
     "description": {
       "ru": "Colline — сумка хобо полумесяцем из фактурной кожи — для повседневного гардероба, офиса и спокойных вечерних выходов. Силуэт остаётся собранным и лёгким в повседневной носке.\n\nУниверсальный городской силуэт. Внутри — место для телефона, кошелька, ключей и небольшой косметики. В наличии: доставка 1–3 дня.",
@@ -1124,9 +1121,9 @@ const productCopyBySlug: Record<string, ProductLocalizedCopy> = {
   },
   "womens-pebbled-leather-drawstring-tote-bag": {
     "title": {
-      "ru": "Maelle — тоут на завязках",
-      "ro": "Maelle — geantă tote",
-      "en": "Maelle — tote bag"
+      "ru": "Maelle",
+      "ro": "Maelle",
+      "en": "Maelle"
     },
     "description": {
       "ru": "Maelle — тоут на завязках из фактурной кожи — для работы, поездок по городу и дней, когда нужно взять с собой больше обычного. Силуэт остаётся собранным и лёгким в повседневной носке.\n\nВнутри — место для телефона, кошелька, ключей и небольшой косметики. В наличии: доставка 1–3 дня.",
@@ -1136,9 +1133,9 @@ const productCopyBySlug: Record<string, ProductLocalizedCopy> = {
   },
   "womens-pebbled-leather-half-moon-shoulder-bag": {
     "title": {
-      "ru": "Livia — сумка полумесяц на плечо",
-      "ro": "Livia — geantă de umăr",
-      "en": "Livia — shoulder bag"
+      "ru": "Livia",
+      "ro": "Livia",
+      "en": "Livia"
     },
     "description": {
       "ru": "Livia — сумка полумесяц на плечо из фактурной кожи — для городского дня, встреч и образов, где важны свобода движения и аккуратный силуэт. Силуэт остаётся собранным и лёгким в повседневной носке.\n\nУдобно носить на плече. Внутри — место для телефона, кошелька, ключей и небольшой косметики. В наличии: доставка 1–3 дня.",
@@ -1148,9 +1145,9 @@ const productCopyBySlug: Record<string, ProductLocalizedCopy> = {
   },
   "womens-pebbled-leather-kiss-lock-pouch-bag-ivory": {
     "title": {
-      "ru": "Cassia — клатч с рамочным замком",
-      "ro": "Cassia — clutch cu încuietoare tip cadru",
-      "en": "Cassia — kiss-lock clutch"
+      "ru": "Cassia",
+      "ro": "Cassia",
+      "en": "Cassia"
     },
     "description": {
       "ru": "Cassia — компактный клатч с рамочным замком из фактурной кожи с мягкой драпировкой — для повседневного гардероба, офиса и спокойных вечерних выходов. Силуэт остаётся собранным и лёгким в повседневной носке.\n\nВнутри — место для телефона, кошелька, ключей и небольшой косметики. В наличии: доставка 1–3 дня.",
@@ -1160,9 +1157,9 @@ const productCopyBySlug: Record<string, ProductLocalizedCopy> = {
   },
   "womens-pleated-leather-frame-clutch": {
     "title": {
-      "ru": "Fiamma — клатч с металлической рамкой",
-      "ro": "Fiamma — clutch cu cadru metalic",
-      "en": "Fiamma — metal-frame clutch"
+      "ru": "Fiamma",
+      "ro": "Fiamma",
+      "en": "Fiamma"
     },
     "description": {
       "ru": "Fiamma — мягкий клатч с вертикальной драпировкой и геометричной металлической рамкой-ручкой. Магнитная застёжка, просторное отделение и съёмный регулируемый плечевой ремень.\n\nНосить в руке за рамку или через плечо на ремне. Доставка 7–14 дней.",
@@ -1172,9 +1169,9 @@ const productCopyBySlug: Record<string, ProductLocalizedCopy> = {
   },
   "womens-pebbled-leather-side-drawstring-shoulder-bag": {
     "title": {
-      "ru": "Gioia — сумка на плечо с боковыми завязками",
-      "ro": "Gioia — geantă de umăr cu șnururi laterale",
-      "en": "Gioia — side-drawstring shoulder bag"
+      "ru": "Gioia",
+      "ro": "Gioia",
+      "en": "Gioia"
     },
     "description": {
       "ru": "Gioia — сумка на плечо из зернистой кожи с тонкими ремнями и декоративными боковыми завязками с золотыми наконечниками. Верх на молнии, одно просторное отделение.\n\nУдлинённый силуэт для города. Доставка 7–14 дней.",
@@ -1184,9 +1181,9 @@ const productCopyBySlug: Record<string, ProductLocalizedCopy> = {
   },
   "womens-pebbled-leather-two-tone-bowling-bag": {
     "title": {
-      "ru": "Giorgia — боулинг-сумка двухцветная",
-      "ro": "Giorgia — geantă bowling bicoloră",
-      "en": "Giorgia — two-tone bowling bag"
+      "ru": "Giorgia",
+      "ro": "Giorgia",
+      "en": "Giorgia"
     },
     "description": {
       "ru": "Giorgia — структурная боулинг-сумка из зернистой кожи. Доступна в двухцветном сочетании taupe и однотонных оттенках. Верх на молнии, просторное отделение с карманом, золотая фурнитура.\n\nСобранный силуэт для города. Доставка 7–14 дней.",
@@ -1196,9 +1193,9 @@ const productCopyBySlug: Record<string, ProductLocalizedCopy> = {
   },
   "womens-pebbled-leather-kiss-lock-pouch-bag-light-blue": {
     "title": {
-      "ru": "Paloma — сумка с фермуаром",
-      "ro": "Paloma — geantă cu fermuar",
-      "en": "Paloma — kiss-lock bag"
+      "ru": "Paloma",
+      "ro": "Paloma",
+      "en": "Paloma"
     },
     "description": {
       "ru": "Paloma — структурная сумка с рамочным замком из фактурной кожи — для повседневного гардероба, офиса и спокойных вечерних выходов. Силуэт остаётся собранным и лёгким в повседневной носке.\n\nВнутри — место для телефона, кошелька, ключей и небольшой косметики. В наличии: доставка 1–3 дня.",
@@ -1208,9 +1205,9 @@ const productCopyBySlug: Record<string, ProductLocalizedCopy> = {
   },
   "womens-pebbled-leather-rectangular-handbag": {
     "title": {
-      "ru": "Aurea — прямоугольная сумка в руке",
-      "ro": "Aurea — geantă",
-      "en": "Aurea — handbag"
+      "ru": "Aurea",
+      "ro": "Aurea",
+      "en": "Aurea"
     },
     "description": {
       "ru": "Aurea — прямоугольная сумка в руке из фактурной кожи — для повседневного гардероба, офиса и спокойных вечерних выходов. Силуэт остаётся собранным и лёгким в повседневной носке.\n\nУниверсальный городской силуэт. Внутри — место для телефона, кошелька, ключей и небольшой косметики. В наличии: доставка 1–3 дня.",
@@ -1220,9 +1217,9 @@ const productCopyBySlug: Record<string, ProductLocalizedCopy> = {
   },
   "womens-pebbled-leather-satchel-bag": {
     "title": {
-      "ru": "Halle — сумка-сэтчел",
-      "ro": "Halle — geantă",
-      "en": "Halle — handbag"
+      "ru": "Halle",
+      "ro": "Halle",
+      "en": "Halle"
     },
     "description": {
       "ru": "Halle — сумка-сэтчел из фактурной кожи — для повседневного гардероба, офиса и спокойных вечерних выходов. Силуэт остаётся собранным и лёгким в повседневной носке.\n\nУниверсальный городской силуэт. Внутри — место для телефона, кошелька, ключей и небольшой косметики. В наличии: доставка 1–3 дня.",
@@ -1232,9 +1229,9 @@ const productCopyBySlug: Record<string, ProductLocalizedCopy> = {
   },
   "womens-pebbled-leather-structured-handbag": {
     "title": {
-      "ru": "Romilly — структурная сумка в руке",
-      "ro": "Romilly — geantă",
-      "en": "Romilly — handbag"
+      "ru": "Romilly",
+      "ro": "Romilly",
+      "en": "Romilly"
     },
     "description": {
       "ru": "Romilly — структурная сумка в руке из фактурной кожи — для повседневного гардероба, офиса и спокойных вечерних выходов. Силуэт остаётся собранным и лёгким в повседневной носке.\n\nУниверсальный городской силуэт. Внутри — место для телефона, кошелька, ключей и небольшой косметики. В наличии: доставка 1–3 дня.",
@@ -1244,9 +1241,9 @@ const productCopyBySlug: Record<string, ProductLocalizedCopy> = {
   },
   "womens-pebbled-leather-structured-shopper-tote": {
     "title": {
-      "ru": "Vespera — структурный шоппер-тоут",
-      "ro": "Vespera — geantă tote",
-      "en": "Vespera — tote bag"
+      "ru": "Vespera",
+      "ro": "Vespera",
+      "en": "Vespera"
     },
     "description": {
       "ru": "Vespera — структурный шоппер-тоут из фактурной кожи — для работы, поездок по городу и дней, когда нужно взять с собой больше обычного. Силуэт остаётся собранным и лёгким в повседневной носке.\n\nВместительный формат на каждый день. Внутри — место для телефона, кошелька, ключей и небольшой косметики. В наличии: доставка 1–3 дня.",
@@ -1256,9 +1253,9 @@ const productCopyBySlug: Record<string, ProductLocalizedCopy> = {
   },
   "womens-pebbled-leather-structured-tote-bag-with-pouch": {
     "title": {
-      "ru": "Marielle — тоут с коcmетичкой",
-      "ro": "Marielle — geantă tote",
-      "en": "Marielle — tote bag"
+      "ru": "Marielle",
+      "ro": "Marielle",
+      "en": "Marielle"
     },
     "description": {
       "ru": "Marielle — тоут с коcmетичкой из фактурной кожи — для работы, поездок по городу и дней, когда нужно взять с собой больше обычного. Силуэт остаётся собранным и лёгким в повседневной носке.\n\nВместительный формат на каждый день. Внутри — место для телефона, кошелька, ключей и небольшой косметики. В наличии: доставка 1–3 дня.",
@@ -1268,9 +1265,9 @@ const productCopyBySlug: Record<string, ProductLocalizedCopy> = {
   },
   "womens-pebbled-leather-tote-bag": {
     "title": {
-      "ru": "Fiorenza — сумка-тоут",
-      "ro": "Fiorenza — geantă tote",
-      "en": "Fiorenza — tote bag"
+      "ru": "Fiorenza",
+      "ro": "Fiorenza",
+      "en": "Fiorenza"
     },
     "description": {
       "ru": "Fiorenza — сумка-тоут из фактурной кожи — для работы, поездок по городу и дней, когда нужно взять с собой больше обычного. Силуэт остаётся собранным и лёгким в повседневной носке.\n\nВместительный формат на каждый день. Внутри — место для телефона, кошелька, ключей и небольшой косметики. В наличии: доставка 1–3 дня.",
@@ -1280,9 +1277,9 @@ const productCopyBySlug: Record<string, ProductLocalizedCopy> = {
   },
   "womens-pebbled-leather-turn-lock-flap-shoulder-bag-black": {
     "title": {
-      "ru": "Colette — сумка на плечо с клапаном на замке",
-      "ro": "Colette — geantă de umăr cu clapetă și încuietoare",
-      "en": "Colette — turn-lock flap shoulder bag"
+      "ru": "Colette",
+      "ro": "Colette",
+      "en": "Colette"
     },
     "description": {
       "ru": "Colette — сумка на плечо с клапаном на замке из фактурной кожи — для городского дня, встреч и образов, где важны свобода движения и аккуратный силуэт. Силуэт остаётся собранным и лёгким в повседневной носке.\n\nВнутри — место для телефона, кошелька, ключей и небольшой косметики. В наличии: доставка 1–3 дня.",
@@ -1292,9 +1289,9 @@ const productCopyBySlug: Record<string, ProductLocalizedCopy> = {
   },
   "womens-pebbled-leather-turn-lock-flap-shoulder-tote-bag": {
     "title": {
-      "ru": "Loretta — тоут с клапаном на замке",
-      "ro": "Loretta — geantă tote",
-      "en": "Loretta — tote bag"
+      "ru": "Loretta",
+      "ro": "Loretta",
+      "en": "Loretta"
     },
     "description": {
       "ru": "Loretta — тоут с клапаном на замке из фактурной кожи — для работы, поездок по городу и дней, когда нужно взять с собой больше обычного. Силуэт остаётся собранным и лёгким в повседневной носке.\n\nАккуратный поворотный замок. Внутри — место для телефона, кошелька, ключей и небольшой косметики. В наличии: доставка 1–3 дня.",
@@ -1304,9 +1301,9 @@ const productCopyBySlug: Record<string, ProductLocalizedCopy> = {
   },
   "womens-pebbled-leather-turn-lock-placket-tote-with-pouch": {
     "title": {
-      "ru": "Cressida — тоут с планкой на замке",
-      "ro": "Cressida — geantă tote",
-      "en": "Cressida — tote bag"
+      "ru": "Cressida",
+      "ro": "Cressida",
+      "en": "Cressida"
     },
     "description": {
       "ru": "Cressida — тоут с планкой на замке из фактурной кожи — для работы, поездок по городу и дней, когда нужно взять с собой больше обычного. Силуэт остаётся собранным и лёгким в повседневной носке.\n\nАккуратный поворотный замок. Внутри — место для телефона, кошелька, ключей и небольшой косметики. В наличии: доставка 1–3 дня.",
@@ -1316,9 +1313,9 @@ const productCopyBySlug: Record<string, ProductLocalizedCopy> = {
   },
   "womens-pebbled-leather-turn-lock-top-handle-bag": {
     "title": {
-      "ru": "Palmira — сумка с поворотным замком",
-      "ro": "Palmira — geantă",
-      "en": "Palmira — handbag"
+      "ru": "Palmira",
+      "ro": "Palmira",
+      "en": "Palmira"
     },
     "description": {
       "ru": "Palmira — сумка с поворотным замком из фактурной кожи — для повседневного гардероба, офиса и спокойных вечерних выходов. Силуэт остаётся собранным и лёгким в повседневной носке.\n\nАккуратный поворотный замок. Внутри — место для телефона, кошелька, ключей и небольшой косметики. В наличии: доставка 1–3 дня.",
@@ -1328,9 +1325,9 @@ const productCopyBySlug: Record<string, ProductLocalizedCopy> = {
   },
   "womens-pebbled-leather-zip-hobo-bag": {
     "title": {
-      "ru": "Amabel — сумка хобо на молнии",
-      "ro": "Amabel — geantă",
-      "en": "Amabel — handbag"
+      "ru": "Amabel",
+      "ro": "Amabel",
+      "en": "Amabel"
     },
     "description": {
       "ru": "Amabel — сумка хобо на молнии из фактурной кожи — для повседневного гардероба, офиса и спокойных вечерних выходов. Силуэт остаётся собранным и лёгким в повседневной носке.\n\nНадёжная застёжка на молнии. Внутри — место для телефона, кошелька, ключей и небольшой косметики. В наличии: доставка 1–3 дня.",
@@ -1340,9 +1337,9 @@ const productCopyBySlug: Record<string, ProductLocalizedCopy> = {
   },
   "womens-smooth-leather-compact-baguette-bag": {
     "title": {
-      "ru": "Ottilie — гладкий компактный багет",
-      "ro": "Ottilie — geantă",
-      "en": "Ottilie — handbag"
+      "ru": "Ottilie",
+      "ro": "Ottilie",
+      "en": "Ottilie"
     },
     "description": {
       "ru": "Ottilie — гладкий компактный багет из гладкой кожи — для повседневного гардероба, офиса и спокойных вечерних выходов. Силуэт остаётся собранным и лёгким в повседневной носке.\n\nУниверсальный городской силуэт. Внутри — место для телефона, кошелька, ключей и небольшой косметики. В наличии: доставка 1–3 дня.",
@@ -1352,9 +1349,9 @@ const productCopyBySlug: Record<string, ProductLocalizedCopy> = {
   },
   "womens-smooth-leather-contrast-trim-flap-shoulder-bag": {
     "title": {
-      "ru": "Perlette — сумка на плечо с клапаном",
-      "ro": "Perlette — geantă de umăr",
-      "en": "Perlette — shoulder bag"
+      "ru": "Perlette",
+      "ro": "Perlette",
+      "en": "Perlette"
     },
     "description": {
       "ru": "Perlette — сумка на плечо с клапаном из гладкой кожи — для городского дня, встреч и образов, где важны свобода движения и аккуратный силуэт. Силуэт остаётся собранным и лёгким в повседневной носке.\n\nВнутри — место для телефона, кошелька, ключей и небольшой косметики. В наличии: доставка 1–3 дня.",
@@ -1364,9 +1361,9 @@ const productCopyBySlug: Record<string, ProductLocalizedCopy> = {
   },
   "womens-smooth-leather-crescent-hobo-bag": {
     "title": {
-      "ru": "Rosalind — гладкая хобо полумесяцем",
-      "ro": "Rosalind — geantă",
-      "en": "Rosalind — handbag"
+      "ru": "Rosalind",
+      "ro": "Rosalind",
+      "en": "Rosalind"
     },
     "description": {
       "ru": "Rosalind — гладкая хобо полумесяцем из гладкой кожи — для повседневного гардероба, офиса и спокойных вечерних выходов. Силуэт остаётся собранным и лёгким в повседневной носке.\n\nУниверсальный городской силуэт. Внутри — место для телефона, кошелька, ключей и небольшой косметики. В наличии: доставка 1–3 дня.",
@@ -1376,9 +1373,9 @@ const productCopyBySlug: Record<string, ProductLocalizedCopy> = {
   },
   "womens-suede-wing-tote-bag": {
     "title": {
-      "ru": "Severine — сумка-тоут из замши",
-      "ro": "Severine — shopper din piele întoarsă",
-      "en": "Severine — suede tote bag"
+      "ru": "Severine",
+      "ro": "Severine",
+      "en": "Severine"
     },
     "description": {
       "ru": "Severine — сумка-тоут из замши с трапециевидным силуэтом и расклешёнными боками. Тонкие кожаные плечевые ремни с декоративными концами и магнитная застёжка — характерные детали модели.\n\nПросторное внутреннее отделение с контрастной подкладкой и косметичка в комплекте делают сумку удобной для повседневной носки. Модель доступна под заказ: срок доставки 7–14 дней.",
@@ -1388,9 +1385,9 @@ const productCopyBySlug: Record<string, ProductLocalizedCopy> = {
   },
   "womens-pebbled-leather-ring-handle-structured-bag": {
     "title": {
-      "ru": "Callista — сумка с кольцевой ручкой",
-      "ro": "Callista — geantă cu mâner circular",
-      "en": "Callista — ring-handle structured bag"
+      "ru": "Callista",
+      "ro": "Callista",
+      "en": "Callista"
     },
     "description": {
       "ru": "Callista — структурная сумка из зернистой кожи с архитектурным силуэтом и кольцевой ручкой. Центральная треугольная панель и боковая молния — характерные детали модели.\n\nСъёмный плечевой ремень позволяет носить сумку в руке или через плечо. Модель доступна под заказ: срок доставки 7–14 дней.",
@@ -1400,9 +1397,9 @@ const productCopyBySlug: Record<string, ProductLocalizedCopy> = {
   },
   "womens-woven-suede-flap-clutch-bag": {
     "title": {
-      "ru": "Damiana — плетёный клатч из замши",
-      "ro": "Damiana — clutch împletit din piele întoarsă",
-      "en": "Damiana — woven suede flap clutch"
+      "ru": "Damiana",
+      "ro": "Damiana",
+      "en": "Damiana"
     },
     "description": {
       "ru": "Damiana — клатч из плетёной замши с диагональным переплетением и клапаном на магнитной кнопке. Тонкий ремешок с декоративными узлами — характерная деталь модели.\n\nПодходит для вечера и повседневных выходов: внутри помещаются телефон, карты и косметика. Модель доступна под заказ: срок доставки 7–14 рабочих дней.",
@@ -1412,9 +1409,9 @@ const productCopyBySlug: Record<string, ProductLocalizedCopy> = {
   },
   "womens-smooth-leather-metal-ring-crescent-hobo-bag": {
     "title": {
-      "ru": "Mirabel — сумка-полумесяц с металлическим кольцом",
-      "ro": "Mirabel — geantă semilună cu inel metalic",
-      "en": "Mirabel — metal-ring crescent hobo bag"
+      "ru": "Mirabel",
+      "ro": "Mirabel",
+      "en": "Mirabel"
     },
     "description": {
       "ru": "Mirabel — сумка-полумесяц из гладкой кожи с округлым силуэтом и встроенным плечевым ремнём. Серебристое декоративное кольцо у нижнего края — характерная деталь модели.\n\nМягкий силуэт без каркаса и одно отделение через верхний проём подходят для повседневного минимума. Модель доступна под заказ: срок доставки 7–14 рабочих дней.",
@@ -1424,9 +1421,9 @@ const productCopyBySlug: Record<string, ProductLocalizedCopy> = {
   },
   "womens-woven-leather-turn-lock-clutch-bag": {
     "title": {
-      "ru": "Annabel — плетёная сумка с замком-вертушкой",
-      "ro": "Annabel — geantă împletită cu incuietoare rotativă",
-      "en": "Annabel — woven leather turn-lock clutch"
+      "ru": "Annabel",
+      "ro": "Annabel",
+      "en": "Annabel"
     },
     "description": {
       "ru": "Annabel — горизонтальная сумка из плетёной кожи с диагональным переплетением и клапаном на замке-вертушке. Плоская верхняя ручка и съёмный плечевой ремень — характерные детали модели.\n\nВытянутый силуэт подходит для вечера и повседневных выходов: внутри помещаются телефон, карты и косметика. Модель доступна под заказ: срок доставки 7–14 рабочих дней.",
@@ -1436,9 +1433,9 @@ const productCopyBySlug: Record<string, ProductLocalizedCopy> = {
   },
   "womens-soft-leather-draped-flap-bag": {
     "title": {
-      "ru": "Solaine — сумка с драпированным клапаном",
-      "ro": "Solaine — geantă de umăr",
-      "en": "Solaine — shoulder bag"
+      "ru": "Solaine",
+      "ro": "Solaine",
+      "en": "Solaine"
     },
     "description": {
       "ru": "Solaine — сумка с драпированным клапаном из натуральной кожи — для городского дня, встреч и образов, где важны свобода движения и аккуратный силуэт. Силуэт остаётся собранным и лёгким в повседневной носке.\n\nУдобно носить на плече. Внутри — место для телефона, кошелька, ключей и небольшой косметики. В наличии: доставка 1–3 дня.",
@@ -1448,9 +1445,9 @@ const productCopyBySlug: Record<string, ProductLocalizedCopy> = {
   },
   "womens-tote-shopper-bag": {
     "title": {
-      "ru": "Adalina — сумка-шоппер",
-      "ro": "Adalina — geantă tote",
-      "en": "Adalina — tote bag"
+      "ru": "Adalina",
+      "ro": "Adalina",
+      "en": "Adalina"
     },
     "description": {
       "ru": "Adalina — сумка-шоппер из натуральной кожи — для работы, поездок по городу и дней, когда нужно взять с собой больше обычного. Силуэт остаётся собранным и лёгким в повседневной носке.\n\nВместительный формат на каждый день. Внутри — место для телефона, кошелька, ключей и небольшой косметики. В наличии: доставка 1–3 дня.",
@@ -1460,9 +1457,9 @@ const productCopyBySlug: Record<string, ProductLocalizedCopy> = {
   },
   "womens-woven-base-drawstring-bucket-bag": {
     "title": {
-      "ru": "Elowen — сумка-мешок с плетёным основанием",
-      "ro": "Elowen — geantă bucket",
-      "en": "Elowen — bucket bag"
+      "ru": "Elowen",
+      "ro": "Elowen",
+      "en": "Elowen"
     },
     "description": {
       "ru": "Elowen — сумка-мешок с плетёным основанием из плетёной фактуры с кожаными деталями — для повседневного гардероба, офиса и спокойных вечерних выходов. Силуэт остаётся собранным и лёгким в повседневной носке.\n\nВнутри — место для телефона, кошелька, ключей и небольшой косметики. В наличии: доставка 1–3 дня.",
@@ -1472,9 +1469,9 @@ const productCopyBySlug: Record<string, ProductLocalizedCopy> = {
   },
   "womens-woven-base-leather-link-handle-hobo-bag": {
     "title": {
-      "ru": "Fantine — хобо с плетёным основанием",
-      "ro": "Fantine — geantă",
-      "en": "Fantine — handbag"
+      "ru": "Fantine",
+      "ro": "Fantine",
+      "en": "Fantine"
     },
     "description": {
       "ru": "Fantine — хобо с плетёным основанием из плетёной фактуры с кожаными деталями — для повседневного гардероба, офиса и спокойных вечерних выходов. Силуэт остаётся собранным и лёгким в повседневной носке.\n\nУниверсальный городской силуэт. Внутри — место для телефона, кошелька, ключей и небольшой косметики. В наличии: доставка 1–3 дня.",
@@ -1484,9 +1481,9 @@ const productCopyBySlug: Record<string, ProductLocalizedCopy> = {
   },
   "womens-woven-base-open-top-structured-bag-with-pouch": {
     "title": {
-      "ru": "Garance — структурная сумка с плетёным основанием",
-      "ro": "Garance — geantă tote",
-      "en": "Garance — tote bag"
+      "ru": "Garance",
+      "ro": "Garance",
+      "en": "Garance"
     },
     "description": {
       "ru": "Garance — структурная сумка с плетёным основанием из плетёной фактуры с кожаными деталями — для работы, поездок по городу и дней, когда нужно взять с собой больше обычного. Силуэт остаётся собранным и лёгким в повседневной носке.\n\nВместительный формат на каждый день. Внутри — место для телефона, кошелька, ключей и небольшой косметики. В наличии: доставка 1–3 дня.",
@@ -1496,9 +1493,9 @@ const productCopyBySlug: Record<string, ProductLocalizedCopy> = {
   },
   "womens-woven-base-round-bucket-bag": {
     "title": {
-      "ru": "Herminie — круглая сумка-мешок",
-      "ro": "Herminie — geantă bucket",
-      "en": "Herminie — bucket bag"
+      "ru": "Herminie",
+      "ro": "Herminie",
+      "en": "Herminie"
     },
     "description": {
       "ru": "Herminie — круглая сумка-мешок из плетёной фактуры с кожаными деталями — для повседневного гардероба, офиса и спокойных вечерних выходов. Силуэт остаётся собранным и лёгким в повседневной носке.\n\nВнутри — место для телефона, кошелька, ключей и небольшой косметики. В наличии: доставка 1–3 дня.",
@@ -1508,9 +1505,9 @@ const productCopyBySlug: Record<string, ProductLocalizedCopy> = {
   },
   "womens-woven-base-turn-lock-top-handle-bag": {
     "title": {
-      "ru": "Isolde — сумка с плетёным основанием и замком",
-      "ro": "Isolde — geantă",
-      "en": "Isolde — handbag"
+      "ru": "Isolde",
+      "ro": "Isolde",
+      "en": "Isolde"
     },
     "description": {
       "ru": "Isolde — сумка с плетёным основанием и замком из плетёной фактуры с кожаными деталями — для повседневного гардероба, офиса и спокойных вечерних выходов. Силуэт остаётся собранным и лёгким в повседневной носке.\n\nАккуратный поворотный замок. Внутри — место для телефона, кошелька, ключей и небольшой косметики. В наличии: доставка 1–3 дня.",
@@ -1520,9 +1517,9 @@ const productCopyBySlug: Record<string, ProductLocalizedCopy> = {
   },
   "womens-woven-base-zip-top-compact-structured-bag": {
     "title": {
-      "ru": "Jacinta — компактная структурная сумка на молнии",
-      "ro": "Jacinta — geantă",
-      "en": "Jacinta — handbag"
+      "ru": "Jacinta",
+      "ro": "Jacinta",
+      "en": "Jacinta"
     },
     "description": {
       "ru": "Jacinta — компактная структурная сумка на молнии из плетёной фактуры с кожаными деталями — для повседневного гардероба, офиса и спокойных вечерних выходов. Силуэт остаётся собранным и лёгким в повседневной носке.\n\nНадёжная застёжка на молнии. Внутри — место для телефона, кошелька, ключей и небольшой косметики. В наличии: доставка 1–3 дня.",
@@ -1532,9 +1529,9 @@ const productCopyBySlug: Record<string, ProductLocalizedCopy> = {
   },
   "womens-woven-base-zip-top-structured-bag": {
     "title": {
-      "ru": "Kalina — структурная сумка на молнии",
-      "ro": "Kalina — geantă",
-      "en": "Kalina — handbag"
+      "ru": "Kalina",
+      "ro": "Kalina",
+      "en": "Kalina"
     },
     "description": {
       "ru": "Kalina — структурная сумка на молнии из плетёной фактуры с кожаными деталями — для повседневного гардероба, офиса и спокойных вечерних выходов. Силуэт остаётся собранным и лёгким в повседневной носке.\n\nНадёжная застёжка на молнии. Внутри — место для телефона, кошелька, ключей и небольшой косметики. В наличии: доставка 1–3 дня.",
@@ -1544,9 +1541,9 @@ const productCopyBySlug: Record<string, ProductLocalizedCopy> = {
   },
   "womens-woven-buckle-handle-tote-bag": {
     "title": {
-      "ru": "Lisette — тоут с пряжкой на ручке",
-      "ro": "Lisette — geantă tote",
-      "en": "Lisette — tote bag"
+      "ru": "Lisette",
+      "ro": "Lisette",
+      "en": "Lisette"
     },
     "description": {
       "ru": "Lisette — тоут с пряжкой на ручке из плетёной фактуры с кожаными деталями — для работы, поездок по городу и дней, когда нужно взять с собой больше обычного. Силуэт остаётся собранным и лёгким в повседневной носке.\n\nВместительный формат на каждый день. Внутри — место для телефона, кошелька, ключей и небольшой косметики. В наличии: доставка 1–3 дня.",
@@ -1556,9 +1553,9 @@ const productCopyBySlug: Record<string, ProductLocalizedCopy> = {
   },
   "womens-woven-crescent-hobo-bag": {
     "title": {
-      "ru": "Manon — плетёная хобо полумесяцем",
-      "ro": "Manon — geantă",
-      "en": "Manon — handbag"
+      "ru": "Manon",
+      "ro": "Manon",
+      "en": "Manon"
     },
     "description": {
       "ru": "Manon — плетёная хобо полумесяцем из плетёной фактуры с кожаными деталями — для повседневного гардероба, офиса и спокойных вечерних выходов. Силуэт остаётся собранным и лёгким в повседневной носке.\n\nУниверсальный городской силуэт. Внутри — место для телефона, кошелька, ключей и небольшой косметики. В наличии: доставка 1–3 дня.",
@@ -1568,9 +1565,9 @@ const productCopyBySlug: Record<string, ProductLocalizedCopy> = {
   },
   "womens-woven-flap-top-handle-bag": {
     "title": {
-      "ru": "Noriane — плетёная сумка с клапаном",
-      "ro": "Noriane — geantă",
-      "en": "Noriane — handbag"
+      "ru": "Noriane",
+      "ro": "Noriane",
+      "en": "Noriane"
     },
     "description": {
       "ru": "Noriane — плетёная сумка с клапаном из плетёной фактуры с кожаными деталями — для повседневного гардероба, офиса и спокойных вечерних выходов. Силуэт остаётся собранным и лёгким в повседневной носке.\n\nВнутри — место для телефона, кошелька, ключей и небольшой косметики. В наличии: доставка 1–3 дня.",
@@ -1580,9 +1577,9 @@ const productCopyBySlug: Record<string, ProductLocalizedCopy> = {
   },
   "womens-woven-oval-handle-tote-bag": {
     "title": {
-      "ru": "Oriane — тоут с овальными ручками",
-      "ro": "Oriane — geantă tote",
-      "en": "Oriane — tote bag"
+      "ru": "Oriane",
+      "ro": "Oriane",
+      "en": "Oriane"
     },
     "description": {
       "ru": "Oriane — тоут с овальными ручками из плетёной фактуры с кожаными деталями — для работы, поездок по городу и дней, когда нужно взять с собой больше обычного. Силуэт остаётся собранным и лёгким в повседневной носке.\n\nВместительный формат на каждый день. Внутри — место для телефона, кошелька, ключей и небольшой косметики. В наличии: доставка 1–3 дня.",
@@ -1592,9 +1589,9 @@ const productCopyBySlug: Record<string, ProductLocalizedCopy> = {
   },
   "womens-woven-oval-handle-tote-bag-natural-tan": {
     "title": {
-      "ru": "Celia — тоут с овальными ручками",
-      "ro": "Celia — geantă tote cu mânere ovale",
-      "en": "Celia — oval handle tote bag"
+      "ru": "Celia",
+      "ro": "Celia",
+      "en": "Celia"
     },
     "description": {
       "ru": "Celia — тоут с овальными ручками и плетёной фактурой полотна. Лёгкий открытый силуэт подойдёт для повседневных выходов, прогулок и тёплого сезона.\n\nВнутри одно просторное отделение для телефона, кошелька, ключей и небольших аксессуаров. Модель есть в наличии: доставим за 1–3 дня.",
@@ -1604,9 +1601,9 @@ const productCopyBySlug: Record<string, ProductLocalizedCopy> = {
   },
   "womens-woven-oval-handle-tote-bag-mokko": {
     "title": {
-      "ru": "Roxane — тоут с овальными ручками",
-      "ro": "Roxane — geantă tote cu mânere ovale",
-      "en": "Roxane — oval handle tote bag"
+      "ru": "Roxane",
+      "ro": "Roxane",
+      "en": "Roxane"
     },
     "description": {
       "ru": "Roxane — тоут с овальными ручками и плетёной фактурой полотна. Лёгкий открытый силуэт подойдёт для повседневных выходов, прогулок и тёплого сезона.\n\nВнутри одно просторное отделение для телефона, кошелька, ключей и небольших аксессуаров. Модель есть в наличии: доставим за 1–3 дня.",
@@ -1616,9 +1613,9 @@ const productCopyBySlug: Record<string, ProductLocalizedCopy> = {
   },
   "womens-woven-panel-crystal-accent-structured-top-handle-bag": {
     "title": {
-      "ru": "Pernelle — структурная сумка с декоративной вставкой",
-      "ro": "Pernelle — geantă",
-      "en": "Pernelle — handbag"
+      "ru": "Pernelle",
+      "ro": "Pernelle",
+      "en": "Pernelle"
     },
     "description": {
       "ru": "Pernelle — структурная сумка с декоративной вставкой из плетёной фактуры с кожаными деталями — для повседневного гардероба, офиса и спокойных вечерних выходов. Силуэт остаётся собранным и лёгким в повседневной носке.\n\nУниверсальный городской силуэт. Внутри — место для телефона, кошелька, ключей и небольшой косметики. В наличии: доставка 1–3 дня.",
@@ -1628,9 +1625,9 @@ const productCopyBySlug: Record<string, ProductLocalizedCopy> = {
   },
   "womens-woven-panel-pebbled-leather-top-handle-bag": {
     "title": {
-      "ru": "Aveline — сумка с плетёной панелью",
-      "ro": "Aveline — geantă",
-      "en": "Aveline — handbag"
+      "ru": "Aveline",
+      "ro": "Aveline",
+      "en": "Aveline"
     },
     "description": {
       "ru": "Aveline — сумка с плетёной панелью из плетёной фактуры с кожаными деталями — для повседневного гардероба, офиса и спокойных вечерних выходов. Силуэт остаётся собранным и лёгким в повседневной носке.\n\nУниверсальный городской силуэт. Внутри — место для телефона, кошелька, ключей и небольшой косметики. В наличии: доставка 1–3 дня.",
@@ -1640,9 +1637,9 @@ const productCopyBySlug: Record<string, ProductLocalizedCopy> = {
   },
   "womens-woven-spiral-panel-shoulder-tote-bag": {
     "title": {
-      "ru": "Cendrine — тоут со спиральным плетением",
-      "ro": "Cendrine — geantă tote",
-      "en": "Cendrine — tote bag"
+      "ru": "Cendrine",
+      "ro": "Cendrine",
+      "en": "Cendrine"
     },
     "description": {
       "ru": "Cendrine — тоут со спиральным плетением из плетёной фактуры с кожаными деталями — для работы, поездок по городу и дней, когда нужно взять с собой больше обычного. Силуэт остаётся собранным и лёгким в повседневной носке.\n\nВместительный формат на каждый день. Внутри — место для телефона, кошелька, ключей и небольшой косметики. В наличии: доставка 1–3 дня.",
@@ -1652,9 +1649,9 @@ const productCopyBySlug: Record<string, ProductLocalizedCopy> = {
   },
   "womens-woven-triangular-shoulder-bag": {
     "title": {
-      "ru": "Dorine — плетёная сумка треугольной формы",
-      "ro": "Dorine — geantă de umăr",
-      "en": "Dorine — shoulder bag"
+      "ru": "Dorine",
+      "ro": "Dorine",
+      "en": "Dorine"
     },
     "description": {
       "ru": "Dorine — плетёная сумка треугольной формы из плетёной фактуры с кожаными деталями — для городского дня, встреч и образов, где важны свобода движения и аккуратный силуэт. Силуэт остаётся собранным и лёгким в повседневной носке.\n\nУдобно носить на плече. Внутри — место для телефона, кошелька, ключей и небольшой косметики. В наличии: доставка 1–3 дня.",
@@ -1664,9 +1661,9 @@ const productCopyBySlug: Record<string, ProductLocalizedCopy> = {
   },
   "womens-woven-zip-crossbody-bag": {
     "title": {
-      "ru": "Gwenaelle — плетёная сумка кроссбоди",
-      "ro": "Gwenaelle — geantă crossbody",
-      "en": "Gwenaelle — crossbody bag"
+      "ru": "Gwenaelle",
+      "ro": "Gwenaelle",
+      "en": "Gwenaelle"
     },
     "description": {
       "ru": "Gwenaelle — плетёная сумка кроссбоди из плетёной фактуры с кожаными деталями — для повседневного гардероба, офиса и спокойных вечерних выходов. Силуэт остаётся собранным и лёгким в повседневной носке.\n\nНадёжная застёжка на молнии. Внутри — место для телефона, кошелька, ключей и небольшой косметики. В наличии: доставка 1–3 дня.",
@@ -1772,9 +1769,9 @@ const productCopyBySlug: Record<string, ProductLocalizedCopy> = {
   },
   "womens-full-grain-leather-zip-around-wallet": {
     "title": {
-      "ru": "Francesca — кошелёк на молнии",
-      "ro": "Francesca — portofel pentru femei",
-      "en": "Francesca — women's wallet"
+      "ru": "Francesca",
+      "ro": "Francesca",
+      "en": "Francesca"
     },
     "description": {
       "ru": "Francesca — кошелёк на молнии из натуральной кожи — для повседневного гардероба, офиса и спокойных вечерних выходов. Силуэт остаётся собранным и лёгким в повседневной носке.\n\nНадёжная застёжка на молнии. Внутри — место для телефона, кошелька, ключей и небольшой косметики. В наличии: доставка 1–3 дня.",
@@ -1784,9 +1781,9 @@ const productCopyBySlug: Record<string, ProductLocalizedCopy> = {
   },
   "womens-flap-leather-trifold-wallet": {
     "title": {
-      "ru": "Federica — кошелёк на клапане",
-      "ro": "Federica — portofel cu clapă",
-      "en": "Federica — flap wallet"
+      "ru": "Federica",
+      "ro": "Federica",
+      "en": "Federica"
     },
     "description": {
       "ru": "Federica — трёхсложный кошелёк с клапаном на кнопке. Внутри — отделения для карт и купюр, окно для документов, монетница на кнопке и карман на молнии. Зернистая кожа с винтажной фактурой.\n\nМодель есть в наличии: доставим за 1–3 дня.",
@@ -1796,9 +1793,9 @@ const productCopyBySlug: Record<string, ProductLocalizedCopy> = {
   },
   "womens-woven-flap-trifold-wallet": {
     "title": {
-      "ru": "Fabiana — плетёный кошелёк на клапане",
-      "ro": "Fabiana — portofel împletit cu clapă",
-      "en": "Fabiana — woven flap wallet"
+      "ru": "Fabiana",
+      "ro": "Fabiana",
+      "en": "Fabiana"
     },
     "description": {
       "ru": "Fabiana — трёхсложный кошелёк с клапаном и плетением intrecciato. Внутри — отделения для карт и купюр, окно для документов, монетница на кнопке и карман на молнии.\n\nВыразительная фактура плетёной кожи делает аксессуар заметным даже в минималистичном образе. Модель есть в наличии: доставим за 1–3 дня.",
@@ -1808,9 +1805,9 @@ const productCopyBySlug: Record<string, ProductLocalizedCopy> = {
   },
   "womens-vintage-accordion-zip-wallet": {
     "title": {
-      "ru": "Giulietta — кошелёк-гармошка на молнии",
-      "ro": "Giulietta — portofel pentru femei",
-      "en": "Giulietta — women's wallet"
+      "ru": "Giulietta",
+      "ro": "Giulietta",
+      "en": "Giulietta"
     },
     "description": {
       "ru": "Giulietta — кошелёк-гармошка на молнии из натуральной кожи — для повседневного гардероба, офиса и спокойных вечерних выходов. Силуэт остаётся собранным и лёгким в повседневной носке.\n\nНадёжная застёжка на молнии. Внутри — место для телефона, кошелька, ключей и небольшой косметики. В наличии: доставка 1–3 дня.",
@@ -1820,9 +1817,9 @@ const productCopyBySlug: Record<string, ProductLocalizedCopy> = {
   },
   "womens-woven-leather-zip-around-wallet": {
     "title": {
-      "ru": "Seraphina — плетёный кошелёк на молнии",
-      "ro": "Seraphina — portofel împletit cu fermoar",
-      "en": "Seraphina — woven zip-around wallet"
+      "ru": "Seraphina",
+      "ro": "Seraphina",
+      "en": "Seraphina"
     },
     "description": {
       "ru": "Seraphina — плетёный кошелёк на молнии с фирменным переплетением intrecciato. Молния по периметру надёжно закрывает карты, купюры и мелочь; внутри — отделения для карт, окно для документов и монетница.\n\nВыразительная фактура плетёной кожи делает аксессуар заметным даже в минималистичном образе. Модель есть в наличии: доставим за 1–3 дня.",
@@ -1832,9 +1829,9 @@ const productCopyBySlug: Record<string, ProductLocalizedCopy> = {
   },
   "womens-woven-leather-zip-snap-wallet": {
     "title": {
-      "ru": "Flavia — плетёный кошелёк на молнии с кнопкой",
-      "ro": "Flavia — portofel împletit cu fermoar și capsă",
-      "en": "Flavia — woven zip snap wallet"
+      "ru": "Flavia",
+      "ro": "Flavia",
+      "en": "Flavia"
     },
     "description": {
       "ru": "Flavia — кошелёк с плетением intrecciato, молнией по периметру и ремешком на кнопке для дополнительной фиксации. Внутри — отделения для карт, окно для документов и монетница на молнии.\n\nВыразительная фактура плетёной кожи и насыщенный оттенок делают аксессуар заметным акцентом в образе. Модель есть в наличии: доставим за 1–3 дня.",
@@ -1844,9 +1841,9 @@ const productCopyBySlug: Record<string, ProductLocalizedCopy> = {
   },
   "la-via-firenze-bat-bag-charm": {
     "title": {
-      "ru": "Bat — брелок для сумки La Via Firenze",
-      "ro": "Bat — breloc La Via Firenze",
-      "en": "Bat — La Via Firenze bag charm"
+      "ru": "Bat",
+      "ro": "Bat",
+      "en": "Bat"
     },
     "description": {
       "ru": "Брелок La Via Firenze в форме летучей мыши из зернистой чёрной кожи с жёлтой кожаной маской. Кожаный шнур, золотая цепочка и миниатюрный ключ с гравировкой LA VIA — характерная подпись бренда.\n\nКрепится на карабин к ручке или ремню сумки. Поставляется на фирменной карточке Made in Italy. Модель есть в наличии: доставим за 1–3 дня.",
@@ -1856,9 +1853,9 @@ const productCopyBySlug: Record<string, ProductLocalizedCopy> = {
   },
   "la-via-firenze-flower-bag-charm": {
     "title": {
-      "ru": "Flower — брелок для сумки La Via Firenze",
-      "ro": "Flower — breloc La Via Firenze",
-      "en": "Flower — La Via Firenze bag charm"
+      "ru": "Flower",
+      "ro": "Flower",
+      "en": "Flower"
     },
     "description": {
       "ru": "Брелок La Via Firenze с многослойным цветком из чёрной, коньячной и белой кожи. Кремовый кожаный шнур с декоративным узлом, золотая цепочка и миниатюрный ключ с гравировкой LA VIA.\n\nКрепится на карабин к ручке или ремню сумки. Поставляется на фирменной карточке Made in Italy. Модель есть в наличии: доставим за 1–3 дня.",
@@ -1868,9 +1865,9 @@ const productCopyBySlug: Record<string, ProductLocalizedCopy> = {
   },
   "la-via-firenze-cat-bag-charm": {
     "title": {
-      "ru": "Cat — брелок для сумки La Via Firenze",
-      "ro": "Cat — breloc La Via Firenze",
-      "en": "Cat — La Via Firenze bag charm"
+      "ru": "Cat",
+      "ro": "Cat",
+      "en": "Cat"
     },
     "description": {
       "ru": "Брелок La Via Firenze с мордочкой кота из чёрной и белой кожи, декоративным бантом из принтованного шёлка и золотой цепочкой с ключом LA VIA.\n\nКрепится на карабин к ручке или ремню сумки. Поставляется на фирменной карточке Made in Italy. Модель есть в наличии: доставим за 1–3 дня.",
@@ -1880,9 +1877,9 @@ const productCopyBySlug: Record<string, ProductLocalizedCopy> = {
   },
   "la-via-firenze-bear-bag-charm": {
     "title": {
-      "ru": "Bear — брелок для сумки La Via Firenze",
-      "ro": "Bear — breloc La Via Firenze",
-      "en": "Bear — La Via Firenze bag charm"
+      "ru": "Bear",
+      "ro": "Bear",
+      "en": "Bear"
     },
     "description": {
       "ru": "Брелок La Via Firenze в форме медвежонка из коньячной кожи с тёмно-коричневыми акцентами на ушах и лапках. Золотая цепочка с кожаной вставкой и ключ с гравировкой LA VIA.\n\nКрепится на карабин к ручке или ремню сумки. Поставляется на фирменной карточке Made in Italy. Модель есть в наличии: доставим за 1–3 дня.",
@@ -1892,9 +1889,9 @@ const productCopyBySlug: Record<string, ProductLocalizedCopy> = {
   },
   "sora-pegasus-leather-bag-charm": {
     "title": {
-      "ru": "Pegaso — кожаный брелок для сумки",
-      "ro": "Pegaso — breloc din piele",
-      "en": "Pegaso — leather bag charm"
+      "ru": "Pegaso",
+      "ro": "Pegaso",
+      "en": "Pegaso"
     },
     "description": {
       "ru": "Кожаный брелок Pegaso в форме крылатого коня: объёмное тело, крыло, грива и хвост из полосок кожи, контрастная строчка по контуру. Петля на спине крепится на ручку или ремешок сумки.\n\nРучная отделка и насыщенные оттенки — заметный акцент к любой модели. Модель есть в наличии: доставим за 1–3 дня.",
@@ -1904,9 +1901,9 @@ const productCopyBySlug: Record<string, ProductLocalizedCopy> = {
   },
   "sora-dachshund-leather-bag-charm": {
     "title": {
-      "ru": "Bassotto — кожаный брелок для сумки",
-      "ro": "Bassotto — breloc din piele",
-      "en": "Bassotto — leather bag charm"
+      "ru": "Bassotto",
+      "ro": "Bassotto",
+      "en": "Bassotto"
     },
     "description": {
       "ru": "Кожаный брелок Bassotto в форме таксы: вытянутый силуэт, контрастные лапки и мордочка, глаз из белой и чёрной кожи, строчка по контуру. Петля на спине крепится на ручку или ремешок сумки.\n\nИгривый акцент для повседневных и вечерних образов. Модель есть в наличии: доставим за 1–3 дня.",
@@ -1916,9 +1913,9 @@ const productCopyBySlug: Record<string, ProductLocalizedCopy> = {
   },
   "sora-silk-bow-bag-charm": {
     "title": {
-      "ru": "Fiocco — шёлковый брелок-бант",
-      "ro": "Fiocco — breloc fundă din mătase",
-      "en": "Fiocco — silk bow bag charm"
+      "ru": "Fiocco",
+      "ro": "Fiocco",
+      "en": "Fiocco"
     },
     "description": {
       "ru": "Шёлковый брелок-бант на карабине: принтованная лента заплетена у основания и завязана в объёмный бант с заострёнными концами. Золотой карабин крепится к ручке, ремню или молнии сумки.\n\nЛёгкий акцент, который меняет характер базовой модели. Модель есть в наличии: доставим за 1–3 дня.",
@@ -1928,9 +1925,9 @@ const productCopyBySlug: Record<string, ProductLocalizedCopy> = {
   },
   "sora-dachshund-mix-bag-charm": {
     "title": {
-      "ru": "Mix — брелок-набор для сумки",
-      "ro": "Mix — set breloc pentru geantă",
-      "en": "Mix — bag charm set"
+      "ru": "Mix",
+      "ro": "Mix",
+      "en": "Mix"
     },
     "description": {
       "ru": "Брелок-набор на кольце: кожаная такса, миниатюрная «шоколадка», плетёный шнур с узлом, кожаные ремешки и пружинящий шнур с карабином. Несколько элементов на одном кольце — сразу заметный акцент на сумке.\n\nИгривый микс фактур и материалов. Модель есть в наличии: доставим за 1–3 дня.",
@@ -1940,9 +1937,9 @@ const productCopyBySlug: Record<string, ProductLocalizedCopy> = {
   },
   "womens-abstract-geometric-silk-scarf": {
     "title": {
-      "ru": "Serenella — шёлковый платок",
-      "ro": "Serenella — eșarfă din mătase",
-      "en": "Serenella — silk scarf"
+      "ru": "Serenella",
+      "ro": "Serenella",
+      "en": "Serenella"
     },
     "description": {
       "ru": "Квадратный шёлковый платок с абстрактным геометрическим принтом: терракотовые и коралловые формы, графичные круги, контрастные линии и акценты тёмно-синего и чёрного. Лёгкая ткань с мягким блеском держит форму и красиво драпируется — на шее, на сумке или как акцент на плечах.\n\nТонкая ручная отделка по краю делает платок заметным аксессуаром сезона.",
@@ -1957,9 +1954,9 @@ const productCopyBySlug: Record<string, ProductLocalizedCopy> = {
   },
   "womens-lavender-wave-silk-scarf": {
     "title": {
-      "ru": "Marcelline — шёлковый платок",
-      "ro": "Marcelline — eșarfă din mătase",
-      "en": "Marcelline — silk scarf"
+      "ru": "Marcelline",
+      "ro": "Marcelline",
+      "en": "Marcelline"
     },
     "description": {
       "ru": "Квадратный шёлковый платок с абстрактным принтом на лавандовом фоне: волнистые лаймовые штрихи с контрастными тёмными акцентами. Лёгкая ткань с мягким блеском держит форму и красиво драпируется — на шее, на сумке или как акцент на плечах.\n\nТонкая ручная отделка по краю делает платок заметным аксессуаром сезона.",
@@ -1974,9 +1971,9 @@ const productCopyBySlug: Record<string, ProductLocalizedCopy> = {
   },
   "womens-pastel-tie-dye-silk-scarf": {
     "title": {
-      "ru": "Celestina — шёлковый платок",
-      "ro": "Celestina — eșarfă din mătase",
-      "en": "Celestina — silk scarf"
+      "ru": "Celestina",
+      "ro": "Celestina",
+      "en": "Celestina"
     },
     "description": {
       "ru": "Квадратный шёлковый платок с мягким принтом в технике тай-дай: нежные розовые, мятные и лавандовые пятна, плавно переходящие друг в друга на светлом фоне. Лёгкая ткань с мягким блеском держит форму и красиво драпируется — на шее, на сумке или как акцент на плечах.\n\nТонкая ручная отделка по краю делает платок заметным аксессуаром сезона.",
@@ -1991,9 +1988,9 @@ const productCopyBySlug: Record<string, ProductLocalizedCopy> = {
   },
   "womens-aqua-wave-silk-scarf": {
     "title": {
-      "ru": "Marina — шёлковый платок",
-      "ro": "Marina — eșarfă din mătase",
-      "en": "Marina — silk scarf"
+      "ru": "Marina",
+      "ro": "Marina",
+      "en": "Marina"
     },
     "description": {
       "ru": "Квадратный шёлковый платок с абстрактным принтом на аквамариновом фоне: волнистые лаймовые штрихи с контрастными тёмными акцентами, напоминающие движение воды. Лёгкая ткань с мягким блеском держит форму и красиво драпируется — на шее, на сумке или как акцент на плечах.\n\nТонкая ручная отделка по краю делает платок заметным аксессуаром сезона.",
@@ -2008,9 +2005,9 @@ const productCopyBySlug: Record<string, ProductLocalizedCopy> = {
   },
   "womens-slate-geometric-silk-scarf": {
     "title": {
-      "ru": "Costanza — шёлковый платок",
-      "ro": "Costanza — eșarfă din mătase",
-      "en": "Costanza — silk scarf"
+      "ru": "Costanza",
+      "ro": "Costanza",
+      "en": "Costanza"
     },
     "description": {
       "ru": "Квадратный шёлковый платок с графичным абстрактным принтом: сланцево-синие и серые блоки, контрастные белые полосы, коричневые акценты и полукруглые формы. Лёгкая ткань с мягким блеском держит форму и красиво драпируется — на шее, на сумке или как акцент на плечах.\n\nТонкая ручная отделка по краю делает платок заметным аксессуаром сезона.",
@@ -2025,9 +2022,9 @@ const productCopyBySlug: Record<string, ProductLocalizedCopy> = {
   },
   "womens-mustard-wave-silk-scarf": {
     "title": {
-      "ru": "Doriana — шёлковый платок",
-      "ro": "Doriana — eșarfă din mătase",
-      "en": "Doriana — silk scarf"
+      "ru": "Doriana",
+      "ro": "Doriana",
+      "en": "Doriana"
     },
     "description": {
       "ru": "Квадратный шёлковый платок с абстрактным принтом на кремовом фоне: волнистые горчично-жёлтые линии с живописной фактурой. Лёгкая ткань с мягким блеском держит форму и красиво драпируется — на шее, на сумке или как акцент на плечах.\n\nТонкая ручная отделка по краю делает платок заметным аксессуаром сезона.",
@@ -2042,9 +2039,9 @@ const productCopyBySlug: Record<string, ProductLocalizedCopy> = {
   },
   "womens-rainbow-pastel-silk-scarf": {
     "title": {
-      "ru": "Iride — шёлковый платок",
-      "ro": "Iride — eșarfă din mătase",
-      "en": "Iride — silk scarf"
+      "ru": "Iride",
+      "ro": "Iride",
+      "en": "Iride"
     },
     "description": {
       "ru": "Квадратный шёлковый платок с акварельным радужным принтом: нежные розовые, жёлтые, голубые и лавандовые пятна, плавно переходящие друг в друга. Лёгкая ткань с мягким блеском держит форму и красиво драпируется — на шее, на сумке или как акцент на плечах.\n\nТонкая ручная отделка по краю делает платок заметным аксессуаром сезона.",
@@ -2059,9 +2056,9 @@ const productCopyBySlug: Record<string, ProductLocalizedCopy> = {
   },
   "womens-heart-leopard-silk-scarf": {
     "title": {
-      "ru": "Amorette — шёлковый платок",
-      "ro": "Amorette — eșarfă din mătase",
-      "en": "Amorette — silk scarf"
+      "ru": "Amorette",
+      "ro": "Amorette",
+      "en": "Amorette"
     },
     "description": {
       "ru": "Квадратный шёлковый платок с игривым принтом «сердечный леопард»: стилизованные сердца в чёрно-серых тонах на кремовом фоне. Лёгкая ткань с мягким блеском держит форму и красиво драпируется — на шее, на сумке или как акцент на плечах.\n\nТонкая ручная отделка по краю делает платок заметным аксессуаром сезона.",
@@ -2076,9 +2073,9 @@ const productCopyBySlug: Record<string, ProductLocalizedCopy> = {
   },
   "womens-landscape-hills-silk-scarf": {
     "title": {
-      "ru": "Colomba — шёлковый платок",
-      "ro": "Colomba — eșarfă din mătase",
-      "en": "Colomba — silk scarf"
+      "ru": "Colomba",
+      "ro": "Colomba",
+      "en": "Colomba"
     },
     "description": {
       "ru": "Квадратный шёлковый платок с абстрактным пейзажным принтом: волнистые полосы зелёных, охристых и терракотовых оттенков, разделённые графичными чёрными контурами. Лёгкая ткань с мягким блеском держит форму и красиво драпируется — на шее, на сумке или как акцент на плечах.\n\nТонкая ручная отделка по краю делает платок заметным аксессуаром сезона.",
@@ -2093,9 +2090,9 @@ const productCopyBySlug: Record<string, ProductLocalizedCopy> = {
   },
   "womens-grey-stripe-silk-scarf": {
     "title": {
-      "ru": "Nebbia — шёлковый платок",
-      "ro": "Nebbia — eșarfă din mătase",
-      "en": "Nebbia — silk scarf"
+      "ru": "Nebbia",
+      "ro": "Nebbia",
+      "en": "Nebbia"
     },
     "description": {
       "ru": "Квадратный шёлковый платок с фактурным принтом в полоску: мягкий серый тон с вертикальными полосами и лёгкой морщинистой фактурой. Лёгкая ткань с мягким блеском держит форму и красиво драпируется — на шее, на сумке или как акцент на плечах.\n\nТонкая ручная отделка по краю делает платок заметным аксессуаром сезона.",
@@ -2110,9 +2107,9 @@ const productCopyBySlug: Record<string, ProductLocalizedCopy> = {
   },
   "womens-mint-abstract-silk-scarf": {
     "title": {
-      "ru": "Clarissa — шёлковый платок",
-      "ro": "Clarissa — eșarfă din mătase",
-      "en": "Clarissa — silk scarf"
+      "ru": "Clarissa",
+      "ro": "Clarissa",
+      "en": "Clarissa"
     },
     "description": {
       "ru": "Квадратный шёлковый платок с абстрактным принтом на мятном фоне: органические формы в тёмно-зелёных, чёрных и бежевых тонах, круговой мотив и фактурные акценты. Лёгкая ткань с мягким блеском держит форму и красиво драпируется — на шее, на сумке или как акцент на плечах.\n\nТонкая ручная отделка по краю делает платок заметным аксессуаром сезона.",
@@ -2127,9 +2124,9 @@ const productCopyBySlug: Record<string, ProductLocalizedCopy> = {
   },
   "womens-dusty-blue-abstract-silk-scarf": {
     "title": {
-      "ru": "Azzurra — шёлковый платок",
-      "ro": "Azzurra — eșarfă din mătase",
-      "en": "Azzurra — silk scarf"
+      "ru": "Azzurra",
+      "ro": "Azzurra",
+      "en": "Azzurra"
     },
     "description": {
       "ru": "Квадратный шёлковый платок с художественным абстрактным принтом на пыльно-голубом фоне: оливково-зелёные формы, бежевые акценты, круговой мотив и тёмно-коричневые штрихи. Лёгкая ткань с мягким блеском держит форму и красиво драпируется — на шее, на сумке или как акцент на плечах.\n\nТонкая ручная отделка по краю делает платок заметным аксессуаром сезона.",
@@ -2144,9 +2141,9 @@ const productCopyBySlug: Record<string, ProductLocalizedCopy> = {
   },
   "womens-lavender-ink-silk-scarf": {
     "title": {
-      "ru": "Lavinia — шёлковый платок",
-      "ro": "Lavinia — eșarfă din mătase",
-      "en": "Lavinia — silk scarf"
+      "ru": "Lavinia",
+      "ro": "Lavinia",
+      "en": "Lavinia"
     },
     "description": {
       "ru": "Квадратный шёлковый платок с акварельным принтом: мягкие лавандовые, фиолетовые и шалфейно-зелёные пятна с чёрными каплями чернил и фактурными штрихами. Лёгкая ткань с мягким блеском держит форму и красиво драпируется — на шее, на сумке или как акцент на плечах.\n\nТонкая ручная отделка по краю делает платок заметным аксессуаром сезона.",
@@ -2161,9 +2158,9 @@ const productCopyBySlug: Record<string, ProductLocalizedCopy> = {
   },
   "womens-colorful-brushstroke-silk-scarf": {
     "title": {
-      "ru": "Artemisia — шёлковый платок",
-      "ro": "Artemisia — eșarfă din mătase",
-      "en": "Artemisia — silk scarf"
+      "ru": "Artemisia",
+      "ro": "Artemisia",
+      "en": "Artemisia"
     },
     "description": {
       "ru": "Квадратный шёлковый платок с живописным абстрактным принтом: смелые мазки тёмно-синего, жёлтого, лаймового и малинового на светлом фоне. Лёгкая ткань с мягким блеском держит форму и красиво драпируется — на шее, на сумке или как акцент на плечах.\n\nТонкая ручная отделка по краю делает платок заметным аксессуаром сезона.",
@@ -2178,9 +2175,9 @@ const productCopyBySlug: Record<string, ProductLocalizedCopy> = {
   },
   "womens-cherry-print-silk-scarf": {
     "title": {
-      "ru": "Rosetta — шёлковый платок",
-      "ro": "Rosetta — eșarfă din mătase",
-      "en": "Rosetta — silk scarf"
+      "ru": "Rosetta",
+      "ro": "Rosetta",
+      "en": "Rosetta"
     },
     "description": {
       "ru": "Квадратный шёлковый платок с игривым принтом: пары красных вишен с зелёными листьями на пыльно-голубом фоне. Лёгкая ткань с мягким блеском держит форму и красиво драпируется — на шее, на сумке или как акцент на плечах.\n\nТонкая ручная отделка по краю делает платок заметным аксессуаром сезона.",
@@ -2195,9 +2192,9 @@ const productCopyBySlug: Record<string, ProductLocalizedCopy> = {
   },
   "womens-green-geometric-silk-scarf": {
     "title": {
-      "ru": "Verdiana — шёлковый платок",
-      "ro": "Verdiana — eșarfă din mătase",
-      "en": "Verdiana — silk scarf"
+      "ru": "Verdiana",
+      "ro": "Verdiana",
+      "en": "Verdiana"
     },
     "description": {
       "ru": "Квадратный шёлковый платок с графичным абстрактным принтом на зелёном фоне: органические формы, полоски, круговые мотивы и контрастные тёмно-синие акценты. Лёгкая ткань с мягким блеском держит форму и красиво драпируется — на шее, на сумке или как акцент на плечах.\n\nТонкая ручная отделка по краю делает платок заметным аксессуаром сезона.",
@@ -2212,9 +2209,9 @@ const productCopyBySlug: Record<string, ProductLocalizedCopy> = {
   },
   "womens-red-floral-silk-scarf": {
     "title": {
-      "ru": "Fiorina — шёлковый платок",
-      "ro": "Fiorina — eșarfă din mătase",
-      "en": "Fiorina — silk scarf"
+      "ru": "Fiorina",
+      "ro": "Fiorina",
+      "en": "Fiorina"
     },
     "description": {
       "ru": "Квадратный шёлковый платок с художественным цветочным принтом: крупные розовые цветы с чёрными контурами и мелкие линейные мотивы на насыщенном красном фоне. Лёгкая ткань с мягким блеском держит форму и красиво драпируется — на шее, на сумке или как акцент на плечах.\n\nТонкая ручная отделка по краю делает платок заметным аксессуаром сезона.",
@@ -2229,9 +2226,9 @@ const productCopyBySlug: Record<string, ProductLocalizedCopy> = {
   },
   "womens-watercolor-circles-silk-scarf": {
     "title": {
-      "ru": "Cerelia — шёлковый платок",
-      "ro": "Cerelia — eșarfă din mătase",
-      "en": "Cerelia — silk scarf"
+      "ru": "Cerelia",
+      "ro": "Cerelia",
+      "en": "Cerelia"
     },
     "description": {
       "ru": "Квадратный шёлковый платок с акварельным принтом: перекрывающиеся круги розовых, фиолетовых, зелёных и голубых оттенков на светлом фоне. Лёгкая ткань с мягким блеском держит форму и красиво драпируется — на шее, на сумке или как акцент на плечах.\n\nТонкая ручная отделка по краю делает платок заметным аксессуаром сезона.",
@@ -2246,9 +2243,9 @@ const productCopyBySlug: Record<string, ProductLocalizedCopy> = {
   },
   "womens-blue-multicolor-brushstroke-silk-scarf": {
     "title": {
-      "ru": "Teodora — шёлковый платок",
-      "ro": "Teodora — eșarfă din mătase",
-      "en": "Teodora — silk scarf"
+      "ru": "Teodora",
+      "ro": "Teodora",
+      "en": "Teodora"
     },
     "description": {
       "ru": "Квадратный шёлковый платок с живописным абстрактным принтом на синем фоне: многоцветные мазки жёлтого, зелёного, розового и тёмно-синего с фактурной tie-dye отделкой. Лёгкая ткань с мягким блеском держит форму и красиво драпируется — на шее, на сумке или как акцент на плечах.\n\nТонкая ручная отделка по краю делает платок заметным аксессуаром сезона.",
@@ -2263,9 +2260,9 @@ const productCopyBySlug: Record<string, ProductLocalizedCopy> = {
   },
   "womens-whale-print-silk-scarf": {
     "title": {
-      "ru": "Delphina — шёлковый платок",
-      "ro": "Delphina — eșarfă din mătase",
-      "en": "Delphina — silk scarf"
+      "ru": "Delphina",
+      "ro": "Delphina",
+      "en": "Delphina"
     },
     "description": {
       "ru": "Квадратный шёлковый платок с игривым принтом: стилизованные киты в синих и голубых тонах на нейтральном таupe-фоне. Лёгкая ткань с мягким блеском держит форму и красиво драпируется — на шее, на сумке или как акцент на плечах.\n\nТонкая ручная отделка по краю делает платок заметным аксессуаром сезона.",
@@ -2280,9 +2277,9 @@ const productCopyBySlug: Record<string, ProductLocalizedCopy> = {
   },
   "womens-metallic-leather-bifold-cardholder-fuchsia": {
     "title": {
-      "ru": "Rosalia — картхолдер",
-      "ro": "Rosalia — portcard",
-      "en": "Rosalia — card holder"
+      "ru": "Rosalia",
+      "ro": "Rosalia",
+      "en": "Rosalia"
     },
     "description": {
       "ru": "Компактный картхолдер из зернистой кожи с металлическим фуксиевым покрытием: яркий блеск и выразительная фактура без лишнего объёма. Складная конструкция раскрывается на четыре вертикальных слота для карт — по два с каждой стороны.\n\nТональная строчка по контуру, аккуратная окраска торцов и золотое тиснение «Genuine Leather / Made in Italy» внутри подчёркивают итальянское происхождение. Помещается в карман сумки или куртки и хорошо сочетается с вечерними образами.",
@@ -2297,9 +2294,9 @@ const productCopyBySlug: Record<string, ProductLocalizedCopy> = {
   },
   "womens-metallic-leather-bifold-cardholder-electric-blue": {
     "title": {
-      "ru": "Azzurina — картхолдер",
-      "ro": "Azzurina — portcard",
-      "en": "Azzurina — card holder"
+      "ru": "Azzurina",
+      "ro": "Azzurina",
+      "en": "Azzurina"
     },
     "description": {
       "ru": "Компактный картхолдер из зернистой кожи с металлическим электрик-синим покрытием: насыщенный оттенок и зеркальный блеск на каждом изгибе. Складная конструкция раскрывается на четыре вертикальных слота для карт — по два с каждой стороны.\n\nТональная строчка по контуру, аккуратная окраска торцов и золотое тиснение «Genuine Leather / Made in Italy» внутри подчёркивают итальянское происхождение. Помещается в карман сумки или куртки и добавляет акцент даже к спокойному повседневному образу.",
@@ -2314,9 +2311,9 @@ const productCopyBySlug: Record<string, ProductLocalizedCopy> = {
   },
   "womens-metallic-leather-bifold-cardholder-teal": {
     "title": {
-      "ru": "Turchese — картхолдер",
-      "ro": "Turchese — portcard",
-      "en": "Turchese — card holder"
+      "ru": "Turchese",
+      "ro": "Turchese",
+      "en": "Turchese"
     },
     "description": {
       "ru": "Компактный картхолдер из зернистой кожи с металлическим бирюзовым покрытием: свежий оттенок и мягкий перламутровый блеск на рельефе зерна. Складная конструкция раскрывается на четыре вертикальных слота для карт — по два с каждой стороны.\n\nТональная строчка по контуру, аккуратная окраска торцов и золотое тиснение «Genuine Leather / Made in Italy» внутри подчёркивают итальянское происхождение. Помещается в карман сумки или куртки и хорошо смотрится как самостоятельный акцент.",
@@ -2331,9 +2328,9 @@ const productCopyBySlug: Record<string, ProductLocalizedCopy> = {
   },
   "womens-pebbled-leather-bifold-cardholder-white": {
     "title": {
-      "ru": "Bianca — картхолдер",
-      "ro": "Bianca — portcard",
-      "en": "Bianca — card holder"
+      "ru": "Bianca",
+      "ro": "Bianca",
+      "en": "Bianca"
     },
     "description": {
       "ru": "Компактный картхолдер из белой зернистой кожи: чистый минималистичный силуэт без лишних деталей. Складная конструкция раскрывается на несколько вертикальных слотов для карт с обеих сторон.\n\nТональная строчка по контуру, аккуратная окраска торцов и золотое тиснение «Genuine Leather / Made in Italy» внутри подчёркивают итальянское происхождение. Лаконичный аксессуар для повседневного кармана или сумки.",
@@ -2348,9 +2345,9 @@ const productCopyBySlug: Record<string, ProductLocalizedCopy> = {
   },
   "womens-pebbled-leather-bifold-cardholder-chartreuse": {
     "title": {
-      "ru": "Limona — картхолдер",
-      "ro": "Limona — portcard",
-      "en": "Limona — card holder"
+      "ru": "Limona",
+      "ro": "Limona",
+      "en": "Limona"
     },
     "description": {
       "ru": "Компактный картхолдер из зернистой кожи насыщенного лаймово-шартрезового оттенка: яркий акцент без лишнего объёма. Складная конструкция с отделениями для карт с обеих сторон.\n\nТональная строчка по контуру, аккуратная окраска торцов и тиснение «Genuine Leather / Made in Italy» внутри. Смелый цвет для тех, кто любит заметные детали в повседневном образе.",
@@ -2365,9 +2362,9 @@ const productCopyBySlug: Record<string, ProductLocalizedCopy> = {
   },
   "womens-metallic-leather-bifold-cardholder-emerald": {
     "title": {
-      "ru": "Smeralda — картхолдер",
-      "ro": "Smeralda — portcard",
-      "en": "Smeralda — card holder"
+      "ru": "Smeralda",
+      "ro": "Smeralda",
+      "en": "Smeralda"
     },
     "description": {
       "ru": "Компактный картхолдер из зернистой кожи с металлическим изумрудным покрытием: насыщенный зелёный оттенок и зеркальный блеск на каждом изгибе. Складная конструкция раскрывается на несколько слотов для карт с обеих сторон.\n\nТональная строчка по контуру, аккуратная окраска торцов и золотое тиснение «Genuine Leather / Made in Italy» внутри подчёркивают итальянское происхождение.",
@@ -2382,9 +2379,9 @@ const productCopyBySlug: Record<string, ProductLocalizedCopy> = {
   },
   "womens-pebbled-leather-bifold-cardholder-dark-brown": {
     "title": {
-      "ru": "Bruna — картхолдер",
-      "ro": "Bruna — portcard",
-      "en": "Bruna — card holder"
+      "ru": "Bruna",
+      "ro": "Bruna",
+      "en": "Bruna"
     },
     "description": {
       "ru": "Компактный картхолдер из зернистой кожи глубокого шоколадно-коричневого оттенка: насыщенный тон и выразительная фактура зерна. Складная конструкция с отделениями для карт с обеих сторон — по три слота на каждой панели.\n\nТональная строчка по контуру, аккуратная окраска торцов и золотое тиснение «Genuine Leather / Made in Italy» внутри. Универсальный тёмный аксессуар на каждый день.",
@@ -2399,9 +2396,9 @@ const productCopyBySlug: Record<string, ProductLocalizedCopy> = {
   },
   "womens-pebbled-leather-snap-strap-rfid-cardholder-sage": {
     "title": {
-      "ru": "Olivetta — картхолдер",
-      "ro": "Olivetta — portcard",
-      "en": "Olivetta — card holder"
+      "ru": "Olivetta",
+      "ro": "Olivetta",
+      "en": "Olivetta"
     },
     "description": {
       "ru": "Компактный картхолдер из зернистой кожи приглушённого оливково-шалфейного оттенка: вертикальные слоты на лицевой стороне и кожаный ремешок с кнопкой, который фиксирует карты. Внутри — дополнительные отделения и защита RFID.\n\nТональная строчка по контуру, тиснение «Genuine Leather / Vera Pelle» и маркировка RFID на подкладке. Удобный формат, когда нужны 4–6 карт под рукой и не хочется носить полноразмерный кошелёк.",
@@ -2416,9 +2413,9 @@ const productCopyBySlug: Record<string, ProductLocalizedCopy> = {
   },
   "womens-pebbled-leather-snap-strap-rfid-wallet-sage": {
     "title": {
-      "ru": "Salvia — кошелёк",
-      "ro": "Salvia — portofel",
-      "en": "Salvia — wallet"
+      "ru": "Salvia",
+      "ro": "Salvia",
+      "en": "Salvia"
     },
     "description": {
       "ru": "Компактный кошелёк из зернистой кожи приглушённого оливково-шалфейного оттенка: вертикальный формат, кожаный ремешок с кнопкой и продуманная внутренняя организация. Внутри — отделение на молнии, слоты для карт, прозрачные окна для документов и защита RFID.\n\nТональная строчка по контуру и маркировка RFID на подкладке. Спокойный природный оттенок для повседневного кармана.",
@@ -2433,9 +2430,9 @@ const productCopyBySlug: Record<string, ProductLocalizedCopy> = {
   },
   "womens-pebbled-leather-snap-strap-rfid-cardholder-grey": {
     "title": {
-      "ru": "Cenere — картхолдер",
-      "ro": "Cenere — portcard",
-      "en": "Cenere — card holder"
+      "ru": "Cenere",
+      "ro": "Cenere",
+      "en": "Cenere"
     },
     "description": {
       "ru": "Компактный картхолдер из зернистой кожи светло-серого оттенка: вертикальные слоты на лицевой стороне и кожаный ремешок с кнопкой, который фиксирует карты. Внутри — шесть слотов для карт с обеих сторон и защита RFID.\n\nТональная строчка по контуру, тиснение «Genuine Leather / Vera Pelle» и маркировка RFID на подкладке. Спокойный нейтральный тон для повседневного кармана.",
@@ -2450,9 +2447,9 @@ const productCopyBySlug: Record<string, ProductLocalizedCopy> = {
   },
   "womens-pebbled-leather-snap-strap-rfid-cardholder-red": {
     "title": {
-      "ru": "Rubina — картхолдер",
-      "ro": "Rubina — portcard",
-      "en": "Rubina — card holder"
+      "ru": "Rubina",
+      "ro": "Rubina",
+      "en": "Rubina"
     },
     "description": {
       "ru": "Компактный картхолдер из зернистой кожи насыщенного красного оттенка: вертикальные слоты на лицевой стороне и кожаный ремешок с кнопкой, который фиксирует карты. Внутри — дополнительные отделения и защита RFID.\n\nТональная строчка по контуру, тиснение «Genuine Leather / Vera Pelle» и маркировка RFID на подкладке. Яркий акцентный оттенок для повседневного кармана.",
@@ -2467,9 +2464,9 @@ const productCopyBySlug: Record<string, ProductLocalizedCopy> = {
   },
   "womens-pebbled-leather-snap-strap-rfid-cardholder-cream": {
     "title": {
-      "ru": "Avorio — картхолдер",
-      "ro": "Avorio — portcard",
-      "en": "Avorio — card holder"
+      "ru": "Avorio",
+      "ro": "Avorio",
+      "en": "Avorio"
     },
     "description": {
       "ru": "Компактный картхолдер из зернистой кожи нежного кремово-бежевого оттенка: вертикальные слоты на лицевой стороне и кожаный ремешок с кнопкой, который фиксирует карты. Внутри — дополнительные отделения и защита RFID.\n\nТональная строчка по контуру, тиснение «Genuine Leather / Vera Pelle» и маркировка RFID на подкладке. Спокойный нейтральный тон для повседневного кармана.",
@@ -2484,9 +2481,9 @@ const productCopyBySlug: Record<string, ProductLocalizedCopy> = {
   },
   "womens-pebbled-leather-snap-strap-rfid-cardholder-black": {
     "title": {
-      "ru": "Notte — картхолдер",
-      "ro": "Notte — portcard",
-      "en": "Notte — card holder"
+      "ru": "Notte",
+      "ro": "Notte",
+      "en": "Notte"
     },
     "description": {
       "ru": "Компактный картхолдер из зернистой чёрной кожи: вертикальные слоты на лицевой стороне и кожаный ремешок с кнопкой, который фиксирует карты. Внутри — дополнительные отделения и защита RFID.\n\nТональная строчка по контуру, тиснение «Genuine Leather / Vera Pelle» и маркировка RFID на подкладке. Классический чёрный аксессуар для повседневного кармана.",
@@ -2501,9 +2498,9 @@ const productCopyBySlug: Record<string, ProductLocalizedCopy> = {
   },
   "womens-pebbled-leather-snap-strap-rfid-wallet-red": {
     "title": {
-      "ru": "Cremisi — кошелёк",
-      "ro": "Cremisi — portofel",
-      "en": "Cremisi — wallet"
+      "ru": "Cremisi",
+      "ro": "Cremisi",
+      "en": "Cremisi"
     },
     "description": {
       "ru": "Компактный кошелёк из зернистой кожи насыщенного красного оттенка: вертикальный формат, кожаный ремешок с кнопкой и продуманная внутренняя организация. Внутри — отделение на молнии, слоты для карт, прозрачные окна для документов и защита RFID.\n\nТональная строчка по контуру и маркировка RFID на подкладке. Яркий акцентный оттенок для повседневного кармана.",
@@ -2518,9 +2515,9 @@ const productCopyBySlug: Record<string, ProductLocalizedCopy> = {
   },
   "womens-pebbled-leather-snap-strap-rfid-cardholder-beige": {
     "title": {
-      "ru": "Perla — кошелёк",
-      "ro": "Perla — portofel",
-      "en": "Perla — wallet"
+      "ru": "Perla",
+      "ro": "Perla",
+      "en": "Perla"
     },
     "description": {
       "ru": "Компактный кошелёк из зернистой кожи нежного бежевого оттенка: вертикальный формат, кожаный ремешок с кнопкой и продуманная внутренняя организация. Внутри — отделение на молнии, слоты для карт и прозрачные окна для документов, а также защита RFID.\n\nТональная строчка по контуру и маркировка RFID на подкладке. Спокойный нейтральный цвет, который легко сочетается с сумками любых оттенков.",
@@ -2535,9 +2532,9 @@ const productCopyBySlug: Record<string, ProductLocalizedCopy> = {
   },
   "womens-pebbled-leather-trifold-rfid-cardholder-black": {
     "title": {
-      "ru": "Nera — картхолдер",
-      "ro": "Nera — portcard",
-      "en": "Nera — card holder"
+      "ru": "Nera",
+      "ro": "Nera",
+      "en": "Nera"
     },
     "description": {
       "ru": "Компактный картхолдер из зернистой чёрной кожи: трёхслойная складная конструкция с клапаном и застёжками на кнопках. Внутри — девять слотов для карт и защита RFID.\n\nТональная строчка по контуру, тиснение «Genuine Leather / Vera Pelle» и маркировка RFID на подкладке. Классический чёрный аксессуар, который подходит к любому образу.",
@@ -2552,9 +2549,9 @@ const productCopyBySlug: Record<string, ProductLocalizedCopy> = {
   },
   "womens-pebbled-leather-heart-shaped-handbag": {
     "title": {
-      "ru": "Rosalba — сумка в форме сердца",
-      "ro": "Rosalba — geantă în formă de inimă",
-      "en": "Rosalba — heart-shaped handbag"
+      "ru": "Rosalba",
+      "ro": "Rosalba",
+      "en": "Rosalba"
     },
     "description": {
       "ru": "Сумка в форме сердца из зернистой кожи — узнаваемый силуэт, который добавляет характер даже к простому образу.\n\nЗолотая молния идёт по верхней линии сердца, а съёмный ремень позволяет носить модель в руке или через плечо. Внутри — красная подкладка и аккордеонные перегородки.",
@@ -2569,9 +2566,9 @@ const productCopyBySlug: Record<string, ProductLocalizedCopy> = {
   },
   "womens-pebbled-leather-wing-flap-tote-bag": {
     title: {
-      ru: "Solange — сумка-тоут трапециевидной формы",
-      ro: "Solange — geantă tote trapezoidală",
-      en: "Solange — trapezoid tote bag",
+      ru: "Solange",
+      ro: "Solange",
+      en: "Solange",
     },
     description: {
       ru: "Solange — сумка-тоут трапециевидной формы с расклешёнными боками и укороченным клапаном, застёгнутым потайным магнитом. Силуэт выглядит собранно и структурно, при этом остаётся лёгким на плече.\n\nПередний карман на молнии добавляет практичности, а плотная зернистая кожа держит форму бортов даже при полной загрузке. Внутри — просторное отделение для повседневных вещей.",
@@ -2586,9 +2583,9 @@ const productCopyBySlug: Record<string, ProductLocalizedCopy> = {
   },
   "womens-pebbled-leather-wing-turn-lock-tote-bag": {
     title: {
-      ru: "Georgina — тоут с расклешёнными боками и замком",
-      ro: "Georgina — tote cu laterale evazate și încuietoare",
-      en: "Georgina — flared-side tote with turn lock",
+      ru: "Georgina",
+      ro: "Georgina",
+      en: "Georgina",
     },
     description: {
       ru: "Тоут трапециевидной формы с расклешёнными боками: широкий верх и собранный центр держат силуэт архитектурным даже без наполнения. Зернистая кожа и золотистая фурнитура — спокойная, но заметная комбинация.\n\nПланка с поворотным замком фиксирует верх, внутри — отделение с центральной перегородкой на молнии и карман на молнии у стенки. В комплекте съёмный плечевой ремень.",
@@ -2603,9 +2600,9 @@ const productCopyBySlug: Record<string, ProductLocalizedCopy> = {
   },
   "womens-pebbled-leather-turn-lock-top-handle-bag-white": {
     title: {
-      ru: "Margot — сумка с поворотным замком",
-      ro: "Margot — geantă cu încuietoare rotativă",
-      en: "Margot — turn-lock top handle bag",
+      ru: "Margot",
+      ro: "Margot",
+      en: "Margot",
     },
     description: {
       ru: "Сумка на короткой ручке с поворотным замком на клапане — щёлкающая застёжка, которая быстро открывается одной рукой.\n\nАккуратные пропорции подходят и для офиса, и для города.",
@@ -2620,9 +2617,9 @@ const productCopyBySlug: Record<string, ProductLocalizedCopy> = {
   },
   "womens-pebbled-leather-envelope-turn-lock-chain-bag": {
     title: {
-      ru: "Marcelle — компактная сумка-конверт на цепочке",
-      ro: "Marcelle — geantă plic compactă pe lanț",
-      en: "Marcelle — compact envelope chain bag",
+      ru: "Marcelle",
+      ro: "Marcelle",
+      en: "Marcelle",
     },
     description: {
       ru: "Компактная структурная сумка с конвертным клапаном и поворотным замком: зернистая кожа, золотистая цепочка и собранный прямоугольный силуэт.\n\nВнутри — два отделения с чёрной подкладкой и контрастной строчкой по краю. Подходит для вечера и для городских выходов, когда нужен аккуратный акцент без лишнего объёма.",
