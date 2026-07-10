@@ -85,7 +85,7 @@ export default async function Home() {
                 <span className="font-serif text-2xl font-normal uppercase tracking-[0.14em] drop-shadow-sm sm:text-3xl sm:leading-none">
                   {t(tile.labelKey)}
                 </span>
-                <span className="border border-white px-8 py-2.5 text-[10px] font-normal uppercase tracking-[0.28em] transition group-hover:bg-white/10 group-focus-visible:bg-white/10">
+                <span className="border border-white px-7 py-[18px] text-[10px] font-normal uppercase tracking-[0.28em] backdrop-blur-md transition max-md:bg-[rgba(255,255,255,0.14)] group-hover:bg-white/10 group-focus-visible:bg-white/10 md:px-8 md:py-2.5 md:backdrop-blur-none">
                   {t("common.openCollection")}
                 </span>
               </div>

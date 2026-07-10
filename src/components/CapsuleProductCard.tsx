@@ -35,15 +35,11 @@ export default function CapsuleProductCard({ product }: { product: Product }) {
 
   return (
     <div
-      className="group flex min-h-[420px] flex-col bg-[#FFFFFF]"
-      style={{
-        border: "1px solid #F0EDE9",
-        boxShadow: "0 1px 3px rgba(0,0,0,0.04)",
-      }}
+      className="group flex min-h-[420px] flex-col border border-[#F0EDE9] bg-[#FFFFFF] max-md:min-h-0 max-md:border-transparent max-md:bg-[#F6F1EB] max-md:shadow-none md:shadow-[0_1px_3px_rgba(0,0,0,0.04)]"
     >
       <div className="relative">
         <Link href={withLocalePath(`/product/${product.slug}`, locale)} className="block">
-          <div className="relative aspect-[4/5] w-full overflow-hidden bg-[#FFFFFF]">
+          <div className="relative aspect-[4/5] w-full overflow-hidden bg-[#FFFFFF] max-md:bg-[#F6F1EB]">
             {primary?.src ? (
               <Image
                 src={primary.src}

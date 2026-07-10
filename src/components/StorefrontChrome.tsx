@@ -25,7 +25,7 @@ export default function StorefrontChrome({
   const path = stripLocaleFromPathname(pathname || "/");
   const isAdmin = path.startsWith("/admin");
   const isPrintCatalog = path === "/catalog/print";
-  const isHome = path === "/";
+  const isProduct = path.startsWith("/product/");
 
   if (isAdmin || isPrintCatalog) {
     return <main className="flex-1">{children}</main>;
@@ -37,7 +37,7 @@ export default function StorefrontChrome({
       <main className="flex-1">{children}</main>
       {footer}
       <CartDrawer />
-      {isHome ? <VideoWidget /> : null}
+      {isProduct ? <VideoWidget /> : null}
     </MenuOpenProvider>
   );
 }

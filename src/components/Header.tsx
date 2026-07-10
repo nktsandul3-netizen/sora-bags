@@ -24,7 +24,7 @@ function BrandLogoLink({
   const nameClass =
     size === "desktop"
       ? "font-serif text-[32px] font-normal uppercase leading-none tracking-[0.2em]"
-      : "font-serif text-[1.55rem] font-normal uppercase leading-none tracking-[0.26em] sm:text-[2rem] sm:tracking-[0.2em]";
+      : "font-serif text-[1.85rem] font-normal uppercase leading-none tracking-[0.18em] sm:text-[2rem] sm:tracking-[0.2em]";
 
   return (
     <Link
@@ -86,28 +86,23 @@ export default function Header() {
 
   return (
     <header className="relative z-50 box-border h-[72px] min-h-[72px] max-h-[72px] border-b border-[#EDE5DF] bg-[#F7F3F0] text-[#111]">
-      {/* Mobile */}
+      {/* Mobile: burger + logo + cart only */}
       <div className="mx-auto flex h-[72px] max-w-7xl items-center justify-between px-4 text-[#111] sm:px-6 lg:hidden">
-        <div className="flex items-center gap-2">
-          <button
-            type="button"
-            className="-ml-1 inline-flex items-center gap-2.5 rounded-sm px-2.5 py-1.5 text-[#111] transition hover:opacity-60 sm:px-3 sm:py-2"
-            onClick={() => setMenuOpen(true)}
-            aria-label={t("common.menu")}
-          >
-            <svg viewBox="0 0 24 24" className="h-5 w-5" fill="none" stroke="currentColor" strokeWidth="1.5">
-              <path d="M4 7h16M4 12h16M4 17h16" strokeLinecap="round" />
-            </svg>
-          </button>
-          <StoreLocatorLink overlay={false} />
-        </div>
+        <button
+          type="button"
+          className="-ml-1 inline-flex h-11 w-11 items-center justify-center rounded-sm text-[#111] transition hover:opacity-60"
+          onClick={() => setMenuOpen(true)}
+          aria-label={t("common.menu")}
+        >
+          <svg viewBox="0 0 24 24" className="h-5 w-5" fill="none" stroke="currentColor" strokeWidth="1.5">
+            <path d="M4 7h16M4 12h16M4 17h16" strokeLinecap="round" />
+          </svg>
+        </button>
 
         <BrandLogoLink overlay={false} size="mobile" />
 
-        <div className="flex shrink-0 items-center gap-2 sm:gap-3">
-          <ProfileMenu overlay={false} iconOnly />
+        <div className="flex h-11 w-11 shrink-0 items-center justify-center">
           <CartIcon hoverClassName={iconHoverClass} />
-          <LanguageSwitcher overlay={false} reversed compact />
         </div>
       </div>
 
@@ -471,6 +466,22 @@ function MobileMenu({ onClose }: { onClose: () => void }) {
           </nav>
 
           <div className="border-t border-[#F1EBE6] px-8 py-6 sm:px-10 lg:px-16">
+            <div className="mb-5 flex flex-col gap-3 lg:hidden">
+              <Link
+                href={withLocalePath("/account", locale)}
+                onClick={onClose}
+                className="text-[15px] font-normal tracking-[0.02em] text-[#111] transition hover:opacity-70"
+              >
+                {t("common.profile")}
+              </Link>
+              <Link
+                href={withLocalePath("/info/nashi-magaziny", locale)}
+                onClick={onClose}
+                className="text-[15px] font-normal tracking-[0.02em] text-[#111] transition hover:opacity-70"
+              >
+                {t("nav.stores")}
+              </Link>
+            </div>
             <div className="flex gap-3 text-[11px] font-medium uppercase tracking-[0.18em]">
               {locales.map((item) => (
                 <Link

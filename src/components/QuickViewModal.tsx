@@ -433,7 +433,7 @@ export default function QuickViewModal({
                     type="button"
                     onClick={handleAdd}
                     disabled={!canBuy}
-                    className="flex h-12 flex-1 items-center justify-center rounded-full bg-stone-950 px-6 text-sm font-semibold tracking-wide text-white transition hover:bg-stone-800 disabled:cursor-not-allowed disabled:opacity-50"
+                    className="flex h-12 min-h-[46px] flex-1 items-center justify-center rounded-full bg-stone-950 px-6 text-sm font-semibold tracking-wide text-white transition hover:bg-stone-800 disabled:cursor-not-allowed disabled:opacity-50"
                   >
                     {canBuy
                       ? showAdded

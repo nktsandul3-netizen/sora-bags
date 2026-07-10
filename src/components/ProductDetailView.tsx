@@ -467,7 +467,7 @@ export default function ProductDetailView({
             type="button"
             onClick={handleAdd}
             disabled={!canBuy}
-            className="w-full rounded-sm bg-stone-950 px-7 py-[1.125rem] text-base font-medium text-white transition hover:bg-stone-800 disabled:cursor-not-allowed disabled:opacity-50"
+            className="min-h-[46px] w-full rounded-sm bg-stone-950 px-7 py-[1.125rem] text-base font-medium text-white transition hover:bg-stone-800 disabled:cursor-not-allowed disabled:opacity-50"
           >
             {canBuy
               ? added

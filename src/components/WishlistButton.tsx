@@ -27,7 +27,7 @@ export default function WishlistButton({
         onClick={handle}
         aria-label={ariaLabel}
         className={
-          "inline-flex h-12 w-12 shrink-0 items-center justify-center border border-[#E8E2DD] bg-[#FFFBF9] outline-none transition hover:bg-white focus:outline-none focus-visible:outline-none " +
+          "inline-flex h-11 w-11 min-h-[44px] min-w-[44px] shrink-0 items-center justify-center border border-[#E8E2DD] bg-[#FFFBF9] outline-none transition hover:bg-white focus:outline-none focus-visible:outline-none md:h-12 md:w-12 " +
           (active ? "text-[#C96A1A]" : "text-[#111]")
         }
       >
@@ -42,7 +42,7 @@ export default function WishlistButton({
         onClick={handle}
         aria-label={ariaLabel}
         className={
-          "-m-2 inline-flex items-center justify-center p-2 transition " +
+          "inline-flex h-11 w-11 min-h-[44px] min-w-[44px] items-center justify-center transition " +
           (active ? "text-[#C96A1A]" : "text-stone-700 hover:text-stone-950")
         }
       >
@@ -57,7 +57,7 @@ export default function WishlistButton({
         onClick={handle}
         aria-label={ariaLabel}
         className={
-          "inline-flex items-center justify-center transition " +
+          "inline-flex h-11 w-11 min-h-[44px] min-w-[44px] items-center justify-center transition " +
           (active ? "text-[#C96A1A]" : "text-stone-400 hover:text-stone-700")
         }
       >
@@ -121,7 +121,7 @@ export default function WishlistButton({
       onClick={handle}
       aria-label={ariaLabel}
       className={
-        "inline-flex h-9 w-9 items-center justify-center rounded-full bg-white/85 shadow-sm backdrop-blur transition-all duration-200 hover:scale-110 hover:bg-white active:scale-95 " +
+        "inline-flex h-11 w-11 min-h-[44px] min-w-[44px] items-center justify-center rounded-full bg-white/85 shadow-sm backdrop-blur transition-all duration-200 hover:scale-110 hover:bg-white active:scale-95 md:h-9 md:w-9 md:min-h-0 md:min-w-0 " +
         (active ? "text-[#C96A1A]" : "text-stone-700")
       }
     >
