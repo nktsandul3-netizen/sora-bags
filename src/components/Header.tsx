@@ -8,6 +8,7 @@ import { useCart } from "@/context/cart";
 import { useWishlist } from "@/context/wishlist";
 import { useMenuOpen } from "@/context/menu-open";
 import ProfileMenu from "./ProfileMenu";
+import SearchOverlay from "./SearchOverlay";
 import { locales, switchLocalePath, withLocalePath } from "@/lib/i18n";
 import { useLocale, useT } from "@/lib/useI18n";
 import { persistLocaleCookie } from "@/context/locale";
@@ -79,14 +80,17 @@ function StoreLocatorLink({ overlay, compact = false }: { overlay: boolean; comp
 }
 
 export default function Header() {
-  const pathname = usePathname();
   const t = useT();
   const { menuOpen, setMenuOpen } = useMenuOpen();
+  const [searchOpen, setSearchOpen] = useState(false);
   const iconHoverClass = "hover:opacity-60";
+
+  const openSearch = () => setSearchOpen(true);
+  const closeSearch = () => setSearchOpen(false);
 
   return (
     <header className="relative z-50 box-border h-[72px] min-h-[72px] max-h-[72px] border-b border-[#EDE5DF] bg-[#F7F3F0] text-[#111]">
-      {/* Mobile: burger + logo + cart only */}
+      {/* Mobile: burger + logo + search / wishlist / cart */}
       <div className="mx-auto flex h-[72px] max-w-7xl items-center justify-between px-4 text-[#111] sm:px-6 lg:hidden">
         <button
           type="button"
@@ -101,7 +105,9 @@ export default function Header() {
 
         <BrandLogoLink overlay={false} size="mobile" />
 
-        <div className="flex h-11 w-11 shrink-0 items-center justify-center">
+        <div className="flex h-11 shrink-0 items-center gap-4">
+          <SearchIconButton onClick={openSearch} hoverClassName={iconHoverClass} />
+          <WishlistIcon hoverClassName={iconHoverClass} />
           <CartIcon hoverClassName={iconHoverClass} />
         </div>
       </div>
@@ -118,6 +124,7 @@ export default function Header() {
 
         <div className="flex h-[72px] items-center text-[#111]">
           <div className="header-icons flex items-center gap-6">
+            <SearchIconButton onClick={openSearch} hoverClassName={iconHoverClass} />
             <WishlistIcon hoverClassName={iconHoverClass} />
             <ProfileMenu overlay={false} iconOnly />
             <CartIcon hoverClassName={iconHoverClass} />
@@ -139,8 +146,46 @@ export default function Header() {
         </div>
       </div>
 
-      {menuOpen && <MobileMenu onClose={() => setMenuOpen(false)} />}
+      {menuOpen && (
+        <MobileMenu
+          onClose={() => setMenuOpen(false)}
+          onOpenSearch={() => {
+            setMenuOpen(false);
+            setSearchOpen(true);
+          }}
+        />
+      )}
+      {searchOpen && <SearchOverlay onClose={closeSearch} />}
     </header>
+  );
+}
+
+function SearchIcon() {
+  return (
+    <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden>
+      <circle cx="9" cy="9" r="5.5" stroke="#111" strokeWidth={1.25} />
+      <path d="m14.2 14.2 3 3" stroke="#111" strokeWidth={1.25} strokeLinecap="round" />
+    </svg>
+  );
+}
+
+function SearchIconButton({
+  onClick,
+  hoverClassName = "hover:opacity-60",
+}: {
+  onClick: () => void;
+  hoverClassName?: string;
+}) {
+  const t = useT();
+  return (
+    <button
+      type="button"
+      onClick={onClick}
+      aria-label={t("common.search")}
+      className={`relative text-current transition ${hoverClassName}`}
+    >
+      <SearchIcon />
+    </button>
   );
 }
 
@@ -320,7 +365,13 @@ type MenuSection = {
   links: MenuLink[];
 };
 
-function MobileMenu({ onClose }: { onClose: () => void }) {
+function MobileMenu({
+  onClose,
+  onOpenSearch,
+}: {
+  onClose: () => void;
+  onOpenSearch: () => void;
+}) {
   const locale = useLocale();
   const t = useT();
   const pathname = usePathname();
@@ -466,18 +517,32 @@ function MobileMenu({ onClose }: { onClose: () => void }) {
           </nav>
 
           <div className="border-t border-[#F1EBE6] px-8 py-6 sm:px-10 lg:px-16">
-            <div className="mb-5 flex flex-col gap-3 lg:hidden">
+            <div className="mb-5 flex flex-col gap-3">
+              <button
+                type="button"
+                onClick={onOpenSearch}
+                className="text-left text-[15px] font-normal tracking-[0.02em] text-[#111] transition hover:opacity-70"
+              >
+                {t("common.search")}
+              </button>
+              <Link
+                href={withLocalePath("/wishlist", locale)}
+                onClick={onClose}
+                className="text-[15px] font-normal tracking-[0.02em] text-[#111] transition hover:opacity-70"
+              >
+                {t("common.wishlist")}
+              </Link>
               <Link
                 href={withLocalePath("/account", locale)}
                 onClick={onClose}
-                className="text-[15px] font-normal tracking-[0.02em] text-[#111] transition hover:opacity-70"
+                className="text-[15px] font-normal tracking-[0.02em] text-[#111] transition hover:opacity-70 lg:hidden"
               >
                 {t("common.profile")}
               </Link>
               <Link
                 href={withLocalePath("/info/nashi-magaziny", locale)}
                 onClick={onClose}
-                className="text-[15px] font-normal tracking-[0.02em] text-[#111] transition hover:opacity-70"
+                className="text-[15px] font-normal tracking-[0.02em] text-[#111] transition hover:opacity-70 lg:hidden"
               >
                 {t("nav.stores")}
               </Link>

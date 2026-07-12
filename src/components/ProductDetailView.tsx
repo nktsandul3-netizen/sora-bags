@@ -21,10 +21,11 @@ import {
   getVisibleProductSpecs,
 } from "@/lib/product-i18n";
 import ProductImage from "./ProductImage";
-import { getColorSwatchImage } from "./ProductColorSwatches";
+import ProductColorSwatches from "./ProductColorSwatches";
 import WishlistButton from "./WishlistButton";
 import PreorderStatusBadge from "./PreorderStatusBadge";
 import BrandStories from "./BrandStories";
+import TrustNotes from "./TrustNotes";
 
 function PhoneIcon() {
   return (
@@ -200,7 +201,9 @@ export default function ProductDetailView({
   const [imageIdx, setImageIdx] = useState(0);
   const [added, setAdded] = useState(false);
   const [contactOpen, setContactOpen] = useState(false);
+  const [showStickyBuy, setShowStickyBuy] = useState(false);
   const touchStartX = useRef<number | null>(null);
+  const addToCartRef = useRef<HTMLButtonElement | null>(null);
 
   useEffect(() => {
     fetch(`/api/products/${product.slug}/view`, { method: "POST" }).catch(() => {});
@@ -225,14 +228,6 @@ export default function ProductDetailView({
   const galleryFit = product.galleryFit ?? "cover";
   const showLeatherBadge = hasPureLeatherMaterial(product);
   const activeImageFit = activeImage?.fit ?? galleryFit;
-  const swatchImageClass =
-    galleryFit === "contain"
-      ? "object-contain object-center p-1"
-      : "object-cover object-center";
-  const galleryImageClass =
-    activeImageFit === "contain"
-      ? "object-contain object-center p-6 sm:p-8"
-      : "object-cover object-center";
   const galleryHoverClass =
     activeImageFit === "contain" ? "" : "transition-transform duration-700 group-hover:scale-[1.018]";
   const localizedColor = localizeColorName(color, locale);
@@ -270,6 +265,34 @@ export default function ProductDetailView({
     setImageIdx(0);
   }, [colorIdx]);
 
+  useEffect(() => {
+    const target = addToCartRef.current;
+    if (!target || typeof IntersectionObserver === "undefined") return;
+
+    const media = window.matchMedia("(max-width: 1023px)");
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        setShowStickyBuy(media.matches && !entry.isIntersecting);
+      },
+      { threshold: 0, rootMargin: "0px" },
+    );
+
+    const sync = () => {
+      if (!media.matches) {
+        setShowStickyBuy(false);
+        return;
+      }
+      observer.observe(target);
+    };
+
+    sync();
+    media.addEventListener("change", sync);
+    return () => {
+      media.removeEventListener("change", sync);
+      observer.disconnect();
+    };
+  }, []);
+
   function handleAdd() {
     if (!canBuy) return;
     add({
@@ -284,6 +307,14 @@ export default function ProductDetailView({
     setAdded(true);
     setTimeout(() => setAdded(false), 1800);
   }
+
+  const buyLabel = canBuy
+    ? added
+      ? `${isPreorder ? t("common.addedToPreorder") : t("common.addedToCart")} ✓`
+      : isPreorder
+        ? t("common.placePreorder")
+        : t("common.addToCart")
+    : t("common.outOfStock");
 
   function showImage(direction: "prev" | "next") {
     if (hasGallery) {
@@ -308,7 +339,7 @@ export default function ProductDetailView({
       <div className="grid gap-10 lg:grid-cols-[minmax(0,0.82fr)_minmax(0,1.18fr)]">
       <div>
         <div
-          className="group relative aspect-[4/5] touch-pan-y overflow-hidden rounded-2xl bg-[#FFFFFF]"
+          className="group relative flex h-[100svh] max-h-[100svh] touch-pan-y items-center justify-center overflow-hidden rounded-2xl bg-[var(--background)] lg:aspect-[4/5] lg:h-auto lg:max-h-none"
           onTouchStart={(e) => {
             touchStartX.current = e.changedTouches[0]?.clientX ?? null;
           }}
@@ -327,7 +358,12 @@ export default function ProductDetailView({
                 src={activeImage.src}
                 alt={localizeProductImageAlt(activeImage.alt, locale) || localizedTitle}
                 loading="eager"
-                className={`absolute inset-0 z-10 h-full w-full ${galleryHoverClass} ${galleryImageClass}`}
+                className={
+                  "relative z-10 max-h-[78svh] max-w-[85vw] object-contain object-center " +
+                  "lg:absolute lg:inset-0 lg:h-full lg:w-full lg:max-h-none lg:max-w-none " +
+                  (activeImageFit === "contain" ? "lg:object-contain" : "lg:object-cover lg:object-center") +
+                  (galleryHoverClass ? ` ${galleryHoverClass}` : "")
+                }
               />
             ) : (
               <ProductImage
@@ -336,8 +372,8 @@ export default function ProductDetailView({
                 section={product.section}
                 alt={localizedTitle}
                 sizes="(min-width: 1024px) 50vw, 100vw"
-                imageClassName="object-contain object-center"
-                className="h-full w-full"
+                imageClassName="object-contain object-center max-h-[78svh] max-w-[85vw] lg:max-h-none lg:max-w-none"
+                className="relative z-10 flex h-auto w-auto items-center justify-center lg:absolute lg:inset-0 lg:h-full lg:w-full"
               />
             )}
 
@@ -395,9 +431,6 @@ export default function ProductDetailView({
         <div className="notranslate relative -mx-4 overflow-hidden bg-[#F7F3F0] sm:-mx-6 lg:mx-0 lg:rounded-3xl">
           <div className="relative bg-[#F7F3F0] p-6 sm:p-7 lg:p-8">
         <div className="flex flex-wrap items-center gap-x-3 gap-y-2 leading-none">
-          <span className="product-detail-brand-reveal text-[14px] font-medium uppercase tracking-[0.12em] text-[#111] opacity-60">
-            SÓRA
-          </span>
           <span className="product-detail-badge product-detail-badge-delay-1 inline-flex items-center gap-1.5 text-[11px] font-medium uppercase tracking-[0.12em] text-[#111] opacity-60">
             <ItalyFlagIcon />
             {t("common.madeInItaly")}
@@ -411,55 +444,8 @@ export default function ProductDetailView({
         <h1 className="product-detail-title-reveal mt-4 font-sans text-[20px] font-normal leading-[1.3] tracking-[-0.01em] text-[#111]">
           {localizedTitle}
         </h1>
-        <PreorderStatusBadge
-          status={isPreorder ? "pre_order" : product.status}
-          className="product-detail-status-reveal mt-2 !text-[13px]"
-          pulse
-        />
-        <div className="mt-8">
-          <p className="text-[11px] font-medium uppercase tracking-[0.12em] text-[#111]/70">
-            {t("catalog.color")}: {localizedColor}
-          </p>
-          <div className="mt-3 flex flex-wrap gap-2.5">
-            {product.colors.map((c, i) => {
-              const thumb = getColorSwatchImage(c);
-              const selected = i === colorIdx;
-              const cName = localizeColorName(c, locale);
-              const cStatus = localizeStaticText(c.status, locale);
-              return (
-                <button
-                  key={`${c.name}-${i}`}
-                  type="button"
-                  onClick={() => setColorIdx(i)}
-                  aria-label={cName}
-                  aria-pressed={selected}
-                  title={cStatus ? `${cName} — ${cStatus}` : cName}
-                  className={
-                    "relative box-border h-[72px] w-[72px] shrink-0 overflow-hidden bg-[#FFFFFF] p-0.5 outline-none transition focus:outline-none focus-visible:outline-none focus-visible:ring-0 " +
-                    (selected
-                      ? "border border-[#111]"
-                      : "border border-[#E8E2DD] hover:border-[#111]/40")
-                  }
-                >
-                  <span className="relative block h-full w-full overflow-hidden">
-                    <ProductImage
-                      hex={c.hex}
-                      section={product.section}
-                      src={thumb?.src}
-                      alt={localizeProductImageAlt(thumb?.alt, locale) || c.name}
-                      sizes="72px"
-                      unoptimized
-                      imageClassName={swatchImageClass}
-                      className="h-full w-full"
-                    />
-                  </span>
-                </button>
-              );
-            })}
-          </div>
-        </div>
 
-        <div className="product-detail-price-reveal mt-10 flex items-baseline gap-2.5">
+        <div className="product-detail-price-reveal mt-4 flex items-baseline gap-2.5">
           {onSale && (
             <span className="price-strike text-[16px] font-normal text-stone-400">
               {formatPrice(product.oldPrice!, locale)}
@@ -475,30 +461,49 @@ export default function ProductDetailView({
           </span>
         </div>
 
-        <div className="mt-5 flex flex-col gap-3">
+        <PreorderStatusBadge
+          status={isPreorder ? "pre_order" : product.status}
+          className="product-detail-status-reveal mt-3 !text-[13px]"
+          pulse
+        />
+
+        <div className="mt-8">
+          <p className="text-[11px] font-medium uppercase tracking-[0.12em] text-[#111]/70">
+            {t("catalog.color")}:{" "}
+            <span className="font-semibold text-[#111]">{localizedColor}</span>
+          </p>
+          {product.colors.length > 0 ? (
+            <div className="mt-3">
+              <ProductColorSwatches
+                productSlug={product.slug}
+                colors={product.colors}
+                defaultIndex={colorIdx}
+                size="md"
+                onSelect={setColorIdx}
+              />
+            </div>
+          ) : null}
+        </div>
+
+        <div className="mt-8 flex flex-col gap-3">
           <button
             type="button"
-            onClick={handleAdd}
-            disabled={!canBuy}
-            className="min-h-[46px] w-full rounded-sm bg-stone-950 px-7 py-[1.125rem] text-base font-medium text-white transition hover:bg-stone-800 disabled:cursor-not-allowed disabled:opacity-50"
+            onClick={() => setContactOpen((v) => !v)}
+            aria-expanded={contactOpen}
+            className="min-h-[46px] w-full rounded-sm bg-stone-950 px-7 py-[1.125rem] text-base font-medium text-white outline-none transition hover:bg-stone-800 active:bg-stone-900 focus-visible:outline focus-visible:outline-2 focus-visible:outline-[#111] focus-visible:outline-offset-[3px]"
           >
-            {canBuy
-              ? added
-                ? `${isPreorder ? t("common.addedToPreorder") : t("common.addedToCart")} ✓`
-                : isPreorder
-                  ? t("common.placePreorder")
-                  : t("common.addToCart")
-              : t("common.outOfStock")}
+            {t("pdp.reserveButton")}
           </button>
           <div className="flex flex-col">
             <div className="flex items-center gap-3">
               <button
+                ref={addToCartRef}
                 type="button"
-                onClick={() => setContactOpen((v) => !v)}
-                aria-expanded={contactOpen}
-                className="flex h-12 flex-1 items-center justify-center border border-[#E8E2DD] bg-[#FFFBF9] px-5 text-[14px] font-medium text-[#111] outline-none transition hover:bg-white focus:outline-none focus-visible:outline focus-visible:outline-2 focus-visible:outline-[#111] focus-visible:outline-offset-[3px]"
+                onClick={handleAdd}
+                disabled={!canBuy}
+                className="flex h-12 flex-1 items-center justify-center rounded-sm border border-[#E8E2DD] bg-[#FFFBF9] px-5 text-[14px] font-medium text-[#111] outline-none transition hover:bg-white active:bg-[#F7F3F0] disabled:cursor-not-allowed disabled:opacity-50 focus-visible:outline focus-visible:outline-2 focus-visible:outline-[#111] focus-visible:outline-offset-[3px]"
               >
-                {t("pdp.reserveButton")}
+                {buyLabel}
               </button>
               <WishlistButton slug={product.slug} variant="pdp" />
             </div>
@@ -575,11 +580,34 @@ export default function ProductDetailView({
           </div>
         </div>
 
+        <TrustNotes className="mt-6 space-y-2.5 px-0.5" />
+
         <BrandStories productSlug={product.slug} className="mt-8 max-lg:origin-top max-lg:scale-100 lg:origin-top-left lg:scale-110 justify-start" />
           </div>
         </div>
       </div>
       </div>
+
+        {showStickyBuy ? (
+          <div className="fixed inset-x-0 bottom-0 z-40 border-t border-[#EDE5DF] bg-[#F7F3F0]/95 px-4 pb-[max(0.75rem,env(safe-area-inset-bottom))] pt-3 backdrop-blur-md lg:hidden">
+            <div className="mx-auto flex max-w-7xl items-center gap-3">
+              <div className="min-w-0 flex-1">
+                <p className="truncate text-[13px] font-medium text-[#111]">{localizedTitle}</p>
+                <p className="mt-0.5 text-[15px] font-semibold text-[#111]">
+                  {formatPrice(product.price, locale)}
+                </p>
+              </div>
+              <button
+                type="button"
+                onClick={handleAdd}
+                disabled={!canBuy}
+                className="min-h-11 shrink-0 rounded-sm bg-stone-950 px-5 text-[13px] font-medium text-white transition hover:bg-stone-800 disabled:cursor-not-allowed disabled:opacity-50"
+              >
+                {buyLabel}
+              </button>
+            </div>
+          </div>
+        ) : null}
 
         <div className="mt-16 w-full lg:mt-24">
           <div className="grid w-full gap-x-12 gap-y-10 lg:grid-cols-[minmax(0,0.9fr)_minmax(0,1.6fr)] xl:gap-x-16">

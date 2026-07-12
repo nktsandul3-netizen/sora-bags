@@ -615,18 +615,6 @@ const productCopyBySlug: Record<string, ProductLocalizedCopy> = {
       "en": "Ortigia — cage-frame tote bag in natural leather — for everyday wear, the office and relaxed evenings. The silhouette stays polished and easy to wear with everyday looks.\n\nA versatile city-ready shape. The interior fits a phone, wallet, keys and small cosmetics. Available to order, delivery in 7–14 days."
     }
   },
-  "mini-elegance-top-handle-bag-white": {
-    "title": {
-      "ru": "Micaela",
-      "ro": "Micaela",
-      "en": "Micaela"
-    },
-    "description": {
-      "ru": "Мини-сумка с верхней ручкой из натуральной кожи — для повседневного гардероба, офиса и спокойных вечерних выходов. Силуэт остаётся собранным и лёгким в повседневной носке.\n\nНадёжная застёжка на молнии. Внутри — место для телефона, кошелька, ключей и небольшой косметики. Доступна под заказ: доставка 7–14 дней.",
-      "ro": "Micaela — geantă mini cu mâner superior din piele naturală — pentru garderoba de zi cu zi, birou și ieșiri de seară relaxate. Silueta rămâne elegantă și ușor de purtat zi de zi.\n\nÎnchidere sigură cu fermoar. Interiorul încăpe telefon, portofel, chei și mici accesorii. Disponibil la comandă: livrare 7–14 zile.",
-      "en": "Micaela — mini top handle bag in natural leather — for everyday wear, the office and relaxed evenings. The silhouette stays polished and easy to wear with everyday looks.\n\nSecure zip closure. The interior fits a phone, wallet, keys and small cosmetics. Available to order, delivery in 7–14 days."
-    }
-  },
   "classic-leather-tote-bag-black": {
     "title": {
       "ru": "Claudine",
@@ -711,40 +699,16 @@ const productCopyBySlug: Record<string, ProductLocalizedCopy> = {
       "en": "Premium Fan Straw Handbag in a woven texture with leather details — for everyday wear, the office and relaxed evenings. The silhouette stays polished and easy to wear with everyday looks.\n\nA versatile city-ready shape. The interior fits a phone, wallet, keys and small cosmetics. Available to order, delivery in 7–14 days."
     }
   },
-  "elegant-leather-crossbody-bag-white": {
-    "title": {
-      "ru": "Noelia",
-      "ro": "Noelia",
-      "en": "Noelia"
-    },
-    "description": {
-      "ru": "Noelia — кожаная сумка кроссбоди из натуральной кожи — для повседневного гардероба, офиса и спокойных вечерних выходов. Силуэт остаётся собранным и лёгким в повседневной носке.\n\nВнутри — место для телефона, кошелька, ключей и небольшой косметики. Доступна под заказ: доставка 7–14 дней.",
-      "ro": "Noelia — geantă crossbody din piele din piele naturală — pentru garderoba de zi cu zi, birou și ieșiri de seară relaxate. Silueta rămâne elegantă și ușor de purtat zi de zi.\n\nInteriorul este gândit pentru esențiale: telefon, portofel, chei și mici accesorii. Disponibil la comandă: livrare 7–14 zile.",
-      "en": "Noelia — leather crossbody bag in natural leather — for everyday wear, the office and relaxed evenings. The silhouette stays polished and easy to wear with everyday looks.\n\nThe interior is made for daily essentials — phone, wallet, keys and small cosmetics. Available to order, delivery in 7–14 days."
-    }
-  },
   "elegant-leather-crossbody-bag-beige": {
     "title": {
-      "ru": "Элегантная кожаная сумка кроссбоди",
-      "ro": "Geantă crossbody elegantă din piele",
-      "en": "Elegant Leather Crossbody Bag"
+      "ru": "Coralie",
+      "ro": "Coralie",
+      "en": "Coralie"
     },
     "description": {
-      "ru": "Элегантная кожаная сумка кроссбоди из натуральной кожи — для повседневного гардероба, офиса и спокойных вечерних выходов. Силуэт остаётся собранным и лёгким в повседневной носке.\n\nНадёжная застёжка на молнии. Внутри — место для телефона, кошелька, ключей и небольшой косметики. Доступна под заказ: доставка 7–14 дней.",
-      "ro": "Geantă crossbody elegantă din piele din piele naturală — pentru garderoba de zi cu zi, birou și ieșiri de seară relaxate. Silueta rămâne elegantă și ușor de purtat zi de zi.\n\nÎnchidere sigură cu fermoar. Interiorul încăpe telefon, portofel, chei și mici accesorii. Disponibil la comandă: livrare 7–14 zile.",
-      "en": "Elegant Leather Crossbody Bag in natural leather — for everyday wear, the office and relaxed evenings. The silhouette stays polished and easy to wear with everyday looks.\n\nSecure zip closure. The interior fits a phone, wallet, keys and small cosmetics. Available to order, delivery in 7–14 days."
-    }
-  },
-  "elegant-leather-moon-bag-cognac": {
-    "title": {
-      "ru": "Elara",
-      "ro": "Elara",
-      "en": "Elara"
-    },
-    "description": {
-      "ru": "Elara — кожаная сумка полумесяцем из фактурной кожи с дугообразным силуэтом и золотистой фурнитурой — для повседневных и вечерних образов.\n\nКороткая ручка и съёмный регулируемый ремень, застёжка на молнии. Внутри — телефон, кошелёк, ключи и косметика. Модель доступна под заказ: доставка 7–14 дней.",
-      "ro": "Elara — geantă semilună din piele texturată, cu siluetă arcuită și finisaje aurii — pentru ținute de zi și de seară.\n\nMâner scurt și curea detașabilă reglabilă, fermoar sigur. Interiorul încăpe telefon, portofel, chei și cosmetice. Model disponibil la comandă: livrare 7–14 zile.",
-      "en": "Elara — leather crescent bag in textured leather with an arched silhouette and gold hardware — for day-to-evening looks.\n\nShort handle and detachable adjustable strap, zip closure. Fits a phone, wallet, keys and cosmetics. Available to order, delivery in 7–14 days."
+      "ru": "Coralie — кожаная сумка кроссбоди из натуральной кожи — для повседневного гардероба, офиса и спокойных вечерних выходов. Силуэт остаётся собранным и лёгким в повседневной носке.\n\nНадёжная застёжка на молнии. Внутри — место для телефона, кошелька, ключей и небольшой косметики. Доступна под заказ: доставка 7–14 дней.",
+      "ro": "Coralie — geantă crossbody din piele naturală — pentru garderoba de zi cu zi, birou și ieșiri de seară relaxate. Silueta rămâne elegantă și ușor de purtat zi de zi.\n\nÎnchidere sigură cu fermoar. Interiorul încăpe telefon, portofel, chei și mici accesorii. Disponibil la comandă: livrare 7–14 zile.",
+      "en": "Coralie — leather crossbody bag in natural leather — for everyday wear, the office and relaxed evenings. The silhouette stays polished and easy to wear with everyday looks.\n\nSecure zip closure. The interior fits a phone, wallet, keys and small cosmetics. Available to order, delivery in 7–14 days."
     }
   },
   "elegant-leather-tote-bag-black": {

@@ -11,6 +11,7 @@ import { localizeColorName, localizeProductTitle } from "@/lib/product-i18n";
 import Breadcrumbs from "@/components/Breadcrumbs";
 import ProductImage from "@/components/ProductImage";
 import CheckoutForm from "@/components/CheckoutForm";
+import TrustNotes from "@/components/TrustNotes";
 
 export default function CartPage() {
   const router = useRouter();
@@ -153,7 +154,7 @@ export default function CartPage() {
                 {t("checkout.standardSectionTitle")}
               </h2>
               <div className="space-y-3">{standardItems.map(renderCartItem)}</div>
-              <CartTrustNotes />
+              <TrustNotes />
             </div>
             <CartCheckoutSummary
               mode="standard"
@@ -172,7 +173,7 @@ export default function CartPage() {
                 {t("checkout.preorderSectionTitle")}
               </h2>
               <div className="space-y-3">{preorderItems.map(renderCartItem)}</div>
-              <CartTrustNotes />
+              <TrustNotes />
             </div>
             <CartCheckoutSummary
               mode="preorder"
@@ -186,60 +187,6 @@ export default function CartPage() {
 
       </div>
     </div>
-  );
-}
-
-function CartTrustNotes() {
-  const t = useT();
-  const items = [
-    { key: "fitting" as const, label: t("cart.trustFitting"), icon: <FittingIcon /> },
-    { key: "exchange" as const, label: t("cart.trustExchange"), icon: <ExchangeIcon /> },
-    { key: "cod" as const, label: t("cart.trustCod"), icon: <CodIcon /> },
-  ];
-
-  return (
-    <ul className="mt-6 space-y-2.5 px-1">
-      {items.map((item) => (
-        <li
-          key={item.key}
-          className="flex items-center gap-2.5 text-[13px] leading-snug text-[#1A1A1A] opacity-60"
-        >
-          <span className="flex h-4 w-4 shrink-0 items-center justify-center" aria-hidden>
-            {item.icon}
-          </span>
-          <span>{item.label}</span>
-        </li>
-      ))}
-    </ul>
-  );
-}
-
-function FittingIcon() {
-  return (
-    <svg viewBox="0 0 16 16" className="h-4 w-4" fill="none" stroke="currentColor" strokeWidth="1.3" aria-hidden>
-      <path d="M5.5 2.5h5l1 3.5H4.5l1-3.5Z" strokeLinejoin="round" />
-      <path d="M4.5 6v7.5h7V6" strokeLinecap="round" strokeLinejoin="round" />
-      <path d="M6.5 9.5h3" strokeLinecap="round" />
-    </svg>
-  );
-}
-
-function ExchangeIcon() {
-  return (
-    <svg viewBox="0 0 16 16" className="h-4 w-4" fill="none" stroke="currentColor" strokeWidth="1.3" aria-hidden>
-      <path d="M3.5 6.5h8.2l-2-2" strokeLinecap="round" strokeLinejoin="round" />
-      <path d="M12.5 9.5H4.3l2 2" strokeLinecap="round" strokeLinejoin="round" />
-    </svg>
-  );
-}
-
-function CodIcon() {
-  return (
-    <svg viewBox="0 0 16 16" className="h-4 w-4" fill="none" stroke="currentColor" strokeWidth="1.3" aria-hidden>
-      <rect x="2.5" y="4" width="11" height="8" rx="1.2" />
-      <path d="M2.5 6.5h11" strokeLinecap="round" />
-      <path d="M5 10h2.5" strokeLinecap="round" />
-    </svg>
   );
 }
 
@@ -257,6 +204,7 @@ function CartCheckoutSummary({
   onSuccess: (order: { id: string; number: string; kind: PurchaseKind }) => void;
 }) {
   const t = useT();
+
   return (
     <aside className="h-fit rounded-[24px] border border-[#F0EDEA] bg-[#fbfaf8] p-5 lg:sticky lg:top-6">
       <h2 className="text-xl font-semibold uppercase tracking-[0.06em] text-stone-950">{t("checkout.summary")}</h2>
@@ -268,9 +216,7 @@ function CartCheckoutSummary({
           </div>
           <div className="flex justify-between">
             <span className="text-stone-500">{t("checkout.delivery")}</span>
-            <span className="text-stone-900">
-              {total >= 15000 ? t("checkout.free") : t("checkout.byTariff")}
-            </span>
+            <span className="text-stone-900">{t("checkout.free")}</span>
           </div>
         </div>
         <div className="mt-4 flex justify-between border-t border-[#F0EBE6] pt-4">

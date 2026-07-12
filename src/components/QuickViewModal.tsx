@@ -21,7 +21,8 @@ import {
   localizeProductTitle,
   getVisibleProductSpecs,
 } from "@/lib/product-i18n";
-import { getColorImages, getColorSwatchImage } from "./ProductColorSwatches";
+import { getColorImages } from "./ProductColorSwatches";
+import ProductColorSwatches from "./ProductColorSwatches";
 import ProductImage from "./ProductImage";
 import WishlistButton from "./WishlistButton";
 import PreorderStatusBadge from "./PreorderStatusBadge";
@@ -234,6 +235,7 @@ export default function QuickViewModal({
     ? Math.min(imageIdx, galleryImages.length - 1)
     : 0;
   const activeImage = galleryImages[safeImageIdx];
+  const activeImageFit = activeImage?.fit ?? product.galleryFit ?? "cover";
   const hasGallery = galleryImages.length > 1;
   const canNavigateMedia = hasGallery || product.colors.length > 1;
   const onSale = Boolean(product.oldPrice && product.oldPrice > product.price);
@@ -241,10 +243,6 @@ export default function QuickViewModal({
   const canBuy = product.status !== "out_of_stock";
   const purchaseKind = color ? getPurchaseKindForItem(product, color.name) : getPurchaseKind(product);
   const isPreorder = purchaseKind === "preorder";
-  const swatchImageClass =
-    (product.galleryFit ?? "cover") === "contain"
-      ? "object-contain object-center p-0.5"
-      : "object-cover object-center";
   const localizedColor = localizeColorName(color, locale);
   const localizedDescription = localizeProductDescription(product, locale);
   const localizedTitle = localizeProductTitle(product, locale);
@@ -363,7 +361,7 @@ export default function QuickViewModal({
                     <div className="absolute inset-x-10 bottom-4 h-20 rounded-full bg-stone-950/10 blur-3xl" />
                     <div className="absolute inset-0 bg-[radial-gradient(circle_at_28%_18%,rgba(255,255,255,0.92),transparent_35%)]" />
                   </div>
-                  <div className="absolute inset-2 overflow-hidden rounded-[17px] bg-white/75 shadow-inner ring-1 ring-white/80">
+                  <div className="absolute inset-2 overflow-hidden rounded-[17px] bg-[var(--background)] shadow-inner ring-1 ring-white/80">
                     <ProductImage
                       key={`${colorIdx}-${safeImageIdx}-${activeImage?.src ?? "placeholder"}`}
                       hex={color?.hex ?? "#d6d3d1"}
@@ -371,7 +369,11 @@ export default function QuickViewModal({
                       src={activeImage?.src}
                       alt={localizeProductImageAlt(activeImage?.alt, locale) || localizedTitle}
                       sizes="(min-width: 1024px) 40vw, 100vw"
-                      imageClassName="object-contain object-center"
+                      imageClassName={
+                        activeImageFit === "contain"
+                          ? "object-contain object-center"
+                          : "object-cover object-center"
+                      }
                       className="absolute inset-0 h-full w-full"
                     />
                   </div>
@@ -452,52 +454,21 @@ export default function QuickViewModal({
                   />
                 </div>
 
-                {/* Цвета (фото-миниатюры) */}
+                {/* Цвета */}
                 <div className="mt-5">
                   <p className="text-sm text-stone-700">
-                    {t("catalog.color")}: <span className="text-stone-500">{localizedColor}</span>
+                    {t("catalog.color")}:{" "}
+                    <span className="font-semibold text-[#111]">{localizedColor}</span>
                   </p>
-                  {product.colors.length > 1 && (
-                    <div className="mt-2.5 flex flex-wrap gap-2.5">
-                      {product.colors.map((c, i) => {
-                        const thumb = getColorSwatchImage(c);
-                        const selected = i === colorIdx;
-                        return (
-                          <button
-                            key={`${c.name}-${i}`}
-                            type="button"
-                            onClick={() => setSelectedColorIdx(i)}
-                            aria-label={localizeColorName(c, locale)}
-                            title={localizeColorName(c, locale)}
-                            className={
-                              "relative box-border h-12 w-12 overflow-hidden rounded-[10px] bg-transparent p-0.5 transition " +
-                              (selected
-                                ? "border-[1.5px] border-[#111]"
-                                : "border border-[#E5E0DC] hover:border-stone-400")
-                            }
-                          >
-                            <span className="relative block h-full w-full overflow-hidden rounded-[7px]">
-                              {thumb ? (
-                                <ProductImage
-                                  hex={c.hex}
-                                  section={product.section}
-                                  src={thumb.src}
-                                  alt={localizeProductImageAlt(thumb.alt, locale) || c.name}
-                                  sizes="48px"
-                                  unoptimized
-                                  imageClassName={swatchImageClass}
-                                  className="absolute inset-0 h-full w-full"
-                                />
-                              ) : (
-                                <span
-                                  className="absolute inset-0"
-                                  style={{ backgroundColor: c.hex }}
-                                />
-                              )}
-                            </span>
-                          </button>
-                        );
-                      })}
+                  {product.colors.length > 0 && (
+                    <div className="mt-3">
+                      <ProductColorSwatches
+                        productSlug={product.slug}
+                        colors={product.colors}
+                        defaultIndex={colorIdx}
+                        size="md"
+                        onSelect={setSelectedColorIdx}
+                      />
                     </div>
                   )}
                 </div>

@@ -31,26 +31,28 @@ export default function CapsuleProductCard({ product }: { product: Product }) {
   const primary = colorImages[0];
   const showSwatches = colors.length > 1;
   const galleryFit = product.galleryFit ?? "cover";
+  const primaryFit = primary?.fit ?? galleryFit;
   const delivery = getDeliveryInfo({ status: product.status ?? "pre_order" }, locale);
 
   return (
     <div
-      className="group flex min-h-[420px] flex-col border border-[#F0EDE9] bg-[#FFFFFF] max-md:min-h-0 max-md:border-transparent max-md:shadow-none md:shadow-[0_1px_3px_rgba(0,0,0,0.04)]"
+      className="group flex h-full min-h-[420px] flex-col border border-[#F0EDE9] bg-[#FFFFFF] max-md:min-h-0 max-md:border-transparent max-md:shadow-none md:shadow-[0_1px_3px_rgba(0,0,0,0.04)]"
     >
-      <div className="relative">
+      <div className="relative shrink-0">
         <Link href={withLocalePath(`/product/${product.slug}`, locale)} className="block touch-manipulation">
-          <div className="relative aspect-[4/5] w-full overflow-hidden bg-[#FFFFFF]">
+          <div className="relative aspect-[4/5] w-full overflow-hidden bg-[var(--background)]">
             {primary?.src ? (
               <Image
                 src={primary.src}
                 alt={localizeProductImageAlt(primary.alt, locale) || localizedTitle}
                 fill
                 sizes="(min-width: 1024px) 20vw, 45vw"
-                quality={82}
+                quality={88}
                 className={
-                  galleryFit === "contain"
-                    ? "object-contain object-center max-md:p-2.5 md:p-0"
-                    : "object-cover object-center max-md:object-contain max-md:p-2.5"
+                  (primaryFit === "contain"
+                    ? "object-contain object-center"
+                    : "object-cover object-center max-md:object-contain") +
+                  " transition-transform duration-[700ms] ease-out md:group-hover:scale-[1.04]"
                 }
               />
             ) : null}
@@ -75,23 +77,23 @@ export default function CapsuleProductCard({ product }: { product: Product }) {
         </Link>
       </div>
 
-      {/* Свотчи → бренд 12px; бренд → название 4px; название → цена 14px; цена → статус 6px */}
-      <div className="flex min-h-6 items-center justify-between gap-2 px-3 pt-3.5">
-        {showSwatches ? (
-          <ProductColorSwatches
-            productSlug={product.slug}
-            colors={colors}
-            previewIndex={previewIdx}
-            defaultIndex={defaultColorIdx}
-            onPreview={setPreviewIdx}
-            swatchFit={galleryFit}
-          />
-        ) : (
-          <span aria-hidden className="h-6" />
-        )}
+      {/* Fixed swatch row so cards without colors stay aligned with neighbors */}
+      <div className="shrink-0 px-3 pt-3.5">
+        <div className="flex min-h-10 items-end">
+          {showSwatches ? (
+            <ProductColorSwatches
+              productSlug={product.slug}
+              colors={colors}
+              previewIndex={previewIdx}
+              defaultIndex={defaultColorIdx}
+              onPreview={setPreviewIdx}
+              className="flex-nowrap"
+            />
+          ) : null}
+        </div>
       </div>
 
-      <Link href={withLocalePath(`/product/${product.slug}`, locale)} className="mt-3 flex flex-col px-3">
+      <Link href={withLocalePath(`/product/${product.slug}`, locale)} className="mt-3 flex shrink-0 flex-col px-3">
         <p className="text-[11px] font-normal uppercase tracking-[0.08em] text-[#111]/36">
           {getBrandName(product.brandSlug)}
         </p>
@@ -100,7 +102,7 @@ export default function CapsuleProductCard({ product }: { product: Product }) {
         </h3>
       </Link>
 
-      <div className="mt-3.5 px-3 pb-4">
+      <div className="mt-auto flex flex-col px-3 pb-4 pt-3.5">
         <div className="flex min-h-5 items-baseline gap-2">
           {onSale ? (
             <span className="price-strike text-[13px] font-normal text-[#111]/40">
@@ -111,14 +113,16 @@ export default function CapsuleProductCard({ product }: { product: Product }) {
             {formatPrice(product.price, locale)}
           </span>
         </div>
-        <p className="mt-1.5 text-[12px] font-normal text-[#111]/48">{delivery.badge}</p>
+        <p className="mt-1.5 min-h-4 text-[12px] font-normal leading-4 text-[#111]/48">
+          {delivery.badge}
+        </p>
         <button
           type="button"
           onClick={() => {
             setQuickViewMounted(true);
             setQuickViewOpen(true);
           }}
-          className="mt-3 flex h-11 w-full items-center justify-center border border-[#111] bg-transparent text-[10px] font-semibold uppercase tracking-[0.16em] text-[#111] transition-colors duration-200 hover:bg-[#111] hover:text-white"
+          className="mt-3 flex h-11 w-full shrink-0 items-center justify-center border border-[#111] bg-transparent text-[10px] font-semibold uppercase tracking-[0.16em] text-[#111] transition-colors duration-200 hover:bg-[#111] hover:text-white"
         >
           {t("common.buy")}
         </button>

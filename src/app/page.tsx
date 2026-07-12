@@ -66,13 +66,13 @@ export default async function Home() {
       <HeroBannerSlider slides={getHeroSlides(locale)} intervalMs={4000} />
 
       {/* Плитки разделов: Сумки / Аксессуары */}
-      <section className="mt-0.5 w-full">
-        <div className="grid grid-cols-2 gap-0.5 md:gap-1">
+      <section className="mt-3 w-full md:mt-2">
+        <div className="grid grid-cols-2 gap-3 md:gap-2">
           {heroTiles.map((tile) => (
             <Link
               key={tile.href}
               href={withLocalePath(tile.href, locale)}
-              className="group relative block aspect-square w-full touch-manipulation overflow-hidden bg-[#f3f0eb]"
+              className="group relative block aspect-[3/4] w-full touch-manipulation overflow-hidden bg-[#f3f0eb] md:aspect-square"
             >
               <Image
                 src={tile.img}
@@ -83,11 +83,11 @@ export default async function Home() {
                 className="object-cover object-center transition-transform duration-[900ms] ease-out group-hover:scale-[1.02]"
               />
               <div className="absolute inset-0 bg-black/10 transition-colors duration-300 group-hover:bg-black/30 group-focus-visible:bg-black/30" />
-              <div className="pointer-events-none absolute inset-0 flex flex-col items-center justify-center gap-5 px-4 text-white opacity-0 translate-y-3 transition-all duration-300 group-hover:opacity-100 group-hover:translate-y-0 group-focus-visible:opacity-100 group-focus-visible:translate-y-0 max-md:opacity-100 max-md:translate-y-0">
-                <span className="font-serif text-2xl font-normal uppercase tracking-[0.14em] drop-shadow-sm sm:text-3xl sm:leading-none">
+              <div className="pointer-events-none absolute inset-0 flex flex-col items-center justify-center gap-3 px-3 text-white opacity-0 translate-y-3 transition-all duration-300 group-hover:opacity-100 group-hover:translate-y-0 group-focus-visible:opacity-100 group-focus-visible:translate-y-0 max-md:opacity-100 max-md:translate-y-0 md:gap-5 md:px-4">
+                <span className="font-serif text-[17px] font-normal uppercase leading-none tracking-[0.12em] drop-shadow-sm sm:text-2xl md:text-3xl md:tracking-[0.14em]">
                   {t(tile.labelKey)}
                 </span>
-                <span className="border border-white px-7 py-[18px] text-[10px] font-normal uppercase tracking-[0.28em] backdrop-blur-md transition max-md:bg-[rgba(255,255,255,0.14)] group-hover:bg-white/10 group-focus-visible:bg-white/10 md:px-8 md:py-2.5 md:backdrop-blur-none">
+                <span className="border border-white px-3.5 py-2 text-[8px] font-normal uppercase tracking-[0.2em] backdrop-blur-md transition max-md:bg-[rgba(255,255,255,0.14)] group-hover:bg-white/10 group-focus-visible:bg-white/10 sm:px-5 sm:py-2.5 sm:text-[9px] md:px-8 md:py-2.5 md:text-[10px] md:tracking-[0.28em] md:backdrop-blur-none">
                   {t("common.openCollection")}
                 </span>
               </div>
@@ -97,8 +97,8 @@ export default async function Home() {
       </section>
 
       {/* Капсула: лайфстайл + 4 товара */}
-      <section className="bg-[#f7f5f0] px-4 pt-20 pb-10 sm:px-6 lg:px-10 lg:pb-14">
-        <div className="grid gap-20 lg:grid-cols-[minmax(0,1.08fr)_minmax(0,1fr)]">
+      <section className="bg-[#f7f5f0] px-4 pt-2 pb-10 sm:px-6 md:pt-16 lg:px-10 lg:pt-20 lg:pb-14">
+        <div className="grid gap-8 md:gap-20 lg:grid-cols-[minmax(0,1.08fr)_minmax(0,1fr)]">
           <Link
             href={withLocalePath("/collections/amalfi-woven", locale)}
             className="group relative aspect-[4/5] touch-manipulation overflow-hidden bg-stone-100 lg:min-h-[620px] lg:aspect-auto"

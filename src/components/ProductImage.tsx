@@ -80,7 +80,7 @@ export default function ProductImage({
 }) {
   if (src) {
     return (
-      <div className={`relative overflow-hidden bg-stone-100 ${className}`}>
+      <div className={`relative overflow-hidden bg-[#FAF5EF] ${className}`}>
         <Image
           key={src}
           src={src}

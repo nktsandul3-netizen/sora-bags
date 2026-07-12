@@ -236,6 +236,41 @@ function CatalogViewInner({
       : categories?.filter((c) => c.slug !== "vse-aksessuary");
   const productCountLabel = t("catalog.productsLabel");
 
+  const activeFilterChips = useMemo(() => {
+    const chips: { key: string; label: string; onRemove: () => void }[] = [];
+    for (const value of filters.colors) {
+      const label = facets.colors.find((o) => o.value === value)?.label ?? value;
+      chips.push({
+        key: `color:${value}`,
+        label,
+        onRemove: () => toggle("colors", value),
+      });
+    }
+    for (const value of filters.materials) {
+      const label = facets.materials.find((o) => o.value === value)?.label ?? value;
+      chips.push({
+        key: `material:${value}`,
+        label,
+        onRemove: () => toggle("materials", value),
+      });
+    }
+    if (filters.priceMin) {
+      chips.push({
+        key: "priceMin",
+        label: `${t("catalog.from")} ${filters.priceMin}`,
+        onRemove: () => updateFilters((prev) => ({ ...prev, priceMin: "" })),
+      });
+    }
+    if (filters.priceMax) {
+      chips.push({
+        key: "priceMax",
+        label: `${t("catalog.to")} ${filters.priceMax}`,
+        onRemove: () => updateFilters((prev) => ({ ...prev, priceMax: "" })),
+      });
+    }
+    return chips;
+  }, [facets.colors, facets.materials, filters, t, toggle, updateFilters]);
+
   // Lock body scroll while the mobile filter drawer is open.
   useEffect(() => {
     if (!showFilter) return;
@@ -352,6 +387,25 @@ function CatalogViewInner({
             </span>
           </div>
         </div>
+
+        {activeFilterChips.length > 0 ? (
+          <div className="-mt-3 mb-6 flex gap-2 overflow-x-auto pb-1 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+            {activeFilterChips.map((chip) => (
+              <button
+                key={chip.key}
+                type="button"
+                onClick={chip.onRemove}
+                className="inline-flex h-8 shrink-0 items-center gap-1.5 rounded-full border border-[#E9E2DC] bg-white pl-3 pr-2 text-[12px] text-[#111] transition hover:border-[#111]/30 hover:bg-[#FBF8F6]"
+                aria-label={`${t("catalog.removeFilter")}: ${chip.label}`}
+              >
+                <span>{chip.label}</span>
+                <span className="inline-flex h-5 w-5 items-center justify-center rounded-full text-[#111]/45" aria-hidden>
+                  ×
+                </span>
+              </button>
+            ))}
+          </div>
+        ) : null}
 
         <div
           className={

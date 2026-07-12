@@ -1,10 +1,5 @@
 "use client";
 
-import { useEffect, useMemo } from "react";
-import Image from "next/image";
-import Link from "next/link";
-import { AnimatePresence, motion } from "framer-motion";
-import { useCart } from "@/context/cart";
 import { getBrandName, getProduct } from "@/lib/data";
 import { formatPrice } from "@/lib/format";
 import { getDeliveryInfo } from "@/lib/delivery";
@@ -14,6 +9,11 @@ import { getCartRecommendations } from "@/lib/recommendations";
 import { useLocale, useT } from "@/lib/useI18n";
 import type { Product } from "@/lib/types";
 import ProductImage from "./ProductImage";
+import { useCart } from "@/context/cart";
+import { useEffect, useMemo } from "react";
+import Image from "next/image";
+import Link from "next/link";
+import { AnimatePresence, motion } from "framer-motion";
 
 function CartLineImage({ slug, colorName, title }: { slug: string; colorName: string; title: string }) {
   const product = getProduct(slug);
@@ -182,9 +182,7 @@ export default function CartDrawer() {
                       {t("common.cart")}
                     </h2>
                     <p className="mt-3 max-w-sm text-sm leading-relaxed text-stone-600">
-                      {total >= 15000
-                        ? t("cart.freeDeliveryUnlocked")
-                        : t("cart.deliveryCalculated")}
+                      {t("cart.freeDeliveryUnlocked")}
                     </p>
                   </div>
                   <button
@@ -315,7 +313,7 @@ export default function CartDrawer() {
                   <footer className="border-t border-[#F0EDEA] bg-white px-5 py-5 sm:px-8">
                     <div className="mb-3 flex items-center justify-between gap-4 text-xs uppercase tracking-[0.14em] text-stone-400">
                       <span>{getItemCountLabel(itemCount, locale, t)}</span>
-                      <span>{total >= 15000 ? t("checkout.free") : t("checkout.byTariff")}</span>
+                      <span>{t("checkout.free")}</span>
                     </div>
                     <div className="space-y-2">
                       {hasStandard && (

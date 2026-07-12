@@ -76,7 +76,9 @@ function ShowcaseCard({ product }: { product: Product }) {
   const galleryFit = product.galleryFit ?? "cover";
   const cardFrameClass =
     "relative aspect-[4/5] w-full overflow-hidden rounded-[22px] border border-white/80 shadow-[0_18px_55px_-42px_rgba(28,25,23,0.65)] ring-1 ring-stone-950/10 transition duration-500 group-hover:-translate-y-1 group-hover:shadow-[0_26px_70px_-44px_rgba(28,25,23,0.85)] " +
-    (galleryFit === "contain" ? "bg-white" : "bg-gradient-to-br from-stone-50 via-[#f7f1e9] to-white");
+    (galleryFit === "contain"
+      ? "bg-[var(--background)]"
+      : "bg-gradient-to-br from-stone-50 via-[#f7f1e9] to-white");
   function openQuickView() {
     setQuickViewMounted(true);
     setQuickViewOpen(true);
@@ -173,7 +175,7 @@ function ShowcaseCard({ product }: { product: Product }) {
       </div>
 
       {/* Свотчи → бренд 12px; бренд → название 4px; название → цена 14px; цена → статус 6px */}
-      <div className="mt-3.5 flex min-h-6 items-center justify-between gap-2 px-1">
+      <div className="mt-3.5 flex min-h-10 items-end justify-between gap-2 px-1">
         {showSwatches ? (
           <ProductColorSwatches
             productSlug={product.slug}
@@ -181,7 +183,6 @@ function ShowcaseCard({ product }: { product: Product }) {
             previewIndex={previewIdx}
             defaultIndex={defaultColorIdx}
             onPreview={setPreviewIdx}
-            swatchFit={galleryFit}
           />
         ) : (
           <span aria-hidden />

@@ -121,8 +121,10 @@ export default function WishlistButton({
       onClick={handle}
       aria-label={ariaLabel}
       className={
-        "inline-flex h-11 w-11 min-h-[44px] min-w-[44px] items-center justify-center rounded-full bg-white/85 shadow-sm backdrop-blur transition-all duration-200 hover:scale-110 hover:bg-white active:scale-95 md:h-9 md:w-9 md:min-h-0 md:min-w-0 " +
-        (active ? "text-[#C96A1A]" : "text-stone-700")
+        "inline-flex h-9 w-9 items-center justify-center rounded-full bg-white " +
+        "shadow-[0_2px_10px_rgba(28,25,23,0.12)] transition-all duration-200 " +
+        "hover:scale-105 hover:shadow-[0_4px_14px_rgba(28,25,23,0.16)] active:scale-95 " +
+        (active ? "text-[#C96A1A]" : "text-[#111]")
       }
     >
       <HeartIcon filled={active} />
@@ -132,28 +134,25 @@ export default function WishlistButton({
 
 function HeartIcon({
   filled,
-  exact = false,
   size = 18,
 }: {
   filled: boolean;
   exact?: boolean;
   size?: number;
 }) {
+  // Same path as Header wishlist icon
   return (
     <svg
-      viewBox="0 0 24 24"
-      className={exact ? undefined : "origin-center scale-x-[1.08]"}
+      viewBox="0 0 20 20"
       style={{ width: size, height: size }}
       fill={filled ? "currentColor" : "none"}
       stroke="currentColor"
-      strokeWidth="1.5"
+      strokeWidth={1.1}
+      strokeLinecap="round"
+      strokeLinejoin="round"
       aria-hidden
     >
-      <path
-        d="M12 20.25s-7.25-4.35-9.25-8.9C1.45 8.4 3.15 5.25 6.3 5.25c1.8 0 3.15 1.05 3.95 2.15.8-1.1 2.15-2.15 3.95-2.15 3.15 0 4.85 3.15 3.55 6.1-2 4.55-9.25 8.9-9.25 8.9z"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
+      <path d="M10 17.2 L3.8 11.1 C2.6 9.9 2 8.7 2 7.3 C2 5.4 3.5 4 5.4 4 C6.6 4 7.5 4.5 8.3 5.6 L10 7.8 L11.7 5.6 C12.5 4.5 13.4 4 14.6 4 C16.5 4 18 5.4 18 7.3 C18 8.7 17.4 9.9 16.2 11.1 L10 17.2Z" />
     </svg>
   );
 }
