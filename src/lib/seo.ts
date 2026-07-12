@@ -30,15 +30,6 @@ export function localeAlternates(pathname: string) {
   return languages;
 }
 
-/** Absolute hreflang URLs for sitemap.xml alternates. */
-export function sitemapLanguageAlternates(pathname: string) {
-  const languages: Record<string, string> = Object.fromEntries(
-    locales.map((locale) => [locale, localizedAbsoluteUrl(pathname, locale)]),
-  );
-  languages["x-default"] = localizedAbsoluteUrl(pathname, defaultLocale);
-  return languages;
-}
-
 function truncateSeoText(value: string, max = 158) {
   const text = value.replace(/\s+/g, " ").trim();
   if (text.length <= max) return text;

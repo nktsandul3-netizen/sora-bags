@@ -2,13 +2,18 @@ import type { MetadataRoute } from "next";
 import {
   brands,
   products,
+  productsByBrand,
   shopAccessoryMenuCategories,
   shopBagMenuCategories,
 } from "@/lib/data";
 import { infoPages } from "@/lib/info";
 import { locales, withLocalePath } from "@/lib/i18n";
-import { siteOrigin, sitemapLanguageAlternates } from "@/lib/seo";
+import { siteOrigin } from "@/lib/seo";
 
+/**
+ * Indexable storefront paths (locale-agnostic).
+ * Excludes cart/account/wishlist/admin/auth/print, redirects, and query/filter URLs.
+ */
 const staticPaths = [
   "/",
   "/bags",
@@ -16,74 +21,64 @@ const staticPaths = [
   "/new",
   "/sale",
   "/bestsellers",
-  "/brands",
   "/contacts",
   "/collections/amalfi-woven",
   "/collections/venezia-intreccio",
   "/capsule/blue",
-  "/info/nashi-magaziny",
 ] as const;
 
-function entry(
-  pathname: string,
-  options: {
-    priority?: number;
-    changeFrequency?: MetadataRoute.Sitemap[number]["changeFrequency"];
-  } = {},
-): MetadataRoute.Sitemap {
-  const now = new Date();
-  const languages = sitemapLanguageAlternates(pathname);
-
-  return locales.map((locale) => ({
-    url: `${siteOrigin}${withLocalePath(pathname, locale)}`,
-    lastModified: now,
-    changeFrequency: options.changeFrequency ?? "weekly",
-    priority: options.priority ?? 0.7,
-    alternates: { languages },
-  }));
+function isActiveProduct(status: (typeof products)[number]["status"]) {
+  // Keep in_stock / pre_order / undefined (treated as available in catalog).
+  return status !== "out_of_stock";
 }
 
-export default function sitemap(): MetadataRoute.Sitemap {
-  const urls: MetadataRoute.Sitemap = [];
+function collectCanonicalPaths(): string[] {
+  const paths = new Set<string>();
 
   for (const path of staticPaths) {
-    urls.push(
-      ...entry(path, {
-        priority: path === "/" ? 1 : path === "/bags" || path === "/accessories" ? 0.9 : 0.8,
-        changeFrequency: path === "/" ? "daily" : "weekly",
-      }),
-    );
+    paths.add(path);
   }
 
   for (const category of shopBagMenuCategories) {
-    urls.push(...entry(`/bags/${category.slug}`, { priority: 0.8 }));
+    paths.add(`/bags/${category.slug}`);
   }
 
   for (const category of shopAccessoryMenuCategories) {
-    urls.push(...entry(`/accessories/${category.slug}`, { priority: 0.75 }));
+    paths.add(`/accessories/${category.slug}`);
   }
 
   for (const product of products) {
-    urls.push(
-      ...entry(`/product/${product.slug}`, {
-        priority: 0.85,
-        changeFrequency: "weekly",
-      }),
-    );
+    if (!product.slug || !isActiveProduct(product.status)) continue;
+    paths.add(`/product/${product.slug}`);
   }
 
   for (const brandItem of brands) {
-    urls.push(...entry(`/brand/${brandItem.slug}`, { priority: 0.6 }));
+    if (productsByBrand(brandItem.slug).some((p) => isActiveProduct(p.status))) {
+      paths.add(`/brand/${brandItem.slug}`);
+    }
   }
 
   for (const page of infoPages) {
-    urls.push(
-      ...entry(`/info/${page.slug}`, {
-        priority: 0.5,
-        changeFrequency: "monthly",
-      }),
-    );
+    paths.add(`/info/${page.slug}`);
   }
 
-  return urls;
+  return [...paths].sort();
+}
+
+export default function sitemap(): MetadataRoute.Sitemap {
+  const entries: MetadataRoute.Sitemap = [];
+  const seen = new Set<string>();
+
+  for (const pathname of collectCanonicalPaths()) {
+    for (const locale of locales) {
+      const url = `${siteOrigin}${withLocalePath(pathname, locale)}`;
+      if (seen.has(url)) continue;
+      seen.add(url);
+      // No lastModified: catalog data has no reliable updatedAt.
+      // No changeFrequency / priority: optional and often ignored by Google.
+      entries.push({ url });
+    }
+  }
+
+  return entries;
 }
