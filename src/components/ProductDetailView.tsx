@@ -120,7 +120,7 @@ function ArrowIcon({ direction }: { direction: "left" | "right" }) {
         stroke="currentColor"
         strokeLinecap="round"
         strokeLinejoin="round"
-        strokeWidth="1.4"
+        strokeWidth="1.7"
       />
     </svg>
   );
@@ -201,6 +201,7 @@ export default function ProductDetailView({
   const [imageIdx, setImageIdx] = useState(0);
   const [added, setAdded] = useState(false);
   const [contactOpen, setContactOpen] = useState(false);
+  const [mobileContactOpen, setMobileContactOpen] = useState(false);
   const [showStickyBuy, setShowStickyBuy] = useState(false);
   const touchStartX = useRef<number | null>(null);
   const addToCartRef = useRef<HTMLButtonElement | null>(null);
@@ -293,6 +294,20 @@ export default function ProductDetailView({
     };
   }, []);
 
+  useEffect(() => {
+    if (!mobileContactOpen) return;
+    const previousOverflow = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    const closeOnEscape = (event: KeyboardEvent) => {
+      if (event.key === "Escape") setMobileContactOpen(false);
+    };
+    window.addEventListener("keydown", closeOnEscape);
+    return () => {
+      document.body.style.overflow = previousOverflow;
+      window.removeEventListener("keydown", closeOnEscape);
+    };
+  }, [mobileContactOpen]);
+
   function handleAdd() {
     if (!canBuy) return;
     add({
@@ -360,7 +375,7 @@ export default function ProductDetailView({
                 loading="eager"
                 className={
                   "relative z-10 max-h-[78svh] max-w-[85vw] object-contain object-center " +
-                  "lg:absolute lg:inset-0 lg:h-full lg:w-full lg:max-h-none lg:max-w-none " +
+                  "lg:absolute lg:inset-[3%] lg:h-[94%] lg:w-[94%] lg:max-h-none lg:max-w-none " +
                   (activeImageFit === "contain" ? "lg:object-contain" : "lg:object-cover lg:object-center") +
                   (galleryHoverClass ? ` ${galleryHoverClass}` : "")
                 }
@@ -373,7 +388,7 @@ export default function ProductDetailView({
                 alt={localizedTitle}
                 sizes="(min-width: 1024px) 50vw, 100vw"
                 imageClassName="object-contain object-center max-h-[78svh] max-w-[85vw] lg:max-h-none lg:max-w-none"
-                className="relative z-10 flex h-auto w-auto items-center justify-center lg:absolute lg:inset-0 lg:h-full lg:w-full"
+                className="relative z-10 flex h-auto w-auto items-center justify-center lg:absolute lg:inset-[3%] lg:h-[94%] lg:w-[94%]"
               />
             )}
 
@@ -383,7 +398,7 @@ export default function ProductDetailView({
                 type="button"
                 aria-label={t("common.previousPhoto")}
                 onClick={() => showImage("prev")}
-                className="absolute left-3 top-1/2 z-20 flex h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full border border-[#E8E2DD] bg-white text-[#111] outline-none transition hover:bg-[#F7F3F0] focus:outline-none focus-visible:outline-none"
+                className="absolute left-3 top-1/2 z-20 flex h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full border border-[#D4C8C0] bg-white/95 text-[#111] shadow-[0_3px_12px_rgba(28,25,23,0.12)] outline-none transition hover:bg-white hover:shadow-[0_5px_16px_rgba(28,25,23,0.16)] focus:outline-none focus-visible:outline-none"
               >
                 <ArrowIcon direction="left" />
               </button>
@@ -391,7 +406,7 @@ export default function ProductDetailView({
                 type="button"
                 aria-label={t("common.nextPhoto")}
                 onClick={() => showImage("next")}
-                className="absolute right-3 top-1/2 z-20 flex h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full border border-[#E8E2DD] bg-white text-[#111] outline-none transition hover:bg-[#F7F3F0] focus:outline-none focus-visible:outline-none"
+                className="absolute right-3 top-1/2 z-20 flex h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full border border-[#D4C8C0] bg-white/95 text-[#111] shadow-[0_3px_12px_rgba(28,25,23,0.12)] outline-none transition hover:bg-white hover:shadow-[0_5px_16px_rgba(28,25,23,0.16)] focus:outline-none focus-visible:outline-none"
               >
                 <ArrowIcon direction="right" />
               </button>
@@ -401,25 +416,31 @@ export default function ProductDetailView({
               </div>
 
               {hasGallery ? (
-              <div className="absolute bottom-5 left-1/2 z-20 flex -translate-x-1/2 items-center gap-0">
-                {images.map((image, i) => (
-                  <button
-                    key={`${image.alt}-dot-${i}`}
-                    type="button"
-                    aria-label={`${t("common.photo")} ${i + 1}`}
-                    onClick={() => setImageIdx(i)}
-                    className="flex items-center justify-center p-1.5"
-                  >
-                    <span
-                      aria-hidden
-                      className={
-                        "block h-1.5 rounded-full transition-all " +
-                        (i === safeImageIdx ? "w-5 bg-[#111]" : "w-1.5 bg-[#111]/30")
-                      }
-                    />
-                  </button>
-                ))}
-              </div>
+                <div className="absolute bottom-5 left-1/2 z-20 flex -translate-x-1/2 items-center gap-2 rounded-full border border-white/80 bg-white/55 px-3.5 py-2 shadow-[0_8px_28px_rgba(28,25,23,0.1)] backdrop-blur-md">
+                  {images.map((image, i) => {
+                    const active = i === safeImageIdx;
+                    return (
+                      <button
+                        key={`${image.alt}-dot-${i}`}
+                        type="button"
+                        aria-label={`${t("common.photo")} ${i + 1}`}
+                        aria-current={active ? "true" : undefined}
+                        onClick={() => setImageIdx(i)}
+                        className="group/dot flex h-5 w-5 items-center justify-center"
+                      >
+                        <span
+                          aria-hidden
+                          className={
+                            "block rounded-full transition-all duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] " +
+                            (active
+                              ? "h-[7px] w-7 bg-[#111] shadow-[0_1px_4px_rgba(17,17,17,0.28)]"
+                              : "h-[7px] w-[7px] bg-[#111]/22 ring-1 ring-[#111]/12 group-hover/dot:bg-[#111]/40 group-hover/dot:ring-[#111]/25")
+                          }
+                        />
+                      </button>
+                    );
+                  })}
+                </div>
               ) : null}
             </>
           )}
@@ -428,20 +449,20 @@ export default function ProductDetailView({
       </div>
 
       <div className="self-start">
-        <div className="notranslate relative -mx-4 overflow-hidden bg-[#F7F3F0] sm:-mx-6 lg:mx-0 lg:rounded-3xl">
-          <div className="relative bg-[#F7F3F0] p-6 sm:p-7 lg:p-8">
+        <div className="notranslate relative -mx-4 overflow-hidden bg-[#F7F3F0] sm:-mx-6 lg:mx-0 lg:rounded-2xl">
+          <div className="relative bg-[#F7F3F0] p-6 sm:p-7 lg:p-9">
         <div className="flex flex-wrap items-center gap-x-3 gap-y-2 leading-none">
-          <span className="product-detail-badge product-detail-badge-delay-1 inline-flex items-center gap-1.5 text-[11px] font-medium uppercase tracking-[0.12em] text-[#111] opacity-60">
+          <span className="product-detail-badge product-detail-badge-delay-1 inline-flex items-center gap-1.5 text-[11px] font-medium uppercase tracking-[0.12em] text-[#111] opacity-60 lg:text-[12px]">
             <ItalyFlagIcon />
             {t("common.madeInItaly")}
           </span>
           {showLeatherBadge && (
-            <span className="product-detail-badge product-detail-badge-delay-2 text-[11px] font-medium uppercase tracking-[0.12em] text-[#111] opacity-60">
+            <span className="product-detail-badge product-detail-badge-delay-2 text-[11px] font-medium uppercase tracking-[0.12em] text-[#111] opacity-60 lg:text-[12px]">
               {t("common.genuineLeather")}
             </span>
           )}
         </div>
-        <h1 className="product-detail-title-reveal mt-4 font-sans text-[20px] font-normal leading-[1.3] tracking-[-0.01em] text-[#111]">
+        <h1 className="product-detail-title-reveal mt-4 font-sans text-[20px] font-normal leading-[1.3] tracking-[-0.01em] text-[#111] lg:text-[22px]">
           {localizedTitle}
         </h1>
 
@@ -453,7 +474,7 @@ export default function ProductDetailView({
           )}
           <span
             className={
-              "text-[22px] font-bold leading-none tracking-[-0.01em] " +
+              "text-[22px] font-bold leading-none tracking-[-0.01em] lg:text-[24px] " +
               (onSale ? "text-sale" : "text-[#111]")
             }
           >
@@ -463,12 +484,12 @@ export default function ProductDetailView({
 
         <PreorderStatusBadge
           status={isPreorder ? "pre_order" : product.status}
-          className="product-detail-status-reveal mt-3 !text-[13px]"
+          className="product-detail-status-reveal mt-3 !text-[13px] lg:!text-[14px]"
           pulse
         />
 
         <div className="mt-8">
-          <p className="text-[11px] font-medium uppercase tracking-[0.12em] text-[#111]/70">
+          <p className="text-[11px] font-medium uppercase tracking-[0.12em] text-[#111]/70 lg:text-[12px]">
             {t("catalog.color")}:{" "}
             <span className="font-semibold text-[#111]">{localizedColor}</span>
           </p>
@@ -491,7 +512,7 @@ export default function ProductDetailView({
             type="button"
             onClick={() => setContactOpen((v) => !v)}
             aria-expanded={contactOpen}
-            className="min-h-[46px] w-full rounded-sm bg-stone-950 px-7 py-[1.125rem] text-base font-medium text-white outline-none transition hover:bg-stone-800 active:bg-stone-900 focus-visible:outline focus-visible:outline-2 focus-visible:outline-[#111] focus-visible:outline-offset-[3px]"
+            className="min-h-[46px] w-full rounded-sm bg-stone-950 px-7 py-[1.125rem] text-base font-medium text-white outline-none transition hover:bg-stone-800 active:bg-stone-900 focus-visible:outline focus-visible:outline-2 focus-visible:outline-[#111] focus-visible:outline-offset-[3px] lg:text-[17px]"
           >
             {t("pdp.reserveButton")}
           </button>
@@ -501,7 +522,7 @@ export default function ProductDetailView({
                 type="button"
                 onClick={handleAdd}
                 disabled={!canBuy}
-                className="flex h-12 flex-1 items-center justify-center rounded-sm border border-[#E8E2DD] bg-[#FFFBF9] px-5 text-[14px] font-medium text-[#111] outline-none transition hover:bg-white active:bg-[#F7F3F0] disabled:cursor-not-allowed disabled:opacity-50 focus-visible:outline focus-visible:outline-2 focus-visible:outline-[#111] focus-visible:outline-offset-[3px]"
+                className="flex h-12 flex-1 items-center justify-center rounded-sm border border-[#E8E2DD] bg-[#FFFBF9] px-5 text-[14px] font-medium text-[#111] outline-none transition hover:bg-white active:bg-[#F7F3F0] disabled:cursor-not-allowed disabled:opacity-50 focus-visible:outline focus-visible:outline-2 focus-visible:outline-[#111] focus-visible:outline-offset-[3px] lg:text-[15px]"
               >
                 {buyLabel}
               </button>
@@ -582,11 +603,92 @@ export default function ProductDetailView({
 
         <TrustNotes className="mt-6 space-y-2.5 px-0.5" />
 
-        <BrandStories productSlug={product.slug} className="mt-8 max-lg:origin-top max-lg:scale-100 lg:origin-top-left lg:scale-110 justify-start" />
+        <BrandStories productSlug={product.slug} className="mt-8 origin-top-left scale-90 justify-start" />
           </div>
         </div>
       </div>
       </div>
+
+        {mobileContactOpen ? (
+          <div
+            className="fixed inset-0 z-[70] flex items-end bg-black/35 backdrop-blur-[2px] lg:hidden"
+            role="dialog"
+            aria-modal="true"
+            aria-label={t("pdp.reserveButton")}
+          >
+            <button
+              type="button"
+              aria-label={t("common.close")}
+              onClick={() => setMobileContactOpen(false)}
+              className="absolute inset-0"
+            />
+            <div className="relative z-10 w-full overflow-hidden rounded-t-[24px] border-t border-[#EDE6E0] bg-[#F7F3F0] pb-[max(1rem,env(safe-area-inset-bottom))] shadow-[0_-20px_60px_rgba(28,25,23,0.18)]">
+              <div className="flex items-center justify-between border-b border-[#E8E0DA] px-5 py-4">
+                <p className="text-[16px] font-semibold text-[#111]">{t("pdp.reserveButton")}</p>
+                <button
+                  type="button"
+                  aria-label={t("common.close")}
+                  onClick={() => setMobileContactOpen(false)}
+                  className="flex h-9 w-9 items-center justify-center rounded-full bg-white text-[24px] font-light leading-none text-[#111]"
+                >
+                  ×
+                </button>
+              </div>
+
+              <div className="p-3">
+                <a
+                  href={`tel:${primaryStore.phone.replace(/\s/g, "")}`}
+                  onClick={() => setMobileContactOpen(false)}
+                  className="flex items-center gap-3.5 rounded-2xl border border-[#E4DBD4] bg-white px-4 py-4"
+                >
+                  <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-[#F7F3F0] text-[#111]">
+                    <PhoneIcon />
+                  </span>
+                  <span className="min-w-0 flex-1">
+                    <span className="block text-[12px] text-[#111]/48">{t("pdp.directCall")}</span>
+                    <span className="mt-0.5 block text-[19px] font-semibold text-[#111]">
+                      {primaryStore.phone}
+                    </span>
+                  </span>
+                </a>
+              </div>
+
+              <div className="mx-3 overflow-hidden rounded-2xl border border-[#E4DBD4] bg-white">
+                {contactOptions.map((option, index) => (
+                  <a
+                    key={`mobile-${option.name}`}
+                    href={option.href}
+                    target="_blank"
+                    rel="noreferrer"
+                    onClick={() => setMobileContactOpen(false)}
+                    className={
+                      "flex min-h-16 items-center gap-3.5 px-4 py-3 " +
+                      (index > 0 ? "border-t border-[#F0EAE5]" : "")
+                    }
+                  >
+                    <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-[#F7F3F0] text-[#111]">
+                      <MessengerIcon name={option.icon} />
+                    </span>
+                    <span className="min-w-0 flex-1">
+                      <span className="block text-[15px] font-medium text-[#111]">{option.name}</span>
+                      <span className="mt-0.5 block text-[12px] text-[#111]/45">{option.hint}</span>
+                    </span>
+                    <svg
+                      viewBox="0 0 24 24"
+                      className="h-4 w-4 shrink-0 text-[#111]/25"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="1.8"
+                      aria-hidden
+                    >
+                      <path d="M9 6l6 6-6 6" strokeLinecap="round" strokeLinejoin="round" />
+                    </svg>
+                  </a>
+                ))}
+              </div>
+            </div>
+          </div>
+        ) : null}
 
         {showStickyBuy ? (
           <div className="fixed inset-x-0 bottom-0 z-40 border-t border-[#EDE5DF] bg-[#F7F3F0]/95 px-4 pb-[max(0.75rem,env(safe-area-inset-bottom))] pt-3 backdrop-blur-md lg:hidden">
@@ -597,17 +699,19 @@ export default function ProductDetailView({
                   {formatPrice(product.price, locale)}
                 </p>
               </div>
-              <a
-                href={`tel:${primaryStore.phone.replace(/\s/g, "")}`}
+              <button
+                type="button"
+                onClick={() => setMobileContactOpen(true)}
+                aria-expanded={mobileContactOpen}
                 className="inline-flex min-h-11 shrink-0 items-center justify-center rounded-sm bg-stone-950 px-5 text-[13px] font-medium text-white transition hover:bg-stone-800 active:bg-stone-900"
               >
                 {t("pdp.reserveButton")}
-              </a>
+              </button>
             </div>
           </div>
         ) : null}
 
-        <div className="mt-16 w-full lg:mt-24">
+        <div className="mt-10 w-full lg:mt-14">
           <div className="grid w-full gap-x-12 gap-y-10 lg:grid-cols-[minmax(0,0.9fr)_minmax(0,1.6fr)] xl:gap-x-16">
             <div className="border-b border-stone-200 lg:border-b-0">
               <section className="border-t border-stone-200 py-5">

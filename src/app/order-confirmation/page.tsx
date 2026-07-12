@@ -3,10 +3,14 @@ import type { Metadata } from "next";
 import { brand } from "@/lib/config";
 import { withLocalePath } from "@/lib/i18n";
 import { getServerLocale, getServerT } from "@/lib/server-i18n";
+import { noIndexMetadata } from "@/lib/seo";
 
 export async function generateMetadata(): Promise<Metadata> {
   const t = await getServerT();
-  return { title: t("order.confirmation") };
+  return {
+    ...noIndexMetadata,
+    title: t("order.confirmation"),
+  };
 }
 
 export default async function OrderConfirmationPage({

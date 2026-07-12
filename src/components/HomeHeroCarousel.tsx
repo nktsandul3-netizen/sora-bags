@@ -39,8 +39,8 @@ export default function HomeHeroCarousel({
             src={slide.src}
             alt={slide.alt}
             fill
-            priority={i === 0}
-            quality={i === 0 ? 100 : 90}
+            preload={i === 0}
+            quality={i === 0 ? 85 : 82}
             sizes="100vw"
             style={{ objectPosition: slide.objectPosition ?? "50% 50%" }}
             className={

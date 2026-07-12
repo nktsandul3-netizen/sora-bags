@@ -1,6 +1,8 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 import Image from "next/image";
 import { products } from "@/lib/data";
+import { brand } from "@/lib/config";
 import { getInstagramPosts } from "@/lib/instagram";
 import CapsuleProductCard from "@/components/CapsuleProductCard";
 import HeroBannerSlider, { type HeroSlide } from "@/components/HeroBannerSlider";
@@ -8,6 +10,19 @@ import HomeBelowFold from "@/components/HomeBelowFold";
 import { getServerLocale, getServerT } from "@/lib/server-i18n";
 import { withLocalePath, type Locale } from "@/lib/i18n";
 import { translate } from "@/lib/messages";
+import { buildPageMetadata } from "@/lib/seo";
+
+export async function generateMetadata(): Promise<Metadata> {
+  const [locale, t] = await Promise.all([getServerLocale(), getServerT()]);
+  const title = `${brand.name} — ${t("brand.tagline")}`;
+  return buildPageMetadata({
+    path: "/",
+    locale,
+    title,
+    description: t("brand.description"),
+    absoluteTitle: true,
+  });
+}
 
 function getHeroSlides(locale: Locale): HeroSlide[] {
   const t = (key: string) => translate(locale, key);
@@ -16,6 +31,12 @@ function getHeroSlides(locale: Locale): HeroSlide[] {
       type: "image",
       src: "/hero-sora-bamboo-studio-v3.jpg",
       mobileSrc: "/hero-sora-bamboo-studio-mobile.jpg",
+      width: 1920,
+      height: 960,
+      mobileWidth: 1400,
+      mobileHeight: 875,
+      objectPosition: "42% 28%",
+      mobileObjectPosition: "50% 50%",
       alt: t("home.heroBambooAlt"),
     },
     {
@@ -78,8 +99,10 @@ export default async function Home() {
                 src={tile.img}
                 alt={t(tile.labelKey)}
                 fill
-                sizes="(min-width: 768px) 50vw, 100vw"
-                quality={80}
+                sizes="50vw"
+                quality={75}
+                loading="lazy"
+                fetchPriority="low"
                 className="object-cover object-center transition-transform duration-[900ms] ease-out group-hover:scale-[1.02]"
               />
               <div className="absolute inset-0 bg-black/10 transition-colors duration-300 group-hover:bg-black/30 group-focus-visible:bg-black/30" />
@@ -109,6 +132,8 @@ export default async function Home() {
               fill
               sizes="(min-width: 1024px) 52vw, 100vw"
               quality={82}
+              loading="lazy"
+              fetchPriority="low"
               className="object-cover object-[55%_68%] transition-transform duration-700 ease-out group-hover:scale-[1.02]"
             />
           </Link>

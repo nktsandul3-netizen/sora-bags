@@ -48,6 +48,8 @@ export default function CapsuleProductCard({ product }: { product: Product }) {
                 fill
                 sizes="(min-width: 1024px) 20vw, 45vw"
                 quality={88}
+                loading="lazy"
+                fetchPriority="low"
                 className={
                   (primaryFit === "contain"
                     ? "object-contain object-center"

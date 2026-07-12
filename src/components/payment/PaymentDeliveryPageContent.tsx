@@ -300,8 +300,8 @@ export default function PaymentDeliveryPageContent({ locale = "ru" }: { locale?:
           src={heroImage}
           alt={c.alt}
           fill
-          priority
-          quality={90}
+          preload
+          quality={85}
           sizes="100vw"
           className="object-cover object-[center_58%]"
         />

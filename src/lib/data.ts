@@ -3901,7 +3901,7 @@ export const products: Product[] = [
         ...C.redOrange,
         images: [
           { src: "/products/womens-smooth-leather-compact-baguette-bag/red-orange-front-card-v5.webp", alt: "Ottilie Red-Orange — вид спереди" },
-          { src: "/products/womens-smooth-leather-compact-baguette-bag/red-orange-front-alt-v4.webp", alt: "Ottilie Red-Orange — альтернативный вид" },
+          { src: "/products/womens-smooth-leather-compact-baguette-bag/red-orange-back-v3.webp", alt: "Ottilie Red-Orange — сзади" },
           { src: "/products/womens-smooth-leather-compact-baguette-bag/red-orange-side-v2.webp", alt: "Ottilie Red-Orange — сбоку" },
           { src: "/products/womens-smooth-leather-compact-baguette-bag/red-orange-inside-v5.webp", alt: "Ottilie Red-Orange — внутри" },
         ],

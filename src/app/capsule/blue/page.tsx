@@ -5,10 +5,21 @@ import CapsuleProductCard from "@/components/CapsuleProductCard";
 import { products } from "@/lib/data";
 import { getServerLocale, getServerT } from "@/lib/server-i18n";
 import { withLocalePath } from "@/lib/i18n";
+import { buildPageMetadata } from "@/lib/seo";
 
 export async function generateMetadata(): Promise<Metadata> {
-  const t = await getServerT();
-  return { title: t("home.blueCapsule") };
+  const [locale, t] = await Promise.all([getServerLocale(), getServerT()]);
+  return buildPageMetadata({
+    path: "/capsule/blue",
+    locale,
+    title: t("home.blueCapsule"),
+    description:
+      locale === "ro"
+        ? "Capsule Blue — look selectat cu genți și accesorii SÓRA Bags."
+        : locale === "en"
+          ? "Blue capsule — a curated SÓRA Bags look with bags and accessories."
+          : "Blue capsule — подобранный образ с сумками и аксессуарами SÓRA Bags.",
+  });
 }
 
 const capsuleSlugs = [

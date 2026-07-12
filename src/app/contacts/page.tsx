@@ -2,14 +2,25 @@ import type { Metadata } from "next";
 import Breadcrumbs from "@/components/Breadcrumbs";
 import { brand } from "@/lib/config";
 import { getServerLocale, getServerT } from "@/lib/server-i18n";
+import { buildPageMetadata } from "@/lib/seo";
 
 export async function generateMetadata(): Promise<Metadata> {
-  const t = await getServerT();
-  return { title: t("nav.contacts") };
+  const [locale, t] = await Promise.all([getServerLocale(), getServerT()]);
+  return buildPageMetadata({
+    path: "/contacts",
+    locale,
+    title: t("nav.contacts"),
+    description:
+      locale === "ro"
+        ? `Contactați SÓRA Bags: telefoane, adresa magazinului din Chișinău și program de lucru.`
+        : locale === "en"
+          ? `Contact SÓRA Bags: phones, Chișinău store address and opening hours.`
+          : `Связаться с SÓRA Bags: телефоны, адрес магазина в Кишинёве и часы работы.`,
+  });
 }
 
 export default async function ContactsPage() {
-  const [locale, t] = await Promise.all([getServerLocale(), getServerT()]);
+  const t = await getServerT();
   const copy = {
     phones: t("contacts.phones"),
     addressHours: t("contacts.addressHours"),

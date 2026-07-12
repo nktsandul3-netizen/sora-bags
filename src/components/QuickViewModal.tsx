@@ -225,6 +225,12 @@ export default function QuickViewModal({
     };
   }, [open, onClose]);
 
+  useEffect(() => {
+    // Reset the disclosure after the modal closes.
+    // eslint-disable-next-line react-hooks/set-state-in-effect
+    if (!open) setContactOpen(false);
+  }, [open]);
+
   if (typeof document === "undefined") return null;
 
   const brandName = getBrandName(product.brandSlug);
@@ -269,10 +275,6 @@ export default function QuickViewModal({
       hint: t("pdp.openChat"),
     },
   ];
-
-  useEffect(() => {
-    if (!open) setContactOpen(false);
-  }, [open]);
 
   function handleAdd() {
     if (!canBuy || !color) return;

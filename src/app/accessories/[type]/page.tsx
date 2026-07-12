@@ -7,8 +7,9 @@ import {
   productsByCategory,
   shopAccessoryMenuCategories,
 } from "@/lib/data";
-import { getServerLocale } from "@/lib/server-i18n";
+import { getServerLocale, getServerT } from "@/lib/server-i18n";
 import { categoryName } from "@/lib/catalog-i18n";
+import { buildPageMetadata } from "@/lib/seo";
 
 const accessoryRouteSlugs = Array.from(
   new Set([
@@ -29,8 +30,22 @@ export async function generateMetadata({
   params: Promise<{ type: string }>;
 }): Promise<Metadata> {
   const { type } = await params;
+  const [locale, t] = await Promise.all([getServerLocale(), getServerT()]);
   const cat = getCategory(type);
-  return { title: cat?.name ?? "Аксессуары" };
+  const title = cat
+    ? categoryName(cat.slug, cat.name, locale)
+    : t("catalog.allAccessories");
+  return buildPageMetadata({
+    path: `/accessories/${type}`,
+    locale,
+    title,
+    description:
+      locale === "ro"
+        ? `${title} din piele italiană — livrare în Moldova.`
+        : locale === "en"
+          ? `${title} in Italian leather — delivery across Moldova.`
+          : `${title} из итальянской кожи — доставка по Молдове.`,
+  });
 }
 
 export default async function AccessoryTypePage({

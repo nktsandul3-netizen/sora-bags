@@ -1,4 +1,4 @@
-import Image from "next/image";
+import Image, { getImageProps } from "next/image";
 import type { Locale } from "@/lib/i18n";
 
 import { brand } from "@/lib/config";
@@ -97,26 +97,39 @@ function EditorialImage({
 }
 
 function WarrantyHero({ alt }: { alt: string }) {
+  const common = { alt, sizes: "100vw" };
+  const {
+    props: { srcSet: desktopSrcSet },
+  } = getImageProps({
+    ...common,
+    src: heroImage,
+    width: 1920,
+    height: 1091,
+    quality: 85,
+  });
+  const {
+    props: { srcSet: mobileSrcSet, ...mobileProps },
+  } = getImageProps({
+    ...common,
+    src: heroImageMobile,
+    width: 1600,
+    height: 909,
+    quality: 85,
+  });
+
   return (
     <section className="relative aspect-[16/9] w-full overflow-hidden bg-[#1a1a1a] md:aspect-auto md:h-[clamp(280px,44vw,580px)] md:bg-stone-100">
-      <Image
-        src={heroImageMobile}
-        alt={alt}
-        fill
-        priority
-        quality={90}
-        sizes="100vw"
-        className="object-cover object-center md:hidden"
-      />
-      <Image
-        src={heroImage}
-        alt={alt}
-        fill
-        priority
-        quality={90}
-        sizes="100vw"
-        className="hidden object-cover object-center md:block"
-      />
+      <picture>
+        <source media="(min-width: 768px)" srcSet={desktopSrcSet} sizes="100vw" />
+        <source media="(max-width: 767px)" srcSet={mobileSrcSet} sizes="100vw" />
+        <img
+          {...mobileProps}
+          alt={alt}
+          loading="eager"
+          fetchPriority="high"
+          className="absolute inset-0 h-full w-full object-cover object-center"
+        />
+      </picture>
       <div
         className="pointer-events-none absolute inset-0 bg-gradient-to-b from-black/30 via-transparent to-transparent"
         aria-hidden

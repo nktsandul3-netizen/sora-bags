@@ -88,16 +88,20 @@ function swatchShellClass(size: SwatchSize) {
 function ColorSwatchFace({
   color,
   size,
+  highlighted,
 }: {
   color: ProductColor;
   size: SwatchSize;
+  highlighted: boolean;
 }) {
   return (
     <span
       className={
         "relative block overflow-hidden " +
         swatchShellClass(size) +
-        " shadow-[inset_0_0_0_1px_rgba(0,0,0,0.08)]"
+        (highlighted
+          ? " shadow-[inset_0_0_0_1px_rgba(0,0,0,0.12),0_0_0_2px_#fff,0_0_0_3px_#111]"
+          : " shadow-[inset_0_0_0_1px_rgba(0,0,0,0.08)]")
       }
       style={{ backgroundColor: color.hex }}
     >
@@ -138,7 +142,7 @@ function ColorSwatch({
     />
   );
 
-  const face = <ColorSwatchFace color={color} size={size} />;
+  const face = <ColorSwatchFace color={color} size={size} highlighted={highlighted} />;
 
   if (onSelect) {
     return (

@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import Image from "next/image";
+import Image, { getImageProps } from "next/image";
 import Link from "next/link";
 import { useT } from "@/lib/useI18n";
 
@@ -14,7 +14,19 @@ export interface HeroSlideCaption {
 }
 
 export type HeroSlide =
-  | { type: "image"; src: string; mobileSrc?: string; alt: string; caption?: HeroSlideCaption }
+  | {
+      type: "image";
+      src: string;
+      mobileSrc?: string;
+      alt: string;
+      width?: number;
+      height?: number;
+      mobileWidth?: number;
+      mobileHeight?: number;
+      objectPosition?: string;
+      mobileObjectPosition?: string;
+      caption?: HeroSlideCaption;
+    }
   | {
       type: "video";
       src: string;
@@ -23,6 +35,91 @@ export type HeroSlide =
       mobilePoster?: string;
       caption?: HeroSlideCaption;
     };
+
+function ResponsiveHeroImage({
+  src,
+  mobileSrc,
+  alt,
+  width = 1920,
+  height = 1080,
+  mobileWidth = 1400,
+  mobileHeight = 875,
+  objectPosition = "42% 28%",
+  mobileObjectPosition = "50% 50%",
+  eager = false,
+  className = "",
+}: {
+  src: string;
+  mobileSrc?: string;
+  alt: string;
+  width?: number;
+  height?: number;
+  mobileWidth?: number;
+  mobileHeight?: number;
+  objectPosition?: string;
+  mobileObjectPosition?: string;
+  eager?: boolean;
+  className?: string;
+}) {
+  if (!mobileSrc) {
+    return (
+      <Image
+        src={src}
+        alt={alt}
+        fill
+        preload={eager}
+        quality={85}
+        sizes="100vw"
+        className={"object-cover " + className}
+        style={{ objectPosition }}
+      />
+    );
+  }
+
+  const common = { alt, sizes: "100vw" };
+  const {
+    props: { srcSet: desktopSrcSet },
+  } = getImageProps({
+    ...common,
+    src,
+    width,
+    height,
+    quality: 85,
+  });
+  const {
+    props: { srcSet: mobileSrcSet, ...mobileProps },
+  } = getImageProps({
+    ...common,
+    src: mobileSrc,
+    width: mobileWidth,
+    height: mobileHeight,
+    quality: 82,
+  });
+
+  return (
+    <picture>
+      <source media="(min-width: 768px)" srcSet={desktopSrcSet} sizes="100vw" />
+      <source media="(max-width: 767px)" srcSet={mobileSrcSet} sizes="100vw" />
+      {/* getImageProps provides responsive src/srcSet without loading both art-directed files. */}
+      <img
+        {...mobileProps}
+        alt={alt}
+        loading={eager ? "eager" : "lazy"}
+        fetchPriority={eager ? "high" : "auto"}
+        className={
+          "absolute inset-0 h-full w-full object-cover object-[var(--hero-mobile-position)] md:object-[var(--hero-desktop-position)] " +
+          className
+        }
+        style={
+          {
+            "--hero-mobile-position": mobileObjectPosition,
+            "--hero-desktop-position": objectPosition,
+          } as React.CSSProperties
+        }
+      />
+    </picture>
+  );
+}
 
 function HeroSlideVideo({
   src,
@@ -45,11 +142,6 @@ function HeroSlideVideo({
 }) {
   const videoRef = useRef<HTMLVideoElement | null>(null);
   const [ready, setReady] = useState(false);
-  const posterSrc = mobilePoster ?? poster;
-
-  useEffect(() => {
-    setReady(false);
-  }, [src, mobileSrc]);
 
   useEffect(() => {
     const v = videoRef.current;
@@ -71,10 +163,6 @@ function HeroSlideVideo({
     v.addEventListener("canplay", onCanPlay);
     v.addEventListener("loadeddata", markReady);
 
-    if (warm || active) {
-      v.load();
-    }
-
     return () => {
       v.removeEventListener("canplay", onCanPlay);
       v.removeEventListener("loadeddata", markReady);
@@ -95,15 +183,20 @@ function HeroSlideVideo({
 
   return (
     <>
-      {posterSrc ? (
-        // eslint-disable-next-line @next/next/no-img-element
-        <img
-          src={posterSrc}
+      {(active || warm) && poster ? (
+        <ResponsiveHeroImage
+          src={poster}
+          mobileSrc={mobilePoster}
           alt=""
-          aria-hidden
-          decoding="async"
+          width={1280}
+          height={720}
+          mobileWidth={720}
+          mobileHeight={406}
+          eager={active}
+          objectPosition="50% 66%"
+          mobileObjectPosition="50% 66%"
           className={
-            "absolute inset-0 h-full w-full object-cover object-[50%_66%] " +
+            "transition-opacity duration-300 " +
             (ready && active ? "opacity-0" : "opacity-100")
           }
         />
@@ -113,7 +206,6 @@ function HeroSlideVideo({
         muted
         playsInline
         preload={warm || active ? "auto" : "none"}
-        poster={posterSrc}
         loop={false}
         onEnded={onEnded}
         data-ready={ready ? "true" : "false"}
@@ -168,17 +260,6 @@ export default function HeroBannerSlider({
     return () => window.clearTimeout(timer);
   }, [slides.length, intervalMs, safeIndex, activeSlide]);
 
-  // Prefetch Venezia poster early (tiny JPG).
-  useEffect(() => {
-    for (const slide of slides) {
-      if (slide.type !== "video") continue;
-      const poster = slide.mobilePoster ?? slide.poster;
-      if (!poster) continue;
-      const img = new window.Image();
-      img.src = poster;
-    }
-  }, [slides]);
-
   if (!activeSlide) return null;
 
   return (
@@ -206,8 +287,6 @@ export default function HeroBannerSlider({
       >
         {slides.map((slide, i) => {
           const active = i === safeIndex;
-          const warmVideo = slide.type === "video" && !active && safeIndex === 0;
-
           return (
             <div
               key={
@@ -222,32 +301,18 @@ export default function HeroBannerSlider({
               aria-hidden={!active}
             >
               {slide.type === "image" ? (
-                <>
-                  {slide.mobileSrc ? (
-                    <Image
-                      src={slide.mobileSrc}
-                      alt={slide.alt}
-                      fill
-                      priority={i === 0}
-                      quality={85}
-                      sizes="100vw"
-                      className="object-cover object-center md:hidden"
-                    />
-                  ) : null}
-                  <Image
-                    src={slide.src}
-                    alt={slide.alt}
-                    fill
-                    priority={i === 0}
-                    quality={88}
-                    sizes="100vw"
-                    className={
-                      slide.mobileSrc
-                        ? "hidden object-cover object-[42%_28%] md:block"
-                        : "object-cover object-[42%_28%]"
-                    }
-                  />
-                </>
+                <ResponsiveHeroImage
+                  src={slide.src}
+                  mobileSrc={slide.mobileSrc}
+                  alt={slide.alt}
+                  width={slide.width}
+                  height={slide.height}
+                  mobileWidth={slide.mobileWidth}
+                  mobileHeight={slide.mobileHeight}
+                  objectPosition={slide.objectPosition}
+                  mobileObjectPosition={slide.mobileObjectPosition}
+                  eager={i === 0}
+                />
               ) : (
                 <HeroSlideVideo
                   src={slide.src}
@@ -255,7 +320,7 @@ export default function HeroBannerSlider({
                   poster={slide.poster}
                   mobilePoster={slide.mobilePoster}
                   active={active}
-                  warm={warmVideo || active}
+                  warm={active}
                   onEnded={() => {
                     if (i === safeIndex) goNext();
                   }}

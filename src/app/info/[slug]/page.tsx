@@ -15,6 +15,7 @@ import PrivacyPolicyContent from "@/components/PrivacyPolicyContent";
 import { getInfoBody, getInfoPage, getInfoTitle, infoPages, navInfoPages } from "@/lib/info";
 import { getServerLocale } from "@/lib/server-i18n";
 import { withLocalePath, type Locale } from "@/lib/i18n";
+import { buildPageMetadata } from "@/lib/seo";
 
 export function generateStaticParams() {
   return infoPages.map((p) => ({ slug: p.slug }));
@@ -28,7 +29,30 @@ export async function generateMetadata({
   const { slug } = await params;
   const locale = await getServerLocale();
   const page = getInfoPage(slug);
-  return { title: page ? getInfoTitle(page, locale) : locale === "ro" ? "Informații" : locale === "en" ? "Information" : "Информация" };
+  const title = page
+    ? getInfoTitle(page, locale)
+    : locale === "ro"
+      ? "Informații"
+      : locale === "en"
+        ? "Information"
+        : "Информация";
+  const body = page ? getInfoBody(page, locale) : [];
+  const description = Array.isArray(body)
+    ? body.filter(Boolean).join(" ").slice(0, 158)
+    : undefined;
+
+  return buildPageMetadata({
+    path: `/info/${slug}`,
+    locale,
+    title,
+    description:
+      description ||
+      (locale === "ro"
+        ? `${title} — SÓRA Bags, Chișinău.`
+        : locale === "en"
+          ? `${title} — SÓRA Bags, Chișinău.`
+          : `${title} — SÓRA Bags, Кишинёв.`),
+  });
 }
 
 function InfoSidebar({ activeSlug, locale }: { activeSlug: string; locale: Locale }) {

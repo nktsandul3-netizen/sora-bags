@@ -10,8 +10,12 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import StorefrontChrome from "@/components/StorefrontChrome";
 import AnalyticsTracker from "@/components/AnalyticsTracker";
+import JsonLd from "@/components/JsonLd";
 import { getServerLocale, getServerT } from "@/lib/server-i18n";
-import { locales, withLocalePath } from "@/lib/i18n";
+import {
+  buildOrganizationJsonLd,
+  buildWebsiteJsonLd,
+} from "@/lib/seo";
 
 const inter = Inter({
   variable: "--font-inter",
@@ -36,9 +40,7 @@ export async function generateMetadata(): Promise<Metadata> {
   const t = await getServerT();
   const tagline = t("brand.tagline");
   const description = t("brand.description");
-  const languages = Object.fromEntries(
-    locales.map((code) => [code, withLocalePath("/", code)]),
-  ) as Record<string, string>;
+  const googleVerification = process.env.GOOGLE_SITE_VERIFICATION?.trim();
 
   return {
     metadataBase: new URL(`https://${brand.domain}`),
@@ -47,9 +49,8 @@ export async function generateMetadata(): Promise<Metadata> {
       template: `%s — ${brand.name}`,
     },
     description,
-    alternates: {
-      languages,
-    },
+    // Canonical + hreflang are set per-route via buildPageMetadata / page generateMetadata.
+    // Do not set home canonical here — nested pages would inherit it.
     icons: {
       icon: [{ url: "/favicon.png", sizes: "800x800", type: "image/png" }],
       apple: [{ url: "/apple-touch-icon.png", sizes: "800x800", type: "image/png" }],
@@ -59,7 +60,6 @@ export async function generateMetadata(): Promise<Metadata> {
       siteName: brand.name,
       title: `${brand.name} — ${tagline}`,
       description,
-      url: `https://${brand.domain}`,
       images: [
         {
           url: "/og-image.jpg",
@@ -75,6 +75,9 @@ export async function generateMetadata(): Promise<Metadata> {
       description,
       images: ["/og-image.jpg"],
     },
+    ...(googleVerification
+      ? { verification: { google: googleVerification } }
+      : {}),
     other: {
       google: "notranslate",
     },
@@ -94,6 +97,8 @@ export default async function RootLayout({
       className={`${inter.variable} ${playfair.variable} ${instrumentSerif.variable} notranslate h-full antialiased`}
     >
       <body className="flex min-h-full flex-col bg-background text-stone-900">
+        <JsonLd data={buildOrganizationJsonLd()} />
+        <JsonLd data={buildWebsiteJsonLd()} />
         <LocaleProvider locale={locale}>
           <SessionProviderWrapper>
             <CartProvider>

@@ -10,6 +10,7 @@ import {
 import { getServerLocale, getServerT } from "@/lib/server-i18n";
 import { categoryName, categoryHeroCopy } from "@/lib/catalog-i18n";
 import type { Locale } from "@/lib/i18n";
+import { buildPageMetadata } from "@/lib/seo";
 
 const bagHeroConfigs: Record<
   string,
@@ -159,9 +160,20 @@ export async function generateMetadata({
   const { type } = await params;
   const [locale, t] = await Promise.all([getServerLocale(), getServerT()]);
   const cat = getCategory(type);
-  return {
-    title: cat ? categoryName(cat.slug, cat.name, locale) : t("nav.bags"),
-  };
+  const title = cat ? categoryName(cat.slug, cat.name, locale) : t("nav.bags");
+  const hero = cat ? categoryHeroCopy(cat.slug, locale) : null;
+  return buildPageMetadata({
+    path: `/bags/${type}`,
+    locale,
+    title,
+    description:
+      hero?.description ??
+      (locale === "ro"
+        ? `${title} din piele italiană — livrare în Moldova.`
+        : locale === "en"
+          ? `${title} in Italian leather — delivery across Moldova.`
+          : `${title} из итальянской кожи — доставка по Молдове.`),
+  });
 }
 
 export default async function BagTypePage({

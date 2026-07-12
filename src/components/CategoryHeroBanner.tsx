@@ -27,9 +27,9 @@ export default function CategoryHeroBanner({
           src={banner.image}
           alt={banner.imageAlt}
           fill
-          priority
+          preload
           quality={85}
-          sizes="(min-width: 1024px) 100vw, 100vw"
+          sizes="100vw"
           className="object-cover object-center"
         />
       </div>

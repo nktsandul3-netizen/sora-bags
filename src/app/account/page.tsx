@@ -6,10 +6,14 @@ import AccountDashboard from "@/components/account/AccountDashboard";
 import { auth } from "@/auth";
 import { getAddresses, getOrders, getProfile } from "@/lib/account";
 import { getServerT } from "@/lib/server-i18n";
+import { noIndexMetadata } from "@/lib/seo";
 
 export async function generateMetadata(): Promise<Metadata> {
   const t = await getServerT();
-  return { title: t("auth.accountTitle") };
+  return {
+    ...noIndexMetadata,
+    title: t("auth.accountTitle"),
+  };
 }
 
 export default async function AccountPage({

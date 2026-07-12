@@ -675,8 +675,8 @@ function HeroBanner({ heroBanner }: { heroBanner: NonNullable<CatalogViewProps["
             alt={heroBanner.alt}
             width={heroBanner.width ?? 2560}
             height={heroBanner.height ?? 1440}
-            priority
-            quality={90}
+            preload
+            quality={85}
             sizes="100vw"
             className={
               heroMediaFilterClass + " catalog-hero-image block h-auto w-full max-w-none"
@@ -704,8 +704,8 @@ function HeroBanner({ heroBanner }: { heroBanner: NonNullable<CatalogViewProps["
             fill={heroBanner.fit !== "contain"}
             width={heroBanner.fit === "contain" ? heroBanner.width : undefined}
             height={heroBanner.fit === "contain" ? heroBanner.height : undefined}
-            priority
-            quality={90}
+            preload
+            quality={85}
             sizes="100vw"
             className={
               heroBanner.fit === "contain"

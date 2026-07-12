@@ -3,10 +3,16 @@ import CatalogView from "@/components/CatalogView";
 import { productsBySection, shopAccessoryMenuCategories } from "@/lib/data";
 import { getServerLocale, getServerT } from "@/lib/server-i18n";
 import { categoryName } from "@/lib/catalog-i18n";
+import { buildPageMetadata } from "@/lib/seo";
 
 export async function generateMetadata(): Promise<Metadata> {
-  const t = await getServerT();
-  return { title: t("catalog.allAccessories") };
+  const [locale, t] = await Promise.all([getServerLocale(), getServerT()]);
+  return buildPageMetadata({
+    path: "/accessories",
+    locale,
+    title: t("catalog.allAccessories"),
+    description: t("catalog.accessoriesDescription"),
+  });
 }
 
 export default async function AccessoriesPage() {

@@ -6,10 +6,14 @@ import { auth } from "@/auth";
 import { redirect } from "next/navigation";
 import { withLocalePath } from "@/lib/i18n";
 import { getServerLocale, getServerT } from "@/lib/server-i18n";
+import { noIndexMetadata } from "@/lib/seo";
 
 export async function generateMetadata(): Promise<Metadata> {
   const t = await getServerT();
-  return { title: t("auth.newPasswordTitle") };
+  return {
+    ...noIndexMetadata,
+    title: t("auth.newPasswordTitle"),
+  };
 }
 
 export default async function ResetPasswordPage({

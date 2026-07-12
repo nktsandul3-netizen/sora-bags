@@ -84,6 +84,7 @@ export default function ProductCard({
 
   // When the catalog color filter changes, drop manual/hover preview so the card follows the filter.
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setPreviewIdx(null);
   }, [filterKey, product.slug]);
 
@@ -92,6 +93,7 @@ export default function ProductCard({
   const colorImages = activeColor ? getColorImages(activeColor) : [];
 
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setImageIdx(0);
   }, [displayIdx, product.slug]);
 

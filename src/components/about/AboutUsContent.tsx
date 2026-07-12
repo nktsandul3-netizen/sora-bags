@@ -176,8 +176,8 @@ export default function AboutUsContent({ locale = "ru" }: { locale?: Locale }) {
             src="/about/about-hero-sora-florence.png"
             alt={c.alts.hero}
             fill
-            priority
-            quality={92}
+            preload
+            quality={85}
             sizes="100vw"
             className="object-cover object-center"
           />

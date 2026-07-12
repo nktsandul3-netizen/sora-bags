@@ -1,11 +1,17 @@
 import type { Metadata } from "next";
 import CatalogView from "@/components/CatalogView";
 import { veneziaIntreccioProducts } from "@/lib/data";
-import { getServerT } from "@/lib/server-i18n";
+import { getServerLocale, getServerT } from "@/lib/server-i18n";
+import { buildPageMetadata } from "@/lib/seo";
 
 export async function generateMetadata(): Promise<Metadata> {
-  const t = await getServerT();
-  return { title: t("catalog.veneziaCollection") };
+  const [locale, t] = await Promise.all([getServerLocale(), getServerT()]);
+  return buildPageMetadata({
+    path: "/collections/venezia-intreccio",
+    locale,
+    title: t("catalog.veneziaCollection"),
+    description: t("catalog.veneziaCollectionDescription"),
+  });
 }
 
 export default async function VeneziaIntreccioCollectionPage() {

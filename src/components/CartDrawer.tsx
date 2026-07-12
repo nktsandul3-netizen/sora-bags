@@ -96,7 +96,6 @@ function getItemCountLabel(count: number, locale: Locale, t: (key: string) => st
 export default function CartDrawer() {
   const {
     items,
-    total,
     standardItems,
     preorderItems,
     standardTotal,

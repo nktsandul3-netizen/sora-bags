@@ -15,7 +15,7 @@ export default function TrustNotes({ className = "mt-6 space-y-2.5 px-1" }: { cl
       {items.map((item) => (
         <li
           key={item.key}
-          className="flex items-center gap-2.5 text-[13px] leading-snug text-[#1A1A1A] opacity-60"
+          className="flex items-center gap-2.5 text-[13px] leading-snug text-[#1A1A1A] opacity-75"
         >
           <span className="flex h-4 w-4 shrink-0 items-center justify-center" aria-hidden>
             {item.icon}
