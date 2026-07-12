@@ -487,6 +487,7 @@ export default function ProductDetailView({
 
         <div className="mt-8 flex flex-col gap-3">
           <button
+            ref={addToCartRef}
             type="button"
             onClick={() => setContactOpen((v) => !v)}
             aria-expanded={contactOpen}
@@ -497,7 +498,6 @@ export default function ProductDetailView({
           <div className="flex flex-col">
             <div className="flex items-center gap-3">
               <button
-                ref={addToCartRef}
                 type="button"
                 onClick={handleAdd}
                 disabled={!canBuy}
@@ -597,14 +597,12 @@ export default function ProductDetailView({
                   {formatPrice(product.price, locale)}
                 </p>
               </div>
-              <button
-                type="button"
-                onClick={handleAdd}
-                disabled={!canBuy}
-                className="min-h-11 shrink-0 rounded-sm bg-stone-950 px-5 text-[13px] font-medium text-white transition hover:bg-stone-800 disabled:cursor-not-allowed disabled:opacity-50"
+              <a
+                href={`tel:${primaryStore.phone.replace(/\s/g, "")}`}
+                className="inline-flex min-h-11 shrink-0 items-center justify-center rounded-sm bg-stone-950 px-5 text-[13px] font-medium text-white transition hover:bg-stone-800 active:bg-stone-900"
               >
-                {buyLabel}
-              </button>
+                {t("pdp.reserveButton")}
+              </a>
             </div>
           </div>
         ) : null}
