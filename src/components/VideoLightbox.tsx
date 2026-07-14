@@ -204,7 +204,7 @@ export default function VideoLightbox({
       </button>
 
       <div className="relative z-10 flex w-full max-w-[920px] flex-col items-stretch gap-5 md:flex-row md:items-end md:gap-8">
-        <div className="relative mx-auto aspect-[9/16] w-full max-h-[85vh] max-w-[min(100%,calc(85vh*9/16))] overflow-hidden rounded-2xl bg-black shadow-[0_24px_80px_rgba(0,0,0,0.45)] md:mx-0">
+        <div className="relative mx-auto aspect-[9/16] h-[min(92svh,720px)] max-h-[92svh] w-auto max-w-[min(100%,calc(92svh*9/16))] overflow-hidden rounded-2xl bg-black shadow-[0_24px_80px_rgba(0,0,0,0.45)] md:mx-0">
           <video
             ref={videoRef}
             key={videoUrl}

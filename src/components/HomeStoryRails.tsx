@@ -1,6 +1,7 @@
 "use client";
 
 import { useCallback, useEffect, useRef, useState } from "react";
+import { createPortal } from "react-dom";
 import Image from "next/image";
 import Link from "next/link";
 import {
@@ -128,12 +129,17 @@ export default function HomeStoryRails({ className }: { className?: string }) {
   const [slide, setSlide] = useState(0);
   const [progress, setProgress] = useState(0);
   const [muted, setMuted] = useState(true);
+  const [portalReady, setPortalReady] = useState(false);
   const videoRef = useRef<HTMLVideoElement | null>(null);
 
   const slides = activeTile?.slides ?? [];
   const current = slides[slide] as BrandStorySlide | undefined;
   const isVideo = current?.type === "video";
   const open = Boolean(activeTile);
+
+  useEffect(() => {
+    setPortalReady(true);
+  }, []);
 
   const close = useCallback(() => {
     setActiveTile(null);
@@ -227,16 +233,17 @@ export default function HomeStoryRails({ className }: { className?: string }) {
         />
       </div>
 
-      {open && activeTile && current && (
+      {open && activeTile && current && portalReady
+        ? createPortal(
         <div
-          className="fixed inset-0 z-[120] flex items-center justify-center bg-black/50 px-4 backdrop-blur-[2px]"
+          className="fixed inset-0 z-[120] flex items-center justify-center bg-black/55 px-3 py-6 backdrop-blur-[2px] sm:px-4"
           role="dialog"
           aria-modal="true"
           aria-label={`${railTitle}: ${activeTile.label}`}
         >
           <button type="button" aria-label={t("common.close")} onClick={close} className="absolute inset-0 cursor-default" />
 
-          <div className="relative z-10 aspect-[9/16] max-h-[82vh] w-full max-w-[92vw] overflow-hidden rounded-[20px] bg-black shadow-[0_20px_60px_-15px_rgba(0,0,0,0.6)] sm:max-w-[420px]">
+          <div className="relative z-10 aspect-[9/16] h-[min(92svh,720px)] max-h-[92svh] w-auto max-w-[min(100%,calc(92svh*9/16))] overflow-hidden rounded-[20px] bg-black shadow-[0_20px_60px_-15px_rgba(0,0,0,0.6)]">
             {isVideo ? (
               <video
                 ref={videoRef}
@@ -320,8 +327,10 @@ export default function HomeStoryRails({ className }: { className?: string }) {
               ) : null}
             </div>
           </div>
-        </div>
-      )}
+        </div>,
+        document.body,
+      )
+        : null}
     </>
   );
 }

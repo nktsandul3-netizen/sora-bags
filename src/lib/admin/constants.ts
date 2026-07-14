@@ -73,7 +73,7 @@ export const PRODUCT_STATUSES: ProductStatus[] = [
 export const PRODUCT_STATUS_LABELS: Record<ProductStatus, string> = {
   in_stock: "В наличии",
   out_of_stock: "Нет в наличии",
-  pre_order: "Доставка 7–14 дней",
+  pre_order: "Предзаказ (от 14 дней)",
 };
 
 export const PRODUCT_STATUS_BADGE: Record<ProductStatus, string> = {

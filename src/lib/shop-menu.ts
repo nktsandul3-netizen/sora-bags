@@ -23,7 +23,7 @@ export const shopBagMenuCategories: CategoryDef[] = [
 
 /** Accessory categories shown in shop menu + catalog subnav (order matters). */
 export const shopAccessoryMenuCategories: CategoryDef[] = [
-  { slug: "womens-scarves-women", name: "Foulard", section: "accessories" },
+  { slug: "womens-scarves-women", name: "Платки", section: "accessories" },
   { slug: "wallets-cardholders", name: "Wallets", section: "accessories" },
   { slug: "bag-charms", name: "Charms", section: "accessories" },
 ];

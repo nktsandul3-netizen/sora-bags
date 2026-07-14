@@ -20,9 +20,10 @@ import {
   localizeStaticText,
   getVisibleProductSpecs,
 } from "@/lib/product-i18n";
-import ProductImage from "./ProductImage";
+import ProductDetailGallery from "./ProductDetailGallery";
 import ProductColorSwatches from "./ProductColorSwatches";
 import WishlistButton from "./WishlistButton";
+import ShareProductButton from "./ShareProductButton";
 import PreorderStatusBadge from "./PreorderStatusBadge";
 import BrandStories from "./BrandStories";
 import TrustNotes from "./TrustNotes";
@@ -111,21 +112,6 @@ function groupProductSpecs(specs: ProductSpec[]): { title: SpecGroupTitle; specs
     .filter((group) => group.specs.length > 0);
 }
 
-function ArrowIcon({ direction }: { direction: "left" | "right" }) {
-  return (
-    <svg viewBox="0 0 24 24" className="h-4 w-4" aria-hidden>
-      <path
-        d={direction === "left" ? "M15 6l-6 6 6 6" : "M9 6l6 6-6 6"}
-        fill="none"
-        stroke="currentColor"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-        strokeWidth="1.7"
-      />
-    </svg>
-  );
-}
-
 function ItalyFlagIcon() {
   return (
     <span className="inline-flex h-2 w-3 shrink-0 overflow-hidden" aria-hidden>
@@ -203,8 +189,7 @@ export default function ProductDetailView({
   const [contactOpen, setContactOpen] = useState(false);
   const [mobileContactOpen, setMobileContactOpen] = useState(false);
   const [showStickyBuy, setShowStickyBuy] = useState(false);
-  const touchStartX = useRef<number | null>(null);
-  const addToCartRef = useRef<HTMLButtonElement | null>(null);
+  const purchaseActionsRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
     fetch(`/api/products/${product.slug}/view`, { method: "POST" }).catch(() => {});
@@ -218,19 +203,12 @@ export default function ProductDetailView({
 
   const color = product.colors[colorIdx];
   const images = getImages(product, colorIdx);
-  const safeImageIdx = images.length ? Math.min(imageIdx, images.length - 1) : 0;
-  const activeImage = images[safeImageIdx];
   const onSale = product.oldPrice && product.oldPrice > product.price;
-  const hasGallery = images.length > 1;
-  const canNavigateMedia = hasGallery || product.colors.length > 1;
   const canBuy = product.status !== "out_of_stock";
   const purchaseKind = getPurchaseKindForItem(product, color.name);
   const isPreorder = purchaseKind === "preorder";
   const galleryFit = product.galleryFit ?? "cover";
   const showLeatherBadge = hasPureLeatherMaterial(product);
-  const activeImageFit = activeImage?.fit ?? galleryFit;
-  const galleryHoverClass =
-    activeImageFit === "contain" ? "" : "transition-transform duration-700 group-hover:scale-[1.018]";
   const localizedColor = localizeColorName(color, locale);
   const localizedDescription = localizeProductDescription(product, locale);
   const localizedTitle = localizeProductTitle(product, locale);
@@ -267,13 +245,15 @@ export default function ProductDetailView({
   }, [colorIdx]);
 
   useEffect(() => {
-    const target = addToCartRef.current;
+    const target = purchaseActionsRef.current;
     if (!target || typeof IntersectionObserver === "undefined") return;
 
     const media = window.matchMedia("(max-width: 1023px)");
     const observer = new IntersectionObserver(
       ([entry]) => {
-        setShowStickyBuy(media.matches && !entry.isIntersecting);
+        setShowStickyBuy(
+          media.matches && !entry.isIntersecting && entry.boundingClientRect.top < 0,
+        );
       },
       { threshold: 0, rootMargin: "0px" },
     );
@@ -331,125 +311,35 @@ export default function ProductDetailView({
         : t("common.addToCart")
     : t("common.outOfStock");
 
-  function showImage(direction: "prev" | "next") {
-    if (hasGallery) {
-      setImageIdx((current) =>
-        direction === "next"
-          ? (current + 1) % images.length
-          : (current - 1 + images.length) % images.length,
-      );
-      return;
-    }
-    if (product.colors.length < 2) return;
-    setImageIdx(0);
-    setColorIdx((current) =>
-      direction === "next"
-        ? (current + 1) % product.colors.length
-        : (current - 1 + product.colors.length) % product.colors.length,
-    );
-  }
-
   return (
     <div className="mt-6">
       <div className="grid gap-10 lg:grid-cols-[minmax(0,0.82fr)_minmax(0,1.18fr)]">
-      <div>
-        <div
-          className="group relative flex h-[100svh] max-h-[100svh] touch-pan-y items-center justify-center overflow-hidden rounded-2xl bg-[var(--background)] lg:aspect-[4/5] lg:h-auto lg:max-h-none"
-          onTouchStart={(e) => {
-            touchStartX.current = e.changedTouches[0]?.clientX ?? null;
+      <div className="min-w-0">
+        <ProductDetailGallery
+          images={images}
+          imageIdx={imageIdx}
+          onImageIdxChange={setImageIdx}
+          colorIdx={colorIdx}
+          colorName={color.name}
+          colorHex={color.hex}
+          section={product.section}
+          localizedTitle={localizedTitle}
+          localizeAlt={(alt) => localizeProductImageAlt(alt, locale)}
+          galleryFit={galleryFit}
+          canCycleColors={product.colors.length > 1}
+          onCycleColor={(direction) => {
+            setImageIdx(0);
+            setColorIdx((current) =>
+              direction === "next"
+                ? (current + 1) % product.colors.length
+                : (current - 1 + product.colors.length) % product.colors.length,
+            );
           }}
-          onTouchEnd={(e) => {
-            if (touchStartX.current == null || !canNavigateMedia) return;
-            const dx = (e.changedTouches[0]?.clientX ?? 0) - touchStartX.current;
-            touchStartX.current = null;
-            if (Math.abs(dx) < 40) return;
-            showImage(dx < 0 ? "next" : "prev");
-          }}
-        >
-            {activeImage?.src ? (
-              /* eslint-disable-next-line @next/next/no-img-element */
-              <img
-                key={`${colorIdx}-${safeImageIdx}-${activeImage.src}`}
-                src={activeImage.src}
-                alt={localizeProductImageAlt(activeImage.alt, locale) || localizedTitle}
-                loading="eager"
-                className={
-                  "relative z-10 max-h-[78svh] max-w-[85vw] object-contain object-center " +
-                  "lg:absolute lg:inset-[3%] lg:h-[94%] lg:w-[94%] lg:max-h-none lg:max-w-none " +
-                  (activeImageFit === "contain" ? "lg:object-contain" : "lg:object-cover lg:object-center") +
-                  (galleryHoverClass ? ` ${galleryHoverClass}` : "")
-                }
-              />
-            ) : (
-              <ProductImage
-                key={`${colorIdx}-${safeImageIdx}-placeholder`}
-                hex={color.hex}
-                section={product.section}
-                alt={localizedTitle}
-                sizes="(min-width: 1024px) 50vw, 100vw"
-                imageClassName="object-contain object-center max-h-[78svh] max-w-[85vw] lg:max-h-none lg:max-w-none"
-                className="relative z-10 flex h-auto w-auto items-center justify-center lg:absolute lg:inset-[3%] lg:h-[94%] lg:w-[94%]"
-              />
-            )}
-
-          {canNavigateMedia && (
-            <>
-              <button
-                type="button"
-                aria-label={t("common.previousPhoto")}
-                onClick={() => showImage("prev")}
-                className="absolute left-3 top-1/2 z-20 flex h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full border border-[#D4C8C0] bg-white/95 text-[#111] shadow-[0_3px_12px_rgba(28,25,23,0.12)] outline-none transition hover:bg-white hover:shadow-[0_5px_16px_rgba(28,25,23,0.16)] focus:outline-none focus-visible:outline-none"
-              >
-                <ArrowIcon direction="left" />
-              </button>
-              <button
-                type="button"
-                aria-label={t("common.nextPhoto")}
-                onClick={() => showImage("next")}
-                className="absolute right-3 top-1/2 z-20 flex h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full border border-[#D4C8C0] bg-white/95 text-[#111] shadow-[0_3px_12px_rgba(28,25,23,0.12)] outline-none transition hover:bg-white hover:shadow-[0_5px_16px_rgba(28,25,23,0.16)] focus:outline-none focus-visible:outline-none"
-              >
-                <ArrowIcon direction="right" />
-              </button>
-
-              <div className="absolute right-4 top-4 z-20 text-[11px] font-medium tabular-nums tracking-[0.12em] text-[#111]/55">
-                {hasGallery ? `${safeImageIdx + 1}/${images.length}` : `${colorIdx + 1}/${product.colors.length}`}
-              </div>
-
-              {hasGallery ? (
-                <div className="absolute bottom-5 left-1/2 z-20 flex -translate-x-1/2 items-center gap-2 rounded-full border border-white/80 bg-white/55 px-3.5 py-2 shadow-[0_8px_28px_rgba(28,25,23,0.1)] backdrop-blur-md">
-                  {images.map((image, i) => {
-                    const active = i === safeImageIdx;
-                    return (
-                      <button
-                        key={`${image.alt}-dot-${i}`}
-                        type="button"
-                        aria-label={`${t("common.photo")} ${i + 1}`}
-                        aria-current={active ? "true" : undefined}
-                        onClick={() => setImageIdx(i)}
-                        className="group/dot flex h-5 w-5 items-center justify-center"
-                      >
-                        <span
-                          aria-hidden
-                          className={
-                            "block rounded-full transition-all duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] " +
-                            (active
-                              ? "h-[7px] w-7 bg-[#111] shadow-[0_1px_4px_rgba(17,17,17,0.28)]"
-                              : "h-[7px] w-[7px] bg-[#111]/22 ring-1 ring-[#111]/12 group-hover/dot:bg-[#111]/40 group-hover/dot:ring-[#111]/25")
-                          }
-                        />
-                      </button>
-                    );
-                  })}
-                </div>
-              ) : null}
-            </>
-          )}
-        </div>
-
+        />
       </div>
 
-      <div className="self-start">
-        <div className="notranslate relative -mx-4 overflow-hidden bg-[#F7F3F0] sm:-mx-6 lg:mx-0 lg:rounded-2xl">
+      <div className="min-w-0 self-start">
+        <div className="notranslate relative -mx-4 bg-[#F7F3F0] sm:-mx-6 lg:mx-0 lg:overflow-hidden lg:rounded-2xl">
           <div className="relative bg-[#F7F3F0] p-6 sm:p-7 lg:p-9">
         <div className="flex flex-wrap items-center gap-x-3 gap-y-2 leading-none">
           <span className="product-detail-badge product-detail-badge-delay-1 inline-flex items-center gap-1.5 text-[11px] font-medium uppercase tracking-[0.12em] text-[#111] opacity-60 lg:text-[12px]">
@@ -506,9 +396,8 @@ export default function ProductDetailView({
           ) : null}
         </div>
 
-        <div className="mt-8 flex flex-col gap-3">
+        <div ref={purchaseActionsRef} className="mt-8 flex flex-col gap-3">
           <button
-            ref={addToCartRef}
             type="button"
             onClick={() => setContactOpen((v) => !v)}
             aria-expanded={contactOpen}
@@ -526,6 +415,7 @@ export default function ProductDetailView({
               >
                 {buyLabel}
               </button>
+              <ShareProductButton title={localizedTitle} />
               <WishlistButton slug={product.slug} variant="pdp" />
             </div>
 
@@ -692,21 +582,41 @@ export default function ProductDetailView({
 
         {showStickyBuy ? (
           <div className="fixed inset-x-0 bottom-0 z-40 border-t border-[#EDE5DF] bg-[#F7F3F0]/95 px-4 pb-[max(0.75rem,env(safe-area-inset-bottom))] pt-3 backdrop-blur-md lg:hidden">
-            <div className="mx-auto flex max-w-7xl items-center gap-3">
-              <div className="min-w-0 flex-1">
-                <p className="truncate text-[13px] font-medium text-[#111]">{localizedTitle}</p>
-                <p className="mt-0.5 text-[15px] font-semibold text-[#111]">
+            <div className="mx-auto max-w-7xl">
+              <div className="mb-2 flex items-end justify-between gap-3">
+                <div className="min-w-0">
+                  <p className="truncate text-[12px] font-medium text-[#111]">{localizedTitle}</p>
+                  <p className="mt-0.5 truncate text-[11px] text-[#111]/55">
+                    {t("catalog.color")}: {localizedColor}
+                  </p>
+                </div>
+                <p className="shrink-0 text-[15px] font-semibold text-[#111]">
+                  {onSale ? (
+                    <span className="price-strike mr-1.5 text-[12px] font-normal text-stone-400">
+                      {formatPrice(product.oldPrice!, locale)}
+                    </span>
+                  ) : null}
                   {formatPrice(product.price, locale)}
                 </p>
               </div>
-              <button
-                type="button"
-                onClick={() => setMobileContactOpen(true)}
-                aria-expanded={mobileContactOpen}
-                className="inline-flex min-h-11 shrink-0 items-center justify-center rounded-sm bg-stone-950 px-5 text-[13px] font-medium text-white transition hover:bg-stone-800 active:bg-stone-900"
-              >
-                {t("pdp.reserveButton")}
-              </button>
+              <div className="grid grid-cols-2 gap-2">
+                <button
+                  type="button"
+                  onClick={handleAdd}
+                  disabled={!canBuy}
+                  className="inline-flex min-h-11 items-center justify-center rounded-sm border border-[#DCD4CE] bg-[#FFFBF9] px-3 text-[12px] font-medium text-[#111] transition active:bg-white disabled:cursor-not-allowed disabled:opacity-50"
+                >
+                  {buyLabel}
+                </button>
+                <button
+                  type="button"
+                  onClick={() => setMobileContactOpen(true)}
+                  aria-expanded={mobileContactOpen}
+                  className="inline-flex min-h-11 items-center justify-center rounded-sm bg-stone-950 px-3 text-[12px] font-medium text-white transition active:bg-stone-800"
+                >
+                  {t("pdp.reserveButton")}
+                </button>
+              </div>
             </div>
           </div>
         ) : null}

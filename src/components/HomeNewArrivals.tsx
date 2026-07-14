@@ -7,6 +7,7 @@ import type { Product } from "@/lib/types";
 import { formatPrice } from "@/lib/format";
 import { getBrandName, getFeaturedColorIndex } from "@/lib/data";
 import { withLocalePath } from "@/lib/i18n";
+import { getColorFamilies } from "@/lib/color-taxonomy";
 import { useIsDesktop } from "@/lib/useIsDesktop";
 import { useLocale, useT } from "@/lib/useI18n";
 import { localizeProductImageAlt, localizeProductTitle } from "@/lib/product-i18n";
@@ -24,6 +25,7 @@ function cardImageClassName(
   src: string | undefined,
   hovered: boolean,
   galleryFit: "cover" | "contain" = "cover",
+  preserveWhite = false,
 ) {
   const fit = isLifestyleImage(src)
     ? "object-cover object-[50%_35%]"
@@ -34,7 +36,8 @@ function cardImageClassName(
   return (
     fit +
     " transition-transform duration-700 " +
-    (hovered ? "scale-[1.03]" : "scale-100")
+    (hovered ? "scale-[1.03]" : "scale-100") +
+    (preserveWhite ? "" : " max-lg:mix-blend-darken")
   );
 }
 
@@ -74,6 +77,7 @@ function ShowcaseCard({ product }: { product: Product }) {
   const showSecondary = imageHovered && previewIdx === null && hasSwap;
   const showSwatches = colors.length > 1;
   const galleryFit = product.galleryFit ?? "cover";
+  const preserveWhite = getColorFamilies(activeColor?.name ?? "").includes("white");
   const cardFrameClass =
     "relative aspect-[4/5] w-full overflow-hidden rounded-[22px] border border-white/80 shadow-[0_18px_55px_-42px_rgba(28,25,23,0.65)] ring-1 ring-stone-950/10 transition duration-500 group-hover:-translate-y-1 group-hover:shadow-[0_26px_70px_-44px_rgba(28,25,23,0.85)] " +
     (galleryFit === "contain"
@@ -112,26 +116,26 @@ function ShowcaseCard({ product }: { product: Product }) {
                 src={primary.src}
                 alt={localizeProductImageAlt(primary.alt, locale) || localizedTitle}
                 fill
-                sizes="(min-width: 1024px) 25vw, 82vw"
-                quality={75}
-                className={cardImageClassName(primary.src, imageHovered && previewIdx === null, galleryFit)}
+                sizes="(min-width: 1024px) 20vw, (min-width: 640px) 36vw, 48vw"
+                quality={80}
+                className={cardImageClassName(
+                  primary.src,
+                  imageHovered && previewIdx === null,
+                  galleryFit,
+                  preserveWhite,
+                )}
               />
             </div>
-            {hasSwap && (
-              <div
-                className={
-                  "absolute inset-0 transition-opacity duration-300 ease-out " +
-                  (showSecondary ? "opacity-100" : "opacity-0")
-                }
-              >
+            {showSecondary && (
+              <div className="absolute inset-0 opacity-100 transition-opacity duration-300 ease-out">
                 <Image
                   key={`${displayIdx}-secondary-${secondary!.src}`}
                   src={secondary!.src}
                   alt={localizeProductImageAlt(secondary!.alt, locale) || localizedTitle}
                   fill
-                  sizes="(min-width: 1024px) 25vw, 82vw"
-                  quality={75}
-                  className={cardImageClassName(secondary!.src, showSecondary, galleryFit)}
+                  sizes="(min-width: 1024px) 20vw, (min-width: 640px) 36vw, 48vw"
+                  quality={80}
+                  className={cardImageClassName(secondary!.src, showSecondary, galleryFit, preserveWhite)}
                 />
               </div>
             )}
@@ -142,8 +146,14 @@ function ShowcaseCard({ product }: { product: Product }) {
             hex={activeColor?.hex ?? "#d6d3d1"}
             section={product.section}
             alt={localizedTitle}
-            sizes="(min-width: 1024px) 25vw, 82vw"
-            imageClassName={cardImageClassName(undefined, imageHovered && previewIdx === null, galleryFit)}
+            sizes="(min-width: 1024px) 20vw, (min-width: 640px) 36vw, 48vw"
+            quality={80}
+            imageClassName={cardImageClassName(
+              undefined,
+              imageHovered && previewIdx === null,
+              galleryFit,
+              preserveWhite,
+            )}
             className="h-full w-full"
           />
         )}

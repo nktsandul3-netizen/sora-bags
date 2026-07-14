@@ -41,7 +41,7 @@ import { useLocale, useT } from "@/lib/useI18n";
 import { categoryName } from "@/lib/catalog-i18n";
 import ProductGrid from "./ProductGrid";
 
-const PER_PAGE = 60;
+const PER_PAGE = 16;
 
 type CatalogViewProps = {
   title: string;
@@ -420,7 +420,11 @@ function CatalogViewInner({
             />
           ) : (
             <>
-              <ProductGrid products={shown} activeFilterColors={filters.colors} />
+              <ProductGrid
+                products={shown}
+                activeFilterColors={filters.colors}
+                prioritizeFirstRow
+              />
               {filtered.length > visible && (
                 <div className="mt-10 flex justify-center">
                   <button
@@ -445,8 +449,8 @@ function CatalogViewInner({
           facets={facets}
           activeCount={activeCount}
           onToggle={toggle}
-          onPriceChange={(field, value) =>
-            updateFilters((prev) => ({ ...prev, [field]: value }))
+          onApplyPrices={(prices) =>
+            updateFilters((prev) => ({ ...prev, ...prices }))
           }
           onReset={resetFilters}
         />
@@ -493,7 +497,7 @@ function FilterDrawer({
   facets,
   activeCount,
   onToggle,
-  onPriceChange,
+  onApplyPrices,
   onReset,
 }: {
   open: boolean;
@@ -502,10 +506,29 @@ function FilterDrawer({
   facets: ReturnType<typeof buildCatalogFacets>;
   activeCount: number;
   onToggle: (key: MultiSelectFilterKey, value: string) => void;
-  onPriceChange: (field: "priceMin" | "priceMax", value: string) => void;
+  onApplyPrices: (
+    prices: Pick<CatalogFilters, "priceMin" | "priceMax">,
+  ) => void;
   onReset: () => void;
 }) {
   const t = useT();
+  const [draftPriceMin, setDraftPriceMin] = useState(filters.priceMin);
+  const [draftPriceMax, setDraftPriceMax] = useState(filters.priceMax);
+
+  useEffect(() => {
+    if (!open) return;
+    // eslint-disable-next-line react-hooks/set-state-in-effect
+    setDraftPriceMin(filters.priceMin);
+    setDraftPriceMax(filters.priceMax);
+  }, [open, filters.priceMin, filters.priceMax]);
+
+  function applyAndClose() {
+    onApplyPrices({
+      priceMin: draftPriceMin.trim(),
+      priceMax: draftPriceMax.trim(),
+    });
+    onClose();
+  }
 
   return (
     <div
@@ -554,8 +577,8 @@ function FilterDrawer({
                 inputMode="numeric"
                 min={0}
                 placeholder={t("catalog.from")}
-                value={filters.priceMin}
-                onChange={(e) => onPriceChange("priceMin", e.target.value)}
+                value={draftPriceMin}
+                onChange={(e) => setDraftPriceMin(e.target.value)}
                 className="w-full rounded-md border border-stone-200 px-3 py-2.5 text-sm outline-none focus:border-stone-900"
               />
               <span className="text-stone-400">—</span>
@@ -564,8 +587,8 @@ function FilterDrawer({
                 inputMode="numeric"
                 min={0}
                 placeholder={t("catalog.to")}
-                value={filters.priceMax}
-                onChange={(e) => onPriceChange("priceMax", e.target.value)}
+                value={draftPriceMax}
+                onChange={(e) => setDraftPriceMax(e.target.value)}
                 className="w-full rounded-md border border-stone-200 px-3 py-2.5 text-sm outline-none focus:border-stone-900"
               />
             </div>
@@ -595,7 +618,7 @@ function FilterDrawer({
         <div className="flex items-center gap-3 border-t border-stone-200 px-5 py-4 pb-[max(1rem,env(safe-area-inset-bottom))] sm:gap-4 sm:px-6">
           <button
             type="button"
-            onClick={onClose}
+            onClick={applyAndClose}
             className="flex-1 border border-stone-900 bg-stone-900 px-6 py-3.5 text-[11px] font-medium uppercase tracking-[0.16em] text-white transition hover:bg-stone-800"
           >
             {t("catalog.apply")}

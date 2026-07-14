@@ -8,7 +8,16 @@ import {
 import type { Product, ProductColor } from "@/lib/types";
 
 const text: Record<string, Partial<Record<Locale, string>>> = {
-  "Доставка 7–14 дней": { ro: "Livrare 7–14 zile", en: "Delivery 7–14 days" },
+  "Доставка 7–14 дней": {
+    ru: "Предзаказ (от 14 дней)",
+    ro: "Precomandă (de la 14 zile)",
+    en: "Pre-order (14+ days)",
+  },
+  "7–14 дней": {
+    ru: "от 14 дней",
+    ro: "de la 14 zile",
+    en: "14+ days",
+  },
   Женский: { ro: "Femei", en: "Women" },
   Италия: { ro: "Italia", en: "Italy" },
   Пол: { ro: "Gen", en: "Gender" },
@@ -1611,6 +1620,166 @@ const productCopyBySlug: Record<string, ProductLocalizedCopy> = {
       "en": "Cendrine — tote bag in a woven texture with leather details — for work, city errands and days when you need to carry more. The silhouette stays polished and easy to wear with everyday looks.\n\nThe interior is made for daily essentials — phone, wallet, keys and small cosmetics. In stock, delivery in 1–3 days."
     }
   },
+  "womens-woven-knot-strap-shoulder-bag": {
+    title: {
+      ru: "Novella",
+      ro: "Novella",
+      en: "Novella",
+    },
+    description: {
+      ru: "Novella — компактная сумка на плечо из плетёной кожи с диагональным переплетением intrecciato. Прямоугольный силуэт с мягкими углами и клапаном держит форму за счёт плотного плетения.\n\nТонкий шнуровой ремень с декоративными узлами крепится по бокам. Внутри — основное отделение и карман на золотистой молнии. Предзаказ (от 14 дней).",
+      ro: "Novella — geantă compactă de umăr din piele împletită cu textură intrecciato pe diagonală. Silueta dreptunghiulară cu colțuri moi și clapă își păstrează forma datorită împletiturii dense.\n\nCureaua subțire tip șnur, cu noduri decorative pe laterale, completează modelul. Interiorul are compartiment principal și buzunar cu fermoar auriu. Precomandă (de la 14 zile).",
+      en: "Novella — a compact woven-leather shoulder bag with diagonal intrecciato texture. The rectangular silhouette with soft corners and a flap holds its shape thanks to the dense weave.\n\nA slim cord strap with decorative side knots finishes the design. Inside: a main compartment and a gold-zip pocket. Pre-order (14+ days).",
+    },
+    highlights: {
+      ru: [
+        "Плетёная кожа intrecciato",
+        "Ремень с декоративными узлами",
+        "Клапан на магнитных кнопках",
+        "Внутренний карман на молнии",
+      ],
+      ro: [
+        "Piele împletită intrecciato",
+        "Curea cu noduri decorative",
+        "Clapă cu capse magnetice",
+        "Buzunar interior cu fermoar",
+      ],
+      en: [
+        "Intrecciato woven leather",
+        "Strap with decorative knots",
+        "Flap with magnetic snaps",
+        "Interior zip pocket",
+      ],
+    },
+  },
+  "womens-pebbled-leather-fringe-backpack": {
+    title: {
+      ru: "Odette",
+      ro: "Odette",
+      en: "Odette",
+    },
+    description: {
+      ru: "Odette — вместительный рюкзак из зернистой кожи с длинной бахромой по переду. Мягкий силуэт с клапаном и кулиской держит объём на каждый день, а золотистая фурнитура подчёркивает фактуру кожи.\n\nРегулируемые лямки и верхняя ручка, сзади — карман на молнии. Внутри — основное отделение и карман на молнии. Предзаказ (от 14 дней).",
+      ro: "Odette — rucsac încăpător din piele granulată, cu franjuri lungi pe față. Silueta moale, cu clapă și șnur, e gândită pentru ziua de zi, iar feroneria aurie evidențiază textura pielii.\n\nBarete reglabile și mâner superior; pe spate — buzunar cu fermoar. Interior: compartiment principal și buzunar cu fermoar. Precomandă (de la 14 zile).",
+      en: "Odette — a roomy pebbled-leather backpack with long fringe across the front. The soft silhouette with flap and drawstring is made for everyday volume, while gold-tone hardware highlights the grain.\n\nAdjustable straps and a top handle; a zip pocket on the back. Inside: a main compartment and a zip pocket. Pre-order (14+ days).",
+    },
+    highlights: {
+      ru: [
+        "Зернистая кожа",
+        "Бахрома по переду",
+        "Кулиска и клапан",
+        "Карман на спинке",
+      ],
+      ro: [
+        "Piele granulată",
+        "Franjuri pe față",
+        "Șnur și clapă",
+        "Buzunar pe spate",
+      ],
+      en: [
+        "Pebbled leather",
+        "Front fringe detail",
+        "Drawstring and flap",
+        "Back zip pocket",
+      ],
+    },
+  },
+  "womens-woven-integrated-handle-shoulder-bag": {
+    title: {
+      ru: "Eliane",
+      ro: "Eliane",
+      en: "Eliane",
+    },
+    description: {
+      ru: "Eliane — сумка на плечо из плетёной кожи intrecciato с цельной широкой ручкой. Трапециевидный силуэт с плоским дном и мягким вырезом сверху держит форму за счёт плотного плетения.\n\nОсновное отделение на золотистой молнии, внутри — карман на молнии. Сбоку — кольцо для дополнительного ремня. Предзаказ (от 14 дней).",
+      ro: "Eliane — geantă de umăr din piele împletită intrecciato, cu mâner lat integrat. Silueta trapezoidală, cu bază plată și decupaj moale sus, își păstrează forma datorită împletiturii dense.\n\nCompartimentul principal se închide cu fermoar auriu; în interior — buzunar cu fermoar. Pe laterală — inel pentru o curea suplimentară. Precomandă (de la 14 zile).",
+      en: "Eliane — a woven-leather intrecciato shoulder bag with an integrated wide handle. The trapezoid silhouette with a flat base and a soft top cutout holds its shape thanks to the dense weave.\n\nThe main compartment closes with a gold zipper; inside, a zip pocket. A side ring allows an optional strap. Pre-order (14+ days).",
+    },
+    highlights: {
+      ru: [
+        "Плетёная кожа intrecciato",
+        "Цельная широкая ручка",
+        "Застёжка на молнии",
+        "Внутренний карман на молнии",
+      ],
+      ro: [
+        "Piele împletită intrecciato",
+        "Mâner lat integrat",
+        "Închidere cu fermoar",
+        "Buzunar interior cu fermoar",
+      ],
+      en: [
+        "Intrecciato woven leather",
+        "Integrated wide handle",
+        "Zip closure",
+        "Interior zip pocket",
+      ],
+    },
+  },
+  "womens-chevron-quilted-chain-flap-bag": {
+    title: {
+      ru: "Clarisse",
+      ro: "Clarisse",
+      en: "Clarisse",
+    },
+    description: {
+      ru: "Clarisse — классическая сумка с клапаном из стеганой кожи с шевронной прострочкой. Прямоугольный силуэт и золотистый замок-вертушка задают спокойный дневной и вечерний тон.\n\nЦепочка с кожаной вставкой носится коротко на плече или длиннее через плечо. Сзади — накладной карман. Предзаказ (от 14 дней).",
+      ro: "Clarisse — geantă clasică cu clapă din piele matlasată, cu cusătură chevron. Silueta dreptunghiulară și închiderea tip turn-lock aurie dau un ton elegant pentru zi și seară.\n\nLanțul cu bandă din piele se poartă scurt pe umăr sau mai lung pe diagonală. Pe spate — buzunar exterior. Precomandă (de la 14 zile).",
+      en: "Clarisse — a classic flap bag in chevron-quilted leather. The rectangular silhouette and gold turn-lock keep a calm day-to-evening line.\n\nA chain strap with a leather insert wears short on the shoulder or longer across the body. A slip pocket sits on the back. Pre-order (14+ days).",
+    },
+    highlights: {
+      ru: [
+        "Шевронная стёжка",
+        "Замок-вертушка",
+        "Цепочка с кожаной вставкой",
+        "Карман на спинке",
+      ],
+      ro: [
+        "Matlasare chevron",
+        "Închidere turn-lock",
+        "Lanț cu bandă din piele",
+        "Buzunar pe spate",
+      ],
+      en: [
+        "Chevron quilting",
+        "Turn-lock clasp",
+        "Chain strap with leather insert",
+        "Back slip pocket",
+      ],
+    },
+  },
+  "womens-smooth-leather-accordion-turn-lock-bag": {
+    title: {
+      ru: "Helene",
+      ro: "Helene",
+      en: "Helene",
+    },
+    description: {
+      ru: "Helene — структурированная сумка из гладкой кожи с боковыми складками-аккордеоном и клапаном на золотистой вертушке. Прямоугольный силуэт держит форму, а отделения внутри помогают собрать день без лишнего хаоса.\n\nВ комплекте — верхняя ручка и съёмный регулируемый плечевой ремень. Предзаказ (от 14 дней).",
+      ro: "Helene — geantă structurată din piele netedă, cu pliuri laterale tip acordeon și clapă cu închidere turn-lock aurie. Silueta dreptunghiulară își păstrează forma, iar compartimentele interioare organizează ziua fără haos.\n\nInclude mâner superior și curea de umăr detașabilă, reglabilă. Precomandă (de la 14 zile).",
+      en: "Helene — a structured smooth-leather bag with accordion side gussets and a gold turn-lock flap. The rectangular silhouette holds its shape, while the interior compartments keep the day organized.\n\nIncludes a top handle and a detachable adjustable shoulder strap. Pre-order (14+ days).",
+    },
+    highlights: {
+      ru: [
+        "Гладкая кожа",
+        "Боковые складки-аккордеон",
+        "Замок-вертушка",
+        "Съёмный плечевой ремень",
+      ],
+      ro: [
+        "Piele netedă",
+        "Pliuri laterale tip acordeon",
+        "Închidere turn-lock",
+        "Curea de umăr detașabilă",
+      ],
+      en: [
+        "Smooth leather",
+        "Accordion side gussets",
+        "Turn-lock clasp",
+        "Detachable shoulder strap",
+      ],
+    },
+  },
   "womens-woven-triangular-shoulder-bag": {
     "title": {
       "ru": "Dorine",
@@ -1906,14 +2075,14 @@ const productCopyBySlug: Record<string, ProductLocalizedCopy> = {
       "en": "Serenella"
     },
     "description": {
-      "ru": "Квадратный шёлковый платок с абстрактным геометрическим принтом: терракотовые и коралловые формы, графичные круги, контрастные линии и акценты тёмно-синего и чёрного. Лёгкая ткань с мягким блеском держит форму и красиво драпируется — на шее, на сумке или как акцент на плечах.\n\nТонкая ручная отделка по краю делает платок заметным аксессуаром сезона.",
-      "ro": "Eșarfă pătrată din mătase cu imprimeu abstract geometric: forme terracotta și coral, cercuri grafice, linii contrastante și accente bleumarin și negre. Țesătura ușoară, cu luciu discret, își păstrează forma și cade frumos — la gât, pe geantă sau pe umeri.\n\nFinisarea fină pe margine face din această eșarfă un accesoriu remarcabil al sezonului.",
-      "en": "Square silk scarf with an abstract geometric print: terracotta and coral shapes, graphic circles, contrasting lines and deep navy and black accents. The lightweight fabric has a soft sheen, holds its shape and drapes beautifully — around the neck, on a bag or over the shoulders.\n\nFine edge finishing makes this scarf a standout seasonal accessory."
+      "ru": "Платок из хлопка и шёлка с абстрактным геометрическим принтом: терракотовые и коралловые формы, графичные круги, контрастные линии и акценты тёмно-синего и чёрного. Лёгкая хлопково-шёлковая ткань держит форму и красиво драпируется — на шее, на сумке или как акцент на плечах.\n\nТонкая ручная отделка по краю делает платок заметным аксессуаром сезона.",
+      "ro": "Foulard din bumbac și mătase cu imprimeu abstract geometric: forme terracotta și coral, cercuri grafice, linii contrastante și accente bleumarin și negre. Țesătura ușoară din bumbac și mătase își păstrează forma și cade frumos — la gât, pe geantă sau pe umeri.\n\nFinisarea fină pe margine face din această eșarfă un accesoriu remarcabil al sezonului.",
+      "en": "Cotton and silk scarf with an abstract geometric print: terracotta and coral shapes, graphic circles, contrasting lines and deep navy and black accents. The lightweight cotton-silk fabric, holds its shape and drapes beautifully — around the neck, on a bag or over the shoulders.\n\nFine edge finishing makes this scarf a standout seasonal accessory."
     },
     "highlights": {
-      "ru": ["Чистый шёлк", "Абстрактный геометрический принт", "Квадратный формат 90 × 90 см", "Ручная отделка по краю"],
-      "ro": ["Mătase pură", "Imprimeu abstract geometric", "Format pătrat 90 × 90 cm", "Finisare manuală pe margine"],
-      "en": ["Pure silk", "Abstract geometric print", "Square format 90 × 90 cm", "Hand-finished edge"]
+      "ru": ["80% хлопок, 20% шёлк", "Абстрактный геометрический принт", "Формат 155 × 80 см", "Ручная отделка по краю"],
+      "ro": ["80% bumbac, 20% mătase", "Imprimeu abstract geometric", "Format 155 × 80 cm", "Finisare manuală pe margine"],
+      "en": ["80% cotton, 20% silk", "Abstract geometric print", "155 × 80 cm format", "Hand-finished edge"]
     }
   },
   "womens-lavender-wave-silk-scarf": {
@@ -1923,14 +2092,14 @@ const productCopyBySlug: Record<string, ProductLocalizedCopy> = {
       "en": "Marcelline"
     },
     "description": {
-      "ru": "Квадратный шёлковый платок с абстрактным принтом на лавандовом фоне: волнистые лаймовые штрихи с контрастными тёмными акцентами. Лёгкая ткань с мягким блеском держит форму и красиво драпируется — на шее, на сумке или как акцент на плечах.\n\nТонкая ручная отделка по краю делает платок заметным аксессуаром сезона.",
-      "ro": "Eșarfă pătrată din mătase cu imprimeu abstract pe fundal lavandă: tușe ondulate lime cu accente închise contrastante. Țesătura ușoară, cu luciu discret, își păstrează forma și cade frumos — la gât, pe geantă sau pe umeri.\n\nFinisarea fină pe margine face din această eșarfă un accesoriu remarcabil al sezonului.",
-      "en": "Square silk scarf with an abstract print on a lavender ground: wavy lime brushstrokes with contrasting dark accents. The lightweight fabric has a soft sheen, holds its shape and drapes beautifully — around the neck, on a bag or over the shoulders.\n\nFine edge finishing makes this scarf a standout seasonal accessory."
+      "ru": "Платок из хлопка и шёлка с абстрактным принтом на лавандовом фоне: волнистые лаймовые штрихи с контрастными тёмными акцентами. Лёгкая хлопково-шёлковая ткань держит форму и красиво драпируется — на шее, на сумке или как акцент на плечах.\n\nТонкая ручная отделка по краю делает платок заметным аксессуаром сезона.",
+      "ro": "Foulard din bumbac și mătase cu imprimeu abstract pe fundal lavandă: tușe ondulate lime cu accente închise contrastante. Țesătura ușoară din bumbac și mătase își păstrează forma și cade frumos — la gât, pe geantă sau pe umeri.\n\nFinisarea fină pe margine face din această eșarfă un accesoriu remarcabil al sezonului.",
+      "en": "Cotton and silk scarf with an abstract print on a lavender ground: wavy lime brushstrokes with contrasting dark accents. The lightweight cotton-silk fabric, holds its shape and drapes beautifully — around the neck, on a bag or over the shoulders.\n\nFine edge finishing makes this scarf a standout seasonal accessory."
     },
     "highlights": {
-      "ru": ["Чистый шёлк", "Лавандовый принт с волнистыми штрихами", "Квадратный формат 90 × 90 см", "Ручная отделка по краю"],
-      "ro": ["Mătase pură", "Imprimeu lavandă cu tușe ondulate", "Format pătrat 90 × 90 cm", "Finisare manuală pe margine"],
-      "en": ["Pure silk", "Lavender print with wavy brushstrokes", "Square format 90 × 90 cm", "Hand-finished edge"]
+      "ru": ["80% хлопок, 20% шёлк", "Лавандовый принт с волнистыми штрихами", "Формат 155 × 80 см", "Ручная отделка по краю"],
+      "ro": ["80% bumbac, 20% mătase", "Imprimeu lavandă cu tușe ondulate", "Format 155 × 80 cm", "Finisare manuală pe margine"],
+      "en": ["80% cotton, 20% silk", "Lavender print with wavy brushstrokes", "155 × 80 cm format", "Hand-finished edge"]
     }
   },
   "womens-pastel-tie-dye-silk-scarf": {
@@ -1940,14 +2109,14 @@ const productCopyBySlug: Record<string, ProductLocalizedCopy> = {
       "en": "Celestina"
     },
     "description": {
-      "ru": "Квадратный шёлковый платок с мягким принтом в технике тай-дай: нежные розовые, мятные и лавандовые пятна, плавно переходящие друг в друга на светлом фоне. Лёгкая ткань с мягким блеском держит форму и красиво драпируется — на шее, на сумке или как акцент на плечах.\n\nТонкая ручная отделка по краю делает платок заметным аксессуаром сезона.",
-      "ro": "Eșarfă pătrată din mătase cu imprimeu tie-dye delicat: pete roz, mentă și lavandă care se estompează una în alta pe un fundal deschis. Țesătura ușoară, cu luciu discret, își păstrează forma și cade frumos — la gât, pe geantă sau pe umeri.\n\nFinisarea fină pe margine face din această eșarfă un accesoriu remarcabil al sezonului.",
-      "en": "Square silk scarf with a soft tie-dye print: gentle pink, mint and lavender patches blending into each other on a light ground. The lightweight fabric has a soft sheen, holds its shape and drapes beautifully — around the neck, on a bag or over the shoulders.\n\nFine edge finishing makes this scarf a standout seasonal accessory."
+      "ru": "Платок из хлопка и шёлка с мягким принтом в технике тай-дай: нежные розовые, мятные и лавандовые пятна, плавно переходящие друг в друга на светлом фоне. Лёгкая хлопково-шёлковая ткань держит форму и красиво драпируется — на шее, на сумке или как акцент на плечах.\n\nТонкая ручная отделка по краю делает платок заметным аксессуаром сезона.",
+      "ro": "Foulard din bumbac și mătase cu imprimeu tie-dye delicat: pete roz, mentă și lavandă care se estompează una în alta pe un fundal deschis. Țesătura ușoară din bumbac și mătase își păstrează forma și cade frumos — la gât, pe geantă sau pe umeri.\n\nFinisarea fină pe margine face din această eșarfă un accesoriu remarcabil al sezonului.",
+      "en": "Cotton and silk scarf with a soft tie-dye print: gentle pink, mint and lavender patches blending into each other on a light ground. The lightweight cotton-silk fabric, holds its shape and drapes beautifully — around the neck, on a bag or over the shoulders.\n\nFine edge finishing makes this scarf a standout seasonal accessory."
     },
     "highlights": {
-      "ru": ["Чистый шёлк", "Пастельный тай-дай принт", "Квадратный формат 90 × 90 см", "Ручная отделка по краю"],
-      "ro": ["Mătase pură", "Imprimeu tie-dye pastel", "Format pătrat 90 × 90 cm", "Finisare manuală pe margine"],
-      "en": ["Pure silk", "Pastel tie-dye print", "Square format 90 × 90 cm", "Hand-finished edge"]
+      "ru": ["80% хлопок, 20% шёлк", "Пастельный тай-дай принт", "Формат 155 × 80 см", "Ручная отделка по краю"],
+      "ro": ["80% bumbac, 20% mătase", "Imprimeu tie-dye pastel", "Format 155 × 80 cm", "Finisare manuală pe margine"],
+      "en": ["80% cotton, 20% silk", "Pastel tie-dye print", "155 × 80 cm format", "Hand-finished edge"]
     }
   },
   "womens-aqua-wave-silk-scarf": {
@@ -1957,14 +2126,14 @@ const productCopyBySlug: Record<string, ProductLocalizedCopy> = {
       "en": "Marina"
     },
     "description": {
-      "ru": "Квадратный шёлковый платок с абстрактным принтом на аквамариновом фоне: волнистые лаймовые штрихи с контрастными тёмными акцентами, напоминающие движение воды. Лёгкая ткань с мягким блеском держит форму и красиво драпируется — на шее, на сумке или как акцент на плечах.\n\nТонкая ручная отделка по краю делает платок заметным аксессуаром сезона.",
-      "ro": "Eșarfă pătrată din mătase cu imprimeu abstract pe fundal aqua: tușe ondulate lime cu accente închise contrastante, ca mișcarea apei. Țesătura ușoară, cu luciu discret, își păstrează forma și cade frumos — la gât, pe geantă sau pe umeri.\n\nFinisarea fină pe margine face din această eșarfă un accesoriu remarcabil al sezonului.",
-      "en": "Square silk scarf with an abstract print on an aqua ground: wavy lime brushstrokes with contrasting dark accents, like moving water. The lightweight fabric has a soft sheen, holds its shape and drapes beautifully — around the neck, on a bag or over the shoulders.\n\nFine edge finishing makes this scarf a standout seasonal accessory."
+      "ru": "Платок из хлопка и шёлка с абстрактным принтом на аквамариновом фоне: волнистые лаймовые штрихи с контрастными тёмными акцентами, напоминающие движение воды. Лёгкая хлопково-шёлковая ткань держит форму и красиво драпируется — на шее, на сумке или как акцент на плечах.\n\nТонкая ручная отделка по краю делает платок заметным аксессуаром сезона.",
+      "ro": "Foulard din bumbac și mătase cu imprimeu abstract pe fundal aqua: tușe ondulate lime cu accente închise contrastante, ca mișcarea apei. Țesătura ușoară din bumbac și mătase își păstrează forma și cade frumos — la gât, pe geantă sau pe umeri.\n\nFinisarea fină pe margine face din această eșarfă un accesoriu remarcabil al sezonului.",
+      "en": "Cotton and silk scarf with an abstract print on an aqua ground: wavy lime brushstrokes with contrasting dark accents, like moving water. The lightweight cotton-silk fabric, holds its shape and drapes beautifully — around the neck, on a bag or over the shoulders.\n\nFine edge finishing makes this scarf a standout seasonal accessory."
     },
     "highlights": {
-      "ru": ["Чистый шёлк", "Аквамариновый принт с волнистыми штрихами", "Квадратный формат 90 × 90 см", "Ручная отделка по краю"],
-      "ro": ["Mătase pură", "Imprimeu aqua cu tușe ondulate", "Format pătrat 90 × 90 cm", "Finisare manuală pe margine"],
-      "en": ["Pure silk", "Aqua print with wavy brushstrokes", "Square format 90 × 90 cm", "Hand-finished edge"]
+      "ru": ["80% хлопок, 20% шёлк", "Аквамариновый принт с волнистыми штрихами", "Формат 155 × 80 см", "Ручная отделка по краю"],
+      "ro": ["80% bumbac, 20% mătase", "Imprimeu aqua cu tușe ondulate", "Format 155 × 80 cm", "Finisare manuală pe margine"],
+      "en": ["80% cotton, 20% silk", "Aqua print with wavy brushstrokes", "155 × 80 cm format", "Hand-finished edge"]
     }
   },
   "womens-slate-geometric-silk-scarf": {
@@ -1974,14 +2143,14 @@ const productCopyBySlug: Record<string, ProductLocalizedCopy> = {
       "en": "Costanza"
     },
     "description": {
-      "ru": "Квадратный шёлковый платок с графичным абстрактным принтом: сланцево-синие и серые блоки, контрастные белые полосы, коричневые акценты и полукруглые формы. Лёгкая ткань с мягким блеском держит форму и красиво драпируется — на шее, на сумке или как акцент на плечах.\n\nТонкая ручная отделка по краю делает платок заметным аксессуаром сезона.",
-      "ro": "Eșarfă pătrată din mătase cu imprimeu abstract grafic: blocuri albastru-ardoziu și gri, dungi albe contrastante, accente maro și forme semicirculare. Țesătura ușoară, cu luciu discret, își păstrează forma și cade frumos — la gât, pe geantă sau pe umeri.\n\nFinisarea fină pe margine face din această eșarfă un accesoriu remarcabil al sezonului.",
-      "en": "Square silk scarf with a graphic abstract print: slate-blue and grey blocks, contrasting white stripes, brown accents and semicircular shapes. The lightweight fabric has a soft sheen, holds its shape and drapes beautifully — around the neck, on a bag or over the shoulders.\n\nFine edge finishing makes this scarf a standout seasonal accessory."
+      "ru": "Платок из хлопка и шёлка с графичным абстрактным принтом: сланцево-синие и серые блоки, контрастные белые полосы, коричневые акценты и полукруглые формы. Лёгкая хлопково-шёлковая ткань держит форму и красиво драпируется — на шее, на сумке или как акцент на плечах.\n\nТонкая ручная отделка по краю делает платок заметным аксессуаром сезона.",
+      "ro": "Foulard din bumbac și mătase cu imprimeu abstract grafic: blocuri albastru-ardoziu și gri, dungi albe contrastante, accente maro și forme semicirculare. Țesătura ușoară din bumbac și mătase își păstrează forma și cade frumos — la gât, pe geantă sau pe umeri.\n\nFinisarea fină pe margine face din această eșarfă un accesoriu remarcabil al sezonului.",
+      "en": "Cotton and silk scarf with a graphic abstract print: slate-blue and grey blocks, contrasting white stripes, brown accents and semicircular shapes. The lightweight cotton-silk fabric, holds its shape and drapes beautifully — around the neck, on a bag or over the shoulders.\n\nFine edge finishing makes this scarf a standout seasonal accessory."
     },
     "highlights": {
-      "ru": ["Чистый шёлк", "Графичный геометрический принт", "Квадратный формат 90 × 90 см", "Ручная отделка по краю"],
-      "ro": ["Mătase pură", "Imprimeu geometric grafic", "Format pătrat 90 × 90 cm", "Finisare manuală pe margine"],
-      "en": ["Pure silk", "Graphic geometric print", "Square format 90 × 90 cm", "Hand-finished edge"]
+      "ru": ["80% хлопок, 20% шёлк", "Графичный геометрический принт", "Формат 155 × 80 см", "Ручная отделка по краю"],
+      "ro": ["80% bumbac, 20% mătase", "Imprimeu geometric grafic", "Format 155 × 80 cm", "Finisare manuală pe margine"],
+      "en": ["80% cotton, 20% silk", "Graphic geometric print", "155 × 80 cm format", "Hand-finished edge"]
     }
   },
   "womens-mustard-wave-silk-scarf": {
@@ -1991,14 +2160,14 @@ const productCopyBySlug: Record<string, ProductLocalizedCopy> = {
       "en": "Doriana"
     },
     "description": {
-      "ru": "Квадратный шёлковый платок с абстрактным принтом на кремовом фоне: волнистые горчично-жёлтые линии с живописной фактурой. Лёгкая ткань с мягким блеском держит форму и красиво драпируется — на шее, на сумке или как акцент на плечах.\n\nТонкая ручная отделка по краю делает платок заметным аксессуаром сезона.",
-      "ro": "Eșarfă pătrată din mătase cu imprimeu abstract pe fundal crem: linii ondulate galben-muștar cu textură picturală. Țesătura ușoară, cu luciu discret, își păstrează forma și cade frumos — la gât, pe geantă sau pe umeri.\n\nFinisarea fină pe margine face din această eșarfă un accesoriu remarcabil al sezonului.",
-      "en": "Square silk scarf with an abstract print on a cream ground: wavy mustard-yellow lines with a painterly texture. The lightweight fabric has a soft sheen, holds its shape and drapes beautifully — around the neck, on a bag or over the shoulders.\n\nFine edge finishing makes this scarf a standout seasonal accessory."
+      "ru": "Платок из хлопка и шёлка с абстрактным принтом на кремовом фоне: волнистые горчично-жёлтые линии с живописной фактурой. Лёгкая хлопково-шёлковая ткань держит форму и красиво драпируется — на шее, на сумке или как акцент на плечах.\n\nТонкая ручная отделка по краю делает платок заметным аксессуаром сезона.",
+      "ro": "Foulard din bumbac și mătase cu imprimeu abstract pe fundal crem: linii ondulate galben-muștar cu textură picturală. Țesătura ușoară din bumbac și mătase își păstrează forma și cade frumos — la gât, pe geantă sau pe umeri.\n\nFinisarea fină pe margine face din această eșarfă un accesoriu remarcabil al sezonului.",
+      "en": "Cotton and silk scarf with an abstract print on a cream ground: wavy mustard-yellow lines with a painterly texture. The lightweight cotton-silk fabric, holds its shape and drapes beautifully — around the neck, on a bag or over the shoulders.\n\nFine edge finishing makes this scarf a standout seasonal accessory."
     },
     "highlights": {
-      "ru": ["Чистый шёлк", "Горчичный принт с волнистыми линиями", "Квадратный формат 90 × 90 см", "Ручная отделка по краю"],
-      "ro": ["Mătase pură", "Imprimeu muștar cu linii ondulate", "Format pătrat 90 × 90 cm", "Finisare manuală pe margine"],
-      "en": ["Pure silk", "Mustard print with wavy lines", "Square format 90 × 90 cm", "Hand-finished edge"]
+      "ru": ["80% хлопок, 20% шёлк", "Горчичный принт с волнистыми линиями", "Формат 155 × 80 см", "Ручная отделка по краю"],
+      "ro": ["80% bumbac, 20% mătase", "Imprimeu muștar cu linii ondulate", "Format 155 × 80 cm", "Finisare manuală pe margine"],
+      "en": ["80% cotton, 20% silk", "Mustard print with wavy lines", "155 × 80 cm format", "Hand-finished edge"]
     }
   },
   "womens-rainbow-pastel-silk-scarf": {
@@ -2008,14 +2177,14 @@ const productCopyBySlug: Record<string, ProductLocalizedCopy> = {
       "en": "Iride"
     },
     "description": {
-      "ru": "Квадратный шёлковый платок с акварельным радужным принтом: нежные розовые, жёлтые, голубые и лавандовые пятна, плавно переходящие друг в друга. Лёгкая ткань с мягким блеском держит форму и красиво драпируется — на шее, на сумке или как акцент на плечах.\n\nТонкая ручная отделка по краю делает платок заметным аксессуаром сезона.",
-      "ro": "Eșarfă pătrată din mătase cu imprimeu acuarelă curcubeu: pete delicate roz, galben, albastru și lavandă care se estompează una în alta. Țesătura ușoară, cu luciu discret, își păstrează forma și cade frumos — la gât, pe geantă sau pe umeri.\n\nFinisarea fină pe margine face din această eșarfă un accesoriu remarcabil al sezonului.",
-      "en": "Square silk scarf with a watercolor rainbow print: soft pink, yellow, blue and lavender patches blending into each other. The lightweight fabric has a soft sheen, holds its shape and drapes beautifully — around the neck, on a bag or over the shoulders.\n\nFine edge finishing makes this scarf a standout seasonal accessory."
+      "ru": "Платок из хлопка и шёлка с акварельным радужным принтом: нежные розовые, жёлтые, голубые и лавандовые пятна, плавно переходящие друг в друга. Лёгкая хлопково-шёлковая ткань держит форму и красиво драпируется — на шее, на сумке или как акцент на плечах.\n\nТонкая ручная отделка по краю делает платок заметным аксессуаром сезона.",
+      "ro": "Foulard din bumbac și mătase cu imprimeu acuarelă curcubeu: pete delicate roz, galben, albastru și lavandă care se estompează una în alta. Țesătura ușoară din bumbac și mătase își păstrează forma și cade frumos — la gât, pe geantă sau pe umeri.\n\nFinisarea fină pe margine face din această eșarfă un accesoriu remarcabil al sezonului.",
+      "en": "Cotton and silk scarf with a watercolor rainbow print: soft pink, yellow, blue and lavender patches blending into each other. The lightweight cotton-silk fabric, holds its shape and drapes beautifully — around the neck, on a bag or over the shoulders.\n\nFine edge finishing makes this scarf a standout seasonal accessory."
     },
     "highlights": {
-      "ru": ["Чистый шёлк", "Акварельный радужный принт", "Квадратный формат 90 × 90 см", "Ручная отделка по краю"],
-      "ro": ["Mătase pură", "Imprimeu acuarelă curcubeu", "Format pătrat 90 × 90 cm", "Finisare manuală pe margine"],
-      "en": ["Pure silk", "Watercolor rainbow print", "Square format 90 × 90 cm", "Hand-finished edge"]
+      "ru": ["80% хлопок, 20% шёлк", "Акварельный радужный принт", "Формат 155 × 80 см", "Ручная отделка по краю"],
+      "ro": ["80% bumbac, 20% mătase", "Imprimeu acuarelă curcubeu", "Format 155 × 80 cm", "Finisare manuală pe margine"],
+      "en": ["80% cotton, 20% silk", "Watercolor rainbow print", "155 × 80 cm format", "Hand-finished edge"]
     }
   },
   "womens-heart-leopard-silk-scarf": {
@@ -2025,14 +2194,14 @@ const productCopyBySlug: Record<string, ProductLocalizedCopy> = {
       "en": "Amorette"
     },
     "description": {
-      "ru": "Квадратный шёлковый платок с игривым принтом «сердечный леопард»: стилизованные сердца в чёрно-серых тонах на кремовом фоне. Лёгкая ткань с мягким блеском держит форму и красиво драпируется — на шее, на сумке или как акцент на плечах.\n\nТонкая ручная отделка по краю делает платок заметным аксессуаром сезона.",
-      "ro": "Eșarfă pătrată din mătase cu imprimeu jucăuș „leopard inimi”: inimi stilizate în tonuri negru-gri pe fundal crem. Țesătura ușoară, cu luciu discret, își păstrează forma și cade frumos — la gât, pe geantă sau pe umeri.\n\nFinisarea fină pe margine face din această eșarfă un accesoriu remarcabil al sezonului.",
-      "en": "Square silk scarf with a playful heart-leopard print: stylised hearts in black and grey tones on a cream ground. The lightweight fabric has a soft sheen, holds its shape and drapes beautifully — around the neck, on a bag or over the shoulders.\n\nFine edge finishing makes this scarf a standout seasonal accessory."
+      "ru": "Платок из хлопка и шёлка с игривым принтом «сердечный леопард»: стилизованные сердца в чёрно-серых тонах на кремовом фоне. Лёгкая хлопково-шёлковая ткань держит форму и красиво драпируется — на шее, на сумке или как акцент на плечах.\n\nТонкая ручная отделка по краю делает платок заметным аксессуаром сезона.",
+      "ro": "Foulard din bumbac și mătase cu imprimeu jucăuș „leopard inimi”: inimi stilizate în tonuri negru-gri pe fundal crem. Țesătura ușoară din bumbac și mătase își păstrează forma și cade frumos — la gât, pe geantă sau pe umeri.\n\nFinisarea fină pe margine face din această eșarfă un accesoriu remarcabil al sezonului.",
+      "en": "Cotton and silk scarf with a playful heart-leopard print: stylised hearts in black and grey tones on a cream ground. The lightweight cotton-silk fabric, holds its shape and drapes beautifully — around the neck, on a bag or over the shoulders.\n\nFine edge finishing makes this scarf a standout seasonal accessory."
     },
     "highlights": {
-      "ru": ["Чистый шёлк", "Принт «сердечный леопард»", "Квадратный формат 90 × 90 см", "Ручная отделка по краю"],
-      "ro": ["Mătase pură", "Imprimeu leopard inimi", "Format pătrat 90 × 90 cm", "Finisare manuală pe margine"],
-      "en": ["Pure silk", "Heart leopard print", "Square format 90 × 90 cm", "Hand-finished edge"]
+      "ru": ["80% хлопок, 20% шёлк", "Принт «сердечный леопард»", "Формат 155 × 80 см", "Ручная отделка по краю"],
+      "ro": ["80% bumbac, 20% mătase", "Imprimeu leopard inimi", "Format 155 × 80 cm", "Finisare manuală pe margine"],
+      "en": ["80% cotton, 20% silk", "Heart leopard print", "155 × 80 cm format", "Hand-finished edge"]
     }
   },
   "womens-landscape-hills-silk-scarf": {
@@ -2042,14 +2211,14 @@ const productCopyBySlug: Record<string, ProductLocalizedCopy> = {
       "en": "Colomba"
     },
     "description": {
-      "ru": "Квадратный шёлковый платок с абстрактным пейзажным принтом: волнистые полосы зелёных, охристых и терракотовых оттенков, разделённые графичными чёрными контурами. Лёгкая ткань с мягким блеском держит форму и красиво драпируется — на шее, на сумке или как акцент на плечах.\n\nТонкая ручная отделка по краю делает платок заметным аксессуаром сезона.",
-      "ro": "Eșarfă pătrată din mătase cu imprimeu abstract peisagistic: benzi ondulate în nuanțe de verde, ocru și teracotă, separate de contururi negre grafice. Țesătura ușoară, cu luciu discret, își păstrează forma și cade frumos — la gât, pe geantă sau pe umeri.\n\nFinisarea fină pe margine face din această eșarfă un accesoriu remarcabil al sezonului.",
-      "en": "Square silk scarf with an abstract landscape print: wavy bands of green, ochre and terracotta tones separated by graphic black outlines. The lightweight fabric has a soft sheen, holds its shape and drapes beautifully — around the neck, on a bag or over the shoulders.\n\nFine edge finishing makes this scarf a standout seasonal accessory."
+      "ru": "Платок из хлопка и шёлка с абстрактным пейзажным принтом: волнистые полосы зелёных, охристых и терракотовых оттенков, разделённые графичными чёрными контурами. Лёгкая хлопково-шёлковая ткань держит форму и красиво драпируется — на шее, на сумке или как акцент на плечах.\n\nТонкая ручная отделка по краю делает платок заметным аксессуаром сезона.",
+      "ro": "Foulard din bumbac și mătase cu imprimeu abstract peisagistic: benzi ondulate în nuanțe de verde, ocru și teracotă, separate de contururi negre grafice. Țesătura ușoară din bumbac și mătase își păstrează forma și cade frumos — la gât, pe geantă sau pe umeri.\n\nFinisarea fină pe margine face din această eșarfă un accesoriu remarcabil al sezonului.",
+      "en": "Cotton and silk scarf with an abstract landscape print: wavy bands of green, ochre and terracotta tones separated by graphic black outlines. The lightweight cotton-silk fabric, holds its shape and drapes beautifully — around the neck, on a bag or over the shoulders.\n\nFine edge finishing makes this scarf a standout seasonal accessory."
     },
     "highlights": {
-      "ru": ["Чистый шёлк", "Пейзажный принт с волнистыми линиями", "Квадратный формат 90 × 90 см", "Ручная отделка по краю"],
-      "ro": ["Mătase pură", "Imprimeu peisagistic cu linii ondulate", "Format pătrat 90 × 90 cm", "Finisare manuală pe margine"],
-      "en": ["Pure silk", "Landscape print with wavy lines", "Square format 90 × 90 cm", "Hand-finished edge"]
+      "ru": ["80% хлопок, 20% шёлк", "Пейзажный принт с волнистыми линиями", "Формат 155 × 80 см", "Ручная отделка по краю"],
+      "ro": ["80% bumbac, 20% mătase", "Imprimeu peisagistic cu linii ondulate", "Format 155 × 80 cm", "Finisare manuală pe margine"],
+      "en": ["80% cotton, 20% silk", "Landscape print with wavy lines", "155 × 80 cm format", "Hand-finished edge"]
     }
   },
   "womens-grey-stripe-silk-scarf": {
@@ -2059,14 +2228,14 @@ const productCopyBySlug: Record<string, ProductLocalizedCopy> = {
       "en": "Nebbia"
     },
     "description": {
-      "ru": "Квадратный шёлковый платок с фактурным принтом в полоску: мягкий серый тон с вертикальными полосами и лёгкой морщинистой фактурой. Лёгкая ткань с мягким блеском держит форму и красиво драпируется — на шее, на сумке или как акцент на плечах.\n\nТонкая ручная отделка по краю делает платок заметным аксессуаром сезона.",
-      "ro": "Eșarfă pătrată din mătase cu imprimeu texturat în dungi: ton gri moale cu dungi verticale și o ușoară textură plisată. Țesătura ușoară, cu luciu discret, își păstrează forma și cade frumos — la gât, pe geantă sau pe umeri.\n\nFinisarea fină pe margine face din această eșarfă un accesoriu remarcabil al sezonului.",
-      "en": "Square silk scarf with a textured stripe print: soft grey tone with vertical stripes and a light crinkled texture. The lightweight fabric has a soft sheen, holds its shape and drapes beautifully — around the neck, on a bag or over the shoulders.\n\nFine edge finishing makes this scarf a standout seasonal accessory."
+      "ru": "Платок из хлопка и шёлка с фактурным принтом в полоску: мягкий серый тон с вертикальными полосами и лёгкой морщинистой фактурой. Лёгкая хлопково-шёлковая ткань держит форму и красиво драпируется — на шее, на сумке или как акцент на плечах.\n\nТонкая ручная отделка по краю делает платок заметным аксессуаром сезона.",
+      "ro": "Foulard din bumbac și mătase cu imprimeu texturat în dungi: ton gri moale cu dungi verticale și o ușoară textură plisată. Țesătura ușoară din bumbac și mătase își păstrează forma și cade frumos — la gât, pe geantă sau pe umeri.\n\nFinisarea fină pe margine face din această eșarfă un accesoriu remarcabil al sezonului.",
+      "en": "Cotton and silk scarf with a textured stripe print: soft grey tone with vertical stripes and a light crinkled texture. The lightweight cotton-silk fabric, holds its shape and drapes beautifully — around the neck, on a bag or over the shoulders.\n\nFine edge finishing makes this scarf a standout seasonal accessory."
     },
     "highlights": {
-      "ru": ["Чистый шёлк", "Фактурный принт в полоску", "Квадратный формат 90 × 90 см", "Ручная отделка по краю"],
-      "ro": ["Mătase pură", "Imprimeu texturat în dungi", "Format pătrat 90 × 90 cm", "Finisare manuală pe margine"],
-      "en": ["Pure silk", "Textured stripe print", "Square format 90 × 90 cm", "Hand-finished edge"]
+      "ru": ["80% хлопок, 20% шёлк", "Фактурный принт в полоску", "Формат 155 × 80 см", "Ручная отделка по краю"],
+      "ro": ["80% bumbac, 20% mătase", "Imprimeu texturat în dungi", "Format 155 × 80 cm", "Finisare manuală pe margine"],
+      "en": ["80% cotton, 20% silk", "Textured stripe print", "155 × 80 cm format", "Hand-finished edge"]
     }
   },
   "womens-mint-abstract-silk-scarf": {
@@ -2076,14 +2245,14 @@ const productCopyBySlug: Record<string, ProductLocalizedCopy> = {
       "en": "Clarissa"
     },
     "description": {
-      "ru": "Квадратный шёлковый платок с абстрактным принтом на мятном фоне: органические формы в тёмно-зелёных, чёрных и бежевых тонах, круговой мотив и фактурные акценты. Лёгкая ткань с мягким блеском держит форму и красиво драпируется — на шее, на сумке или как акцент на плечах.\n\nТонкая ручная отделка по краю делает платок заметным аксессуаром сезона.",
-      "ro": "Eșarfă pătrată din mătase cu imprimeu abstract pe fundal mentă: forme organice în tonuri verde închis, negru și bej, motiv circular și accente texturate. Țesătura ușoară, cu luciu discret, își păstrează forma și cade frumos — la gât, pe geantă sau pe umeri.\n\nFinisarea fină pe margine face din această eșarfă un accesoriu remarcabil al sezonului.",
-      "en": "Square silk scarf with an abstract print on a mint ground: organic shapes in dark green, black and beige tones, a circular motif and textured accents. The lightweight fabric has a soft sheen, holds its shape and drapes beautifully — around the neck, on a bag or over the shoulders.\n\nFine edge finishing makes this scarf a standout seasonal accessory."
+      "ru": "Платок из хлопка и шёлка с абстрактным принтом на мятном фоне: органические формы в тёмно-зелёных, чёрных и бежевых тонах, круговой мотив и фактурные акценты. Лёгкая хлопково-шёлковая ткань держит форму и красиво драпируется — на шее, на сумке или как акцент на плечах.\n\nТонкая ручная отделка по краю делает платок заметным аксессуаром сезона.",
+      "ro": "Foulard din bumbac și mătase cu imprimeu abstract pe fundal mentă: forme organice în tonuri verde închis, negru și bej, motiv circular și accente texturate. Țesătura ușoară din bumbac și mătase își păstrează forma și cade frumos — la gât, pe geantă sau pe umeri.\n\nFinisarea fină pe margine face din această eșarfă un accesoriu remarcabil al sezonului.",
+      "en": "Cotton and silk scarf with an abstract print on a mint ground: organic shapes in dark green, black and beige tones, a circular motif and textured accents. The lightweight cotton-silk fabric, holds its shape and drapes beautifully — around the neck, on a bag or over the shoulders.\n\nFine edge finishing makes this scarf a standout seasonal accessory."
     },
     "highlights": {
-      "ru": ["Чистый шёлк", "Абстрактный принт на мятном фоне", "Квадратный формат 90 × 90 см", "Ручная отделка по краю"],
-      "ro": ["Mătase pură", "Imprimeu abstract pe fundal mentă", "Format pătrat 90 × 90 cm", "Finisare manuală pe margine"],
-      "en": ["Pure silk", "Abstract print on mint ground", "Square format 90 × 90 cm", "Hand-finished edge"]
+      "ru": ["80% хлопок, 20% шёлк", "Абстрактный принт на мятном фоне", "Формат 155 × 80 см", "Ручная отделка по краю"],
+      "ro": ["80% bumbac, 20% mătase", "Imprimeu abstract pe fundal mentă", "Format 155 × 80 cm", "Finisare manuală pe margine"],
+      "en": ["80% cotton, 20% silk", "Abstract print on mint ground", "155 × 80 cm format", "Hand-finished edge"]
     }
   },
   "womens-dusty-blue-abstract-silk-scarf": {
@@ -2093,14 +2262,14 @@ const productCopyBySlug: Record<string, ProductLocalizedCopy> = {
       "en": "Azzurra"
     },
     "description": {
-      "ru": "Квадратный шёлковый платок с художественным абстрактным принтом на пыльно-голубом фоне: оливково-зелёные формы, бежевые акценты, круговой мотив и тёмно-коричневые штрихи. Лёгкая ткань с мягким блеском держит форму и красиво драпируется — на шее, на сумке или как акцент на плечах.\n\nТонкая ручная отделка по краю делает платок заметным аксессуаром сезона.",
-      "ro": "Eșarfă pătrată din mătase cu imprimeu abstract artistic pe fundal albastru prăfuit: forme verde măsliniu, accente bej, motiv circular și tușe maro închis. Țesătura ușoară, cu luciu discret, își păstrează forma și cade frumos — la gât, pe geantă sau pe umeri.\n\nFinisarea fină pe margine face din această eșarfă un accesoriu remarcabil al sezonului.",
-      "en": "Square silk scarf with an artistic abstract print on a dusty blue ground: olive-green shapes, beige accents, a circular motif and deep brown brushstrokes. The lightweight fabric has a soft sheen, holds its shape and drapes beautifully — around the neck, on a bag or over the shoulders.\n\nFine edge finishing makes this scarf a standout seasonal accessory."
+      "ru": "Платок из хлопка и шёлка с художественным абстрактным принтом на пыльно-голубом фоне: оливково-зелёные формы, бежевые акценты, круговой мотив и тёмно-коричневые штрихи. Лёгкая хлопково-шёлковая ткань держит форму и красиво драпируется — на шее, на сумке или как акцент на плечах.\n\nТонкая ручная отделка по краю делает платок заметным аксессуаром сезона.",
+      "ro": "Foulard din bumbac și mătase cu imprimeu abstract artistic pe fundal albastru prăfuit: forme verde măsliniu, accente bej, motiv circular și tușe maro închis. Țesătura ușoară din bumbac și mătase își păstrează forma și cade frumos — la gât, pe geantă sau pe umeri.\n\nFinisarea fină pe margine face din această eșarfă un accesoriu remarcabil al sezonului.",
+      "en": "Cotton and silk scarf with an artistic abstract print on a dusty blue ground: olive-green shapes, beige accents, a circular motif and deep brown brushstrokes. The lightweight cotton-silk fabric, holds its shape and drapes beautifully — around the neck, on a bag or over the shoulders.\n\nFine edge finishing makes this scarf a standout seasonal accessory."
     },
     "highlights": {
-      "ru": ["Чистый шёлк", "Абстрактный принт на пыльно-голубом фоне", "Квадратный формат 90 × 90 см", "Ручная отделка по краю"],
-      "ro": ["Mătase pură", "Imprimeu abstract pe fundal albastru prăfuit", "Format pătrat 90 × 90 cm", "Finisare manuală pe margine"],
-      "en": ["Pure silk", "Abstract print on dusty blue ground", "Square format 90 × 90 cm", "Hand-finished edge"]
+      "ru": ["80% хлопок, 20% шёлк", "Абстрактный принт на пыльно-голубом фоне", "Формат 155 × 80 см", "Ручная отделка по краю"],
+      "ro": ["80% bumbac, 20% mătase", "Imprimeu abstract pe fundal albastru prăfuit", "Format 155 × 80 cm", "Finisare manuală pe margine"],
+      "en": ["80% cotton, 20% silk", "Abstract print on dusty blue ground", "155 × 80 cm format", "Hand-finished edge"]
     }
   },
   "womens-lavender-ink-silk-scarf": {
@@ -2110,14 +2279,14 @@ const productCopyBySlug: Record<string, ProductLocalizedCopy> = {
       "en": "Lavinia"
     },
     "description": {
-      "ru": "Квадратный шёлковый платок с акварельным принтом: мягкие лавандовые, фиолетовые и шалфейно-зелёные пятна с чёрными каплями чернил и фактурными штрихами. Лёгкая ткань с мягким блеском держит форму и красиво драпируется — на шее, на сумке или как акцент на плечах.\n\nТонкая ручная отделка по краю делает платок заметным аксессуаром сезона.",
-      "ro": "Eșarfă pătrată din mătase cu imprimeu acuarelă: pete moi lavandă, violet și verde salvie cu picături negre de cerneală și tușe texturate. Țesătura ușoară, cu luciu discret, își păstrează forma și cade frumos — la gât, pe geantă sau pe umeri.\n\nFinisarea fină pe margine face din această eșarfă un accesoriu remarcabil al sezonului.",
-      "en": "Square silk scarf with a watercolor print: soft lavender, purple and sage-green patches with black ink drops and textured brushstrokes. The lightweight fabric has a soft sheen, holds its shape and drapes beautifully — around the neck, on a bag or over the shoulders.\n\nFine edge finishing makes this scarf a standout seasonal accessory."
+      "ru": "Платок из хлопка и шёлка с акварельным принтом: мягкие лавандовые, фиолетовые и шалфейно-зелёные пятна с чёрными каплями чернил и фактурными штрихами. Лёгкая хлопково-шёлковая ткань держит форму и красиво драпируется — на шее, на сумке или как акцент на плечах.\n\nТонкая ручная отделка по краю делает платок заметным аксессуаром сезона.",
+      "ro": "Foulard din bumbac și mătase cu imprimeu acuarelă: pete moi lavandă, violet și verde salvie cu picături negre de cerneală și tușe texturate. Țesătura ușoară din bumbac și mătase își păstrează forma și cade frumos — la gât, pe geantă sau pe umeri.\n\nFinisarea fină pe margine face din această eșarfă un accesoriu remarcabil al sezonului.",
+      "en": "Cotton and silk scarf with a watercolor print: soft lavender, purple and sage-green patches with black ink drops and textured brushstrokes. The lightweight cotton-silk fabric, holds its shape and drapes beautifully — around the neck, on a bag or over the shoulders.\n\nFine edge finishing makes this scarf a standout seasonal accessory."
     },
     "highlights": {
-      "ru": ["Чистый шёлк", "Акварельный принт с каплями чернил", "Квадратный формат 90 × 90 см", "Ручная отделка по краю"],
-      "ro": ["Mătase pură", "Imprimeu acuarelă cu picături de cerneală", "Format pătrat 90 × 90 cm", "Finisare manuală pe margine"],
-      "en": ["Pure silk", "Watercolor print with ink drops", "Square format 90 × 90 cm", "Hand-finished edge"]
+      "ru": ["80% хлопок, 20% шёлк", "Акварельный принт с каплями чернил", "Формат 155 × 80 см", "Ручная отделка по краю"],
+      "ro": ["80% bumbac, 20% mătase", "Imprimeu acuarelă cu picături de cerneală", "Format 155 × 80 cm", "Finisare manuală pe margine"],
+      "en": ["80% cotton, 20% silk", "Watercolor print with ink drops", "155 × 80 cm format", "Hand-finished edge"]
     }
   },
   "womens-colorful-brushstroke-silk-scarf": {
@@ -2127,14 +2296,14 @@ const productCopyBySlug: Record<string, ProductLocalizedCopy> = {
       "en": "Artemisia"
     },
     "description": {
-      "ru": "Квадратный шёлковый платок с живописным абстрактным принтом: смелые мазки тёмно-синего, жёлтого, лаймового и малинового на светлом фоне. Лёгкая ткань с мягким блеском держит форму и красиво драпируется — на шее, на сумке или как акцент на плечах.\n\nТонкая ручная отделка по краю делает платок заметным аксессуаром сезона.",
-      "ro": "Eșarfă pătrată din mătase cu imprimeu abstract pictural: tușe îndrăznețe bleumarin, galben, lime și magenta pe fundal deschis. Țesătura ușoară, cu luciu discret, își păstrează forma și cade frumos — la gât, pe geantă sau pe umeri.\n\nFinisarea fină pe margine face din această eșarfă un accesoriu remarcabil al sezonului.",
-      "en": "Square silk scarf with a painterly abstract print: bold strokes of deep navy, yellow, lime and magenta on a light ground. The lightweight fabric has a soft sheen, holds its shape and drapes beautifully — around the neck, on a bag or over the shoulders.\n\nFine edge finishing makes this scarf a standout seasonal accessory."
+      "ru": "Платок из хлопка и шёлка с живописным абстрактным принтом: смелые мазки тёмно-синего, жёлтого, лаймового и малинового на светлом фоне. Лёгкая хлопково-шёлковая ткань держит форму и красиво драпируется — на шее, на сумке или как акцент на плечах.\n\nТонкая ручная отделка по краю делает платок заметным аксессуаром сезона.",
+      "ro": "Foulard din bumbac și mătase cu imprimeu abstract pictural: tușe îndrăznețe bleumarin, galben, lime și magenta pe fundal deschis. Țesătura ușoară din bumbac și mătase își păstrează forma și cade frumos — la gât, pe geantă sau pe umeri.\n\nFinisarea fină pe margine face din această eșarfă un accesoriu remarcabil al sezonului.",
+      "en": "Cotton and silk scarf with a painterly abstract print: bold strokes of deep navy, yellow, lime and magenta on a light ground. The lightweight cotton-silk fabric, holds its shape and drapes beautifully — around the neck, on a bag or over the shoulders.\n\nFine edge finishing makes this scarf a standout seasonal accessory."
     },
     "highlights": {
-      "ru": ["Чистый шёлк", "Живописный принт с цветными мазками", "Квадратный формат 90 × 90 см", "Ручная отделка по краю"],
-      "ro": ["Mătase pură", "Imprimeu pictural cu tușe colorate", "Format pătrat 90 × 90 cm", "Finisare manuală pe margine"],
-      "en": ["Pure silk", "Painterly print with colorful brushstrokes", "Square format 90 × 90 cm", "Hand-finished edge"]
+      "ru": ["80% хлопок, 20% шёлк", "Живописный принт с цветными мазками", "Формат 155 × 80 см", "Ручная отделка по краю"],
+      "ro": ["80% bumbac, 20% mătase", "Imprimeu pictural cu tușe colorate", "Format 155 × 80 cm", "Finisare manuală pe margine"],
+      "en": ["80% cotton, 20% silk", "Painterly print with colorful brushstrokes", "155 × 80 cm format", "Hand-finished edge"]
     }
   },
   "womens-cherry-print-silk-scarf": {
@@ -2144,14 +2313,14 @@ const productCopyBySlug: Record<string, ProductLocalizedCopy> = {
       "en": "Rosetta"
     },
     "description": {
-      "ru": "Квадратный шёлковый платок с игривым принтом: пары красных вишен с зелёными листьями на пыльно-голубом фоне. Лёгкая ткань с мягким блеском держит форму и красиво драпируется — на шее, на сумке или как акцент на плечах.\n\nТонкая ручная отделка по краю делает платок заметным аксессуаром сезона.",
-      "ro": "Eșarfă pătrată din mătase cu imprimeu jucăuș: perechi de cireșe roșii cu frunze verzi pe fundal albastru prăfuit. Țesătura ușoară, cu luciu discret, își păstrează forma și cade frumos — la gât, pe geantă sau pe umeri.\n\nFinisarea fină pe margine face din această eșarfă un accesoriu remarcabil al sezonului.",
-      "en": "Square silk scarf with a playful print: pairs of red cherries with green leaves on a dusty blue ground. The lightweight fabric has a soft sheen, holds its shape and drapes beautifully — around the neck, on a bag or over the shoulders.\n\nFine edge finishing makes this scarf a standout seasonal accessory."
+      "ru": "Платок из хлопка и шёлка с игривым принтом: пары красных вишен с зелёными листьями на пыльно-голубом фоне. Лёгкая хлопково-шёлковая ткань держит форму и красиво драпируется — на шее, на сумке или как акцент на плечах.\n\nТонкая ручная отделка по краю делает платок заметным аксессуаром сезона.",
+      "ro": "Foulard din bumbac și mătase cu imprimeu jucăuș: perechi de cireșe roșii cu frunze verzi pe fundal albastru prăfuit. Țesătura ușoară din bumbac și mătase își păstrează forma și cade frumos — la gât, pe geantă sau pe umeri.\n\nFinisarea fină pe margine face din această eșarfă un accesoriu remarcabil al sezonului.",
+      "en": "Cotton and silk scarf with a playful print: pairs of red cherries with green leaves on a dusty blue ground. The lightweight cotton-silk fabric, holds its shape and drapes beautifully — around the neck, on a bag or over the shoulders.\n\nFine edge finishing makes this scarf a standout seasonal accessory."
     },
     "highlights": {
-      "ru": ["Чистый шёлк", "Принт с вишнями", "Квадратный формат 90 × 90 см", "Ручная отделка по краю"],
-      "ro": ["Mătase pură", "Imprimeu cu cireșe", "Format pătrat 90 × 90 cm", "Finisare manuală pe margine"],
-      "en": ["Pure silk", "Cherry print", "Square format 90 × 90 cm", "Hand-finished edge"]
+      "ru": ["80% хлопок, 20% шёлк", "Принт с вишнями", "Формат 155 × 80 см", "Ручная отделка по краю"],
+      "ro": ["80% bumbac, 20% mătase", "Imprimeu cu cireșe", "Format 155 × 80 cm", "Finisare manuală pe margine"],
+      "en": ["80% cotton, 20% silk", "Cherry print", "155 × 80 cm format", "Hand-finished edge"]
     }
   },
   "womens-green-geometric-silk-scarf": {
@@ -2161,14 +2330,14 @@ const productCopyBySlug: Record<string, ProductLocalizedCopy> = {
       "en": "Verdiana"
     },
     "description": {
-      "ru": "Квадратный шёлковый платок с графичным абстрактным принтом на зелёном фоне: органические формы, полоски, круговые мотивы и контрастные тёмно-синие акценты. Лёгкая ткань с мягким блеском держит форму и красиво драпируется — на шее, на сумке или как акцент на плечах.\n\nТонкая ручная отделка по краю делает платок заметным аксессуаром сезона.",
-      "ro": "Eșarfă pătrată din mătase cu imprimeu abstract grafic pe fundal verde: forme organice, dungi, motive circulare și accente bleumarin contrastante. Țesătura ușoară, cu luciu discret, își păstrează forma și cade frumos — la gât, pe geantă sau pe umeri.\n\nFinisarea fină pe margine face din această eșarfă un accesoriu remarcabil al sezonului.",
-      "en": "Square silk scarf with a graphic abstract print on a green ground: organic shapes, stripes, circular motifs and contrasting deep navy accents. The lightweight fabric has a soft sheen, holds its shape and drapes beautifully — around the neck, on a bag or over the shoulders.\n\nFine edge finishing makes this scarf a standout seasonal accessory."
+      "ru": "Платок из хлопка и шёлка с графичным абстрактным принтом на зелёном фоне: органические формы, полоски, круговые мотивы и контрастные тёмно-синие акценты. Лёгкая хлопково-шёлковая ткань держит форму и красиво драпируется — на шее, на сумке или как акцент на плечах.\n\nТонкая ручная отделка по краю делает платок заметным аксессуаром сезона.",
+      "ro": "Foulard din bumbac și mătase cu imprimeu abstract grafic pe fundal verde: forme organice, dungi, motive circulare și accente bleumarin contrastante. Țesătura ușoară din bumbac și mătase își păstrează forma și cade frumos — la gât, pe geantă sau pe umeri.\n\nFinisarea fină pe margine face din această eșarfă un accesoriu remarcabil al sezonului.",
+      "en": "Cotton and silk scarf with a graphic abstract print on a green ground: organic shapes, stripes, circular motifs and contrasting deep navy accents. The lightweight cotton-silk fabric, holds its shape and drapes beautifully — around the neck, on a bag or over the shoulders.\n\nFine edge finishing makes this scarf a standout seasonal accessory."
     },
     "highlights": {
-      "ru": ["Чистый шёлк", "Графичный геометрический принт", "Квадратный формат 90 × 90 см", "Ручная отделка по краю"],
-      "ro": ["Mătase pură", "Imprimeu geometric grafic", "Format pătrat 90 × 90 cm", "Finisare manuală pe margine"],
-      "en": ["Pure silk", "Graphic geometric print", "Square format 90 × 90 cm", "Hand-finished edge"]
+      "ru": ["80% хлопок, 20% шёлк", "Графичный геометрический принт", "Формат 155 × 80 см", "Ручная отделка по краю"],
+      "ro": ["80% bumbac, 20% mătase", "Imprimeu geometric grafic", "Format 155 × 80 cm", "Finisare manuală pe margine"],
+      "en": ["80% cotton, 20% silk", "Graphic geometric print", "155 × 80 cm format", "Hand-finished edge"]
     }
   },
   "womens-red-floral-silk-scarf": {
@@ -2178,14 +2347,14 @@ const productCopyBySlug: Record<string, ProductLocalizedCopy> = {
       "en": "Fiorina"
     },
     "description": {
-      "ru": "Квадратный шёлковый платок с художественным цветочным принтом: крупные розовые цветы с чёрными контурами и мелкие линейные мотивы на насыщенном красном фоне. Лёгкая ткань с мягким блеском держит форму и красиво драпируется — на шее, на сумке или как акцент на плечах.\n\nТонкая ручная отделка по краю делает платок заметным аксессуаром сезона.",
-      "ro": "Eșarfă pătrată din mătase cu imprimeu floral artistic: flori mari roz cu contururi negre și motive liniare mici pe fundal roșu intens. Țesătura ușoară, cu luciu discret, își păstrează forma și cade frumos — la gât, pe geantă sau pe umeri.\n\nFinisarea fină pe margine face din această eșarfă un accesoriu remarcabil al sezonului.",
-      "en": "Square silk scarf with an artistic floral print: large pink flowers with black outlines and small line motifs on a rich red ground. The lightweight fabric has a soft sheen, holds its shape and drapes beautifully — around the neck, on a bag or over the shoulders.\n\nFine edge finishing makes this scarf a standout seasonal accessory."
+      "ru": "Платок из хлопка и шёлка с художественным цветочным принтом: крупные розовые цветы с чёрными контурами и мелкие линейные мотивы на насыщенном красном фоне. Лёгкая хлопково-шёлковая ткань держит форму и красиво драпируется — на шее, на сумке или как акцент на плечах.\n\nТонкая ручная отделка по краю делает платок заметным аксессуаром сезона.",
+      "ro": "Foulard din bumbac și mătase cu imprimeu floral artistic: flori mari roz cu contururi negre și motive liniare mici pe fundal roșu intens. Țesătura ușoară din bumbac și mătase își păstrează forma și cade frumos — la gât, pe geantă sau pe umeri.\n\nFinisarea fină pe margine face din această eșarfă un accesoriu remarcabil al sezonului.",
+      "en": "Cotton and silk scarf with an artistic floral print: large pink flowers with black outlines and small line motifs on a rich red ground. The lightweight cotton-silk fabric, holds its shape and drapes beautifully — around the neck, on a bag or over the shoulders.\n\nFine edge finishing makes this scarf a standout seasonal accessory."
     },
     "highlights": {
-      "ru": ["Чистый шёлк", "Цветочный принт на красном фоне", "Квадратный формат 90 × 90 см", "Ручная отделка по краю"],
-      "ro": ["Mătase pură", "Imprimeu floral pe fundal roșu", "Format pătrat 90 × 90 cm", "Finisare manuală pe margine"],
-      "en": ["Pure silk", "Floral print on red ground", "Square format 90 × 90 cm", "Hand-finished edge"]
+      "ru": ["80% хлопок, 20% шёлк", "Цветочный принт на красном фоне", "Формат 155 × 80 см", "Ручная отделка по краю"],
+      "ro": ["80% bumbac, 20% mătase", "Imprimeu floral pe fundal roșu", "Format 155 × 80 cm", "Finisare manuală pe margine"],
+      "en": ["80% cotton, 20% silk", "Floral print on red ground", "155 × 80 cm format", "Hand-finished edge"]
     }
   },
   "womens-watercolor-circles-silk-scarf": {
@@ -2195,14 +2364,14 @@ const productCopyBySlug: Record<string, ProductLocalizedCopy> = {
       "en": "Cerelia"
     },
     "description": {
-      "ru": "Квадратный шёлковый платок с акварельным принтом: перекрывающиеся круги розовых, фиолетовых, зелёных и голубых оттенков на светлом фоне. Лёгкая ткань с мягким блеском держит форму и красиво драпируется — на шее, на сумке или как акцент на плечах.\n\nТонкая ручная отделка по краю делает платок заметным аксессуаром сезона.",
-      "ro": "Eșarfă pătrată din mătase cu imprimeu acuarelă: cercuri suprapuse în nuanțe de roz, violet, verde și albastru pe fundal deschis. Țesătura ușoară, cu luciu discret, își păstrează forma și cade frumos — la gât, pe geantă sau pe umeri.\n\nFinisarea fină pe margine face din această eșarfă un accesoriu remarcabil al sezonului.",
-      "en": "Square silk scarf with a watercolor print: overlapping circles in pink, purple, green and blue tones on a light ground. The lightweight fabric has a soft sheen, holds its shape and drapes beautifully — around the neck, on a bag or over the shoulders.\n\nFine edge finishing makes this scarf a standout seasonal accessory."
+      "ru": "Платок из хлопка и шёлка с акварельным принтом: перекрывающиеся круги розовых, фиолетовых, зелёных и голубых оттенков на светлом фоне. Лёгкая хлопково-шёлковая ткань держит форму и красиво драпируется — на шее, на сумке или как акцент на плечах.\n\nТонкая ручная отделка по краю делает платок заметным аксессуаром сезона.",
+      "ro": "Foulard din bumbac și mătase cu imprimeu acuarelă: cercuri suprapuse în nuanțe de roz, violet, verde și albastru pe fundal deschis. Țesătura ușoară din bumbac și mătase își păstrează forma și cade frumos — la gât, pe geantă sau pe umeri.\n\nFinisarea fină pe margine face din această eșarfă un accesoriu remarcabil al sezonului.",
+      "en": "Cotton and silk scarf with a watercolor print: overlapping circles in pink, purple, green and blue tones on a light ground. The lightweight cotton-silk fabric, holds its shape and drapes beautifully — around the neck, on a bag or over the shoulders.\n\nFine edge finishing makes this scarf a standout seasonal accessory."
     },
     "highlights": {
-      "ru": ["Чистый шёлк", "Акварельный принт с кругами", "Квадратный формат 90 × 90 см", "Ручная отделка по краю"],
-      "ro": ["Mătase pură", "Imprimeu acuarelă cu cercuri", "Format pătrat 90 × 90 cm", "Finisare manuală pe margine"],
-      "en": ["Pure silk", "Watercolor print with circles", "Square format 90 × 90 cm", "Hand-finished edge"]
+      "ru": ["80% хлопок, 20% шёлк", "Акварельный принт с кругами", "Формат 155 × 80 см", "Ручная отделка по краю"],
+      "ro": ["80% bumbac, 20% mătase", "Imprimeu acuarelă cu cercuri", "Format 155 × 80 cm", "Finisare manuală pe margine"],
+      "en": ["80% cotton, 20% silk", "Watercolor print with circles", "155 × 80 cm format", "Hand-finished edge"]
     }
   },
   "womens-blue-multicolor-brushstroke-silk-scarf": {
@@ -2212,14 +2381,14 @@ const productCopyBySlug: Record<string, ProductLocalizedCopy> = {
       "en": "Teodora"
     },
     "description": {
-      "ru": "Квадратный шёлковый платок с живописным абстрактным принтом на синем фоне: многоцветные мазки жёлтого, зелёного, розового и тёмно-синего с фактурной tie-dye отделкой. Лёгкая ткань с мягким блеском держит форму и красиво драпируется — на шее, на сумке или как акцент на плечах.\n\nТонкая ручная отделка по краю делает платок заметным аксессуаром сезона.",
-      "ro": "Eșarfă pătrată din mătase cu imprimeu abstract pictural pe fundal albastru: tușe multicolore galben, verde, roz și bleumarin închis cu finisaj tie-dye texturat. Țesătura ușoară, cu luciu discret, își păstrează forma și cade frumos — la gât, pe geantă sau pe umeri.\n\nFinisarea fină pe margine face din această eșarfă un accesoriu remarcabil al sezonului.",
-      "en": "Square silk scarf with a painterly abstract print on a blue ground: multicolor strokes of yellow, green, pink and deep navy with a textured tie-dye finish. The lightweight fabric has a soft sheen, holds its shape and drapes beautifully — around the neck, on a bag or over the shoulders.\n\nFine edge finishing makes this scarf a standout seasonal accessory."
+      "ru": "Платок из хлопка и шёлка с живописным абстрактным принтом на синем фоне: многоцветные мазки жёлтого, зелёного, розового и тёмно-синего с фактурной tie-dye отделкой. Лёгкая хлопково-шёлковая ткань держит форму и красиво драпируется — на шее, на сумке или как акцент на плечах.\n\nТонкая ручная отделка по краю делает платок заметным аксессуаром сезона.",
+      "ro": "Foulard din bumbac și mătase cu imprimeu abstract pictural pe fundal albastru: tușe multicolore galben, verde, roz și bleumarin închis cu finisaj tie-dye texturat. Țesătura ușoară din bumbac și mătase își păstrează forma și cade frumos — la gât, pe geantă sau pe umeri.\n\nFinisarea fină pe margine face din această eșarfă un accesoriu remarcabil al sezonului.",
+      "en": "Cotton and silk scarf with a painterly abstract print on a blue ground: multicolor strokes of yellow, green, pink and deep navy with a textured tie-dye finish. The lightweight cotton-silk fabric, holds its shape and drapes beautifully — around the neck, on a bag or over the shoulders.\n\nFine edge finishing makes this scarf a standout seasonal accessory."
     },
     "highlights": {
-      "ru": ["Чистый шёлк", "Многоцветные мазки на синем фоне", "Квадратный формат 90 × 90 см", "Ручная отделка по краю"],
-      "ro": ["Mătase pură", "Tușe multicolore pe fundal albastru", "Format pătrat 90 × 90 cm", "Finisare manuală pe margine"],
-      "en": ["Pure silk", "Multicolor brushstrokes on blue ground", "Square format 90 × 90 cm", "Hand-finished edge"]
+      "ru": ["80% хлопок, 20% шёлк", "Многоцветные мазки на синем фоне", "Формат 155 × 80 см", "Ручная отделка по краю"],
+      "ro": ["80% bumbac, 20% mătase", "Tușe multicolore pe fundal albastru", "Format 155 × 80 cm", "Finisare manuală pe margine"],
+      "en": ["80% cotton, 20% silk", "Multicolor brushstrokes on blue ground", "155 × 80 cm format", "Hand-finished edge"]
     }
   },
   "womens-whale-print-silk-scarf": {
@@ -2229,14 +2398,14 @@ const productCopyBySlug: Record<string, ProductLocalizedCopy> = {
       "en": "Delphina"
     },
     "description": {
-      "ru": "Квадратный шёлковый платок с игривым принтом: стилизованные киты в синих и голубых тонах на нейтральном таupe-фоне. Лёгкая ткань с мягким блеском держит форму и красиво драпируется — на шее, на сумке или как акцент на плечах.\n\nТонкая ручная отделка по краю делает платок заметным аксессуаром сезона.",
-      "ro": "Eșarfă pătrată din mătase cu imprimeu jucăuș: balene stilizate în tonuri albastre și cyan pe fundal taupe neutru. Țesătura ușoară, cu luciu discret, își păstrează forma și cade frumos — la gât, pe geantă sau pe umeri.\n\nFinisarea fină pe margine face din această eșarfă un accesoriu remarcabil al sezonului.",
-      "en": "Square silk scarf with a playful print: stylised whales in blue and cyan tones on a neutral taupe ground. The lightweight fabric has a soft sheen, holds its shape and drapes beautifully — around the neck, on a bag or over the shoulders.\n\nFine edge finishing makes this scarf a standout seasonal accessory."
+      "ru": "Платок из хлопка и шёлка с игривым принтом: стилизованные киты в синих и голубых тонах на нейтральном таupe-фоне. Лёгкая хлопково-шёлковая ткань держит форму и красиво драпируется — на шее, на сумке или как акцент на плечах.\n\nТонкая ручная отделка по краю делает платок заметным аксессуаром сезона.",
+      "ro": "Foulard din bumbac și mătase cu imprimeu jucăuș: balene stilizate în tonuri albastre și cyan pe fundal taupe neutru. Țesătura ușoară din bumbac și mătase își păstrează forma și cade frumos — la gât, pe geantă sau pe umeri.\n\nFinisarea fină pe margine face din această eșarfă un accesoriu remarcabil al sezonului.",
+      "en": "Cotton and silk scarf with a playful print: stylised whales in blue and cyan tones on a neutral taupe ground. The lightweight cotton-silk fabric, holds its shape and drapes beautifully — around the neck, on a bag or over the shoulders.\n\nFine edge finishing makes this scarf a standout seasonal accessory."
     },
     "highlights": {
-      "ru": ["Чистый шёлк", "Принт с китами", "Квадратный формат 90 × 90 см", "Ручная отделка по краю"],
-      "ro": ["Mătase pură", "Imprimeu cu balene", "Format pătrat 90 × 90 cm", "Finisare manuală pe margine"],
-      "en": ["Pure silk", "Whale print", "Square format 90 × 90 cm", "Hand-finished edge"]
+      "ru": ["80% хлопок, 20% шёлк", "Принт с китами", "Формат 155 × 80 см", "Ручная отделка по краю"],
+      "ro": ["80% bumbac, 20% mătase", "Imprimeu cu balene", "Format 155 × 80 cm", "Finisare manuală pe margine"],
+      "en": ["80% cotton, 20% silk", "Whale print", "155 × 80 cm format", "Hand-finished edge"]
     }
   },
   "womens-metallic-leather-bifold-cardholder-fuchsia": {
@@ -2625,6 +2794,8 @@ export function localizeProductTitle(
 
 export function localizeStaticText(value: string | undefined, locale: Locale = defaultLocale): string {
   if (!value) return "";
+  const direct = text[value]?.[locale];
+  if (direct) return direct;
   if (locale === "ru") return value;
 
   const mapped =
@@ -2640,11 +2811,28 @@ export function localizeColorName(color: ProductColor | string | undefined, loca
   return colors[value]?.[locale] ?? value;
 }
 
+function normalizePreorderDescription(value: string, locale: Locale): string {
+  if (locale === "ru") {
+    return value
+      .replace(/под заказ/gi, "для предзаказа")
+      .replace(/7–14 дней/g, "от 14 дней");
+  }
+  if (locale === "ro") {
+    return value
+      .replace(/la comandă/gi, "pentru precomandă")
+      .replace(/livrare în 7–14 zile/gi, "livrare începând de la 14 zile")
+      .replace(/7–14 zile/g, "de la 14 zile");
+  }
+  return value
+    .replace(/delivery in 7–14 days/gi, "delivery in 14 days or more")
+    .replace(/7–14 days/g, "14 days or more");
+}
+
 export function localizeProductDescription(product: Product, locale: Locale = defaultLocale): string {
   const localized = productCopyBySlug[product.slug]?.description?.[locale];
-  if (localized) return localized;
+  if (localized) return normalizePreorderDescription(localized, locale);
   if (locale === "ru" || !/[А-Яа-яЁё]/.test(product.description)) {
-    return product.description;
+    return normalizePreorderDescription(product.description, locale);
   }
   const material = localizeStaticText(product.material, locale);
   if (locale === "ro") {

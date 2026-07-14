@@ -24,7 +24,11 @@ const categoryLabels: Record<string, Partial<Record<Locale, string>>> = {
     ro: "Portofele",
     en: "Wallets",
   },
-  "womens-scarves-women": { ru: "Foulard", ro: "Foulard", en: "Foulard" },
+  "womens-scarves-women": {
+    ru: "Платки",
+    ro: "Foularduri",
+    en: "Scarves",
+  },
   "bag-charms": { ru: "Charms", ro: "Charms", en: "Charms" },
 };
 

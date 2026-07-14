@@ -10,10 +10,11 @@ import { useLocale, useT } from "@/lib/useI18n";
 import type { Product } from "@/lib/types";
 import ProductImage from "./ProductImage";
 import { useCart } from "@/context/cart";
-import { useEffect, useMemo } from "react";
+import { useMemo, useRef } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { AnimatePresence, motion } from "framer-motion";
+import { useOverlayA11y } from "@/hooks/useOverlayA11y";
 
 function CartLineImage({ slug, colorName, title }: { slug: string; colorName: string; title: string }) {
   const product = getProduct(slug);
@@ -111,6 +112,8 @@ export default function CartDrawer() {
   const hasStandard = standardItems.length > 0;
   const hasPreorder = preorderItems.length > 0;
   const hasMixedCart = hasStandard && hasPreorder;
+  const drawerRef = useRef<HTMLElement>(null);
+  const closeButtonRef = useRef<HTMLButtonElement>(null);
   const recommendations = useMemo(
     () => getCartRecommendations(items.map((item) => item.slug), 3),
     [items],
@@ -122,19 +125,12 @@ export default function CartDrawer() {
     return product ? getDeliveryInfo(product, locale).leadTime : null;
   }, [items, locale]);
 
-  useEffect(() => {
-    if (!isOpen) return;
-    const previous = document.body.style.overflow;
-    document.body.style.overflow = "hidden";
-    function onKeyDown(event: KeyboardEvent) {
-      if (event.key === "Escape") closeCart();
-    }
-    window.addEventListener("keydown", onKeyDown);
-    return () => {
-      document.body.style.overflow = previous;
-      window.removeEventListener("keydown", onKeyDown);
-    };
-  }, [closeCart, isOpen]);
+  useOverlayA11y({
+    open: isOpen,
+    onClose: closeCart,
+    containerRef: drawerRef,
+    initialFocusRef: closeButtonRef,
+  });
 
   return (
     <AnimatePresence>
@@ -148,6 +144,11 @@ export default function CartDrawer() {
           onClick={closeCart}
         >
           <motion.aside
+            ref={drawerRef}
+            id="cart-drawer"
+            role="dialog"
+            aria-modal="true"
+            tabIndex={-1}
             className="absolute right-0 top-0 flex h-full w-full max-w-[920px] overflow-hidden bg-[#fbfaf8] shadow-[-24px_0_80px_rgba(28,25,23,0.2)]"
             initial={{ x: "100%" }}
             animate={{ x: 0 }}
@@ -185,6 +186,7 @@ export default function CartDrawer() {
                     </p>
                   </div>
                   <button
+                    ref={closeButtonRef}
                     type="button"
                     onClick={closeCart}
                     aria-label={t("cart.closeCart")}

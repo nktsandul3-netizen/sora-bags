@@ -7,7 +7,7 @@ import type { Product } from "@/lib/types";
 import { getBrandName, getFeaturedColorIndex } from "@/lib/data";
 import { formatPrice } from "@/lib/format";
 import { withLocalePath } from "@/lib/i18n";
-import { findColorIndexForFilterFamilies } from "@/lib/color-taxonomy";
+import { findColorIndexForFilterFamilies, getColorFamilies } from "@/lib/color-taxonomy";
 import { useIsDesktop } from "@/lib/useIsDesktop";
 import { useLocale, useT } from "@/lib/useI18n";
 import { localizeProductImageAlt, localizeProductTitle } from "@/lib/product-i18n";
@@ -57,10 +57,12 @@ function CardNavArrow({
 export default function ProductCard({
   product,
   activeFilterColors = [],
+  prioritizeImage = false,
 }: {
   product: Product;
   /** Color family keys from catalog URL `?color=` (e.g. `blue`). */
   activeFilterColors?: string[];
+  prioritizeImage?: boolean;
 }) {
   const [previewIdx, setPreviewIdx] = useState<number | null>(null);
   const [imageIdx, setImageIdx] = useState(0);
@@ -104,10 +106,13 @@ export default function ProductCard({
   const showSwatches = colors.length > 1;
   const galleryFit = product.galleryFit ?? "cover";
   const activeImageFit = activeImage?.fit ?? galleryFit;
+  const mobileBackgroundBlend = getColorFamilies(activeColor?.name ?? "").includes("white")
+    ? ""
+    : " max-lg:mix-blend-darken";
   const cardImageClass =
-    activeImageFit === "contain"
+    (activeImageFit === "contain"
       ? "object-contain object-center"
-      : "object-cover object-center max-md:object-contain";
+      : "object-cover object-center max-md:object-contain") + mobileBackgroundBlend;
   const productHref = withLocalePath(
     activeColor
       ? getProductColorHref(product.slug, activeColor.name)
@@ -145,8 +150,10 @@ export default function ProductCard({
                 src={activeImage.src}
                 alt={localizeProductImageAlt(activeImage.alt, locale) || localizedTitle}
                 fill
-                sizes="(min-width: 1024px) 25vw, 50vw"
-                quality={88}
+                sizes="(min-width: 1280px) 320px, (min-width: 1024px) 25vw, 50vw"
+                quality={80}
+                loading={prioritizeImage ? "eager" : "lazy"}
+                fetchPriority={prioritizeImage ? "high" : "low"}
                 className={cardImageClass + " transition-opacity duration-300 ease-out"}
               />
             ) : (

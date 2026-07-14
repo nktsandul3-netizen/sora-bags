@@ -51,11 +51,11 @@ const copy: Record<
       },
       {
         image: "/materials-care/blue_white_silk_scarf.webp",
-        alt: "Шёлковый платок SÓRA",
-        title: "Шёлк / Foulard",
+        alt: "Платок из хлопка и шёлка SÓRA",
+        title: "Платки: хлопок 80%, шёлк 20%",
         paragraphs: [
-          "Шёлковые платки SÓRA — лёгкий акцент к сумке или образу. Храните их вдали от прямого солнца, чтобы сохранить яркость принта.",
-          "Рекомендуется бережная химчистка или ручная стирка в прохладной воде со средством для шёлка. Не выкручивайте и сушите в расправленном виде.",
+          "Платки SÓRA выполнены из смеси хлопка и шёлка: хлопок даёт приятную матовую фактуру и мягкость, а шёлк добавляет лёгкость и деликатный блеск.",
+          "Рекомендуется бережная ручная стирка в прохладной воде или деликатная химчистка. Не выкручивайте, не сушите на батарее и храните вдали от прямого солнца, чтобы сохранить яркость принта.",
         ],
       },
       {
@@ -108,11 +108,11 @@ const copy: Record<
       },
       {
         image: "/materials-care/blue_white_silk_scarf.webp",
-        alt: "Foulard din mătase SÓRA",
-        title: "Mătase / Foulard",
+        alt: "Foulard din bumbac și mătase SÓRA",
+        title: "Foularduri: 80% bumbac, 20% mătase",
         paragraphs: [
-          "Foulardurile din mătase SÓRA completează geanta sau ținuta. Păstrați-le departe de soarele direct pentru a menține intensitatea printului.",
-          "Recomandăm curățătorie delicată sau spălare manuală în apă rece cu detergent pentru mătase. Nu răsuciți și uscați întinse.",
+          "Foulardurile SÓRA sunt realizate dintr-un amestec de bumbac și mătase: bumbacul oferă o textură plăcută și moale, iar mătasea adaugă lejeritate și luciu discret.",
+          "Recomandăm spălare manuală delicată în apă rece sau curățătorie delicată. Nu răsuciți, nu uscați pe calorifer și păstrați departe de soare direct pentru a menține intensitatea printului.",
         ],
       },
       {
@@ -165,11 +165,11 @@ const copy: Record<
       },
       {
         image: "/materials-care/blue_white_silk_scarf.webp",
-        alt: "Silk foulard SÓRA",
-        title: "Silk / Foulard",
+        alt: "Cotton and silk scarf SÓRA",
+        title: "Scarves: 80% cotton, 20% silk",
         paragraphs: [
-          "SÓRA silk scarves add a light accent to a bag or look. Store them away from direct sun to keep the print vivid.",
-          "Prefer gentle dry cleaning or hand wash in cool water with silk detergent. Do not wring; dry flat.",
+          "SÓRA scarves are made from a cotton and silk blend: cotton gives a soft, pleasant texture, while silk adds lightness and a subtle sheen.",
+          "Prefer gentle hand washing in cool water or delicate dry cleaning. Do not wring, do not dry on a heater, and store away from direct sun to keep the print vivid.",
         ],
       },
       {

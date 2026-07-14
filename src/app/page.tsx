@@ -5,6 +5,7 @@ import { products } from "@/lib/data";
 import { brand } from "@/lib/config";
 import { getInstagramPosts } from "@/lib/instagram";
 import CapsuleProductCard from "@/components/CapsuleProductCard";
+import BenefitsBar from "@/components/BenefitsBar";
 import HeroBannerSlider, { type HeroSlide } from "@/components/HeroBannerSlider";
 import HomeBelowFold from "@/components/HomeBelowFold";
 import { getServerLocale, getServerT } from "@/lib/server-i18n";
@@ -35,9 +36,14 @@ function getHeroSlides(locale: Locale): HeroSlide[] {
       height: 960,
       mobileWidth: 1400,
       mobileHeight: 875,
-      objectPosition: "42% 28%",
+      objectPosition: "50% 38%",
       mobileObjectPosition: "50% 50%",
       alt: t("home.heroBambooAlt"),
+      caption: {
+        layout: "brand",
+        ctaLabel: t("home.heroMainCta"),
+        ctaHref: withLocalePath("/bags", locale),
+      },
     },
     {
       type: "video",
@@ -86,9 +92,19 @@ export default async function Home() {
       {/* Hero: Amalfi → Venezia Intreccio */}
       <HeroBannerSlider slides={getHeroSlides(locale)} intervalMs={4000} />
 
+      <BenefitsBar
+        label={t("home.benefitsBarLabel")}
+        items={[
+          t("home.benefitLeather"),
+          t("home.benefitDesign"),
+          t("home.benefitDurable"),
+          t("home.benefitMadeInItaly"),
+        ]}
+      />
+
       {/* Плитки разделов: Сумки / Аксессуары */}
       <section className="mt-3 w-full md:mt-2">
-        <div className="grid grid-cols-2 gap-3 md:gap-2">
+        <div className="grid grid-cols-2 gap-2 sm:gap-3 md:gap-2">
           {heroTiles.map((tile) => (
             <Link
               key={tile.href}
@@ -99,18 +115,19 @@ export default async function Home() {
                 src={tile.img}
                 alt={t(tile.labelKey)}
                 fill
-                sizes="50vw"
+                sizes="(max-width: 767px) 50vw, 50vw"
                 quality={75}
                 loading="lazy"
                 fetchPriority="low"
+                decoding="async"
                 className="object-cover object-center transition-transform duration-[900ms] ease-out group-hover:scale-[1.02]"
               />
-              <div className="absolute inset-0 bg-black/10 transition-colors duration-300 group-hover:bg-black/30 group-focus-visible:bg-black/30" />
-              <div className="pointer-events-none absolute inset-0 flex flex-col items-center justify-center gap-3 px-3 text-white opacity-0 translate-y-3 transition-all duration-300 group-hover:opacity-100 group-hover:translate-y-0 group-focus-visible:opacity-100 group-focus-visible:translate-y-0 max-md:opacity-100 max-md:translate-y-0 md:gap-5 md:px-4">
-                <span className="font-serif text-[17px] font-normal uppercase leading-none tracking-[0.12em] drop-shadow-sm sm:text-2xl md:text-3xl md:tracking-[0.14em]">
+              <div className="absolute inset-0 bg-black/25 transition-colors duration-300 group-hover:bg-black/35 group-focus-visible:bg-black/35" />
+              <div className="pointer-events-none absolute inset-0 flex flex-col items-center justify-center gap-2.5 px-2.5 text-white sm:gap-3 sm:px-3 md:gap-5 md:px-4">
+                <span className="text-center font-serif text-[15px] font-normal uppercase leading-none tracking-[0.1em] drop-shadow-sm xs:text-[17px] sm:text-2xl sm:tracking-[0.12em] md:text-3xl md:tracking-[0.14em]">
                   {t(tile.labelKey)}
                 </span>
-                <span className="border border-white px-3.5 py-2 text-[8px] font-normal uppercase tracking-[0.2em] backdrop-blur-md transition max-md:bg-[rgba(255,255,255,0.14)] group-hover:bg-white/10 group-focus-visible:bg-white/10 sm:px-5 sm:py-2.5 sm:text-[9px] md:px-8 md:py-2.5 md:text-[10px] md:tracking-[0.28em] md:backdrop-blur-none">
+                <span className="max-w-full truncate border border-white bg-[rgba(255,255,255,0.14)] px-2.5 py-1.5 text-[7px] font-normal uppercase tracking-[0.14em] backdrop-blur-md transition group-hover:bg-white/20 group-focus-visible:bg-white/20 xs:text-[8px] xs:tracking-[0.16em] sm:px-5 sm:py-2.5 sm:text-[9px] sm:tracking-[0.2em] md:px-8 md:py-2.5 md:text-[10px] md:tracking-[0.28em]">
                   {t("common.openCollection")}
                 </span>
               </div>

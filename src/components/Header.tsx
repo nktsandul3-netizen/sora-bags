@@ -1,54 +1,69 @@
 "use client";
 
 import Link from "next/link";
+import dynamic from "next/dynamic";
 import { usePathname, useRouter } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { brand } from "@/lib/config";
 import { useCart } from "@/context/cart";
 import { useWishlist } from "@/context/wishlist";
 import { useMenuOpen } from "@/context/menu-open";
 import ProfileMenu from "./ProfileMenu";
-import SearchOverlay from "./SearchOverlay";
-import { locales, switchLocalePath, withLocalePath } from "@/lib/i18n";
+import { locales, pathWithoutLocale, switchLocalePath, withLocalePath } from "@/lib/i18n";
 import { useLocale, useT } from "@/lib/useI18n";
 import { persistLocaleCookie } from "@/context/locale";
+import { useOverlayA11y } from "@/hooks/useOverlayA11y";
+
+const SearchOverlay = dynamic(() => import("./SearchOverlay"), {
+  ssr: false,
+  loading: () => null,
+});
 
 function BrandLogoLink({
   overlay,
   size,
+  compact = false,
 }: {
   overlay: boolean;
   size: "mobile" | "desktop";
+  /** Slightly smaller mark — used on home so it doesn’t compete with the hero title */
+  compact?: boolean;
 }) {
   const locale = useLocale();
   const t = useT();
+  const smaller = overlay || compact;
+  // leading > 1 so the Ó accent isn’t clipped; overflow-visible on the mark
   const nameClass =
     size === "desktop"
-      ? "font-serif text-[32px] font-normal uppercase leading-none tracking-[0.2em]"
-      : "font-serif text-[1.85rem] font-normal uppercase leading-none tracking-[0.18em] sm:text-[2rem] sm:tracking-[0.2em]";
+      ? smaller
+        ? "font-serif text-[26px] font-normal uppercase leading-[1.15] tracking-[0.16em]"
+        : "font-serif text-[32px] font-normal uppercase leading-[1.15] tracking-[0.18em]"
+      : smaller
+        ? "font-serif text-[1.5rem] font-normal uppercase leading-[1.15] tracking-[0.14em] sm:text-[1.65rem] sm:tracking-[0.16em]"
+        : "font-serif text-[1.85rem] font-normal uppercase leading-[1.15] tracking-[0.16em] sm:text-[2rem] sm:tracking-[0.18em]";
 
   return (
     <Link
       href={withLocalePath("/", locale)}
       className={
-        "group flex flex-col items-center text-center transition-opacity hover:opacity-95 " +
+        "group flex max-w-full flex-col items-center overflow-visible text-center transition-opacity hover:opacity-95 " +
         (overlay ? "text-white" : "text-stone-950")
       }
     >
-      <span className={nameClass}>{brand.name}</span>
+      <span className={"block overflow-visible py-0.5 " + nameClass}>{brand.name}</span>
       <span
         className={
-          "mt-1 inline-flex items-center gap-2 whitespace-nowrap text-[9px] font-medium uppercase tracking-[0.3em] " +
+          "mt-0.5 inline-flex max-w-full items-center gap-1.5 overflow-visible whitespace-nowrap text-[8px] font-medium uppercase tracking-[0.22em] sm:gap-2 sm:text-[9px] sm:tracking-[0.28em] " +
           (overlay ? "text-white/80" : "text-stone-500 group-hover:text-stone-600")
         }
       >
         <span
-          className={"h-px w-4 " + (overlay ? "bg-white/40" : "bg-stone-400/70")}
+          className={"hidden h-px w-3 sm:block sm:w-4 " + (overlay ? "bg-white/40" : "bg-stone-400/70")}
           aria-hidden
         />
         {t("common.madeInItaly")}
         <span
-          className={"h-px w-4 " + (overlay ? "bg-white/40" : "bg-stone-400/70")}
+          className={"hidden h-px w-3 sm:block sm:w-4 " + (overlay ? "bg-white/40" : "bg-stone-400/70")}
           aria-hidden
         />
       </span>
@@ -81,50 +96,64 @@ function StoreLocatorLink({ overlay, compact = false }: { overlay: boolean; comp
 
 export default function Header() {
   const t = useT();
+  const pathname = usePathname();
   const { menuOpen, setMenuOpen } = useMenuOpen();
   const [searchOpen, setSearchOpen] = useState(false);
   const iconHoverClass = "hover:opacity-60";
+  const isHome = pathWithoutLocale(pathname) === "/";
 
   const openSearch = () => setSearchOpen(true);
   const closeSearch = () => setSearchOpen(false);
 
   return (
-    <header className="relative z-50 box-border h-[72px] min-h-[72px] max-h-[72px] border-b border-[#EDE5DF] bg-[#F7F3F0] text-[#111]">
+    <header className="relative z-50 box-border h-[72px] min-h-[72px] overflow-visible border-b border-[#EDE5DF] bg-[#F7F3F0] text-[#111]">
       {/* Mobile: burger + logo + search / wishlist / cart */}
-      <div className="mx-auto flex h-[72px] max-w-7xl items-center justify-between px-4 text-[#111] sm:px-6 lg:hidden">
+      <div className="mx-auto flex h-[72px] max-w-7xl items-center justify-between gap-2 overflow-visible px-4 text-[#111] sm:px-6 lg:hidden">
         <button
           type="button"
-          className="-ml-1 inline-flex h-11 w-11 items-center justify-center rounded-sm text-[#111] transition hover:opacity-60"
+          className="-ml-1 inline-flex h-11 w-11 shrink-0 items-center justify-center rounded-sm text-[#111] transition hover:opacity-60"
           onClick={() => setMenuOpen(true)}
           aria-label={t("common.menu")}
+          aria-expanded={menuOpen}
+          aria-controls="mobile-menu"
         >
           <svg viewBox="0 0 24 24" className="h-5 w-5" fill="none" stroke="currentColor" strokeWidth="1.5">
             <path d="M4 7h16M4 12h16M4 17h16" strokeLinecap="round" />
           </svg>
         </button>
 
-        <BrandLogoLink overlay={false} size="mobile" />
+        <div className="min-w-0 flex-1 overflow-visible px-1">
+          <BrandLogoLink overlay={false} size="mobile" compact={isHome} />
+        </div>
 
         <div className="flex h-11 shrink-0 items-center gap-4">
-          <SearchIconButton onClick={openSearch} hoverClassName={iconHoverClass} />
+          <SearchIconButton
+            onClick={openSearch}
+            hoverClassName={iconHoverClass}
+            expanded={searchOpen}
+          />
           <WishlistIcon hoverClassName={iconHoverClass} />
           <CartIcon hoverClassName={iconHoverClass} />
         </div>
       </div>
 
       {/* Desktop */}
-      <div className="relative mx-auto hidden h-[72px] max-w-7xl items-center justify-between px-8 lg:flex">
-        <div className="flex translate-y-0.5 items-center text-[#111]">
+      <div className="relative mx-auto hidden h-[72px] max-w-7xl items-center justify-between overflow-visible px-8 lg:flex">
+        <div className="flex min-w-0 shrink-0 translate-y-0.5 items-center overflow-visible text-[#111]">
           <StoreLocatorLink overlay={false} />
         </div>
 
-        <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2">
-          <BrandLogoLink overlay={false} size="desktop" />
+        <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 overflow-visible">
+          <BrandLogoLink overlay={false} size="desktop" compact={isHome} />
         </div>
 
         <div className="flex h-[72px] items-center text-[#111]">
           <div className="header-icons flex items-center gap-6">
-            <SearchIconButton onClick={openSearch} hoverClassName={iconHoverClass} />
+            <SearchIconButton
+              onClick={openSearch}
+              hoverClassName={iconHoverClass}
+              expanded={searchOpen}
+            />
             <WishlistIcon hoverClassName={iconHoverClass} />
             <ProfileMenu overlay={false} iconOnly />
             <CartIcon hoverClassName={iconHoverClass} />
@@ -133,6 +162,8 @@ export default function Header() {
             type="button"
             onClick={() => setMenuOpen(true)}
             aria-label={t("common.menu")}
+            aria-expanded={menuOpen}
+            aria-controls="mobile-menu"
             className="ml-7 inline-flex items-center gap-2 px-0 text-[13px] font-medium uppercase leading-none tracking-[0.12em] text-[#111] opacity-85 transition hover:opacity-100"
           >
             <svg width="18" height="12" viewBox="0 0 18 12" fill="none" className="block" aria-hidden>
@@ -172,9 +203,11 @@ function SearchIcon() {
 function SearchIconButton({
   onClick,
   hoverClassName = "hover:opacity-60",
+  expanded = false,
 }: {
   onClick: () => void;
   hoverClassName?: string;
+  expanded?: boolean;
 }) {
   const t = useT();
   return (
@@ -182,6 +215,8 @@ function SearchIconButton({
       type="button"
       onClick={onClick}
       aria-label={t("common.search")}
+      aria-expanded={expanded}
+      aria-controls="global-search"
       className={`relative text-current transition ${hoverClassName}`}
     >
       <SearchIcon />
@@ -252,13 +287,15 @@ function WishlistIcon({
 }
 
 function CartIcon({ hoverClassName = "hover:opacity-60" }: { hoverClassName?: string }) {
-  const { count, openCart } = useCart();
+  const { count, isOpen, openCart } = useCart();
   const t = useT();
   return (
     <button
       type="button"
       onClick={openCart}
       aria-label={t("common.cart")}
+      aria-expanded={isOpen}
+      aria-controls="cart-drawer"
       className={`relative text-current transition ${hoverClassName}`}
     >
       <HandbagIcon />
@@ -378,6 +415,7 @@ function MobileMenu({
   const router = useRouter();
   const suffix = useCurrentUrlSuffix();
   const [activeSection, setActiveSection] = useState<"shop" | "collections" | "info" | null>("shop");
+  const menuRef = useRef<HTMLDivElement>(null);
 
   const sections: MenuSection[] = [
     {
@@ -435,13 +473,11 @@ function MobileMenu({
     },
   ];
 
-  useEffect(() => {
-    const prev = document.body.style.overflow;
-    document.body.style.overflow = "hidden";
-    return () => {
-      document.body.style.overflow = prev;
-    };
-  }, []);
+  useOverlayA11y({
+    open: true,
+    onClose,
+    containerRef: menuRef,
+  });
 
   const linkSpacing = (_sectionId: MenuSection["id"], links: MenuLink[], index: number) => {
     if (index === links.length - 1) return "mb-0";
@@ -472,7 +508,15 @@ function MobileMenu({
   return (
     <div className="fixed inset-0 z-[60]">
       <div className="absolute inset-0 hidden bg-black/35 backdrop-blur-md lg:block" onClick={onClose} />
-      <div className="absolute inset-0 bg-white lg:left-auto lg:w-[42%] lg:min-w-[440px] lg:max-w-[560px] lg:rounded-l-[28px] lg:shadow-[-24px_0_80px_rgba(0,0,0,0.18)]">
+      <div
+        ref={menuRef}
+        id="mobile-menu"
+        role="dialog"
+        aria-modal="true"
+        aria-label={t("common.menu")}
+        tabIndex={-1}
+        className="absolute inset-0 bg-white lg:left-auto lg:w-[42%] lg:min-w-[440px] lg:max-w-[560px] lg:rounded-l-[28px] lg:shadow-[-24px_0_80px_rgba(0,0,0,0.18)]"
+      >
         <div className="relative flex h-full flex-col overflow-y-auto bg-white">
           <div className="flex items-center justify-end px-5 pb-2 pt-5 sm:px-8 sm:pt-7 lg:px-10 lg:pt-7">
             <button

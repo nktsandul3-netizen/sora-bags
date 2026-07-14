@@ -1,6 +1,7 @@
 "use client";
 
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import { createPortal } from "react-dom";
 import { brand, brandStories, type BrandStoryHighlight, type BrandStoryHighlightOverride, type BrandStoryProductOverride } from "@/lib/config";
 import { useT } from "@/lib/useI18n";
 
@@ -162,9 +163,14 @@ export default function BrandStories({
   const [paused, setPaused] = useState(false);
   const [muted, setMuted] = useState(true);
   const [progress, setProgress] = useState(0);
+  const [portalReady, setPortalReady] = useState(false);
 
   const videoRef = useRef<HTMLVideoElement | null>(null);
   const elapsedRef = useRef(0);
+
+  useEffect(() => {
+    setPortalReady(true);
+  }, []);
 
   const open = openIdx !== null;
   const highlight = open ? items[openIdx] : null;
@@ -382,16 +388,17 @@ export default function BrandStories({
       </div>
       )}
 
-      {open && highlight && (
+      {open && highlight && portalReady
+        ? createPortal(
         <div
-          className="fixed inset-0 z-[120] flex items-center justify-center bg-black/50 px-4 backdrop-blur-[2px]"
+          className="fixed inset-0 z-[120] flex items-center justify-center bg-black/55 px-3 py-6 backdrop-blur-[2px] sm:px-4"
           role="dialog"
           aria-modal="true"
           aria-label={highlight.label}
         >
           <button type="button" aria-label={t("common.close")} onClick={close} className="absolute inset-0 cursor-default" />
 
-          <div className="relative z-10 flex items-center gap-2 sm:gap-4 md:gap-5">
+          <div className="relative z-10 flex max-h-full w-full items-center justify-center gap-2 sm:gap-4 md:gap-5">
             <button
               type="button"
               aria-label={t("a11y.previous")}
@@ -402,8 +409,7 @@ export default function BrandStories({
             </button>
 
             <div
-              className="relative flex aspect-[9/16] max-h-[82vh] max-w-[92vw] flex-col overflow-hidden rounded-[20px] bg-black shadow-[0_20px_60px_-15px_rgba(0,0,0,0.6)]"
-              style={{ height: "min(82vh, 560px)" }}
+              className="relative flex aspect-[9/16] h-[min(92svh,720px)] max-h-[92svh] w-auto max-w-[min(100%,calc(92svh*9/16))] flex-col overflow-hidden rounded-[20px] bg-black shadow-[0_20px_60px_-15px_rgba(0,0,0,0.6)]"
             >
             {isVideo ? (
               <video
@@ -522,8 +528,10 @@ export default function BrandStories({
               <ChevronIcon direction="right" className="h-5 w-5" />
             </button>
           </div>
-        </div>
-      )}
+        </div>,
+        document.body,
+      )
+        : null}
     </>
   );
 }

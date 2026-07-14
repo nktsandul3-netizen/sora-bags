@@ -38,6 +38,12 @@ export default function CartPage() {
     );
   }
 
+  function scrollToCheckout(kind: PurchaseKind) {
+    document
+      .getElementById(`checkout-${kind}`)
+      ?.scrollIntoView({ behavior: "smooth", block: "start" });
+  }
+
   function renderCartItem(it: CartItem) {
     const product = getProduct(it.slug);
     const color = product?.colors.find((c) => c.name === it.color);
@@ -137,7 +143,12 @@ export default function CartPage() {
   }
 
   return (
-    <div className="mx-auto max-w-6xl px-4 py-8 sm:px-6">
+    <div
+      className={
+        "mx-auto max-w-6xl px-4 py-8 sm:px-6 lg:pb-8 " +
+        (hasMixedCart ? "pb-44" : "pb-28")
+      }
+    >
       <Breadcrumbs items={[{ label: t("common.cart") }]} />
 
       {hasMixedCart && (
@@ -186,6 +197,44 @@ export default function CartPage() {
         )}
 
       </div>
+      <div className="fixed inset-x-0 bottom-0 z-40 border-t border-[#EDE5DF] bg-[#F7F3F0]/95 px-4 pb-[max(0.75rem,env(safe-area-inset-bottom))] pt-3 backdrop-blur-md lg:hidden">
+        {hasMixedCart ? (
+          <div className="mx-auto grid max-w-6xl gap-2">
+            <button
+              type="button"
+              onClick={() => scrollToCheckout("standard")}
+              className="flex min-h-11 items-center justify-between rounded-sm bg-stone-950 px-4 text-[12px] font-medium text-white"
+            >
+              <span>{t("cart.goToCheckout")}</span>
+              <span>{formatPrice(standardTotal, locale)}</span>
+            </button>
+            <button
+              type="button"
+              onClick={() => scrollToCheckout("preorder")}
+              className="flex min-h-11 items-center justify-between rounded-sm border border-amber-300 bg-amber-50 px-4 text-[12px] font-medium text-amber-950"
+            >
+              <span>{t("cart.goToPreorder")}</span>
+              <span>{formatPrice(preorderTotal, locale)}</span>
+            </button>
+          </div>
+        ) : (
+          <div className="mx-auto flex max-w-6xl items-center gap-4">
+            <div className="min-w-0 flex-1">
+              <p className="text-[11px] text-[#111]/50">{t("checkout.total")}</p>
+              <p className="text-[17px] font-semibold text-[#111]">
+                {formatPrice(hasStandard ? standardTotal : preorderTotal, locale)}
+              </p>
+            </div>
+            <button
+              type="button"
+              onClick={() => scrollToCheckout(hasStandard ? "standard" : "preorder")}
+              className="inline-flex min-h-11 items-center justify-center rounded-sm bg-stone-950 px-5 text-[12px] font-medium text-white"
+            >
+              {hasStandard ? t("cart.goToCheckout") : t("cart.goToPreorder")}
+            </button>
+          </div>
+        )}
+      </div>
     </div>
   );
 }
@@ -206,7 +255,10 @@ function CartCheckoutSummary({
   const t = useT();
 
   return (
-    <aside className="h-fit rounded-[24px] border border-[#F0EDEA] bg-[#fbfaf8] p-5 lg:sticky lg:top-6">
+    <aside
+      id={`checkout-${mode}`}
+      className="h-fit scroll-mt-20 rounded-[24px] border border-[#F0EDEA] bg-[#fbfaf8] p-5 lg:sticky lg:top-6"
+    >
       <h2 className="text-xl font-semibold uppercase tracking-[0.06em] text-stone-950">{t("checkout.summary")}</h2>
       <div className="mt-3 rounded-[20px] border border-[#EDE9E5] bg-white p-5">
         <div className="space-y-2 text-sm">

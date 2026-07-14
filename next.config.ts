@@ -20,7 +20,12 @@ const nextConfig: NextConfig = {
     "/*": ["./public/**/*"],
   },
   images: {
-    formats: ["image/avif", "image/webp"],
+    // Vercel Image Optimization currently returns 402
+    // (OPTIMIZED_IMAGE_REQUEST_PAYMENT_REQUIRED), which breaks product photos
+    // in browsers. Masters are already WebP at catalog sizes — serve them
+    // directly and skip the optimizer until the plan/quota is restored.
+    unoptimized: true,
+    formats: ["image/webp"],
     qualities: [75, 78, 80, 82, 85, 86, 88, 90, 92, 100],
     minimumCacheTTL: 60 * 60 * 24 * 30, // 30 days
     deviceSizes: [640, 750, 828, 960, 1080, 1200, 1440, 1920],
@@ -46,6 +51,42 @@ const nextConfig: NextConfig = {
       },
       {
         source: "/videos/:path*",
+        headers: [
+          { key: "Cache-Control", value: "public, max-age=31536000, immutable" },
+        ],
+      },
+      {
+        source: "/hero-sora-bamboo-studio-mobile-v2.jpg",
+        headers: [
+          { key: "Cache-Control", value: "public, max-age=31536000, immutable" },
+        ],
+      },
+      {
+        source: "/hero-venezia-banner-poster-mobile-v2.jpg",
+        headers: [
+          { key: "Cache-Control", value: "public, max-age=31536000, immutable" },
+        ],
+      },
+      {
+        source: "/hero-sora-bamboo-studio-v3.jpg",
+        headers: [
+          { key: "Cache-Control", value: "public, max-age=31536000, immutable" },
+        ],
+      },
+      {
+        source: "/hero-venezia-banner-poster.jpg",
+        headers: [
+          { key: "Cache-Control", value: "public, max-age=31536000, immutable" },
+        ],
+      },
+      {
+        source: "/tile-sale-mobile.jpg",
+        headers: [
+          { key: "Cache-Control", value: "public, max-age=31536000, immutable" },
+        ],
+      },
+      {
+        source: "/tile-bags-mobile.jpg",
         headers: [
           { key: "Cache-Control", value: "public, max-age=31536000, immutable" },
         ],

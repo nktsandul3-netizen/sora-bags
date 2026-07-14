@@ -27,6 +27,27 @@ body {
   overflow-x: clip;
 }
 
+/* Home benefits-bar: seamless one-line ticker on mobile */
+@keyframes benefits-marquee {
+  from {
+    transform: translate3d(0, 0, 0);
+  }
+  to {
+    transform: translate3d(-50%, 0, 0);
+  }
+}
+
+.benefits-marquee {
+  animation: benefits-marquee 26s linear infinite;
+  will-change: transform;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .benefits-marquee {
+    animation-play-state: paused;
+  }
+}
+
 /*
  * iOS Safari auto-zooms the page when a focused text input has font-size
  * below 16px. Force 16px on touch-sized viewports so tapping into checkout,

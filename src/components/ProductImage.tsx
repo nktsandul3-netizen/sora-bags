@@ -65,7 +65,9 @@ export default function ProductImage({
   imageClassName = "object-cover object-center",
   unoptimized = false,
   quality = 75,
-  priority = false,
+  preload = false,
+  loading,
+  fetchPriority,
 }: {
   hex: string;
   section: Section;
@@ -76,11 +78,13 @@ export default function ProductImage({
   imageClassName?: string;
   unoptimized?: boolean;
   quality?: number;
-  priority?: boolean;
+  preload?: boolean;
+  loading?: "eager" | "lazy";
+  fetchPriority?: "high" | "low" | "auto";
 }) {
   if (src) {
     return (
-      <div className={`relative overflow-hidden bg-[#FAF5EF] ${className}`}>
+      <div className={`relative overflow-hidden bg-[var(--background)] ${className}`}>
         <Image
           key={src}
           src={src}
@@ -88,7 +92,9 @@ export default function ProductImage({
           fill
           sizes={sizes}
           quality={quality}
-          priority={priority}
+          preload={preload}
+          loading={loading}
+          fetchPriority={fetchPriority}
           unoptimized={unoptimized}
           className={imageClassName}
         />

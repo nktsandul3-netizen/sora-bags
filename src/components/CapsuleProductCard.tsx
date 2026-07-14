@@ -7,6 +7,7 @@ import type { Product } from "@/lib/types";
 import { getBrandName, getFeaturedColorIndex } from "@/lib/data";
 import { formatPrice } from "@/lib/format";
 import { withLocalePath } from "@/lib/i18n";
+import { getColorFamilies } from "@/lib/color-taxonomy";
 import { useLocale, useT } from "@/lib/useI18n";
 import { localizeProductImageAlt, localizeProductTitle } from "@/lib/product-i18n";
 import ProductColorSwatches, { getColorImages } from "./ProductColorSwatches";
@@ -32,6 +33,9 @@ export default function CapsuleProductCard({ product }: { product: Product }) {
   const showSwatches = colors.length > 1;
   const galleryFit = product.galleryFit ?? "cover";
   const primaryFit = primary?.fit ?? galleryFit;
+  const mobileBackgroundBlend = getColorFamilies(activeColor?.name ?? "").includes("white")
+    ? ""
+    : " max-lg:mix-blend-darken";
   const delivery = getDeliveryInfo({ status: product.status ?? "pre_order" }, locale);
 
   return (
@@ -47,13 +51,14 @@ export default function CapsuleProductCard({ product }: { product: Product }) {
                 alt={localizeProductImageAlt(primary.alt, locale) || localizedTitle}
                 fill
                 sizes="(min-width: 1024px) 20vw, 45vw"
-                quality={88}
+                quality={80}
                 loading="lazy"
                 fetchPriority="low"
                 className={
                   (primaryFit === "contain"
                     ? "object-contain object-center"
                     : "object-cover object-center max-md:object-contain") +
+                  mobileBackgroundBlend +
                   " transition-transform duration-[700ms] ease-out md:group-hover:scale-[1.04]"
                 }
               />

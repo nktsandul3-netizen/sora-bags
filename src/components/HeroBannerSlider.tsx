@@ -7,10 +7,16 @@ import { useT } from "@/lib/useI18n";
 
 export interface HeroSlideCaption {
   eyebrow?: string;
-  title: string;
+  /** Optional — omit for brand-only first slide */
+  title?: string;
   subtitle?: string;
   ctaLabel: string;
   ctaHref: string;
+  /**
+   * `brand` — red SÓRA mark + bottom CTA, no headline
+   * `centered` (default) — classic title + CTA stack
+   */
+  layout?: "brand" | "centered";
 }
 
 export type HeroSlide =
@@ -106,6 +112,7 @@ function ResponsiveHeroImage({
         alt={alt}
         loading={eager ? "eager" : "lazy"}
         fetchPriority={eager ? "high" : "auto"}
+        decoding={eager ? "sync" : "async"}
         className={
           "absolute inset-0 h-full w-full object-cover object-[var(--hero-mobile-position)] md:object-[var(--hero-desktop-position)] " +
           className
@@ -262,16 +269,21 @@ export default function HeroBannerSlider({
 
   if (!activeSlide) return null;
 
+  const isVideoSlide = activeSlide.type === "video";
+  const captionLayout = activeSlide.caption?.layout ?? "centered";
+  const isBrandLayout = captionLayout === "brand";
+
   return (
     <section
       id="home-hero"
+      // Полноэкранный hero: фон зависит от активного слайда
       className={
         "relative w-full overflow-hidden " +
-        (activeSlide.type === "video" ? "bg-[#1f3d36]" : "bg-[#F7F3F0]")
+        (isVideoSlide ? "bg-[#1f3d36]" : "bg-[#D4C4B5]")
       }
     >
       <div
-        className="relative aspect-[16/10] w-full touch-pan-y md:aspect-auto md:h-[calc(100vh-72px)] md:min-h-[748px]"
+        className="relative aspect-[16/10] w-full touch-pan-y md:aspect-auto md:h-[calc(100svh-4.5rem)] md:min-h-[748px]"
         onTouchStart={(e) => {
           if (!canSwipe) return;
           touchStartX.current = e.changedTouches[0]?.clientX ?? null;
@@ -285,6 +297,7 @@ export default function HeroBannerSlider({
           else goPrev();
         }}
       >
+        {/* Слайды: изображение / видео */}
         {slides.map((slide, i) => {
           const active = i === safeIndex;
           return (
@@ -320,7 +333,7 @@ export default function HeroBannerSlider({
                   poster={slide.poster}
                   mobilePoster={slide.mobilePoster}
                   active={active}
-                  warm={active}
+                  warm={Math.abs(i - safeIndex) <= 1}
                   onEnded={() => {
                     if (i === safeIndex) goNext();
                   }}
@@ -331,72 +344,99 @@ export default function HeroBannerSlider({
           );
         })}
 
+        {/* Оверлей: brand-слайд — лёгкий низ; остальные — прежний градиент */}
         <div
           aria-hidden
-          className="pointer-events-none absolute inset-x-0 bottom-0 z-[2] h-[35%]"
+          className="pointer-events-none absolute inset-0 z-[2]"
           style={{
-            background: "linear-gradient(0deg, rgba(0,0,0,0.14) 0%, transparent 100%)",
+            background: isBrandLayout
+              ? "linear-gradient(to top, rgba(0,0,0,0.12) 0%, transparent 30%)"
+              : "linear-gradient(to top, rgba(0,0,0,0.18), transparent 55%)",
           }}
         />
 
-        {activeSlide.caption ? (
-          <div className="pointer-events-none absolute inset-x-0 bottom-12 z-20 flex flex-col items-center px-4 text-center text-white md:bottom-auto md:top-[36%]">
-            <div className="pointer-events-auto relative z-20 flex max-w-3xl flex-col items-center">
+        {activeSlide.caption && isBrandLayout ? (
+          <div className="pointer-events-none absolute inset-0 z-20">
+            {/* Логотип уже вшит в фото — на мобиле/десктопе только CTA */}
+            <Link
+              href={activeSlide.caption.ctaHref}
+              className="pointer-events-auto absolute left-5 top-[38%] isolate inline-flex min-h-[34px] w-[138px] items-center justify-center rounded-full border border-[#111] bg-[#111] px-3 py-1.5 text-[8px] font-semibold uppercase tracking-[0.07em] text-white antialiased [backdrop-filter:none] touch-manipulation transition-colors duration-200 hover:bg-black active:bg-black md:bottom-12 md:left-1/2 md:top-auto md:min-h-[44px] md:w-auto md:-translate-x-1/2 md:px-8 md:py-3 md:text-[13px] md:tracking-[0.12em]"
+            >
+              <span className="max-w-[102px] text-center leading-[1.2] md:max-w-none md:whitespace-nowrap">
+                {activeSlide.caption.ctaLabel}
+              </span>
+              <span className="ml-1.5 opacity-80 md:ml-2" aria-hidden>
+                →
+              </span>
+            </Link>
+          </div>
+        ) : null}
+
+        {/* Текст по центру — второй и прочие слайды */}
+        {activeSlide.caption && !isBrandLayout ? (
+          <div className="pointer-events-none absolute inset-0 z-20 flex items-center justify-center px-5">
+            <div className="pointer-events-auto flex w-full max-w-[800px] flex-col items-center text-center">
               {activeSlide.caption.eyebrow ? (
-                <p className="mb-2 text-[10px] font-medium uppercase tracking-[0.2em] text-white sm:mb-3.5 sm:text-[12px] md:text-[13px]">
+                <p className="mb-3 text-[11px] font-medium uppercase tracking-[0.22em] text-white/85 md:mb-4 md:text-[13px]">
                   {activeSlide.caption.eyebrow}
                 </p>
               ) : null}
+
               {activeSlide.caption.title ? (
-                <h1 className="font-serif text-[20px] font-normal uppercase leading-[1.15] tracking-[0.04em] text-white md:-mt-4 md:text-[40px]">
+                <h1
+                  className="font-serif text-[28px] font-normal uppercase leading-[1.05] tracking-[0.03em] text-white xs:text-[32px] sm:text-[36px] md:text-[76px]"
+                  style={{ textShadow: "0 2px 24px rgba(0,0,0,0.25)" }}
+                >
                   {activeSlide.caption.title}
                 </h1>
               ) : null}
+
               {activeSlide.caption.subtitle ? (
-                <p className="mt-1.5 mb-2 max-w-xl text-[12px] leading-snug text-white opacity-[0.92] md:mt-3.5 md:text-[16px]">
+                <p
+                  className="mt-3 max-w-[20rem] text-[13px] leading-relaxed text-white/90 sm:max-w-xl sm:text-[14px] md:mt-4 md:text-[17px]"
+                  style={{ textShadow: "0 2px 24px rgba(0,0,0,0.25)" }}
+                >
                   {activeSlide.caption.subtitle}
                 </p>
               ) : null}
+
               <Link
                 href={activeSlide.caption.ctaHref}
-                className="relative z-30 mt-1 inline-flex h-9 min-h-[44px] items-center rounded-full bg-white px-4 text-[11px] font-medium uppercase tracking-[0.08em] text-[#111] touch-manipulation transition hover:bg-[#F5F3F0] md:mt-0 md:h-11 md:min-h-0 md:px-6 md:text-[12px]"
+                className="mt-5 inline-flex min-h-[44px] items-center justify-center rounded-full border border-[#1A1A1A] bg-[#1A1A1A] px-7 py-3 text-[11px] font-medium uppercase tracking-[0.12em] text-white touch-manipulation transition duration-300 hover:scale-[1.03] hover:bg-black active:scale-[0.98] md:mt-6 md:px-8 md:text-[13px]"
               >
                 {activeSlide.caption.ctaLabel}
-                <svg
-                  viewBox="0 0 16 16"
-                  className="ml-1.5 h-3 w-3 shrink-0 opacity-60 md:ml-2 md:h-3.5 md:w-3.5"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="1.6"
-                  aria-hidden
-                >
-                  <path d="M3 8h10M9 4l4 4-4 4" strokeLinecap="round" strokeLinejoin="round" />
-                </svg>
+                <span className="ml-2 opacity-80" aria-hidden>
+                  →
+                </span>
               </Link>
             </div>
           </div>
         ) : null}
 
+        {/* Компактные индикаторы отдельно под CTA */}
         {slides.length > 1 && (
-          <div className="pointer-events-none absolute inset-x-0 bottom-0 z-10 flex justify-center pb-3 md:pb-12">
-            {slides.map((_, i) => (
-              <button
-                key={i}
-                type="button"
-                aria-label={t("a11y.bannerNumber").replace("{number}", String(i + 1))}
-                aria-current={i === safeIndex}
-                onClick={() => setIndex(i)}
-                className="pointer-events-auto flex items-center justify-center p-2 outline-none focus:outline-none focus-visible:outline-none md:p-2.5"
-              >
-                <span
-                  aria-hidden
-                  className={
-                    "block h-1.5 rounded-full bg-white transition-all md:h-2 " +
-                    (i === safeIndex ? "w-4 opacity-100 md:w-5" : "w-1.5 opacity-[0.36] hover:opacity-70 md:w-2")
-                  }
-                />
-              </button>
-            ))}
+          <div className="pointer-events-none absolute inset-x-0 bottom-0 z-30 flex justify-center pb-3 md:pb-4">
+            <div className="pointer-events-auto flex items-center gap-2 px-3 py-2">
+              {slides.map((_, i) => {
+                const active = i === safeIndex;
+                return (
+                  <button
+                    key={i}
+                    type="button"
+                    aria-label={t("a11y.bannerNumber").replace("{number}", String(i + 1))}
+                    aria-current={active}
+                    onClick={() => setIndex(i)}
+                    className={
+                      "relative rounded-full outline-none transition-[width,height,background-color] duration-300 " +
+                      "before:absolute before:inset-[-10px] before:content-[''] " +
+                      (active
+                        ? "h-[7px] w-[7px] bg-[#111] md:h-2 md:w-2"
+                        : "h-1.5 w-1.5 bg-black/25 hover:bg-black/45 md:h-[7px] md:w-[7px]")
+                    }
+                  />
+                );
+              })}
+            </div>
           </div>
         )}
       </div>

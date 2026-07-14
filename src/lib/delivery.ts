@@ -29,10 +29,10 @@ const deliveryCopy = {
       description: "Этот товар сейчас недоступен для покупки. Свяжитесь с нами, чтобы уточнить сроки поступления.",
     },
     pre_order: {
-      badge: "Под заказ (7–14 дней)",
-      title: "Можно купить сейчас",
-      leadTime: "Срок доставки: 7–14 рабочих дней.",
-      description: "Товар доступен для покупки. После оформления заказа наша команда свяжется с вами для подтверждения деталей доставки.",
+      badge: "Предзаказ (от 14 дней)",
+      title: "Доступно для предзаказа",
+      leadTime: "Срок доставки: от 14 рабочих дней.",
+      description: "Товар доступен для предзаказа. После оформления наша команда свяжется с вами для подтверждения деталей доставки.",
     },
   },
   ro: {
@@ -49,10 +49,10 @@ const deliveryCopy = {
       description: "Produsul nu este disponibil momentan. Contactați-ne pentru termene.",
     },
     pre_order: {
-      badge: "La comandă (7–14 zile)",
-      title: "Disponibil pentru comandă",
-      leadTime: "Livrare: 7–14 zile lucrătoare.",
-      description: "Produsul poate fi comandat. După plasarea comenzii confirmăm detaliile livrării.",
+      badge: "Precomandă (de la 14 zile)",
+      title: "Disponibil pentru precomandă",
+      leadTime: "Livrare: de la 14 zile lucrătoare.",
+      description: "Produsul este disponibil pentru precomandă. După plasare confirmăm detaliile livrării.",
     },
   },
   en: {
@@ -69,10 +69,10 @@ const deliveryCopy = {
       description: "This item is currently unavailable. Contact us to check restock timing.",
     },
     pre_order: {
-      badge: "Pre-order (7–14 days)",
+      badge: "Pre-order (14+ days)",
       title: "Available to order",
-      leadTime: "Delivery time: 7–14 business days.",
-      description: "The item is available to order. After placing the order we will confirm delivery details.",
+      leadTime: "Delivery time: 14 business days or more.",
+      description: "The item is available for pre-order. After placing the pre-order we will confirm delivery details.",
     },
   },
 } satisfies Record<Locale, Record<string, { badge: string; title: string; leadTime: string; description: string }>>;

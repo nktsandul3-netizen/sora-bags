@@ -8,9 +8,11 @@ import ProductCard from "./ProductCard";
 export default function ProductGrid({
   products,
   activeFilterColors = [],
+  prioritizeFirstRow = false,
 }: {
   products: Product[];
   activeFilterColors?: string[];
+  prioritizeFirstRow?: boolean;
 }) {
   const t = useT();
   const visibleProducts = products.filter(productHasPhotos);
@@ -24,8 +26,13 @@ export default function ProductGrid({
   }
   return (
     <div className="grid grid-cols-2 gap-x-1.5 gap-y-5 max-md:gap-x-1 max-md:gap-y-4 sm:gap-x-4 sm:gap-y-10 lg:grid-cols-4 lg:gap-x-5">
-      {visibleProducts.map((p) => (
-        <ProductCard key={p.slug} product={p} activeFilterColors={activeFilterColors} />
+      {visibleProducts.map((p, index) => (
+        <ProductCard
+          key={p.slug}
+          product={p}
+          activeFilterColors={activeFilterColors}
+          prioritizeImage={prioritizeFirstRow && index < 2}
+        />
       ))}
     </div>
   );

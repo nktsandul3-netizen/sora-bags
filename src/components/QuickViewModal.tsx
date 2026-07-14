@@ -10,6 +10,7 @@ import { getBrandName } from "@/lib/data";
 import { formatPrice } from "@/lib/format";
 import { getDeliveryInfo } from "@/lib/delivery";
 import { withLocalePath } from "@/lib/i18n";
+import { getColorFamilies } from "@/lib/color-taxonomy";
 import { useLocale, useT } from "@/lib/useI18n";
 import { getPurchaseKind, getPurchaseKindForItem } from "@/lib/purchase-kind";
 import {
@@ -235,6 +236,9 @@ export default function QuickViewModal({
 
   const brandName = getBrandName(product.brandSlug);
   const color = product.colors[colorIdx] ?? product.colors[0];
+  const mobileBackgroundBlend = getColorFamilies(color?.name ?? "").includes("white")
+    ? ""
+    : " max-lg:mix-blend-darken";
   const images = color ? getColorImages(color) : [];
   const galleryImages = images.length > 0 ? images : product.images ?? [];
   const safeImageIdx = galleryImages.length
@@ -370,11 +374,14 @@ export default function QuickViewModal({
                       section={product.section}
                       src={activeImage?.src}
                       alt={localizeProductImageAlt(activeImage?.alt, locale) || localizedTitle}
-                      sizes="(min-width: 1024px) 40vw, 100vw"
+                      sizes="(min-width: 1024px) 40vw, 94vw"
+                      quality={82}
+                      loading="eager"
+                      fetchPriority="high"
                       imageClassName={
-                        activeImageFit === "contain"
+                        (activeImageFit === "contain"
                           ? "object-contain object-center"
-                          : "object-cover object-center"
+                          : "object-cover object-center") + mobileBackgroundBlend
                       }
                       className="absolute inset-0 h-full w-full"
                     />
@@ -399,7 +406,7 @@ export default function QuickViewModal({
                         <ArrowIcon direction="right" />
                       </button>
                       {hasGallery ? (
-                        <div className="absolute bottom-5 left-1/2 z-20 flex -translate-x-1/2 items-center gap-1.5">
+                        <div className="absolute bottom-5 left-1/2 z-20 hidden -translate-x-1/2 items-center gap-1.5 lg:flex">
                           {galleryImages.map((image, i) => (
                             <button
                               key={`${image.src}-dot-${i}`}

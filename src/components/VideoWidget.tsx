@@ -111,9 +111,6 @@ export default function VideoWidget() {
   const videoRef = useRef<HTMLVideoElement | null>(null);
   const isDesktop = useIsDesktop();
   const defaultBottom = isDesktop ? DEFAULT_BOTTOM_DESKTOP : DEFAULT_BOTTOM_MOBILE;
-  const [showMobileWidget, setShowMobileWidget] = useState(
-    () => typeof window !== "undefined" && window.scrollY > 260,
-  );
   const [footerLayout, setFooterLayout] = useState({
     bottom: DEFAULT_BOTTOM_MOBILE,
     blocked: false,
@@ -170,13 +167,6 @@ export default function VideoWidget() {
     const timer = window.setInterval(goNext, videoWidget.rotateIntervalMs);
     return () => window.clearInterval(timer);
   }, [dismissed, expanded, goNext, isTikTokMode]);
-
-  useEffect(() => {
-    if (isDesktop) return;
-    const updateVisibility = () => setShowMobileWidget(window.scrollY > 260);
-    window.addEventListener("scroll", updateVisibility, { passive: true });
-    return () => window.removeEventListener("scroll", updateVisibility);
-  }, [isDesktop]);
 
   useEffect(() => {
     const hero = document.getElementById("home-hero");
@@ -270,7 +260,7 @@ export default function VideoWidget() {
     dismissed ||
     menuOpen ||
     footerLayout.blocked ||
-    (!isDesktop && !showMobileWidget) ||
+    !isDesktop ||
     (heroInView && !expanded)
   ) {
     return null;

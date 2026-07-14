@@ -32,7 +32,7 @@ const copy: Record<Locale, Record<string, { title: string; intro: string; sectio
       title: "Plată și livrare",
       intro: "După plasarea comenzii, managerul SÓRA vă contactează pentru confirmarea disponibilității, livrării și metodei de plată.",
       sections: [
-        { title: "Livrare", paragraphs: ["Livrăm în Chișinău și pe întreg teritoriul Republicii Moldova.", "Termenul depinde de disponibilitatea produsului: produsele în stoc se livrează mai rapid, iar modelele la comandă pot necesita 7–14 zile lucrătoare."] },
+        { title: "Livrare", paragraphs: ["Livrăm în Chișinău și pe întreg teritoriul Republicii Moldova.", "Termenul depinde de disponibilitatea produsului: produsele în stoc se livrează mai rapid, iar modelele disponibile pentru precomandă necesită cel puțin 14 zile lucrătoare."] },
         { title: "Plată", paragraphs: ["Metoda de plată se confirmă cu managerul după plasarea comenzii.", "Pentru unele comenzi poate fi disponibilă plata la primire sau prin transfer/link de plată."] },
       ],
     },
@@ -92,7 +92,7 @@ const copy: Record<Locale, Record<string, { title: string; intro: string; sectio
       title: "Payment and delivery",
       intro: "After you place an order, a SÓRA manager contacts you to confirm availability, delivery and payment.",
       sections: [
-        { title: "Delivery", paragraphs: ["We deliver in Chișinău and across Moldova.", "Delivery time depends on availability: in-stock items ship faster, while pre-order models may take 7–14 business days."] },
+        { title: "Delivery", paragraphs: ["We deliver in Chișinău and across Moldova.", "Delivery time depends on availability: in-stock items ship faster, while pre-order models take at least 14 business days."] },
         { title: "Payment", paragraphs: ["Payment method is confirmed with the manager after ordering.", "Depending on the order, payment on delivery, bank transfer or payment link may be available."] },
       ],
     },
