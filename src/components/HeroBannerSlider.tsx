@@ -375,12 +375,12 @@ export default function HeroBannerSlider({
             {/* Логотип уже вшит в фото — на мобиле/десктопе только CTA */}
             <Link
               href={activeSlide.caption.ctaHref}
-              className="pointer-events-auto absolute left-5 top-[38%] isolate inline-flex min-h-[34px] w-[138px] items-center justify-center rounded-full border border-[#111] bg-[#111] px-3 py-1.5 text-[8px] font-semibold uppercase tracking-[0.07em] text-white antialiased [backdrop-filter:none] touch-manipulation transition-colors duration-200 hover:bg-black active:bg-black md:bottom-12 md:left-1/2 md:top-auto md:min-h-[44px] md:w-auto md:-translate-x-1/2 md:px-8 md:py-3 md:text-[13px] md:tracking-[0.12em]"
+              className="pointer-events-auto absolute left-5 top-[62%] isolate inline-flex min-h-[28px] w-[118px] items-center justify-center rounded-full border border-[#111] bg-[#111] px-2.5 py-1 text-[7px] font-semibold uppercase tracking-[0.06em] text-white antialiased [backdrop-filter:none] touch-manipulation transition-colors duration-200 hover:bg-black active:bg-black md:bottom-12 md:left-1/2 md:top-auto md:min-h-[44px] md:w-auto md:-translate-x-1/2 md:px-8 md:py-3 md:text-[13px] md:tracking-[0.12em]"
             >
-              <span className="max-w-[102px] text-center leading-[1.2] md:max-w-none md:whitespace-nowrap">
+              <span className="max-w-[88px] text-center leading-[1.2] md:max-w-none md:whitespace-nowrap">
                 {activeSlide.caption.ctaLabel}
               </span>
-              <span className="ml-1.5 opacity-80 md:ml-2" aria-hidden>
+              <span className="ml-1 opacity-80 md:ml-2" aria-hidden>
                 →
               </span>
             </Link>
