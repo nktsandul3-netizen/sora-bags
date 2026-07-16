@@ -30,13 +30,13 @@ function getHeroSlides(locale: Locale): HeroSlide[] {
   return [
     {
       type: "image",
-      src: "/hero-sora-bamboo-studio-v3.jpg",
-      mobileSrc: "/hero-sora-bamboo-studio-mobile.jpg",
-      width: 1920,
-      height: 960,
+      src: "/hero-sora-bamboo-studio-v6.jpg",
+      mobileSrc: "/hero-sora-bamboo-studio-mobile-v3.jpg",
+      width: 2560,
+      height: 1280,
       mobileWidth: 1400,
       mobileHeight: 875,
-      objectPosition: "50% 38%",
+      objectPosition: "50% 50%",
       mobileObjectPosition: "50% 50%",
       alt: t("home.heroBambooAlt"),
       caption: {
@@ -50,7 +50,7 @@ function getHeroSlides(locale: Locale): HeroSlide[] {
       src: "/videos/venezia-intreccio-banner-opt.mp4",
       mobileSrc: "/videos/venezia-intreccio-banner-mobile.mp4",
       poster: "/hero-venezia-banner-poster.jpg",
-      mobilePoster: "/hero-venezia-banner-poster-mobile.jpg",
+      mobilePoster: "/hero-venezia-banner-poster-mobile-v2.jpg",
       caption: {
         title: t("catalog.veneziaCollection"),
         subtitle: t("catalog.veneziaCollectionDescription"),

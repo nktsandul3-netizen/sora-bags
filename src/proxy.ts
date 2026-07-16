@@ -78,8 +78,9 @@ export const config = {
 };
 
 function rewriteWithLocale(request: NextRequest, pathname: string, locale: string) {
-  const url = request.nextUrl.clone();
-  url.pathname = pathname;
+  // Keep the same origin as the incoming request (127.0.0.1 vs localhost).
+  // Cloning nextUrl alone can rewrite to a different host and create a redirect loop.
+  const url = new URL(pathname + request.nextUrl.search, request.url);
   const headers = new Headers(request.headers);
   headers.set("x-sora-locale", locale);
   return NextResponse.rewrite(url, { request: { headers } });

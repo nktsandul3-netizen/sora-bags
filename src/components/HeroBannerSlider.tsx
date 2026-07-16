@@ -84,7 +84,7 @@ function ResponsiveHeroImage({
 
   const common = { alt, sizes: "100vw" };
   const {
-    props: { srcSet: desktopSrcSet },
+    props: { srcSet: desktopSrcSet, src: desktopSrc },
   } = getImageProps({
     ...common,
     src,
@@ -93,7 +93,7 @@ function ResponsiveHeroImage({
     quality: 85,
   });
   const {
-    props: { srcSet: mobileSrcSet, ...mobileProps },
+    props: { srcSet: mobileSrcSet, src: mobileImgSrc, ...mobileProps },
   } = getImageProps({
     ...common,
     src: mobileSrc,
@@ -102,13 +102,18 @@ function ResponsiveHeroImage({
     quality: 82,
   });
 
+  // With `images.unoptimized`, Next often omits srcSet and only returns `src`.
+  // Empty source srcSet made every browser fall back to the mobile <img src>.
+  const desktopSet = desktopSrcSet || desktopSrc || src;
+  const mobileSet = mobileSrcSet || mobileImgSrc || mobileSrc;
+
   return (
     <picture>
-      <source media="(min-width: 768px)" srcSet={desktopSrcSet} sizes="100vw" />
-      <source media="(max-width: 767px)" srcSet={mobileSrcSet} sizes="100vw" />
-      {/* getImageProps provides responsive src/srcSet without loading both art-directed files. */}
+      <source media="(min-width: 768px)" srcSet={desktopSet} sizes="100vw" />
+      <source media="(max-width: 767px)" srcSet={mobileSet} sizes="100vw" />
       <img
         {...mobileProps}
+        src={mobileImgSrc || mobileSrc}
         alt={alt}
         loading={eager ? "eager" : "lazy"}
         fetchPriority={eager ? "high" : "auto"}
@@ -212,6 +217,8 @@ function HeroSlideVideo({
         ref={videoRef}
         muted
         playsInline
+        // Safari / iOS / Windows Chrome: keep autoplay eligible
+        autoPlay={active}
         preload={warm || active ? "auto" : "none"}
         loop={false}
         onEnded={onEnded}
@@ -260,12 +267,20 @@ export default function HeroBannerSlider({
 
   useEffect(() => {
     if (slides.length < 2 || !activeSlide) return;
-    if (activeSlide.type !== "image") return;
+
+    // Image slides: advance on timer.
+    // Video slides: also keep a fallback timer in case `ended` never fires
+    // (autoplay blocked / decode error on some Windows Chrome setups).
+    const delay =
+      activeSlide.type === "video"
+        ? Math.max(intervalMs * 3, 12000)
+        : intervalMs;
+
     const timer = window.setTimeout(() => {
       setIndex((current) => (current + 1) % slides.length);
-    }, intervalMs);
+    }, delay);
     return () => window.clearTimeout(timer);
-  }, [slides.length, intervalMs, safeIndex, activeSlide]);
+  }, [slides.length, intervalMs, safeIndex, activeSlide?.type]);
 
   if (!activeSlide) return null;
 
@@ -283,7 +298,7 @@ export default function HeroBannerSlider({
       }
     >
       <div
-        className="relative aspect-[16/10] w-full touch-pan-y md:aspect-auto md:h-[calc(100svh-4.5rem)] md:min-h-[748px]"
+        className="relative aspect-[16/10] w-full touch-pan-y md:aspect-[2/1] md:h-auto md:min-h-0"
         onTouchStart={(e) => {
           if (!canSwipe) return;
           touchStartX.current = e.changedTouches[0]?.clientX ?? null;
@@ -430,8 +445,8 @@ export default function HeroBannerSlider({
                       "relative rounded-full outline-none transition-[width,height,background-color] duration-300 " +
                       "before:absolute before:inset-[-10px] before:content-[''] " +
                       (active
-                        ? "h-[7px] w-[7px] bg-[#111] md:h-2 md:w-2"
-                        : "h-1.5 w-1.5 bg-black/25 hover:bg-black/45 md:h-[7px] md:w-[7px]")
+                        ? "h-[7px] w-[7px] bg-white shadow-[0_0_0_1px_rgba(0,0,0,0.25)] md:h-2 md:w-2"
+                        : "h-1.5 w-1.5 bg-white/55 shadow-[0_0_0_1px_rgba(0,0,0,0.2)] hover:bg-white/80 md:h-[7px] md:w-[7px]")
                     }
                   />
                 );

@@ -14,6 +14,10 @@ const lumaProductSlugRedirects = [
 ] as const;
 
 const nextConfig: NextConfig = {
+  // Allow opening the local site via 127.0.0.1 as well as localhost.
+  // Without this, Next blocks /_next/* from 127.0.0.1 and client JS never hydrates
+  // (hero slider won't auto-advance, dots won't work).
+  allowedDevOrigins: ["127.0.0.1", "localhost"],
   // Hide the Next.js "N" badge so it doesn't cover checkout UI in local preview.
   devIndicators: false,
   outputFileTracingExcludes: {
