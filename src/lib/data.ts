@@ -187,8 +187,8 @@ export const products: Product[] = [
         hex: C.ivory.hex,
         status: "Доставка 7–14 дней",
         images: [
-          { src: "/products/premium-leather-kelly-shoulder-bag/kelly-cream-1-card-v2.webp", alt: "Premium Leather Kelly Shoulder Bag Cream — вид спереди" },
-          { src: "/products/premium-leather-kelly-shoulder-bag/kelly-cream-2.webp", alt: "Premium Leather Kelly Shoulder Bag Cream — внутри" },
+          { src: "/products/premium-leather-kelly-shoulder-bag/kelly-cream-1-card-v4.webp", alt: "Premium Leather Kelly Shoulder Bag Cream — вид спереди" },
+          { src: "/products/premium-leather-kelly-shoulder-bag/kelly-cream-2-v4.webp", alt: "Premium Leather Kelly Shoulder Bag Cream — внутри" },
         ],
       },
       {
@@ -197,7 +197,7 @@ export const products: Product[] = [
         status: "Доставка 7–14 дней",
         images: [
           { src: "/products/premium-leather-kelly-shoulder-bag/kelly-beige-1-card-v3.webp", alt: "Premium Leather Kelly Shoulder Bag Beige — вид спереди" },
-          { src: "/products/premium-leather-kelly-shoulder-bag/kelly-beige-2.webp", alt: "Premium Leather Kelly Shoulder Bag Beige — внутри" },
+          { src: "/products/premium-leather-kelly-shoulder-bag/kelly-beige-2-v2.webp", alt: "Premium Leather Kelly Shoulder Bag Beige — внутри" },
         ],
       },
       {
@@ -327,7 +327,7 @@ export const products: Product[] = [
         status: "Доставка 7–14 дней",
         images: [
           {
-            src: "/products/woven-leather-shopper-tote/off-white-card-v2.webp",
+            src: "/products/woven-leather-shopper-tote/off-white-card-v4.webp",
             alt: "Ondine Off-White — вид спереди",
           },
         ],
@@ -371,7 +371,7 @@ export const products: Product[] = [
         images: [
           { src: "/products/premium-woven-beach-tote-bag/beach-natural-black-2-card-v4.webp", alt: "Capri Natural / Black — вид спереди" },
           { src: "/products/premium-woven-beach-tote-bag/beach-natural-black-1-v3.webp", alt: "Capri Natural / Black — под углом" },
-          { src: "/products/premium-woven-beach-tote-bag/beach-natural-black-3.webp", alt: "Capri Natural / Black — внутри" },
+          { src: "/products/premium-woven-beach-tote-bag/beach-natural-black-3-v2.webp", alt: "Capri Natural / Black — внутри" },
         ],
       },
     ],
@@ -413,7 +413,7 @@ export const products: Product[] = [
           { src: "/products/milano-cage-tote-bag/black-red-2-card-v4.webp", alt: "Ortigia Black / Red — под углом" },
           { src: "/products/milano-cage-tote-bag/black-red-1-v2.webp", alt: "Ortigia Black / Red — вид спереди" },
           { src: "/products/milano-cage-tote-bag/black-red-3-v3.webp", alt: "Ortigia Black / Red — внутренний мешок" },
-          { src: "/products/milano-cage-tote-bag/black-red-4.webp", alt: "Ortigia Black / Red — вид сверху" },
+          { src: "/products/milano-cage-tote-bag/black-red-4-v2.webp", alt: "Ortigia Black / Red — вид сверху" },
         ],
       },
       {
@@ -422,7 +422,7 @@ export const products: Product[] = [
         images: [
           { src: "/products/milano-cage-tote-bag/red-1-card-v4.webp", alt: "Ortigia Red — вид спереди" },
           { src: "/products/milano-cage-tote-bag/red-2-v3.webp", alt: "Ortigia Red — под углом" },
-          { src: "/products/milano-cage-tote-bag/red-3.webp", alt: "Ortigia Red — вид сверху" },
+          { src: "/products/milano-cage-tote-bag/red-3-v2.webp", alt: "Ortigia Red — вид сверху" },
         ],
       },
       {
@@ -474,9 +474,9 @@ export const products: Product[] = [
         ...C.white,
         status: "Доставка 7–14 дней",
         images: [
-          { src: "/products/milano-cage-tote-bag/white-1-card-v2.webp", alt: "Ortigia White — вид спереди" },
-          { src: "/products/milano-cage-tote-bag/white-2.webp", alt: "Ortigia White — под углом" },
-          { src: "/products/milano-cage-tote-bag/white-3.webp", alt: "Ortigia White — вид сверху" },
+          { src: "/products/milano-cage-tote-bag/white-1-card-v4.webp", alt: "Ortigia White — вид спереди" },
+          { src: "/products/milano-cage-tote-bag/white-2-v4.webp", alt: "Ortigia White — под углом" },
+          { src: "/products/milano-cage-tote-bag/white-3-v4.webp", alt: "Ortigia White — вид сверху" },
         ],
       },
     ],
@@ -519,8 +519,8 @@ export const products: Product[] = [
           { src: "/products/classic-leather-tote-bag/black-1-card-v4.webp", alt: "Claudine Black — вид спереди" },
           { src: "/products/classic-leather-tote-bag/black-2-v3.webp", alt: "Claudine Black — внутри" },
           { src: "/products/classic-leather-tote-bag/black-3-v3.webp", alt: "Claudine Black — сбоку" },
-          { src: "/products/classic-leather-tote-bag/black-4.webp", alt: "Claudine Black — детали" },
-          { src: "/products/classic-leather-tote-bag/black-5.webp", alt: "Claudine Black — сверху" },
+          { src: "/products/classic-leather-tote-bag/black-4-v2.webp", alt: "Claudine Black — детали" },
+          { src: "/products/classic-leather-tote-bag/black-5-v2.webp", alt: "Claudine Black — сверху" },
           { src: "/products/classic-leather-tote-bag/black-lifestyle.webp", alt: "Claudine Black в образе", fit: "cover" },
         ],
       },
@@ -531,7 +531,7 @@ export const products: Product[] = [
           { src: "/products/classic-leather-tote-bag/taupe-1-card-v4.webp", alt: "Claudine Taupe — вид спереди" },
           { src: "/products/classic-leather-tote-bag/taupe-2-v3.webp", alt: "Claudine Taupe — вид сзади" },
           { src: "/products/classic-leather-tote-bag/taupe-3-v3.webp", alt: "Claudine Taupe — сбоку" },
-          { src: "/products/classic-leather-tote-bag/taupe-4.webp", alt: "Claudine Taupe — сверху" },
+          { src: "/products/classic-leather-tote-bag/taupe-4-v2.webp", alt: "Claudine Taupe — сверху" },
         ],
       },
       {
@@ -541,7 +541,7 @@ export const products: Product[] = [
           { src: "/products/classic-leather-tote-bag/light-blue-1-card-v4.webp", alt: "Claudine Light Blue — вид спереди" },
           { src: "/products/classic-leather-tote-bag/light-blue-2-v3.webp", alt: "Claudine Light Blue — вид сзади" },
           { src: "/products/classic-leather-tote-bag/light-blue-3-v3.webp", alt: "Claudine Light Blue — сбоку" },
-          { src: "/products/classic-leather-tote-bag/light-blue-4.webp", alt: "Claudine Light Blue — внутри" },
+          { src: "/products/classic-leather-tote-bag/light-blue-4-v2.webp", alt: "Claudine Light Blue — внутри" },
           { src: "/products/classic-leather-tote-bag/light-blue-5-v2.webp", alt: "Claudine Light Blue — сверху" },
         ],
       },
@@ -549,11 +549,11 @@ export const products: Product[] = [
         ...C.white,
         status: "Доставка 7–14 дней",
         images: [
-          { src: "/products/classic-leather-tote-bag/white-1-card-v2.webp", alt: "Claudine White — вид спереди" },
-          { src: "/products/classic-leather-tote-bag/white-2.webp", alt: "Claudine White — сбоку" },
-          { src: "/products/classic-leather-tote-bag/white-3.webp", alt: "Claudine White — вид сзади" },
-          { src: "/products/classic-leather-tote-bag/white-4.webp", alt: "Claudine White — внутри" },
-          { src: "/products/classic-leather-tote-bag/white-5.webp", alt: "Claudine White — детали" },
+          { src: "/products/classic-leather-tote-bag/white-1-card-v4.webp", alt: "Claudine White — вид спереди" },
+          { src: "/products/classic-leather-tote-bag/white-2-v4.webp", alt: "Claudine White — сбоку" },
+          { src: "/products/classic-leather-tote-bag/white-3-v4.webp", alt: "Claudine White — вид сзади" },
+          { src: "/products/classic-leather-tote-bag/white-4-v3.webp", alt: "Claudine White — внутри" },
+          { src: "/products/classic-leather-tote-bag/white-5-v4.webp", alt: "Claudine White — детали" },
         ],
       },
     ],
@@ -589,16 +589,16 @@ export const products: Product[] = [
     galleryFit: "contain",
     price: 2399,
     images: [
-      { src: "/products/classic-leather-bowling-bag/off-white-1-card-v2.webp", alt: "Classic Leather Bowling Bag Off-White — вид спереди" },
+      { src: "/products/classic-leather-bowling-bag/off-white-1-card-v4.webp", alt: "Classic Leather Bowling Bag Off-White — вид спереди" },
     ],
     colors: [
       {
         ...C.offWhite,
         status: "Доставка 7–14 дней",
         images: [
-          { src: "/products/classic-leather-bowling-bag/off-white-1-card-v2.webp", alt: "Classic Leather Bowling Bag Off-White — вид спереди" },
-          { src: "/products/classic-leather-bowling-bag/off-white-2.webp", alt: "Classic Leather Bowling Bag Off-White — ракурс" },
-          { src: "/products/classic-leather-bowling-bag/off-white-3.webp", alt: "Classic Leather Bowling Bag Off-White — внутри" },
+          { src: "/products/classic-leather-bowling-bag/off-white-1-card-v4.webp", alt: "Classic Leather Bowling Bag Off-White — вид спереди" },
+          { src: "/products/classic-leather-bowling-bag/off-white-2-v4.webp", alt: "Classic Leather Bowling Bag Off-White — ракурс" },
+          { src: "/products/classic-leather-bowling-bag/off-white-3-v4.webp", alt: "Classic Leather Bowling Bag Off-White — внутри" },
           { src: "/products/classic-leather-bowling-bag/off-white-lifestyle-v2.webp", alt: "Classic Leather Bowling Bag Off-White в образе", fit: "cover" },
         ],
       },
@@ -769,9 +769,9 @@ export const products: Product[] = [
         ...C.white,
         status: "Доставка 7–14 дней",
         images: [
-          { src: "/products/elegant-leather-hobo-bag-classic/classic-white-1-card-v2.webp", alt: "Elegant Leather Hobo Bag White — вид спереди" },
-          { src: "/products/elegant-leather-hobo-bag-classic/classic-white-2.webp", alt: "Elegant Leather Hobo Bag White — сбоку" },
-          { src: "/products/elegant-leather-hobo-bag-classic/classic-white-3.webp", alt: "Elegant Leather Hobo Bag White — ракурс" },
+          { src: "/products/elegant-leather-hobo-bag-classic/classic-white-1-card-v4.webp", alt: "Elegant Leather Hobo Bag White — вид спереди" },
+          { src: "/products/elegant-leather-hobo-bag-classic/classic-white-2-v3.webp", alt: "Elegant Leather Hobo Bag White — сбоку" },
+          { src: "/products/elegant-leather-hobo-bag-classic/classic-white-3-v4.webp", alt: "Elegant Leather Hobo Bag White — ракурс" },
         ],
       },
       {
@@ -780,7 +780,7 @@ export const products: Product[] = [
         images: [
           { src: "/products/elegant-leather-hobo-bag-classic/classic-taupe-1-card-v4.webp", alt: "Elegant Leather Hobo Bag Taupe — вид спереди" },
           { src: "/products/elegant-leather-hobo-bag-classic/classic-taupe-2-v3.webp", alt: "Elegant Leather Hobo Bag Taupe — сбоку" },
-          { src: "/products/elegant-leather-hobo-bag-classic/classic-taupe-3.webp", alt: "Elegant Leather Hobo Bag Taupe — ракурс" },
+          { src: "/products/elegant-leather-hobo-bag-classic/classic-taupe-3-v3.webp", alt: "Elegant Leather Hobo Bag Taupe — ракурс" },
         ],
       },
       {
@@ -788,7 +788,7 @@ export const products: Product[] = [
         status: "Доставка 7–14 дней",
         images: [
           { src: "/products/elegant-leather-hobo-bag-classic/classic-butter-yellow-1-card-v4.webp", alt: "Elegant Leather Hobo Bag Butter Yellow — вид спереди" },
-          { src: "/products/elegant-leather-hobo-bag-classic/classic-butter-yellow-2.webp", alt: "Elegant Leather Hobo Bag Butter Yellow — сбоку" },
+          { src: "/products/elegant-leather-hobo-bag-classic/classic-butter-yellow-2-v2.webp", alt: "Elegant Leather Hobo Bag Butter Yellow — сбоку" },
           { src: "/products/elegant-leather-hobo-bag-classic/classic-butter-yellow-3-v3.webp", alt: "Elegant Leather Hobo Bag Butter Yellow — ракурс" },
         ],
       },
@@ -797,7 +797,7 @@ export const products: Product[] = [
         status: "Доставка 7–14 дней",
         images: [
           { src: "/products/elegant-leather-hobo-bag-classic/classic-pink-1-card-v4.webp", alt: "Elegant Leather Hobo Bag Pink — вид спереди" },
-          { src: "/products/elegant-leather-hobo-bag-classic/classic-pink-2.webp", alt: "Elegant Leather Hobo Bag Pink — сбоку" },
+          { src: "/products/elegant-leather-hobo-bag-classic/classic-pink-2-v2.webp", alt: "Elegant Leather Hobo Bag Pink — сбоку" },
           { src: "/products/elegant-leather-hobo-bag-classic/classic-pink-3-v3.webp", alt: "Elegant Leather Hobo Bag Pink — ракурс" },
         ],
       },
@@ -805,9 +805,9 @@ export const products: Product[] = [
         ...C.offWhite,
         status: "Доставка 7–14 дней",
         images: [
-          { src: "/products/elegant-leather-hobo-bag-classic/classic-off-white-1-card-v2.webp", alt: "Elegant Leather Hobo Bag Off-White — вид спереди" },
-          { src: "/products/elegant-leather-hobo-bag-classic/classic-off-white-2.webp", alt: "Elegant Leather Hobo Bag Off-White — сбоку" },
-          { src: "/products/elegant-leather-hobo-bag-classic/classic-off-white-3.webp", alt: "Elegant Leather Hobo Bag Off-White — ракурс" },
+          { src: "/products/elegant-leather-hobo-bag-classic/classic-off-white-1-card-v4.webp", alt: "Elegant Leather Hobo Bag Off-White — вид спереди" },
+          { src: "/products/elegant-leather-hobo-bag-classic/classic-off-white-2-v3.webp", alt: "Elegant Leather Hobo Bag Off-White — сбоку" },
+          { src: "/products/elegant-leather-hobo-bag-classic/classic-off-white-3-v4.webp", alt: "Elegant Leather Hobo Bag Off-White — ракурс" },
         ],
       },
       {
@@ -815,7 +815,7 @@ export const products: Product[] = [
         status: "Доставка 7–14 дней",
         images: [
           { src: "/products/elegant-leather-hobo-bag-classic/classic-baby-blue-1-card-v4.webp", alt: "Elegant Leather Hobo Bag Baby Blue — вид спереди" },
-          { src: "/products/elegant-leather-hobo-bag-classic/classic-baby-blue-2.webp", alt: "Elegant Leather Hobo Bag Baby Blue — сбоку" },
+          { src: "/products/elegant-leather-hobo-bag-classic/classic-baby-blue-2-v3.webp", alt: "Elegant Leather Hobo Bag Baby Blue — сбоку" },
           { src: "/products/elegant-leather-hobo-bag-classic/classic-baby-blue-3-v3.webp", alt: "Elegant Leather Hobo Bag Baby Blue — ракурс" },
         ],
       },
@@ -824,7 +824,7 @@ export const products: Product[] = [
         status: "Доставка 7–14 дней",
         images: [
           { src: "/products/elegant-leather-hobo-bag-classic/classic-sage-green-1-card-v4.webp", alt: "Elegant Leather Hobo Bag Sage Green — вид спереди" },
-          { src: "/products/elegant-leather-hobo-bag-classic/classic-sage-green-2.webp", alt: "Elegant Leather Hobo Bag Sage Green — сбоку" },
+          { src: "/products/elegant-leather-hobo-bag-classic/classic-sage-green-2-v2.webp", alt: "Elegant Leather Hobo Bag Sage Green — сбоку" },
           { src: "/products/elegant-leather-hobo-bag-classic/classic-sage-green-3-v3.webp", alt: "Elegant Leather Hobo Bag Sage Green — ракурс" },
         ],
       },
@@ -833,7 +833,7 @@ export const products: Product[] = [
         status: "Доставка 7–14 дней",
         images: [
           { src: "/products/elegant-leather-hobo-bag-classic/classic-red-1-card-v4.webp", alt: "Elegant Leather Hobo Bag Red — вид спереди" },
-          { src: "/products/elegant-leather-hobo-bag-classic/classic-red-2.webp", alt: "Elegant Leather Hobo Bag Red — сбоку" },
+          { src: "/products/elegant-leather-hobo-bag-classic/classic-red-2-v2.webp", alt: "Elegant Leather Hobo Bag Red — сбоку" },
           { src: "/products/elegant-leather-hobo-bag-classic/classic-red-3-v3.webp", alt: "Elegant Leather Hobo Bag Red — ракурс" },
         ],
       },
@@ -843,7 +843,7 @@ export const products: Product[] = [
         status: "Доставка 7–14 дней",
         images: [
           { src: "/products/elegant-leather-hobo-bag-classic/classic-cognac-1-card-v4.webp", alt: "Elegant Leather Hobo Bag Cognac — вид спереди" },
-          { src: "/products/elegant-leather-hobo-bag-classic/classic-cognac-2.webp", alt: "Elegant Leather Hobo Bag Cognac — сбоку" },
+          { src: "/products/elegant-leather-hobo-bag-classic/classic-cognac-2-v2.webp", alt: "Elegant Leather Hobo Bag Cognac — сбоку" },
           { src: "/products/elegant-leather-hobo-bag-classic/classic-cognac-3-v3.webp", alt: "Elegant Leather Hobo Bag Cognac — ракурс" },
         ],
       },
@@ -853,7 +853,7 @@ export const products: Product[] = [
         status: "Доставка 7–14 дней",
         images: [
           { src: "/products/elegant-leather-hobo-bag-classic/classic-black-1-card-v4.webp", alt: "Elegant Leather Hobo Bag Black — вид спереди" },
-          { src: "/products/elegant-leather-hobo-bag-classic/classic-black-2.webp", alt: "Elegant Leather Hobo Bag Black — сбоку" },
+          { src: "/products/elegant-leather-hobo-bag-classic/classic-black-2-v2.webp", alt: "Elegant Leather Hobo Bag Black — сбоку" },
           { src: "/products/elegant-leather-hobo-bag-classic/classic-black-3-v3.webp", alt: "Elegant Leather Hobo Bag Black — ракурс" },
         ],
       },
@@ -890,7 +890,7 @@ export const products: Product[] = [
     galleryFit: "contain",
     price: 2599,
     images: [
-      { src: "/products/elegant-leather-hobo-bag-smooth/smooth-white-1-card-v2.webp", alt: "Elegant Leather Hobo Bag White — вид спереди" },
+      { src: "/products/elegant-leather-hobo-bag-smooth/smooth-white-1-card-v4.webp", alt: "Elegant Leather Hobo Bag White — вид спереди" },
     ],
     colors: [
       {
@@ -898,9 +898,9 @@ export const products: Product[] = [
         hex: C.white.hex,
         status: "Доставка 7–14 дней",
         images: [
-          { src: "/products/elegant-leather-hobo-bag-smooth/smooth-white-1-card-v2.webp", alt: "Elegant Leather Hobo Bag White — вид спереди" },
-          { src: "/products/elegant-leather-hobo-bag-smooth/smooth-white-2.webp", alt: "Elegant Leather Hobo Bag White — с ремнём" },
-          { src: "/products/elegant-leather-hobo-bag-smooth/smooth-white-3.webp", alt: "Elegant Leather Hobo Bag White — сбоку" },
+          { src: "/products/elegant-leather-hobo-bag-smooth/smooth-white-1-card-v4.webp", alt: "Elegant Leather Hobo Bag White — вид спереди" },
+          { src: "/products/elegant-leather-hobo-bag-smooth/smooth-white-2-v4.webp", alt: "Elegant Leather Hobo Bag White — с ремнём" },
+          { src: "/products/elegant-leather-hobo-bag-smooth/smooth-white-3-v4.webp", alt: "Elegant Leather Hobo Bag White — сбоку" },
           { src: "/products/elegant-leather-hobo-bag-smooth/smooth-white-lifestyle.webp", alt: "Elegant Leather Hobo Bag White в образе", fit: "cover" },
         ],
       },
@@ -941,7 +941,7 @@ export const products: Product[] = [
         images: [
           { src: "/products/elegant-leather-hobo-bag-smooth/smooth-red-1-card-v4.webp", alt: "Elegant Leather Hobo Bag Red — вид спереди" },
           { src: "/products/elegant-leather-hobo-bag-smooth/smooth-red-2-v3.webp", alt: "Elegant Leather Hobo Bag Red — с ремнём" },
-          { src: "/products/elegant-leather-hobo-bag-smooth/smooth-red-3.webp", alt: "Elegant Leather Hobo Bag Red — сбоку" },
+          { src: "/products/elegant-leather-hobo-bag-smooth/smooth-red-3-v2.webp", alt: "Elegant Leather Hobo Bag Red — сбоку" },
         ],
       },
     ],
@@ -1015,9 +1015,9 @@ export const products: Product[] = [
         hex: C.offWhite.hex,
         status: "Доставка 7–14 дней",
         images: [
-          { src: "/products/structured-leather-top-handle-bag/top-handle-off-white-1-card-v2.webp", alt: "Structured Leather Top Handle Bag Off-White — вид спереди" },
-          { src: "/products/structured-leather-top-handle-bag/top-handle-off-white-2.webp", alt: "Structured Leather Top Handle Bag Off-White — под углом" },
-          { src: "/products/structured-leather-top-handle-bag/top-handle-off-white-3.webp", alt: "Structured Leather Top Handle Bag Off-White — вид сзади" },
+          { src: "/products/structured-leather-top-handle-bag/top-handle-off-white-1-card-v4.webp", alt: "Structured Leather Top Handle Bag Off-White — вид спереди" },
+          { src: "/products/structured-leather-top-handle-bag/top-handle-off-white-2-v4.webp", alt: "Structured Leather Top Handle Bag Off-White — под углом" },
+          { src: "/products/structured-leather-top-handle-bag/top-handle-off-white-3-v4.webp", alt: "Structured Leather Top Handle Bag Off-White — вид сзади" },
         ],
       },
       {
@@ -1163,7 +1163,7 @@ export const products: Product[] = [
         images: [
           { src: "/products/elegant-leather-crossbody-bag-beige/cross-black-1-card-v4.webp", alt: "Coralie Black — вид спереди" },
           { src: "/products/elegant-leather-crossbody-bag-beige/cross-black-2-v3.webp", alt: "Coralie Black — сбоку" },
-          { src: "/products/elegant-leather-crossbody-bag-beige/cross-black-3.webp", alt: "Coralie Black — вид сверху" },
+          { src: "/products/elegant-leather-crossbody-bag-beige/cross-black-3-v5.webp", alt: "Coralie Black — вид сверху" },
           { src: "/products/elegant-leather-crossbody-bag-beige/cross-black-lifestyle-v2.webp", alt: "Coralie Black в образе", fit: "cover" },
         ],
       },
@@ -1183,16 +1183,16 @@ export const products: Product[] = [
         images: [
           { src: "/products/elegant-leather-crossbody-bag-beige/cross-cognac-1-card-v4.webp", alt: "Coralie Cognac — вид спереди" },
           { src: "/products/elegant-leather-crossbody-bag-beige/cross-cognac-2.webp", alt: "Coralie Cognac — сбоку" },
-          { src: "/products/elegant-leather-crossbody-bag-beige/cross-cognac-3.webp", alt: "Coralie Cognac — вид сверху" },
+          { src: "/products/elegant-leather-crossbody-bag-beige/cross-cognac-3-v5.webp", alt: "Coralie Cognac — вид сверху" },
         ],
       },
       {
         ...C.offWhite,
         status: "Доставка 7–14 дней",
         images: [
-          { src: "/products/elegant-leather-crossbody-bag-beige/cross-off-white-1-card-v2.webp", alt: "Coralie Off-White — вид спереди" },
-          { src: "/products/elegant-leather-crossbody-bag-beige/cross-off-white-2.webp", alt: "Coralie Off-White — сбоку" },
-          { src: "/products/elegant-leather-crossbody-bag-beige/cross-off-white-3.webp", alt: "Coralie Off-White — вид сверху" },
+          { src: "/products/elegant-leather-crossbody-bag-beige/cross-off-white-1-card-v4.webp", alt: "Coralie Off-White — вид спереди" },
+          { src: "/products/elegant-leather-crossbody-bag-beige/cross-off-white-2-v4.webp", alt: "Coralie Off-White — сбоку" },
+          { src: "/products/elegant-leather-crossbody-bag-beige/cross-off-white-3-v4.webp", alt: "Coralie Off-White — вид сверху" },
         ],
       },
       {
@@ -1200,7 +1200,7 @@ export const products: Product[] = [
         status: "Доставка 7–14 дней",
         images: [
           { src: "/products/elegant-leather-crossbody-bag-beige/cross-dark-brown-1-card-v4.webp", alt: "Coralie Dark Brown — вид спереди" },
-          { src: "/products/elegant-leather-crossbody-bag-beige/cross-dark-brown-2.webp", alt: "Coralie Dark Brown — сбоку" },
+          { src: "/products/elegant-leather-crossbody-bag-beige/cross-dark-brown-2-v5.webp", alt: "Coralie Dark Brown — сбоку" },
           { src: "/products/elegant-leather-crossbody-bag-beige/cross-dark-brown-3-v3.webp", alt: "Coralie Dark Brown — вид сверху" },
         ],
       },
@@ -1248,8 +1248,8 @@ export const products: Product[] = [
         images: [
           { src: "/products/elegant-leather-tote-bag/tote-cognac-1-card-v4.webp", alt: "Violaine Cognac — вид спереди" },
           { src: "/products/elegant-leather-tote-bag/tote-cognac-2-v3.webp", alt: "Violaine Cognac — сбоку" },
-          { src: "/products/elegant-leather-tote-bag/tote-cognac-3.webp", alt: "Violaine Cognac — вид сверху" },
-          { src: "/products/elegant-leather-tote-bag/tote-cognac-4.webp", alt: "Violaine Cognac — внутри" },
+          { src: "/products/elegant-leather-tote-bag/tote-cognac-3-v2.webp", alt: "Violaine Cognac — вид сверху" },
+          { src: "/products/elegant-leather-tote-bag/tote-cognac-4-v2.webp", alt: "Violaine Cognac — внутри" },
           { src: "/products/elegant-leather-tote-bag/tote-cognac-lifestyle-v2.webp", alt: "Violaine Cognac в образе", fit: "cover" },
         ],
       },
@@ -1258,10 +1258,10 @@ export const products: Product[] = [
         hex: C.jetBlack.hex,
         status: "Доставка 7–14 дней",
         images: [
-          { src: "/products/elegant-leather-tote-bag/tote-black-1-card-v2.webp", alt: "Violaine Black — вид спереди" },
+          { src: "/products/elegant-leather-tote-bag/tote-black-1-card-v3.webp", alt: "Violaine Black — вид спереди" },
           { src: "/products/elegant-leather-tote-bag/tote-black-2-v3.webp", alt: "Violaine Black — сбоку" },
-          { src: "/products/elegant-leather-tote-bag/tote-black-3.webp", alt: "Violaine Black — вид сверху" },
-          { src: "/products/elegant-leather-tote-bag/tote-black-4.webp", alt: "Violaine Black — внутри" },
+          { src: "/products/elegant-leather-tote-bag/tote-black-3-v2.webp", alt: "Violaine Black — вид сверху" },
+          { src: "/products/elegant-leather-tote-bag/tote-black-4-v2.webp", alt: "Violaine Black — внутри" },
         ],
       },
       {
@@ -1271,17 +1271,17 @@ export const products: Product[] = [
           { src: "/products/elegant-leather-tote-bag/tote-taupe-1-card-v4.webp", alt: "Violaine Taupe — вид спереди" },
           { src: "/products/elegant-leather-tote-bag/tote-taupe-2-v3.webp", alt: "Violaine Taupe — сбоку" },
           { src: "/products/elegant-leather-tote-bag/tote-taupe-3-v3.webp", alt: "Violaine Taupe — вид сверху" },
-          { src: "/products/elegant-leather-tote-bag/tote-taupe-4.webp", alt: "Violaine Taupe — внутри" },
+          { src: "/products/elegant-leather-tote-bag/tote-taupe-4-v2.webp", alt: "Violaine Taupe — внутри" },
         ],
       },
       {
         ...C.darkBrown,
         status: "Доставка 7–14 дней",
         images: [
-          { src: "/products/elegant-leather-tote-bag/tote-dark-brown-1-card-v2.webp", alt: "Violaine Dark Brown — вид спереди" },
-          { src: "/products/elegant-leather-tote-bag/tote-dark-brown-2.webp", alt: "Violaine Dark Brown — сбоку" },
+          { src: "/products/elegant-leather-tote-bag/tote-dark-brown-1-card-v3.webp", alt: "Violaine Dark Brown — вид спереди" },
+          { src: "/products/elegant-leather-tote-bag/tote-dark-brown-2-v2.webp", alt: "Violaine Dark Brown — сбоку" },
           { src: "/products/elegant-leather-tote-bag/tote-dark-brown-3-v3.webp", alt: "Violaine Dark Brown — вид сверху" },
-          { src: "/products/elegant-leather-tote-bag/tote-dark-brown-4.webp", alt: "Violaine Dark Brown — внутри" },
+          { src: "/products/elegant-leather-tote-bag/tote-dark-brown-4-v2.webp", alt: "Violaine Dark Brown — внутри" },
         ],
       },
       {
@@ -1290,8 +1290,8 @@ export const products: Product[] = [
         images: [
           { src: "/products/elegant-leather-tote-bag/tote-burgundy-1-card-v4.webp", alt: "Violaine Burgundy — вид спереди" },
           { src: "/products/elegant-leather-tote-bag/tote-burgundy-2-v3.webp", alt: "Violaine Burgundy — сбоку" },
-          { src: "/products/elegant-leather-tote-bag/tote-burgundy-3.webp", alt: "Violaine Burgundy — вид сверху" },
-          { src: "/products/elegant-leather-tote-bag/tote-burgundy-4.webp", alt: "Violaine Burgundy — внутри" },
+          { src: "/products/elegant-leather-tote-bag/tote-burgundy-3-v2.webp", alt: "Violaine Burgundy — вид сверху" },
+          { src: "/products/elegant-leather-tote-bag/tote-burgundy-4-v2.webp", alt: "Violaine Burgundy — внутри" },
         ],
       },
     ],
@@ -1406,11 +1406,11 @@ export const products: Product[] = [
         status: "Доставка 7–14 дней",
         images: [
           {
-            src: "/products/pouch-bag/ivory-1-card-v2.webp",
+            src: "/products/pouch-bag/ivory-1-card-v4.webp",
             alt: "Capucine Ivory спереди",
           },
           {
-            src: "/products/pouch-bag/ivory-2.webp",
+            src: "/products/pouch-bag/ivory-2-v4.webp",
             alt: "Capucine Ivory сбоку",
           },
         ],
@@ -1500,7 +1500,7 @@ export const products: Product[] = [
             alt: "Beatrice Burgundy — вид сзади",
           },
           {
-            src: "/products/structured-leather-tote-bag/burgundy-3.webp",
+            src: "/products/structured-leather-tote-bag/burgundy-3-v2.webp",
             alt: "Beatrice Burgundy — внутри",
           },
         ],
@@ -1518,7 +1518,7 @@ export const products: Product[] = [
             alt: "Beatrice Espresso — вид сзади",
           },
           {
-            src: "/products/structured-leather-tote-bag/espresso-3.webp",
+            src: "/products/structured-leather-tote-bag/espresso-3-v2.webp",
             alt: "Beatrice Espresso — внутри",
           },
         ],
@@ -1536,7 +1536,7 @@ export const products: Product[] = [
             alt: "Beatrice Ruby Red — вид сверху",
           },
           {
-            src: "/products/structured-leather-tote-bag/ruby-red-3.webp",
+            src: "/products/structured-leather-tote-bag/ruby-red-3-v2.webp",
             alt: "Beatrice Ruby Red — внутри",
           },
         ],
@@ -2198,7 +2198,7 @@ export const products: Product[] = [
       {
         ...C.ivory,
         images: [
-          { src: "/products/womens-duo-mini-tote-bag/ivory-front-card-v4.webp", alt: "Fabrizia Ivory — вид спереди" },
+          { src: "/products/womens-duo-mini-tote-bag/ivory-front-card-v5.webp", alt: "Fabrizia Ivory — вид спереди" },
           { src: "/products/womens-duo-mini-tote-bag/ivory-inside-v2.webp", alt: "Fabrizia Ivory — внутри" },
           { src: "/products/womens-duo-mini-tote-bag/ivory-inside-alt-v2.webp", alt: "Fabrizia Ivory — внутри, отделение" },
         ],
@@ -2206,9 +2206,9 @@ export const products: Product[] = [
       {
         ...C.lightBlue,
         images: [
-          { src: "/products/womens-duo-mini-tote-bag/light-blue-front-card-v6.webp", alt: "Fabrizia Light Blue — вид спереди" },
-          { src: "/products/womens-duo-mini-tote-bag/light-blue-inside-v4.webp", alt: "Fabrizia Light Blue — внутри" },
-          { src: "/products/womens-duo-mini-tote-bag/light-blue-inside-alt-v4.webp", alt: "Fabrizia Light Blue — внутри, отделение" },
+          { src: "/products/womens-duo-mini-tote-bag/light-blue-front-card-v7.webp", alt: "Fabrizia Light Blue — вид спереди" },
+          { src: "/products/womens-duo-mini-tote-bag/light-blue-inside-v6.webp", alt: "Fabrizia Light Blue — внутри" },
+          { src: "/products/womens-duo-mini-tote-bag/light-blue-inside-alt-v5.webp", alt: "Fabrizia Light Blue — внутри, отделение" },
         ],
       },
       {
@@ -2216,13 +2216,13 @@ export const products: Product[] = [
         images: [
           { src: "/products/womens-duo-mini-tote-bag/sage-green-front-card-v6.webp", alt: "Fabrizia Sage Green — вид спереди" },
           { src: "/products/womens-duo-mini-tote-bag/sage-green-inside-v4.webp", alt: "Fabrizia Sage Green — внутри" },
-          { src: "/products/womens-duo-mini-tote-bag/sage-green-inside-alt-v3.webp", alt: "Fabrizia Sage Green — внутри, отделение" },
+          { src: "/products/womens-duo-mini-tote-bag/sage-green-inside-alt-v7.webp", alt: "Fabrizia Sage Green — внутри, отделение" },
         ],
       },
       {
         ...C.white,
         images: [
-          { src: "/products/womens-duo-mini-tote-bag/white-front-card-v4.webp", alt: "Fabrizia White — вид спереди" },
+          { src: "/products/womens-duo-mini-tote-bag/white-front-card-v5.webp", alt: "Fabrizia White — вид спереди" },
           { src: "/products/womens-duo-mini-tote-bag/white-inside-v3.webp", alt: "Fabrizia White — внутри" },
           { src: "/products/womens-duo-mini-tote-bag/white-inside-alt-v3.webp", alt: "Fabrizia White — внутри, отделение" },
         ],
@@ -2332,7 +2332,7 @@ export const products: Product[] = [
         ...C.black,
         images: [
           { src: "/products/womens-knitted-openwork-panel-tote-bag/black-front-card-v2.webp", alt: "Ginevra Чёрный — карточка товара" },
-          { src: "/products/womens-knitted-openwork-panel-tote-bag/black-inside.webp", alt: "Ginevra Чёрный — внутри" },
+          { src: "/products/womens-knitted-openwork-panel-tote-bag/black-inside-v5.webp", alt: "Ginevra Чёрный — внутри" },
         ],
       },
     ],
@@ -2373,44 +2373,44 @@ export const products: Product[] = [
         images: [
           { src: "/products/womens-leather-tote-shoulder-bag/dark-chocolate-front-alt-card-v6.webp", alt: "Allegra Dark Chocolate — альтернативный вид" },
           { src: "/products/womens-leather-tote-shoulder-bag/dark-chocolate-angle-v5.webp", alt: "Allegra Dark Chocolate — под углом" },
-          { src: "/products/womens-leather-tote-shoulder-bag/dark-chocolate-inside-v3.webp", alt: "Allegra Dark Chocolate — внутри" },
+          { src: "/products/womens-leather-tote-shoulder-bag/dark-chocolate-inside-v7.webp", alt: "Allegra Dark Chocolate — внутри" },
           { src: "/products/womens-leather-tote-shoulder-bag/dark-chocolate-detail-v3.webp", alt: "Allegra Dark Chocolate — деталь" },
         ],
       },
       {
         ...C.dustyBlue,
         images: [
-          { src: "/products/womens-leather-tote-shoulder-bag/dusty-blue-angle-card-v6.webp", alt: "Allegra Dusty Blue — под углом" },
-          { src: "/products/womens-leather-tote-shoulder-bag/dusty-blue-front-alt-v5.webp", alt: "Allegra Dusty Blue — альтернативный вид" },
-          { src: "/products/womens-leather-tote-shoulder-bag/dusty-blue-inside-v4.webp", alt: "Allegra Dusty Blue — внутри" },
-          { src: "/products/womens-leather-tote-shoulder-bag/dusty-blue-detail-v3.webp", alt: "Allegra Dusty Blue — деталь" },
+          { src: "/products/womens-leather-tote-shoulder-bag/dusty-blue-front-alt-v6.webp", alt: "Allegra Dusty Blue — вид спереди" },
+          { src: "/products/womens-leather-tote-shoulder-bag/dusty-blue-angle-card-v7.webp", alt: "Allegra Dusty Blue — под углом" },
+          { src: "/products/womens-leather-tote-shoulder-bag/dusty-blue-inside-v5.webp", alt: "Allegra Dusty Blue — внутри" },
+          { src: "/products/womens-leather-tote-shoulder-bag/dusty-blue-detail-v4.webp", alt: "Allegra Dusty Blue — деталь" },
         ],
       },
       {
         ...C.redOrange,
         images: [
-          { src: "/products/womens-leather-tote-shoulder-bag/red-orange-angle-card-v6.webp", alt: "Allegra Red-Orange — под углом" },
-          { src: "/products/womens-leather-tote-shoulder-bag/red-orange-front-alt-v5.webp", alt: "Allegra Red-Orange — альтернативный вид" },
-          { src: "/products/womens-leather-tote-shoulder-bag/red-orange-inside-v5.webp", alt: "Allegra Red-Orange — внутри" },
-          { src: "/products/womens-leather-tote-shoulder-bag/red-orange-detail-v3.webp", alt: "Allegra Red-Orange — деталь" },
+          { src: "/products/womens-leather-tote-shoulder-bag/red-orange-front-alt-v7.webp", alt: "Allegra Red-Orange — вид спереди" },
+          { src: "/products/womens-leather-tote-shoulder-bag/red-orange-angle-card-v8.webp", alt: "Allegra Red-Orange — под углом" },
+          { src: "/products/womens-leather-tote-shoulder-bag/red-orange-inside-v7.webp", alt: "Allegra Red-Orange — внутри" },
+          { src: "/products/womens-leather-tote-shoulder-bag/red-orange-detail-v5.webp", alt: "Allegra Red-Orange — деталь" },
         ],
       },
       {
         ...C.taupe,
         images: [
-          { src: "/products/womens-leather-tote-shoulder-bag/taupe-angle-card-v7.webp", alt: "Allegra Taupe — под углом" },
-          { src: "/products/womens-leather-tote-shoulder-bag/taupe-front-alt-v6.webp", alt: "Allegra Taupe — альтернативный вид" },
-          { src: "/products/womens-leather-tote-shoulder-bag/taupe-inside-v6.webp", alt: "Allegra Taupe — внутри" },
-          { src: "/products/womens-leather-tote-shoulder-bag/taupe-detail-v3.webp", alt: "Allegra Taupe — деталь" },
+          { src: "/products/womens-leather-tote-shoulder-bag/taupe-front-alt-v8.webp", alt: "Allegra Taupe — вид спереди" },
+          { src: "/products/womens-leather-tote-shoulder-bag/taupe-angle-card-v9.webp", alt: "Allegra Taupe — под углом" },
+          { src: "/products/womens-leather-tote-shoulder-bag/taupe-inside-v8.webp", alt: "Allegra Taupe — внутри" },
+          { src: "/products/womens-leather-tote-shoulder-bag/taupe-detail-v5.webp", alt: "Allegra Taupe — деталь" },
         ],
       },
       {
         ...C.white,
         images: [
-          { src: "/products/womens-leather-tote-shoulder-bag/white-angle-card-v4.webp", alt: "Allegra White — под углом" },
-          { src: "/products/womens-leather-tote-shoulder-bag/white-front-alt-v3.webp", alt: "Allegra White — альтернативный вид" },
-          { src: "/products/womens-leather-tote-shoulder-bag/white-inside-v3.webp", alt: "Allegra White — внутри" },
-          { src: "/products/womens-leather-tote-shoulder-bag/white-detail-v3.webp", alt: "Allegra White — деталь" },
+          { src: "/products/womens-leather-tote-shoulder-bag/white-front-alt-v5.webp", alt: "Allegra White — вид спереди" },
+          { src: "/products/womens-leather-tote-shoulder-bag/white-angle-card-v7.webp", alt: "Allegra White — под углом" },
+          { src: "/products/womens-leather-tote-shoulder-bag/white-inside-v10.webp", alt: "Allegra White — внутри" },
+          { src: "/products/womens-leather-tote-shoulder-bag/white-detail-v9.webp", alt: "Allegra White — деталь" },
         ],
       },
     ],
@@ -2451,8 +2451,8 @@ export const products: Product[] = [
         ...C.white,
         images: [
           { src: "/products/womens-luna-soft-hobo-bag/white-1-card-v10.webp", alt: "Luna White — вид спереди" },
-          { src: "/products/womens-luna-soft-hobo-bag/white-3-v8.webp", alt: "Luna White — сверху" },
-          { src: "/products/womens-luna-soft-hobo-bag/white-4-v9.webp", alt: "Luna White — внутри" },
+          { src: "/products/womens-luna-soft-hobo-bag/white-3-v10.webp", alt: "Luna White — сверху" },
+          { src: "/products/womens-luna-soft-hobo-bag/white-4-v13.webp", alt: "Luna White — внутри" },
           { src: "/products/womens-luna-soft-hobo-bag/white-2-v8.webp", alt: "Luna White — с ремнём" },
         ],
       },
@@ -2460,8 +2460,8 @@ export const products: Product[] = [
         ...C.lightBlue,
         images: [
           { src: "/products/womens-luna-soft-hobo-bag/light-blue-2-card-v11.webp", alt: "Luna Light Blue — вид спереди" },
-          { src: "/products/womens-luna-soft-hobo-bag/light-blue-3-v10.webp", alt: "Luna Light Blue — сверху" },
-          { src: "/products/womens-luna-soft-hobo-bag/light-blue-4-v10.webp", alt: "Luna Light Blue — внутри" },
+          { src: "/products/womens-luna-soft-hobo-bag/light-blue-3-v12.webp", alt: "Luna Light Blue — сверху" },
+          { src: "/products/womens-luna-soft-hobo-bag/light-blue-4-v11.webp", alt: "Luna Light Blue — внутри" },
           { src: "/products/womens-luna-soft-hobo-bag/light-blue-1-v10.webp", alt: "Luna Light Blue — с ремнём" },
         ],
       },
@@ -2500,10 +2500,10 @@ export const products: Product[] = [
       {
         ...C.black,
         images: [
-          { src: "/products/womens-pebbled-leather-accordion-buckle-shoulder-bag/black-front-card-v5.webp", alt: "Bettina Чёрный — вид спереди" },
-          { src: "/products/womens-pebbled-leather-accordion-buckle-shoulder-bag/black-back-v4.webp", alt: "Bettina Чёрный — сзади" },
-          { src: "/products/womens-pebbled-leather-accordion-buckle-shoulder-bag/black-side-v3.webp", alt: "Bettina Чёрный — сбоку" },
-          { src: "/products/womens-pebbled-leather-accordion-buckle-shoulder-bag/black-inside-v4.webp", alt: "Bettina Чёрный — внутри" },
+          { src: "/products/womens-pebbled-leather-accordion-buckle-shoulder-bag/black-front-card-v6.webp", alt: "Bettina Чёрный — вид спереди" },
+          { src: "/products/womens-pebbled-leather-accordion-buckle-shoulder-bag/black-back-v5.webp", alt: "Bettina Чёрный — сзади" },
+          { src: "/products/womens-pebbled-leather-accordion-buckle-shoulder-bag/black-side-v4.webp", alt: "Bettina Чёрный — сбоку" },
+          { src: "/products/womens-pebbled-leather-accordion-buckle-shoulder-bag/black-inside-v5.webp", alt: "Bettina Чёрный — внутри" },
         ],
       },
       {
@@ -2655,7 +2655,6 @@ export const products: Product[] = [
         ...C.magenta,
         images: [
           { src: "/products/womens-pebbled-leather-contrast-trim-structured-top-handle-bag/magenta-front-card-v2.webp", alt: "Ninette Magenta — карточка товара" },
-          { src: "/products/womens-pebbled-leather-contrast-trim-structured-top-handle-bag/magenta-front-alt-v3.webp", alt: "Ninette Magenta — альтернативный вид" },
           { src: "/products/womens-pebbled-leather-contrast-trim-structured-top-handle-bag/magenta-back-v4.webp", alt: "Ninette Magenta — сзади" },
           { src: "/products/womens-pebbled-leather-contrast-trim-structured-top-handle-bag/magenta-side-v3.webp", alt: "Ninette Magenta — сбоку" },
           { src: "/products/womens-pebbled-leather-contrast-trim-structured-top-handle-bag/magenta-inside-v3.webp", alt: "Ninette Magenta — внутри" },
@@ -2847,7 +2846,7 @@ export const products: Product[] = [
           { src: "/products/womens-pebbled-leather-half-moon-shoulder-bag/black-front-card-v6.webp", alt: "Livia Чёрный — вид спереди" },
           { src: "/products/womens-pebbled-leather-half-moon-shoulder-bag/black-back-v5.webp", alt: "Livia Чёрный — сзади" },
           { src: "/products/womens-pebbled-leather-half-moon-shoulder-bag/black-open-v7.webp", alt: "Livia Чёрный — в открытом виде" },
-          { src: "/products/womens-pebbled-leather-half-moon-shoulder-bag/black-inside-v6.webp", alt: "Livia Чёрный — внутри" },
+          { src: "/products/womens-pebbled-leather-half-moon-shoulder-bag/black-inside-v7.webp", alt: "Livia Чёрный — внутри" },
         ],
       },
       {
@@ -2943,16 +2942,16 @@ export const products: Product[] = [
       {
         ...C.ivory,
         images: [
-          { src: "/products/womens-pleated-leather-frame-clutch/ivory-front-alt-card-v2.webp", alt: "Fiamma Ivory — с ремнём" },
-          { src: "/products/womens-pleated-leather-frame-clutch/ivory-front-card.webp", alt: "Fiamma Ivory — вид спереди" },
-          { src: "/products/womens-pleated-leather-frame-clutch/ivory-inside.webp", alt: "Fiamma Ivory — внутри" },
+          { src: "/products/womens-pleated-leather-frame-clutch/ivory-front-alt-card-v4.webp", alt: "Fiamma Ivory — с ремнём" },
+          { src: "/products/womens-pleated-leather-frame-clutch/ivory-front-card-v4.webp", alt: "Fiamma Ivory — вид спереди" },
+          { src: "/products/womens-pleated-leather-frame-clutch/ivory-inside-v3.webp", alt: "Fiamma Ivory — внутри" },
         ],
       },
       {
         ...C.jetBlack,
         images: [
           { src: "/products/womens-pleated-leather-frame-clutch/black-front-alt-card-v4.webp", alt: "Fiamma Jet Black — с ремнём" },
-          { src: "/products/womens-pleated-leather-frame-clutch/black-front-card.webp", alt: "Fiamma Jet Black — вид спереди" },
+          { src: "/products/womens-pleated-leather-frame-clutch/black-front-card-v2.webp", alt: "Fiamma Jet Black — вид спереди" },
           { src: "/products/womens-pleated-leather-frame-clutch/black-inside-v3.webp", alt: "Fiamma Jet Black — внутри" },
         ],
       },
@@ -2999,8 +2998,8 @@ export const products: Product[] = [
       {
         ...C.ivory,
         images: [
-          { src: "/products/womens-pebbled-leather-side-drawstring-shoulder-bag/ivory-front-card.webp", alt: "Gioia Ivory — вид спереди" },
-          { src: "/products/womens-pebbled-leather-side-drawstring-shoulder-bag/ivory-side.webp", alt: "Gioia Ivory — сбоку" },
+          { src: "/products/womens-pebbled-leather-side-drawstring-shoulder-bag/ivory-front-card-v4.webp", alt: "Gioia Ivory — вид спереди" },
+          { src: "/products/womens-pebbled-leather-side-drawstring-shoulder-bag/ivory-side-v4.webp", alt: "Gioia Ivory — сбоку" },
         ],
       },
       {
@@ -3048,7 +3047,7 @@ export const products: Product[] = [
         images: [
           { src: "/products/womens-pebbled-leather-two-tone-bowling-bag/taupe-chocolate-front-alt-card-v4.webp", alt: "Giorgia Taupe / Chocolate Brown — под углом" },
           { src: "/products/womens-pebbled-leather-two-tone-bowling-bag/taupe-chocolate-front-card-v2.webp", alt: "Giorgia Taupe / Chocolate Brown — вид спереди" },
-          { src: "/products/womens-pebbled-leather-two-tone-bowling-bag/taupe-chocolate-inside.webp", alt: "Giorgia Taupe / Chocolate Brown — внутри" },
+          { src: "/products/womens-pebbled-leather-two-tone-bowling-bag/taupe-chocolate-inside-v2.webp", alt: "Giorgia Taupe / Chocolate Brown — внутри" },
         ],
       },
       {
@@ -3056,7 +3055,7 @@ export const products: Product[] = [
         images: [
           { src: "/products/womens-pebbled-leather-two-tone-bowling-bag/burgundy-front-card-v2.webp", alt: "Giorgia Burgundy — вид спереди" },
           { src: "/products/womens-pebbled-leather-two-tone-bowling-bag/burgundy-front-alt-v3.webp", alt: "Giorgia Burgundy — под углом" },
-          { src: "/products/womens-pebbled-leather-two-tone-bowling-bag/burgundy-inside.webp", alt: "Giorgia Burgundy — внутри" },
+          { src: "/products/womens-pebbled-leather-two-tone-bowling-bag/burgundy-inside-v2.webp", alt: "Giorgia Burgundy — внутри" },
         ],
       },
     ],
@@ -3396,7 +3395,7 @@ export const products: Product[] = [
           { src: "/products/womens-pebbled-leather-tote-bag/camel-front-card-v5.webp", alt: "Fiorenza Camel — вид спереди" },
           { src: "/products/womens-pebbled-leather-tote-bag/camel-angle-v4.webp", alt: "Fiorenza Camel — открытый верх" },
           { src: "/products/womens-pebbled-leather-tote-bag/camel-side-v3.webp", alt: "Fiorenza Camel — сбоку" },
-          { src: "/products/womens-pebbled-leather-tote-bag/camel-inside-v4.webp", alt: "Fiorenza Camel — внутри" },
+          { src: "/products/womens-pebbled-leather-tote-bag/camel-inside-v5.webp", alt: "Fiorenza Camel — внутри" },
           { src: "/products/womens-pebbled-leather-tote-bag/camel-inside-alt-v4.webp", alt: "Fiorenza Camel — внутри, ремень" },
         ],
       },
@@ -3628,8 +3627,8 @@ export const products: Product[] = [
       {
         ...C.lightGrey,
         images: [
-          { src: "/products/womens-pebbled-leather-turn-lock-placket-tote-with-pouch/light-grey-front-card-v4.webp", alt: "Cressida Light Grey — вид спереди" },
-          { src: "/products/womens-pebbled-leather-turn-lock-placket-tote-with-pouch/light-grey-back-v3.webp", alt: "Cressida Light Grey — сзади" },
+          { src: "/products/womens-pebbled-leather-turn-lock-placket-tote-with-pouch/light-grey-front-card-v5.webp", alt: "Cressida Light Grey — вид спереди" },
+          { src: "/products/womens-pebbled-leather-turn-lock-placket-tote-with-pouch/light-grey-back-v4.webp", alt: "Cressida Light Grey — сзади" },
           { src: "/products/womens-pebbled-leather-turn-lock-placket-tote-with-pouch/light-grey-side-v3.webp", alt: "Cressida Light Grey — сбоку" },
           { src: "/products/womens-pebbled-leather-turn-lock-placket-tote-with-pouch/light-grey-inside-v3.webp", alt: "Cressida Light Grey — внутри" },
           { src: "/products/womens-pebbled-leather-turn-lock-placket-tote-with-pouch/light-grey-set-v3.webp", alt: "Cressida Light Grey — комплект с косметичкой" },
@@ -3638,8 +3637,8 @@ export const products: Product[] = [
       {
         ...C.redOrange,
         images: [
-          { src: "/products/womens-pebbled-leather-turn-lock-placket-tote-with-pouch/red-orange-front-card-v4.webp", alt: "Cressida Red-Orange — вид спереди" },
-          { src: "/products/womens-pebbled-leather-turn-lock-placket-tote-with-pouch/red-orange-back-v3.webp", alt: "Cressida Red-Orange — сзади" },
+          { src: "/products/womens-pebbled-leather-turn-lock-placket-tote-with-pouch/red-orange-front-card-v5.webp", alt: "Cressida Red-Orange — вид спереди" },
+          { src: "/products/womens-pebbled-leather-turn-lock-placket-tote-with-pouch/red-orange-back-v4.webp", alt: "Cressida Red-Orange — сзади" },
           { src: "/products/womens-pebbled-leather-turn-lock-placket-tote-with-pouch/red-orange-inside-v3.webp", alt: "Cressida Red-Orange — внутри" },
           { src: "/products/womens-pebbled-leather-turn-lock-placket-tote-with-pouch/red-orange-open-v3.webp", alt: "Cressida Red-Orange — в открытом виде" },
           { src: "/products/womens-pebbled-leather-turn-lock-placket-tote-with-pouch/red-orange-set-v3.webp", alt: "Cressida Red-Orange — комплект с косметичкой" },
@@ -3648,11 +3647,11 @@ export const products: Product[] = [
       {
         ...C.white,
         images: [
-          { src: "/products/womens-pebbled-leather-turn-lock-placket-tote-with-pouch/white-front-card-v2.webp", alt: "Cressida White — вид спереди" },
-          { src: "/products/womens-pebbled-leather-turn-lock-placket-tote-with-pouch/white-back.webp", alt: "Cressida White — сзади" },
-          { src: "/products/womens-pebbled-leather-turn-lock-placket-tote-with-pouch/white-side.webp", alt: "Cressida White — сбоку" },
-          { src: "/products/womens-pebbled-leather-turn-lock-placket-tote-with-pouch/white-inside.webp", alt: "Cressida White — внутри" },
-          { src: "/products/womens-pebbled-leather-turn-lock-placket-tote-with-pouch/white-set.webp", alt: "Cressida White — комплект с косметичкой" },
+          { src: "/products/womens-pebbled-leather-turn-lock-placket-tote-with-pouch/white-front-card-v5.webp", alt: "Cressida White — вид спереди" },
+          { src: "/products/womens-pebbled-leather-turn-lock-placket-tote-with-pouch/white-back-v5.webp", alt: "Cressida White — сзади" },
+          { src: "/products/womens-pebbled-leather-turn-lock-placket-tote-with-pouch/white-side-v4.webp", alt: "Cressida White — сбоку" },
+          { src: "/products/womens-pebbled-leather-turn-lock-placket-tote-with-pouch/white-inside-v4.webp", alt: "Cressida White — внутри" },
+          { src: "/products/womens-pebbled-leather-turn-lock-placket-tote-with-pouch/white-set-v4.webp", alt: "Cressida White — комплект с косметичкой" },
         ],
       },
     ],
@@ -3692,19 +3691,19 @@ export const products: Product[] = [
       {
         ...C.black,
         images: [
-          { src: "/products/womens-pebbled-leather-turn-lock-top-handle-bag/black-front-card-v6.webp", alt: "Palmira Чёрный — вид спереди" },
-          { src: "/products/womens-pebbled-leather-turn-lock-top-handle-bag/black-back-v5.webp", alt: "Palmira Чёрный — сзади" },
-          { src: "/products/womens-pebbled-leather-turn-lock-top-handle-bag/black-side-v4.webp", alt: "Palmira Чёрный — сбоку" },
-          { src: "/products/womens-pebbled-leather-turn-lock-top-handle-bag/black-inside-v5.webp", alt: "Palmira Чёрный — внутри" },
+          { src: "/products/womens-pebbled-leather-turn-lock-top-handle-bag/black-front-card-v7.webp", alt: "Palmira Чёрный — вид спереди" },
+          { src: "/products/womens-pebbled-leather-turn-lock-top-handle-bag/black-back-v6.webp", alt: "Palmira Чёрный — сзади" },
+          { src: "/products/womens-pebbled-leather-turn-lock-top-handle-bag/black-side-v5.webp", alt: "Palmira Чёрный — сбоку" },
+          { src: "/products/womens-pebbled-leather-turn-lock-top-handle-bag/black-inside-v6.webp", alt: "Palmira Чёрный — внутри" },
         ],
       },
       {
         ...C.camel,
         images: [
-          { src: "/products/womens-pebbled-leather-turn-lock-top-handle-bag/camel-front-card-v8.webp", alt: "Palmira Camel — вид спереди" },
-          { src: "/products/womens-pebbled-leather-turn-lock-top-handle-bag/camel-back-v7.webp", alt: "Palmira Camel — сзади" },
-          { src: "/products/womens-pebbled-leather-turn-lock-top-handle-bag/camel-side-v7.webp", alt: "Palmira Camel — сбоку" },
-          { src: "/products/womens-pebbled-leather-turn-lock-top-handle-bag/camel-inside-v7.webp", alt: "Palmira Camel — внутри" },
+          { src: "/products/womens-pebbled-leather-turn-lock-top-handle-bag/camel-front-card-v9.webp", alt: "Palmira Camel — вид спереди" },
+          { src: "/products/womens-pebbled-leather-turn-lock-top-handle-bag/camel-back-v8.webp", alt: "Palmira Camel — сзади" },
+          { src: "/products/womens-pebbled-leather-turn-lock-top-handle-bag/camel-side-v8.webp", alt: "Palmira Camel — сбоку" },
+          { src: "/products/womens-pebbled-leather-turn-lock-top-handle-bag/camel-inside-v8.webp", alt: "Palmira Camel — внутри" },
         ],
       },
     ],
@@ -3894,21 +3893,21 @@ export const products: Product[] = [
     galleryFit: "contain",
     colors: [
       {
-        ...C.redOrange,
-        images: [
-          { src: "/products/womens-smooth-leather-compact-baguette-bag/red-orange-front-card-v5.webp", alt: "Ottilie Red-Orange — вид спереди" },
-          { src: "/products/womens-smooth-leather-compact-baguette-bag/red-orange-back-v3.webp", alt: "Ottilie Red-Orange — сзади" },
-          { src: "/products/womens-smooth-leather-compact-baguette-bag/red-orange-side-v2.webp", alt: "Ottilie Red-Orange — сбоку" },
-          { src: "/products/womens-smooth-leather-compact-baguette-bag/red-orange-inside-v5.webp", alt: "Ottilie Red-Orange — внутри" },
-        ],
-      },
-      {
         ...C.oliveGreen,
         images: [
           { src: "/products/womens-smooth-leather-compact-baguette-bag/olive-green-front-card-v5.webp", alt: "Ottilie Olive Green — вид спереди" },
           { src: "/products/womens-smooth-leather-compact-baguette-bag/olive-green-back-v4.webp", alt: "Ottilie Olive Green — сзади" },
           { src: "/products/womens-smooth-leather-compact-baguette-bag/olive-green-side-v2.webp", alt: "Ottilie Olive Green — сбоку" },
           { src: "/products/womens-smooth-leather-compact-baguette-bag/olive-green-inside-v3.webp", alt: "Ottilie Olive Green — внутри" },
+        ],
+      },
+      {
+        ...C.redOrange,
+        images: [
+          { src: "/products/womens-smooth-leather-compact-baguette-bag/red-orange-front-card-v6.webp", alt: "Ottilie Red-Orange — вид спереди" },
+          { src: "/products/womens-smooth-leather-compact-baguette-bag/red-orange-back-v4.webp", alt: "Ottilie Red-Orange — сзади" },
+          { src: "/products/womens-smooth-leather-compact-baguette-bag/red-orange-side-v2.webp", alt: "Ottilie Red-Orange — сбоку" },
+          { src: "/products/womens-smooth-leather-compact-baguette-bag/red-orange-inside-v5.webp", alt: "Ottilie Red-Orange — внутри" },
         ],
       },
     ],
@@ -3998,7 +3997,7 @@ export const products: Product[] = [
         hex: "#3a5a78",
         images: [
           { src: "/products/womens-smooth-leather-crescent-hobo-bag/blue-front-card-v4.webp", alt: "Rosalind Синий — вид спереди" },
-          { src: "/products/womens-smooth-leather-crescent-hobo-bag/blue-inside.webp", alt: "Rosalind Синий — внутри" },
+          { src: "/products/womens-smooth-leather-crescent-hobo-bag/blue-inside-v5.webp", alt: "Rosalind Синий — внутри" },
         ],
       },
     ],
@@ -4106,8 +4105,8 @@ export const products: Product[] = [
       {
         ...C.ivory,
         images: [
-          { src: "/products/womens-pebbled-leather-ring-handle-structured-bag/ivory-front-card-v2.webp", alt: "Callista Ivory — вид спереди" },
-          { src: "/products/womens-pebbled-leather-ring-handle-structured-bag/ivory-side.webp", alt: "Callista Ivory — сбоку" },
+          { src: "/products/womens-pebbled-leather-ring-handle-structured-bag/ivory-front-card-v4.webp", alt: "Callista Ivory — вид спереди" },
+          { src: "/products/womens-pebbled-leather-ring-handle-structured-bag/ivory-side-v4.webp", alt: "Callista Ivory — сбоку" },
         ],
       },
     ],
@@ -4216,7 +4215,7 @@ export const products: Product[] = [
       {
         ...C.ivory,
         images: [
-          { src: "/products/womens-smooth-leather-metal-ring-crescent-hobo-bag/ivory-front-card-v2.webp", alt: "Mirabel Ivory — вид спереди" },
+          { src: "/products/womens-smooth-leather-metal-ring-crescent-hobo-bag/ivory-front-card-v4.webp", alt: "Mirabel Ivory — вид спереди" },
           { src: "/products/womens-smooth-leather-metal-ring-crescent-hobo-bag/ivory-detail.webp", alt: "Mirabel Ivory — деталь фурнитуры" },
         ],
       },
@@ -4659,17 +4658,17 @@ export const products: Product[] = [
       {
         ...C.camel,
         images: [
-          { src: "/products/womens-woven-base-zip-top-compact-structured-bag/camel-front-card-v5.webp", alt: "Jacinta Camel — вид спереди" },
-          { src: "/products/womens-woven-base-zip-top-compact-structured-bag/camel-side-v4.webp", alt: "Jacinta Camel — сбоку" },
-          { src: "/products/womens-woven-base-zip-top-compact-structured-bag/camel-inside-v3.webp", alt: "Jacinta Camel — внутри" },
+          { src: "/products/womens-woven-base-zip-top-compact-structured-bag/camel-front-card-v6.webp", alt: "Jacinta Camel — вид спереди" },
+          { src: "/products/womens-woven-base-zip-top-compact-structured-bag/camel-side-v5.webp", alt: "Jacinta Camel — сбоку" },
+          { src: "/products/womens-woven-base-zip-top-compact-structured-bag/camel-inside-v4.webp", alt: "Jacinta Camel — внутри" },
         ],
       },
       {
         ...C.white,
         images: [
-          { src: "/products/womens-woven-base-zip-top-compact-structured-bag/white-front-card-v3.webp", alt: "Jacinta White — вид спереди" },
-          { src: "/products/womens-woven-base-zip-top-compact-structured-bag/white-side-v2.webp", alt: "Jacinta White — сбоку" },
-          { src: "/products/womens-woven-base-zip-top-compact-structured-bag/white-inside-v2.webp", alt: "Jacinta White — внутри" },
+          { src: "/products/womens-woven-base-zip-top-compact-structured-bag/white-front-card-v4.webp", alt: "Jacinta White — вид спереди" },
+          { src: "/products/womens-woven-base-zip-top-compact-structured-bag/white-side-v3.webp", alt: "Jacinta White — сбоку" },
+          { src: "/products/womens-woven-base-zip-top-compact-structured-bag/white-inside-v3.webp", alt: "Jacinta White — внутри" },
         ],
       },
     ],
@@ -4755,7 +4754,7 @@ export const products: Product[] = [
       {
         ...C.blush,
         images: [
-          { src: "/products/womens-woven-buckle-handle-tote-bag/blush-front-card-v2.webp", alt: "Lisette Blush — карточка товара" },
+          { src: "/products/womens-woven-buckle-handle-tote-bag/blush-front-card-v3.webp", alt: "Lisette Blush — карточка товара" },
           { src: "/products/womens-woven-buckle-handle-tote-bag/blush-inside-v3.webp", alt: "Lisette Blush — внутри" },
         ],
       },
@@ -4895,14 +4894,14 @@ export const products: Product[] = [
         images: [
           { src: "/products/womens-woven-oval-handle-tote-bag/dusty-pink-front-card-v2.webp", alt: "Oriane Dusty Pink — карточка товара" },
           { src: "/products/womens-woven-oval-handle-tote-bag/dusty-pink-inside-alt-v3.webp", alt: "Oriane Dusty Pink — отделения внутри" },
-          { src: "/products/womens-woven-oval-handle-tote-bag/dusty-pink-inside.webp", alt: "Oriane Dusty Pink — внутри" },
+          { src: "/products/womens-woven-oval-handle-tote-bag/dusty-pink-inside-v2.webp", alt: "Oriane Dusty Pink — внутри" },
         ],
       },
       {
         ...C.dustyTurquoise,
         images: [
           { src: "/products/womens-woven-oval-handle-tote-bag/dusty-turquoise-front-card-v2.webp", alt: "Oriane Dusty Turquoise — карточка товара" },
-          { src: "/products/womens-woven-oval-handle-tote-bag/dusty-turquoise-inside-alt.webp", alt: "Oriane Dusty Turquoise — отделения внутри" },
+          { src: "/products/womens-woven-oval-handle-tote-bag/dusty-turquoise-inside-alt-v2.webp", alt: "Oriane Dusty Turquoise — отделения внутри" },
           { src: "/products/womens-woven-oval-handle-tote-bag/dusty-turquoise-inside-v3.webp", alt: "Oriane Dusty Turquoise — внутри" },
         ],
       },
@@ -5488,7 +5487,7 @@ export const products: Product[] = [
       {
         ...C.plum,
         images: [
-          { src: "/products/womens-woven-zip-crossbody-bag/plum-front-card-v2.webp", alt: "Gwenaelle Plum — карточка товара" },
+          { src: "/products/womens-woven-zip-crossbody-bag/plum-front-card-v3.webp", alt: "Gwenaelle Plum — карточка товара" },
           { src: "/products/womens-woven-zip-crossbody-bag/plum-front-alt-v3.webp", alt: "Gwenaelle Plum — альтернативный вид" },
           { src: "/products/womens-woven-zip-crossbody-bag/plum-inside-v3.webp", alt: "Gwenaelle Plum — внутри" },
         ],
@@ -6198,7 +6197,7 @@ export const products: Product[] = [
         ...C.cherryRed,
         images: [
           { src: "/products/womens-pebbled-leather-snap-strap-rfid-wallet-red/red-front-card-v3.webp", alt: "Cremisi — вид спереди" },
-          { src: "/products/womens-pebbled-leather-snap-strap-rfid-wallet-red/red-inside.webp", alt: "Cremisi — внутри" },
+          { src: "/products/womens-pebbled-leather-snap-strap-rfid-wallet-red/red-inside-v5.webp", alt: "Cremisi — внутри" },
           { src: "/products/womens-pebbled-leather-snap-strap-rfid-wallet-red/red-inside-alt-v3.webp", alt: "Cremisi — отделения внутри" },
           { src: "/products/womens-pebbled-leather-snap-strap-rfid-wallet-red/red-open-v2.webp", alt: "Cremisi — вид сзади" },
         ],
@@ -6612,7 +6611,7 @@ export const products: Product[] = [
         ...C.forestGreen,
         images: [
           { src: "/products/womens-vintage-accordion-zip-wallet/forest-green-front-card-v3.webp", alt: "Giulietta Forest Green — вид спереди" },
-          { src: "/products/womens-vintage-accordion-zip-wallet/forest-green-front-alt.webp", alt: "Giulietta Forest Green — под углом" },
+          { src: "/products/womens-vintage-accordion-zip-wallet/forest-green-front-alt-v2.webp", alt: "Giulietta Forest Green — под углом" },
           { src: "/products/womens-vintage-accordion-zip-wallet/forest-green-inside-v3.webp", alt: "Giulietta Forest Green — внутри" },
         ],
       },
@@ -6815,7 +6814,7 @@ export const products: Product[] = [
       {
         ...C.offWhite,
         images: [
-          { src: "/products/la-via-firenze-flower-bag-charm/cream-front-card-v3.webp", alt: "Flower La Via Firenze — брелок для сумки" },
+          { src: "/products/la-via-firenze-flower-bag-charm/cream-front-card-v4.webp", alt: "Flower La Via Firenze — брелок для сумки" },
         ],
       },
     ],
@@ -7128,7 +7127,7 @@ export const products: Product[] = [
       {
         ...C.white,
         images: [
-          { src: "/products/luma-dachshund-mix-bag-charm/white-front-card-v3.webp", alt: "Mix White — брелок-набор" },
+          { src: "/products/luma-dachshund-mix-bag-charm/white-front-card-v5.webp", alt: "Mix White — брелок-набор" },
         ],
       },
       {
@@ -8016,17 +8015,17 @@ export const products: Product[] = [
       {
         ...C.yellow,
         images: [
-          { src: "/products/womens-pebbled-leather-heart-shaped-handbag/yellow-front-card-v6.webp", alt: "Rosalba Yellow — вид спереди" },
-          { src: "/products/womens-pebbled-leather-heart-shaped-handbag/yellow-front-set-v5.webp", alt: "Rosalba Yellow — с ремнём" },
-          { src: "/products/womens-pebbled-leather-heart-shaped-handbag/yellow-open-v5.webp", alt: "Rosalba Yellow — внутри" },
+          { src: "/products/womens-pebbled-leather-heart-shaped-handbag/yellow-front-card-v11.webp", alt: "Rosalba Yellow — вид спереди" },
+          { src: "/products/womens-pebbled-leather-heart-shaped-handbag/yellow-front-set-v10.webp", alt: "Rosalba Yellow — с ремнём" },
+          { src: "/products/womens-pebbled-leather-heart-shaped-handbag/yellow-open-v10.webp", alt: "Rosalba Yellow — внутри" },
         ],
       },
       {
         ...C.fuchsia,
         images: [
-          { src: "/products/womens-pebbled-leather-heart-shaped-handbag/fuchsia-front-card-v9.webp", alt: "Rosalba Fuchsia — вид спереди" },
-          { src: "/products/womens-pebbled-leather-heart-shaped-handbag/fuchsia-front-set-v5.webp", alt: "Rosalba Fuchsia — с ремнём" },
-          { src: "/products/womens-pebbled-leather-heart-shaped-handbag/fuchsia-open-v5.webp", alt: "Rosalba Fuchsia — внутри" },
+          { src: "/products/womens-pebbled-leather-heart-shaped-handbag/fuchsia-front-card-v14.webp", alt: "Rosalba Fuchsia — вид спереди" },
+          { src: "/products/womens-pebbled-leather-heart-shaped-handbag/fuchsia-front-set-v10.webp", alt: "Rosalba Fuchsia — с ремнём" },
+          { src: "/products/womens-pebbled-leather-heart-shaped-handbag/fuchsia-open-v11.webp", alt: "Rosalba Fuchsia — внутри" },
         ],
       },
     ],
