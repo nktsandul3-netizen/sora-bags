@@ -4,6 +4,7 @@ import { brand } from "@/lib/config";
 import { withLocalePath } from "@/lib/i18n";
 import { getServerLocale, getServerT } from "@/lib/server-i18n";
 import { noIndexMetadata } from "@/lib/seo";
+import GoogleAdsPurchaseConversion from "@/components/GoogleAdsPurchaseConversion";
 
 export async function generateMetadata(): Promise<Metadata> {
   const t = await getServerT();
@@ -16,11 +17,12 @@ export async function generateMetadata(): Promise<Metadata> {
 export default async function OrderConfirmationPage({
   searchParams,
 }: {
-  searchParams: Promise<{ order?: string; kind?: string }>;
+  searchParams: Promise<{ order?: string; kind?: string; value?: string }>;
 }) {
-  const { order, kind } = await searchParams;
+  const { order, kind, value: valueParam } = await searchParams;
   const [locale, t] = await Promise.all([getServerLocale(), getServerT()]);
   const isPreorder = kind === "preorder";
+  const orderValue = valueParam ? Number(valueParam) : undefined;
   const whatsappText = order
     ? t(isPreorder ? "order.whatsappPreorder" : "order.whatsappOrder").replace("{order}", order)
     : t(isPreorder ? "order.whatsappPreorderNoNumber" : "order.whatsappOrderNoNumber");
@@ -28,6 +30,10 @@ export default async function OrderConfirmationPage({
 
   return (
     <div className="mx-auto max-w-2xl px-4 py-24 text-center sm:px-6">
+      <GoogleAdsPurchaseConversion
+        transactionId={order}
+        value={Number.isFinite(orderValue) ? orderValue : undefined}
+      />
       <p className="text-xs font-semibold uppercase tracking-[0.24em] text-stone-400">
         SÓRA Bags
       </p>

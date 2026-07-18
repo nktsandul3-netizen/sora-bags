@@ -32,9 +32,10 @@ export default function CartPage() {
   const hasMixedCart = hasStandard && hasPreorder;
 
   function handleOrdered(order: { id: string; number: string; kind: PurchaseKind }) {
+    const orderTotal = order.kind === "preorder" ? preorderTotal : standardTotal;
     clearKind(order.kind);
     router.push(
-      `${withLocalePath("/order-confirmation", locale)}?order=${encodeURIComponent(order.number)}&kind=${order.kind}`,
+      `${withLocalePath("/order-confirmation", locale)}?order=${encodeURIComponent(order.number)}&kind=${order.kind}&value=${encodeURIComponent(String(orderTotal))}`,
     );
   }
 
