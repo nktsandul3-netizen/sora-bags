@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import { Instrument_Serif, Inter, Playfair_Display } from "next/font/google";
-import Script from "next/script";
 import "./globals.css";
 import { brand } from "@/lib/config";
 import { CartProvider } from "@/context/cart";
@@ -99,19 +98,24 @@ export default async function RootLayout({
       translate="no"
       className={`${inter.variable} ${playfair.variable} ${instrumentSerif.variable} notranslate h-full antialiased`}
     >
-      <body className="flex min-h-full flex-col bg-background text-stone-900">
-        <Script
+      <head>
+        {/* Google Ads — in initial HTML so Google's tag checker can see AW-… */}
+        <script
+          async
           src={`https://www.googletagmanager.com/gtag/js?id=${GOOGLE_ADS_ID}`}
-          strategy="afterInteractive"
         />
-        <Script id="google-ads-gtag" strategy="afterInteractive">
-          {`
-            window.dataLayer = window.dataLayer || [];
-            function gtag(){dataLayer.push(arguments);}
-            gtag('js', new Date());
-            gtag('config', '${GOOGLE_ADS_ID}');
-          `}
-        </Script>
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              window.dataLayer = window.dataLayer || [];
+              function gtag(){dataLayer.push(arguments);}
+              gtag('js', new Date());
+              gtag('config', '${GOOGLE_ADS_ID}');
+            `,
+          }}
+        />
+      </head>
+      <body className="flex min-h-full flex-col bg-background text-stone-900">
         <JsonLd data={buildOrganizationJsonLd()} />
         <JsonLd data={buildWebsiteJsonLd()} />
         <LocaleProvider locale={locale}>
