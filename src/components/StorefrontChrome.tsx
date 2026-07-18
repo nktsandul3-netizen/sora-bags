@@ -4,6 +4,7 @@ import { usePathname } from "next/navigation";
 import dynamic from "next/dynamic";
 import type { ReactNode } from "react";
 import CartDrawer from "@/components/CartDrawer";
+import ProtectImages from "@/components/ProtectImages";
 import { stripLocaleFromPathname } from "@/lib/i18n";
 import { MenuOpenProvider } from "@/context/menu-open";
 
@@ -37,6 +38,7 @@ export default function StorefrontChrome({
 
   return (
     <MenuOpenProvider>
+      <ProtectImages />
       {header}
       <main className="flex-1">{children}</main>
       {footer}

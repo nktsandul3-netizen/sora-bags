@@ -96,7 +96,8 @@ export default function ProductImage({
           loading={loading}
           fetchPriority={fetchPriority}
           unoptimized={unoptimized}
-          className={imageClassName}
+          draggable={false}
+          className={`select-none ${imageClassName}`}
         />
       </div>
     );
