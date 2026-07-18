@@ -3088,7 +3088,7 @@ export const products: Product[] = [
     categorySlug: "clutches",
     galleryFit: "contain",
     price: 2599,
-    status: "in_stock",
+    status: "pre_order",
     isNew: true,
     colors: [
       {
@@ -3117,7 +3117,51 @@ export const products: Product[] = [
       { label: "Материал", value: "Кожа" },
       { label: "Страна производства", value: "Италия" },
       { label: "Уход", value: "Очищать мягкой сухой тканью; избегать влаги, жары и прямого солнца" },
-      { label: "Доставка", value: "1–3 дня" },
+      { label: "Доставка", value: "7–14 дней" },
+      { label: "Возврат", value: "14 дней" },
+    ],
+  },
+  {
+    slug: "womens-pebbled-leather-multi-zip-crossbody-bag",
+    title: "Renata",
+    brandSlug: "sora-atelier",
+    section: "bags",
+    categorySlug: "shoulder-bags-women",
+    additionalCategorySlugs: ["crossbody-bags-women"],
+    galleryFit: "contain",
+    price: 2699,
+    status: "pre_order",
+    isNew: true,
+    colors: [
+      {
+        ...C.black,
+        images: [
+          { src: "/products/womens-pebbled-leather-multi-zip-crossbody-bag/black-front-card-v1.webp", alt: "Renata Чёрный — вид спереди" },
+          { src: "/products/womens-pebbled-leather-multi-zip-crossbody-bag/black-back-v1.webp", alt: "Renata Чёрный — сзади" },
+          { src: "/products/womens-pebbled-leather-multi-zip-crossbody-bag/black-angle-v1.webp", alt: "Renata Чёрный — сбоку" },
+          { src: "/products/womens-pebbled-leather-multi-zip-crossbody-bag/black-inside-v1.webp", alt: "Renata Чёрный — внутри" },
+        ],
+      },
+    ],
+    material: "Кожа",
+    description:
+      "Компактная сумка с несколькими отделениями на молнии и серебристой фурнитурой. Прямоугольный силуэт из зернистой кожи удобно держит телефон, карты и ключи.\n\nВ комплекте два ремня: тонкий плечевой и съёмный регулируемый для ношения через плечо.",
+    highlights: [
+      "Кожа",
+      "Несколько отделений на молнии",
+      "Серебристая фурнитура",
+      "Два ремня в комплекте",
+    ],
+    specs: [
+      { label: "Размер", value: "26 × 16 × 7 см" },
+      { label: "Форма", value: "Сумка через плечо" },
+      { label: "Застёжка", value: "Молнии" },
+      { label: "Ремень", value: "Плечевой и съёмный регулируемый" },
+      { label: "Материал", value: "Кожа" },
+      { label: "Фурнитура", value: "Серебристая металлическая фурнитура" },
+      { label: "Страна производства", value: "Италия" },
+      { label: "Уход", value: "Очищать мягкой сухой тканью; избегать влаги, жары и прямого солнца" },
+      { label: "Доставка", value: "Предзаказ (от 14 дней)" },
       { label: "Возврат", value: "14 дней" },
     ],
   },
@@ -3616,6 +3660,7 @@ export const products: Product[] = [
     colors: [
       {
         ...C.lightBlue,
+        status: "Доставка 7–14 дней",
         images: [
           { src: "/products/womens-pebbled-leather-turn-lock-placket-tote-with-pouch/light-blue-front-card-v4.webp", alt: "Cressida Light Blue — вид спереди" },
           { src: "/products/womens-pebbled-leather-turn-lock-placket-tote-with-pouch/light-blue-back-v3.webp", alt: "Cressida Light Blue — сзади" },
@@ -8184,6 +8229,7 @@ export const veneziaIntreccioProducts = veneziaIntreccioOrder
   .filter((p): p is Product => Boolean(p && productHasPhotos(p)));
 
 const curatedBagGridOrder = [
+  "womens-pebbled-leather-multi-zip-crossbody-bag",
   "womens-pebbled-leather-heart-shaped-handbag",
   "premium-leather-kelly-shoulder-bag-black",
   "classic-leather-tote-bag-black",
@@ -8268,6 +8314,7 @@ const curatedBagGridOrder = [
 
 const curatedBagCategoryOrder: Record<string, readonly string[]> = {
   "shoulder-bags-women": [
+    "womens-pebbled-leather-multi-zip-crossbody-bag",
     "the-essential-shoulder-bag-tan-cognac",
     "premium-leather-kelly-shoulder-bag-black",
     "elegant-leather-hobo-bag-pink",
@@ -8342,6 +8389,7 @@ const curatedBagCategoryOrder: Record<string, readonly string[]> = {
     "womens-woven-oval-handle-tote-bag",
   ],
   "crossbody-bags-women": [
+    "womens-pebbled-leather-multi-zip-crossbody-bag",
     "elegant-leather-crossbody-bag-beige",
     "womens-woven-zip-crossbody-bag",
   ],

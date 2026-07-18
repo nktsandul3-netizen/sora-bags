@@ -1176,6 +1176,38 @@ const productCopyBySlug: Record<string, ProductLocalizedCopy> = {
       "en": "Paloma — structured kiss-lock bag crafted from textured leather, designed for city days, meetings and everyday looks with a defined silhouette. The frame closure adds character without extra hardware.\n\nMore room for daily essentials — phone, wallet, keys and cosmetics. This style is in stock, with delivery in 1–3 days."
     }
   },
+  "womens-pebbled-leather-multi-zip-crossbody-bag": {
+    title: {
+      ru: "Renata",
+      ro: "Renata",
+      en: "Renata",
+    },
+    description: {
+      ru: "Renata — компактная сумка через плечо из зернистой кожи с несколькими отделениями на молнии и серебристой фурнитурой. Прямоугольный силуэт удобно держит телефон, карты и ключи.\n\nВ комплекте два ремня: тонкий плечевой и съёмный регулируемый. Предзаказ (от 14 дней).",
+      ro: "Renata — geantă compactă crossbody din piele texturată, cu mai multe compartimente cu fermoar și accesorii argintii. Silueta dreptunghiulară încăpe telefonul, cardurile și cheile.\n\nInclude două curele: una subțire de umăr și una detașabilă reglabilă. Precomandă (de la 14 zile).",
+      en: "Renata — a compact pebbled-leather crossbody with multiple zip compartments and silver hardware. The rectangular silhouette holds a phone, cards and keys with ease.\n\nComes with two straps: a slim shoulder strap and a detachable adjustable strap. Pre-order (14+ days).",
+    },
+    highlights: {
+      ru: [
+        "Кожа",
+        "Несколько отделений на молнии",
+        "Серебристая фурнитура",
+        "Два ремня в комплекте",
+      ],
+      ro: [
+        "Piele",
+        "Mai multe compartimente cu fermoar",
+        "Accesorii argintii",
+        "Două curele incluse",
+      ],
+      en: [
+        "Leather",
+        "Multiple zip compartments",
+        "Silver hardware",
+        "Two straps included",
+      ],
+    },
+  },
   "womens-pebbled-leather-rectangular-handbag": {
     "title": {
       "ru": "Aurea",
