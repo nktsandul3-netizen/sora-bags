@@ -114,7 +114,10 @@ function groupProductSpecs(specs: ProductSpec[]): { title: SpecGroupTitle; specs
 
 function ItalyFlagIcon() {
   return (
-    <span className="inline-flex h-2 w-3 shrink-0 overflow-hidden" aria-hidden>
+    <span
+      className="inline-flex h-3 w-[18px] shrink-0 overflow-hidden rounded-[2px] ring-1 ring-black/10"
+      aria-hidden
+    >
       <span className="h-full flex-1 bg-[#009246]" />
       <span className="h-full flex-1 bg-white" />
       <span className="h-full flex-1 bg-[#ce2b37]" />
@@ -341,13 +344,13 @@ export default function ProductDetailView({
       <div className="min-w-0 self-start">
         <div className="notranslate relative -mx-4 bg-[#F7F3F0] sm:-mx-6 lg:mx-0 lg:overflow-hidden lg:rounded-2xl">
           <div className="relative bg-[#F7F3F0] p-6 sm:p-7 lg:p-9">
-        <div className="flex flex-wrap items-center gap-x-3 gap-y-2 leading-none">
-          <span className="product-detail-badge product-detail-badge-delay-1 inline-flex items-center gap-1.5 text-[11px] font-medium uppercase tracking-[0.12em] text-[#111] opacity-60 lg:text-[12px]">
+        <div className="flex flex-wrap items-center gap-2 leading-none">
+          <span className="product-detail-badge product-detail-badge-delay-1 inline-flex items-center gap-2 rounded-full border border-[#E4D6C8] bg-white px-3 py-1.5 text-[11px] font-semibold uppercase tracking-[0.14em] text-[#1A1A1A] shadow-[0_1px_0_rgba(28,25,23,0.04)] lg:text-[12px]">
             <ItalyFlagIcon />
             {t("common.madeInItaly")}
           </span>
           {showLeatherBadge && (
-            <span className="product-detail-badge product-detail-badge-delay-2 text-[11px] font-medium uppercase tracking-[0.12em] text-[#111] opacity-60 lg:text-[12px]">
+            <span className="product-detail-badge product-detail-badge-delay-2 inline-flex items-center rounded-full border border-[#E4D6C8] bg-white px-3 py-1.5 text-[11px] font-semibold uppercase tracking-[0.14em] text-[#9A4B27] shadow-[0_1px_0_rgba(28,25,23,0.04)] lg:text-[12px]">
               {t("common.genuineLeather")}
             </span>
           )}

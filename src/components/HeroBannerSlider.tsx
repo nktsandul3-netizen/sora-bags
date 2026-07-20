@@ -17,6 +17,8 @@ export interface HeroSlideCaption {
    * `centered` (default) — classic title + CTA stack
    */
   layout?: "brand" | "centered";
+  /** Optional Tailwind classes overriding brand-CTA placement */
+  ctaClassName?: string;
 }
 
 export type HeroSlide =
@@ -39,6 +41,10 @@ export type HeroSlide =
       mobileSrc?: string;
       poster?: string;
       mobilePoster?: string;
+      /** Tailwind object-* class for cover framing (default object-[50%_66%]) */
+      objectPositionClass?: string;
+      /** CSS object-position for poster stills */
+      objectPosition?: string;
       caption?: HeroSlideCaption;
     };
 
@@ -142,6 +148,7 @@ function HeroSlideVideo({
   warm,
   onEnded,
   className,
+  posterObjectPosition = "50% 66%",
 }: {
   src: string;
   mobileSrc?: string;
@@ -151,6 +158,7 @@ function HeroSlideVideo({
   warm: boolean;
   onEnded: () => void;
   className?: string;
+  posterObjectPosition?: string;
 }) {
   const videoRef = useRef<HTMLVideoElement | null>(null);
   const [ready, setReady] = useState(false);
@@ -205,8 +213,8 @@ function HeroSlideVideo({
           mobileWidth={720}
           mobileHeight={406}
           eager={active}
-          objectPosition="50% 66%"
-          mobileObjectPosition="50% 66%"
+          objectPosition={posterObjectPosition}
+          mobileObjectPosition={posterObjectPosition}
           className={
             "transition-opacity duration-300 " +
             (ready && active ? "opacity-0" : "opacity-100")
@@ -352,7 +360,11 @@ export default function HeroBannerSlider({
                   onEnded={() => {
                     if (i === safeIndex) goNext();
                   }}
-                  className="absolute inset-0 h-full w-full object-cover object-[50%_66%]"
+                  posterObjectPosition={slide.objectPosition ?? "50% 66%"}
+                  className={
+                    "absolute inset-0 h-full w-full object-cover " +
+                    (slide.objectPositionClass ?? "object-[50%_66%]")
+                  }
                 />
               )}
             </div>
@@ -375,7 +387,10 @@ export default function HeroBannerSlider({
             {/* Логотип уже вшит в фото — на мобиле/десктопе только CTA */}
             <Link
               href={activeSlide.caption.ctaHref}
-              className="pointer-events-auto absolute left-5 top-[62%] isolate inline-flex min-h-[28px] w-[118px] items-center justify-center rounded-full border border-[#111] bg-[#111] px-2.5 py-1 text-[7px] font-semibold uppercase tracking-[0.06em] text-white antialiased [backdrop-filter:none] touch-manipulation transition-colors duration-200 hover:bg-black active:bg-black md:bottom-12 md:left-1/2 md:top-auto md:min-h-[44px] md:w-auto md:-translate-x-1/2 md:px-8 md:py-3 md:text-[13px] md:tracking-[0.12em]"
+              className={
+                activeSlide.caption.ctaClassName ??
+                "pointer-events-auto absolute left-5 top-[62%] isolate inline-flex min-h-[28px] w-[118px] items-center justify-center rounded-full border border-[#111] bg-[#111] px-2.5 py-1 text-[7px] font-semibold uppercase tracking-[0.06em] text-white antialiased [backdrop-filter:none] touch-manipulation transition-colors duration-200 hover:bg-black active:bg-black md:bottom-12 md:left-1/2 md:top-auto md:min-h-[44px] md:w-auto md:-translate-x-1/2 md:px-8 md:py-3 md:text-[13px] md:tracking-[0.12em]"
+              }
             >
               <span className="max-w-[88px] text-center leading-[1.2] md:max-w-none md:whitespace-nowrap">
                 {activeSlide.caption.ctaLabel}

@@ -29,20 +29,21 @@ function getHeroSlides(locale: Locale): HeroSlide[] {
   const t = (key: string) => translate(locale, key);
   return [
     {
-      type: "image",
-      src: "/hero-sora-bamboo-studio-v6.jpg",
-      mobileSrc: "/hero-sora-bamboo-studio-mobile-v3.jpg",
-      width: 2560,
-      height: 1280,
-      mobileWidth: 1400,
-      mobileHeight: 875,
-      objectPosition: "50% 50%",
-      mobileObjectPosition: "50% 50%",
-      alt: t("home.heroBambooAlt"),
+      type: "video",
+      src: "/videos/hero-banner-3-v2.mp4",
+      mobileSrc: "/videos/hero-banner-3-mobile-v2.mp4",
+      poster: "/hero-banner-3-poster-v2.jpg",
+      mobilePoster: "/hero-banner-3-poster-mobile-v2.jpg",
+      // Vertical lifestyle clip — slight top preference after bottom framing
+      objectPositionClass: "object-[50%_58%]",
+      objectPosition: "50% 58%",
       caption: {
         layout: "brand",
         ctaLabel: t("home.heroMainCta"),
         ctaHref: withLocalePath("/bags", locale),
+        // Far left, vertical middle of the banner
+        ctaClassName:
+          "pointer-events-auto absolute left-4 top-1/2 isolate inline-flex min-h-[28px] w-[118px] -translate-y-1/2 items-center justify-center rounded-full border border-[#111] bg-[#111] px-2.5 py-1 text-[7px] font-semibold uppercase tracking-[0.06em] text-white antialiased [backdrop-filter:none] touch-manipulation transition-colors duration-200 hover:bg-black active:bg-black md:left-8 md:min-h-[44px] md:w-auto md:px-8 md:py-3 md:text-[13px] md:tracking-[0.12em]",
       },
     },
     {
@@ -89,7 +90,7 @@ export default async function Home() {
   ]);
   return (
     <div>
-      {/* Hero: Amalfi → Venezia Intreccio */}
+      {/* Hero: lifestyle video → Venezia */}
       <HeroBannerSlider slides={getHeroSlides(locale)} intervalMs={4000} />
 
       <BenefitsBar
