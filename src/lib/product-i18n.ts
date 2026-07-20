@@ -1171,9 +1171,9 @@ const productCopyBySlug: Record<string, ProductLocalizedCopy> = {
       "en": "Paloma"
     },
     "description": {
-      "ru": "Paloma — структурная сумка с рамочным замком из фактурной кожи — для повседневного гардероба, офиса и спокойных вечерних выходов. Силуэт остаётся собранным и лёгким в повседневной носке.\n\nВнутри — место для телефона, кошелька, ключей и небольшой косметики. В наличии: доставка 1–3 дня.",
-      "ro": "Paloma — geantă structurată cu încuietoare tip cadru. Model din piele texturată, creat pentru oraș, întâlniri și ținute de zi cu zi cu accent pe siluetă. Forma bine definită și închiderea tip cadru îi dau personalitate.\n\nMai mult spațiu pentru lucrurile zilnice — telefon, portofel, chei și cosmetice. Modelul este în stoc: livrare în 1–3 zile.",
-      "en": "Paloma — structured kiss-lock bag crafted from textured leather, designed for city days, meetings and everyday looks with a defined silhouette. The frame closure adds character without extra hardware.\n\nMore room for daily essentials — phone, wallet, keys and cosmetics. This style is in stock, with delivery in 1–3 days."
+      "ru": "Paloma — структурная сумка с рамочным замком из фактурной кожи — для повседневного гардероба, офиса и спокойных вечерних выходов. Силуэт остаётся собранным и лёгким в повседневной носке.\n\nВнутри — место для телефона, кошелька, ключей и небольшой косметики. Предзаказ (от 14 дней).",
+      "ro": "Paloma — geantă structurată cu încuietoare tip cadru. Model din piele texturată, creat pentru oraș, întâlniri și ținute de zi cu zi cu accent pe siluetă. Forma bine definită și închiderea tip cadru îi dau personalitate.\n\nMai mult spațiu pentru lucrurile zilnice — telefon, portofel, chei și cosmetice. Precomandă (de la 14 zile).",
+      "en": "Paloma — structured kiss-lock bag crafted from textured leather, designed for city days, meetings and everyday looks with a defined silhouette. The frame closure adds character without extra hardware.\n\nMore room for daily essentials — phone, wallet, keys and cosmetics. Pre-order (14+ days)."
     }
   },
   "womens-pebbled-leather-multi-zip-crossbody-bag": {
