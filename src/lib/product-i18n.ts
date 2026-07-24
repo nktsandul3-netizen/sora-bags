@@ -1647,9 +1647,9 @@ const productCopyBySlug: Record<string, ProductLocalizedCopy> = {
       "en": "Cendrine"
     },
     "description": {
-      "ru": "Cendrine — тоут со спиральным плетением из плетёной фактуры с кожаными деталями — для работы, поездок по городу и дней, когда нужно взять с собой больше обычного. Силуэт остаётся собранным и лёгким в повседневной носке.\n\nВместительный формат на каждый день. Внутри — место для телефона, кошелька, ключей и небольшой косметики. В наличии: доставка 1–3 дня.",
-      "ro": "Cendrine — geantă tote din textură împletită cu detalii din piele — pentru birou, deplasări în oraș și zilele în care ai nevoie să duci mai multe. Silueta rămâne elegantă și ușor de purtat zi de zi.\n\nInteriorul este gândit pentru esențiale: telefon, portofel, chei și mici accesorii. În stoc: livrare în 1–3 zile.",
-      "en": "Cendrine — tote bag in a woven texture with leather details — for work, city errands and days when you need to carry more. The silhouette stays polished and easy to wear with everyday looks.\n\nThe interior is made for daily essentials — phone, wallet, keys and small cosmetics. In stock, delivery in 1–3 days."
+      "ru": "Cendrine — тоут со спиральным плетением из плетёной фактуры с кожаными деталями — для работы, поездок по городу и дней, когда нужно взять с собой больше обычного. Силуэт остаётся собранным и лёгким в повседневной носке.\n\nВместительный формат на каждый день. Внутри — место для телефона, кошелька, ключей и небольшой косметики. Предзаказ (от 14 дней).",
+      "ro": "Cendrine — geantă tote din textură împletită cu detalii din piele — pentru birou, deplasări în oraș și zilele în care ai nevoie să duci mai multe. Silueta rămâne elegantă și ușor de purtat zi de zi.\n\nInteriorul este gândit pentru esențiale: telefon, portofel, chei și mici accesorii. Precomandă (de la 14 zile).",
+      "en": "Cendrine — tote bag in a woven texture with leather details — for work, city errands and days when you need to carry more. The silhouette stays polished and easy to wear with everyday looks.\n\nThe interior is made for daily essentials — phone, wallet, keys and small cosmetics. Pre-order (14+ days)."
     }
   },
   "womens-woven-knot-strap-shoulder-bag": {
@@ -1819,9 +1819,9 @@ const productCopyBySlug: Record<string, ProductLocalizedCopy> = {
       "en": "Dorine"
     },
     "description": {
-      "ru": "Dorine — плетёная сумка треугольной формы из плетёной фактуры с кожаными деталями — для городского дня, встреч и образов, где важны свобода движения и аккуратный силуэт. Силуэт остаётся собранным и лёгким в повседневной носке.\n\nУдобно носить на плече. Внутри — место для телефона, кошелька, ключей и небольшой косметики. В наличии: доставка 1–3 дня.",
-      "ro": "Dorine — geantă de umăr din textură împletită cu detalii din piele — pentru ziua în oraș, întâlniri și ținute care cer libertate de mișcare. Silueta rămâne elegantă și ușor de purtat zi de zi.\n\nInteriorul este gândit pentru esențiale: telefon, portofel, chei și mici accesorii. În stoc: livrare în 1–3 zile.",
-      "en": "Dorine — shoulder bag in a woven texture with leather details — for city days, meetings and looks that need easy movement. The silhouette stays polished and easy to wear with everyday looks.\n\nThe interior is made for daily essentials — phone, wallet, keys and small cosmetics. In stock, delivery in 1–3 days."
+      "ru": "Dorine — плетёная сумка треугольной формы из плетёной фактуры с кожаными деталями — для городского дня, встреч и образов, где важны свобода движения и аккуратный силуэт. Силуэт остаётся собранным и лёгким в повседневной носке.\n\nУдобно носить на плече. Внутри — место для телефона, кошелька, ключей и небольшой косметики. Предзаказ (от 14 дней).",
+      "ro": "Dorine — geantă de umăr din textură împletită cu detalii din piele — pentru ziua în oraș, întâlniri și ținute care cer libertate de mișcare. Silueta rămâne elegantă și ușor de purtat zi de zi.\n\nInteriorul este gândit pentru esențiale: telefon, portofel, chei și mici accesorii. Precomandă (de la 14 zile).",
+      "en": "Dorine — shoulder bag in a woven texture with leather details — for city days, meetings and looks that need easy movement. The silhouette stays polished and easy to wear with everyday looks.\n\nThe interior is made for daily essentials — phone, wallet, keys and small cosmetics. Pre-order (14+ days)."
     }
   },
   "womens-woven-zip-crossbody-bag": {
@@ -2035,9 +2035,9 @@ const productCopyBySlug: Record<string, ProductLocalizedCopy> = {
       "en": "Cat"
     },
     "description": {
-      "ru": "Брелок La Via Firenze с мордочкой кота из чёрной и белой кожи, декоративным бантом из принтованного шёлка и золотой цепочкой с ключом LA VIA.\n\nКрепится на карабин к ручке или ремню сумки. Поставляется на фирменной карточке Made in Italy. Модель есть в наличии: доставим за 1–3 дня.",
-      "ro": "Breloc La Via Firenze cu cap de pisică din piele neagră și albă, fundă decorativă din mătase imprimată și lanț auriu cu cheia LA VIA.\n\nSe prinde cu carabină de mânerul sau cureaua genții. Livrat pe cardul de brand Made in Italy. Modelul este în stoc: livrare în 1–3 zile.",
-      "en": "La Via Firenze bag charm with a cat face in black and white leather, a decorative printed silk bow and a gold chain with an LA VIA key.\n\nClips onto a bag handle or strap with a carabiner. Comes on a Made in Italy brand card. This style is in stock, with delivery in 1–3 days."
+      "ru": "Брелок La Via Firenze с мордочкой кота из чёрной и белой кожи, декоративным бантом из принтованного шёлка и золотой цепочкой с ключом LA VIA.\n\nКрепится на карабин к ручке или ремню сумки. Поставляется на фирменной карточке Made in Italy. Предзаказ (от 14 дней).",
+      "ro": "Breloc La Via Firenze cu cap de pisică din piele neagră și albă, fundă decorativă din mătase imprimată și lanț auriu cu cheia LA VIA.\n\nSe prinde cu carabină de mânerul sau cureaua genții. Livrat pe cardul de brand Made in Italy. Precomandă (de la 14 zile).",
+      "en": "La Via Firenze bag charm with a cat face in black and white leather, a decorative printed silk bow and a gold chain with an LA VIA key.\n\nClips onto a bag handle or strap with a carabiner. Comes on a Made in Italy brand card. Pre-order (14+ days)."
     }
   },
   "la-via-firenze-bear-bag-charm": {

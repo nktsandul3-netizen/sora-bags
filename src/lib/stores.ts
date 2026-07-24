@@ -12,6 +12,10 @@ export type StoreLocation = {
   hours: LocalizedString[];
   mapUrl: string;
   images: string[];
+  /** Optional looping hero video (replaces static gallery when set) */
+  heroVideo?: string;
+  heroVideoMobile?: string;
+  heroPoster?: string;
 };
 
 /** Категории каталога, которые показываем в блоке магазина. */

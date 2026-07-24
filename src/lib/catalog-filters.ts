@@ -53,10 +53,17 @@ const URL_KEYS = {
   colors: "color",
   materials: "mat",
   sort: "sort",
+  page: "page",
 } as const;
 
 /** Legacy query keys from older filter UI — stripped on write so they don't linger. */
 const LEGACY_FILTER_URL_KEYS = ["cat", "size", "strap", "close", "avail"] as const;
+
+export function parseCatalogPage(value: string | null | undefined): number {
+  const n = Number.parseInt(value ?? "1", 10);
+  if (!Number.isFinite(n) || n < 1) return 1;
+  return Math.min(n, 50);
+}
 
 export function countActiveCatalogFilters(filters: CatalogFilters) {
   return (

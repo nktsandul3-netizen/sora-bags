@@ -28,10 +28,10 @@ export const homeInstagramPosts: InstagramPost[] = [
     alt: "Образ с бежевой сумкой SÓRA у двери",
   },
   {
-    id: "Daaz_qutQIz",
-    previewUrl: "/instagram/Daaz_qutQIz.jpg",
-    videoUrl: "https://www.instagram.com/reel/Daaz_qutQIz/",
-    alt: "Бежевый тоут SÓRA в белом образе",
+    id: "DbIm6dMM5t-",
+    previewUrl: "/instagram/DbIm6dMM5t-.jpg",
+    videoUrl: "https://www.instagram.com/p/DbIm6dMM5t-/",
+    alt: "SÓRA Italy — образ с шопером в бутике",
   },
   {
     id: "DZ7YM3Bt6VZ",

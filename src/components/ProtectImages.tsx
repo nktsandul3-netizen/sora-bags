@@ -10,6 +10,8 @@ function isProtectedMedia(target: EventTarget | null): boolean {
   if (el.closest("button, [role='button'], a[href^='tel:'], a[href^='mailto:']")) {
     if (el.tagName === "SVG" || el.closest("svg")) return false;
   }
+  // Allow browser menu on linked media so "Open in new tab" works
+  if (el.closest("a[href]")) return false;
   // Product / hero / catalog photos are usually <img> (incl. next/image)
   return el.tagName === "IMG" || el.tagName === "PICTURE" || el.tagName === "VIDEO" || el.tagName === "CANVAS";
 }

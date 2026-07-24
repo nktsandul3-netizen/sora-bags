@@ -103,46 +103,66 @@ export default function StoreDetailContent({
   return (
     <>
       <div className="flex min-h-[calc(100dvh-4.5rem)] flex-col bg-white lg:min-h-[calc(100dvh-5rem)] lg:flex-row">
-      {/* Gallery */}
-      <div className="relative aspect-[4/3] w-full bg-stone-100 lg:aspect-auto lg:min-h-[calc(100dvh-5rem)] lg:w-[65%]">
-        {store.images.map((src, i) => (
-          <Image
-            key={src}
-            src={src}
-            alt={name}
-            fill
-            priority={i === 0}
-            quality={i === 0 ? 90 : 80}
-            sizes="(min-width: 1024px) 65vw, 100vw"
-            className={
-              "object-cover transition-opacity duration-700 ease-in-out " +
-              (i === activeSlide ? "opacity-100" : "opacity-0")
-            }
-          />
-        ))}
-
-        {store.images.length > 1 ? (
-          <div className="absolute inset-x-0 bottom-5 z-10 flex items-center justify-center">
+      {/* Gallery / hero video */}
+      <div className="relative aspect-[4/3] w-full overflow-hidden bg-stone-100 lg:aspect-auto lg:min-h-[calc(100dvh-5rem)] lg:w-[65%]">
+        {store.heroVideo ? (
+          <video
+            key={store.heroVideo}
+            className="absolute inset-0 h-full w-full object-cover object-[50%_50%]"
+            autoPlay
+            muted
+            loop
+            playsInline
+            preload="metadata"
+            poster={store.heroPoster ?? store.images[0]}
+          >
+            {store.heroVideoMobile ? (
+              <source src={store.heroVideoMobile} media="(max-width: 1023px)" type="video/mp4" />
+            ) : null}
+            <source src={store.heroVideo} type="video/mp4" />
+          </video>
+        ) : (
+          <>
             {store.images.map((src, i) => (
-              <button
+              <Image
                 key={src}
-                type="button"
-                aria-label={`${copy.slide} ${i + 1}`}
-                aria-current={i === activeSlide}
-                onClick={() => setActiveSlide(i)}
-                className="flex items-center justify-center p-2"
-              >
-                <span
-                  aria-hidden
-                  className={
-                    "block h-1.5 rounded-full transition-all duration-300 " +
-                    (i === activeSlide ? "w-6 bg-stone-950" : "w-1.5 bg-stone-400 hover:bg-stone-600")
-                  }
-                />
-              </button>
+                src={src}
+                alt={name}
+                fill
+                priority={i === 0}
+                quality={i === 0 ? 90 : 80}
+                sizes="(min-width: 1024px) 65vw, 100vw"
+                className={
+                  "object-cover transition-opacity duration-700 ease-in-out " +
+                  (i === activeSlide ? "opacity-100" : "opacity-0")
+                }
+              />
             ))}
-          </div>
-        ) : null}
+
+            {store.images.length > 1 ? (
+              <div className="absolute inset-x-0 bottom-5 z-10 flex items-center justify-center">
+                {store.images.map((src, i) => (
+                  <button
+                    key={src}
+                    type="button"
+                    aria-label={`${copy.slide} ${i + 1}`}
+                    aria-current={i === activeSlide}
+                    onClick={() => setActiveSlide(i)}
+                    className="flex items-center justify-center p-2"
+                  >
+                    <span
+                      aria-hidden
+                      className={
+                        "block h-1.5 rounded-full transition-all duration-300 " +
+                        (i === activeSlide ? "w-6 bg-stone-950" : "w-1.5 bg-stone-400 hover:bg-stone-600")
+                      }
+                    />
+                  </button>
+                ))}
+              </div>
+            ) : null}
+          </>
+        )}
       </div>
 
       {/* Info panel */}

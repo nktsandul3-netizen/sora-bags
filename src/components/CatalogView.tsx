@@ -4,6 +4,7 @@ import {
   Suspense,
   useCallback,
   useEffect,
+  useLayoutEffect,
   useMemo,
   useState,
   useTransition,
@@ -30,6 +31,7 @@ import {
   EMPTY_CATALOG_FILTERS,
   filterProductsByCatalogFilters,
   parseCatalogFiltersFromSearchParams,
+  parseCatalogPage,
   parseCatalogSort,
   toggleCatalogFilterValue,
   type CatalogFilters,
@@ -42,6 +44,10 @@ import { categoryName } from "@/lib/catalog-i18n";
 import ProductGrid from "./ProductGrid";
 
 const PER_PAGE = 16;
+
+function catalogScrollStorageKey(pathname: string, queryKey: string) {
+  return `sora-catalog-scroll:${pathname}?${queryKey}`;
+}
 
 type CatalogViewProps = {
   title: string;
@@ -158,16 +164,21 @@ function CatalogViewInner({
     () => parseCatalogSort(searchParams.get("sort")),
     [searchParams],
   );
+  const page = useMemo(
+    () => parseCatalogPage(searchParams.get("page")),
+    [searchParams],
+  );
+  const visible = page * PER_PAGE;
 
   const [showFilter, setShowFilter] = useState(false);
   const [openMenu, setOpenMenu] = useState<"sort" | null>(null);
   const queryKey = searchParams.toString();
-  const [pageState, setPageState] = useState({ key: queryKey, visible: PER_PAGE });
-  const visible = pageState.key === queryKey ? pageState.visible : PER_PAGE;
 
   const writeUrl = useCallback(
     (nextFilters: CatalogFilters, nextSort: CatalogSortKey) => {
       const nextParams = catalogStateToSearchParams(nextFilters, nextSort, searchParams);
+      // Filter/sort changes always return to the first page of results.
+      nextParams.delete("page");
       const currentParams = new URLSearchParams(searchParams.toString());
       if (catalogSearchParamsEqual(nextParams, currentParams)) return;
       const qs = nextParams.toString();
@@ -177,6 +188,15 @@ function CatalogViewInner({
     },
     [pathname, router, searchParams],
   );
+
+  const showMore = useCallback(() => {
+    const nextParams = new URLSearchParams(searchParams.toString());
+    nextParams.set("page", String(page + 1));
+    const qs = nextParams.toString();
+    startTransition(() => {
+      router.replace(qs ? `${pathname}?${qs}` : pathname, { scroll: false });
+    });
+  }, [page, pathname, router, searchParams]);
 
   const updateFilters = useCallback(
     (updater: (prev: CatalogFilters) => CatalogFilters) => {
@@ -226,6 +246,41 @@ function CatalogViewInner({
   }, [indexes, filters, sortKey, groupByCategory, useCuratedBagOrder, activeSlug]);
 
   const shown = useMemo(() => filtered.slice(0, visible), [filtered, visible]);
+
+  // Remember scroll so Back from a product returns to the same place in the grid.
+  useLayoutEffect(() => {
+    const key = catalogScrollStorageKey(pathname, queryKey);
+    let restoredY = 0;
+    try {
+      const raw = sessionStorage.getItem(key);
+      const y = raw ? Number(raw) : NaN;
+      if (Number.isFinite(y) && y > 0) {
+        restoredY = y;
+        sessionStorage.removeItem(key);
+        window.scrollTo(0, y);
+      }
+    } catch {
+      // ignore storage errors
+    }
+
+    const retry =
+      restoredY > 0 ? window.setTimeout(() => window.scrollTo(0, restoredY), 40) : 0;
+
+    const save = () => {
+      try {
+        sessionStorage.setItem(key, String(window.scrollY));
+      } catch {
+        // ignore
+      }
+    };
+
+    window.addEventListener("pagehide", save);
+    return () => {
+      if (retry) window.clearTimeout(retry);
+      save();
+      window.removeEventListener("pagehide", save);
+    };
+  }, [pathname, queryKey, shown.length]);
   const activeCount = countActiveCatalogFilters(filters);
   const hasActiveFilters = activeCount > 0;
   const isBags = categories?.[0]?.section === "bags";
@@ -429,16 +484,13 @@ function CatalogViewInner({
                 <div className="mt-10 flex justify-center">
                   <button
                     type="button"
-                    onClick={() =>
-                      setPageState({ key: queryKey, visible: visible + PER_PAGE })
-                    }
+                    onClick={showMore}
                     className="border border-stone-200 px-16 py-3 text-[11px] font-medium uppercase tracking-[0.16em] text-stone-950 transition hover:border-stone-950"
                   >
                     {t("catalog.more")}
                   </button>
                 </div>
-              )}
-            </>
+              )}            </>
           )}
         </div>
 

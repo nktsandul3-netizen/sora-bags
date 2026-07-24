@@ -2095,6 +2095,7 @@ export const products: Product[] = [
       },
       {
         ...C.ivory,
+        status: "Доставка 7–14 дней",
         images: [
           { src: "/products/womens-pebbled-leather-turn-lock-strap-tote-bag/ivory-front-card-v8.webp", alt: "Greta Ivory — вид спереди" },
           { src: "/products/womens-pebbled-leather-turn-lock-strap-tote-bag/ivory-front-alt-v9.webp", alt: "Greta Ivory — альтернативный вид" },
@@ -2140,7 +2141,8 @@ export const products: Product[] = [
     brandSlug: "sora-atelier",
     section: "bags",
     categorySlug: "handbags-women",
-    price: 1599,
+    price: 1399,
+    oldPrice: 1599,
     status: "in_stock",
     isNew: true,
     galleryFit: "contain",
@@ -2191,7 +2193,8 @@ export const products: Product[] = [
     section: "bags",
     categorySlug: "tote-bags-women",
     galleryFit: "contain",
-    price: 2299,
+    price: 1699,
+    oldPrice: 2299,
     status: "in_stock",
     isNew: true,
     colors: [
@@ -2221,6 +2224,7 @@ export const products: Product[] = [
       },
       {
         ...C.white,
+        status: "Доставка 7–14 дней",
         images: [
           { src: "/products/womens-duo-mini-tote-bag/white-front-card-v5.webp", alt: "Fabrizia White — вид спереди" },
           { src: "/products/womens-duo-mini-tote-bag/white-inside-v3.webp", alt: "Fabrizia White — внутри" },
@@ -2255,7 +2259,8 @@ export const products: Product[] = [
     brandSlug: "sora-atelier",
     section: "bags",
     categorySlug: "shoulder-bags-women",
-    price: 2199,
+    price: 1699,
+    oldPrice: 2599,
     status: "in_stock",
     isNew: true,
     galleryFit: "contain",
@@ -2492,7 +2497,8 @@ export const products: Product[] = [
     brandSlug: "sora-atelier",
     section: "bags",
     categorySlug: "shoulder-bags-women",
-    price: 1799,
+    price: 1439,
+    oldPrice: 1799,
     status: "in_stock",
     isNew: true,
     galleryFit: "contain",
@@ -2542,7 +2548,8 @@ export const products: Product[] = [
     brandSlug: "sora-atelier",
     section: "bags",
     categorySlug: "shoulder-bags-women",
-    price: 2599,
+    price: 2079,
+    oldPrice: 2599,
     status: "in_stock",
     isNew: true,
     galleryFit: "contain",
@@ -2591,7 +2598,8 @@ export const products: Product[] = [
     brandSlug: "sora-atelier",
     section: "bags",
     categorySlug: "shoulder-bags-women",
-    price: 1699,
+    price: 1499,
+    oldPrice: 1699,
     status: "in_stock",
     isNew: true,
     galleryFit: "contain",
@@ -2637,7 +2645,8 @@ export const products: Product[] = [
     brandSlug: "sora-atelier",
     section: "bags",
     categorySlug: "handbags-women",
-    price: 2499,
+    price: 2199,
+    oldPrice: 2499,
     status: "in_stock",
     isNew: true,
     galleryFit: "contain",
@@ -3186,6 +3195,7 @@ export const products: Product[] = [
       },
       {
         ...C.taupe,
+        status: "Доставка 7–14 дней",
         images: [
           { src: "/products/womens-pebbled-leather-rectangular-handbag/taupe-front-card-v5.webp", alt: "Aurea Taupe — вид спереди" },
           { src: "/products/womens-pebbled-leather-rectangular-handbag/taupe-side-v4.webp", alt: "Aurea Taupe — сбоку" },
@@ -3604,6 +3614,7 @@ export const products: Product[] = [
       },
       {
         ...C.cognac,
+        status: "Доставка 7–14 дней",
         images: [
           { src: "/products/womens-pebbled-leather-wing-turn-lock-tote-bag/cognac-front-card-v5.webp", alt: "Georgina Коньячный — вид спереди" },
           { src: "/products/womens-pebbled-leather-wing-turn-lock-tote-bag/cognac-front-alt-v4.webp", alt: "Georgina Коньячный — альтернативный вид" },
@@ -3888,6 +3899,7 @@ export const products: Product[] = [
       },
       {
         ...C.ivory,
+        status: "Доставка 7–14 дней",
         images: [
           { src: "/products/womens-pebbled-leather-zip-hobo-bag/ivory-front-card-v1.webp", alt: "Amabel Ivory — вид спереди" },
           { src: "/products/womens-pebbled-leather-zip-hobo-bag/ivory-angle-v1.webp", alt: "Amabel Ivory — под углом" },
@@ -3998,6 +4010,7 @@ export const products: Product[] = [
       },
       {
         ...C.redOrange,
+        status: "Доставка 7–14 дней",
         images: [
           { src: "/products/womens-smooth-leather-contrast-trim-flap-shoulder-bag/red-orange-front-card-v6.webp", alt: "Perlette Red-Orange — вид спереди" },
           { src: "/products/womens-smooth-leather-contrast-trim-flap-shoulder-bag/red-orange-back-v1.webp", alt: "Perlette Red-Orange — сзади" },
@@ -4518,6 +4531,7 @@ export const products: Product[] = [
     colors: [
       {
         ...C.black,
+        status: "Доставка 7–14 дней",
         images: [
           { src: "/products/womens-woven-base-leather-link-handle-hobo-bag/black-front-card-v2.webp", alt: "Fantine Чёрный — карточка товара" },
           { src: "/products/womens-woven-base-leather-link-handle-hobo-bag/black-side-v2.webp", alt: "Fantine Чёрный — сбоку" },
@@ -4615,7 +4629,8 @@ export const products: Product[] = [
     brandSlug: "sora-atelier",
     section: "bags",
     categorySlug: "bucket-bags-women",
-    price: 1799,
+    price: 1529,
+    oldPrice: 1799,
     status: "in_stock",
     isNew: true,
     galleryFit: "contain",
@@ -5154,7 +5169,7 @@ export const products: Product[] = [
     section: "bags",
     categorySlug: "tote-bags-women",
     price: 1499,
-    status: "in_stock",
+    status: "pre_order",
     isNew: true,
     galleryFit: "contain",
     colors: [
@@ -5185,7 +5200,7 @@ export const products: Product[] = [
       { label: "Материал", value: "Рафия" },
       { label: "Страна производства", value: "Италия" },
       { label: "Уход", value: "Очищать мягкой сухой тканью; избегать влаги, жары и прямого солнца" },
-      { label: "Доставка", value: "1–3 дня" },
+      { label: "Доставка", value: "Предзаказ (от 14 дней)" },
       { label: "Возврат", value: "14 дней" },
     ],
   },
@@ -5478,7 +5493,7 @@ export const products: Product[] = [
     section: "bags",
     categorySlug: "shoulder-bags-women",
     price: 1499,
-    status: "in_stock",
+    status: "pre_order",
     isNew: true,
     galleryFit: "contain",
     colors: [
@@ -5505,7 +5520,7 @@ export const products: Product[] = [
       { label: "Материал", value: "Рафия" },
       { label: "Страна производства", value: "Италия" },
       { label: "Уход", value: "Очищать мягкой сухой тканью; избегать влаги, жары и прямого солнца" },
-      { label: "Доставка", value: "1–3 дня" },
+      { label: "Доставка", value: "Предзаказ (от 14 дней)" },
       { label: "Возврат", value: "14 дней" },
     ],
   },
@@ -6889,7 +6904,7 @@ export const products: Product[] = [
     section: "accessories",
     categorySlug: "bag-charms",
     price: 749,
-    status: "in_stock",
+    status: "pre_order",
     isNew: true,
     galleryFit: "contain",
     colors: [
@@ -6915,7 +6930,7 @@ export const products: Product[] = [
       { label: "Материал", value: "Кожа и текстиль" },
       { label: "Страна производства", value: "Италия" },
       { label: "Уход", value: "Очищать мягкой сухой тканью; избегать влаги, жары и прямого солнца" },
-      { label: "Доставка", value: "1–3 дня" },
+      { label: "Доставка", value: "Предзаказ (от 14 дней)" },
       { label: "Возврат", value: "14 дней" },
     ],
   },
@@ -7207,7 +7222,8 @@ export const products: Product[] = [
     brandSlug: "sora-atelier",
     section: "bags",
     categorySlug: "shoulder-bags-women",
-    price: 1699,
+    price: 1399,
+    oldPrice: 1699,
     status: "in_stock",
     isNew: true,
     galleryFit: "contain",

@@ -336,8 +336,8 @@ picture {
   left: -0.05em;
   right: -0.05em;
   top: 50%;
-  height: 1.5px;
-  background: var(--c-sale);
+  height: 2px;
+  background: #8f1f2e;
   transform: translateY(-50%) rotate(-12deg);
   transform-origin: center;
   pointer-events: none;

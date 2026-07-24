@@ -206,7 +206,10 @@ export default function ProductDetailView({
 
   const color = product.colors[colorIdx];
   const images = getImages(product, colorIdx);
-  const onSale = product.oldPrice && product.oldPrice > product.price;
+  const onSale = Boolean(product.oldPrice && product.oldPrice > product.price);
+  const discountPct = onSale
+    ? Math.round(100 - (product.price / (product.oldPrice as number)) * 100)
+    : 0;
   const canBuy = product.status !== "out_of_stock";
   const purchaseKind = getPurchaseKindForItem(product, color.name);
   const isPreorder = purchaseKind === "preorder";
@@ -359,20 +362,20 @@ export default function ProductDetailView({
           {localizedTitle}
         </h1>
 
-        <div className="product-detail-price-reveal mt-4 flex items-baseline gap-2.5">
+        <div className="product-detail-price-reveal mt-4 flex flex-wrap items-baseline gap-2.5">
+          <span className="text-[22px] font-bold leading-none tracking-[-0.01em] text-[#111] lg:text-[24px]">
+            {formatPrice(product.price, locale)}
+          </span>
           {onSale && (
             <span className="price-strike text-[16px] font-normal text-stone-400">
               {formatPrice(product.oldPrice!, locale)}
             </span>
           )}
-          <span
-            className={
-              "text-[22px] font-bold leading-none tracking-[-0.01em] lg:text-[24px] " +
-              (onSale ? "text-sale" : "text-[#111]")
-            }
-          >
-            {formatPrice(product.price, locale)}
-          </span>
+          {onSale && discountPct > 0 ? (
+            <span className="inline-flex items-center rounded-md bg-[#C4A484] px-2 py-0.5 text-[12px] font-semibold leading-none text-white">
+              −{discountPct}%
+            </span>
+          ) : null}
         </div>
 
         <PreorderStatusBadge
